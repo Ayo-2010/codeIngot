@@ -35,8 +35,15 @@
       </div>
     </header>
 
-    <div class="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1fr_300px]">
-      <div>
+    <!--
+      `minmax(0, 1fr)` rather than `1fr`: a bare `1fr` track is `minmax(auto, 1fr)`,
+      so its automatic minimum is the column's min-content size. The lesson rows use
+      `truncate` (white-space: nowrap), and nowrap text reports its full unwrapped
+      width as min-content, so the track grew past the `max-w-7xl` container and
+      pushed the sticky aside off the right edge of the viewport.
+    -->
+    <div class="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[minmax(0,1fr)_300px]">
+      <div class="min-w-0">
         <section
           v-for="(section, sectionIndex) in course.sections"
           :key="section.id"

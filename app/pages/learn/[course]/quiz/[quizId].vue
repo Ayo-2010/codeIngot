@@ -93,6 +93,8 @@ const quiz = computed(() => getQuizById(courseSlug.value, quizId.value))
 
 const { recordQuiz } = useLearningProgress()
 
+useHead({ title: computed(() => quiz.value?.title ?? 'Quiz') })
+
 const drawerOpen = ref(false)
 
 const currentLessonId = computed(() => {

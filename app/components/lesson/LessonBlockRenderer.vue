@@ -99,6 +99,24 @@
         </div>
       </figure>
 
+      <figure
+        v-else-if="block.type === 'demo'"
+        :id="block.id"
+        class="scroll-mt-20 overflow-hidden rounded-xl border border-ink-600 bg-ink-900"
+      >
+        <figcaption class="border-b border-ink-600 bg-ink-850 px-3 py-2">
+          <p class="text-sm font-semibold text-mist-50">{{ block.title }}</p>
+          <p v-if="block.body" class="mt-0.5 text-xs leading-relaxed text-muted" v-html="inline(block.body)" />
+        </figcaption>
+        <iframe
+          class="w-full bg-white"
+          :style="{ height: `${block.height ?? 180}px` }"
+          title="Live example"
+          sandbox="allow-scripts"
+          :srcdoc="demoDoc(block)"
+        />
+      </figure>
+
       <section
         v-else-if="block.type === 'exercise'"
         :id="block.id"
@@ -139,7 +157,14 @@
 </template>
 
 <script setup lang="ts">
-import type { CodingExercise, EditorLanguage, ExampleBlock, LessonBlock, Quiz } from '~/types/content'
+import type {
+  CodingExercise,
+  DemoBlock,
+  EditorLanguage,
+  ExampleBlock,
+  LessonBlock,
+  Quiz,
+} from '~/types/content'
 import { TOKEN_CLASS, highlight, type Token, type TokenKind } from '~/utils/highlight'
 import { renderInline } from '~/utils/inline-markdown'
 
@@ -175,8 +200,16 @@ function exampleCode(block: ExampleBlock): Token[] {
   return highlight(parts.map((part) => part.code).join('\n\n'), first.language)
 }
 
+function wrapDoc(html: string, css: string, javascript: string): string {
+  return `<!DOCTYPE html><html><head><meta charset="utf-8" /><style>body{font-family:system-ui,sans-serif;margin:0;padding:14px;line-height:1.55;color:#0b0d10}img{max-width:100%;height:auto}*{box-sizing:border-box}</style><style>${css}</style></head><body>${html}<script>${javascript}<\/script></body></html>`
+}
+
 function exampleDoc(block: ExampleBlock): string {
-  return `<!DOCTYPE html><html><head><meta charset="utf-8" /><style>body{font-family:system-ui,sans-serif;margin:0;padding:14px;line-height:1.55;color:#0b0d10}img{max-width:100%;height:auto}*{box-sizing:border-box}</style><style>${block.css ?? ''}</style></head><body>${block.html}<script>${block.javascript ?? ''}<\/script></body></html>`
+  return wrapDoc(block.html, block.css ?? '', block.javascript ?? '')
+}
+
+function demoDoc(block: DemoBlock): string {
+  return wrapDoc(block.html, block.css ?? '', block.javascript ?? '')
 }
 
 function starterFor(exercise: CodingExercise): Partial<Record<EditorLanguage, string>> {

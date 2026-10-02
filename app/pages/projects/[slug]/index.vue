@@ -55,13 +55,56 @@
         </section>
 
         <section>
-          <h2 class="mb-3 text-sm font-semibold text-mist-50">Design reference</h2>
-          <iframe
-            class="h-80 w-full rounded-2xl border border-ink-600 bg-white"
-            title="Design reference"
-            sandbox=""
-            :srcdoc="designDoc"
-          />
+          <div class="mb-3 flex flex-wrap items-center justify-between gap-3">
+            <h2 class="text-sm font-semibold text-mist-50">Design reference</h2>
+            <NuxtLink
+              :to="`/projects/${project.slug}/design`"
+              class="rounded-lg border border-ink-600 px-3 py-1.5 text-xs font-medium text-mist-50 transition hover:border-brand/50 hover:bg-ink-800"
+            >
+              Open full page
+            </NuxtLink>
+          </div>
+          <NuxtLink
+            :to="`/projects/${project.slug}/design`"
+            class="group block overflow-hidden rounded-2xl border border-ink-600 transition hover:border-brand/40"
+          >
+            <div class="h-56 bg-white">
+              <iframe
+                class="pointer-events-none h-full w-full"
+                :title="`${project.title} design reference thumbnail`"
+                sandbox=""
+                :srcdoc="thumbnailDoc"
+              />
+            </div>
+            <p class="flex items-center justify-between gap-2 border-t border-ink-600 bg-ink-900 px-4 py-2.5 text-xs text-muted">
+              <span>The reference is a full page. Open it to check 360px, 720px and 1280px.</span>
+              <span class="shrink-0 text-brand transition group-hover:translate-x-0.5" aria-hidden="true">&rarr;</span>
+            </p>
+          </NuxtLink>
+        </section>
+
+        <section>
+          <div class="mb-3 flex flex-wrap items-center justify-between gap-3">
+            <h2 class="text-sm font-semibold text-mist-50">Starter files</h2>
+            <button
+              type="button"
+              class="flex items-center gap-1.5 rounded-lg border border-ink-600 px-3 py-1.5 text-xs font-medium text-mist-50 transition hover:border-brand/50 hover:bg-ink-800"
+              @click="downloadFolder"
+            >
+              <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              Download folder
+            </button>
+          </div>
+          <p class="text-xs text-muted">
+            Unpacks a <code class="font-mono text-mist-200">{{ project.slug }}/</code> folder with
+            <code class="font-mono text-mist-200">index.html</code>,
+            <code class="font-mono text-mist-200">style.css</code>, your
+            <code class="font-mono text-mist-200">script.js</code>, a
+            <code class="font-mono text-mist-200">README.md</code> and the design reference, so you
+            can work in your own editor.
+          </p>
         </section>
 
         <EditorCodeWorkspace
@@ -133,6 +176,8 @@
 <script setup lang="ts">
 import type { ChecklistItem, EditorLanguage } from '~/types/content'
 import { renderInline } from '~/utils/inline-markdown'
+import { designDocument, designThumbnailDocument } from '~/utils/project-design'
+import { downloadZip } from '~/utils/zip'
 
 const route = useRoute()
 const project = computed(() => getProject(String(route.params.slug)))
@@ -166,10 +211,63 @@ const firstLanguage = computed<EditorLanguage>(() => {
   return 'html'
 })
 
-const designDoc = computed(
-  () =>
-    `<!DOCTYPE html><html><head><meta charset="utf-8" /><style>body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:#0b0d10}*{box-sizing:border-box}${project.value?.designPreviewCss ?? ''}</style></head><body>${project.value?.designPreviewHtml ?? ''}</body></html>`,
-)
+const thumbnailDoc = computed(() => (project.value ? designThumbnailDocument(project.value) : ''))
+
+const FILE_NAMES: Record<EditorLanguage, string> = {
+  html: 'index.html',
+  css: 'style.css',
+  javascript: 'script.js',
+}
+
+/**
+ * Bundle the editor's current files into a folder the learner can unzip. The
+ * brief and requirements travel with it so the folder stands on its own.
+ */
+function downloadFolder() {
+  const current = project.value
+  if (!current) return
+
+  const folder = current.slug
+  const entries = (Object.keys(FILE_NAMES) as EditorLanguage[])
+    .filter((language) => files.value[language])
+    .map((language) => ({
+      path: `${folder}/${FILE_NAMES[language]}`,
+      content: files.value[language] as string,
+    }))
+
+  entries.push({
+    path: `${folder}/reference/design-reference.html`,
+    content: designDocument(current),
+  })
+  entries.push({ path: `${folder}/README.md`, content: readme(current) })
+
+  downloadZip(entries, `${folder}.zip`)
+}
+
+function readme(target: NonNullable<typeof project.value>) {
+  const lines = [
+    `# ${target.title}`,
+    '',
+    target.summary,
+    '',
+    '## Files',
+    '',
+    '- `index.html` - the page structure',
+    '- `style.css` - the styles',
+    ...(files.value.javascript ? ['- `script.js` - the behaviour'] : []),
+    '- `reference/design-reference.html` - open this in a browser to see the target design',
+    '',
+    '## Brief',
+    '',
+    ...target.brief.map((line, index) => `${index + 1}. ${renderInline(line)}`),
+    '',
+    '## Requirements',
+    '',
+    ...target.requirements.map((line) => `- ${renderInline(line)}`),
+    '',
+  ]
+  return lines.join('\n')
+}
 
 function inline(text: string) {
   return renderInline(text)

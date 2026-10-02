@@ -1,5 +1,5 @@
 <template>
-  <nav class="space-y-2" aria-label="On this lesson">
+  <nav ref="tocEl" class="space-y-2" aria-label="On this lesson">
     <p class="font-mono text-[11px] uppercase tracking-wider text-dim">On this lesson</p>
     <ul class="space-y-1 border-l border-ink-600">
       <li v-for="entry in entries" :key="entry.id">
@@ -7,6 +7,7 @@
           :href="`#${entry.id}`"
           class="-ml-px block border-l-2 py-1 pl-3 text-sm transition"
           :class="active === entry.id ? 'border-brand text-brand' : 'border-transparent text-muted hover:text-mist-50'"
+          @click="onLinkClick($event, entry.id)"
         >
           {{ entry.label }}
         </a>
@@ -27,6 +28,20 @@ import type { LessonBlock } from '~/types/content'
 const props = defineProps<{ blocks: LessonBlock[]; xp: number; duration: number }>()
 
 const active = ref<string>('')
+const tocEl = ref<HTMLElement | null>(null)
+const inBand = ref<Set<string>>(new Set())
+let observer: IntersectionObserver | null = null
+let scrollRoot: Element | null = null
+
+function findScrollRoot(): Element | null {
+  let node = tocEl.value?.parentElement ?? null
+  while (node) {
+    const style = getComputedStyle(node)
+    if (/(auto|scroll|overlay)/.test(style.overflowY)) return node
+    node = node.parentElement
+  }
+  return null
+}
 
 const entries = computed(() => {
   const out: { id: string; label: string }[] = []
@@ -39,7 +54,7 @@ const entries = computed(() => {
       out.push({ id: block.id, label: 'Challenge' })
     } else if (block.type === 'quiz') {
       out.push({ id: block.id, label: block.quiz.title })
-    } else if (block.type === 'example') {
+    } else if (block.type === 'example' || block.type === 'demo') {
       out.push({ id: block.id, label: block.title })
     } else if (block.type === 'tip') {
       out.push({ id: block.id, label: block.title })
@@ -50,20 +65,101 @@ const entries = computed(() => {
   return out
 })
 
+/**
+ * Handle the jump ourselves instead of letting the browser do a fragment
+ * navigation. The learn layout is a fixed-height shell whose body scrolls in an
+ * inner container, and `html`/`body` are `overflow: hidden`. A native fragment
+ * jump scrolls every scrollable ancestor including the document - `overflow:
+ * hidden` only stops the user, not `scrollTo` - so the whole shell would slide
+ * up and the sticky header would scroll out of view. Scrolling the container
+ * directly also lines the target up with the top of the reading area, which the
+ * native jump does not reliably do inside a nested scroller.
+ */
+function onLinkClick(event: MouseEvent, id: string) {
+  // Leave modified clicks alone: they mean "open in a new tab".
+  if (event.defaultPrevented || event.button !== 0) return
+  if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+
+  const target = document.getElementById(id)
+  if (!target) return
+
+  event.preventDefault()
+
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  const behavior: ScrollBehavior = reduced ? 'auto' : 'smooth'
+
+  if (scrollRoot) {
+    const rootTop = scrollRoot.getBoundingClientRect().top
+    const targetTop = target.getBoundingClientRect().top
+    scrollRoot.scrollTo({ top: scrollRoot.scrollTop + (targetTop - rootTop), behavior })
+  } else {
+    target.scrollIntoView({ behavior, block: 'start' })
+  }
+
+  // Belt and braces: undo any document scroll a previous native jump left behind.
+  window.scrollTo({ top: 0, behavior: 'auto' })
+
+  // Keep the fragment shareable without re-triggering a native jump.
+  history.replaceState(null, '', `#${id}`)
+  active.value = id
+}
+
 onMounted(() => {
-  const observer = new IntersectionObserver(
+  scrollRoot = findScrollRoot()
+  observer = new IntersectionObserver(
     (items) => {
-      const visible = items
-        .filter((item) => item.isIntersecting)
-        .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0]
-      if (visible) active.value = visible.target.id
+      // Track which targets sit in the band rather than reacting to arrivals
+      // alone. Reacting only to entries that become visible leaves the previous
+      // entry active when you scroll back up past everything, because nothing
+      // new enters the band on the way.
+      for (const item of items) {
+        if (item.isIntersecting) inBand.value.add(item.target.id)
+        else inBand.value.delete(item.target.id)
+      }
+      active.value = currentEntryId()
     },
-    { rootMargin: '-15% 0px -70% 0px' },
+    { root: scrollRoot, rootMargin: '0px 0px -68% 0px' },
   )
+  observe()
+})
+
+/**
+ * The topmost entry in the band, or - when a fast scroll leaves the band empty -
+ * the last entry already scrolled past, so the highlight never goes stale.
+ */
+function currentEntryId(): string {
+  const ordered = entries.value
+    for (const entry of ordered) {
+      if (inBand.value.has(entry.id)) return entry.id
+    }
+  if (!scrollRoot) return ''
+  const rootTop = scrollRoot.getBoundingClientRect().top
+  let passed = ''
+  for (const entry of ordered) {
+    const element = document.getElementById(entry.id)
+    if (element && element.getBoundingClientRect().top < rootTop) passed = entry.id
+  }
+  return passed
+}
+
+watch(entries, async () => {
+  await nextTick()
+  active.value = ''
+  inBand.value = new Set()
+  observe()
+})
+
+function observe() {
+  observer?.disconnect()
+  if (!observer) return
   for (const entry of entries.value) {
     const element = document.getElementById(entry.id)
     if (element) observer.observe(element)
   }
-  onBeforeUnmount(() => observer.disconnect())
+}
+
+onBeforeUnmount(() => {
+  observer?.disconnect()
+  observer = null
 })
 </script>

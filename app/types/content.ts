@@ -94,6 +94,18 @@ export interface QuizBlock {
   quiz: Quiz
 }
 
+/** A live result shown on its own, with no code beside it. Used to open a lesson. */
+export interface DemoBlock {
+  type: 'demo'
+  id: string
+  title: string
+  body?: string
+  html: string
+  css?: string
+  javascript?: string
+  height?: number
+}
+
 export type LessonBlock =
   | TextBlock
   | HeadingBlock
@@ -102,6 +114,7 @@ export type LessonBlock =
   | TipBlock
   | WarningBlock
   | ExampleBlock
+  | DemoBlock
   | ExerciseBlock
   | QuizBlock
 

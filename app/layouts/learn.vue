@@ -11,10 +11,8 @@
 useHead({
   style: [
     {
-      hid: 'learn-layout-overflow',
-      tag: 'style',
-      attrs: { 'data-learn-layout': '' },
-      children: 'html,body{overflow:hidden;height:100%;margin:0}',
+      id: 'learn-layout-overflow',
+      innerHTML: 'html,body{overflow:hidden;height:100%;margin:0}',
     },
   ],
 })

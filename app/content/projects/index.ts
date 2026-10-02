@@ -14,7 +14,7 @@ export const projects: Project[] = [
     xp: 260,
     brief: [
       'Plan the outline before you write markup: list every heading on the page in order, then turn each one into a section.',
-      'Write the document skeleton first â€” doctype, language, title â€” and only then fill the body.',
+      'Write the document skeleton first — doctype, language, title — and only then fill the body.',
       'Group the content with semantic landmarks so the page can be navigated without reading it top to bottom.',
       'Use real content: write three sentences about yourself rather than leaving placeholder text.',
       'Finish with a contact form in which every control has a label and a name.',
@@ -251,7 +251,7 @@ h1 {
     estimatedMinutes: 120,
     xp: 380,
     brief: [
-      'Write the section list first â€” hero, features, pricing, call to action â€” and give each one an id so the nav can link to it.',
+      'Write the section list first — hero, features, pricing, call to action — and give each one an id so the nav can link to it.',
       'Start mobile-first: write the single-column layout with no media query at all.',
       'Add a container that keeps line length readable on very wide screens.',
       'Use grid for the feature and pricing areas so the columns are described in one declaration.',
@@ -316,7 +316,7 @@ h1 {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Product name â€” the small thing that does one job well</title>
+    <title>Product name — the small thing that does one job well</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -421,11 +421,19 @@ body {
 
 .site-nav {
   display: flex;
+  align-items: center;
   gap: 1rem;
   font-size: 0.9rem;
 }
 
-.site-nav a {
+/* Give every nav item the same box so the plain links and the button share a
+   common height and their text sits on one optical line. The :not() keeps this
+   from outranking the button's own wider horizontal padding. */
+.site-nav a:not(.btn) {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.1rem;
+  padding: 0.55rem 0.5rem;
   color: #8b96a5;
   text-decoration: none;
 }
@@ -490,6 +498,8 @@ h1 {
 
 .card,
 .plan {
+  display: flex;
+  flex-direction: column;
   padding: 1.25rem;
   background: #11151a;
   border: 1px solid #252c35;
@@ -500,6 +510,7 @@ h1 {
 .plan h3 {
   margin: 0 0 0.4rem;
   font-size: 1rem;
+  line-height: 1.35;
 }
 
 .card p,
@@ -532,7 +543,7 @@ h1 {
 }
 `,
     solutionNote:
-      'A strong solution writes the narrow layout first and adds exactly one breakpoint that changes columns and spacing. It also constrains the text column with a max-width, and it never hides content on small screens â€” only reflows it.',
+      'A strong solution writes the narrow layout first and adds exactly one breakpoint that changes columns and spacing. It also constrains the text column with a max-width, and it never hides content on small screens — only reflows it.',
   },
   {
     id: 'project-interactive-calculator',
@@ -726,13 +737,13 @@ body {
 .key--wide { grid-column: span 2; }
 `,
     solutionNote:
-      'A strong solution keeps three pieces of state, routes every press through one listener that switches on the button action, and computes the result in a single function. It also guards the decimal point and division by zero, and it disables nothing a keyboard user needs â€” every button is a real button.',
+      'A strong solution keeps three pieces of state, routes every press through one listener that switches on the button action, and computes the result in a single function. It also guards the decimal point and division by zero, and it disables nothing a keyboard user needs — every button is a real button.',
   },
   {
     id: 'project-todo-application',
     slug: 'todo-application',
     title: 'Todo Application',
-    tagline: 'Add, complete, filter and delete tasks â€” and still find them all after closing the tab.',
+    tagline: 'Add, complete, filter and delete tasks — and still find them all after closing the tab.',
     summary:
       'Build a task list that persists to localStorage, which means the real work is in the data layer rather than the buttons. You will also deal with the part most tutorials skip: rendering from state on every change instead of mutating the DOM in five different places.',
     difficulty: 'intermediate',
@@ -745,7 +756,7 @@ body {
       'Write one render function that rebuilds the list from the array, and call it after every change.',
       'Persist on every mutation by writing JSON.stringify(tasks) to localStorage under one key.',
       'On load, read that key back and fall back to an empty list if it is missing or corrupt.',
-      'Add three filters â€” all, active, completed â€” and mark the current one with aria-pressed.',
+      'Add three filters — all, active, completed — and mark the current one with aria-pressed.',
     ],
     requirements: [
       'An input for the task text, an add button, and a list to show the tasks.',
@@ -1117,7 +1128,7 @@ h1 {
       <div class="bar"><div class="bar-fill"></div></div>
 
       <section class="question-area">
-        <h2 class="question-text">Loading questionâ€¦</h2>
+        <h2 class="question-text">Loading question…</h2>
         <div class="options"></div>
         <p class="feedback" role="status"></p>
       </section>
