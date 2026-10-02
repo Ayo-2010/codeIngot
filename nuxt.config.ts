@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: false },
-  modules: ['@nuxtjs/color-mode'],
+  modules: ['@nuxtjs/color-mode' , '@vercel/analytics'],
   css: ['~/assets/css/main.css'],
   colorMode: {
     preference: 'dark',
