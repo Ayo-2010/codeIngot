@@ -1,4 +1,5 @@
 import type { Course } from '~/types/content'
+import { projectsForCourse } from '~/content/projects'
 import { jsFoundationsSections } from './js/01-foundations'
 import { jsCoreLanguageSections } from './js/02-core-language'
 import { jsArraysDatesSections } from './js/03-arrays-dates'
@@ -64,5 +65,5 @@ export const javascriptFundamentals: Course = {
     ...jsFetchAjaxSections,
     ...jsJsonProjectSections,
   ],
-  projects: [],
+  projects: projectsForCourse('javascript-fundamentals'),
 }

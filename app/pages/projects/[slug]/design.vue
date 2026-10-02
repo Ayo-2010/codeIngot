@@ -48,7 +48,7 @@
         class="h-full max-w-full shrink-0 rounded-2xl border border-ink-600 bg-white shadow-2xl transition-[width] duration-300"
         :class="frameWidth"
         title="Design reference"
-        sandbox=""
+        sandbox="allow-scripts"
         :srcdoc="designDoc"
       />
     </div>

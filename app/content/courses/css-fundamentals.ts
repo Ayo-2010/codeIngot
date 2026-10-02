@@ -1,4 +1,5 @@
 import type { Course, Section } from '~/types/content'
+import { projectsForCourse } from '~/content/projects'
 import { cssIntroSections } from './css/01-intro'
 import { cssColorsSections } from './css/02-colors'
 import { cssBorderMarginSections } from './css/borders-margins'
@@ -80,5 +81,5 @@ export const cssFundamentals: Course = {
     ...cssResponsiveSections,
     ...cssGridSections,
   ],
-  projects: [],
+  projects: projectsForCourse('css-fundamentals'),
 }

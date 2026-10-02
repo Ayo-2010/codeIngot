@@ -1,4 +1,5 @@
 import type { Course } from '~/types/content'
+import { projectsForCourse } from '~/content/projects'
 import { htmlIntroSections } from './html/01-intro'
 import { htmlElementsSections } from './html/02-elements-attributes'
 import { htmlColorSections } from './html/03-colors'
@@ -58,5 +59,5 @@ export const htmlFundamentals: Course = {
     ...htmlApiSections,
     ...htmlClosingSections,
   ],
-  projects: [],
+  projects: projectsForCourse('html-fundamentals'),
 }

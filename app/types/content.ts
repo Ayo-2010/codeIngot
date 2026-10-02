@@ -230,9 +230,26 @@ export interface Project {
   requirements: string[]
   checklist: ChecklistItem[]
   starterFiles: Partial<Record<EditorLanguage, string>>
+  /** Images the learner needs, offered as one-click copy so URLs are never typed by hand. */
+  assets?: ProjectAsset[]
   designPreviewHtml: string
   designPreviewCss: string
+  /**
+   * Behaviour for the design reference, so a project that is really a piece of
+   * software can be tried in place. Optional: a static reference is enough for
+   * a layout exercise, and this script is never handed to the learner.
+   */
+  designPreviewJs?: string
   solutionNote: string
+}
+
+export interface ProjectAsset {
+  id: string
+  /** What the image is, in the learner's terms: "Hero photo", "Chart 1". */
+  label: string
+  url: string
+  /** Suggested alt text, so a placeholder does not ship with placeholder wording. */
+  alt?: string
 }
 
 export interface ChecklistItem {

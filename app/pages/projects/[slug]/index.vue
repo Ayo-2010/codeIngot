@@ -54,6 +54,44 @@
           </ul>
         </section>
 
+        <section
+          v-if="project.assets && project.assets.length"
+          class="rounded-2xl border border-ink-600 bg-ink-900 p-5"
+        >
+          <h2 class="text-sm font-semibold text-mist-50">Images</h2>
+          <p class="mt-1 text-xs leading-relaxed text-muted">
+            These are the images the design reference uses. Copy the URL rather than typing it:
+            a query string like <code class="font-mono">?text=Saturday+Market</code> is exactly where
+            typos happen, and a broken image is harder to spot than a broken selector.
+          </p>
+          <ul class="mt-3 space-y-2">
+            <li
+              v-for="asset in project.assets"
+              :key="asset.id"
+              class="rounded-xl border border-ink-600 bg-ink-850 p-3"
+            >
+              <div class="flex items-start justify-between gap-3">
+                <div class="min-w-0">
+                  <p class="text-sm font-medium text-mist-50">{{ asset.label }}</p>
+                  <p v-if="asset.alt" class="mt-0.5 text-xs leading-relaxed text-muted">
+                    alt: {{ asset.alt }}
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  class="shrink-0 rounded-lg border border-ink-600 px-2.5 py-1.5 text-xs font-medium transition hover:border-brand/50 hover:bg-ink-800"
+                  :class="copiedUrl === asset.url ? 'text-ok' : 'text-mist-50'"
+                  :aria-label="`Copy the URL for ${asset.label}`"
+                  @click="copyAsset(asset.url)"
+                >
+                  {{ copiedUrl === asset.url ? 'Copied' : 'Copy' }}
+                </button>
+              </div>
+              <p class="mt-2 break-all font-mono text-[11px] leading-relaxed text-dim">{{ asset.url }}</p>
+            </li>
+          </ul>
+        </section>
+
         <section>
           <div class="mb-3 flex flex-wrap items-center justify-between gap-3">
             <h2 class="text-sm font-semibold text-mist-50">Design reference</h2>
@@ -128,7 +166,6 @@
                   type="checkbox"
                   class="mt-1 accent-brand"
                   :checked="isChecked(item.id)"
-                  :disabled="item.verify.kind === 'manual' && !complete"
                   @change="toggle(item.id)"
                 />
                 <span :class="isChecked(item.id) ? 'text-dim line-through' : 'text-mist-200'">
@@ -187,6 +224,25 @@ useHead({ title: computed(() => project.value?.title ?? 'Project') })
 
 const files = ref<Partial<Record<EditorLanguage, string>>>({})
 const manualChecks = ref<Record<string, boolean>>({})
+const copiedUrl = ref('')
+let copyReset: ReturnType<typeof setTimeout> | undefined
+
+/** Copy an asset URL and flash a confirmation, since a placeholder URL is easy to mistype. */
+async function copyAsset(url: string) {
+  try {
+    await navigator.clipboard.writeText(url)
+    copiedUrl.value = url
+  } catch {
+    copiedUrl.value = ''
+    return
+  }
+  clearTimeout(copyReset)
+  copyReset = setTimeout(() => {
+    copiedUrl.value = ''
+  }, 1800)
+}
+
+onBeforeUnmount(() => clearTimeout(copyReset))
 
 watch(
   project,
@@ -265,6 +321,14 @@ function readme(target: NonNullable<typeof project.value>) {
     '',
     ...target.requirements.map((line) => `- ${renderInline(line)}`),
     '',
+    ...(target.assets?.length
+      ? [
+          '## Images',
+          '',
+          ...target.assets.map((asset) => `- ${asset.label}: ${asset.url}`),
+          '',
+        ]
+      : []),
   ]
   return lines.join('\n')
 }
