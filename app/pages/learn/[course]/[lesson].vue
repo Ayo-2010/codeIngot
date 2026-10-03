@@ -92,6 +92,16 @@
             />
 
             <footer class="mt-12 border-t border-ink-600 pt-6">
+              <div v-if="!isDone" class="mb-5">
+                <div class="h-1 overflow-hidden rounded-full bg-ink-700">
+                  <div
+                    class="h-full rounded-full bg-brand transition-[width] duration-500 ease-out"
+                    :style="{ width: `${Math.round(autoProgress * 100)}%` }"
+                  />
+                </div>
+                <p class="mt-2 text-xs text-dim">{{ autoHint }}</p>
+              </div>
+
               <div class="flex flex-wrap items-center justify-between gap-4">
                 <div>
                   <p class="text-sm font-medium text-mist-50">
@@ -163,6 +173,31 @@ const scrollContainer = ref<HTMLElement | null>(null)
 const next = computed(() => (lesson.value ? nextLesson(lesson.value.id) : undefined))
 const previous = computed(() => (lesson.value ? previousLesson(lesson.value.id) : undefined))
 const isDone = computed(() => (lesson.value ? isLessonComplete(lesson.value.id) : false))
+
+// Reading to the end and spending a minute on the page completes the lesson on
+// its own, so the button below is a shortcut rather than the only way through.
+const {
+  progress: autoProgress,
+  reachedEnd: hasReachedEnd,
+  remainingMs: autoRemainingMs,
+  isPaused: autoPaused,
+} = useLessonAutoComplete({
+  lessonId: computed(() => lesson.value?.id ?? ''),
+  container: scrollContainer,
+  enabled: computed(() => Boolean(lesson.value) && !isDone.value),
+  onComplete: () => complete(),
+})
+
+const autoHint = computed(() => {
+  if (autoPaused.value) {
+    return 'Paused while this tab is in the background. The timer picks up where it left off.'
+  }
+  const outstanding: string[] = []
+  if (!hasReachedEnd.value) outstanding.push('scroll to the end')
+  if (autoRemainingMs.value > 0) outstanding.push(`read for another ${formatRemaining(autoRemainingMs.value)}`)
+  if (!outstanding.length) return 'Marking this lesson complete.'
+  return `This lesson completes itself once you ${outstanding.join(' and ')}.`
+})
 
 watch(
   [lesson, () => route.hash],
