@@ -40,20 +40,26 @@ export interface LessonAutoCompleteOptions {
 /**
  * Fraction of the content the viewport has covered, 0–1.
  *
- * Content that is shorter than its viewport is fully visible from the start, so
- * it reads as 1 and the reading condition is never the thing holding a learner
- * back on a short lesson.
+ * Kept pure so the threshold arithmetic can be reasoned about and tested without
+ * a DOM. Content shorter than its viewport is fully visible from the start, so it
+ * reads as 1 and a short lesson is never gated on scrolling.
  */
-function readCoverage(container: HTMLElement | null): number {
-  const scrollTop = container ? container.scrollTop : window.scrollY
-  const clientHeight = container ? container.clientHeight : window.innerHeight
-  const scrollHeight = container
-    ? container.scrollHeight
-    : Math.max(document.documentElement.scrollHeight, document.body?.scrollHeight ?? 0)
-
+export function coverageFrom(scrollTop: number, clientHeight: number, scrollHeight: number): number {
   if (scrollHeight <= 0) return 1
   if (scrollHeight - clientHeight <= 1) return 1
   return Math.min(Math.max((scrollTop + clientHeight) / scrollHeight, 0), 1)
+}
+
+/** Reads live scroll metrics and converts them to coverage. */
+function readCoverage(container: HTMLElement | null): number {
+  if (!container) {
+    return coverageFrom(
+      window.scrollY,
+      window.innerHeight,
+      Math.max(document.documentElement.scrollHeight, document.body?.scrollHeight ?? 0),
+    )
+  }
+  return coverageFrom(container.scrollTop, container.clientHeight, container.scrollHeight)
 }
 
 export function useLessonAutoComplete(options: LessonAutoCompleteOptions) {
