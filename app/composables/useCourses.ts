@@ -6,6 +6,43 @@ import { frontendDeveloper } from '~/content/paths/frontend-developer'
 import { challenges } from '~/content/challenges/index'
 import { projects } from '~/content/projects/index'
 import { referenceEntries } from '~/content/reference/index'
+import { htmlGlobalAttributes, htmlTagCategories, htmlTags } from '~/content/reference/html'
+import { htmlAttributes } from '~/content/reference/html-attributes'
+import { htmlTagPages, findHtmlTagPage } from '~/content/reference/html-tag-pages'
+import { htmlEvents } from '~/content/reference/html-events'
+import { htmlNavItems, htmlTagNavItems } from '~/content/reference/html-nav'
+import {
+  cssAnimatableProperties,
+  cssInheritedProperties,
+  cssNonAnimatableProperties,
+  cssProperties,
+  cssPropertyCategories,
+} from '~/content/reference/css-properties'
+import { cssNavItems, cssPropertyNavItems } from '~/content/reference/css-nav'
+import { cssPropertyPages, findCssPropertyPage, propertySlug } from '~/content/reference/css-property-pages'
+import {
+  cssAuralProperties,
+  cssColorNames,
+  cssColorValues,
+  cssEntities,
+  cssFontFallbacks,
+  cssFunctions,
+  cssSelectors,
+  cssUnits,
+  cssWebSafeFonts,
+} from '~/content/reference/css-sections'
+import { htmlCanvasMembers, htmlCanvasProperties } from '~/content/reference/html-canvas'
+import {
+  htmlCharacterSets,
+  htmlColorNames,
+  htmlCountryCodes,
+  htmlDoctypes,
+  htmlLanguageCodes,
+  httpMethods,
+  httpStatuses,
+  keyboardShortcuts,
+  mediaFormats,
+} from '~/content/reference/html-sections'
 
 export interface FlatLesson extends Lesson {
   courseSlug: string
@@ -154,6 +191,192 @@ export function allProjectsList() {
 export function allReferenceEntries() {
   return referenceEntries
 }
+
+export function htmlReferenceTags() {
+  return htmlTags
+}
+
+export function htmlReferenceCategories() {
+  return htmlTagCategories
+}
+
+export function htmlReferenceGlobalAttributes() {
+  return htmlGlobalAttributes
+}
+
+export function htmlReferenceAttributes() {
+  return htmlAttributes
+}
+
+export function htmlReferenceEvents() {
+  return htmlEvents
+}
+
+export function htmlReferenceNav() {
+  return htmlNavItems
+}
+
+export function htmlReferenceTagNav() {
+  return htmlTagNavItems
+}
+
+export function htmlReferenceTagPages() {
+  return htmlTagPages
+}
+
+export function htmlReferenceTagPage(slug: string) {
+  return findHtmlTagPage(slug)
+}
+
+export function htmlReferenceColorNames() {
+  return htmlColorNames
+}
+
+export function htmlReferenceCharacterSets() {
+  return htmlCharacterSets
+}
+
+export function htmlReferenceDoctypes() {
+  return htmlDoctypes
+}
+
+export function htmlReferenceLanguageCodes() {
+  return htmlLanguageCodes
+}
+
+export function htmlReferenceCountryCodes() {
+  return htmlCountryCodes
+}
+
+export function htmlReferenceHttpStatuses() {
+  return httpStatuses
+}
+
+export function htmlReferenceHttpMethods() {
+  return httpMethods
+}
+
+export function htmlReferenceCanvas() {
+  return { members: htmlCanvasMembers, properties: htmlCanvasProperties }
+}
+
+export function htmlReferenceMediaFormats() {
+  return mediaFormats
+}
+
+export function htmlReferenceKeyboardShortcuts() {
+  return keyboardShortcuts
+}
+
+export function cssReferenceProperties() {
+  return cssProperties
+}
+
+export function cssReferenceNav() {
+  return cssNavItems
+}
+
+export function cssReferencePropertyNav() {
+  return cssPropertyNavItems
+}
+
+export function cssReferencePropertyPages() {
+  return cssPropertyPages
+}
+
+export function cssReferencePropertyPage(slug: string) {
+  return findCssPropertyPage(slug)
+}
+
+export function cssReferenceSelectors() {
+  return cssSelectors
+}
+
+export function cssReferenceFunctions() {
+  return cssFunctions
+}
+
+export function cssReferenceUnits() {
+  return cssUnits
+}
+
+export function cssReferenceColorNames() {
+  return cssColorNames
+}
+
+export function cssReferenceColorValues() {
+  return cssColorValues
+}
+
+export function cssReferenceWebSafeFonts() {
+  return cssWebSafeFonts
+}
+
+export function cssReferenceFontFallbacks() {
+  return cssFontFallbacks
+}
+
+export function cssReferenceEntities() {
+  return cssEntities
+}
+
+export function cssReferenceAuralProperties() {
+  return cssAuralProperties
+}
+
+export function cssReferenceAnimatable() {
+  return { animatable: cssAnimatableProperties(), static: cssNonAnimatableProperties() }
+}
+
+export function cssReferenceInherited() {
+  return cssInheritedProperties()
+}
+
+/**
+ * The category groups shown on the CSS overview. Each links to its first
+ * property, so the overview needs no route of its own per category.
+ */
+export function cssReferenceCategories() {
+  return cssPropertyCategories
+    .map((category) => {
+      const members = cssProperties.filter((property) => property.category === category)
+      return {
+        category,
+        count: members.length,
+        firstSlug: members.length ? propertySlug(members[0]!.name) : '',
+      }
+    })
+    .filter((group) => group.count > 0)
+}
+
+export function cssReferencePropertySlug(name: string) {
+  return propertySlug(name)
+}
+
+/**
+ * The language subpages the reference index links to. Adding CSS or JavaScript
+ * means adding an entry here and building the matching page.
+ */
+export const referenceLanguages = [
+  {
+    value: 'html' as const,
+    label: 'HTML',
+    to: '/reference/html',
+    blurb: 'Every element, what it is for, and the attributes that belong to it.',
+  },
+  {
+    value: 'css' as const,
+    label: 'CSS',
+    to: '/reference/css',
+    blurb: 'Properties, selectors, functions and units, with the syntax and first-support version for each.',
+  },
+  {
+    value: 'javascript' as const,
+    label: 'JavaScript',
+    to: '/reference/javascript',
+    blurb: 'Built-in objects, the DOM and the browser APIs.',
+  },
+]
 
 export interface CourseStats {
   lessons: number

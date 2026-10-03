@@ -3,6 +3,7 @@ import type { ReferenceEntry } from '~/types/content'
 export const referenceEntries: ReferenceEntry[] = [
   {
     id: 'html-a',
+    section: 'tags',
     name: '<a>',
     group: 'html',
     summary: 'Creates a hyperlink to another page, a file, an anchor on the current page, an email address or a phone number.',
@@ -23,6 +24,7 @@ export const referenceEntries: ReferenceEntry[] = [
   },
   {
     id: 'html-button',
+    section: 'tags',
     name: '<button>',
     group: 'html',
     summary: 'A control the user activates, which is the correct element whenever something happens rather than somewhere you go.',
@@ -42,6 +44,7 @@ export const referenceEntries: ReferenceEntry[] = [
   },
   {
     id: 'html-form',
+    section: 'tags',
     name: '<form>',
     group: 'html',
     summary: 'Groups related controls so their values are submitted together as one request.',
@@ -66,6 +69,7 @@ export const referenceEntries: ReferenceEntry[] = [
   },
   {
     id: 'html-input',
+    section: 'tags',
     name: '<input>',
     group: 'html',
     summary: 'A single-line text field, and also the base for every other input type through its type attribute.',
@@ -90,6 +94,7 @@ export const referenceEntries: ReferenceEntry[] = [
   },
   {
     id: 'html-img',
+    section: 'tags',
     name: '<img>',
     group: 'html',
     summary: 'Embeds an image, and is a void element like input or br.',
@@ -113,6 +118,7 @@ export const referenceEntries: ReferenceEntry[] = [
   },
   {
     id: 'html-section',
+    section: 'tags',
     name: '<section>',
     group: 'html',
     summary: 'A thematic grouping of content, normally introduced by its own heading.',
@@ -133,6 +139,7 @@ export const referenceEntries: ReferenceEntry[] = [
   },
   {
     id: 'html-article',
+    section: 'tags',
     name: '<article>',
     group: 'html',
     summary: 'A self-contained composition that would still make sense if it were syndicated on its own.',
@@ -159,6 +166,7 @@ export const referenceEntries: ReferenceEntry[] = [
   },
   {
     id: 'html-header',
+    section: 'tags',
     name: '<header>',
     group: 'html',
     summary: 'Introductory content for its nearest section: a title, a logo, or navigation.',
@@ -182,6 +190,7 @@ export const referenceEntries: ReferenceEntry[] = [
   },
   {
     id: 'html-footer',
+    section: 'tags',
     name: '<footer>',
     group: 'html',
     summary: 'Closing content for its nearest section: copyright, authorship, navigation or contact details.',
@@ -205,6 +214,7 @@ export const referenceEntries: ReferenceEntry[] = [
   },
   {
     id: 'html-nav',
+    section: 'tags',
     name: '<nav>',
     group: 'html',
     summary: 'A block of major navigation links.',
@@ -228,6 +238,7 @@ export const referenceEntries: ReferenceEntry[] = [
   },
   {
     id: 'html-ul',
+    section: 'tags',
     name: '<ul>',
     group: 'html',
     summary: 'An unordered list of items where the order carries no meaning.',
@@ -249,6 +260,7 @@ export const referenceEntries: ReferenceEntry[] = [
   },
   {
     id: 'html-table',
+    section: 'tags',
     name: '<table>',
     group: 'html',
     summary: 'Tabular data in rows and cells, which is a different thing from layout.',
@@ -280,6 +292,7 @@ export const referenceEntries: ReferenceEntry[] = [
   },
   {
     id: 'css-display',
+    section: 'properties',
     name: 'display',
     group: 'css',
     summary: 'Decides whether an element is a block, an inline box, a flex or grid container, or not rendered at all.',
@@ -308,6 +321,7 @@ export const referenceEntries: ReferenceEntry[] = [
   },
   {
     id: 'css-position',
+    section: 'properties',
     name: 'position',
     group: 'css',
     summary: 'Places an element using the normal flow, or offsets it from a reference box.',
@@ -333,6 +347,7 @@ export const referenceEntries: ReferenceEntry[] = [
   },
   {
     id: 'css-flex',
+    section: 'properties',
     name: 'flex',
     group: 'css',
     summary: 'Lays out the direct children of a container along one axis, main or cross, with distribution and alignment controls.',
@@ -360,6 +375,7 @@ export const referenceEntries: ReferenceEntry[] = [
   },
   {
     id: 'css-grid',
+    section: 'properties',
     name: 'grid',
     group: 'css',
     summary: 'Places children into rows and columns on two axes at once, with tracks that can be defined or implicit.',
@@ -381,6 +397,7 @@ export const referenceEntries: ReferenceEntry[] = [
   },
   {
     id: 'css-margin',
+    section: 'properties',
     name: 'margin',
     group: 'css',
     summary: 'Space outside an element, and the only way to push a flex or grid item away from its neighbours.',
@@ -405,6 +422,7 @@ section + section {
   },
   {
     id: 'css-padding',
+    section: 'properties',
     name: 'padding',
     group: 'css',
     summary: 'Space inside an element, between its content and its border.',
@@ -425,6 +443,7 @@ section + section {
   },
   {
     id: 'css-color',
+    section: 'properties',
     name: 'color',
     group: 'css',
     summary: 'Sets the foreground text colour of an element, and is inherited by descendants unless overridden.',
@@ -450,6 +469,7 @@ section + section {
   },
   {
     id: 'css-font',
+    section: 'properties',
     name: 'font',
     group: 'css',
     summary: 'Controls the typography of text: family, size, weight, style and spacing.',
@@ -477,6 +497,7 @@ h1 {
   },
   {
     id: 'css-gap',
+    section: 'properties',
     name: 'gap',
     group: 'css',
     summary: 'Sets the space between grid or flex items without touching the items themselves.',
@@ -498,6 +519,7 @@ h1 {
   },
   {
     id: 'css-box-sizing',
+    section: 'properties',
     name: 'box-sizing',
     group: 'css',
     summary: 'Decides whether padding and border are counted inside a declared width and height or added outside it.',
@@ -525,6 +547,7 @@ h1 {
   },
   {
     id: 'css-z-index',
+    section: 'properties',
     name: 'z-index',
     group: 'css',
     summary: 'Controls the paint order of positioned elements when they overlap.',
@@ -552,6 +575,7 @@ h1 {
   },
   {
     id: 'javascript-array',
+    section: 'objects',
     name: 'Array',
     group: 'javascript',
     summary: 'An ordered, mutable list of values with methods for transforming it without changing the original.',
@@ -575,6 +599,7 @@ console.log(descending.slice(0, 3).join(', '))`,
   },
   {
     id: 'javascript-object',
+    section: 'objects',
     name: 'Object',
     group: 'javascript',
     summary: 'A keyed collection of properties, used to describe one thing with named fields.',
@@ -599,6 +624,7 @@ console.log(lead)`,
   },
   {
     id: 'javascript-map',
+    section: 'objects',
     name: 'Map',
     group: 'javascript',
     summary: 'A keyed collection that keeps insertion order and accepts any value as a key.',
@@ -623,6 +649,7 @@ console.log([...counts.keys()])`,
   },
   {
     id: 'javascript-set',
+    section: 'objects',
     name: 'Set',
     group: 'javascript',
     summary: 'A collection of unique values with fast membership tests and predictable insertion order.',
@@ -647,6 +674,7 @@ console.log([...seen])`,
   },
   {
     id: 'javascript-function',
+    section: 'objects',
     name: 'Function',
     group: 'javascript',
     summary: 'A reusable block of scope with parameters, a body and a return value.',
@@ -672,6 +700,7 @@ console.log(double(21))`,
   },
   {
     id: 'javascript-promise',
+    section: 'objects',
     name: 'Promise',
     group: 'javascript',
     summary: 'An object representing the eventual result of an asynchronous operation.',
@@ -701,6 +730,7 @@ load().then(console.log)`,
   },
   {
     id: 'javascript-fetch',
+    section: 'web-apis',
     name: 'fetch',
     group: 'javascript',
     summary: 'Requests a resource from the network and returns a promise that resolves to a Response.',
@@ -730,6 +760,7 @@ loadUser(1)
   },
   {
     id: 'javascript-querySelector',
+    section: 'dom-element',
     name: 'querySelector',
     group: 'javascript',
     summary: 'Returns the first element matching a CSS selector, or null when nothing matches.',
@@ -755,6 +786,7 @@ errors.forEach((node) => console.warn(node.textContent))`,
   },
   {
     id: 'javascript-addeventlistener',
+    section: 'dom-events',
     name: 'addEventListener',
     group: 'javascript',
     summary: 'Registers a function to run when an event of a given type reaches an element.',
@@ -779,6 +811,7 @@ button.removeEventListener('click', onClick)`,
   },
   {
     id: 'javascript-json',
+    section: 'objects',
     name: 'JSON',
     group: 'javascript',
     summary: 'A text format for structured data, with JSON.parse to read it and JSON.stringify to write it.',
@@ -805,6 +838,7 @@ console.log(JSON.stringify({ b: 2, a: 1 }, null, 2))`,
   },
   {
     id: 'javascript-console-log',
+    section: 'web-apis',
     name: 'console.log',
     group: 'javascript',
     summary: 'Prints a value to the developer console, and does nothing visible to the user.',
@@ -827,6 +861,7 @@ console.error('something failed:', new Error('boom'))`,
   },
   {
     id: 'javascript-template-literals',
+    section: 'other',
     name: 'Template literals',
     group: 'javascript',
     summary: 'A string syntax using backticks that can embed expressions and span multiple lines.',

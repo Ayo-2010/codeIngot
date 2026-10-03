@@ -324,12 +324,264 @@ export interface Challenge {
 
 /* --------------------------------- reference ------------------------------- */
 
+export type ReferenceGroup = 'html' | 'css' | 'javascript'
+
+/**
+ * Which part of a language an entry belongs to. The reference splits each
+ * language into its own subpage, and the sidebar groups by this rather than
+ * dumping every DOM method and Web API into one flat list.
+ */
+export type ReferenceSection =
+  | 'tags'
+  | 'attributes'
+  | 'global-attributes'
+  | 'selectors'
+  | 'units'
+  | 'functions'
+  | 'properties'
+  | 'objects'
+  | 'statements'
+  | 'dom-element'
+  | 'dom-events'
+  | 'web-apis'
+  | 'other'
+
 export interface ReferenceEntry {
   id: string
   name: string
-  group: 'html' | 'css' | 'javascript'
+  group: ReferenceGroup
+  section: ReferenceSection
   summary: string
   syntax: string
   details: string[]
+  /** Why this should no longer be used. Absent on anything still supported. */
+  deprecated?: string
   example?: { language: EditorLanguage | 'plaintext'; code: string }
+}
+
+/* ---------------------------------- html ----------------------------------- */
+
+export type HtmlTagCategory =
+  | 'Document structure'
+  | 'Sections and grouping'
+  | 'Text content'
+  | 'Lists'
+  | 'Inline text'
+  | 'Links'
+  | 'Media'
+  | 'Embedded content'
+  | 'Tables'
+  | 'Forms'
+  | 'Interactive'
+
+export interface HtmlTag {
+  tag: string
+  description: string
+  category: HtmlTagCategory
+  /** Why this should no longer be used. Absent on anything still supported. */
+  deprecated?: string
+}
+
+export interface HtmlAttribute {
+  attribute: string
+  /** The tag or tags the attribute applies to, e.g. `<a>, <area>`. */
+  belongsTo: string
+  description: string
+  deprecated?: string
+}
+
+export interface HtmlGlobalAttribute {
+  attribute: string
+  description: string
+  deprecated?: string
+}
+
+/* ----------------------------- html detail pages --------------------------- */
+
+export interface HtmlEventAttribute {
+  event: string
+  /** The elements the event fires on, e.g. `<form>, <input>`. */
+  appliesTo: string
+  description: string
+}
+
+export type BrowserName = 'Chrome' | 'Edge' | 'Firefox' | 'Safari'
+
+export interface BrowserSupport {
+  browser: BrowserName
+  /** First version with support, e.g. "1". "No" when still unsupported. */
+  version: string
+}
+
+export interface HtmlTagPage {
+  tag: string
+  /** One or two sentences on when to reach for the element. */
+  usage: string
+  example: { language: EditorLanguage; code: string }
+  support: BrowserSupport[]
+  /** Tag names on other detail pages this one should link to. */
+  related: string[]
+}
+
+/* ------------------------------ html sections ------------------------------ */
+
+export interface HtmlColorName {
+  name: string
+  hex: string
+}
+
+export interface HtmlCharacterSet {
+  label: string
+  charset: string
+  description: string
+}
+
+export interface HtmlDoctype {
+  name: string
+  doctype: string
+  description: string
+  deprecated?: string
+}
+
+export interface LanguageCode {
+  code: string
+  language: string
+}
+
+export interface CountryCode {
+  code: string
+  country: string
+}
+
+export interface HttpStatus {
+  code: number
+  status: string
+  description: string
+}
+
+export interface HttpMethod {
+  method: string
+  description: string
+  /** Whether repeating the request has the same effect as making it once. */
+  idempotent: boolean
+}
+
+export interface HtmlCanvasMember {
+  name: string
+  kind: 'method' | 'property'
+  description: string
+}
+
+export interface MediaFormat {
+  format: string
+  type: string
+  note: string
+}
+
+export interface KeyboardShortcut {
+  keys: string
+  action: string
+}
+
+/* ---------------------------------- css ----------------------------------- */
+
+export type CssPropertyCategory =
+  | 'Box model'
+  | 'Typography'
+  | 'Background and borders'
+  | 'Flexbox and grid'
+  | 'Positioning'
+  | 'Transitions and animation'
+  | 'Transforms and filters'
+  | 'Layout and overflow'
+  | 'Tables and columns'
+  | 'Lists and generated content'
+  | 'Color and effects'
+  | 'Caret and user interaction'
+  | 'Shorthands and resets'
+  | 'At-rules'
+
+export interface CssProperty {
+  /** Property or at-rule name as written in a stylesheet, e.g. `margin-top`. */
+  name: string
+  description: string
+  category: CssPropertyCategory
+  /** The value the property has when nothing sets it. */
+  initial: string
+  /** Whether descendants inherit the computed value. */
+  inherits: boolean
+  deprecated?: string
+}
+
+export interface CssPropertyPage {
+  property: string
+  /** One or two sentences on when to reach for the property. */
+  usage: string
+  example: { language: EditorLanguage; code: string }
+  support: BrowserSupport[]
+  /** Property names on other detail pages this one should link to. */
+  related: string[]
+}
+
+export interface CssSelector {
+  selector: string
+  kind: string
+  description: string
+}
+
+export interface CssFunction {
+  name: string
+  signature: string
+  description: string
+  example: string
+}
+
+export interface CssUnit {
+  unit: string
+  kind: string
+  /** How many bytes one unit represents. 0 for units with no fixed size. */
+  bytes: number
+  description: string
+}
+
+export interface CssColorName {
+  name: string
+  hex: string
+}
+
+export interface CssColorValue {
+  syntax: string
+  description: string
+  example: string
+}
+
+export interface CssFontFamily {
+  stack: string[]
+  /** The generic family that ends the stack. */
+  generic: string
+  /** Fonts offered by operating systems rather than downloaded over the web. */
+  webSafe: boolean
+}
+
+export interface CssAuralProperty {
+  property: string
+  description: string
+  deprecated?: string
+}
+
+export interface CssEntity {
+  name: string
+  character: string
+  numeric: string
+  description: string
+}
+
+/** One entry in the HTML reference sidebar. */
+export interface ReferenceNavItem {
+  id: string
+  label: string
+  /** Route this entry points at. */
+  to: string
+  /** Set when the entry expands into its own group of links. */
+  children?: { label: string; to: string }[]
 }

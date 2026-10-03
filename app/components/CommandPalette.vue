@@ -131,12 +131,14 @@ const items = computed<PaletteItem[]>(() => {
     to: `/projects/${project.slug}`,
     haystack: `${project.title} ${project.tagline} ${project.summary}`.toLowerCase(),
   }))
+  // The reference is split into a subpage per language, so a deep link has to
+  // carry the group or it lands on the index with no matching anchor.
   const reference = allReferenceEntries().map((entry) => ({
     id: `ref-${entry.id}`,
     kind: 'Reference',
     title: entry.name,
     hint: entry.summary,
-    to: `/reference#${entry.id}`,
+    to: `/reference/${entry.group}#${entry.id}`,
     haystack: `${entry.name} ${entry.summary} ${entry.group}`.toLowerCase(),
   }))
   const pages = [
