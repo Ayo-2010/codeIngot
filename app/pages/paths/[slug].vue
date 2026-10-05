@@ -8,7 +8,7 @@
           <span class="text-muted">{{ path.title }}</span>
         </nav>
 
-        <div class="mt-4 flex flex-wrap items-start justify-between gap-8">
+        <div class="mt-8 flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
           <div class="max-w-2xl">
             <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">{{ path.title }}</h1>
             <p class="mt-2 font-mono text-xs uppercase tracking-widest text-brand">{{ path.tagline }}</p>
@@ -20,19 +20,38 @@
             </ul>
           </div>
 
-          <div class="min-w-[240px] rounded-2xl border border-ink-600 bg-ink-900 p-5">
-            <p class="font-mono text-[11px] uppercase tracking-wider text-dim">Path progress</p>
-            <p class="mt-2 font-mono text-3xl text-mist-50">{{ completed }} / {{ path.steps.length }}</p>
-            <p class="text-xs text-muted">courses completed</p>
-            <ProgressBar class="mt-3" :value="percent" :label="`${path.title} progress`" />
-            <p class="mt-2 font-mono text-xs text-brand">████████░░ {{ percent }}%</p>
-            <NuxtLink
-              v-if="continueStep"
-              :to="continueHref"
-              class="mt-4 block rounded-xl bg-brand px-4 py-2.5 text-center text-sm font-semibold text-ink-950 transition hover:bg-brand-soft"
-            >
-              Continue with {{ continueStep.title }}
-            </NuxtLink>
+          <div class="w-full lg:w-[320px] lg:shrink-0">
+            <div class="rounded-2xl border border-ink-600 bg-ink-900 p-5">
+              <div class="flex items-baseline justify-between gap-3">
+                <p class="font-mono text-[11px] uppercase tracking-wider text-dim">Path progress</p>
+                <p class="font-mono text-sm tabular-nums text-brand">{{ percent }}%</p>
+              </div>
+
+              <p class="mt-3 font-mono text-3xl leading-none text-mist-50">
+                {{ completed }}<span class="text-lg text-dim"> / {{ path.steps.length }}</span>
+              </p>
+              <p class="mt-1.5 text-xs text-muted">courses completed</p>
+
+              <ProgressBar class="mt-4" :value="percent" :label="`${path.title} progress`" />
+
+              <template v-if="continueStep">
+                <p class="mt-4 text-xs text-dim">
+                  Up next <span class="text-muted">· {{ continueStep.title }}</span>
+                </p>
+                <NuxtLink
+                  :to="continueHref"
+                  class="mt-2 block w-full rounded-xl bg-brand px-4 py-3 text-center text-sm font-semibold text-ink-950 transition hover:bg-brand-soft"
+                >
+                  Continue with {{ continueStep.title }}
+                </NuxtLink>
+              </template>
+              <p
+                v-else
+                class="mt-4 rounded-xl border border-ink-600 px-4 py-3 text-center text-xs text-dim"
+              >
+                Every course in this path is finished.
+              </p>
+            </div>
           </div>
         </div>
       </div>

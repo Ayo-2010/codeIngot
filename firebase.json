@@ -1,0 +1,17 @@
+{
+  "firestore": {
+    "rules": "firestore.rules"
+  },
+  "auth": {
+    "providers": {
+      "emailPassword": true,
+      "googleSignIn": {
+        "oAuthBrandDisplayName": "codeIngot",
+        "supportEmail": "ayoabdullah13@gmail.com",
+        "authorizedRedirectUris": [
+          "https://codeingot-7a761.web.app"
+        ]
+      }
+    }
+  }
+}

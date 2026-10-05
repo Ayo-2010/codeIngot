@@ -1,5 +1,5 @@
 <template>
-  <div v-if="quiz && course" class="flex h-[calc(100vh-3.5rem)] overflow-hidden">
+  <div v-if="quiz && course" class="flex h-[calc(100vh-4rem)] overflow-hidden">
     <aside
       class="hidden w-72 shrink-0 border-r border-ink-600 bg-ink-900 lg:block"
       aria-label="Course navigation"
@@ -10,9 +10,15 @@
       />
     </aside>
 
-    <div v-if="drawerOpen" class="fixed inset-0 z-50 lg:hidden">
+    <div
+      v-if="drawerOpen"
+      id="course-drawer"
+      class="fixed inset-x-0 bottom-0 top-16 z-40 lg:hidden"
+    >
       <div class="absolute inset-0 bg-ink-950/80" @click="drawerOpen = false" />
-      <div class="absolute inset-y-0 left-0 w-[86vw] max-w-sm border-r border-ink-600 bg-ink-900">
+      <div
+        class="absolute bottom-0 left-0 top-14 w-[86vw] max-w-sm overflow-hidden border-r border-ink-600 bg-ink-900"
+      >
         <LearnCourseSidebar
           :course="course"
           :current-lesson-id="currentLessonId"
@@ -21,17 +27,17 @@
     </div>
 
     <div class="flex min-w-0 flex-1 flex-col">
-      <div class="flex items-center gap-3 border-b border-ink-600 bg-ink-900/60 px-4 py-2.5">
-        <button
-          type="button"
-          class="rounded-lg border border-ink-600 p-1.5 text-muted lg:hidden"
-          aria-label="Open course navigation"
-          @click="drawerOpen = true"
-        >
-          <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8">
-            <path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round" />
-          </svg>
-        </button>
+      <div
+        class="relative z-[45] flex h-14 shrink-0 items-center gap-3 border-b border-ink-600 bg-ink-900 px-4"
+      >
+        <HamburgerButton
+          :open="drawerOpen"
+          controls="course-drawer"
+          open-label="Open course navigation"
+          close-label="Close course navigation"
+          class="lg:hidden"
+          @toggle="drawerOpen = !drawerOpen"
+        />
         <p class="truncate font-mono text-[11px] uppercase tracking-wider text-dim">
           {{ course.shortTitle }} · Quiz
         </p>

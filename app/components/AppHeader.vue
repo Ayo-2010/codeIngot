@@ -1,7 +1,6 @@
 <template>
   <header
-    class="sticky top-0 z-40 border-b border-ink-600/70 bg-ink-950/85 backdrop-blur-md"
-    :class="compact ? 'h-14' : 'h-16'"
+    class="sticky top-0 z-50 h-16 border-b border-ink-600/70 bg-ink-950/85 backdrop-blur-md"
   >
     <div class="mx-auto flex h-full max-w-[1600px] items-center gap-4 px-4 sm:px-6">
       <NuxtLink
@@ -23,7 +22,7 @@
         </span>
       </NuxtLink>
 
-      <nav v-if="!compact" class="hidden items-center gap-1 lg:flex" aria-label="Main">
+      <nav class="hidden items-center gap-1 lg:flex" aria-label="Main">
         <NuxtLink
           v-for="item in primaryNav"
           :key="item.to"
@@ -78,23 +77,48 @@
         </NuxtLink>
 
         <button
-          v-if="!compact"
           type="button"
-          class="grid h-9 w-9 place-items-center rounded-lg border border-ink-600 text-muted lg:hidden"
-          :aria-expanded="mobileOpen"
-          aria-controls="mobile-nav"
-          aria-label="Open navigation"
-          @click="mobileOpen = !mobileOpen"
+          class="flex items-center gap-2 rounded-lg border border-ink-600 bg-ink-900 px-3 py-1.5 text-sm font-medium text-mist-50 transition hover:border-brand/40 hover:bg-ink-800"
+          :aria-expanded="accountOpen"
+          aria-controls="account-dialog"
+          @click="accountOpen = true"
         >
-          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8">
-            <path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round" />
-          </svg>
+          <ClientOnly>
+            <span v-if="isSignedIn" class="flex items-center gap-2">
+              <span
+                class="grid h-5 w-5 place-items-center rounded-full bg-brand/15 font-mono text-[10px] text-brand"
+                aria-hidden="true"
+              >
+                {{ initials }}
+              </span>
+              <span class="hidden sm:inline">{{ accountName }}</span>
+            </span>
+            <span v-else class="flex items-center gap-1.5">
+              <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <circle cx="12" cy="8" r="3.5" />
+                <path d="M5 20a7 7 0 0 1 14 0" stroke-linecap="round" />
+              </svg>
+              <span class="hidden sm:inline">Sign in</span>
+            </span>
+            <template #fallback>
+              <span class="text-sm text-mist-50">Sign in</span>
+            </template>
+          </ClientOnly>
         </button>
+
+        <HamburgerButton
+          :open="mobileOpen"
+          controls="mobile-nav"
+          open-label="Open navigation"
+          close-label="Close navigation"
+          class="lg:hidden"
+          @toggle="mobileOpen = !mobileOpen"
+        />
       </div>
     </div>
 
     <div
-      v-if="mobileOpen && !compact"
+      v-if="mobileOpen"
       id="mobile-nav"
       class="border-t border-ink-600 bg-ink-950 px-4 py-3 lg:hidden"
     >
@@ -122,6 +146,13 @@
         >
           Progress
         </NuxtLink>
+        <NuxtLink
+          to="/account"
+          class="rounded-lg px-3 py-2.5 text-sm text-mist-200 hover:bg-ink-800"
+          @click="mobileOpen = false"
+        >
+          Account
+        </NuxtLink>
         <button
           type="button"
           class="mt-2 rounded-lg border border-ink-600 px-3 py-2.5 text-left text-sm text-muted"
@@ -132,13 +163,21 @@
       </nav>
     </div>
   </header>
+
+  <AuthDialog :open="accountOpen" @close="accountOpen = false" />
 </template>
 
 <script setup lang="ts">
-defineProps<{ compact?: boolean }>()
+const { isSignedIn, displayName: accountName } = useAuth()
 
+const accountOpen = ref(false)
 const mobileOpen = ref(false)
 const { openPalette } = useCommandPalette()
+
+const initials = computed(() => {
+  const source = accountName.value.trim()
+  return source.charAt(0).toUpperCase() || 'L'
+})
 
 const primaryNav = [
   { to: '/paths', label: 'Learn' },
@@ -151,6 +190,7 @@ const primaryNav = [
 
 watch(() => useRoute().fullPath, () => {
   mobileOpen.value = false
+  accountOpen.value = false
 })
 </script>
 

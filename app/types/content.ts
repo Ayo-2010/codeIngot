@@ -1,3 +1,4 @@
+
 export type Difficulty = 'beginner' | 'intermediate' | 'advanced'
 
 export type Technology =
@@ -576,7 +577,39 @@ export interface CssEntity {
   description: string
 }
 
-/** One entry in the HTML reference sidebar. */
+/**
+ * What a JavaScript reference entry is. The source mixes several kinds inside
+ * one topic — `DOM Events` holds event names, event properties and helper
+ * methods together — so the kind is carried per entry rather than per topic.
+ * `token` covers the RegExp topic, whose entries are quantifiers, character
+ * classes and escape sequences rather than methods.
+ */
+export type JsMemberKind = 'method' | 'property' | 'constant' | 'statement' | 'token' | 'interface'
+
+export interface JsMember {
+  /** Member name exactly as the source index writes it, e.g. `map()`. */
+  name: string
+  kind: JsMemberKind
+  description: string
+  deprecated?: string
+}
+
+export interface JsTopic {
+  /** URL-safe identifier, e.g. `js-array`. */
+  id: string
+  /** Label as the source index writes it, e.g. `JS Array`. */
+  label: string
+  /** The source group the topic sits under, e.g. `JavaScript` or `HTML DOM`. */
+  group: string
+  /** One line for the overview cards. */
+  summary: string
+  /** A short paragraph for the topic page. */
+  usage: string
+  example: { language: EditorLanguage; code: string }
+  members: JsMember[]
+}
+
+/** One entry in the JavaScript reference sidebar. */
 export interface ReferenceNavItem {
   id: string
   label: string

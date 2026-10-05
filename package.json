@@ -13,6 +13,7 @@
   "dependencies": {
     "@nuxtjs/color-mode": "^3.5.2",
     "@vercel/analytics": "^2.0.1",
+    "firebase": "^12.19.0",
     "nuxt": "^4.5.2",
     "vue": "^3.5.43",
     "vue-router": "^5.3.1"

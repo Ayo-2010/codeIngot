@@ -33,6 +33,13 @@ import {
 } from '~/content/reference/css-sections'
 import { htmlCanvasMembers, htmlCanvasProperties } from '~/content/reference/html-canvas'
 import {
+  allJsMembers,
+  javascriptTopicBySlug,
+  javascriptTopicSlug,
+  javascriptTopics,
+} from '~/content/reference/javascript'
+import { javascriptNavGroups } from '~/content/reference/javascript-nav'
+import {
   htmlCharacterSets,
   htmlColorNames,
   htmlCountryCodes,
@@ -353,6 +360,28 @@ export function cssReferencePropertySlug(name: string) {
   return propertySlug(name)
 }
 
+export function javascriptReferenceTopics() {
+  return javascriptTopics
+}
+
+export function javascriptReferenceTopicBySlug(slug: string) {
+  return javascriptTopicBySlug(slug)
+}
+
+export function javascriptReferenceTopicSlug(label: string) {
+  return javascriptTopicSlug(label)
+}
+
+/** Every member in the reference, paired with the topic it belongs to. */
+export function javascriptReferenceMembers() {
+  return allJsMembers
+}
+
+/** The sidebar groups, which keep the source index headings and their order. */
+export function javascriptReferenceNavGroups() {
+  return javascriptNavGroups
+}
+
 /**
  * The language subpages the reference index links to. Adding CSS or JavaScript
  * means adding an entry here and building the matching page.
@@ -374,7 +403,7 @@ export const referenceLanguages = [
     value: 'javascript' as const,
     label: 'JavaScript',
     to: '/reference/javascript',
-    blurb: 'Built-in objects, the DOM and the browser APIs.',
+    blurb: 'The built-in objects, the DOM, the browser APIs and every member, with what it is for.',
   },
 ]
 

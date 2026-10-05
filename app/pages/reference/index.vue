@@ -32,11 +32,11 @@
 useHead({ title: 'Reference' })
 
 // Each card counts what its own reference actually contains, rather than the
-// size of the shared entry list, which is only a starting point for CSS.
+// size of the shared entry list, which is only a starting point.
 const counts = {
   html: computed(() => htmlReferenceTags().length),
   css: computed(() => cssReferenceProperties().length),
-  javascript: computed(() => entriesIn('javascript').length),
+  javascript: computed(() => javascriptReferenceMembers().length),
 }
 
 function entriesIn(group: string) {

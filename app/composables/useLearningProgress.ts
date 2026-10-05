@@ -359,6 +359,19 @@ export function useLearningProgress() {
     return step
   }
 
+  /**
+   * Re-read through the storage chain. Signing in widens that chain from local
+   * only to local-plus-cloud, so the merged record is pulled in here rather
+   * than waiting for the next lesson to be completed.
+   */
+  async function refreshFromStorage() {
+    const loaded = await storage.load()
+    if (loaded) {
+      progress.value = loaded
+      persist()
+    }
+  }
+
   async function resetProgress() {
     progress.value = createEmptyProgress()
     await storage.clear()
@@ -400,6 +413,7 @@ export function useLearningProgress() {
     continuePath,
     nextCourseInPath,
     resetProgress,
+    refreshFromStorage,
     exportProgress,
   }
 }

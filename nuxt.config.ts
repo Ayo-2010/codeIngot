@@ -32,4 +32,24 @@ export default defineNuxtConfig({
   typescript: {
     strict: true,
   },
+  runtimeConfig: {
+    public: {
+      /**
+       * Firebase web app config for project codeingot-7a761. These values are
+       * public by design: they identify the project but grant no access on their
+       * own, and Firestore is gated by security rules rather than by hiding them.
+       * Each one can be overridden with a NUXT_PUBLIC_FIREBASE_* env var so a
+       * deployment can point at another project without a code change.
+       */
+      firebase: {
+        apiKey: process.env.NUXT_PUBLIC_FIREBASE_API_KEY ?? 'AIzaSyDTYsoU3-w4nX3gdcseDy1xk8dfoNA242I',
+        authDomain: process.env.NUXT_PUBLIC_FIREBASE_AUTH_DOMAIN ?? 'codeingot-7a761.firebaseapp.com',
+        projectId: process.env.NUXT_PUBLIC_FIREBASE_PROJECT_ID ?? 'codeingot-7a761',
+        storageBucket: process.env.NUXT_PUBLIC_FIREBASE_STORAGE_BUCKET ?? 'codeingot-7a761.firebasestorage.app',
+        messagingSenderId: process.env.NUXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID ?? '190022566998',
+        appId: process.env.NUXT_PUBLIC_FIREBASE_APP_ID ?? '1:190022566998:web:17f881bcb4a6b84644a7f7',
+        measurementId: process.env.NUXT_PUBLIC_FIREBASE_MEASUREMENT_ID ?? 'G-ZEKV2CZYG9',
+      },
+    },
+  },
 })

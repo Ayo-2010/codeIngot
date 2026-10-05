@@ -1,0 +1,118 @@
+rules_version = '2';
+
+/**
+ * Everything here is private to the account that owns it.
+ *
+ * Course and reference content is not in the database at all â€” lessons ship in
+ * the bundle â€” so these rules only ever govern a learner's own results and the
+ * list of browsers their account has been used from.
+ */
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isOwner(uid) {
+      return request.auth != null && request.auth.uid == uid;
+    }
+
+    function isBoundedString(value, cap) {
+      return value is string && value.size() <= cap;
+    }
+
+    /**
+     * Rules have no way to assert the type of every element in a list, so the
+     * cap is the control that matters: Firestore rejects any document over
+     * 1 MiB anyway, and these limits keep a single collection from growing
+     * without bound well before that ceiling.
+     */
+    function isBoundedList(value, cap) {
+      return value is list && value.size() <= cap;
+    }
+
+    /** The uid inside the document has to match the path, or a user could file records under someone else's id. */
+    function profileIsWellFormed(data) {
+      return data.uid is string
+        && data.uid.size() <= 128
+        && (!('email' in data) || data.email == null || isBoundedString(data.email, 320))
+        && (!('displayName' in data) || data.displayName == null || isBoundedString(data.displayName, 120))
+        && (!('photoURL' in data) || data.photoURL == null || isBoundedString(data.photoURL, 2048))
+        && (!('emailVerified' in data) || data.emailVerified is bool)
+        && (!('providers' in data) || isBoundedList(data.providers, 12));
+    }
+
+    function progressIsWellFormed(data) {
+      return data.progress is map
+        && isBoundedList(data.progress.completedLessons, 20000)
+        && isBoundedList(data.progress.completedChallenges, 20000)
+        && isBoundedList(data.progress.completedProjects, 20000)
+        && data.progress.quizScores is map
+        && data.progress.quizScores.size() <= 2000
+        && data.progress.courseProgress is map
+        && data.progress.courseProgress.size() <= 500
+        && data.progress.pathProgress is map
+        && data.progress.pathProgress.size() <= 200
+        && isBoundedList(data.progress.achievements, 500)
+        && data.progress.streak is map
+        && isBoundedList(data.progress.streak.days, 400)
+        && data.progress.xp is number
+        && data.progress.xp >= 0
+        && data.progress.xp <= 10000000;
+    }
+
+    /**
+     * One row per browser, capped so a client cannot grow a document without bound.
+     * There is no address field: the visitor's IP is resolved server-side purely to
+     * derive a location, then discarded, so it is never written.
+     */
+    function deviceIsWellFormed(data, deviceId) {
+      return data.deviceId == deviceId
+        && isBoundedString(data.deviceId, 128)
+        && isBoundedString(data.deviceName, 200)
+        && isBoundedString(data.osName, 100)
+        && isBoundedString(data.browserName, 100)
+        && isBoundedString(data.userAgent, 1024)
+        && !('ip' in data)
+        && (!('city' in data) || data.city == null || isBoundedString(data.city, 200))
+        && (!('region' in data) || data.region == null || isBoundedString(data.region, 200))
+        && (!('country' in data) || data.country == null || isBoundedString(data.country, 200))
+        && (!('isp' in data) || data.isp == null || isBoundedString(data.isp, 200))
+        && (!('organisation' in data) || data.organisation == null || isBoundedString(data.organisation, 200))
+        && (!('firstSeenAt' in data) || isBoundedString(data.firstSeenAt, 64))
+        && (!('lastSeenAt' in data) || isBoundedString(data.lastSeenAt, 64));
+    }
+
+    match /users/{uid} {
+      allow read: if isOwner(uid);
+      allow create: if isOwner(uid) && profileIsWellFormed(request.resource.data);
+      allow update: if isOwner(uid)
+                    && profileIsWellFormed(request.resource.data)
+                    && profileIsWellFormed(resource.data);
+      // An account is removed by the learner in Firebase console, not from here.
+      allow delete: if false;
+
+      match /progress/{docId} {
+        allow read: if isOwner(uid);
+        // Only the one document the app uses may be written.
+        allow create, update: if isOwner(uid)
+                              && docId == 'learner'
+                              && progressIsWellFormed(request.resource.data);
+        allow delete: if isOwner(uid);
+      }
+
+      match /devices/{deviceId} {
+        allow read: if isOwner(uid);
+        allow create: if isOwner(uid) && deviceIsWellFormed(request.resource.data, deviceId);
+        // The first-seen stamp is written once and never moved by the client.
+        allow update: if isOwner(uid)
+                      && deviceIsWellFormed(request.resource.data, deviceId)
+                      && deviceIsWellFormed(resource.data, deviceId)
+                      && request.resource.data.firstSeenAt == resource.data.firstSeenAt;
+        allow delete: if isOwner(uid);
+      }
+    }
+
+    // Nothing else exists in this database, and nothing is readable anonymously.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -96,7 +96,8 @@ export function daysBetween(a: string, b: string): number {
   return Math.round((second - first) / 86_400_000)
 }
 
-function coerce(value: unknown): UserProgress | null {
+/** Normalise an untrusted record into a well-formed progress object. */
+export function coerceProgress(value: unknown): UserProgress | null {
   if (!value || typeof value !== 'object') return null
   const raw = value as Partial<UserProgress>
   const base = createEmptyProgress()
@@ -138,7 +139,7 @@ export class LocalProgressStorage implements ProgressStorage {
     if (!import.meta.client) return null
     try {
       const raw = window.localStorage.getItem(this.key)
-      return raw ? coerce(JSON.parse(raw)) : null
+      return raw ? coerceProgress(JSON.parse(raw)) : null
     } catch {
       return null
     }
@@ -163,44 +164,135 @@ export class LocalProgressStorage implements ProgressStorage {
   }
 }
 
+/* ------------------------------ cloud plumbing ------------------------------ */
+
 /**
- * Provider for the planned account system. Version 1 never selects this,
- * it only proves the swap is a one-line change.
+ * The Firestore-backed provider, registered by the Firebase plugin once the
+ * client SDK is up. It stays null on the server and whenever the plugin is
+ * absent, which is what keeps the app fully usable without an account.
  */
-export class CloudProgressStorage implements ProgressStorage {
-  readonly name = 'cloud'
+let cloudStorage: ProgressStorage | null = null
 
-  constructor(private readonly endpoint = '/api/progress') {}
+export function registerCloudStorage(storage: ProgressStorage | null): void {
+  cloudStorage = storage
+}
 
-  async load(): Promise<UserProgress | null> {
-    if (!import.meta.client) return null
-    try {
-      const response = await fetch(this.endpoint, { credentials: 'include' })
-      if (!response.ok) return null
-      return coerce(await response.json())
-    } catch {
-      return null
+export function getCloudStorage(): ProgressStorage | null {
+  return cloudStorage
+}
+
+/**
+ * Local and cloud are merged rather than one replacing the other, because a
+ * learner can do a lot of work before ever signing in. Sets are unioned and
+ * counters take the larger value, so the guest progress joins the account
+ * instead of overwriting it, and the same lesson is never counted twice.
+ */
+export function mergeProgress(base: UserProgress, incoming: UserProgress): UserProgress {
+  const now = today()
+
+  const quizScores: Record<string, number> = { ...base.quizScores }
+  for (const [id, score] of Object.entries(incoming.quizScores)) {
+    quizScores[id] = Math.max(quizScores[id] ?? 0, score)
+  }
+
+  const xpBySource: Record<string, number> = { ...base.xpBySource }
+  for (const [key, value] of Object.entries(incoming.xpBySource)) {
+    xpBySource[key] = Math.max(xpBySource[key] ?? 0, value)
+  }
+
+  const courseProgress: Record<string, CourseProgress> = {}
+  for (const id of union(Object.keys(base.courseProgress), Object.keys(incoming.courseProgress))) {
+    const a = base.courseProgress[id]
+    const b = incoming.courseProgress[id]
+    courseProgress[id] = {
+      courseId: b?.courseId ?? a?.courseId ?? id,
+      completedLessons: union(a?.completedLessons ?? [], b?.completedLessons ?? []),
+      completedChallenges: union(a?.completedChallenges ?? [], b?.completedChallenges ?? []),
+      completedProjects: union(a?.completedProjects ?? [], b?.completedProjects ?? []),
+      startedAt: earliest(a?.startedAt, b?.startedAt),
+      completedAt: latest(a?.completedAt, b?.completedAt),
     }
   }
 
+  const pathProgress: Record<string, PathProgress> = {}
+  for (const id of union(Object.keys(base.pathProgress), Object.keys(incoming.pathProgress))) {
+    const a = base.pathProgress[id]
+    const b = incoming.pathProgress[id]
+    pathProgress[id] = {
+      pathId: b?.pathId ?? a?.pathId ?? id,
+      completedCourses: union(a?.completedCourses ?? [], b?.completedCourses ?? []),
+    }
+  }
+
+  // Only today's tally means anything, so the two daily counters are compared
+  // rather than added: yesterday's XP would otherwise survive as today's.
+  let dailyGoalDate = now
+  let dailyXp = 0
+  if (base.dailyGoalDate === now) {
+    dailyGoalDate = now
+    dailyXp = base.dailyXp
+  }
+  if (incoming.dailyGoalDate === now) {
+    dailyGoalDate = now
+    dailyXp = Math.max(dailyXp, incoming.dailyXp)
+  }
+
+  return {
+    completedLessons: union(base.completedLessons, incoming.completedLessons),
+    completedChallenges: union(base.completedChallenges, incoming.completedChallenges),
+    completedProjects: union(base.completedProjects, incoming.completedProjects),
+    quizScores,
+    courseProgress,
+    pathProgress,
+    xp: Math.max(base.xp, incoming.xp),
+    streak: {
+      current: Math.max(base.streak.current, incoming.streak.current),
+      longest: Math.max(base.streak.longest, incoming.streak.longest),
+      lastActiveDate: latest(base.streak.lastActiveDate, incoming.streak.lastActiveDate) ?? null,
+      days: union(base.streak.days, incoming.streak.days).sort(),
+    },
+    achievements: union(base.achievements, incoming.achievements),
+    lastVisitedLesson: incoming.lastVisitedLesson ?? base.lastVisitedLesson,
+    lastActiveAt: latest(base.lastActiveAt, incoming.lastActiveAt),
+    dailyGoal: incoming.dailyGoal || base.dailyGoal,
+    dailyGoalDate,
+    dailyXp,
+    xpBySource,
+  }
+}
+
+/**
+ * The provider the app actually uses. Learning without an account is local only;
+ * once a cloud provider is registered the same record is written to both, so the
+ * browser stays the fast source of truth and the account is the durable one.
+ */
+export class SyncedProgressStorage implements ProgressStorage {
+  readonly name = 'synced'
+
+  constructor(private readonly local: ProgressStorage) {}
+
+  async load(): Promise<UserProgress | null> {
+    const local = await this.local.load()
+    const remote = await cloudStorage?.load()
+    if (!remote) return local
+    if (!local) return remote
+    return mergeProgress(local, remote)
+  }
+
   async save(progress: UserProgress): Promise<void> {
-    if (!import.meta.client) return
+    // Local first: if the network is gone the learner's own device still has it.
+    await this.local.save(progress)
     try {
-      await fetch(this.endpoint, {
-        method: 'PUT',
-        credentials: 'include',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify(progress),
-      })
+      await cloudStorage?.save(progress)
     } catch {
-      /* offline: the local provider remains the source of truth */
+      /* offline or signed out: nothing to sync to, learning continues */
     }
   }
 
   async clear(): Promise<void> {
-    if (!import.meta.client) return
+    await this.local.clear()
     try {
-      await fetch(this.endpoint, { method: 'DELETE', credentials: 'include' })
+      await cloudStorage?.clear()
     } catch {
       /* ignore */
     }
@@ -209,7 +301,23 @@ export class CloudProgressStorage implements ProgressStorage {
 
 /** Resolve the active provider. Swap this line to move the whole app to the cloud. */
 export function createProgressStorage(): ProgressStorage {
-  return new LocalProgressStorage()
+  return new SyncedProgressStorage(new LocalProgressStorage())
+}
+
+function union(a: string[], b: string[]): string[] {
+  return [...new Set([...a, ...b])]
+}
+
+function earliest(a?: string | null, b?: string | null): string | undefined {
+  if (!a) return b ?? undefined
+  if (!b) return a
+  return a < b ? a : b
+}
+
+function latest(a?: string | null, b?: string | null): string | undefined {
+  if (!a) return b ?? undefined
+  if (!b) return a
+  return a > b ? a : b
 }
 
 /* --------------------------------- helpers --------------------------------- */
