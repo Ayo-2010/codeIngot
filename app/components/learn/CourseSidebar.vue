@@ -42,6 +42,7 @@
           v-if="section.quiz"
           :to="`/learn/${course.slug}/quiz/${section.quiz.id}`"
           class="flex items-center gap-2.5 px-4 py-2 text-sm text-muted transition hover:text-mist-50"
+          :class="section.quiz.id === currentQuizId ? 'text-mist-50 bg-brand/10 border-l-2 border-brand' : ''"
         >
           <span class="text-brand" aria-hidden="true">★</span>
           {{ section.quiz.title }}
@@ -57,6 +58,7 @@ import type { Course } from '~/types/content'
 const props = defineProps<{
   course: Course
   currentLessonId: string
+  currentQuizId?: string
 }>()
 
 const { progress, courseProgressPercent } = useLearningProgress()

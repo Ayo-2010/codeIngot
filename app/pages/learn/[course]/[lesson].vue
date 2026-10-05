@@ -158,6 +158,8 @@
 <script setup lang="ts">
 definePageMeta({ layout: 'learn' })
 
+import { getQuizSection } from '~/composables/useCourses'
+
 const route = useRoute()
 const router = useRouter()
 
@@ -176,7 +178,24 @@ const drawerOpen = ref(false)
 
 const scrollContainer = ref<HTMLElement | null>(null)
 
-const next = computed(() => (lesson.value ? nextLesson(lesson.value.id) : undefined))
+const next = computed(() => {
+  if (!lesson.value) return undefined
+  const currentLesson = lesson.value
+  const nextLessonResult = nextLesson(currentLesson.id)
+  // If this is the last lesson in its section and the section has a quiz, go to the quiz
+  if (nextLessonResult && currentLesson.sectionId) {
+    const quizSection = getQuizSection(currentLesson.courseSlug, currentLesson.sectionId)
+    if (quizSection) {
+      // Check if current lesson is the last in the section
+      const sectionLessons = quizSection.lessons
+      const lastLessonInSection = sectionLessons[sectionLessons.length - 1]
+      if (lastLessonInSection && lastLessonInSection.id === currentLesson.id) {
+        return { href: `/learn/${currentLesson.courseSlug}/quiz/${quizSection.quiz.id}` }
+      }
+    }
+  }
+  return nextLessonResult
+})
 const previous = computed(() => (lesson.value ? previousLesson(lesson.value.id) : undefined))
 const isDone = computed(() => (lesson.value ? isLessonComplete(lesson.value.id) : false))
 

@@ -49,7 +49,7 @@
                   class="rounded-lg border px-4 py-2 text-sm transition"
                   :class="booleanClass(question, option)"
                   :disabled="isLocked(question)"
-                  @click="choose(question.id, option ? 'true' : 'false')"
+                  @click="choose(question.id, option)"
                 >
                   {{ option ? 'True' : 'False' }}
                 </button>

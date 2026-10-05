@@ -87,9 +87,10 @@
             </li>
           </ol>
 
-          <div
+          <NuxtLink
             v-if="section.quiz"
-            class="mt-3 flex items-center gap-3 rounded-xl border border-ink-600 bg-ink-850 px-4 py-3"
+            :to="`/learn/${course.slug}/quiz/${section.quiz.id}`"
+            class="mt-3 flex items-center gap-3 rounded-xl border border-ink-600 bg-ink-850 px-4 py-3 transition hover:border-brand/40"
           >
             <span class="text-brand" aria-hidden="true">★</span>
             <div class="min-w-0 flex-1">
@@ -101,7 +102,7 @@
             <span class="font-mono text-xs" :class="quizDone(section.quiz) ? 'text-ok' : 'text-dim'">
               {{ quizScore(section.quiz) !== null ? `${quizScore(section.quiz)}%` : 'not taken' }}
             </span>
-          </div>
+          </NuxtLink>
         </section>
 
         <section v-if="isComplete" class="rounded-2xl border border-brand/30 bg-brand/5 p-6 text-center">

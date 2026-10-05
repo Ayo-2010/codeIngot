@@ -7,6 +7,7 @@
       <LearnCourseSidebar
         :course="course"
         :current-lesson-id="currentLessonId"
+        :current-quiz-id="quizId"
       />
     </aside>
 
@@ -22,6 +23,7 @@
         <LearnCourseSidebar
           :course="course"
           :current-lesson-id="currentLessonId"
+          :current-quiz-id="quizId"
         />
       </div>
     </div>
