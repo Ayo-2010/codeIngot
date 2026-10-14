@@ -243,6 +243,14 @@
           <div id="recaptcha-container" />
         </form>
       </div>
+
+      <p class="px-5 pb-5 text-center text-xs leading-relaxed text-dim">
+        Accounts are optional and the backend is opt-in.
+        <NuxtLink to="/privacy" class="text-brand hover:underline" @click="emit('close')">
+          Privacy policy
+        </NuxtLink>
+        lists exactly what is stored, and when.
+      </p>
     </div>
   </div>
 </template>

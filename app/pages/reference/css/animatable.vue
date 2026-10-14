@@ -74,5 +74,5 @@
 definePageMeta({ layout: 'reference' })
 useHead({ title: 'CSS animatable' })
 
-const { animatable, static: staticProperties } = cssReferenceAnimatable()
+const { animatable, static: staticProperties } = await cssReferenceAnimatable()
 </script>

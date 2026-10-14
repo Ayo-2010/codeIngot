@@ -74,7 +74,10 @@ import { tagSlug } from '~/content/reference/html-tag-pages'
 definePageMeta({ layout: 'reference' })
 useHead({ title: 'HTML browser support' })
 
-const pages = htmlReferenceTagPages()
+const [pages, tags] = await Promise.all([
+  htmlReferenceTagPages(),
+  htmlReferenceTags(),
+])
 const search = ref('')
 
 const browsers = ['Chrome', 'Edge', 'Firefox', 'Safari'] as const
@@ -82,7 +85,7 @@ const browsers = ['Chrome', 'Edge', 'Firefox', 'Safari'] as const
 // Every page carries all four browsers, so reshape into one row per element.
 const rows = pages.map((page) => ({
   tag: page.tag,
-  deprecated: htmlReferenceTags().find((tag) => tag.tag === page.tag)?.deprecated,
+  deprecated: tags.find((tag) => tag.tag === page.tag)?.deprecated,
   support: Object.fromEntries(page.support.map((entry) => [entry.browser, entry.version])),
 }))
 

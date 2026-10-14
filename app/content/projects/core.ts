@@ -53,12 +53,12 @@ export const coreProjects: Project[] = [
       {
         id: 'pc-4',
         label: 'The page lists skills in an unordered list',
-          verify: { kind: 'selector', selector: '<li', label: 'list items' },
+          verify: { kind: 'selector', selector: 'li', label: 'list items' },
       },
       {
         id: 'pc-5',
         label: 'The page contains a contact form with labelled controls',
-          verify: { kind: 'selector', selector: '<label', label: 'a label beside a form control' },
+          verify: { kind: 'selector', selector: 'label', label: 'a label beside a form control' },
       },
       {
         id: 'pc-6',
@@ -288,7 +288,7 @@ h1 {
       {
         id: 'lc-1',
           label: 'The page has header, nav, main, at least three sections and a footer',
-          verify: { kind: 'selector', selector: 'section', label: 'at least three section elements' },
+          verify: { kind: 'selector', selector: 'section', count: 3, label: 'at least three section elements' },
       },
       {
         id: 'lc-2',
@@ -1389,7 +1389,7 @@ if (form && input && list) {
       {
         id: 'qc-1',
           label: 'The feedback and result areas announce updates to assistive technology',
-          verify: { kind: 'selector', selector: 'aria-live', label: 'an aria-live region' },
+          verify: { kind: 'selector', selector: '[aria-live]', label: 'an aria-live region' },
       },
       {
         id: 'qc-2',

@@ -47,5 +47,5 @@ body {
 definePageMeta({ layout: 'reference' })
 useHead({ title: 'CSS font fallbacks' })
 
-const stacks = cssReferenceFontFallbacks()
+const stacks = await cssReferenceFontFallbacks()
 </script>

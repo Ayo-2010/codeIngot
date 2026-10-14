@@ -54,7 +54,7 @@
 definePageMeta({ layout: 'reference' })
 useHead({ title: 'HTML character sets' })
 
-const characterSets = htmlReferenceCharacterSets()
+const characterSets = await htmlReferenceCharacterSets()
 
 const example = `<head>
   <meta charset="utf-8">

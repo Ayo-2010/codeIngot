@@ -7,13 +7,17 @@ import { computed, onBeforeUnmount, onMounted, ref, watch, type Ref } from 'vue'
  * Two independent signals have to agree before a lesson is marked complete:
  *
  *  1. Reading depth — the viewport has covered all but the bottom slice of the
- *     content. This watches the lesson's scroll container rather than the window,
- *     because the learn layout pins `html, body` to `overflow: hidden` and
- *     scrolls an inner element instead, which leaves `window.scrollY` at 0.
+ *     content. This watches the lesson's scroll container rather than the
+ *     window, because the learn layout scrolls an inner element instead of
+ *     the document, which leaves `window.scrollY` at 0.
  *  2. Engaged time — wall-clock time during which the document was visible. The
  *     Page Visibility API gates the clock so switching tabs or minimising the
  *     window stops it, and leaving a tab open in the background cannot
  *     accumulate credit toward the minimum.
+ *
+ * Reading alone is only ever enough for a lesson with nothing to do:
+ * the page gates `enabled` on every exercise being passed, so a
+ * lesson that asks for code cannot be completed by scrolling.
  */
 
 const TICK_MS = 1000

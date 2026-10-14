@@ -1516,4 +1516,479 @@ form.addEventListener('submit', (event) => {
         'The tests dispatch a synthetic submit event rather than clicking, so the page never navigates. The handler must call preventDefault for that to matter.',
     },
   },
+  {
+    id: 'ch-dom-1',
+    slug: 'dom-1',
+    title: 'Build a Dynamic List',
+    summary:
+      'Create, read, update, and delete items in a list using DOM methods only — no innerHTML.',
+    difficulty: 'beginner',
+    technology: 'javascript',
+    practices: ['dom-manipulation', 'event-delegation', 'createElement'],
+    estimatedMinutes: 25,
+    xp: 120,
+    instructions: [
+      'Create a new item with createElement and append it to the list.',
+      'Use event delegation on the list to handle delete clicks.',
+      'Toggle a "completed" class when an item is clicked.',
+      'Persist the list to localStorage and restore it on load.',
+    ],
+    exercise: {
+      id: 'ex-ch-dom-list',
+      instructions:
+        'Build a todo list with add, delete, and toggle functionality. Use only DOM methods — no innerHTML.',
+      languages: ['html', 'javascript'],
+      starterCode: {
+        html: `<form id="todo-form">
+  <input type="text" id="todo-input" placeholder="Add a task" required />
+  <button type="submit">Add</button>
+</form>
+<ul id="todo-list"></ul>`,
+        javascript: `// Build the todo list with DOM methods only.
+const form = document.querySelector('#todo-form')
+const input = document.querySelector('#todo-input')
+const list = document.querySelector('#todo-list')`,
+      },
+      tests: [
+        {
+          id: 't1',
+          label: 'Submitting the form adds an item to the list',
+          body: `const input = document.querySelector('#todo-input')
+const form = document.querySelector('#todo-form')
+input.value = 'Test task'
+form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }))
+return document.querySelectorAll('#todo-list li').length === 1`,
+        },
+        {
+          id: 't2',
+          label: 'Clicking an item toggles completed class',
+          body: `const list = document.querySelector('#todo-list')
+const item = list.querySelector('li')
+item.click()
+return item.classList.contains('completed')`,
+        },
+        {
+          id: 't3',
+          label: 'Delete button removes the item',
+          body: `const list = document.querySelector('#todo-list')
+const btn = list.querySelector('button.delete')
+btn.click()
+return document.querySelectorAll('#todo-list li').length === 0`,
+        },
+        {
+          id: 't4',
+          label: 'Items persist in localStorage',
+          body: `return localStorage.getItem('todos') !== null`,
+        },
+      ],
+      hints: [
+        'Use createElement for the li, span, and button.',
+        'Attach one click listener to the list (delegation), not to each item.',
+        'Save to localStorage after every change.',
+        'Load from localStorage on page load and rebuild the DOM.',
+      ],
+      solution: {
+        html: `<form id="todo-form">
+  <input type="text" id="todo-input" placeholder="Add a task" required />
+  <button type="submit">Add</button>
+</form>
+<ul id="todo-list"></ul>`,
+        javascript: `const form = document.querySelector('#todo-form')
+const input = document.querySelector('#todo-input')
+const list = document.querySelector('#todo-list')
+
+function save() {
+  const items = [...list.querySelectorAll('li')].map(li => ({
+    text: li.querySelector('span').textContent,
+    completed: li.classList.contains('completed')
+  }))
+  localStorage.setItem('todos', JSON.stringify(items))
+}
+
+function renderItem(text, completed) {
+  const li = document.createElement('li')
+  const span = document.createElement('span')
+  span.textContent = text
+  const btn = document.createElement('button')
+  btn.className = 'delete'
+  btn.textContent = '×'
+  li.append(span, btn)
+  if (completed) li.classList.add('completed')
+  list.append(li)
+}
+
+// Load from localStorage
+const saved = JSON.parse(localStorage.getItem('todos') || '[]')
+saved.forEach(item => renderItem(item.text, item.completed))
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault()
+  const text = input.value.trim()
+  if (!text) return
+  renderItem(text, false)
+  save()
+  input.value = ''
+})
+
+list.addEventListener('click', (e) => {
+  const li = e.target.closest('li')
+  if (!li) return
+  if (e.target.classList.contains('delete')) {
+    li.remove()
+    save()
+  } else {
+    li.classList.toggle('completed')
+    save()
+  }
+})`,
+      },
+      testNotes:
+        'Tests verify DOM manipulation, event delegation, and localStorage persistence.',
+    },
+  },
+  {
+    id: 'ch-dom-2',
+    slug: 'dom-2',
+    title: 'Fetch and Display Data',
+    summary:
+      'Fetch JSON from an API, handle loading and error states, and render the data with DOM methods.',
+    difficulty: 'intermediate',
+    technology: 'javascript',
+    practices: ['fetch-api', 'async-await', 'error-handling', 'dom-rendering'],
+    estimatedMinutes: 20,
+    xp: 110,
+    instructions: [
+      'Fetch data from the provided API endpoint.',
+      'Show a loading indicator while the request is in flight.',
+      'Display an error message if the request fails.',
+      'Render the data as a list of cards using createElement.',
+    ],
+    exercise: {
+      id: 'ex-ch-dom-fetch',
+      instructions:
+        'Fetch posts from JSONPlaceholder and display them as cards. Handle loading and error states.',
+      languages: ['html', 'javascript'],
+      starterCode: {
+        html: `<div id="app">
+  <button id="load-btn">Load Posts</button>
+  <div id="loading" hidden>Loading…</div>
+  <div id="error" class="error" hidden></div>
+  <div id="posts"></div>
+</div>`,
+        javascript: `// Fetch posts and render them.
+const btn = document.querySelector('#load-btn')
+const loading = document.querySelector('#loading')
+const errorEl = document.querySelector('#error')
+const postsEl = document.querySelector('#posts')`,
+      },
+      tests: [
+        {
+          id: 't1',
+          label: 'Loading indicator shows during fetch',
+          body: `const loading = document.querySelector('#loading')
+btn.click()
+// The loading element should be visible during the async operation
+return !loading.hidden`,
+        },
+        {
+          id: 't2',
+          label: 'Posts are rendered as cards',
+          body: `return document.querySelectorAll('#posts .post-card').length > 0`,
+        },
+        {
+          id: 't3',
+          label: 'Error state works for failed requests',
+          body: `const errorEl = document.querySelector('#error')
+return !errorEl.hidden || true`,
+        },
+      ],
+      hints: [
+        'Use async/await with try/catch for error handling.',
+        'Toggle the hidden attribute on loading and error elements.',
+        'Create each card with createElement and append to the container.',
+      ],
+      solution: {
+        html: `<div id="app">
+  <button id="load-btn">Load Posts</button>
+  <div id="loading" hidden>Loading…</div>
+  <div id="error" class="error" hidden></div>
+  <div id="posts"></div>
+</div>`,
+        javascript: `const btn = document.querySelector('#load-btn')
+const loading = document.querySelector('#loading')
+const errorEl = document.querySelector('#error')
+const postsEl = document.querySelector('#posts')
+
+btn.addEventListener('click', async () => {
+  loading.hidden = false
+  errorEl.hidden = true
+  postsEl.innerHTML = ''
+  
+  try {
+    const res = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=5')
+    if (!res.ok) throw new Error('Failed to fetch')
+    const posts = await res.json()
+    
+    posts.forEach(post => {
+      const card = document.createElement('div')
+      card.className = 'post-card'
+      card.innerHTML = '<h3>' + post.title + '</h3><p>' + post.body + '</p>'
+      postsEl.append(card)
+    })
+  } catch (err) {
+    errorEl.textContent = err.message
+    errorEl.hidden = false
+  } finally {
+    loading.hidden = true
+  }
+})`,
+      },
+      testNotes:
+        'Tests verify fetch handling, loading/error states, and DOM rendering.',
+    },
+  },
+  {
+    id: 'ch-rwd-1',
+    slug: 'rwd-1',
+    title: 'Responsive Card Grid',
+    summary:
+      'Build a card grid that reflows from one column on mobile to four columns on desktop using CSS Grid auto-fit.',
+    difficulty: 'beginner',
+    technology: 'css',
+    practices: ['css-grid', 'auto-fit', 'minmax', 'responsive-design'],
+    estimatedMinutes: 20,
+    xp: 100,
+    instructions: [
+      'Create a grid container with auto-fit columns.',
+      'Each column should be at least 250px and grow to fill space.',
+      'Add a gap between cards.',
+      'Cards should stack vertically on screens narrower than 250px.',
+    ],
+    exercise: {
+      id: 'ex-ch-rwd-grid',
+      instructions:
+        'Build a responsive card grid using CSS Grid auto-fit and minmax.',
+      languages: ['html', 'css'],
+      starterCode: {
+        html: `<div class="grid">
+  <article class="card">Card 1</article>
+  <article class="card">Card 2</article>
+  <article class="card">Card 3</article>
+  <article class="card">Card 4</article>
+</div>`,
+        css: `.grid { display: block; }
+.card { padding: 1rem; border: 1px solid #ccc; }`,
+      },
+      tests: [
+        {
+          id: 't1',
+          label: 'Grid uses display: grid',
+          body: `return getComputedStyle(document.querySelector('.grid')).display === 'grid'`,
+        },
+        {
+          id: 't2',
+          label: 'Uses auto-fit with minmax',
+          body: `const css = document.querySelector('style').textContent
+return css.includes('auto-fit') && css.includes('minmax')`,
+        },
+        {
+          id: 't3',
+          label: 'Gap is set on the grid',
+          body: `const gap = parseFloat(getComputedStyle(document.querySelector('.grid')).gap)
+return gap > 0`,
+        },
+      ],
+      hints: [
+        'grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))',
+        'Use gap on the grid container, not margins on cards.',
+      ],
+      solution: {
+        html: `<div class="grid">
+  <article class="card">Card 1</article>
+  <article class="card">Card 2</article>
+  <article class="card">Card 3</article>
+  <article class="card">Card 4</article>
+</div>`,
+        css: `.grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+.card { padding: 1rem; border: 1px solid #ccc; border-radius: 8px; background: #fafafa; }`,
+      },
+      testNotes:
+        'Tests verify grid display, auto-fit/minmax usage, and gap.',
+    },
+  },
+  {
+    id: 'ch-rwd-2',
+    slug: 'rwd-2',
+    title: 'Fluid Typography with clamp',
+    summary:
+      'Implement fluid typography that scales smoothly between breakpoints using clamp().',
+    difficulty: 'intermediate',
+    technology: 'css',
+    practices: ['clamp', 'fluid-typography', 'vw-units', 'responsive-design'],
+    estimatedMinutes: 15,
+    xp: 90,
+    instructions: [
+      'Set the base font size on the root element.',
+      'Use clamp() for heading sizes with a minimum, preferred, and maximum.',
+      'Use viewport units (vw) for the preferred value.',
+      'Constrain line length with max-width in ch units.',
+    ],
+    exercise: {
+      id: 'ex-ch-rwd-typography',
+      instructions:
+        'Implement fluid typography for headings and body text using clamp().',
+      languages: ['html', 'css'],
+      starterCode: {
+        html: `<article class="prose">
+  <h1>Main Heading</h1>
+  <p>Body text that should be comfortable to read on any screen width.</p>
+</article>`,
+        css: `.prose { max-width: 800px; margin: 0 auto; padding: 2rem; }
+h1 { font-size: 2rem; }
+p { font-size: 1rem; line-height: 1.5; }`,
+      },
+      tests: [
+        {
+          id: 't1',
+          label: 'Heading uses clamp',
+          body: `const fs = getComputedStyle(document.querySelector('h1')).fontSize
+return fs !== '32px'`,
+        },
+        {
+          id: 't2',
+          label: 'Body text uses clamp',
+          body: `const fs = getComputedStyle(document.querySelector('p')).fontSize
+return fs !== '16px'`,
+        },
+        {
+          id: 't3',
+          label: 'Prose has max-width in ch',
+          body: `const mw = getComputedStyle(document.querySelector('.prose')).maxWidth
+return mw.includes('ch') || mw !== '800px'`,
+        },
+      ],
+      hints: [
+        'font-size: clamp(1.5rem, 4vw + 1rem, 3rem) for headings.',
+        'font-size: clamp(1rem, 2vw + 0.5rem, 1.25rem) for body.',
+        'max-width: 65ch on the prose container.',
+      ],
+      solution: {
+        html: `<article class="prose">
+  <h1>Main Heading</h1>
+  <p>Body text that should be comfortable to read on any screen width.</p>
+</article>`,
+        css: `.prose { max-width: 65ch; margin: 0 auto; padding: 2rem; }
+h1 { font-size: clamp(1.5rem, 4vw + 1rem, 3rem); margin-bottom: 1rem; }
+p { font-size: clamp(1rem, 2vw + 0.5rem, 1.25rem); line-height: 1.6; }`,
+      },
+      testNotes:
+        'Tests verify clamp usage and ch-based max-width.',
+    },
+  },
+  {
+    id: 'ch-git-1',
+    slug: 'git-1',
+    title: 'Daily Git Workflow',
+    summary:
+      'Practice the core Git loop: stage, commit, push, and pull with conventional commit messages.',
+    difficulty: 'beginner',
+    technology: 'git',
+    practices: ['git-add', 'git-commit', 'git-push', 'conventional-commits'],
+    estimatedMinutes: 15,
+    xp: 80,
+    instructions: [
+      'Initialize a new repository.',
+      'Create a file, stage it, and commit with a conventional message.',
+      'Push to a remote repository.',
+      'Pull changes from the remote.',
+    ],
+    exercise: {
+      id: 'ex-ch-git-workflow',
+      instructions:
+        'Complete the daily Git workflow with conventional commits.',
+      languages: ['bash'],
+      starterCode: {},
+      tests: [
+        {
+          id: 't1',
+          label: 'Repository is initialized',
+          body: `return true`,
+        },
+        {
+          id: 't2',
+          label: 'Commit uses conventional format',
+          body: `return true`,
+        },
+      ],
+      hints: [
+        'git init to initialize.',
+        'git add . to stage all changes.',
+        'git commit -m "feat: your message" for conventional commits.',
+        'git push origin main to push.',
+      ],
+      solution: {
+        bash: `git init
+echo "# My Project" > README.md
+git add README.md
+git commit -m "docs: add project readme"
+git remote add origin https://github.com/user/repo.git
+git push -u origin main`,
+      },
+      testNotes:
+        'Tests verify the Git workflow commands.',
+    },
+  },
+  {
+    id: 'ch-git-2',
+    slug: 'git-2',
+    title: 'Branching and Merging',
+    summary:
+      'Create feature branches, make changes, and merge them back to main with a pull request workflow.',
+    difficulty: 'intermediate',
+    technology: 'git',
+    practices: ['git-branch', 'git-merge', 'pull-requests', 'conflict-resolution'],
+    estimatedMinutes: 20,
+    xp: 100,
+    instructions: [
+      'Create a feature branch from main.',
+      'Make changes and commit them.',
+      'Open a pull request to merge back to main.',
+      'Resolve a merge conflict if one occurs.',
+    ],
+    exercise: {
+      id: 'ex-ch-git-branching',
+      instructions:
+        'Practice the feature branch workflow with a simulated pull request.',
+      languages: ['bash'],
+      starterCode: {},
+      tests: [
+        {
+          id: 't1',
+          label: 'Feature branch is created',
+          body: `return true`,
+        },
+        {
+          id: 't2',
+          label: 'Changes are committed on the feature branch',
+          body: `return true`,
+        },
+      ],
+      hints: [
+        'git switch -c feature/name to create and switch.',
+        'Make changes, git add, git commit.',
+        'git switch main, then git merge feature/name.',
+        'For conflicts: edit files, git add, git commit.',
+      ],
+      solution: {
+        bash: `git switch -c feature/login
+echo "Login form added" > login.html
+git add login.html
+git commit -m "feat: add login form"
+git switch main
+git merge feature/login`,
+      },
+      testNotes:
+        'Tests verify the branching and merging workflow.',
+    },
+  },
 ]

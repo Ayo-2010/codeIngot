@@ -96,6 +96,13 @@
         <span v-else class="ml-2 text-warn">— {{ quiz.passingScore }}% needed to pass. Try the ones you missed.</span>
       </p>
       <p v-if="bestScore !== null" class="mt-1 font-mono text-xs text-dim">Best score: {{ bestScore }}%</p>
+      <button
+        type="button"
+        class="mt-3 rounded-lg border border-ink-600 px-3 py-1.5 text-xs font-medium text-mist-50 transition hover:border-brand/50 hover:bg-ink-800"
+        @click="retake"
+      >
+        Try again
+      </button>
     </footer>
   </section>
 </template>
@@ -160,6 +167,15 @@ function finishIfDone() {
   const value = score.value
   if (bestScore.value === null || value > bestScore.value) bestScore.value = value
   emit('finish', value)
+}
+
+/**
+ * Every answer clears so the quiz can be retaken. Storage keeps the
+ * best score, so a retake can only ever improve the recorded result.
+ */
+function retake() {
+  answers.value = {}
+  submitted.value = {}
 }
 
 function optionClass(question: QuizQuestion, optionIndex: number): string {

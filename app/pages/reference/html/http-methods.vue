@@ -54,5 +54,5 @@
 definePageMeta({ layout: 'reference' })
 useHead({ title: 'HTTP methods' })
 
-const methods = htmlReferenceHttpMethods()
+const methods = await htmlReferenceHttpMethods()
 </script>

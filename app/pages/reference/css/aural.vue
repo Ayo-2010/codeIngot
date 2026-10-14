@@ -57,5 +57,5 @@
 definePageMeta({ layout: 'reference' })
 useHead({ title: 'CSS aural reference' })
 
-const properties = cssReferenceAuralProperties()
+const properties = await cssReferenceAuralProperties()
 </script>

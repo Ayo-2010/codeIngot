@@ -45,5 +45,5 @@ code {
 definePageMeta({ layout: 'reference' })
 useHead({ title: 'CSS web safe fonts' })
 
-const fonts = cssReferenceWebSafeFonts()
+const fonts = await cssReferenceWebSafeFonts()
 </script>

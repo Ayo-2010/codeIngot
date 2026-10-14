@@ -131,8 +131,13 @@ definePageMeta({ layout: 'reference' })
 const route = useRoute()
 const slug = computed(() => String(route.params.topic ?? ''))
 
-const topics = javascriptReferenceTopics()
-const topic = computed(() => javascriptReferenceTopicBySlug(slug.value))
+const [topics, navGroups, topicData] = await Promise.all([
+  javascriptReferenceTopics(),
+  javascriptReferenceNavGroups(),
+  javascriptReferenceTopicBySlug(slug.value),
+])
+
+const topic = ref(topicData)
 
 const tokens = computed(() => highlight(topic.value?.example.code ?? '', topic.value?.example.language ?? 'javascript'))
 

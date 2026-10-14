@@ -44,12 +44,13 @@
 
 <script setup lang="ts">
 import type { HtmlTag } from '~/types/content'
+import { htmlReferenceTags, htmlReferenceCategories } from '~/composables/useCourses'
 
 const props = defineProps<{ order: 'alphabet' | 'category' }>()
 
 const term = ref('')
-const tags = htmlReferenceTags()
-const categories = htmlReferenceCategories()
+const tags = await htmlReferenceTags()
+const categories = await htmlReferenceCategories()
 
 const filtered = computed(() => {
   const needle = term.value.trim().toLowerCase()

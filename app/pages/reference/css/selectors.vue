@@ -51,7 +51,7 @@
 definePageMeta({ layout: 'reference' })
 useHead({ title: 'CSS selectors' })
 
-const all = cssReferenceSelectors()
+const all = await cssReferenceSelectors()
 const search = ref('')
 
 /** Keeps the order of the data file, so a kind never moves because of a search. */

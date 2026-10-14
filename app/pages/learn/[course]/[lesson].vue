@@ -1,5 +1,5 @@
 <template>
-  <div v-if="lesson && course" class="flex h-[calc(100vh-4rem)] overflow-hidden">
+  <div v-if="lesson && course" class="flex h-full overflow-hidden">
     <aside
       class="hidden w-72 shrink-0 border-r border-ink-600 bg-ink-900 lg:block"
       aria-label="Course navigation"
@@ -92,7 +92,7 @@
 
             <LessonBlockRenderer
               class="mt-8"
-              :blocks="lesson.content"
+              :blocks="lessonContent ?? []"
               :course-slug="course.slug"
               :lesson-id="lesson.id"
             />
@@ -142,7 +142,7 @@
 
         <aside class="hidden w-64 shrink-0 border-l border-ink-600 p-5 xl:block" aria-label="Lesson contents">
           <div class="sticky top-6">
-            <LearnLessonToc :blocks="lesson.content" :xp="lesson.xp" :duration="lesson.duration" />
+            <LearnLessonToc :blocks="lessonContent ?? []" :xp="lesson.xp" :duration="lesson.duration" />
           </div>
         </aside>
       </div>
@@ -158,7 +158,7 @@
 <script setup lang="ts">
 definePageMeta({ layout: 'learn' })
 
-import { getQuizSection } from '~/composables/useCourses'
+import { loadLesson, nextLesson, previousLesson } from '~/composables/useCourses'
 
 const route = useRoute()
 const router = useRouter()
@@ -170,7 +170,7 @@ const lesson = computed(() => {
   return getLesson(slug, id)
 })
 
-const { isLessonComplete, completeLesson, visitLesson } = useLearningProgress()
+const { isLessonComplete, isExerciseComplete, completeLesson, visitLesson } = useLearningProgress()
 
 useHead({ title: computed(() => lesson.value?.title ?? 'Lesson') })
 
@@ -178,29 +178,53 @@ const drawerOpen = ref(false)
 
 const scrollContainer = ref<HTMLElement | null>(null)
 
+/**
+ * The lesson body loads with the course module, which is
+ * why the catalogue can stay small while every lesson still
+ * renders its examples and exercises. useAsyncData rather
+ * than a watch, so the server-rendered and generated pages
+ * carry the content instead of an empty article.
+ */
+const { data: lessonContent } = await useAsyncData(
+  () => `lesson-content-${lesson.value?.id ?? 'none'}`,
+  async () => {
+    const current = lesson.value
+    if (!current) return []
+    const loaded = await loadLesson(current.courseSlug, current.id)
+    return loaded?.content ?? []
+  },
+)
+
 const next = computed(() => {
   if (!lesson.value) return undefined
-  const currentLesson = lesson.value
-  const nextLessonResult = nextLesson(currentLesson.id)
-  // If this is the last lesson in its section and the section has a quiz, go to the quiz
-  if (nextLessonResult && currentLesson.sectionId) {
-    const quizSection = getQuizSection(currentLesson.courseSlug, currentLesson.sectionId)
-    if (quizSection) {
-      // Check if current lesson is the last in the section
-      const sectionLessons = quizSection.lessons
-      const lastLessonInSection = sectionLessons[sectionLessons.length - 1]
-      if (lastLessonInSection && lastLessonInSection.id === currentLesson.id) {
-        return { href: `/learn/${currentLesson.courseSlug}/quiz/${quizSection.quiz.id}` }
-      }
+  const current = lesson.value
+  // The last lesson of a section hands over to the section's quiz,
+  // which travels with the course metadata.
+  const quiz = current.section.quiz
+  if (quiz) {
+    const sectionLessons = current.section.lessons
+    const lastLessonInSection = sectionLessons[sectionLessons.length - 1]
+    if (lastLessonInSection && lastLessonInSection.id === current.id) {
+      return { href: `/learn/${current.courseSlug}/quiz/${quiz.id}` }
     }
   }
-  return nextLessonResult
+  return nextLesson(current.id)
 })
 const previous = computed(() => (lesson.value ? previousLesson(lesson.value.id) : undefined))
 const isDone = computed(() => (lesson.value ? isLessonComplete(lesson.value.id) : false))
 
-// Reading to the end and spending a minute on the page completes the lesson on
-// its own, so the button below is a shortcut rather than the only way through.
+/**
+ * Reading a lesson counts as completing it only when the lesson has
+ * nothing to do: a lesson with exercises asks for them first, so
+ * scrolling alone cannot bank the XP.
+ */
+const outstandingExercises = computed(
+  () =>
+    (lessonContent.value ?? []).filter(
+      (block) => block.type === 'exercise' && !isExerciseComplete(block.exercise.id),
+    ).length,
+)
+
 const {
   progress: autoProgress,
   reachedEnd: hasReachedEnd,
@@ -209,13 +233,18 @@ const {
 } = useLessonAutoComplete({
   lessonId: computed(() => lesson.value?.id ?? ''),
   container: scrollContainer,
-  enabled: computed(() => Boolean(lesson.value) && !isDone.value),
+  enabled: computed(
+    () => Boolean(lesson.value) && !isDone.value && outstandingExercises.value === 0,
+  ),
   onComplete: () => complete(),
 })
 
 const autoHint = computed(() => {
   if (autoPaused.value) {
     return 'Paused while this tab is in the background. The timer picks up where it left off.'
+  }
+  if (outstandingExercises.value > 0) {
+    return 'Pass every exercise in this lesson to finish it; reading alone is not enough here.'
   }
   const outstanding: string[] = []
   if (!hasReachedEnd.value) outstanding.push('scroll to the end')

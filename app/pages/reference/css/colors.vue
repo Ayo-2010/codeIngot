@@ -49,7 +49,7 @@
 definePageMeta({ layout: 'reference' })
 useHead({ title: 'CSS colors' })
 
-const colors = cssReferenceColorNames()
+const colors = await cssReferenceColorNames()
 const search = ref('')
 
 const filtered = computed(() => {

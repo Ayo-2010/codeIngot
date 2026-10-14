@@ -1,6 +1,6 @@
 <template>
-  <div class="flex h-full min-h-0 flex-col bg-ink-950">
-    <div class="flex items-center gap-1 border-b border-ink-600 px-1 py-1">
+  <div class="flex h-full min-h-0 flex-col bg-[var(--color-code-bg)]">
+    <div class="flex items-center gap-1 border-b border-[var(--color-code-border)] px-1 py-1">
       <button
         v-for="tab in tabs"
         :key="tab.id"
@@ -8,8 +8,8 @@
         class="rounded-md px-2.5 py-1 font-mono text-xs transition"
         :class="
           tab.id === active
-            ? 'bg-ink-800 text-mist-50 ring-1 ring-ink-500'
-            : 'text-dim hover:text-mist-200'
+            ? 'bg-[var(--color-code-header-bg)] text-[var(--color-code-text)] ring-1 ring-[var(--color-code-border)]'
+            : 'text-[var(--color-code-header-text)] hover:text-[var(--color-code-text)]'
         "
         :aria-pressed="tab.id === active"
         @click="$emit('update:active', tab.id)"
@@ -20,7 +20,7 @@
         <button
           v-if="showReset"
           type="button"
-          class="rounded-md p-1.5 text-dim transition hover:bg-ink-800 hover:text-mist-200"
+          class="rounded-md p-1.5 text-[var(--color-code-header-text)] transition hover:bg-[var(--color-code-bg)] hover:text-[var(--color-code-text)]"
           title="Reset to the starter code"
           @click="$emit('reset')"
         >
@@ -32,7 +32,7 @@
         </button>
         <button
           type="button"
-          class="rounded-md p-1.5 text-dim transition hover:bg-ink-800 hover:text-mist-200"
+          class="rounded-md p-1.5 text-[var(--color-code-header-text)] transition hover:bg-[var(--color-code-bg)] hover:text-[var(--color-code-text)]"
           title="Copy code"
           @click="copy"
         >
@@ -44,7 +44,7 @@
         </button>
         <button
           type="button"
-          class="rounded-md px-2 py-1 font-mono text-[11px] text-dim transition hover:bg-ink-800 hover:text-mist-200"
+          class="rounded-md px-2 py-1 font-mono text-[11px] text-[var(--color-code-header-text)] transition hover:bg-[var(--color-code-bg)] hover:text-[var(--color-code-text)]"
           title="Format the code (Alt+Shift+F)"
           @click="format"
         >
@@ -55,7 +55,7 @@
 
     <div class="relative flex min-h-0 flex-1 overflow-hidden">
       <div
-        class="pointer-events-none select-none overflow-hidden border-r border-ink-600 bg-ink-900/60 px-2 py-3 text-right font-mono text-[12.5px] leading-6 text-dim"
+        class="pointer-events-none select-none overflow-hidden border-r border-[var(--color-code-border)] bg-[var(--color-code-header-bg)]/60 px-2 py-3 text-right font-mono text-[12.5px] leading-6 text-[var(--color-code-header-text)]"
         aria-hidden="true"
       >
         <div :style="{ transform: `translateY(${-scrollTop}px)` }">
@@ -66,7 +66,7 @@
       <div class="relative min-w-0 flex-1">
         <pre
           ref="highlightEl"
-          class="pointer-events-none absolute inset-0 overflow-hidden px-3 py-3 font-mono text-[12.5px] leading-6 text-mist-200"
+          class="pointer-events-none absolute inset-0 overflow-hidden px-3 py-3 font-mono text-[12.5px] leading-6 text-[var(--color-code-text)]"
           aria-hidden="true"
         ><code><span
             v-for="(token, index) in tokens"

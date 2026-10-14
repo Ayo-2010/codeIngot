@@ -52,9 +52,9 @@
 </template>
 
 <script setup lang="ts">
-import type { Course } from '~/types/content'
+import type { CourseMeta } from '~/types/content'
 
-const props = defineProps<{ course: Course }>()
+const props = defineProps<{ course: CourseMeta }>()
 
 const { courseProgressPercent, courseStatus } = useLearningProgress()
 

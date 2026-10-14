@@ -53,10 +53,10 @@
 </template>
 
 <script setup lang="ts">
-import type { Course } from '~/types/content'
+import type { CourseMeta, CourseSectionMeta } from '~/types/content'
 
 const props = defineProps<{
-  course: Course
+  course: CourseMeta
   currentLessonId: string
   currentQuizId?: string
 }>()
@@ -78,7 +78,7 @@ function done(lessonId: string) {
   return progress.value.completedLessons.includes(lessonId)
 }
 
-function sectionLink(section: Course['sections'][number]): string {
+function sectionLink(section: CourseSectionMeta): string {
   const last = section.lessons[section.lessons.length - 1]
   return `/learn/${props.course.slug}/${last?.id ?? ''}`
 }

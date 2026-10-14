@@ -72,7 +72,7 @@
 definePageMeta({ layout: 'reference' })
 useHead({ title: 'Keyboard shortcuts' })
 
-const shortcuts = htmlReferenceKeyboardShortcuts()
+const shortcuts = await htmlReferenceKeyboardShortcuts()
 
 const browserKeys = new Set([
   'Tab',

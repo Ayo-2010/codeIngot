@@ -2,7 +2,7 @@
   <header
     class="sticky top-0 z-50 h-16 border-b border-ink-600/70 bg-ink-950/85 backdrop-blur-md"
   >
-    <div class="mx-auto flex h-full max-w-[1600px] items-center gap-4 px-4 sm:px-6">
+    <div class="mx-auto flex h-full max-w-[1600px] items-center gap-4 px-4 sm:px-6 min-w-0">
       <NuxtLink
         to="/"
         class="group flex shrink-0 items-center gap-2.5 rounded-lg px-1 py-1"
@@ -17,41 +17,67 @@
             <path d="M15 8l5 4-5 4" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
         </span>
-        <span class="text-[15px] font-semibold tracking-tight text-mist-50">
+        <span class="text-[15px] font-semibold tracking-tight text-mist-50 truncate">
           code<span class="text-brand">Ingot</span>
         </span>
       </NuxtLink>
 
-      <nav class="hidden items-center gap-1 lg:flex" aria-label="Main">
-        <NuxtLink
-          v-for="item in primaryNav"
-          :key="item.to"
-          :to="item.to"
-          class="nav-link"
-        >
-          {{ item.label }}
-        </NuxtLink>
+      <nav class="hidden items-center gap-1 lg:flex lg:gap-2 min-w-0 flex-1" aria-label="Main">
+        <template v-for="item in primaryNav" :key="item.to || item.label">
+          <NuxtLink
+            v-if="!item.children"
+            :to="item.to"
+            class="nav-link whitespace-nowrap"
+          >
+            {{ item.label }}
+          </NuxtLink>
+          <div v-else class="relative group">
+            <button
+              type="button"
+              class="nav-link flex items-center gap-1.5 whitespace-nowrap"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              {{ item.label }}
+              <svg viewBox="0 0 24 24" class="h-3.5 w-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
+            <div class="absolute top-full left-0 mt-2 min-w-[160px] rounded-xl border border-ink-600 bg-ink-900 py-1.5 shadow-xl opacity-0 invisible translate-y-1 transition-all duration-150 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 z-50">
+              <NuxtLink
+                v-for="child in item.children"
+                :key="child.to"
+                :to="child.to"
+                class="block px-3 py-2 text-sm text-muted hover:bg-ink-800 hover:text-mist-50 transition-colors whitespace-nowrap"
+                @click="mobileOpen = false"
+              >
+                {{ child.label }}
+              </NuxtLink>
+            </div>
+          </div>
+        </template>
       </nav>
 
-      <div class="ml-auto flex items-center gap-2">
+      <div class="ml-auto flex items-center gap-2 shrink-0" aria-label="Account actions">
+        <ThemeToggle />
         <button
           type="button"
           class="hidden items-center gap-2 rounded-lg border border-ink-600 bg-ink-900 px-3 py-1.5 text-sm text-muted transition hover:border-ink-500 hover:text-mist-50 sm:flex"
           @click="openPalette()"
         >
-          <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8">
+          <svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8">
             <circle cx="11" cy="11" r="6.5" />
             <path d="M16 16l4.5 4.5" stroke-linecap="round" />
           </svg>
-          <span>Search</span>
-          <kbd class="rounded border border-ink-600 bg-ink-800 px-1.5 py-0.5 font-mono text-[11px] text-dim">
+          <span class="hidden sm:inline">Search</span>
+          <kbd class="rounded border border-ink-600 bg-ink-800 px-1.5 py-0.5 font-mono text-[11px] text-dim shrink-0">
             Ctrl K
           </kbd>
         </button>
 
         <NuxtLink
           to="/dashboard"
-          class="flex items-center gap-2 rounded-lg border border-ink-600 bg-ink-900 px-3 py-1.5 text-sm font-medium text-mist-50 transition hover:border-brand/40 hover:bg-ink-800"
+          class="flex items-center gap-2 rounded-lg border border-ink-600 bg-ink-900 px-3 py-1.5 text-sm font-medium text-mist-50 transition hover:border-brand/40 hover:bg-ink-800 shrink-0"
         >
           <ClientOnly>
             <XpChip />
@@ -78,7 +104,7 @@
 
         <button
           type="button"
-          class="flex items-center gap-2 rounded-lg border border-ink-600 bg-ink-900 px-3 py-1.5 text-sm font-medium text-mist-50 transition hover:border-brand/40 hover:bg-ink-800"
+          class="flex items-center gap-2 rounded-lg border border-ink-600 bg-ink-900 px-3 py-1.5 text-sm font-medium text-mist-50 transition hover:border-brand/40 hover:bg-ink-800 shrink-0"
           :aria-expanded="accountOpen"
           aria-controls="account-dialog"
           @click="accountOpen = true"
@@ -86,15 +112,15 @@
           <ClientOnly>
             <span v-if="isSignedIn" class="flex items-center gap-2">
               <span
-                class="grid h-5 w-5 place-items-center rounded-full bg-brand/15 font-mono text-[10px] text-brand"
+                class="grid h-5 w-5 place-items-center rounded-full bg-brand/15 font-mono text-[10px] text-brand shrink-0"
                 aria-hidden="true"
               >
                 {{ initials }}
               </span>
-              <span class="hidden sm:inline">{{ accountName }}</span>
+              <span class="hidden xl:inline truncate">{{ accountName }}</span>
             </span>
             <span v-else class="flex items-center gap-1.5">
-              <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
                 <circle cx="12" cy="8" r="3.5" />
                 <path d="M5 20a7 7 0 0 1 14 0" stroke-linecap="round" />
               </svg>
@@ -111,41 +137,53 @@
           controls="mobile-nav"
           open-label="Open navigation"
           close-label="Close navigation"
-          class="lg:hidden"
+          class="lg:hidden shrink-0"
           @toggle="mobileOpen = !mobileOpen"
         />
       </div>
     </div>
 
-    <div
-      v-if="mobileOpen"
-      id="mobile-nav"
-      class="border-t border-ink-600 bg-ink-950 px-4 py-3 lg:hidden"
+<div
+  v-if="mobileOpen"
+  id="mobile-nav"
+  class="border-t border-ink-600 bg-ink-950 px-4 py-3 lg:hidden"
+>
+  <nav class="flex flex-col gap-1" aria-label="Mobile">
+    <template v-for="item in primaryNav" :key="item.to || item.label">
+      <NuxtLink
+        v-if="!item.children"
+        :to="item.to"
+        class="rounded-lg px-3 py-2.5 text-sm text-mist-200 hover:bg-ink-800"
+        @click="mobileOpen = false"
+      >
+        {{ item.label }}
+      </NuxtLink>
+      <div v-else class="space-y-1 pl-2 border-l border-ink-600/50">
+        <NuxtLink
+          v-for="child in item.children"
+          :key="child.to"
+          :to="child.to"
+          class="block rounded-lg px-3 py-2 text-sm text-muted hover:bg-ink-800 hover:text-mist-50"
+          @click="mobileOpen = false"
+        >
+          {{ child.label }}
+        </NuxtLink>
+      </div>
+    </template>
+    <NuxtLink
+      to="/dashboard"
+      class="rounded-lg px-3 py-2.5 text-sm text-mist-200 hover:bg-ink-800"
+      @click="mobileOpen = false"
     >
-      <nav class="flex flex-col gap-1" aria-label="Mobile">
-        <NuxtLink
-          v-for="item in primaryNav"
-          :key="item.to"
-          :to="item.to"
-          class="rounded-lg px-3 py-2.5 text-sm text-mist-200 hover:bg-ink-800"
-          @click="mobileOpen = false"
-        >
-          {{ item.label }}
-        </NuxtLink>
-        <NuxtLink
-          to="/dashboard"
-          class="rounded-lg px-3 py-2.5 text-sm text-mist-200 hover:bg-ink-800"
-          @click="mobileOpen = false"
-        >
-          Dashboard
-        </NuxtLink>
-        <NuxtLink
-          to="/progress"
-          class="rounded-lg px-3 py-2.5 text-sm text-mist-200 hover:bg-ink-800"
-          @click="mobileOpen = false"
-        >
-          Progress
-        </NuxtLink>
+      Dashboard
+    </NuxtLink>
+    <NuxtLink
+      to="/progress"
+      class="rounded-lg px-3 py-2.5 text-sm text-mist-200 hover:bg-ink-800"
+      @click="mobileOpen = false"
+    >
+      Progress
+    </NuxtLink>
         <NuxtLink
           to="/account"
           class="rounded-lg px-3 py-2.5 text-sm text-mist-200 hover:bg-ink-800"
@@ -169,6 +207,7 @@
 
 <script setup lang="ts">
 const { isSignedIn, displayName: accountName } = useAuth()
+import ThemeToggle from './ThemeToggle.vue'
 
 const accountOpen = ref(false)
 const mobileOpen = ref(false)
@@ -182,10 +221,20 @@ const initials = computed(() => {
 const primaryNav = [
   { to: '/paths', label: 'Learn' },
   { to: '/courses', label: 'Courses' },
-  { to: '/challenges', label: 'Challenges' },
-  { to: '/projects', label: 'Projects' },
-  { to: '/playground', label: 'Playground' },
-  { to: '/reference', label: 'Reference' },
+  {
+    label: 'Practice',
+    children: [
+      { to: '/challenges', label: 'Challenges' },
+      { to: '/projects', label: 'Projects' },
+    ],
+  },
+  {
+    label: 'Resources',
+    children: [
+      { to: '/reference', label: 'Reference' },
+      { to: '/playground', label: 'Playground' },
+    ],
+  },
 ]
 
 watch(() => useRoute().fullPath, () => {

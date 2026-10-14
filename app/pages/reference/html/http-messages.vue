@@ -42,14 +42,14 @@
 definePageMeta({ layout: 'reference' })
 useHead({ title: 'HTTP messages' })
 
-const statuses = htmlReferenceHttpStatuses()
+const statuses = await htmlReferenceHttpStatuses()
 
 const groups = [
-  { label: '1xx â€” Informational', test: (code: number) => code < 200 },
-  { label: '2xx â€” Success', test: (code: number) => code >= 200 && code < 300 },
-  { label: '3xx â€” Redirection', test: (code: number) => code >= 300 && code < 400 },
-  { label: '4xx â€” Client error', test: (code: number) => code >= 400 && code < 500 },
-  { label: '5xx â€” Server error', test: (code: number) => code >= 500 },
+  { label: '1xx — Informational', test: (code: number) => code < 200 },
+  { label: '2xx — Success', test: (code: number) => code >= 200 && code < 300 },
+  { label: '3xx — Redirection', test: (code: number) => code >= 300 && code < 400 },
+  { label: '4xx — Client error', test: (code: number) => code >= 400 && code < 500 },
+  { label: '5xx — Server error', test: (code: number) => code >= 500 },
 ]
 
 const grouped = groups

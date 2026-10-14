@@ -1,17 +1,13 @@
-import type { Difficulty } from '~/types/content'
+import type { Difficulty, EditorLanguage } from '~/types/content'
 
 export interface CourseProgress {
-  courseId: string
+  courseSlug: string
   completedLessons: string[]
   completedChallenges: string[]
+  completedExercises: string[]
   completedProjects: string[]
   startedAt?: string
   completedAt?: string
-}
-
-export interface PathProgress {
-  pathId: string
-  completedCourses: string[]
 }
 
 export interface StreakData {
@@ -25,10 +21,11 @@ export interface StreakData {
 export interface UserProgress {
   completedLessons: string[]
   completedChallenges: string[]
+  /** In-lesson exercises, tracked apart from standalone challenges. */
+  completedExercises: string[]
   completedProjects: string[]
   quizScores: Record<string, number>
   courseProgress: Record<string, CourseProgress>
-  pathProgress: Record<string, PathProgress>
   xp: number
   streak: StreakData
   achievements: string[]
@@ -65,10 +62,10 @@ export function createEmptyProgress(): UserProgress {
   return {
     completedLessons: [],
     completedChallenges: [],
+    completedExercises: [],
     completedProjects: [],
     quizScores: {},
     courseProgress: {},
-    pathProgress: {},
     xp: 0,
     streak: { current: 0, longest: 0, lastActiveDate: null, days: [] },
     achievements: [],
@@ -106,11 +103,11 @@ export function coerceProgress(value: unknown): UserProgress | null {
     ...raw,
     completedLessons: Array.isArray(raw.completedLessons) ? raw.completedLessons : [],
     completedChallenges: Array.isArray(raw.completedChallenges) ? raw.completedChallenges : [],
+    completedExercises: Array.isArray(raw.completedExercises) ? raw.completedExercises : [],
     completedProjects: Array.isArray(raw.completedProjects) ? raw.completedProjects : [],
     quizScores: raw.quizScores && typeof raw.quizScores === 'object' ? raw.quizScores : {},
     courseProgress:
       raw.courseProgress && typeof raw.courseProgress === 'object' ? raw.courseProgress : {},
-    pathProgress: raw.pathProgress && typeof raw.pathProgress === 'object' ? raw.pathProgress : {},
     xp: typeof raw.xp === 'number' && Number.isFinite(raw.xp) ? raw.xp : 0,
     streak: {
       ...base.streak,
@@ -164,6 +161,50 @@ export class LocalProgressStorage implements ProgressStorage {
   }
 }
 
+/* --------------------------- project drafts ------------------------------ */
+
+/** A learner's in-progress files for one project. */
+export type ProjectDraft = Partial<Record<EditorLanguage, string>>
+
+const DRAFTS_KEY = 'app-learning-drafts'
+
+/**
+ * Project drafts live under their own key, separate from
+ * progress: they are work in progress rather than a record of
+ * what was finished, and they survive a refresh so a project
+ * — the most substantial work on the site — is never lost to
+ * a stray tab close.
+ */
+export class LocalDraftStorage {
+  async load(): Promise<Record<string, ProjectDraft>> {
+    if (!import.meta.client) return {}
+    try {
+      const raw = window.localStorage.getItem(DRAFTS_KEY)
+      if (!raw) return {}
+      const parsed: unknown = JSON.parse(raw)
+      if (!parsed || typeof parsed !== 'object') return {}
+      const out: Record<string, ProjectDraft> = {}
+      for (const [slug, files] of Object.entries(parsed as Record<string, unknown>)) {
+        if (files && typeof files === 'object') {
+          out[slug] = files as ProjectDraft
+        }
+      }
+      return out
+    } catch {
+      return {}
+    }
+  }
+
+  async save(drafts: Record<string, ProjectDraft>): Promise<void> {
+    if (!import.meta.client) return
+    try {
+      window.localStorage.setItem(DRAFTS_KEY, JSON.stringify(drafts))
+    } catch {
+      /* storage full or blocked: the draft stays in memory */
+    }
+  }
+}
+
 /* ------------------------------ cloud plumbing ------------------------------ */
 
 /**
@@ -201,26 +242,17 @@ export function mergeProgress(base: UserProgress, incoming: UserProgress): UserP
   }
 
   const courseProgress: Record<string, CourseProgress> = {}
-  for (const id of union(Object.keys(base.courseProgress), Object.keys(incoming.courseProgress))) {
-    const a = base.courseProgress[id]
-    const b = incoming.courseProgress[id]
-    courseProgress[id] = {
-      courseId: b?.courseId ?? a?.courseId ?? id,
+  for (const slug of union(Object.keys(base.courseProgress), Object.keys(incoming.courseProgress))) {
+    const a = base.courseProgress[slug]
+    const b = incoming.courseProgress[slug]
+    courseProgress[slug] = {
+      courseSlug: b?.courseSlug ?? a?.courseSlug ?? slug,
       completedLessons: union(a?.completedLessons ?? [], b?.completedLessons ?? []),
       completedChallenges: union(a?.completedChallenges ?? [], b?.completedChallenges ?? []),
+      completedExercises: union(a?.completedExercises ?? [], b?.completedExercises ?? []),
       completedProjects: union(a?.completedProjects ?? [], b?.completedProjects ?? []),
       startedAt: earliest(a?.startedAt, b?.startedAt),
       completedAt: latest(a?.completedAt, b?.completedAt),
-    }
-  }
-
-  const pathProgress: Record<string, PathProgress> = {}
-  for (const id of union(Object.keys(base.pathProgress), Object.keys(incoming.pathProgress))) {
-    const a = base.pathProgress[id]
-    const b = incoming.pathProgress[id]
-    pathProgress[id] = {
-      pathId: b?.pathId ?? a?.pathId ?? id,
-      completedCourses: union(a?.completedCourses ?? [], b?.completedCourses ?? []),
     }
   }
 
@@ -240,10 +272,10 @@ export function mergeProgress(base: UserProgress, incoming: UserProgress): UserP
   return {
     completedLessons: union(base.completedLessons, incoming.completedLessons),
     completedChallenges: union(base.completedChallenges, incoming.completedChallenges),
+    completedExercises: union(base.completedExercises, incoming.completedExercises),
     completedProjects: union(base.completedProjects, incoming.completedProjects),
     quizScores,
     courseProgress,
-    pathProgress,
     xp: Math.max(base.xp, incoming.xp),
     streak: {
       current: Math.max(base.streak.current, incoming.streak.current),

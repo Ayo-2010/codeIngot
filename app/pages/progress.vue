@@ -62,16 +62,41 @@
             <span class="text-sm text-muted">day streak</span>
           </p>
           <p class="mt-1 font-mono text-xs text-dim">Longest: {{ streak.longest }} days</p>
-          <ol class="mt-4 grid grid-cols-7 gap-1 text-center">
-            <li v-for="day in streakWeek" :key="day.date">
-              <span
-                class="grid h-7 w-full place-items-center rounded-md text-[11px]"
-                :class="day.active ? 'bg-brand/20 text-brand' : 'bg-ink-800 text-dim'"
-              >
-                {{ day.label }}
-              </span>
-            </li>
-          </ol>
+          <p class="mt-1 font-mono text-xs text-dim">Total active days: {{ progress.value.streak.days.length }}</p>
+
+          <div class="mt-4 space-y-3">
+            <h3 class="text-xs uppercase tracking-wider text-dim">This week</h3>
+            <ol class="grid grid-cols-7 gap-1 text-center">
+              <li v-for="day in streakWeek" :key="day.date">
+                <span
+                  class="grid h-7 w-full place-items-center rounded-md text-[11px]"
+                  :class="day.active ? 'bg-brand/20 text-brand' : 'bg-ink-800 text-dim'"
+                >
+                  {{ day.label }}
+                </span>
+              </li>
+            </ol>
+          </div>
+
+          <div v-if="streakMonths.length > 0" class="mt-4 space-y-3">
+            <h3 class="text-xs uppercase tracking-wider text-dim">All streaked days</h3>
+            <div class="space-y-2 max-h-64 overflow-y-auto pr-1">
+              <div v-for="month in streakMonths" :key="month.month" class="space-y-1">
+                <p class="text-xs font-medium text-muted">{{ month.month }}</p>
+                <div class="flex flex-wrap gap-1">
+                  <span
+                    v-for="day in month.days"
+                    :key="day.date"
+                    class="px-2.5 py-1.5 rounded bg-brand/15 text-brand text-[11px] font-mono border border-brand/20 hover:bg-brand/25 transition-colors cursor-default"
+                    :title="formatDate(day.date)"
+                  >
+                    {{ formatDate(day.date, 'dd') }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <p class="mt-3 text-xs leading-relaxed text-dim">
             A missed day only resets the streak counter. Nothing you completed is ever taken away.
           </p>
@@ -98,7 +123,7 @@
         <li v-for="row in quizRows" :key="row.id" class="flex items-center gap-3">
           <span class="w-40 shrink-0 truncate text-sm text-mist-200">{{ row.title }}</span>
           <ProgressBar class="flex-1" :value="row.score" :label="`${row.title} score`" />
-          <span class="w-12 text-right font-mono text-xs" :class="row.score >= 70 ? 'text-ok' : 'text-warn'">
+          <span class="w-12 text-right font-mono text-xs" :class="row.score >= row.passingScore ? 'text-ok' : 'text-warn'">
             {{ row.score }}%
           </span>
         </li>
@@ -141,7 +166,8 @@
 </template>
 
 <script setup lang="ts">
-import type { Course } from '~/types/content'
+import type { CourseMeta } from '~/types/content'
+import { jsPDF } from 'jspdf'
 
 useHead({ title: 'Progress' })
 
@@ -150,6 +176,30 @@ const { progress, totals, streak, streakWeek, courseProgressPercent, resetProgre
   useLearningProgress()
 
 const confirmReset = ref(false)
+
+// Streak calendar - show all streaked days in a monthly grid
+const streakMonths = computed(() => {
+  const days = progress.value.streak.days
+  if (days.length === 0) return []
+
+  const months: Record<string, { date: string; active: boolean }[]> = {}
+  for (const day of days) {
+    const date = new Date(day + 'T00:00:00')
+    const monthKey = date.toLocaleDateString(undefined, { year: 'numeric', month: 'long' })
+    if (!months[monthKey]) months[monthKey] = []
+    months[monthKey].push({ date: day, active: true })
+  }
+
+  return Object.entries(months).map(([month, days]) => ({ month, days }))
+})
+
+function formatDate(isoDate: string, format: 'full' | 'dd' = 'full'): string {
+  const date = new Date(isoDate + 'T00:00:00')
+  if (format === 'dd') {
+    return String(date.getDate()).padStart(2, '0')
+  }
+  return date.toLocaleDateString()
+}
 
 const headline = computed(() => [
   { label: 'Total XP', value: totals.value.xp.toLocaleString(), note: `Level ${1 + Math.floor(totals.value.xp / 700)}` },
@@ -187,13 +237,18 @@ const xpRows = computed(() =>
 )
 
 const quizRows = computed(() => {
-  const rows: { id: string; title: string; score: number }[] = []
-  for (const course of courses as Course[]) {
+  const rows: { id: string; title: string; score: number; passingScore: number }[] = []
+  for (const course of courses as CourseMeta[]) {
     for (const section of course.sections) {
       if (!section.quiz) continue
       const score = progress.value.quizScores[section.quiz.id]
       if (score === undefined) continue
-      rows.push({ id: section.quiz.id, title: `${course.shortTitle} · ${section.quiz.title}`, score })
+      rows.push({
+        id: section.quiz.id,
+        title: `${course.shortTitle} · ${section.quiz.title}`,
+        score,
+        passingScore: section.quiz.passingScore,
+      })
     }
   }
   return rows
@@ -201,13 +256,228 @@ const quizRows = computed(() => {
 
 async function download() {
   if (!import.meta.client) return
-  const blob = new Blob([exportProgress()], { type: 'application/json' })
-  const url = URL.createObjectURL(blob)
-  const anchor = document.createElement('a')
-  anchor.href = url
-  anchor.download = 'codeingot-progress.json'
-  anchor.click()
-  URL.revokeObjectURL(url)
+
+  const doc = new jsPDF()
+  const margin = 20
+  const pageWidth = doc.internal.pageSize.getWidth()
+  const contentWidth = pageWidth - margin * 2
+  let y = margin
+
+  const primaryColor = '#6366f1'
+  const secondaryColor = '#94a3b8'
+  const darkColor = '#0f172a'
+  const lightColor = '#f8fafc'
+
+  doc.setFont('helvetica', 'bold')
+  doc.setFontSize(28)
+  doc.setTextColor(primaryColor)
+  doc.text('codeIngot', margin, y)
+  y += 10
+
+  doc.setFontSize(14)
+  doc.setTextColor(secondaryColor)
+  doc.text('Learning Progress Report', margin, y)
+  y += 16
+
+  doc.setDrawColor(primaryColor)
+  doc.setLineWidth(0.5)
+  doc.line(margin, y, pageWidth - margin, y)
+  y += 12
+
+  doc.setFont('helvetica', 'normal')
+  doc.setFontSize(10)
+  doc.setTextColor(secondaryColor)
+  doc.text(`Generated on ${new Date().toLocaleDateString()}`, margin, y)
+  y += 6
+  doc.text(`Total XP: ${totals.value.xp.toLocaleString()}  |  Level ${1 + Math.floor(totals.value.xp / 700)}`, margin, y)
+  y += 16
+
+  const drawStatCard = (label: string, value: string, note?: string) => {
+    doc.setFillColor(248, 250, 252)
+    doc.roundedRect(margin, y, contentWidth / 2 - 4, 22, 3, 3, 'F')
+    doc.setFontSize(8)
+    doc.setTextColor(secondaryColor)
+    doc.text(label.toUpperCase(), margin + 6, y + 8)
+    doc.setFont('helvetica', 'bold')
+    doc.setFontSize(14)
+    doc.setTextColor(darkColor)
+    doc.text(value, margin + 6, y + 17)
+    if (note) {
+      doc.setFont('helvetica', 'normal')
+      doc.setFontSize(8)
+      doc.setTextColor(secondaryColor)
+      doc.text(note, margin + 6 + doc.getTextWidth(value) + 4, y + 17)
+    }
+    doc.setFont('helvetica', 'normal')
+  }
+
+  const stats = [
+    { label: 'Total XP', value: totals.value.xp.toLocaleString(), note: `Level ${1 + Math.floor(totals.value.xp / 700)}` },
+    { label: 'Lessons', value: totals.value.lessons.toString(), note: `${allLessonFlat().length} available` },
+    { label: 'Challenges', value: totals.value.challenges.toString(), note: `${allChallenges().length} available` },
+    { label: 'Projects', value: totals.value.projects.toString(), note: `${allProjectsList().length} available` },
+  ]
+
+  stats.forEach((stat, i) => {
+    const col = i % 2
+    const row = Math.floor(i / 2)
+    const x = margin + col * (contentWidth / 2 + 4)
+    const yy = y + row * 28
+
+    doc.setFillColor(248, 250, 252)
+    doc.roundedRect(x, yy, contentWidth / 2 - 4, 22, 3, 3, 'F')
+    doc.setFontSize(8)
+    doc.setTextColor(secondaryColor)
+    doc.text(stat.label.toUpperCase(), x + 6, yy + 8)
+    doc.setFont('helvetica', 'bold')
+    doc.setFontSize(14)
+    doc.setTextColor(darkColor)
+    doc.text(stat.value, x + 6, yy + 17)
+    if (stat.note) {
+      doc.setFont('helvetica', 'normal')
+      doc.setFontSize(8)
+      doc.setTextColor(secondaryColor)
+      doc.text(stat.note, x + 6 + doc.getTextWidth(stat.value) + 4, yy + 17)
+    }
+    doc.setFont('helvetica', 'normal')
+  })
+
+  y += 64
+
+  doc.setFontSize(16)
+  doc.setTextColor(primaryColor)
+  doc.setFont('helvetica', 'bold')
+  doc.text('Course Progress', margin, y)
+  y += 10
+
+  doc.setFont('helvetica', 'normal')
+  doc.setFontSize(10)
+  doc.setTextColor(darkColor)
+
+  for (const course of courses as CourseMeta[]) {
+    const percent = percentFor(course.slug)
+    const done = doneCount(course.slug)
+    const total = course.sections.reduce((sum, s) => sum + s.lessons.length, 0)
+
+    doc.setFillColor(255, 255, 255)
+    doc.roundedRect(margin, y, contentWidth, 28, 3, 3, 'F')
+    doc.setDrawColor(226, 232, 240)
+    doc.roundedRect(margin, y, contentWidth, 28, 3, 3, 'S')
+
+    doc.setFontSize(11)
+    doc.setFont('helvetica', 'bold')
+    doc.setTextColor(darkColor)
+    doc.text(course.title, margin + 8, y + 10)
+
+    doc.setFontSize(9)
+    doc.setFont('helvetica', 'normal')
+    doc.setTextColor(secondaryColor)
+    doc.text(`${done} / ${total} lessons`, margin + 8, y + 18)
+
+    const barWidth = contentWidth - 16
+    const barHeight = 6
+    const barX = margin + 8
+    const barY = y + 20
+
+    doc.setFillColor(226, 232, 240)
+    doc.roundedRect(barX, barY, barWidth, barHeight, 2, 2, 'F')
+    doc.setFillColor(primaryColor)
+    doc.roundedRect(barX, barY, (barWidth * percent) / 100, barHeight, 2, 2, 'F')
+
+    doc.setFontSize(8)
+    doc.setTextColor(secondaryColor)
+    doc.text(`${percent}%`, margin + contentWidth - 20, y + 24)
+
+    y += 34
+  }
+
+  y += 6
+
+  doc.setFontSize(16)
+  doc.setTextColor(primaryColor)
+  doc.setFont('helvetica', 'bold')
+  doc.text('Streak', margin, y)
+  y += 10
+
+  doc.setFillColor(248, 250, 252)
+  doc.roundedRect(margin, y, contentWidth, 30, 3, 3, 'F')
+  doc.setFontSize(24)
+  doc.setFont('helvetica', 'bold')
+  doc.setTextColor(primaryColor)
+  doc.text(`${streak.value.current}`, margin + 12, y + 18)
+  doc.setFontSize(10)
+  doc.setFont('helvetica', 'normal')
+  doc.setTextColor(secondaryColor)
+  doc.text('day streak', margin + 12 + doc.getTextWidth(`${streak.value.current}`) + 4, y + 18)
+  doc.setFontSize(9)
+  doc.text(`Longest: ${streak.value.longest} days`, margin + 12, y + 26)
+  y += 42
+
+  doc.setFontSize(16)
+  doc.setTextColor(primaryColor)
+  doc.setFont('helvetica', 'bold')
+  doc.text('XP by Source', margin, y)
+  y += 10
+
+  for (const row of xpRows.value) {
+    doc.setFillColor(255, 255, 255)
+    doc.roundedRect(margin, y, contentWidth, 18, 3, 3, 'F')
+    doc.setDrawColor(226, 232, 240)
+    doc.roundedRect(margin, y, contentWidth, 18, 3, 3, 'S')
+    doc.setFontSize(10)
+    doc.setFont('helvetica', 'normal')
+    doc.setTextColor(darkColor)
+    doc.text(row.label, margin + 8, y + 12)
+    doc.setFont('helvetica', 'bold')
+    doc.setTextColor(primaryColor)
+    doc.text(`${row.value.toLocaleString()} XP`, margin + contentWidth - 8 - doc.getTextWidth(`${row.value.toLocaleString()} XP`), y + 12)
+    y += 22
+  }
+
+  if (quizRows.value.length > 0) {
+    y += 6
+    doc.setFontSize(16)
+    doc.setTextColor(primaryColor)
+    doc.setFont('helvetica', 'bold')
+    doc.text('Quiz Scores', margin, y)
+    y += 10
+
+    for (const row of quizRows.value) {
+      doc.setFillColor(255, 255, 255)
+      doc.roundedRect(margin, y, contentWidth, 22, 3, 3, 'F')
+      doc.setDrawColor(226, 232, 240)
+      doc.roundedRect(margin, y, contentWidth, 22, 3, 3, 'S')
+      doc.setFontSize(10)
+      doc.setFont('helvetica', 'normal')
+      doc.setTextColor(darkColor)
+      doc.text(row.title, margin + 8, y + 10)
+
+      const barWidth = contentWidth - 16
+      const barHeight = 6
+      const barX = margin + 8
+      const barY = y + 12
+
+      doc.setFillColor(226, 232, 240)
+      doc.roundedRect(barX, barY, barWidth, barHeight, 2, 2, 'F')
+      const scoreColor = row.score >= row.passingScore ? '#22c55e' : '#f59e0b'
+      doc.setFillColor(scoreColor)
+      doc.roundedRect(barX, barY, (barWidth * row.score) / 100, barHeight, 2, 2, 'F')
+
+      doc.setFontSize(8)
+      doc.setFont('helvetica', 'bold')
+      doc.setTextColor(scoreColor)
+      doc.text(`${row.score}%`, margin + contentWidth - 20, y + 17)
+      y += 26
+    }
+  }
+
+  y += 10
+  doc.setFontSize(8)
+  doc.setTextColor(secondaryColor)
+  doc.setFont('helvetica', 'italic')
+  doc.text('Keep learning! Every lesson completed brings you closer to mastery.', margin, y)
+
+  doc.save('codeingot-progress.pdf')
 }
 
 async function doReset() {

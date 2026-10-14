@@ -1,5 +1,5 @@
 <template>
-  <div v-if="quiz && course" class="flex h-[calc(100vh-4rem)] overflow-hidden">
+  <div v-if="quiz && course" class="flex h-full overflow-hidden">
     <aside
       class="hidden w-72 shrink-0 border-r border-ink-600 bg-ink-900 lg:block"
       aria-label="Course navigation"
@@ -105,11 +105,7 @@ useHead({ title: computed(() => quiz.value?.title ?? 'Quiz') })
 
 const drawerOpen = ref(false)
 
-const currentLessonId = computed(() => {
-  const sec = getQuizSection(courseSlug.value, quizId.value)
-  if (!sec) return ''
-  return sec.lessons[sec.lessons.length - 1]?.id ?? ''
-})
+const currentLessonId = computed(() => '')
 
 const lastLessonId = computed(() => {
   const sec = getQuizSection(courseSlug.value, quizId.value)

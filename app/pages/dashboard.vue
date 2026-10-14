@@ -209,7 +209,7 @@ const unlocked = computed(() => achievements.value.filter((item) => item.unlocke
 
 const suggestions = computed(() => {
   const all = allChallenges()
-  const next = all.find((challenge) => !isChallengeComplete(challenge.id))
-  return (next ? [next] : all).slice(0, 4)
+  const remaining = all.filter((challenge) => !isChallengeComplete(challenge.id))
+  return (remaining.length ? remaining : all).slice(0, 4)
 })
 </script>

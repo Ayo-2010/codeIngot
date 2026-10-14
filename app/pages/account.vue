@@ -132,12 +132,7 @@ One row per browser that has signed in. Each row is stored in Firestore under yo
                   <span v-else class="text-dim">Unknown</span>
                 </dd>
               </div>
-              <div class="sm:col-span-2">
-                <dt class="font-mono text-[10px] uppercase tracking-wider text-dim">User-Agent string</dt>
-                <dd class="mt-0.5 break-all font-mono text-[11px] leading-relaxed text-muted">
-                  {{ device.userAgent }}
-                </dd>
-              </div>
+              
               <div v-if="device.firstSeenAt">
                 <dt class="font-mono text-[10px] uppercase tracking-wider text-dim">First seen</dt>
                 <dd class="mt-0.5 text-muted">{{ formatWhen(device.firstSeenAt) }}</dd>

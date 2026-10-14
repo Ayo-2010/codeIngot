@@ -1,19 +1,15 @@
 <template>
+  <!--
+    The layout pins its own viewport: the root is a
+    screen-height flex column and the page inside it
+    fills the remaining space and scrolls on its own.
+    No global style is injected, so the rest of the
+    site keeps normal document scrolling.
+  -->
   <div class="flex h-screen flex-col bg-ink-950 overflow-hidden">
     <AppHeader />
-    <main id="main" class="flex-1 overflow-hidden">
+    <main id="main" class="min-h-0 flex-1 overflow-hidden">
       <slot />
     </main>
   </div>
 </template>
-
-<script setup lang="ts">
-useHead({
-  style: [
-    {
-      id: 'learn-layout-overflow',
-      innerHTML: 'html,body{overflow:hidden;height:100%;margin:0}',
-    },
-  ],
-})
-</script>

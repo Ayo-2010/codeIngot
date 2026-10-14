@@ -52,7 +52,7 @@
 definePageMeta({ layout: 'reference' })
 useHead({ title: 'HTML events' })
 
-const events = htmlReferenceEvents()
+const events = await htmlReferenceEvents()
 const search = ref('')
 
 const term = computed(() => search.value.trim().toLowerCase())

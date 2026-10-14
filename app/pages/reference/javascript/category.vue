@@ -24,5 +24,5 @@
 definePageMeta({ layout: 'reference' })
 useHead({ title: 'JavaScript by category' })
 
-const entries = javascriptReferenceMembers()
+const entries = await javascriptReferenceMembers()
 </script>

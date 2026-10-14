@@ -1,6 +1,6 @@
 <template>
-  <section class="overflow-hidden rounded-xl border border-ink-600 bg-ink-900" aria-label="Code workspace">
-    <header class="flex flex-wrap items-center gap-2 border-b border-ink-600 bg-ink-850 px-2 py-2">
+  <section class="overflow-hidden rounded-xl border border-[var(--color-code-border)] bg-[var(--color-code-header-bg)]" aria-label="Code workspace">
+    <header class="flex flex-wrap items-center gap-2 border-b border-[var(--color-code-header-border)] bg-[var(--color-code-header-bg)] px-2 py-2">
       <div class="flex items-center gap-2">
         <button
           type="button"
@@ -16,7 +16,7 @@
         <button
           v-if="showCheck"
           type="button"
-          class="flex items-center gap-1.5 rounded-lg border border-ink-500 px-3 py-1.5 text-sm font-medium text-mist-50 transition hover:border-brand/50 hover:bg-ink-800 disabled:opacity-50"
+          class="flex items-center gap-1.5 rounded-lg border border-[var(--color-code-border)] px-3 py-1.5 text-sm font-medium text-[var(--color-code-text)] transition hover:border-brand/50 hover:bg-[var(--color-code-bg)] disabled:opacity-50"
           :disabled="running || checking"
           @click="onCheck"
         >
@@ -25,16 +25,16 @@
         </button>
         <button
           type="button"
-          class="rounded-lg border border-ink-600 px-2.5 py-1.5 text-xs text-muted transition hover:text-mist-50"
+          class="rounded-lg border border-[var(--color-code-border)] px-2.5 py-1.5 text-xs text-[var(--color-code-header-text)] transition hover:text-[var(--color-code-text)]"
           @click="onReset"
         >
           Reset
         </button>
       </div>
 
-      <p class="font-mono text-[11px] text-dim">
-        <kbd class="rounded border border-ink-600 bg-ink-800 px-1">Ctrl</kbd> +
-        <kbd class="rounded border border-ink-600 bg-ink-800 px-1">Enter</kbd> to run
+      <p class="font-mono text-[11px] text-[var(--color-code-header-text)]">
+        <kbd class="rounded border border-[var(--color-code-border)] bg-[var(--color-code-bg)] px-1">Ctrl</kbd> +
+        <kbd class="rounded border border-[var(--color-code-border)] bg-[var(--color-code-bg)] px-1">Enter</kbd> to run
       </p>
 
       <div v-if="statusText" class="ml-auto flex items-center gap-1.5 text-xs" :class="statusTone">
@@ -46,14 +46,13 @@
       </div>
     </header>
 
-    <div class="grid min-h-0 gap-px bg-ink-600 lg:grid-cols-2">
-      <div class="flex min-h-[320px] flex-col bg-ink-950">
+    <div class="grid min-h-0 gap-px bg-[var(--color-code-border)] lg:grid-cols-2">
+      <div class="flex min-h-[320px] flex-col bg-[var(--color-code-bg)]">
         <EditorCodeEditor
           ref="editorRef"
           :model-value="files"
           :active="activeLanguage"
           :tabs="tabs"
-          :error="editorError"
           :status="null"
           show-reset
           class="min-h-0 flex-1"
@@ -64,14 +63,14 @@
         />
       </div>
 
-      <div class="flex min-h-[320px] flex-col bg-ink-900">
-        <div class="flex items-center gap-1 border-b border-ink-600 px-1 py-1">
+      <div class="flex min-h-[320px] flex-col bg-[var(--color-code-header-bg)]">
+        <div class="flex items-center gap-1 border-b border-[var(--color-code-border)] px-1 py-1">
           <button
             v-for="panel in panels"
             :key="panel.id"
             type="button"
             class="rounded-md px-2.5 py-1 text-xs transition"
-            :class="panel.id === activePanel ? 'bg-ink-800 text-mist-50 ring-1 ring-ink-500' : 'text-dim hover:text-mist-200'"
+            :class="panel.id === activePanel ? 'bg-[var(--color-code-bg)] text-[var(--color-code-text)] ring-1 ring-[var(--color-code-border)]' : 'text-[var(--color-code-header-text)] hover:text-[var(--color-code-text)]'"
             :aria-pressed="panel.id === activePanel"
             @click="activePanel = panel.id"
           >
@@ -97,14 +96,14 @@
 
         <div
           v-show="activePanel === 'console'"
-          class="min-h-0 flex-1 overflow-auto bg-ink-950 px-3 py-2 font-mono text-[12px] leading-6"
+          class="min-h-0 flex-1 overflow-auto bg-[var(--color-code-bg)] px-3 py-2 font-mono text-[12px] leading-6 text-[var(--color-code-text)]"
         >
-          <p v-if="logs.length === 0" class="text-dim">
+          <p v-if="logs.length === 0" class="text-[var(--color-code-header-text)]">
             Nothing logged yet. Use <code class="text-brand">console.log()</code> and press Run.
           </p>
           <ul v-else class="space-y-0.5">
             <li v-for="(entry, index) in logs" :key="index" :class="logTone(entry.level)">
-              <span class="mr-2 select-none text-dim">{{ String(index + 1).padStart(2, '0') }}</span>
+              <span class="mr-2 select-none text-[var(--color-code-header-text)]">{{ String(index + 1).padStart(2, '0') }}</span>
               {{ entry.text }}
             </li>
           </ul>
@@ -114,13 +113,13 @@
         </div>
 
         <div v-show="activePanel === 'tests'" class="min-h-0 flex-1 overflow-auto p-3">
-          <p v-if="testResults.length === 0" class="text-sm text-dim">
-            Press <span class="text-mist-200">Check</span> to run the tests for this exercise.
+          <p v-if="testResults.length === 0" class="text-sm text-[var(--color-code-header-text)]">
+            Press <span class="text-[var(--color-code-text)]">Check</span> to run the tests for this exercise.
           </p>
           <template v-else>
             <p
               class="mb-3 text-sm"
-              :class="passedCount === testResults.length ? 'text-ok' : 'text-mist-200'"
+              :class="passedCount === testResults.length ? 'text-ok' : 'text-[var(--color-code-text)]'"
             >
               {{ passedCount }} of {{ testResults.length }} tests passed.
             </p>
@@ -136,19 +135,25 @@
                     {{ test.passed ? '✓' : '✗' }}
                   </span>
                   <span class="sr-only">{{ test.passed ? 'Passed' : 'Failed' }}:</span>
-                  <span class="text-mist-50">{{ test.label }}</span>
+                  <span class="text-[var(--color-code-text)]">{{ test.label }}</span>
                 </p>
-                <p v-if="test.message && !test.passed" class="mt-1 pl-6 text-xs text-muted">
+                <p v-if="test.message && !test.passed" class="mt-1 pl-6 text-xs text-[var(--color-code-header-text)]">
                   {{ test.message }}
                 </p>
               </li>
             </ul>
+            <p
+              v-if="exercise?.testNotes"
+              class="mt-3 rounded-lg border border-[var(--color-code-border)] bg-[var(--color-code-header-bg)] px-3 py-2 text-xs leading-relaxed text-[var(--color-code-header-text)]"
+            >
+              {{ exercise.testNotes }}
+            </p>
           </template>
         </div>
       </div>
     </div>
 
-    <footer v-if="showCheck" class="border-t border-ink-600 bg-ink-850 px-3 py-2">
+    <footer v-if="showCheck" class="border-t border-[var(--color-code-border)] bg-[var(--color-code-header-bg)] px-3 py-2">
       <div class="flex flex-wrap items-center gap-2">
         <p class="text-xs text-muted">
           Stuck? Hints get more explicit each time.
@@ -223,7 +228,6 @@ const runtimeError = ref<string | null>(null)
 const testResults = ref<SandboxTestResult[]>([])
 const running = ref(false)
 const checking = ref(false)
-const editorError = ref<string | null>(null)
 const revealedHints = ref(0)
 const showSolution = ref(false)
 
@@ -243,13 +247,32 @@ const activeLanguage = computed({
   },
 })
 
+/**
+ * The parent can replace the files — a new exercise, a project
+ * switch — but it also hands over a fresh object on every
+ * render. Only a real change to the contents may reset the
+ * editor, or a parent re-render would wipe what was typed.
+ */
 watch(
   () => props.files,
   (value) => {
+    if (sameFiles(value, localFiles.value)) return
     localFiles.value = { ...value }
   },
-  { deep: true },
 )
+
+function sameFiles(
+  a: Partial<Record<EditorLanguage, string>>,
+  b: Partial<Record<EditorLanguage, string>>,
+): boolean {
+  const keys = new Set([...Object.keys(a), ...Object.keys(b)])
+  for (const key of keys) {
+    if ((a as Record<string, string | undefined>)[key] !== (b as Record<string, string | undefined>)[key]) {
+      return false
+    }
+  }
+  return true
+}
 
 watch(
   () => props.activeLanguage,
@@ -318,7 +341,6 @@ function logTone(level: SandboxLog['level']) {
 }
 
 function onEdit(value: Partial<Record<EditorLanguage, string>>) {
-  editorError.value = null
   files.value = value
 }
 
@@ -336,7 +358,6 @@ async function onCheck() {
   if (!exercise) return
   checking.value = true
   activePanel.value = 'tests'
-  editorError.value = null
   try {
     const result = await previewRef.value?.run(exercise.tests)
     if (!result) return
@@ -357,7 +378,6 @@ function onReset() {
   testResults.value = []
   revealedHints.value = 0
   showSolution.value = false
-  editorError.value = null
 }
 
 function onResult(result: SandboxRunResult) {
@@ -366,15 +386,11 @@ function onResult(result: SandboxRunResult) {
   emit('result', result)
 }
 
-function clearConsole() {
-  logs.value = []
-  runtimeError.value = null
-  editorError.value = null
-}
-
-defineExpose({ runAll: onRun, check: onCheck, clearConsole })
+defineExpose({ runAll: onRun, check: onCheck })
 
 onMounted(() => {
-  editorRef.value?.focus()
+  // Only take focus when nothing else has it, so navigating to a
+  // lesson never pulls the learner out of a link or a button.
+  if (document.activeElement === document.body) editorRef.value?.focus()
 })
 </script>

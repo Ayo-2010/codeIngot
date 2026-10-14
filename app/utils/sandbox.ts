@@ -164,14 +164,22 @@ export function buildSrcdoc(options: SandboxRunOptions): string {
 
 /** Minimal sandbox controller bound to one iframe element. */
 export function createSandboxRunner() {
-  const pending = new Map<string, (payload: Record<string, unknown>) => void>()
+  const pending = new Map<
+    string,
+    { handler: (payload: Record<string, unknown>) => void; iframe: HTMLIFrameElement }
+  >()
 
   function onMessage(event: MessageEvent) {
     const data = event.data as Record<string, unknown> | null
     if (!data || data.channel !== CHANNEL) return
     const id = data.id as string | undefined
-    const handler = id ? pending.get(id) : undefined
-    if (handler) handler(data)
+    const entry = id ? pending.get(id) : undefined
+    // A sandboxed srcdoc iframe has an opaque origin, so origin
+    // cannot be pinned to a URL; the sender is pinned to the
+    // iframe that started the run instead. No other frame can
+    // fake a result for a run it did not own.
+    if (!entry || event.source !== entry.iframe.contentWindow) return
+    entry.handler(data)
   }
 
   if (import.meta.client) window.addEventListener('message', onMessage)
@@ -200,7 +208,7 @@ export function createSandboxRunner() {
         finish([])
       }, options.timeoutMs ?? 4000)
 
-      pending.set(id, (payload) => {
+      const handler = (payload: Record<string, unknown>) => {
         if (payload.type === 'logs' && Array.isArray(payload.logs)) {
           logs.splice(0, logs.length, ...(payload.logs as SandboxLog[]))
         }
@@ -209,7 +217,9 @@ export function createSandboxRunner() {
           finish(payload.tests as SandboxTestResult[])
         }
         if (payload.type === 'done') finish([])
-      })
+      }
+
+      pending.set(id, { handler, iframe })
 
       iframe.setAttribute('sandbox', 'allow-scripts allow-modals allow-forms allow-popups')
       iframe.srcdoc = buildSrcdoc({ ...options, runId: id })

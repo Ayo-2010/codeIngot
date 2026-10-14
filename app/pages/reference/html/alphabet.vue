@@ -19,5 +19,5 @@
 definePageMeta({ layout: 'reference' })
 useHead({ title: 'HTML by alphabet' })
 
-const tags = htmlReferenceTags()
+const tags = await htmlReferenceTags()
 </script>

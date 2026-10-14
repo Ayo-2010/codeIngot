@@ -77,7 +77,7 @@ import type { HtmlCanvasMember } from '~/types/content'
 definePageMeta({ layout: 'reference' })
 useHead({ title: 'HTML canvas' })
 
-const { members, properties } = htmlReferenceCanvas()
+const { members, properties } = await htmlReferenceCanvas()
 const view = ref<'methods' | 'properties'>('methods')
 
 const tabs = computed(() => [

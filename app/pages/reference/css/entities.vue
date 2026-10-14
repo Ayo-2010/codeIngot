@@ -70,7 +70,7 @@ a[title="Tips &amp; tricks"] {
 definePageMeta({ layout: 'reference' })
 useHead({ title: 'CSS entities' })
 
-const entities = cssReferenceEntities()
+const entities = await cssReferenceEntities()
 const search = ref('')
 
 const filtered = computed(() => {

@@ -52,8 +52,10 @@
 definePageMeta({ layout: 'reference' })
 useHead({ title: 'CSS default values' })
 
-const properties = cssReferenceProperties()
-const inherited = cssReferenceInherited()
+const [properties, inherited] = await Promise.all([
+  cssReferenceProperties(),
+  cssReferenceInherited(),
+])
 
 const search = ref('')
 const onlyInherited = ref(false)

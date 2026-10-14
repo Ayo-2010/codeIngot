@@ -55,7 +55,7 @@
 definePageMeta({ layout: 'reference' })
 useHead({ title: 'HTML language codes' })
 
-const codes = htmlReferenceLanguageCodes()
+const codes = await htmlReferenceLanguageCodes()
 const search = ref('')
 
 const term = computed(() => search.value.trim().toLowerCase())

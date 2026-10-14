@@ -28,6 +28,15 @@ function ratio(value: number, target: number): number {
   return Math.max(0, Math.min(1, value / target))
 }
 
+/**
+ * Exercises and challenges share the "pass a test run" loop — the
+ * UI calls both of them challenges — so the challenge counts include
+ * both rather than only the standalone challenges page.
+ */
+function completedTaskCount(p: UserProgress): number {
+  return p.completedChallenges.length + p.completedExercises.length
+}
+
 export const ACHIEVEMENTS: AchievementDefinition[] = [
   {
     id: 'first-lesson',
@@ -43,7 +52,7 @@ export const ACHIEVEMENTS: AchievementDefinition[] = [
     description: 'Pass the tests on your first challenge.',
     icon: '◇',
     xp: 25,
-    progress: (p) => ratio(p.completedChallenges.length, 1),
+    progress: (p) => ratio(completedTaskCount(p), 1),
   },
   {
     id: 'first-project',
@@ -107,7 +116,7 @@ export const ACHIEVEMENTS: AchievementDefinition[] = [
     description: 'Complete ten challenges.',
     icon: '✦',
     xp: 120,
-    progress: (p) => ratio(p.completedChallenges.length, 10),
+    progress: (p) => ratio(completedTaskCount(p), 10),
   },
   {
     id: 'challenges-50',
@@ -115,7 +124,7 @@ export const ACHIEVEMENTS: AchievementDefinition[] = [
     description: 'Complete fifty challenges.',
     icon: '✧',
     xp: 300,
-    progress: (p) => ratio(p.completedChallenges.length, 50),
+    progress: (p) => ratio(completedTaskCount(p), 50),
   },
   {
     id: 'lessons-25',

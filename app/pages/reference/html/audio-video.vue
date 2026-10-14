@@ -56,7 +56,7 @@
 definePageMeta({ layout: 'reference' })
 useHead({ title: 'HTML audio and video' })
 
-const formats = htmlReferenceMediaFormats()
+const formats = await htmlReferenceMediaFormats()
 
 const example = `<video controls preload="metadata" width="640" poster="/images/talk.jpg">
   <source src="/media/talk.mp4" type="video/mp4">

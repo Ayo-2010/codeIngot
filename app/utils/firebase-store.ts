@@ -193,3 +193,41 @@ export async function listDeviceRecords(
     return []
   }
 }
+
+export interface AdminDeviceRow extends DeviceRecord {
+  userId: string
+  userEmail: string | null
+  userName: string | null
+}
+
+export async function listAllDevices(db: Firestore): Promise<AdminDeviceRow[]> {
+  try {
+    const usersSnapshot = await getDocs(collection(db, 'users'))
+    const rows: AdminDeviceRow[] = []
+    for (const userDoc of usersSnapshot.docs) {
+      const userData = userDoc.data() as { email?: string | null; displayName?: string | null }
+      const devicesSnapshot = await getDocs(collection(db, 'users', userDoc.id, 'devices'))
+      for (const deviceDoc of devicesSnapshot.docs) {
+        const data = deviceDoc.data() as DeviceRecord
+        rows.push({
+          ...data,
+          userId: userDoc.id,
+          userEmail: userData.email ?? null,
+          userName: userData.displayName ?? null,
+        })
+      }
+    }
+    return rows
+  } catch {
+    return []
+  }
+}
+
+export async function getAllUserCount(db: Firestore): Promise<number> {
+  try {
+    const snapshot = await getDocs(collection(db, 'users'))
+    return snapshot.size
+  } catch {
+    return 0
+  }
+}

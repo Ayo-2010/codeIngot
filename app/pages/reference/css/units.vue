@@ -51,7 +51,7 @@
 definePageMeta({ layout: 'reference' })
 useHead({ title: 'CSS units' })
 
-const all = cssReferenceUnits()
+const all = await cssReferenceUnits()
 const search = ref('')
 
 const filtered = computed(() => {

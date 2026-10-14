@@ -25,5 +25,5 @@
 definePageMeta({ layout: 'reference' })
 useHead({ title: 'CSS color values' })
 
-const values = cssReferenceColorValues()
+const values = await cssReferenceColorValues()
 </script>

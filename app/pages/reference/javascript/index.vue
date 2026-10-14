@@ -74,13 +74,16 @@
 definePageMeta({ layout: 'reference' })
 useHead({ title: 'JavaScript reference' })
 
-const topics = javascriptReferenceTopics()
+const [topics, navGroups] = await Promise.all([
+  javascriptReferenceTopics(),
+  javascriptReferenceNavGroups(),
+])
 
 const memberCount = computed(() => topics.reduce((total, topic) => total + topic.members.length, 0))
 
 /** The source index groups the topics; keep those headings and their order. */
 const groups = computed(() =>
-  javascriptReferenceNavGroups().map((group) => ({
+  navGroups.map((group) => ({
     label: group.label,
     topics: topics.filter((topic) => topic.group === group.label),
     members: topics

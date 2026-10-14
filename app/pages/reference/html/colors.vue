@@ -56,7 +56,7 @@
 definePageMeta({ layout: 'reference' })
 useHead({ title: 'HTML colors' })
 
-const colors = htmlReferenceColorNames()
+const colors = await htmlReferenceColorNames()
 
 // `currentColor` and `transparent` are keywords rather than hex values.
 function isNamedKeyword(name: string) {

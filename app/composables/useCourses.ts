@@ -1,57 +1,41 @@
-import type { Course, LearningPath, Lesson, Project, Section } from '~/types/content'
-import { htmlFundamentals } from '~/content/courses/html-fundamentals'
-import { cssFundamentals } from '~/content/courses/css-fundamentals'
-import { javascriptFundamentals } from '~/content/courses/javascript-fundamentals'
+import type {
+  Course,
+  CourseLessonMeta,
+  CourseMeta,
+  CourseSectionMeta,
+  HtmlTag,
+  HtmlAttribute,
+  HtmlEventAttribute,
+  HtmlGlobalAttribute,
+  HtmlTagCategory,
+  HtmlCanvasMember,
+  CssProperty,
+  CssSelector,
+  CssFunction,
+  CssUnit,
+  CssColorName,
+  CssColorValue,
+  CssEntity,
+  CssFontFamily,
+  CssAuralProperty,
+  JsTopic,
+  JsMember,
+  LearningPath,
+  Lesson,
+  Project,
+  Quiz,
+} from '~/types/content'
+import { courseMeta } from '~/content/courses/meta'
 import { frontendDeveloper } from '~/content/paths/frontend-developer'
 import { challenges } from '~/content/challenges/index'
 import { projects } from '~/content/projects/index'
-import { referenceEntries } from '~/content/reference/index'
-import { htmlGlobalAttributes, htmlTagCategories, htmlTags } from '~/content/reference/html'
-import { htmlAttributes } from '~/content/reference/html-attributes'
-import { htmlTagPages, findHtmlTagPage } from '~/content/reference/html-tag-pages'
-import { htmlEvents } from '~/content/reference/html-events'
-import { htmlNavItems, htmlTagNavItems } from '~/content/reference/html-nav'
-import {
-  cssAnimatableProperties,
-  cssInheritedProperties,
-  cssNonAnimatableProperties,
-  cssProperties,
-  cssPropertyCategories,
-} from '~/content/reference/css-properties'
-import { cssNavItems, cssPropertyNavItems } from '~/content/reference/css-nav'
-import { cssPropertyPages, findCssPropertyPage, propertySlug } from '~/content/reference/css-property-pages'
-import {
-  cssAuralProperties,
-  cssColorNames,
-  cssColorValues,
-  cssEntities,
-  cssFontFallbacks,
-  cssFunctions,
-  cssSelectors,
-  cssUnits,
-  cssWebSafeFonts,
-} from '~/content/reference/css-sections'
-import { htmlCanvasMembers, htmlCanvasProperties } from '~/content/reference/html-canvas'
-import {
-  allJsMembers,
-  javascriptTopicBySlug,
-  javascriptTopicSlug,
-  javascriptTopics,
-} from '~/content/reference/javascript'
-import { javascriptNavGroups } from '~/content/reference/javascript-nav'
-import {
-  htmlCharacterSets,
-  htmlColorNames,
-  htmlCountryCodes,
-  htmlDoctypes,
-  htmlLanguageCodes,
-  httpMethods,
-  httpStatuses,
-  keyboardShortcuts,
-  mediaFormats,
-} from '~/content/reference/html-sections'
 
-export interface FlatLesson extends Lesson {
+/**
+ * A lesson as the catalogue sees it: everything except the lesson
+ * body. The body travels with the course module, which `loadCourse`
+ * imports on demand, so no page pays for lessons it never opens.
+ */
+export interface FlatLesson extends CourseLessonMeta {
   courseSlug: string
   courseTitle: string
   sectionId: string
@@ -60,19 +44,19 @@ export interface FlatLesson extends Lesson {
   href: string
 }
 
-const allCourses: Course[] = [htmlFundamentals, cssFundamentals, javascriptFundamentals]
+const allCourses: CourseMeta[] = courseMeta
 const allPaths: LearningPath[] = [frontendDeveloper]
 const allProjects: Project[] = projects
 
 /** Every course, precomputed lookup maps. Content-only, so it is module scope. */
 const courseBySlug = new Map(allCourses.map((course) => [course.slug, course]))
-const lessonIndex = new Map<string, FlatLesson & { course: Course; section: Section }>()
+const lessonIndex = new Map<string, FlatLesson & { course: CourseMeta; section: CourseSectionMeta }>()
+const lessonPosition = new Map<string, number>()
 const lessonOrder: string[] = []
 const courseLessonTotals: Record<string, number> = {}
 
 for (const course of allCourses) {
   let index = 0
-  const lessons: string[] = []
   for (const section of course.sections) {
     for (const lesson of section.lessons) {
       lessonIndex.set(lesson.id, {
@@ -86,23 +70,140 @@ for (const course of allCourses) {
         course,
         section,
       })
+      lessonPosition.set(lesson.id, index)
       lessonOrder.push(lesson.id)
-      lessons.push(lesson.id)
       index += 1
     }
   }
-  courseLessonTotals[course.slug] = lessons.length
+  courseLessonTotals[course.slug] = index
+}
+
+/**
+ * Course bodies load on demand. The specifiers are static so the
+ * bundler splits each course into its own chunk; only the module
+ * for the course being read is ever downloaded.
+ */
+const courseLoaders: Record<string, () => Promise<Course>> = {
+  'html-fundamentals': () =>
+    import('~/content/courses/html-fundamentals').then((module) => module.htmlFundamentals),
+  'css-fundamentals': () =>
+    import('~/content/courses/css-fundamentals').then((module) => module.cssFundamentals),
+  'javascript-fundamentals': () =>
+    import('~/content/courses/javascript-fundamentals').then(
+      (module) => module.javascriptFundamentals,
+    ),
+  'dom-browser-apis': () =>
+    import('~/content/courses/dom-browser-apis-course').then((module) => module.domBrowserApisCourse),
+  'responsive-web-design': () =>
+    import('~/content/courses/responsive-web-design-course').then((module) => module.responsiveWebDesignCourse),
+  'git-github': () =>
+    import('~/content/courses/git-github-course').then((module) => module.gitGitHubCourse),
+}
+
+const loadedCourses = new Map<string, Course>()
+
+// Lazy loaders for reference corpora — each language loads on first use.
+const htmlRefPromise = import('~/content/reference/html').then((m) => ({
+  tags: m.htmlTags,
+  categories: m.htmlTagCategories,
+  globalAttributes: m.htmlGlobalAttributes,
+}))
+const htmlAttrPromise = import('~/content/reference/html-attributes').then((m) => m.htmlAttributes)
+const htmlTagPagesPromise = import('~/content/reference/html-tag-pages').then((m) => ({
+  pages: m.htmlTagPages,
+  findPage: m.findHtmlTagPage,
+}))
+const htmlEventsPromise = import('~/content/reference/html-events').then((m) => m.htmlEvents)
+const htmlNavPromise = import('~/content/reference/html-nav').then((m) => ({
+  navItems: m.htmlNavItems,
+  tagNavItems: m.htmlTagNavItems,
+}))
+const htmlCanvasPromise = import('~/content/reference/html-canvas').then((m) => ({
+  members: m.htmlCanvasMembers,
+  properties: m.htmlCanvasProperties,
+}))
+const htmlSectionsPromise = import('~/content/reference/html-sections').then((m) => ({
+  characterSets: m.htmlCharacterSets,
+  colorNames: m.htmlColorNames,
+  countryCodes: m.htmlCountryCodes,
+  doctypes: m.htmlDoctypes,
+  languageCodes: m.htmlLanguageCodes,
+  httpMethods: m.httpMethods,
+  httpStatuses: m.httpStatuses,
+  keyboardShortcuts: m.keyboardShortcuts,
+  mediaFormats: m.mediaFormats,
+}))
+
+const cssPropertiesPromise = import('~/content/reference/css-properties').then((m) => ({
+  properties: m.cssProperties,
+  animatable: m.cssAnimatableProperties,
+  inherited: m.cssInheritedProperties,
+  nonAnimatable: m.cssNonAnimatableProperties,
+  categories: m.cssPropertyCategories,
+}))
+const cssNavPromise = import('~/content/reference/css-nav').then((m) => ({
+  navItems: m.cssNavItems,
+  propertyNavItems: m.cssPropertyNavItems,
+}))
+const cssPropertyPagesPromise = import('~/content/reference/css-property-pages').then((m) => ({
+  pages: m.cssPropertyPages,
+  findPage: m.findCssPropertyPage,
+  propertySlug: m.propertySlug,
+}))
+
+const cssPropertyPagesSlugPromise = import('~/content/reference/css-property-pages').then((m) => m.propertySlug)
+const cssSectionsPromise = import('~/content/reference/css-sections').then((m) => ({
+  auralProperties: m.cssAuralProperties,
+  colorNames: m.cssColorNames,
+  colorValues: m.cssColorValues,
+  entities: m.cssEntities,
+  fontFallbacks: m.cssFontFallbacks,
+  functions: m.cssFunctions,
+  selectors: m.cssSelectors,
+  units: m.cssUnits,
+  webSafeFonts: m.cssWebSafeFonts,
+}))
+
+const javascriptPromise = import('~/content/reference/javascript').then((m) => ({
+  allMembers: m.allJsMembers,
+  topicBySlug: m.javascriptTopicBySlug,
+  topicSlug: m.javascriptTopicSlug,
+  topics: m.javascriptTopics,
+}))
+const javascriptNavPromise = import('~/content/reference/javascript-nav').then((m) => m.javascriptNavGroups)
+
+/** Loads a full course body, caching it for the rest of the session. */
+export async function loadCourse(slug: string): Promise<Course | undefined> {
+  const cached = loadedCourses.get(slug)
+  if (cached) return cached
+  const loader = courseLoaders[slug]
+  if (!loader) return undefined
+  const course = await loader()
+  loadedCourses.set(slug, course)
+  return course
+}
+
+/** A lesson body with its content, once the course module is loaded. */
+export async function loadLesson(courseSlug: string, lessonId: string): Promise<Lesson | undefined> {
+  const course = await loadCourse(courseSlug)
+  if (!course) return undefined
+  for (const section of course.sections) {
+    for (const lesson of section.lessons) {
+      if (lesson.id === lessonId) return lesson
+    }
+  }
+  return undefined
 }
 
 export function useCourses() {
   return { courses: allCourses, paths: allPaths, projects: allProjects }
 }
 
-export function allCoursesList(): Course[] {
+export function allCoursesList(): CourseMeta[] {
   return allCourses
 }
 
-export function getCourse(slug: string): Course | undefined {
+export function getCourse(slug: string): CourseMeta | undefined {
   return courseBySlug.get(slug)
 }
 
@@ -110,6 +211,16 @@ export function getLesson(courseSlug: string, lessonId: string) {
   const lesson = lessonIndex.get(lessonId)
   if (!lesson || lesson.courseSlug !== courseSlug) return undefined
   return lesson
+}
+
+/** Finds a quiz by its own id, across every course. */
+export function findQuiz(quizId: string): Quiz | undefined {
+  for (const course of allCourses) {
+    for (const section of course.sections) {
+      if (section.quiz?.id === quizId) return section.quiz
+    }
+  }
+  return undefined
 }
 
 export function getQuizById(courseSlug: string, quizId: string) {
@@ -134,7 +245,7 @@ export function getLessonById(lessonId: string) {
   return lessonIndex.get(lessonId)
 }
 
-export function courseLessons(course: Course): FlatLesson[] {
+export function courseLessons(course: CourseMeta): FlatLesson[] {
   const out: FlatLesson[] = []
   for (const section of course.sections) {
     for (const lesson of section.lessons) {
@@ -145,16 +256,17 @@ export function courseLessons(course: Course): FlatLesson[] {
 }
 
 export function nextLesson(lessonId: string) {
-  const index = lessonOrder.indexOf(lessonId)
-  const nextId = lessonOrder[index + 1]
+  const position = lessonPosition.get(lessonId)
+  if (position === undefined) return undefined
+  const nextId = lessonOrder[position + 1]
   if (!nextId) return undefined
   return lessonIndex.get(nextId)
 }
 
 export function previousLesson(lessonId: string) {
-  const index = lessonOrder.indexOf(lessonId)
-  if (index <= 0) return undefined
-  const previousId = lessonOrder[index - 1]
+  const position = lessonPosition.get(lessonId)
+  if (position === undefined || position <= 0) return undefined
+  const previousId = lessonOrder[position - 1]
   if (!previousId) return undefined
   return lessonIndex.get(previousId)
 }
@@ -168,7 +280,7 @@ export function allLessonIds(): string[] {
 }
 
 export function allLessonFlat(): FlatLesson[] {
-  return lessonOrder.map((id) => lessonIndex.get(id) as FlatLesson)
+  return allLessonIds().map((id) => lessonIndex.get(id) as FlatLesson)
 }
 
 export function getPath(slug: string): LearningPath | undefined {
@@ -195,191 +307,224 @@ export function allProjectsList() {
   return allProjects
 }
 
-export function allReferenceEntries() {
-  return referenceEntries
+export async function htmlReferenceTags() {
+  const { tags } = await htmlRefPromise
+  return tags
 }
 
-export function htmlReferenceTags() {
-  return htmlTags
+export async function htmlReferenceCategories() {
+  const { categories } = await htmlRefPromise
+  return categories
 }
 
-export function htmlReferenceCategories() {
-  return htmlTagCategories
+export async function htmlReferenceGlobalAttributes() {
+  const { globalAttributes } = await htmlRefPromise
+  return globalAttributes
 }
 
-export function htmlReferenceGlobalAttributes() {
-  return htmlGlobalAttributes
+export async function htmlReferenceAttributes() {
+  return htmlAttrPromise
 }
 
-export function htmlReferenceAttributes() {
-  return htmlAttributes
+export async function htmlReferenceEvents() {
+  return htmlEventsPromise
 }
 
-export function htmlReferenceEvents() {
-  return htmlEvents
+export async function htmlReferenceNav() {
+  const { navItems } = await htmlNavPromise
+  return navItems
 }
 
-export function htmlReferenceNav() {
-  return htmlNavItems
+export async function htmlReferenceTagNav() {
+  const { tagNavItems } = await htmlNavPromise
+  return tagNavItems
 }
 
-export function htmlReferenceTagNav() {
-  return htmlTagNavItems
+export async function htmlReferenceTagPages() {
+  const { pages } = await htmlTagPagesPromise
+  return pages
 }
 
-export function htmlReferenceTagPages() {
-  return htmlTagPages
+export async function htmlReferenceTagPage(slug: string) {
+  const { findPage } = await htmlTagPagesPromise
+  return findPage(slug)
 }
 
-export function htmlReferenceTagPage(slug: string) {
-  return findHtmlTagPage(slug)
+export async function htmlReferenceColorNames() {
+  const { colorNames } = await htmlSectionsPromise
+  return colorNames
 }
 
-export function htmlReferenceColorNames() {
-  return htmlColorNames
+export async function htmlReferenceCharacterSets() {
+  const { characterSets } = await htmlSectionsPromise
+  return characterSets
 }
 
-export function htmlReferenceCharacterSets() {
-  return htmlCharacterSets
+export async function htmlReferenceDoctypes() {
+  const { doctypes } = await htmlSectionsPromise
+  return doctypes
 }
 
-export function htmlReferenceDoctypes() {
-  return htmlDoctypes
+export async function htmlReferenceLanguageCodes() {
+  const { languageCodes } = await htmlSectionsPromise
+  return languageCodes
 }
 
-export function htmlReferenceLanguageCodes() {
-  return htmlLanguageCodes
+export async function htmlReferenceCountryCodes() {
+  const { countryCodes } = await htmlSectionsPromise
+  return countryCodes
 }
 
-export function htmlReferenceCountryCodes() {
-  return htmlCountryCodes
-}
-
-export function htmlReferenceHttpStatuses() {
+export async function htmlReferenceHttpStatuses() {
+  const { httpStatuses } = await htmlSectionsPromise
   return httpStatuses
 }
 
-export function htmlReferenceHttpMethods() {
+export async function htmlReferenceHttpMethods() {
+  const { httpMethods } = await htmlSectionsPromise
   return httpMethods
 }
 
-export function htmlReferenceCanvas() {
-  return { members: htmlCanvasMembers, properties: htmlCanvasProperties }
+export async function htmlReferenceCanvas() {
+  return htmlCanvasPromise
 }
 
-export function htmlReferenceMediaFormats() {
+export async function htmlReferenceMediaFormats() {
+  const { mediaFormats } = await htmlSectionsPromise
   return mediaFormats
 }
 
-export function htmlReferenceKeyboardShortcuts() {
+export async function htmlReferenceKeyboardShortcuts() {
+  const { keyboardShortcuts } = await htmlSectionsPromise
   return keyboardShortcuts
 }
 
-export function cssReferenceProperties() {
-  return cssProperties
+export async function cssReferenceProperties() {
+  const { properties } = await cssPropertiesPromise
+  return properties
 }
 
-export function cssReferenceNav() {
-  return cssNavItems
+export async function cssReferenceNav() {
+  const { navItems } = await cssNavPromise
+  return navItems
 }
 
-export function cssReferencePropertyNav() {
-  return cssPropertyNavItems
+export async function cssReferencePropertyNav() {
+  const { propertyNavItems } = await cssNavPromise
+  return propertyNavItems
 }
 
-export function cssReferencePropertyPages() {
-  return cssPropertyPages
+export async function cssReferencePropertyPages() {
+  const { pages } = await cssPropertyPagesPromise
+  return pages
 }
 
-export function cssReferencePropertyPage(slug: string) {
-  return findCssPropertyPage(slug)
+export async function cssReferencePropertyPage(slug: string) {
+  const { findPage } = await cssPropertyPagesPromise
+  return findPage(slug)
 }
 
-export function cssReferenceSelectors() {
-  return cssSelectors
+export async function cssReferenceSelectors() {
+  const { selectors } = await cssSectionsPromise
+  return selectors
 }
 
-export function cssReferenceFunctions() {
-  return cssFunctions
+export async function cssReferenceFunctions() {
+  const { functions } = await cssSectionsPromise
+  return functions
 }
 
-export function cssReferenceUnits() {
-  return cssUnits
+export async function cssReferenceUnits() {
+  const { units } = await cssSectionsPromise
+  return units
 }
 
-export function cssReferenceColorNames() {
-  return cssColorNames
+export async function cssReferenceColorNames() {
+  const { colorNames } = await cssSectionsPromise
+  return colorNames
 }
 
-export function cssReferenceColorValues() {
-  return cssColorValues
+export async function cssReferenceColorValues() {
+  const { colorValues } = await cssSectionsPromise
+  return colorValues
 }
 
-export function cssReferenceWebSafeFonts() {
-  return cssWebSafeFonts
+export async function cssReferenceWebSafeFonts() {
+  const { webSafeFonts } = await cssSectionsPromise
+  return webSafeFonts
 }
 
-export function cssReferenceFontFallbacks() {
-  return cssFontFallbacks
+export async function cssReferenceFontFallbacks() {
+  const { fontFallbacks } = await cssSectionsPromise
+  return fontFallbacks
 }
 
-export function cssReferenceEntities() {
-  return cssEntities
+export async function cssReferenceEntities() {
+  const { entities } = await cssSectionsPromise
+  return entities
 }
 
-export function cssReferenceAuralProperties() {
-  return cssAuralProperties
+export async function cssReferenceAuralProperties() {
+  const { auralProperties } = await cssSectionsPromise
+  return auralProperties
 }
 
-export function cssReferenceAnimatable() {
-  return { animatable: cssAnimatableProperties(), static: cssNonAnimatableProperties() }
+export async function cssReferenceAnimatable() {
+  const { animatable, nonAnimatable } = await cssPropertiesPromise
+  return { animatable: animatable(), static: nonAnimatable() }
 }
 
-export function cssReferenceInherited() {
-  return cssInheritedProperties()
+export async function cssReferenceInherited() {
+  const { inherited } = await cssPropertiesPromise
+  return inherited()
 }
 
 /**
  * The category groups shown on the CSS overview. Each links to its first
  * property, so the overview needs no route of its own per category.
  */
-export function cssReferenceCategories() {
-  return cssPropertyCategories
-    .map((category) => {
-      const members = cssProperties.filter((property) => property.category === category)
-      return {
-        category,
-        count: members.length,
-        firstSlug: members.length ? propertySlug(members[0]!.name) : '',
-      }
-    })
-    .filter((group) => group.count > 0)
+export async function cssReferenceCategories() {
+  const { properties, categories } = await cssPropertiesPromise
+  const groups = []
+  for (const category of categories) {
+    const members = properties.filter((property) => property.category === category)
+    if (members.length > 0) {
+      const firstSlug = await cssReferencePropertySlug(members[0]!.name)
+      groups.push({ category, count: members.length, firstSlug })
+    }
+  }
+  return groups
 }
 
-export function cssReferencePropertySlug(name: string) {
-  return propertySlug(name)
+export async function cssReferencePropertySlug(name: string) {
+  const { propertySlug: slugFn } = await cssPropertyPagesPromise
+  return slugFn(name)
 }
 
-export function javascriptReferenceTopics() {
-  return javascriptTopics
+export async function javascriptReferenceTopics() {
+  const { topics } = await javascriptPromise
+  return topics
 }
 
-export function javascriptReferenceTopicBySlug(slug: string) {
-  return javascriptTopicBySlug(slug)
+export async function javascriptReferenceTopicBySlug(slug: string) {
+  const { topicBySlug } = await javascriptPromise
+  return topicBySlug(slug)
 }
 
-export function javascriptReferenceTopicSlug(label: string) {
-  return javascriptTopicSlug(label)
+export async function javascriptReferenceTopicSlug(label: string) {
+  const { topicSlug } = await javascriptPromise
+  return topicSlug(label)
 }
 
 /** Every member in the reference, paired with the topic it belongs to. */
-export function javascriptReferenceMembers() {
-  return allJsMembers
+export async function javascriptReferenceMembers() {
+  const { allMembers } = await javascriptPromise
+  return allMembers
 }
 
 /** The sidebar groups, which keep the source index headings and their order. */
-export function javascriptReferenceNavGroups() {
-  return javascriptNavGroups
+export async function javascriptReferenceNavGroups() {
+  return javascriptNavPromise
 }
 
 /**
@@ -415,7 +560,7 @@ export interface CourseStats {
   minutes: number
 }
 
-export function courseStats(course: Course): CourseStats {
+export function courseStats(course: CourseMeta): CourseStats {
   let lessons = 0
   let challenges = 0
   let minutes = 0
@@ -425,7 +570,7 @@ export function courseStats(course: Course): CourseStats {
     for (const lesson of section.lessons) {
       lessons += 1
       minutes += lesson.duration
-      if (lesson.content.some((block) => block.type === 'exercise')) challenges += 1
+      if (lesson.exerciseCount > 0) challenges += 1
     }
   }
   return { lessons, challenges, quizzes, projects: course.projects.length, minutes }

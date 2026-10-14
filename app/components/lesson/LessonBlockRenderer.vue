@@ -34,15 +34,15 @@
       <figure
         v-else-if="block.type === 'code'"
         :id="block.id"
-        class="scroll-mt-20 overflow-hidden rounded-xl border border-ink-600 bg-ink-950"
+        class="scroll-mt-20 overflow-hidden rounded-xl border border-[var(--color-code-border)] bg-[var(--color-code-bg)]"
       >
         <figcaption
-          class="flex items-center justify-between border-b border-ink-600 bg-ink-850 px-3 py-1.5 font-mono text-[11px] uppercase tracking-wider text-dim"
+          class="flex items-center justify-between border-b border-[var(--color-code-header-border)] bg-[var(--color-code-header-bg)] px-3 py-1.5 font-mono text-[11px] uppercase tracking-wider text-[var(--color-code-header-text)]"
         >
           <span>{{ block.title ?? block.language }}</span>
           <button type="button" class="hover:text-brand" @click="copy(block.code)">Copy</button>
         </figcaption>
-        <pre class="overflow-x-auto p-3 font-mono text-[12.5px] leading-6"><code><span
+        <pre class="overflow-x-auto p-3 font-mono text-[12.5px] leading-6 text-[var(--color-code-text)]"><code><span
             v-for="(token, index) in codeTokens(block.code, block.language)"
             :key="index"
             :class="tokenClass(token.kind)"
@@ -76,14 +76,14 @@
       <figure
         v-else-if="block.type === 'example' && block.showPreview"
         :id="block.id"
-        class="scroll-mt-20 overflow-hidden rounded-xl border border-ink-600 bg-ink-900"
+        class="scroll-mt-20 overflow-hidden rounded-xl border border-[var(--color-code-border)] bg-[var(--color-code-header-bg)]"
       >
-        <figcaption class="border-b border-ink-600 bg-ink-850 px-3 py-2">
+        <figcaption class="border-b border-[var(--color-code-header-border)] bg-[var(--color-code-header-bg)] px-3 py-2">
           <p class="text-sm font-semibold text-mist-50">{{ block.title }}</p>
           <p class="mt-0.5 text-xs leading-relaxed text-muted" v-html="inline(block.body)" />
         </figcaption>
         <div class="grid gap-px bg-ink-600 lg:grid-cols-2">
-          <pre class="max-h-72 overflow-auto bg-ink-950 p-3 font-mono text-[12px] leading-5 text-mist-200"><code><span
+          <pre class="max-h-72 overflow-auto bg-[var(--color-code-bg)] p-3 font-mono text-[12px] leading-5 text-[var(--color-code-text)]"><code><span
               v-for="(token, index) in exampleCode(block)"
               :key="index"
               :class="tokenClass(token.kind)"
@@ -99,12 +99,32 @@
         </div>
       </figure>
 
+      <!--
+        An example flagged showPreview: false still teaches: the code
+        is the point, so it renders on its own instead of vanishing.
+      -->
+      <figure
+        v-else-if="block.type === 'example'"
+        :id="block.id"
+        class="scroll-mt-20 overflow-hidden rounded-xl border border-[var(--color-code-border)] bg-[var(--color-code-header-bg)]"
+      >
+        <figcaption class="border-b border-[var(--color-code-header-border)] bg-[var(--color-code-header-bg)] px-3 py-2">
+          <p class="text-sm font-semibold text-mist-50">{{ block.title }}</p>
+          <p class="mt-0.5 text-xs leading-relaxed text-muted" v-html="inline(block.body)" />
+        </figcaption>
+        <pre class="overflow-x-auto bg-[var(--color-code-bg)] p-3 font-mono text-[12px] leading-5 text-[var(--color-code-text)]"><code><span
+            v-for="(token, index) in exampleCode(block)"
+            :key="index"
+            :class="tokenClass(token.kind)"
+          >{{ token.value }}</span></code></pre>
+      </figure>
+
       <figure
         v-else-if="block.type === 'demo'"
         :id="block.id"
-        class="scroll-mt-20 overflow-hidden rounded-xl border border-ink-600 bg-ink-900"
+        class="scroll-mt-20 overflow-hidden rounded-xl border border-[var(--color-code-border)] bg-[var(--color-code-header-bg)]"
       >
-        <figcaption class="border-b border-ink-600 bg-ink-850 px-3 py-2">
+        <figcaption class="border-b border-[var(--color-code-header-border)] bg-[var(--color-code-header-bg)] px-3 py-2">
           <p class="text-sm font-semibold text-mist-50">{{ block.title }}</p>
           <p v-if="block.body" class="mt-0.5 text-xs leading-relaxed text-muted" v-html="inline(block.body)" />
         </figcaption>
@@ -120,7 +140,7 @@
       <section
         v-else-if="block.type === 'exercise'"
         :id="block.id"
-        class="scroll-mt-20 rounded-xl border border-brand/25 bg-ink-900 p-3 sm:p-4"
+        class="scroll-mt-20 rounded-xl border border-brand/25 bg-[var(--color-code-header-bg)] p-3 sm:p-4"
         :aria-labelledby="`${block.id}-title`"
       >
         <header class="mb-3">
@@ -227,14 +247,25 @@ function inline(text: string): string {
 function onPassed(exerciseId: string) {
   if (!passedIds.value.includes(exerciseId)) passedIds.value = [...passedIds.value, exerciseId]
   const exercise = findExercise(exerciseId)
-  if (exercise) completeExercise(exerciseId, exercise.xp ?? 60)
+  if (exercise) completeExercise(exerciseId, exerciseXp(exercise))
 }
 
-function findExercise(id: string): (CodingExercise & { xp?: number }) | undefined {
+function findExercise(id: string): CodingExercise | undefined {
   for (const block of props.blocks) {
     if (block.type === 'exercise' && block.exercise.id === id) return block.exercise
   }
   return undefined
+}
+
+/**
+ * An exercise is worth what it asks: the content can name an xp
+ * value, and otherwise the test count sets it, so a five-test
+ * exercise out-earns a one-test one and none of them flat-rate
+ * at the challenge price.
+ */
+function exerciseXp(exercise: CodingExercise): number {
+  if (exercise.xp !== undefined) return exercise.xp
+  return Math.min(60, 10 + exercise.tests.length * 10)
 }
 
 function onQuiz(quiz: Quiz, score: number) {

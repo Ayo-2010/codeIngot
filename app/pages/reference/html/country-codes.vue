@@ -44,7 +44,7 @@
 definePageMeta({ layout: 'reference' })
 useHead({ title: 'HTML country codes' })
 
-const codes = htmlReferenceCountryCodes()
+const codes = await htmlReferenceCountryCodes()
 const search = ref('')
 
 const term = computed(() => search.value.trim().toLowerCase())

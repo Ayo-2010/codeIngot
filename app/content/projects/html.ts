@@ -45,12 +45,12 @@ export const htmlProjects: Project[] = [
       {
         id: 'hc-2',
         label: 'The schedule is presented as a table with a caption and column headers',
-          verify: { kind: 'selector', selector: '<caption', label: 'a table caption' },
+          verify: { kind: 'selector', selector: 'caption', label: 'a table caption' },
       },
       {
         id: 'hc-3',
         label: 'Related registration controls are grouped in a fieldset described by a legend',
-          verify: { kind: 'selector', selector: '<legend', label: 'a legend inside a fieldset' },
+          verify: { kind: 'selector', selector: 'legend', label: 'a legend inside a fieldset' },
       },
       {
         id: 'hc-4',

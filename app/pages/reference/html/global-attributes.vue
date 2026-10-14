@@ -57,7 +57,7 @@
 definePageMeta({ layout: 'reference' })
 useHead({ title: 'HTML global attributes' })
 
-const globalAttributes = htmlReferenceGlobalAttributes()
+const globalAttributes = await htmlReferenceGlobalAttributes()
 const search = ref('')
 
 const term = computed(() => search.value.trim().toLowerCase())

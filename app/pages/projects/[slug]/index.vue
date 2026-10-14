@@ -151,6 +151,17 @@
           :active-language="firstLanguage"
           @update:files="files = $event"
         />
+        <!--
+          Verification renders the learner's own page off-screen
+          and runs the selector checks against that document.
+        -->
+        <iframe
+          ref="verifyIframe"
+          class="sr-only"
+          aria-hidden="true"
+          tabindex="-1"
+          title="Project verification preview"
+        ></iframe>
       </div>
 
       <aside class="space-y-4 lg:sticky lg:top-20">
@@ -179,6 +190,9 @@
             </li>
           </ul>
           <ProgressBar class="mt-4" :value="checklistPercent" label="Checklist progress" />
+          <p class="mt-2 text-xs leading-relaxed text-dim">
+            Automated checks run against your files as you type. Manual items are yours to judge.
+          </p>
           <button
             type="button"
             class="mt-4 w-full rounded-xl px-4 py-2.5 text-sm font-semibold transition"
@@ -214,6 +228,14 @@
 import type { ChecklistItem, EditorLanguage } from '~/types/content'
 import { renderInline } from '~/utils/inline-markdown'
 import { designDocument, designThumbnailDocument } from '~/utils/project-design'
+import {
+  matchesCssRule,
+  matchesJsCall,
+  matchesText,
+  selectorTestBody,
+} from '~/utils/project-verify'
+import { createSandboxRunner } from '~/utils/sandbox'
+import { LocalDraftStorage, type ProjectDraft } from '~/utils/progress-storage'
 import { downloadZip } from '~/utils/zip'
 
 const route = useRoute()
@@ -242,12 +264,89 @@ async function copyAsset(url: string) {
   }, 1800)
 }
 
-onBeforeUnmount(() => clearTimeout(copyReset))
+/* ------------------------------ drafts ---------------------------------- */
+
+/**
+ * The work itself is saved as it is typed, under its own key,
+ * so a refresh or a closed tab does not throw away a project —
+ * the most substantial work on the site.
+ */
+const draftStorage = new LocalDraftStorage()
+const savedDrafts = ref<Record<string, ProjectDraft>>({})
+let draftTimer: ReturnType<typeof setTimeout> | undefined
+
+onMounted(async () => {
+  savedDrafts.value = await draftStorage.load()
+  const target = project.value
+  if (target) {
+    const draft = savedDrafts.value[target.slug]
+    files.value = draft ? { ...draft } : { ...target.starterFiles }
+  }
+  void runVerification()
+})
+
+watch(files, (value) => {
+  const target = project.value
+  if (!target) return
+  clearTimeout(draftTimer)
+  draftTimer = setTimeout(() => {
+    savedDrafts.value = { ...savedDrafts.value, [target.slug]: { ...value } }
+    void draftStorage.save(savedDrafts.value)
+  }, 500)
+}, { deep: true })
+
+/* --------------------------- verification ------------------------------- */
+
+const verifyIframe = ref<HTMLIFrameElement | null>(null)
+const runner = createSandboxRunner()
+const selectorResults = ref<Record<string, boolean>>({})
+let verifyTimer: ReturnType<typeof setTimeout> | undefined
+
+/**
+ * Selector checks are the only kind that needs the rendered
+ * page, so they run in a sandboxed iframe off-screen and the
+ * outcomes are matched back to their checklist items.
+ */
+async function runVerification() {
+  const target = project.value
+  const iframe = verifyIframe.value
+  if (!target || !iframe) return
+  const selectorItems = target.checklist.filter((item) => item.verify.kind === 'selector')
+  if (selectorItems.length === 0) return
+  const result = await runner.run(iframe, {
+    html: files.value.html ?? '',
+    css: files.value.css ?? '',
+    javascript: files.value.javascript ?? '',
+    tests: selectorItems.map((item) => {
+      const verify = item.verify as { selector: string; count?: number }
+      return { id: item.id, label: item.verify.label, body: selectorTestBody(verify) }
+    }),
+  })
+  const outcomes: Record<string, boolean> = {}
+  for (const test of result.tests) outcomes[test.id] = test.passed
+  selectorResults.value = outcomes
+}
+
+watch(files, () => {
+  clearTimeout(verifyTimer)
+  verifyTimer = setTimeout(runVerification, 600)
+}, { deep: true })
+
+onBeforeUnmount(() => {
+  clearTimeout(copyReset)
+  clearTimeout(draftTimer)
+  clearTimeout(verifyTimer)
+  runner.dispose()
+})
 
 watch(
   project,
   (value) => {
-    if (value) files.value = { ...value.starterFiles }
+    if (!value) return
+    const draft = savedDrafts.value[value.slug]
+    files.value = draft ? { ...draft } : { ...value.starterFiles }
+    selectorResults.value = {}
+    void runVerification()
   },
   { immediate: true },
 )
@@ -338,19 +437,18 @@ function inline(text: string) {
 }
 
 /**
- * Automated items are verified against the learner's own files. This is a local,
- * transparent check: it looks for the structural pieces the brief asked for.
+ * Automated items are verified against the learner's own
+ * files: selectors run against the rendered page, and every
+ * other kind looks only at the file it describes.
  */
 function verifyItem(item: ChecklistItem): boolean {
-  if (item.verify.kind === 'manual') return manualChecks.value[item.id] === true
-  const source = [
-    files.value.html ?? '',
-    files.value.css ?? '',
-    files.value.javascript ?? '',
-  ].join('\n').toLowerCase()
-  const needle =
-    item.verify.kind === 'selector' ? item.verify.selector : (item.verify as { needle: string }).needle
-  return source.includes(needle.toLowerCase())
+  const verify = item.verify
+  if (verify.kind === 'manual') return manualChecks.value[item.id] === true
+  if (verify.kind === 'selector') return selectorResults.value[item.id] === true
+  if (verify.kind === 'text') return matchesText(files.value.html ?? '', verify.needle)
+  if (verify.kind === 'css-rule') return matchesCssRule(files.value.css ?? '', verify.needle)
+  if (verify.kind === 'js-call') return matchesJsCall(files.value.javascript ?? '', verify.needle)
+  return false
 }
 
 function isChecked(itemId: string) {

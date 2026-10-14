@@ -19,6 +19,8 @@ export type Technology =
   | 'dsa'
   | 'uiux'
   | 'a11y'
+  | 'dom'
+  | 'responsive'
   | 'other'
 
 export type CourseCategory = 'web' | 'programming' | 'computer-science' | 'tools' | 'projects'
@@ -138,6 +140,8 @@ export interface CodingExercise {
   tests: ExerciseTest[]
   hints: string[]
   solution?: Partial<Record<EditorLanguage, string>>
+  /** XP awarded for passing; derived from the test count when absent. */
+  xp?: number
   /** Free text explaining what the tests check, shown after a check run. */
   testNotes?: string
 }
@@ -261,7 +265,7 @@ export interface ChecklistItem {
 }
 
 export type ProjectCheck =
-  | { kind: 'selector'; selector: string; label: string }
+  | { kind: 'selector'; selector: string; count?: number; label: string }
   | { kind: 'text'; needle: string; label: string }
   | { kind: 'css-rule'; needle: string; label: string }
   | { kind: 'js-call'; needle: string; label: string }
@@ -282,6 +286,52 @@ export interface Course {
   icon: string
   sections: Section[]
   projects: Project[]
+}
+
+/* --------------------------- course metadata ---------------------------- */
+
+/**
+ * A course with everything the catalogue needs and none of the lesson
+ * bodies. The metadata is bundled eagerly so navigation, search and stats
+ * work without downloading a single lesson; the bodies load on demand
+ * through `loadCourse`.
+ */
+export interface CourseLessonMeta {
+  id: string
+  title: string
+  description: string
+  duration: number
+  objectives: string[]
+  xp: number
+  /** How many exercise blocks the lesson body contains. */
+  exerciseCount: number
+}
+
+export interface CourseSectionMeta {
+  id: string
+  title: string
+  description: string
+  lessons: CourseLessonMeta[]
+  /** Quizzes are small, so they travel with the metadata. */
+  quiz?: Quiz
+}
+
+export interface CourseMeta {
+  id: string
+  slug: string
+  title: string
+  shortTitle: string
+  description: string
+  technology: Technology
+  category: CourseCategory
+  type: CourseType
+  difficulty: Difficulty
+  badges: ('beginner' | 'popular' | 'new' | 'project' | 'certificate')[]
+  topics: string[]
+  icon: string
+  /** Project slugs; the full projects live in their own modules. */
+  projects: string[]
+  sections: CourseSectionMeta[]
 }
 
 /* ----------------------------------- paths --------------------------------- */

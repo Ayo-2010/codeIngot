@@ -39,7 +39,7 @@
 definePageMeta({ layout: 'reference' })
 useHead({ title: 'HTML doctypes' })
 
-const doctypes = htmlReferenceDoctypes()
+const doctypes = await htmlReferenceDoctypes()
 const html5 = doctypes.find((doctype) => doctype.name === 'HTML5') ?? doctypes[0]!
 const deprecated = doctypes.filter((doctype) => doctype.name !== 'HTML5')
 </script>

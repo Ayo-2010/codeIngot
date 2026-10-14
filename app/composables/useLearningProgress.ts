@@ -1,7 +1,7 @@
-import type { Course, LearningPath, Quiz } from '~/types/content'
+import type { CourseMeta, LearningPath, Quiz } from '~/types/content'
+import { findQuiz } from '~/composables/useCourses'
 import {
   type CourseProgress,
-  type PathProgress,
   type ProgressStorage,
   type StreakData,
   type UserProgress,
@@ -96,20 +96,22 @@ export function useLearningProgress() {
     streak.longest = Math.max(streak.longest, streak.current)
   }
 
-  function courseRecord(courseId: string): CourseProgress {
-    let record = progress.value.courseProgress[courseId]
+  /**
+   * Keyed by course slug, which is the stable public identifier.
+   * Every read and write of a per-course record has to agree on
+   * the key or the record is invisible.
+   */
+  function courseRecord(courseSlug: string): CourseProgress {
+    let record = progress.value.courseProgress[courseSlug]
     if (!record) {
-      record = { courseId, completedLessons: [], completedChallenges: [], completedProjects: [] }
-      progress.value.courseProgress[courseId] = record
-    }
-    return record
-  }
-
-  function pathRecord(pathId: string): PathProgress {
-    let record = progress.value.pathProgress[pathId]
-    if (!record) {
-      record = { pathId, completedCourses: [] }
-      progress.value.pathProgress[pathId] = record
+      record = {
+        courseSlug,
+        completedLessons: [],
+        completedChallenges: [],
+        completedExercises: [],
+        completedProjects: [],
+      }
+      progress.value.courseProgress[courseSlug] = record
     }
     return record
   }
@@ -118,21 +120,22 @@ export function useLearningProgress() {
 
   const isLessonComplete = (lessonId: string) => progress.value.completedLessons.includes(lessonId)
   const isChallengeComplete = (id: string) => progress.value.completedChallenges.includes(id)
+  const isExerciseComplete = (id: string) => progress.value.completedExercises.includes(id)
   const isProjectComplete = (id: string) => progress.value.completedProjects.includes(id)
 
-  function completedLessonsInCourse(course: Course): string[] {
+  function completedLessonsInCourse(course: CourseMeta): string[] {
     return course.sections
       .flatMap((section) => section.lessons.map((lesson) => lesson.id))
       .filter((id) => progress.value.completedLessons.includes(id))
   }
 
-  function courseProgressPercent(course: Course): number {
+  function courseProgressPercent(course: CourseMeta): number {
     const total = course.sections.reduce((sum, s) => sum + s.lessons.length, 0)
     if (total === 0) return 0
     return Math.round((completedLessonsInCourse(course).length / total) * 100)
   }
 
-  function isCourseComplete(course: Course): boolean {
+  function isCourseComplete(course: CourseMeta): boolean {
     return courseProgressPercent(course) === 100
   }
 
@@ -163,16 +166,15 @@ export function useLearningProgress() {
 
   /* -------------------------------- mutations ------------------------------- */
 
-  function completeLesson(lesson: { id: string; xp: number; title?: string }, course?: Course) {
+  function completeLesson(lesson: { id: string; xp: number; title?: string }, course?: CourseMeta) {
     if (isLessonComplete(lesson.id)) return false
     progress.value.completedLessons = [...progress.value.completedLessons, lesson.id]
     if (course) {
-      const record = courseRecord(course.id)
+      const record = courseRecord(course.slug)
       if (!record.completedLessons.includes(lesson.id)) {
         record.completedLessons = [...record.completedLessons, lesson.id]
         record.startedAt = record.startedAt ?? new Date().toISOString()
       }
-      syncPathProgress(course)
     }
     awardXp(lesson.xp, 'lesson')
     touchStreak()
@@ -182,16 +184,15 @@ export function useLearningProgress() {
     return true
   }
 
-  function completeExercise(exerciseId: string, xp: number, course?: Course) {
-    if (isChallengeComplete(exerciseId)) return false
-    progress.value.completedChallenges = [...progress.value.completedChallenges, exerciseId]
+  function completeExercise(exerciseId: string, xp: number, course?: CourseMeta) {
+    if (isExerciseComplete(exerciseId)) return false
+    progress.value.completedExercises = [...progress.value.completedExercises, exerciseId]
     if (course) {
-      const record = courseRecord(course.id)
-      if (!record.completedChallenges.includes(exerciseId)) {
-        record.completedChallenges = [...record.completedChallenges, exerciseId]
+      const record = courseRecord(course.slug)
+      if (!record.completedExercises.includes(exerciseId)) {
+        record.completedExercises = [...record.completedExercises, exerciseId]
         record.startedAt = record.startedAt ?? new Date().toISOString()
       }
-      syncPathProgress(course)
     }
     awardXp(xp, 'challenge')
     touchStreak()
@@ -201,11 +202,11 @@ export function useLearningProgress() {
     return true
   }
 
-  function recordQuiz(quiz: Quiz, score: number, course?: Course) {
+  function recordQuiz(quiz: Quiz, score: number, course?: CourseMeta) {
     const previous = progress.value.quizScores[quiz.id]
     if (previous !== undefined && previous >= score) return false
     progress.value.quizScores = { ...progress.value.quizScores, [quiz.id]: score }
-    if (course) courseRecord(course.id)
+    if (course) courseRecord(course.slug)
     if (previous === undefined) {
       awardXp(Math.round(score / 5) + 10, 'quiz')
       touchStreak()
@@ -241,18 +242,20 @@ export function useLearningProgress() {
     commit()
   }
 
-  function syncPathProgress(course: Course) {
-    for (const path of allPathsList()) {
-      const step = path.steps.find((item) => item.courseSlug === course.slug)
-      if (!step) continue
-      const record = pathRecord(path.id)
-      if (isCourseComplete(course) && !record.completedCourses.includes(course.slug)) {
-        record.completedCourses = [...record.completedCourses, course.slug]
-      }
-    }
-  }
-
   /* ------------------------------- achievements ----------------------------- */
+
+  /**
+   * A quiz counts as passed only at its own passing score, which is
+   * per quiz rather than one global threshold.
+   */
+  function passedQuizCount(): number {
+    let passed = 0
+    for (const [id, score] of Object.entries(progress.value.quizScores)) {
+      const quiz = findQuiz(id)
+      if (quiz && score >= quiz.passingScore) passed += 1
+    }
+    return passed
+  }
 
   function buildContext(): AchievementContext {
     const courses = allCoursesList()
@@ -262,7 +265,7 @@ export function useLearningProgress() {
         courses.map((course) => [course.slug, course.sections.reduce((n, s) => n + s.lessons.length, 0)]),
       ),
       challengeTotal: allChallenges().length,
-      quizzesPassed: Object.keys(progress.value.quizScores).length,
+      quizzesPassed: passedQuizCount(),
     }
   }
 
@@ -310,9 +313,10 @@ export function useLearningProgress() {
   const totals = computed(() => ({
     lessons: progress.value.completedLessons.length,
     challenges: progress.value.completedChallenges.length,
+    exercises: progress.value.completedExercises.length,
     projects: progress.value.completedProjects.length,
     quizzes: Object.values(progress.value.quizScores).length,
-    quizzesPassed: Object.entries(progress.value.quizScores).filter(([, score]) => score >= 70).length,
+    quizzesPassed: passedQuizCount(),
     averageQuizScore:
       Object.values(progress.value.quizScores).length > 0
         ? Math.round(
@@ -390,6 +394,7 @@ export function useLearningProgress() {
     init,
     isLessonComplete,
     isChallengeComplete,
+    isExerciseComplete,
     isProjectComplete,
     completedLessonsInCourse,
     courseProgressPercent,

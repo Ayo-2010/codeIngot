@@ -132,14 +132,17 @@ const items = computed<PaletteItem[]>(() => {
     haystack: `${project.title} ${project.tagline} ${project.summary}`.toLowerCase(),
   }))
   // The reference is split into a subpage per language, so a deep link has to
-  // carry the group or it lands on the index with no matching anchor.
-  const reference = allReferenceEntries().map((entry) => ({
-    id: `ref-${entry.id}`,
+  // carry the group or it lands on the index with no matching anchor. The
+  // corpora themselves are the reference: tag, property and member pages are
+  // reachable from each language's own index, so the palette lists the
+  // language indexes rather than dead anchors into them.
+  const reference = referenceLanguages.map((language) => ({
+    id: `ref-${language.value}`,
     kind: 'Reference',
-    title: entry.name,
-    hint: entry.summary,
-    to: `/reference/${entry.group}#${entry.id}`,
-    haystack: `${entry.name} ${entry.summary} ${entry.group}`.toLowerCase(),
+    title: `${language.label} reference`,
+    hint: language.blurb,
+    to: language.to,
+    haystack: `${language.label} reference`.toLowerCase(),
   }))
   const pages = [
     { to: '/dashboard', title: 'Dashboard', hint: 'What to do next' },

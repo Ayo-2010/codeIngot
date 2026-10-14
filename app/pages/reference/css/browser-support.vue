@@ -68,8 +68,11 @@ import type { BrowserName } from '~/types/content'
 definePageMeta({ layout: 'reference' })
 useHead({ title: 'CSS browser support' })
 
-const properties = cssReferenceProperties()
-const pages = cssReferencePropertyPages()
+const [properties, pages] = await Promise.all([
+  cssReferenceProperties(),
+  cssReferencePropertyPages(),
+])
+
 const search = ref('')
 
 const browsers: BrowserName[] = ['Chrome', 'Edge', 'Firefox', 'Safari']

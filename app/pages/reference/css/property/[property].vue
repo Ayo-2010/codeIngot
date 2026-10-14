@@ -122,17 +122,21 @@
 
 <script setup lang="ts">
 import { TOKEN_CLASS, highlight } from '~/utils/highlight'
+import { propertySlug } from '~/content/reference/css-property-pages'
 
 definePageMeta({ layout: 'reference' })
 
 const route = useRoute()
 const slug = computed(() => String(route.params.property ?? ''))
 
-const properties = cssReferenceProperties()
-const pages = cssReferencePropertyPages()
+const [properties, pages, pageData] = await Promise.all([
+  cssReferenceProperties(),
+  cssReferencePropertyPages(),
+  cssReferencePropertyPage(slug.value),
+])
 
-const page = computed(() => cssReferencePropertyPage(slug.value))
-const meta = computed(() => properties.find((property) => cssReferencePropertySlug(property.name) === slug.value))
+const page = ref(pageData)
+const meta = computed(() => properties.find((property) => propertySlug(property.name) === slug.value))
 
 const tokens = computed(() => highlight(page.value?.example.code ?? '', page.value?.example.language ?? 'css'))
 
@@ -140,12 +144,12 @@ const tokens = computed(() => highlight(page.value?.example.code ?? '', page.val
 const related = computed(() =>
   (page.value?.related ?? []).map((name) => ({
     label: name,
-    to: `/reference/css/property/${cssReferencePropertySlug(name)}`,
+    to: `/reference/css/property/${propertySlug(name)}`,
   })),
 )
 
 const position = computed(() =>
-  pages.findIndex((entry) => cssReferencePropertySlug(entry.property) === slug.value),
+  pages.findIndex((entry) => propertySlug(entry.property) === slug.value),
 )
 const previous = computed(() => (position.value > 0 ? link(pages[position.value - 1]!) : null))
 const next = computed(() =>
@@ -153,7 +157,7 @@ const next = computed(() =>
 )
 
 function link(entry: { property: string }) {
-  return { label: entry.property, to: `/reference/css/property/${cssReferencePropertySlug(entry.property)}` }
+  return { label: entry.property, to: `/reference/css/property/${propertySlug(entry.property)}` }
 }
 
 async function copy(code: string) {

@@ -33,14 +33,16 @@ useHead({ title: 'Reference' })
 
 // Each card counts what its own reference actually contains, rather than the
 // size of the shared entry list, which is only a starting point.
-const counts = {
-  html: computed(() => htmlReferenceTags().length),
-  css: computed(() => cssReferenceProperties().length),
-  javascript: computed(() => javascriptReferenceMembers().length),
-}
+const [htmlTags, cssProperties, jsMembers] = await Promise.all([
+  htmlReferenceTags(),
+  cssReferenceProperties(),
+  javascriptReferenceMembers(),
+])
 
-function entriesIn(group: string) {
-  return allReferenceEntries().filter((entry) => entry.group === group)
+const counts = {
+  html: computed(() => htmlTags.length),
+  css: computed(() => cssProperties.length),
+  javascript: computed(() => jsMembers.length),
 }
 
 function count(group: 'html' | 'css' | 'javascript') {

@@ -37,7 +37,7 @@
 definePageMeta({ layout: 'reference' })
 useHead({ title: 'HTML attributes' })
 
-const attributes = htmlReferenceAttributes()
+const attributes = await htmlReferenceAttributes()
 const search = ref('')
 
 const term = computed(() => search.value.trim().toLowerCase())

@@ -183,7 +183,7 @@ function done(lessonId: string) {
 
 function hasExercise(lessonId: string) {
   const lesson = getLessonById(lessonId)
-  return lesson?.content.some((block) => block.type === 'exercise') ?? false
+  return (lesson?.exerciseCount ?? 0) > 0
 }
 
 const continueHref = computed(() => {

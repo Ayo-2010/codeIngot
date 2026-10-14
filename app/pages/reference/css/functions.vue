@@ -43,7 +43,7 @@
 definePageMeta({ layout: 'reference' })
 useHead({ title: 'CSS functions' })
 
-const functions = cssReferenceFunctions()
+const functions = await cssReferenceFunctions()
 const search = ref('')
 
 const filtered = computed(() => {

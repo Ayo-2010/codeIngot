@@ -46,7 +46,7 @@ export const frontendDeveloper: LearningPath = {
       order: 4,
       title: 'DOM & Browser APIs',
       summary: 'Control the browser',
-      courseSlug: 'dom-manipulation',
+      courseSlug: 'dom-browser-apis',
       technologies: ['javascript', 'api'],
     },
     {
@@ -62,7 +62,7 @@ export const frontendDeveloper: LearningPath = {
       order: 6,
       title: 'Git & GitHub',
       summary: 'Version control',
-      courseSlug: 'git-and-github',
+      courseSlug: 'git-github',
       technologies: ['git'],
     },
     {
