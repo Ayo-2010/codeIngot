@@ -1,0 +1,137 @@
+import type { Section } from '~/types/content'
+
+export const reactProjectSections: Section[] = [
+  {
+    id: 'react-s9',
+    title: 'React Project — Dashboard Application',
+    description: 'Build a full dashboard with routing, typed state, charts, and authentication flow.',
+    lessons: [
+      {
+        id: 'react-l26',
+        title: 'Project scaffolding and routing',
+        description: 'Set up Vite + React + TypeScript, configure React Router with layout routes.',
+        duration: 10,
+        objectives: [
+          'Scaffold a Vite + React + TypeScript project with React Router',
+          'Create a layout route with a shared sidebar and header',
+          'Define protected routes for authenticated pages',
+        ],
+        xp: 55,
+        content: [],
+      },
+      {
+        id: 'react-l27',
+        title: 'Typed state and context',
+        description: 'A typed context provider for user authentication and dashboard data.',
+        duration: 10,
+        objectives: [
+          'Create a typed User and Session context',
+          'Build a provider component with typed state',
+          'Consume context in deeply nested components with no any',
+        ],
+        xp: 55,
+        content: [],
+      },
+      {
+        id: 'react-l28',
+        title: 'Data fetching with types',
+        description: 'Fetching dashboard metrics with typed responses and loading states.',
+        duration: 10,
+        objectives: [
+          'Write a typed fetchData function with generics',
+          'Handle loading, success, and error states with a discriminated union',
+          'Cache responses in context with a typed Map',
+        ],
+        xp: 55,
+        content: [],
+      },
+      {
+        id: 'react-l29',
+        title: 'Charts and visual components',
+        description: 'Building reusable, typed chart components from scratch.',
+        duration: 8,
+        objectives: [
+          'Create a BarChart component that accepts typed data points',
+          'Use generics to accept different data shapes',
+          'Style with CSS modules or styled-components',
+        ],
+        xp: 45,
+        content: [],
+      },
+      {
+        id: 'react-l30',
+        title: 'Testing and deployment',
+        description: 'Writing component tests and building for production.',
+        duration: 7,
+        objectives: [
+          'Write tests for components with Testing Library',
+          'Test protected routes with a mock auth context',
+          'Build for production with Vite and verify the output',
+        ],
+        xp: 40,
+        content: [],
+      },
+    ],
+    quiz: {
+      id: 'quiz-react-s9',
+      title: 'Dashboard Application check',
+      passingScore: 60,
+      questions: [
+        {
+          id: 'quiz-react-s9-q1',
+          type: 'multiple-choice',
+          prompt: 'What is the purpose of a layout route?',
+          options: [
+            'To group routes that share a common UI',
+            'To speed up builds',
+            'To define API endpoints',
+            'To handle 404 pages',
+          ],
+          answer: 0,
+          explanation: 'Layout routes share a common element (header, sidebar, etc.) across multiple child routes without duplicating it.',
+        },
+        {
+          id: 'quiz-react-s9-q2',
+          type: 'true-false',
+          prompt: 'React Context is the best solution for state used by less than 3 components.',
+          answer: false,
+          explanation: 'Context adds complexity. For simple prop passing, use props. Context shines when many components at different levels need the same data.',
+        },
+        {
+          id: 'quiz-react-s9-q3',
+          type: 'multiple-choice',
+          prompt: 'Which testing approach is most robust?',
+          options: [
+            'Querying by test ID exclusively',
+            'Querying by display value and role',
+            'Querying by class name',
+            'Querying by element type',
+          ],
+          answer: 1,
+          explanation: 'Testing Library prioritizes role, text, label, and display queries — the same way users find things on the page.',
+        },
+        {
+          id: 'quiz-react-s9-q4',
+          type: 'blank',
+          prompt: 'What hook provides typed context to descendants?',
+          answers: ['useContext', 'useContext<ContextType>'],
+          explanation: 'useContext returns the current context value, typed by the Context<T> you created.',
+        },
+        {
+          id: 'quiz-react-s9-q5',
+          type: 'identify-error',
+          prompt: 'What does React.memo not help with?',
+          code: '// A list of 1000 memoized items, each receiving a new inline object as prop',
+          options: [
+            'Passing a new object literal as a prop every render defeats memoization',
+            'The items are not memoized themselves',
+            'React.memo is not needed for lists',
+            'Inline objects are always fast',
+          ],
+          answer: 0,
+          explanation: 'React.memo does a shallow comparison of props. If you pass a new object literal each render, the comparison always fails and memoization is wasted.',
+        },
+      ],
+    },
+  },
+]

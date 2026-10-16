@@ -98,6 +98,12 @@ const courseLoaders: Record<string, () => Promise<Course>> = {
     import('~/content/courses/responsive-web-design-course').then((module) => module.responsiveWebDesignCourse),
   'git-github': () =>
     import('~/content/courses/git-github-course').then((module) => module.gitGitHubCourse),
+  'typescript': () =>
+    import('~/content/courses/typescript-fundamentals').then((module) => module.typescriptFundamentals),
+  'react': () =>
+    import('~/content/courses/react').then((module) => module.reactCourse),
+  'frontend-projects': () =>
+    import('~/content/courses/frontend-projects-course').then((module) => module.frontendProjectsCourse),
 }
 
 const loadedCourses = new Map<string, Course>()

@@ -1,0 +1,135 @@
+﻿import type { Section } from '~/types/content'
+
+export const reactHomeSections: Section[] = [
+  {
+    id: 'react-s1',
+    title: 'React HOME',
+    description: 'What React adds, how components work, and how to set up your first project.',
+    lessons: [
+      {
+        id: 'react-l1',
+        title: 'What React is and why it exists',
+        description: 'A library for building user interfaces from composable components.',
+        duration: 5,
+        objectives: [
+          'Say what problem React solves that plain JavaScript does not',
+          'Explain the component model and JSX',
+          'Name the three principles of React design',
+        ],
+        xp: 40,
+        content: [],
+      },
+      {
+        id: 'react-l2',
+        title: 'Getting started with Vite',
+        description: 'Scaffolding a new React project and understanding the folder structure.',
+        duration: 6,
+        objectives: [
+          'Create a new Vite + React + TypeScript project',
+          'Identify the src, public, and index.html files',
+          'Run the dev server and open the browser',
+        ],
+        xp: 40,
+        content: [],
+      },
+      {
+        id: 'react-l3',
+        title: 'Your first component',
+        description: 'Writing a component in JSX, rendering it to the page, and understanding the render cycle.',
+        duration: 6,
+        objectives: [
+          'Write a function component that returns JSX',
+          'Render a component tree with createRoot',
+          'Explain the difference between the source and the DOM',
+        ],
+        xp: 45,
+        content: [],
+      },
+      {
+        id: 'react-l35',
+        title: 'ES6 essentials for React',
+        description: 'The JavaScript features you need to read and write React code: arrow functions, destructuring, the spread operator, and modules.',
+        duration: 7,
+        objectives: [
+          'Write arrow functions and understand how they differ from regular functions',
+          'Use destructuring to pull values out of props and state',
+          'Spread array and object values immutably',
+          'Import and export modules with ESM syntax',
+        ],
+        xp: 40,
+        content: [],
+      },
+      {
+        id: 'react-l36',
+        title: 'Upgrading to modern React',
+        description: 'Moving from older React patterns to function components and hooks, and understanding the migration path.',
+        duration: 5,
+        objectives: [
+          'Identify class component patterns that map to hooks',
+          'Replace setState calls with useState equivalents',
+          'Migrate componentDidMount/componentDidUpdate to useEffect',
+          'Use the react-codemod script to automate large migrations',
+        ],
+        xp: 35,
+        content: [],
+      },
+    ],
+    quiz: {
+      id: 'quiz-react-s1',
+      title: 'React HOME check',
+      passingScore: 60,
+      questions: [
+        {
+          id: 'quiz-react-s1-q1',
+          type: 'multiple-choice',
+          prompt: 'What does React solve?',
+          options: [
+            'It replaces the browser entirely',
+            'It keeps the DOM in sync with your data declaratively',
+            'It compiles TypeScript to JavaScript',
+            'It provides a backend for React applications',
+          ],
+          answer: 1,
+          explanation: 'React lets you describe what the UI should look like for a given state, and it handles updating the DOM to match.',
+        },
+        {
+          id: 'quiz-react-s1-q2',
+          type: 'true-false',
+          prompt: 'JSX is required to use React.',
+          answer: false,
+          explanation: 'JSX is syntactic sugar, not a requirement. React can be used with React.createElement or any renderer, though JSX is the standard.',
+        },
+        {
+          id: 'quiz-react-s1-q3',
+          type: 'multiple-choice',
+          prompt: 'Which function mounts a React app to the DOM?',
+          options: ['ReactDOM.render', 'createRoot', 'hydrateRoot', 'Both B and C'],
+          answer: 3,
+          explanation: 'createRoot replaces the older ReactDOM.render. hydrateRoot is used for server-rendered apps. Both mount the app.',
+        },
+        {
+          id: 'quiz-react-s1-q4',
+          type: 'blank',
+          prompt: 'What is the name of the modern React API entry point?',
+          answers: ['createRoot', 'React-dom createRoot'],
+          explanation: 'import { createRoot } from "react-dom/client" is the modern way to mount an app.',
+        },
+        {
+          id: 'quiz-react-s1-q5',
+          type: 'identify-error',
+          prompt: 'What is wrong with this component?',
+          code: 'function Welcome(props) {\n  return <h1>Hello, {props.name}</h1>\n}',
+          options: [
+            'Missing return statement',
+            'Props needs to be destructured',
+            'Missing closing parenthesis',
+            'Nothing â€” it is valid JSX',
+          ],
+          answer: 3,
+          explanation: 'This is valid JSX. Props is the implicit parameter of a function component. With TypeScript you would annotate it, but plain JS accepts this.',
+        },
+      ],
+    },
+  },
+]
+

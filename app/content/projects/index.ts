@@ -3,6 +3,8 @@ import { coreProjects } from './core'
 import { htmlProjects } from './html'
 import { cssProjects } from './css'
 import { javascriptProjects } from './javascript'
+import { typescriptProjects } from './typescript'
+import { reactProjects } from './react'
 
 /**
  * Every project on the site, in the order the /projects page lists them.
@@ -13,6 +15,8 @@ export const projects: Project[] = [
   ...htmlProjects,
   ...cssProjects,
   ...javascriptProjects,
+  ...typescriptProjects,
+  ...reactProjects,
 ]
 
 /**
@@ -29,6 +33,8 @@ const COURSE_BY_SLUG: Record<string, string> = {
   ...Object.fromEntries(htmlProjects.map((p) => [p.slug, 'html-fundamentals'])),
   ...Object.fromEntries(cssProjects.map((p) => [p.slug, 'css-fundamentals'])),
   ...Object.fromEntries(javascriptProjects.map((p) => [p.slug, 'javascript-fundamentals'])),
+  ...Object.fromEntries(typescriptProjects.map((p) => [p.slug, 'typescript'])),
+  ...Object.fromEntries(reactProjects.map((p) => [p.slug, 'react'])),
 }
 
 export function projectsForCourse(courseSlug: string): Project[] {

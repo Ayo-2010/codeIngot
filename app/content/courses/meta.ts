@@ -23425,5 +23425,2784 @@ export const courseMeta: CourseMeta[] = [
         }
       }
     ]
+  },
+  {
+    "id": "course-typescript",
+    "slug": "typescript",
+    "title": "TypeScript Fundamentals",
+    "shortTitle": "TypeScript",
+    "description": "TypeScript adds static types to JavaScript, catching bugs before they reach the browser. You start with the type system basics, learn how to annotate and infer, then build real-world patterns: interfaces, generics, utility types, and configuration. You finish with a typed task tracker that scales.",
+    "technology": "typescript",
+    "category": "programming",
+    "type": "course",
+    "difficulty": "beginner",
+    "badges": [
+      "beginner",
+      "popular"
+    ],
+    "topics": [
+      "variables",
+      "types",
+      "type-inference",
+      "interfaces",
+      "generics",
+      "utility-types",
+      "strict-mode",
+      "tsconfig",
+      "modules",
+      "declaration-files"
+    ],
+    "icon": "TS",
+    "projects": [
+      "typed-task-tracker",
+      "typed-api-client",
+      "typed-dashboard"
+    ],
+    "sections": [
+      {
+        "id": "ts-s1",
+        "title": "TS HOME",
+        "description": "What TypeScript adds to JavaScript, how the compiler works, and what you will be able to do at the end.",
+        "lessons": [
+          {
+            "id": "ts-l1",
+            "title": "What TypeScript is and why it exists",
+            "description": "A typed superset that compiles to plain JavaScript, and the three problems it solves.",
+            "duration": 5,
+            "objectives": [
+              "Say what TypeScript adds that JavaScript cannot do",
+              "Explain the compile step and why it catches bugs early",
+              "Name the three classes of bugs TypeScript prevents"
+            ],
+            "xp": 40,
+            "exerciseCount": 0
+          },
+          {
+            "id": "ts-l2",
+            "title": "How the compiler fits in your workflow",
+            "description": "tsconfig, the watch mode, and running the compiler alongside your editor.",
+            "duration": 5,
+            "objectives": [
+              "Create a minimal tsconfig.json for a new project",
+              "Run tsc in watch mode while you code",
+              "Read compiler output and jump to the failing line"
+            ],
+            "xp": 35,
+            "exerciseCount": 0
+          },
+          {
+            "id": "ts-l3",
+            "title": "Your first typed file",
+            "description": "Renaming .js to .ts, adding a type annotation, and watching the error disappear.",
+            "duration": 6,
+            "objectives": [
+              "Convert a JavaScript file to TypeScript",
+              "Add your first type annotation to a variable",
+              "Distinguish a compile error from a runtime error"
+            ],
+            "xp": 40,
+            "exerciseCount": 0
+          }
+        ],
+        "quiz": {
+          "id": "quiz-ts-s1",
+          "title": "TS HOME check",
+          "passingScore": 60,
+          "questions": [
+            {
+              "id": "quiz-ts-s1-q1",
+              "type": "multiple-choice",
+              "prompt": "What does TypeScript add to JavaScript?",
+              "options": [
+                "New runtime features",
+                "Static type checking that compiles away",
+                "A different standard library",
+                "Server-side rendering"
+              ],
+              "answer": 1,
+              "explanation": "TypeScript is a superset that adds static types; it compiles to plain JavaScript and adds no runtime overhead."
+            },
+            {
+              "id": "quiz-ts-s1-q2",
+              "type": "true-false",
+              "prompt": "TypeScript code runs directly in the browser without compilation.",
+              "answer": false,
+              "explanation": "Browsers only run JavaScript. TypeScript must be compiled (transpiled) to JavaScript first."
+            },
+            {
+              "id": "quiz-ts-s1-q3",
+              "type": "multiple-choice",
+              "prompt": "Which file configures the TypeScript compiler?",
+              "options": [
+                "package.json",
+                "tsconfig.json",
+                "webpack.config.js",
+                ".babelrc"
+              ],
+              "answer": 1,
+              "explanation": "tsconfig.json is the standard configuration file for the TypeScript compiler."
+            },
+            {
+              "id": "quiz-ts-s1-q4",
+              "type": "blank",
+              "prompt": "What command runs the TypeScript compiler in watch mode?",
+              "answers": [
+                "tsc -w",
+                "tsc --watch",
+                "tsc watch"
+              ],
+              "explanation": "`tsc -w` or `tsc --watch` recompiles on file changes, which is ideal during development."
+            },
+            {
+              "id": "quiz-ts-s1-q5",
+              "type": "identify-error",
+              "prompt": "What is wrong with this tsconfig.json?",
+              "code": "{\n  \"compilerOptions\": {\n    \"target\": \"es2020\",\n    \"module\": \"commonjs\"\n  }\n}",
+              "options": [
+                "Nothing is wrong",
+                "Missing \"strict\": true",
+                "target and module are incompatible",
+                "The file must be named typescript.config.json"
+              ],
+              "answer": 0,
+              "explanation": "This is a valid minimal tsconfig.json. Adding \"strict\": true is recommended but not required."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ts-s2",
+        "title": "TypeScript Basics",
+        "description": "The primitive types, type inference, and the annotations you will write every day.",
+        "lessons": [
+          {
+            "id": "ts-l4",
+            "title": "Primitive types and inference",
+            "description": "string, number, boolean, null, undefined, and when TypeScript figures it out for you.",
+            "duration": 6,
+            "objectives": [
+              "List the primitive types and write an annotation for each",
+              "Explain when inference works and when it does not",
+              "Choose between const and let for narrower types"
+            ],
+            "xp": 40,
+            "exerciseCount": 0
+          },
+          {
+            "id": "ts-l5",
+            "title": "Arrays, tuples and readonly",
+            "description": "Typing lists, fixed-length tuples, and preventing mutation with readonly.",
+            "duration": 6,
+            "objectives": [
+              "Write string[] and Array<string> for arrays",
+              "Create a tuple with a fixed number of elements",
+              "Use readonly to make arrays and tuples immutable"
+            ],
+            "xp": 40,
+            "exerciseCount": 0
+          },
+          {
+            "id": "ts-l6",
+            "title": "Objects, optional properties and index signatures",
+            "description": "Object types, optional ? properties, and indexing when keys are dynamic.",
+            "duration": 6,
+            "objectives": [
+              "Write an inline object type with required and optional fields",
+              "Explain what an index signature does and when to use it",
+              "Distinguish excess property checks from structural typing"
+            ],
+            "xp": 40,
+            "exerciseCount": 0
+          },
+          {
+            "id": "ts-l7",
+            "title": "Union and intersection types",
+            "description": "Combining types with | and &, and narrowing with type guards.",
+            "duration": 6,
+            "objectives": [
+              "Create a union type and narrow it with typeof",
+              "Create an intersection type to merge object shapes",
+              "Use a discriminant property for exhaustive narrowing"
+            ],
+            "xp": 45,
+            "exerciseCount": 0
+          }
+        ],
+        "quiz": {
+          "id": "quiz-ts-s2",
+          "title": "TypeScript Basics check",
+          "passingScore": 60,
+          "questions": [
+            {
+              "id": "quiz-ts-s2-q1",
+              "type": "multiple-choice",
+              "prompt": "Which is NOT a primitive type in TypeScript?",
+              "options": [
+                "string",
+                "number",
+                "object",
+                "boolean"
+              ],
+              "answer": 2,
+              "explanation": "object is a non-primitive (reference) type. The primitives are string, number, boolean, null, undefined, symbol, and bigint."
+            },
+            {
+              "id": "quiz-ts-s2-q2",
+              "type": "true-false",
+              "prompt": "TypeScript can always infer the type of a variable from its initial value.",
+              "answer": false,
+              "explanation": "Inference works when there is an initial value. Variables declared without initialization need explicit annotations."
+            },
+            {
+              "id": "quiz-ts-s2-q3",
+              "type": "multiple-choice",
+              "prompt": "What does readonly string[] mean?",
+              "options": [
+                "An array of strings that cannot be reassigned",
+                "An array of strings whose elements cannot be changed",
+                "A tuple of strings",
+                "An array of readonly strings"
+              ],
+              "answer": 1,
+              "explanation": "readonly prevents mutation of the array contents (push, pop, index assignment). The variable itself can still be reassigned unless also declared const."
+            },
+            {
+              "id": "quiz-ts-s2-q4",
+              "type": "blank",
+              "prompt": "What syntax creates a tuple of exactly two elements, a string and a number?",
+              "answers": [
+                "[string, number]",
+                "tuple<string, number>"
+              ],
+              "explanation": "Tuple types use bracket syntax with comma-separated element types: [string, number]."
+            },
+            {
+              "id": "quiz-ts-s2-q5",
+              "type": "identify-error",
+              "prompt": "What is the issue with this type?",
+              "code": "type User = {\n  name: string\n  age?: number\n  [key: string]: any\n}",
+              "options": [
+                "Nothing is wrong",
+                "Optional property must come after index signature",
+                "Index signature value type must be compatible with all properties",
+                "Cannot mix optional properties with index signatures"
+              ],
+              "answer": 2,
+              "explanation": "The index signature says every property is `any`, but `name` is `string` and `age?` is `number | undefined`. The index signature value type must be a supertype of all property types."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ts-s3",
+        "title": "Functions",
+        "description": "Typing parameters, return values, overloads, and the this context.",
+        "lessons": [
+          {
+            "id": "ts-l8",
+            "title": "Parameter and return types",
+            "description": "Annotating function signatures, optional parameters, defaults, and rest parameters.",
+            "duration": 6,
+            "objectives": [
+              "Write a full function signature with parameter and return types",
+              "Use optional parameters and default values correctly",
+              "Type a rest parameter as an array"
+            ],
+            "xp": 40,
+            "exerciseCount": 0
+          },
+          {
+            "id": "ts-l9",
+            "title": "Function types and callbacks",
+            "description": "The function type expression, callbacks, and why void is not undefined.",
+            "duration": 5,
+            "objectives": [
+              "Write a function type as a standalone type alias",
+              "Type a callback that is passed to another function",
+              "Explain when void return is appropriate"
+            ],
+            "xp": 35,
+            "exerciseCount": 0
+          },
+          {
+            "id": "ts-l10",
+            "title": "Overloads and this typing",
+            "description": "Multiple call signatures for one implementation, and binding this in callbacks.",
+            "duration": 5,
+            "objectives": [
+              "Declare overload signatures for a function with different arities",
+              "Type this in an object method or callback",
+              "Use bind or arrow functions to preserve this"
+            ],
+            "xp": 35,
+            "exerciseCount": 0
+          }
+        ],
+        "quiz": {
+          "id": "quiz-ts-s3",
+          "title": "Functions check",
+          "passingScore": 60,
+          "questions": [
+            {
+              "id": "quiz-ts-s3-q1",
+              "type": "multiple-choice",
+              "prompt": "How do you type a function that takes a string and returns a number?",
+              "options": [
+                "(string) => number",
+                "function(string): number",
+                "string -> number",
+                "func(string): number"
+              ],
+              "answer": 0,
+              "explanation": "The function type expression uses arrow syntax: (param: type) => returnType."
+            },
+            {
+              "id": "quiz-ts-s3-q2",
+              "type": "true-false",
+              "prompt": "A function with return type void can return undefined.",
+              "answer": true,
+              "explanation": "void means the return value is ignored. Returning undefined is allowed; returning any other value is an error."
+            },
+            {
+              "id": "quiz-ts-s3-q3",
+              "type": "multiple-choice",
+              "prompt": "What does a rest parameter look like in a function type?",
+              "options": [
+                "...args: string[]",
+                "args: ...string[]",
+                "rest: string...",
+                "params: string..."
+              ],
+              "answer": 0,
+              "explanation": "Rest parameters in function types use the spread syntax before the parameter name: (...args: string[]) => void."
+            },
+            {
+              "id": "quiz-ts-s3-q4",
+              "type": "blank",
+              "prompt": "What keyword declares multiple call signatures for one function implementation?",
+              "answers": [
+                "overload",
+                "function overload"
+              ],
+              "explanation": "Function overloads let you declare multiple signatures before the single implementation."
+            },
+            {
+              "id": "quiz-ts-s3-q5",
+              "type": "identify-error",
+              "prompt": "What is wrong with this callback type?",
+              "code": "function process(callback: (x: number) => string) {}\n\nprocess((n) => n * 2)",
+              "options": [
+                "Nothing is wrong",
+                "The callback returns number but the type expects string",
+                "The callback parameter needs a type annotation",
+                "Arrow functions cannot be used as callbacks"
+              ],
+              "answer": 1,
+              "explanation": "The callback is typed to return string, but the arrow function returns number. The return type must match."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ts-s4",
+        "title": "Interfaces and Type Aliases",
+        "description": "Defining reusable shapes, extending interfaces, and when to prefer type over interface.",
+        "lessons": [
+          {
+            "id": "ts-l11",
+            "title": "Interfaces vs type aliases",
+            "description": "The two ways to name a shape, and the practical differences between them.",
+            "duration": 5,
+            "objectives": [
+              "Define an interface and a type alias for the same shape",
+              "List the features only interfaces have (declaration merging)",
+              "List the features only type aliases have (unions, primitives)"
+            ],
+            "xp": 35,
+            "exerciseCount": 0
+          },
+          {
+            "id": "ts-l12",
+            "title": "Extending and merging interfaces",
+            "description": "Building new interfaces from old ones, and how declaration merging works.",
+            "duration": 5,
+            "objectives": [
+              "Extend an interface with extends",
+              "Merge two interfaces with the same name",
+              "Explain when merging is useful (augmenting library types)"
+            ],
+            "xp": 35,
+            "exerciseCount": 0
+          },
+          {
+            "id": "ts-l13",
+            "title": "Implementing interfaces in classes",
+            "description": "The implements clause, and why a class can satisfy an interface without declaring it.",
+            "duration": 5,
+            "objectives": [
+              "Write a class that implements an interface",
+              "Explain structural typing: no implements required to match",
+              "Use implements to catch missing members at compile time"
+            ],
+            "xp": 35,
+            "exerciseCount": 0
+          }
+        ],
+        "quiz": {
+          "id": "quiz-ts-s4",
+          "title": "Interfaces & Type Aliases check",
+          "passingScore": 60,
+          "questions": [
+            {
+              "id": "quiz-ts-s4-q1",
+              "type": "multiple-choice",
+              "prompt": "Which feature is ONLY available with interfaces, not type aliases?",
+              "options": [
+                "Extending",
+                "Declaration merging",
+                "Union types",
+                "Generic parameters"
+              ],
+              "answer": 1,
+              "explanation": "Declaration merging (multiple interface declarations with the same name combining) only works with interfaces."
+            },
+            {
+              "id": "quiz-ts-s4-q2",
+              "type": "true-false",
+              "prompt": "A class must declare implements Interface to satisfy that interface.",
+              "answer": false,
+              "explanation": "TypeScript uses structural typing. A class matches an interface if it has all the required members, regardless of implements."
+            },
+            {
+              "id": "quiz-ts-s4-q3",
+              "type": "multiple-choice",
+              "prompt": "What does interface B extends A do?",
+              "options": [
+                "Copies all members of A into B",
+                "Creates a new interface with A members plus B own members",
+                "Makes B a subclass of A",
+                "Merges B into A"
+              ],
+              "answer": 1,
+              "explanation": "extends creates a new interface that includes all members from the parent plus its own members."
+            },
+            {
+              "id": "quiz-ts-s4-q4",
+              "type": "blank",
+              "prompt": "Which keyword defines a type alias?",
+              "answers": [
+                "type",
+                "Type"
+              ],
+              "explanation": "type MyType = { ... } defines a type alias."
+            },
+            {
+              "id": "quiz-ts-s4-q5",
+              "type": "identify-error",
+              "prompt": "What is wrong with this type alias?",
+              "code": "type EventHandler = (event: MouseEvent) => void\n  | (event: KeyboardEvent) => void",
+              "options": [
+                "Nothing is wrong",
+                "Function types cannot be unioned",
+                "Parentheses are needed around the union",
+                "void cannot be used in union types"
+              ],
+              "answer": 2,
+              "explanation": "Function types in a union need parentheses: type EventHandler = ((event: MouseEvent) => void) | ((event: KeyboardEvent) => void)."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ts-s5",
+        "title": "Generics",
+        "description": "Writing reusable components that work with any type while preserving type safety.",
+        "lessons": [
+          {
+            "id": "ts-l14",
+            "title": "Generic functions and type parameters",
+            "description": "Angle brackets, type parameter constraints, and inference at call sites.",
+            "duration": 6,
+            "objectives": [
+              "Write a generic function with a type parameter",
+              "Add a constraint with extends",
+              "Let TypeScript infer the type argument from the call"
+            ],
+            "xp": 45,
+            "exerciseCount": 0
+          },
+          {
+            "id": "ts-l15",
+            "title": "Generic interfaces and classes",
+            "description": "Parameterising interfaces and classes, and default type arguments.",
+            "duration": 5,
+            "objectives": [
+              "Define a generic interface like Box<T>",
+              "Write a generic class with a type parameter",
+              "Provide a default so callers can omit the argument"
+            ],
+            "xp": 40,
+            "exerciseCount": 0
+          },
+          {
+            "id": "ts-l16",
+            "title": "Generic constraints and conditional types",
+            "description": "Narrowing what a type parameter can be, and choosing types with extends.",
+            "duration": 6,
+            "objectives": [
+              "Constrain a type parameter to a specific shape",
+              "Write a conditional type T extends U ? X : Y",
+              "Distribute a conditional type over a union"
+            ],
+            "xp": 45,
+            "exerciseCount": 0
+          }
+        ],
+        "quiz": {
+          "id": "quiz-ts-s5",
+          "title": "Generics check",
+          "passingScore": 60,
+          "questions": [
+            {
+              "id": "quiz-ts-s5-q1",
+              "type": "multiple-choice",
+              "prompt": "What does function identity<T>(value: T): T mean?",
+              "options": [
+                "A function that only accepts type T",
+                "A function that works with any type and returns the same type",
+                "A function that converts any value to type T",
+                "A function that requires T to be a class"
+              ],
+              "answer": 1,
+              "explanation": "The type parameter T is a placeholder. The function accepts any type and returns that exact same type."
+            },
+            {
+              "id": "quiz-ts-s5-q2",
+              "type": "true-false",
+              "prompt": "TypeScript can infer the type argument when you call a generic function.",
+              "answer": true,
+              "explanation": "TypeScript infers T from the argument type. identity(\"hello\") infers T = string."
+            },
+            {
+              "id": "quiz-ts-s5-q3",
+              "type": "multiple-choice",
+              "prompt": "What does interface Box<T = string> mean?",
+              "options": [
+                "T defaults to string if not provided",
+                "T must be string",
+                "T extends string",
+                "Box only works with strings"
+              ],
+              "answer": 0,
+              "explanation": "Default type parameters let callers omit the argument. Box<number> uses number; Box uses string."
+            },
+            {
+              "id": "quiz-ts-s5-q4",
+              "type": "blank",
+              "prompt": "What syntax constrains a type parameter to types that have a length property?",
+              "answers": [
+                "T extends { length: number }",
+                "T extends Length",
+                "T has length"
+              ],
+              "explanation": "Constraints use extends with the required shape: function logLength<T extends { length: number }>(item: T)."
+            },
+            {
+              "id": "quiz-ts-s5-q5",
+              "type": "identify-error",
+              "prompt": "What does this conditional type evaluate to?",
+              "code": "type IsString<T> = T extends string ? \"yes\" : \"no\"\n\ntype Test = IsString<string | number>",
+              "options": [
+                "\"yes\"",
+                "\"no\"",
+                "\"yes\" | \"no\"",
+                "never"
+              ],
+              "answer": 2,
+              "explanation": "Conditional types distribute over unions. IsString<string | number> becomes IsString<string> | IsString<number> = \"yes\" | \"no\"."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ts-s6",
+        "title": "Utility Types",
+        "description": "The built-in type transformers that save you from writing boilerplate.",
+        "lessons": [
+          {
+            "id": "ts-l17",
+            "title": "Partial, Required, Readonly",
+            "description": "Making all properties optional, required, or readonly at once.",
+            "duration": 5,
+            "objectives": [
+              "Use Partial<T> for a patch object",
+              "Use Required<T> to remove optionality",
+              "Use Readonly<T> to freeze an object shape"
+            ],
+            "xp": 35,
+            "exerciseCount": 0
+          },
+          {
+            "id": "ts-l18",
+            "title": "Pick, Omit, Record",
+            "description": "Selecting keys, dropping keys, and mapping keys to a uniform value type.",
+            "duration": 5,
+            "objectives": [
+              "Use Pick<T, K> to keep only some properties",
+              "Use Omit<T, K> to remove properties",
+              "Use Record<K, V> for dictionary-like objects"
+            ],
+            "xp": 35,
+            "exerciseCount": 0
+          },
+          {
+            "id": "ts-l19",
+            "title": "Exclude, Extract, NonNullable, ReturnType",
+            "description": "Filtering unions, removing null/undefined, and extracting function return types.",
+            "duration": 5,
+            "objectives": [
+              "Filter a union with Exclude and Extract",
+              "Strip null and undefined with NonNullable",
+              "Extract the return type of a function with ReturnType"
+            ],
+            "xp": 35,
+            "exerciseCount": 0
+          }
+        ],
+        "quiz": {
+          "id": "quiz-ts-s6",
+          "title": "Utility Types check",
+          "passingScore": 60,
+          "questions": [
+            {
+              "id": "quiz-ts-s6-q1",
+              "type": "multiple-choice",
+              "prompt": "What does Partial<User> do?",
+              "options": [
+                "Makes all properties required",
+                "Makes all properties optional",
+                "Removes all properties",
+                "Makes all properties readonly"
+              ],
+              "answer": 1,
+              "explanation": "Partial<T> maps all properties of T to optional. Useful for update/patch objects."
+            },
+            {
+              "id": "quiz-ts-s6-q2",
+              "type": "true-false",
+              "prompt": "Omit<T, K> and Pick<T, K> are opposites.",
+              "answer": true,
+              "explanation": "Pick keeps the listed keys; Omit removes the listed keys. Omit<T, K> === Pick<T, Exclude<keyof T, K>>."
+            },
+            {
+              "id": "quiz-ts-s6-q3",
+              "type": "multiple-choice",
+              "prompt": "What does Record<string, number> create?",
+              "options": [
+                "An object with string keys and number values",
+                "A tuple of strings and numbers",
+                "A union of string and number",
+                "An array of objects"
+              ],
+              "answer": 0,
+              "explanation": "Record<K, V> creates an object type where all keys are of type K and all values are of type V."
+            },
+            {
+              "id": "quiz-ts-s6-q4",
+              "type": "blank",
+              "prompt": "Which utility type removes null and undefined from a union?",
+              "answers": [
+                "NonNullable<T>",
+                "NonNullable"
+              ],
+              "explanation": "NonNullable<T> excludes null and undefined from T."
+            },
+            {
+              "id": "quiz-ts-s6-q5",
+              "type": "identify-error",
+              "prompt": "What is the type of ReturnType<() => string>?",
+              "options": [
+                "string",
+                "() => string",
+                "void",
+                "never"
+              ],
+              "answer": 0,
+              "explanation": "ReturnType extracts the return type of a function type. For () => string, it is string."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ts-s7",
+        "title": "Advanced Types",
+        "description": "Discriminated unions, template literal types, mapped types, and the infer keyword.",
+        "lessons": [
+          {
+            "id": "ts-l20",
+            "title": "Discriminated unions and exhaustive matching",
+            "description": "Using a common tag to narrow unions, and the never check for exhaustiveness.",
+            "duration": 6,
+            "objectives": [
+              "Build a discriminated union with a shared literal property",
+              "Narrow with a switch statement and default: never",
+              "Explain why this pattern scales to many variants"
+            ],
+            "xp": 45,
+            "exerciseCount": 0
+          },
+          {
+            "id": "ts-l21",
+            "title": "Template literal types and key remapping",
+            "description": "Building string types from other strings, and remapping keys in mapped types.",
+            "duration": 5,
+            "objectives": [
+              "Create a template literal type like get${Capitalize<string>}",
+              "Use as in a mapped type to transform keys",
+              "Generate event handler names from event names"
+            ],
+            "xp": 40,
+            "exerciseCount": 0
+          },
+          {
+            "id": "ts-l22",
+            "title": "The infer keyword and type inference in conditional types",
+            "description": "Capturing types inside conditionals, and building Parameters and ReturnType yourself.",
+            "duration": 5,
+            "objectives": [
+              "Use infer to capture a type parameter",
+              "Reimplement ReturnType with infer",
+              "Extract array element types with infer"
+            ],
+            "xp": 40,
+            "exerciseCount": 0
+          }
+        ],
+        "quiz": {
+          "id": "quiz-ts-s7",
+          "title": "Advanced Types check",
+          "passingScore": 60,
+          "questions": [
+            {
+              "id": "quiz-ts-s7-q1",
+              "type": "multiple-choice",
+              "prompt": "What makes a union \"discriminated\"?",
+              "options": [
+                "All members are primitive types",
+                "All members share a common literal property",
+                "The union has exactly two members",
+                "The union uses the discriminated keyword"
+              ],
+              "answer": 1,
+              "explanation": "A discriminated union has a shared property (the discriminant) with a different literal value in each member, enabling narrowing."
+            },
+            {
+              "id": "quiz-ts-s7-q2",
+              "type": "true-false",
+              "prompt": "The never type in a switch default case ensures exhaustiveness.",
+              "answer": true,
+              "explanation": "If all cases are handled, the default branch receives never. Adding a new variant without handling it makes the default reachable, causing a compile error."
+            },
+            {
+              "id": "quiz-ts-s7-q3",
+              "type": "multiple-choice",
+              "prompt": "What does type EventNames = `on${Capitalize<string>}` produce?",
+              "options": [
+                "A union of all possible event handler names",
+                "A template that matches any string starting with \"on\"",
+                "A type that can only be \"onClick\"",
+                "An error, Capitalize only works on literal strings"
+              ],
+              "answer": 1,
+              "explanation": "Template literal types with intrinsic string manipulation (Capitalize, Lowercase, etc.) produce pattern types that match the pattern."
+            },
+            {
+              "id": "quiz-ts-s7-q4",
+              "type": "blank",
+              "prompt": "What keyword captures a type inside a conditional type?",
+              "answers": [
+                "infer",
+                "Infer"
+              ],
+              "explanation": "infer declares a type variable to be inferred within a conditional type: T extends Array<infer U> ? U : never."
+            },
+            {
+              "id": "quiz-ts-s7-q5",
+              "type": "identify-error",
+              "prompt": "What does this mapped type produce?",
+              "code": "type ReadonlyKeys<T> = {\n  readonly [K in keyof T]: T[K]\n}",
+              "options": [
+                "An error, readonly cannot be used in mapped types",
+                "A type with all properties readonly",
+                "A type with only the readonly properties from T",
+                "A type where keys are readonly but values are not"
+              ],
+              "answer": 1,
+              "explanation": "The readonly modifier in a mapped type makes all properties readonly. This is how the built-in Readonly<T> is implemented."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ts-s8",
+        "title": "Modules and Declaration Files",
+        "description": "Organizing code with ES modules, ambient declarations, and publishing type packages.",
+        "lessons": [
+          {
+            "id": "ts-l23",
+            "title": "ES modules in TypeScript",
+            "description": "Import/export syntax, tsconfig module settings, and path aliases.",
+            "duration": 5,
+            "objectives": [
+              "Configure module, moduleResolution and baseUrl",
+              "Use path aliases for clean imports",
+              "Explain the difference between import and require"
+            ],
+            "xp": 35,
+            "exerciseCount": 0
+          },
+          {
+            "id": "ts-l24",
+            "title": "Declaration files and declare",
+            "description": ".d.ts files, ambient modules, and typing third-party JavaScript.",
+            "duration": 5,
+            "objectives": [
+              "Write a declaration file for a plain JavaScript module",
+              "Use declare module to augment an existing package",
+              "Generate declarations with declaration: true"
+            ],
+            "xp": 35,
+            "exerciseCount": 0
+          },
+          {
+            "id": "ts-l25",
+            "title": "Publishing a typed package",
+            "description": "exports, types field, and testing your types with attw or tsc --noEmit.",
+            "duration": 5,
+            "objectives": [
+              "Configure package.json for dual CJS/ESM with types",
+              "Add a types or typesVersions field",
+              "Verify the published types are consumable"
+            ],
+            "xp": 30,
+            "exerciseCount": 0
+          }
+        ],
+        "quiz": {
+          "id": "quiz-ts-s8",
+          "title": "Modules & Declarations check",
+          "passingScore": 60,
+          "questions": [
+            {
+              "id": "quiz-ts-s8-q1",
+              "type": "multiple-choice",
+              "prompt": "What does \"moduleResolution\": \"node16\" enable?",
+              "options": [
+                "CommonJS require only",
+                "ESM imports with package.json exports support",
+                "AMD module loading",
+                "SystemJS module loading"
+              ],
+              "answer": 1,
+              "explanation": "node16 (and nodenext) resolution understands package.json \"exports\" and \"imports\" fields for proper ESM support."
+            },
+            {
+              "id": "quiz-ts-s8-q2",
+              "type": "true-false",
+              "prompt": "A .d.ts file can contain implementation code.",
+              "answer": false,
+              "explanation": "Declaration files (.d.ts) contain only type information. No implementation code is allowed."
+            },
+            {
+              "id": "quiz-ts-s8-q3",
+              "type": "multiple-choice",
+              "prompt": "How do you augment a module declaration from an external package?",
+              "options": [
+                "Modify node_modules directly",
+                "declare module \"package-name\" { ... }",
+                "Create a file named package-name.d.ts",
+                "Use import type from \"package-name\""
+              ],
+              "answer": 1,
+              "explanation": "declare module \"package-name\" lets you add types to an existing module without modifying it."
+            },
+            {
+              "id": "quiz-ts-s8-q4",
+              "type": "blank",
+              "prompt": "Which tsconfig option generates .d.ts files alongside .js output?",
+              "answers": [
+                "declaration: true",
+                "declaration",
+                "\"declaration\": true"
+              ],
+              "explanation": "declaration: true emits declaration files. Combine with declarationMap for source maps."
+            },
+            {
+              "id": "quiz-ts-s8-q5",
+              "type": "identify-error",
+              "prompt": "What is wrong with this package.json for a typed package?",
+              "code": "{\n  \"name\": \"my-lib\",\n  \"main\": \"dist/index.js\",\n  \"types\": \"dist/index.d.ts\"\n}",
+              "options": [
+                "Nothing is wrong",
+                "Missing \"exports\" field for modern resolution",
+                "types must be \"typings\"",
+                "main and types cannot be in the same folder"
+              ],
+              "answer": 1,
+              "explanation": "Modern packages should use \"exports\" with conditional exports for proper dual CJS/ESM support with types."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ts-s9",
+        "title": "Strict Mode and Configuration",
+        "description": "The flags that make TypeScript strict, and tuning them for your project.",
+        "lessons": [
+          {
+            "id": "ts-l26",
+            "title": "strict and the flags it enables",
+            "description": "What strict: true turns on, and why you should start with it.",
+            "duration": 5,
+            "objectives": [
+              "List the seven flags enabled by strict",
+              "Explain noImplicitAny, strictNullChecks, strictFunctionTypes",
+              "Enable strict mode in a new project from day one"
+            ],
+            "xp": 35,
+            "exerciseCount": 0
+          },
+          {
+            "id": "ts-l27",
+            "title": "Tuning strictness for migration",
+            "description": "Turning off individual flags when migrating JavaScript, and the migration path.",
+            "duration": 5,
+            "objectives": [
+              "Disable noImplicitAny temporarily during migration",
+              "Use // @ts-expect-error for known issues",
+              "Enable flags one by one as the codebase improves"
+            ],
+            "xp": 30,
+            "exerciseCount": 0
+          },
+          {
+            "id": "ts-l28",
+            "title": "Project references and incremental builds",
+            "description": "Splitting a monorepo into referenced projects for faster compilation.",
+            "duration": 5,
+            "objectives": [
+              "Configure composite and references in tsconfig",
+              "Build incrementally with --build mode",
+              "Structure a monorepo with shared type packages"
+            ],
+            "xp": 30,
+            "exerciseCount": 0
+          }
+        ],
+        "quiz": {
+          "id": "quiz-ts-s9",
+          "title": "Configuration check",
+          "passingScore": 60,
+          "questions": [
+            {
+              "id": "quiz-ts-s9-q1",
+              "type": "multiple-choice",
+              "prompt": "How many flags does strict: true enable?",
+              "options": [
+                "5",
+                "6",
+                "7",
+                "8"
+              ],
+              "answer": 2,
+              "explanation": "strict enables 7 flags: noImplicitAny, strictNullChecks, strictFunctionTypes, strictBindCallApply, strictPropertyInitialization, noImplicitThis, alwaysStrict."
+            },
+            {
+              "id": "quiz-ts-s9-q2",
+              "type": "true-false",
+              "prompt": "strictNullChecks makes null and undefined valid values of every type.",
+              "answer": false,
+              "explanation": "strictNullChecks does the opposite: it makes null and undefined NOT assignable to other types unless explicitly included in a union (e.g., string | null)."
+            },
+            {
+              "id": "quiz-ts-s9-q3",
+              "type": "multiple-choice",
+              "prompt": "What does // @ts-expect-error do?",
+              "options": [
+                "Suppresses all errors on the next line",
+                "Suppresses errors on the next line, but errors if there are none",
+                "Disables type checking for the entire file",
+                "Marks a line as intentionally broken for testing"
+              ],
+              "answer": 1,
+              "explanation": "@ts-expect-error suppresses errors on the next line AND causes an error if that line has no errors, preventing stale suppressions."
+            },
+            {
+              "id": "quiz-ts-s9-q4",
+              "type": "blank",
+              "prompt": "Which tsconfig option enables incremental compilation with cache?",
+              "answers": [
+                "incremental: true",
+                "incremental",
+                "\"incremental\": true"
+              ],
+              "explanation": "incremental: true saves compilation info to .tsbuildinfo for faster subsequent builds."
+            },
+            {
+              "id": "quiz-ts-s9-q5",
+              "type": "identify-error",
+              "prompt": "What does composite: true require?",
+              "code": "{\n  \"compilerOptions\": {\n    \"composite\": true\n  }\n}",
+              "options": [
+                "Nothing else",
+                "declaration: true and declarationMap: true",
+                "strict: false",
+                "module: commonjs"
+              ],
+              "answer": 1,
+              "explanation": "composite: true (for project references) requires declaration: true and implies declarationMap: true."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ts-s10",
+        "title": "TypeScript Project — Typed Task Tracker",
+        "description": "Build a fully typed task tracker with local storage, filtering, and drag-and-drop.",
+        "lessons": [
+          {
+            "id": "ts-l29",
+            "title": "Project setup and domain types",
+            "description": "Initialize the project, define the Task and Filter types, and set up strict tsconfig.",
+            "duration": 10,
+            "objectives": [
+              "Scaffold a Vite + TypeScript project",
+              "Define the domain types: Task, Filter, Priority",
+              "Configure strict mode and path aliases"
+            ],
+            "xp": 60,
+            "exerciseCount": 0
+          },
+          {
+            "id": "ts-l30",
+            "title": "State management with type-safe reducers",
+            "description": "A Redux-style reducer with discriminated union actions, fully typed.",
+            "duration": 10,
+            "objectives": [
+              "Define action types as a discriminated union",
+              "Write a reducer that narrows on action.type",
+              "Use ReturnType<typeof reducer> for the state type"
+            ],
+            "xp": 60,
+            "exerciseCount": 0
+          },
+          {
+            "id": "ts-l31",
+            "title": "DOM layer with typed event handlers",
+            "description": "Querying elements safely, typing form events, and delegating clicks.",
+            "duration": 10,
+            "objectives": [
+              "Type querySelector with non-null assertions or guards",
+              "Handle submit, input, click with correct event types",
+              "Delegate events on a list with a single listener"
+            ],
+            "xp": 55,
+            "exerciseCount": 0
+          },
+          {
+            "id": "ts-l32",
+            "title": "Persistence and filtering",
+            "description": "localStorage with JSON reviver, and derived state for filters.",
+            "duration": 8,
+            "objectives": [
+              "Save and load typed state from localStorage",
+              "Write a reviver to reconstruct Date objects",
+              "Compute filtered views without mutating state"
+            ],
+            "xp": 50,
+            "exerciseCount": 0
+          },
+          {
+            "id": "ts-l33",
+            "title": "Polish: drag-and-drop and keyboard shortcuts",
+            "description": "Native drag-and-drop API with typed data transfer, and global key handling.",
+            "duration": 8,
+            "objectives": [
+              "Implement drag-and-drop with DataTransfer typing",
+              "Add keyboard shortcuts with keydown event types",
+              "Ensure accessibility with ARIA attributes"
+            ],
+            "xp": 50,
+            "exerciseCount": 0
+          }
+        ],
+        "quiz": {
+          "id": "quiz-ts-s10",
+          "title": "Typed Task Tracker check",
+          "passingScore": 60,
+          "questions": [
+            {
+              "id": "quiz-ts-s10-q1",
+              "type": "multiple-choice",
+              "prompt": "Why use a discriminated union for reducer actions?",
+              "options": [
+                "It makes the code shorter",
+                "TypeScript narrows the action type based on action.type",
+                "It runs faster at runtime",
+                "It is required by Redux"
+              ],
+              "answer": 1,
+              "explanation": "Discriminated unions let TypeScript narrow the action shape in each case branch, giving full type safety for payloads."
+            },
+            {
+              "id": "quiz-ts-s10-q2",
+              "type": "true-false",
+              "prompt": "localStorage stores only strings, so Date objects must be serialized and revived.",
+              "answer": true,
+              "explanation": "localStorage only stores strings. Dates must be serialized (toISOString) and revived (new Date(str)) when loading."
+            },
+            {
+              "id": "quiz-ts-s10-q3",
+              "type": "multiple-choice",
+              "prompt": "What event type do you use for a form submit handler?",
+              "options": [
+                "Event",
+                "SubmitEvent",
+                "FormEvent",
+                "InputEvent"
+              ],
+              "answer": 1,
+              "explanation": "SubmitEvent is the specific type for form submit events, with access to event.submitter."
+            },
+            {
+              "id": "quiz-ts-s10-q4",
+              "type": "blank",
+              "prompt": "What DataTransfer method sets the drag data for a custom type?",
+              "answers": [
+                "setData",
+                "dataTransfer.setData"
+              ],
+              "explanation": "dataTransfer.setData(format, data) sets the drag payload. Use a custom format like \"application/x-task-id\"."
+            },
+            {
+              "id": "quiz-ts-s10-q5",
+              "type": "identify-error",
+              "prompt": "What is the type of e.currentTarget in a click handler on a button?",
+              "code": "button.addEventListener(\"click\", (e) => {\n  console.log(e.currentTarget)\n})",
+              "options": [
+                "HTMLButtonElement",
+                "EventTarget",
+                "HTMLElement",
+                "Element"
+              ],
+              "answer": 1,
+              "explanation": "Event.currentTarget is typed as EventTarget because the same handler could be attached to different element types. Cast or use a type guard for specificity."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "course-react",
+    "slug": "react",
+    "title": "React Fundamentals",
+    "shortTitle": "React",
+    "description": "A library for building user interfaces from composable components. You start with JSX and components, work through state, effects and hooks, then add routing, performance, testing, and finish by building a typed dashboard application.",
+    "technology": "react",
+    "category": "programming",
+    "type": "course",
+    "difficulty": "beginner",
+    "badges": [
+      "beginner",
+      "popular"
+    ],
+    "topics": [
+      "components",
+      "jsx",
+      "props",
+      "state",
+      "hooks",
+      "context",
+      "routing",
+      "forms",
+      "events",
+      "performance",
+      "testing",
+      "typescript",
+      "portals",
+      "css",
+      "styled-components",
+      "sass",
+      "accessibility",
+      "error-boundaries"
+    ],
+    "icon": "⚛",
+    "projects": [
+      "react-dashboard",
+      "react-ecommerce"
+    ],
+    "sections": [
+      {
+        "id": "react-s1",
+        "title": "React HOME",
+        "description": "What React adds, how components work, and how to set up your first project.",
+        "lessons": [
+          {
+            "id": "react-l1",
+            "title": "What React is and why it exists",
+            "description": "A library for building user interfaces from composable components.",
+            "duration": 5,
+            "objectives": [
+              "Say what problem React solves that plain JavaScript does not",
+              "Explain the component model and JSX",
+              "Name the three principles of React design"
+            ],
+            "xp": 40,
+            "exerciseCount": 0
+          },
+          {
+            "id": "react-l2",
+            "title": "Getting started with Vite",
+            "description": "Scaffolding a new React project and understanding the folder structure.",
+            "duration": 6,
+            "objectives": [
+              "Create a new Vite + React + TypeScript project",
+              "Identify the src, public, and index.html files",
+              "Run the dev server and open the browser"
+            ],
+            "xp": 40,
+            "exerciseCount": 0
+          },
+          {
+            "id": "react-l3",
+            "title": "Your first component",
+            "description": "Writing a component in JSX, rendering it to the page, and understanding the render cycle.",
+            "duration": 6,
+            "objectives": [
+              "Write a function component that returns JSX",
+              "Render a component tree with createRoot",
+              "Explain the difference between the source and the DOM"
+            ],
+            "xp": 45,
+            "exerciseCount": 0
+          },
+          {
+            "id": "react-l35",
+            "title": "ES6 essentials for React",
+            "description": "The JavaScript features you need to read and write React code: arrow functions, destructuring, the spread operator, and modules.",
+            "duration": 7,
+            "objectives": [
+              "Write arrow functions and understand how they differ from regular functions",
+              "Use destructuring to pull values out of props and state",
+              "Spread array and object values immutably",
+              "Import and export modules with ESM syntax"
+            ],
+            "xp": 40,
+            "exerciseCount": 0
+          },
+          {
+            "id": "react-l36",
+            "title": "Upgrading to modern React",
+            "description": "Moving from older React patterns to function components and hooks, and understanding the migration path.",
+            "duration": 5,
+            "objectives": [
+              "Identify class component patterns that map to hooks",
+              "Replace setState calls with useState equivalents",
+              "Migrate componentDidMount/componentDidUpdate to useEffect",
+              "Use the react-codemod script to automate large migrations"
+            ],
+            "xp": 35,
+            "exerciseCount": 0
+          }
+        ],
+        "quiz": {
+          "id": "quiz-react-s1",
+          "title": "React HOME check",
+          "passingScore": 60,
+          "questions": [
+            {
+              "id": "quiz-react-s1-q1",
+              "type": "multiple-choice",
+              "prompt": "What does React solve?",
+              "options": [
+                "It replaces the browser entirely",
+                "It keeps the DOM in sync with your data declaratively",
+                "It compiles TypeScript to JavaScript",
+                "It provides a backend for React applications"
+              ],
+              "answer": 1,
+              "explanation": "React lets you describe what the UI should look like for a given state, and it handles updating the DOM to match."
+            },
+            {
+              "id": "quiz-react-s1-q2",
+              "type": "true-false",
+              "prompt": "JSX is required to use React.",
+              "answer": false,
+              "explanation": "JSX is syntactic sugar, not a requirement. React can be used with React.createElement or any renderer, though JSX is the standard."
+            },
+            {
+              "id": "quiz-react-s1-q3",
+              "type": "multiple-choice",
+              "prompt": "Which function mounts a React app to the DOM?",
+              "options": [
+                "ReactDOM.render",
+                "createRoot",
+                "hydrateRoot",
+                "Both B and C"
+              ],
+              "answer": 3,
+              "explanation": "createRoot replaces the older ReactDOM.render. hydrateRoot is used for server-rendered apps. Both mount the app."
+            },
+            {
+              "id": "quiz-react-s1-q4",
+              "type": "blank",
+              "prompt": "What is the name of the modern React API entry point?",
+              "answers": [
+                "createRoot",
+                "React-dom createRoot"
+              ],
+              "explanation": "import { createRoot } from \"react-dom/client\" is the modern way to mount an app."
+            },
+            {
+              "id": "quiz-react-s1-q5",
+              "type": "identify-error",
+              "prompt": "What is wrong with this component?",
+              "code": "function Welcome(props) {\n  return <h1>Hello, {props.name}</h1>\n}",
+              "options": [
+                "Missing return statement",
+                "Props needs to be destructured",
+                "Missing closing parenthesis",
+                "Nothing — it is valid JSX"
+              ],
+              "answer": 3,
+              "explanation": "This is valid JSX. Props is the implicit parameter of a function component. With TypeScript you would annotate it, but plain JS accepts this."
+            }
+          ]
+        }
+      },
+      {
+        "id": "react-s2",
+        "title": "Components and Props",
+        "description": "Writing reusable components, passing data with props, and composing children.",
+        "lessons": [
+          {
+            "id": "react-l4",
+            "title": "Function components and JSX",
+            "description": "Writing a component that returns JSX, props with defaults, and the rules of hooks.",
+            "duration": 6,
+            "objectives": [
+              "Write a function component with typed props",
+              "Use default prop values with destructuring",
+              "Return valid JSX from every code path"
+            ],
+            "xp": 40,
+            "exerciseCount": 0
+          },
+          {
+            "id": "react-l5",
+            "title": "Composing and children prop",
+            "description": "Passing content between components, conditional rendering, and the children prop.",
+            "duration": 6,
+            "objectives": [
+              "Pass data from parent to child through props",
+              "Use the children prop to compose layouts",
+              "Apply conditional rendering with ternary and &&"
+            ],
+            "xp": 40,
+            "exerciseCount": 0
+          },
+          {
+            "id": "react-l6",
+            "title": "Lists and keys",
+            "description": "Rendering arrays of data, the key prop, and avoiding index keys.",
+            "duration": 5,
+            "objectives": [
+              "Render a list with .map and JSX",
+              "Assign a stable key to each item",
+              "Explain why using array index as key breaks reordering"
+            ],
+            "xp": 35,
+            "exerciseCount": 0
+          },
+          {
+            "id": "react-l37",
+            "title": "JSX expressions and attributes",
+            "description": "Embedding JavaScript in JSX with curly braces, setting attributes, and the difference between attribute and property.",
+            "duration": 6,
+            "objectives": [
+              "Embed any JavaScript expression in JSX with curly braces",
+              "Set string and numeric attributes on JSX elements",
+              "Spread props onto an element with the spread operator",
+              "Explain why className is used instead of class"
+            ],
+            "xp": 40,
+            "exerciseCount": 0
+          },
+          {
+            "id": "react-l38",
+            "title": "Conditional rendering",
+            "description": "Rendering different UI based on state using if statements, ternaries, and the && operator.",
+            "duration": 6,
+            "objectives": [
+              "Guard rendering with early returns",
+              "Use ternary operators for inline conditional JSX",
+              "Use the && operator for simple presence checks",
+              "Choose the right pattern for readability and accessibility"
+            ],
+            "xp": 40,
+            "exerciseCount": 0
+          },
+          {
+            "id": "react-l39",
+            "title": "Class components",
+            "description": "The legacy component syntax: state, lifecycle methods, and when you might still encounter them.",
+            "duration": 5,
+            "objectives": [
+              "Write a class component with a render method",
+              "Manage state with this.state and this.setState",
+              "Use lifecycle methods like componentDidMount",
+              "Understand why function components with hooks are preferred"
+            ],
+            "xp": 35,
+            "exerciseCount": 0
+          }
+        ],
+        "quiz": {
+          "id": "quiz-react-s2",
+          "title": "Components and Props check",
+          "passingScore": 60,
+          "questions": [
+            {
+              "id": "quiz-react-s2-q1",
+              "type": "multiple-choice",
+              "prompt": "What makes a component reusable?",
+              "options": [
+                "It never re-renders",
+                "It accepts props so the same component can render different data",
+                "It uses useState",
+                "It imports a CSS file"
+              ],
+              "answer": 1,
+              "explanation": "Props are the mechanism for passing data into a component, making it reusable across different contexts."
+            },
+            {
+              "id": "quiz-react-s2-q2",
+              "type": "true-false",
+              "prompt": "Components must return a single root element.",
+              "answer": false,
+              "explanation": "React 19 (and React 18 with the fragments proposal) supports returning arrays and strings. Fragments also allow multiple roots."
+            },
+            {
+              "id": "quiz-react-s2-q3",
+              "type": "multiple-choice",
+              "prompt": "Why does React warn about keys when rendering a list?",
+              "options": [
+                "To make the list sortable",
+                "To track which items changed, were added, or were removed",
+                "To style each item differently",
+                "To prevent memory leaks"
+              ],
+              "answer": 1,
+              "explanation": "Keys help React identify which items in a list have changed. Without them, reordering causes bugs and poor performance."
+            },
+            {
+              "id": "quiz-react-s2-q4",
+              "type": "blank",
+              "prompt": "What prop does a component receive by default to render its child content?",
+              "answers": [
+                "children",
+                "props.children"
+              ],
+              "explanation": "The children prop contains whatever content is nested between a component's opening and closing tags."
+            },
+            {
+              "id": "quiz-react-s2-q5",
+              "type": "identify-error",
+              "prompt": "What is wrong with using array index as key?",
+              "code": "items.map((item, index) => (\n  <li key={index}>{item.name}</li>\n))",
+              "options": [
+                "Nothing — index keys are always fine",
+                "The list will not sort correctly",
+                "Reordering, inserting or removing items breaks reconciliation",
+                "TypeScript will not compile"
+              ],
+              "answer": 2,
+              "explanation": "Index keys cause bugs when the list changes order, because React uses keys to track identity. Use a stable unique id instead."
+            }
+          ]
+        }
+      },
+      {
+        "id": "react-s3",
+        "title": "State and Effects",
+        "description": "Managing state with hooks, running side effects, and the rules of hooks.",
+        "lessons": [
+          {
+            "id": "react-l7",
+            "title": "useState hook",
+            "description": "Adding state to a function component, updating it immutably, and batching.",
+            "duration": 6,
+            "objectives": [
+              "Call useState to declare and read component state",
+              "Update state with the functional updater form",
+              "Never mutate state directly, always replace it"
+            ],
+            "xp": 40,
+            "exerciseCount": 0
+          },
+          {
+            "id": "react-l8",
+            "title": "useEffect hook",
+            "description": "Running side effects, the dependency array, and cleaning up.",
+            "duration": 6,
+            "objectives": [
+              "Run an effect after every render, on mount only, or on dependency change",
+              "Write a cleanup function for timers and subscriptions",
+              "Avoid stale closures with correct dependency arrays"
+            ],
+            "xp": 40,
+            "exerciseCount": 0
+          },
+          {
+            "id": "react-l9",
+            "title": "Rules of hooks",
+            "description": "The two rules every hook must follow, and why they matter.",
+            "duration": 5,
+            "objectives": [
+              "Only call hooks at the top level, never inside loops or conditions",
+              "Only call hooks from React function components or custom hooks",
+              "Recognize and fix invalid hook call warnings"
+            ],
+            "xp": 30,
+            "exerciseCount": 0
+          }
+        ],
+        "quiz": {
+          "id": "quiz-react-s3",
+          "title": "State and Effects check",
+          "passingScore": 60,
+          "questions": [
+            {
+              "id": "quiz-react-s3-q1",
+              "type": "multiple-choice",
+              "prompt": "What does useState return?",
+              "options": [
+                "A single value",
+                "An array of [value, setter]",
+                "An object with val and set",
+                "A promise"
+              ],
+              "answer": 1,
+              "explanation": "useState returns a tuple: the current state value and a function to update it."
+            },
+            {
+              "id": "quiz-react-s3-q2",
+              "type": "true-false",
+              "prompt": "You must always modify state directly for React to detect the change.",
+              "answer": false,
+              "explanation": "React detects changes by reference. Always create a new array or object rather than mutating the old one."
+            },
+            {
+              "id": "quiz-react-s3-q3",
+              "type": "multiple-choice",
+              "prompt": "When does useEffect run with an empty dependency array?",
+              "options": [
+                "After every render",
+                "Only on mount and only on unmount",
+                "Never, it is a bug",
+                "On mount and whenever the component re-renders"
+              ],
+              "answer": 1,
+              "explanation": "An empty dependency array means the effect runs on mount, and the cleanup runs on unmount."
+            },
+            {
+              "id": "quiz-react-s3-q4",
+              "type": "blank",
+              "prompt": "What is the first argument to useEffect used for?",
+              "answers": [
+                "side effects",
+                "effects",
+                "the side effect function"
+              ],
+              "explanation": "The first argument is a function containing the side effect logic; the second argument is the dependency array."
+            },
+            {
+              "id": "quiz-react-s3-q5",
+              "type": "identify-error",
+              "prompt": "What is wrong with this hook usage?",
+              "code": "function List({ items }) {\n  const [open, setOpen] = useState(false)\n  if (items.length > 0) {\n    useEffect(() => {}, [])\n  }\n  return ...\n}",
+              "options": [
+                "Nothing is wrong",
+                "useEffect is called conditionally, violating the rules of hooks",
+                "useState should not be called before useEffect",
+                "Items should not be a prop"
+              ],
+              "answer": 1,
+              "explanation": "Hooks must be called unconditionally. Calling useEffect inside an if block violates the rules of hooks and causes errors."
+            }
+          ]
+        }
+      },
+      {
+        "id": "react-s4",
+        "title": "Events and Forms",
+        "description": "Handling events, building forms, and controlled versus uncontrolled components.",
+        "lessons": [
+          {
+            "id": "react-l10",
+            "title": "Event handling",
+            "description": "Synthetic events, passing arguments to handlers, and the event object.",
+            "duration": 5,
+            "objectives": [
+              "Attach onClick and onChange handlers to elements",
+              "Pass extra arguments to event handlers",
+              "Read the event target and its value"
+            ],
+            "xp": 35,
+            "exerciseCount": 0
+          },
+          {
+            "id": "react-l11",
+            "title": "Controlled components",
+            "description": "Managing form state in React, validating input, and the controlled pattern.",
+            "duration": 6,
+            "objectives": [
+              "Wire an input to state with value and onChange",
+              "Explain controlled versus uncontrolled inputs",
+              "Extract the current value from the event object"
+            ],
+            "xp": 40,
+            "exerciseCount": 0
+          },
+          {
+            "id": "react-l12",
+            "title": "Forms and validation",
+            "description": "Submitting forms, preventing default, and basic validation.",
+            "duration": 5,
+            "objectives": [
+              "Handle form onSubmit and call preventDefault",
+              "Validate input before submission",
+              "Show feedback for invalid fields"
+            ],
+            "xp": 35,
+            "exerciseCount": 0
+          },
+          {
+            "id": "react-l40",
+            "title": "Textarea and Select",
+            "description": "Handling multiline text input with textarea and dropdowns with select, both as controlled components.",
+            "duration": 6,
+            "objectives": [
+              "Bind a textarea to state with value and onChange",
+              "Read the selected option from a select element",
+              "Use a select with a default option for optional fields",
+              "Handle multi-select with an array of values"
+            ],
+            "xp": 40,
+            "exerciseCount": 0
+          },
+          {
+            "id": "react-l41",
+            "title": "Multiple inputs, Checkbox and Radio",
+            "description": "Managing forms with many fields, and handling checkbox and radio button groups.",
+            "duration": 7,
+            "objectives": [
+              "Update multiple fields from one handler using name attributes",
+              "Handle a single checkbox with a boolean state",
+              "Track a group of checkboxes with an array of values",
+              "Use radio buttons for mutually exclusive choices"
+            ],
+            "xp": 45,
+            "exerciseCount": 0
+          }
+        ],
+        "quiz": {
+          "id": "quiz-react-s4",
+          "title": "Events and Forms check",
+          "passingScore": 60,
+          "questions": [
+            {
+              "id": "quiz-react-s4-q1",
+              "type": "multiple-choice",
+              "prompt": "In a controlled component, where does the input value come from?",
+              "options": [
+                "The DOM element itself",
+                "React state",
+                "localStorage",
+                "A global variable"
+              ],
+              "answer": 1,
+              "explanation": "In a controlled component, the value is held in React state and passed back to the input via the value prop."
+            },
+            {
+              "id": "quiz-react-s4-q2",
+              "type": "true-false",
+              "prompt": "You should always use preventDefault() on form submissions.",
+              "answer": true,
+              "explanation": "preventDefault() stops the browser from reloading the page on form submit, which is almost never what you want in a SPA."
+            },
+            {
+              "id": "quiz-react-s4-q3",
+              "type": "multiple-choice",
+              "prompt": "React events use what naming convention?",
+              "options": [
+                "onclick",
+                "onClick",
+                "on-click",
+                "handle_click"
+              ],
+              "answer": 1,
+              "explanation": "React uses camelCase event names: onClick, onChange, onSubmit, etc."
+            },
+            {
+              "id": "quiz-react-s4-q4",
+              "type": "blank",
+              "prompt": "What does event.target refer to in a React event handler?",
+              "answers": [
+                "the element that triggered the event",
+                "the DOM element"
+              ],
+              "explanation": "event.target is the DOM element that the event originated from."
+            },
+            {
+              "id": "quiz-react-s4-q5",
+              "type": "identify-error",
+              "prompt": "What is the issue with this input?",
+              "code": "<input value=\"hello\" />",
+              "options": [
+                "Nothing is wrong",
+                "It is missing an onChange handler, making it read-only",
+                "The value should not be a string",
+                "Input must have a name prop"
+              ],
+              "answer": 1,
+              "explanation": "Without onChange, a controlled input cannot be edited. React sets the value but nothing updates the state to change it."
+            }
+          ]
+        }
+      },
+      {
+        "id": "react-s5",
+        "title": "Advanced Hooks",
+        "description": "Context, useReducer, useMemo, useCallback, and useRef.",
+        "lessons": [
+          {
+            "id": "react-l13",
+            "title": "useContext for shared state",
+            "description": "Passing data through the component tree without prop drilling.",
+            "duration": 6,
+            "objectives": [
+              "Create a context with createContext",
+              "Provide values with Context.Provider",
+              "Consume context with useContext in any descendant"
+            ],
+            "xp": 40,
+            "exerciseCount": 0
+          },
+          {
+            "id": "react-l14",
+            "title": "useReducer for state logic",
+            "description": "Managing complex state with a reducer function and dispatch.",
+            "duration": 6,
+            "objectives": [
+              "Define a reducer with a switch statement",
+              "Dispatch actions to update state",
+              "Explain when to use useReducer instead of useState"
+            ],
+            "xp": 40,
+            "exerciseCount": 0
+          },
+          {
+            "id": "react-l15",
+            "title": "useMemo and useCallback",
+            "description": "Preventing unnecessary recomputations and function recreations.",
+            "duration": 5,
+            "objectives": [
+              "Memoize expensive calculations with useMemo",
+              "Prevent child re-renders with useCallback",
+              "Explain the dependency arrays for each hook"
+            ],
+            "xp": 35,
+            "exerciseCount": 0
+          },
+          {
+            "id": "react-l16",
+            "title": "useRef for DOM access",
+            "description": "Accessing DOM elements and storing mutable values.",
+            "duration": 5,
+            "objectives": [
+              "Create a ref and attach it to a DOM element",
+              "Use useRef to store a mutable value across renders",
+              "Focus an input programmatically on mount"
+            ],
+            "xp": 35,
+            "exerciseCount": 0
+          },
+          {
+            "id": "react-l42",
+            "title": "useTransition",
+            "description": "Marking updates as non-urgent so the UI stays responsive during slow renders.",
+            "duration": 6,
+            "objectives": [
+              "Call useTransition to get [isPending, startTransition]",
+              "Wrap state updates that are not urgent in startTransition",
+              "Show a pending indicator while the transition is in progress",
+              "Distinguish between urgent and transition updates"
+            ],
+            "xp": 40,
+            "exerciseCount": 0
+          },
+          {
+            "id": "react-l43",
+            "title": "forwardRef",
+            "description": "Passing a ref from a parent component through a custom component to a DOM element.",
+            "duration": 6,
+            "objectives": [
+              "Wrap a component with forwardRef to receive a ref",
+              "Forward the ref to the underlying DOM element",
+              "Type refs with React.Ref and RefObject",
+              "Use forwardRef with function components that use hooks"
+            ],
+            "xp": 40,
+            "exerciseCount": 0
+          },
+          {
+            "id": "react-l44",
+            "title": "Custom Hooks",
+            "description": "Extracting reusable logic into custom hooks that compose React hooks together.",
+            "duration": 7,
+            "objectives": [
+              "Name a hook function starting with use",
+              "Share logic between components by calling a custom hook",
+              "Use useState, useEffect, and other hooks inside a custom hook",
+              "Return whatever state or functions the consuming component needs"
+            ],
+            "xp": 45,
+            "exerciseCount": 0
+          },
+          {
+            "id": "react-l45",
+            "title": "Higher-Order Components",
+            "description": "The legacy pattern of wrapping a component with a function, and when hooks replace it.",
+            "duration": 5,
+            "objectives": [
+              "Write an HOC that takes a component and returns an enhanced one",
+              "Pass props through to the wrapped component",
+              "Explain why custom hooks are preferred over HOCs today",
+              "Recognize HOC patterns in older codebases"
+            ],
+            "xp": 35,
+            "exerciseCount": 0
+          }
+        ],
+        "quiz": {
+          "id": "quiz-react-s5",
+          "title": "Advanced Hooks check",
+          "passingScore": 60,
+          "questions": [
+            {
+              "id": "quiz-react-s5-q1",
+              "type": "multiple-choice",
+              "prompt": "When should you use useContext?",
+              "options": [
+                "When a prop needs to reach deeply nested components",
+                "When you want to store local state",
+                "When you want to optimize rendering",
+                "When you need to fetch data"
+              ],
+              "answer": 0,
+              "explanation": "Context solves prop drilling: when a value is needed by many components at different levels, context avoids passing it through every intermediate component."
+            },
+            {
+              "id": "quiz-react-s5-q2",
+              "type": "true-false",
+              "prompt": "useReducer is always better than useState.",
+              "answer": false,
+              "explanation": "useReducer adds complexity. Use it when state logic is complex or involves multiple sub-values, not for simple booleans."
+            },
+            {
+              "id": "quiz-react-s5-q3",
+              "type": "multiple-choice",
+              "prompt": "What does useCallback(fn, deps) return?",
+              "options": [
+                "The result of calling fn",
+                "A memoized version of fn that only changes when deps change",
+                "A new function every render",
+                "undefined"
+              ],
+              "answer": 1,
+              "explanation": "useCallback returns a memoized callback that only changes when one of its dependencies changes."
+            },
+            {
+              "id": "quiz-react-s5-q4",
+              "type": "blank",
+              "prompt": "What property of a ref holds the current value?",
+              "answers": [
+                "current",
+                "ref.current"
+              ],
+              "explanation": "useRef returns an object whose .current property holds the value."
+            },
+            {
+              "id": "quiz-react-s5-q5",
+              "type": "identify-error",
+              "prompt": "What is wrong with this useMemo usage?",
+              "code": "const filtered = useMemo(\n  () => items.filter(expensiveCheck),\n  [items]\n)",
+              "options": [
+                "Nothing is wrong",
+                "expensiveCheck is not in the dependency array",
+                "useMemo should not be used for filtering",
+                "The function should not take arguments"
+              ],
+              "answer": 1,
+              "explanation": "If expensiveCheck depends on outer variables, they must be in the dependency array. Otherwise stale values cause subtle bugs."
+            }
+          ]
+        }
+      },
+      {
+        "id": "react-s6",
+        "title": "Routing",
+        "description": "Client-side routing with React Router, nested routes, and protected routes.",
+        "lessons": [
+          {
+            "id": "react-l17",
+            "title": "React Router basics",
+            "description": "Setting up BrowserRouter, Routes, Route, and Link components.",
+            "duration": 6,
+            "objectives": [
+              "Configure a BrowserRouter around the app",
+              "Define routes with the Routes and Route components",
+              "Navigate with Link and NavLink components"
+            ],
+            "xp": 40,
+            "exerciseCount": 0
+          },
+          {
+            "id": "react-l18",
+            "title": "URL parameters and nested routes",
+            "description": "Reading dynamic segments from the URL, and nesting route layouts.",
+            "duration": 6,
+            "objectives": [
+              "Read path parameters with useParams",
+              "Build a layout route that wraps child routes",
+              "Use Outlet to render nested route content"
+            ],
+            "xp": 40,
+            "exerciseCount": 0
+          },
+          {
+            "id": "react-l19",
+            "title": "Protected and lazy routes",
+            "description": "Guarding routes behind authentication and code-splitting with lazy.",
+            "duration": 5,
+            "objectives": [
+              "Redirect unauthenticated users to the login page",
+              "Lazy-load a route component with React.lazy and Suspense",
+              "Combine route protection with lazy loading"
+            ],
+            "xp": 35,
+            "exerciseCount": 0
+          },
+          {
+            "id": "react-l46",
+            "title": "React Portals",
+            "description": "Rendering children into a DOM node outside the parent component, for modals, tooltips, and overlays.",
+            "duration": 5,
+            "objectives": [
+              "Call createPortal to render JSX into a DOM node",
+              "Use a portal for a modal or toast that should escape the parent stacking context",
+              "Ensure focus management works correctly across the portal boundary",
+              "Clean up the portal DOM node on unmount"
+            ],
+            "xp": 35,
+            "exerciseCount": 0
+          }
+        ],
+        "quiz": {
+          "id": "quiz-react-s6",
+          "title": "Routing check",
+          "passingScore": 60,
+          "questions": [
+            {
+              "id": "quiz-react-s6-q1",
+              "type": "multiple-choice",
+              "prompt": "Which component wraps the entire app for routing?",
+              "options": [
+                "Routes",
+                "Route",
+                "RouterProvider",
+                "Link"
+              ],
+              "answer": 2,
+              "explanation": "RouterProvider (or BrowserRouter in older versions) wraps the app to provide routing context."
+            },
+            {
+              "id": "quiz-react-s6-q2",
+              "type": "true-false",
+              "prompt": "useParams returns an object of URL parameters.",
+              "answer": true,
+              "explanation": "useParams returns a key-value object where keys are parameter names from the route path."
+            },
+            {
+              "id": "quiz-react-s6-q3",
+              "type": "multiple-choice",
+              "prompt": "What does React.lazy require to work?",
+              "options": [
+                "A callback returning a promise",
+                "A callback returning a module with a default export",
+                "A string URL",
+                "A separate JS file"
+              ],
+              "answer": 1,
+              "explanation": "React.lazy takes a function returning a Promise that resolves to a module with a default export of the component."
+            },
+            {
+              "id": "quiz-react-s6-q4",
+              "type": "blank",
+              "prompt": "What component renders the matched child route?",
+              "answers": [
+                "Outlet",
+                "<Outlet />"
+              ],
+              "explanation": "Outlet is rendered inside a layout route and displays the matched child route component."
+            },
+            {
+              "id": "quiz-react-s6-q5",
+              "type": "identify-error",
+              "prompt": "How do you redirect a user in a React Router loader or effect?",
+              "code": "if (!user) return <Navigate to=\"/login\" />",
+              "options": [
+                "<Navigate /> only works in route components, not loaders",
+                "Correct — Navigate is used inside route components",
+                "You must use useNavigate instead",
+                "Redirections require window.location.assign"
+              ],
+              "answer": 1,
+              "explanation": "<Navigate /> is the correct way to redirect from within a route component. useNavigate is for imperative redirects in handlers."
+            }
+          ]
+        }
+      },
+      {
+        "id": "react-s7",
+        "title": "Performance",
+        "description": "Optimizing renders, code splitting, and measuring performance.",
+        "lessons": [
+          {
+            "id": "react-l20",
+            "title": "Code splitting with Suspense",
+            "description": "Splitting bundles by route and component, and showing a fallback while loading.",
+            "duration": 5,
+            "objectives": [
+              "Split a component with React.lazy",
+              "Show a loading fallback with Suspense",
+              "Code-split by route for faster initial load"
+            ],
+            "xp": 35,
+            "exerciseCount": 0
+          },
+          {
+            "id": "react-l21",
+            "title": "Memoization techniques",
+            "description": "Using React.memo, useMemo, and useCallback to prevent unnecessary re-renders.",
+            "duration": 6,
+            "objectives": [
+              "Wrap a component with React.memo to skip re-renders",
+              "Identify when props are the cause of re-renders",
+              "Apply useCallback to functions passed to memoized children"
+            ],
+            "xp": 40,
+            "exerciseCount": 0
+          },
+          {
+            "id": "react-l22",
+            "title": "Measuring and debugging renders",
+            "description": "Using the React dev tools, memo, and the why-did-you-render package.",
+            "duration": 5,
+            "objectives": [
+              "Profile component renders in React DevTools",
+              "Identify unnecessary re-renders with why-did-you-render",
+              "Understand the relationship between props and re-renders"
+            ],
+            "xp": 30,
+            "exerciseCount": 0
+          },
+          {
+            "id": "react-l47",
+            "title": "CSS styling approaches",
+            "description": "Adding styles to React components: regular CSS, inline styles, and when each approach fits.",
+            "duration": 6,
+            "objectives": [
+              "Import a CSS file and let class names coexist with JSX",
+              "Use inline style objects for dynamic values",
+              "Choose between CSS files and inline styles based on reuse and dynamism"
+            ],
+            "xp": 40,
+            "exerciseCount": 0
+          },
+          {
+            "id": "react-l48",
+            "title": "CSS Modules",
+            "description": "Scoped styles with CSS Modules, where class names are locally available by default.",
+            "duration": 5,
+            "objectives": [
+              "Import a .module.css file and reference its classes in JSX",
+              "Understand how CSS Modules generate unique class names",
+              "Use the :global selector for styles that should not be scoped"
+            ],
+            "xp": 35,
+            "exerciseCount": 0
+          },
+          {
+            "id": "react-l49",
+            "title": "CSS-in-JS and Sass",
+            "description": "Using styled-components or emotion for dynamic styles, and integrating Sass with the build.",
+            "duration": 5,
+            "objectives": [
+              "Write a styled component that accepts props for dynamic styling",
+              "Use template literals to interpolate values into styles",
+              "Configure the Sass preprocessor with Vite or Create React App",
+              "Compare runtime CSS-in-JS with build-time extraction"
+            ],
+            "xp": 35,
+            "exerciseCount": 0
+          }
+        ],
+        "quiz": {
+          "id": "quiz-react-s7",
+          "title": "Performance check",
+          "passingScore": 60,
+          "questions": [
+            {
+              "id": "quiz-react-s7-q1",
+              "type": "multiple-choice",
+              "prompt": "What does React.memo do?",
+              "options": [
+                "Memoizes the return value of a function",
+                "Prevents re-render when props have not changed",
+                "Converts a function component to a class component",
+                "Adds a cache to API calls"
+              ],
+              "answer": 1,
+              "explanation": "React.memo is a higher-order component that skips re-rendering when props are shallowly equal."
+            },
+            {
+              "id": "quiz-react-s7-q2",
+              "type": "true-false",
+              "prompt": "You should memoize everything to make React fast.",
+              "answer": false,
+              "explanation": "Over-memoization adds overhead. Memoize only when re-renders are expensive or children are memoized."
+            },
+            {
+              "id": "quiz-react-s7-q3",
+              "type": "multiple-choice",
+              "prompt": "What is the correct order for React.memo and hooks in a component?",
+              "options": [
+                "Hooks outside, memo inside the file export",
+                "memo wraps the component, hooks stay inside the component",
+                "Hooks must come before the component definition",
+                "Order does not matter"
+              ],
+              "answer": 1,
+              "explanation": "React.memo wraps the component function. The hooks stay inside the function component — the wrapper is external."
+            },
+            {
+              "id": "quiz-react-s7-q4",
+              "type": "blank",
+              "prompt": "When should you NOT use useCallback?",
+              "answers": [
+                "when the callback is not passed to a memoized child",
+                "when there are no children"
+              ],
+              "explanation": "useCallback is only useful when a function reference stability matters — i.e. when passing to a memoized child or as a dependency."
+            },
+            {
+              "id": "quiz-react-s7-q5",
+              "type": "identify-error",
+              "prompt": "What is the issue with this component?",
+              "code": "function Item({ data, onClick }) {\n  const processed = expensiveCalc(data)\n  return <divonClick={onClick}>{processed}</div>\n}",
+              "options": [
+                "No issue",
+                "The div has no children",
+                "expensiveCalc runs on every render, should be wrapped in useMemo",
+                "onClick must be useCallback"
+              ],
+              "answer": 2,
+              "explanation": "expensiveCalc(data) runs on every render. If it is genuinely expensive, wrap it in useMemo with data as the dependency."
+            }
+          ]
+        }
+      },
+      {
+        "id": "react-s8",
+        "title": "Testing",
+        "description": "Testing React components with Vitest, Testing Library, and type-safe mocks.",
+        "lessons": [
+          {
+            "id": "react-l23",
+            "title": "Setting up Vitest and Testing Library",
+            "description": "Configuring the test runner, writing the first test, and jsdom.",
+            "duration": 5,
+            "objectives": [
+              "Install and configure Vitest with Vite",
+              "Write a test that renders a component with @testing-library/react",
+              "Configure jsdom for DOM simulation in tests"
+            ],
+            "xp": 35,
+            "exerciseCount": 0
+          },
+          {
+            "id": "react-l24",
+            "title": "Testing user interactions",
+            "description": "Simulating clicks, typing, and form submission with fireEvent and userEvent.",
+            "duration": 6,
+            "objectives": [
+              "Render a component and find elements with a screen query",
+              "Fire events and assert on the resulting DOM state",
+              "Handle asynchronous behavior with waitFor and findBy"
+            ],
+            "xp": 40,
+            "exerciseCount": 0
+          },
+          {
+            "id": "react-l25",
+            "title": "Mocking modules and type safety",
+            "description": "Replacing dependencies in tests with vi, and keeping types correct.",
+            "duration": 5,
+            "objectives": [
+              "Mock a dependency module with vi.mock",
+              "Create a typed mock that preserves the original interface",
+              "Test components that use async data and useEffect"
+            ],
+            "xp": 35,
+            "exerciseCount": 0
+          }
+        ],
+        "quiz": {
+          "id": "quiz-react-s8",
+          "title": "Testing check",
+          "passingScore": 60,
+          "questions": [
+            {
+              "id": "quiz-react-s8-q1",
+              "type": "multiple-choice",
+              "prompt": "What does @testing-library/react encourage?",
+              "options": [
+                "Querying by element id",
+                "Querying by display value the way a user would",
+                "Testing implementation details",
+                "Mocking every dependency"
+              ],
+              "answer": 1,
+              "explanation": "Testing Library encourages querying as a user would: by role, text, label, etc. This makes tests resilient to refactors."
+            },
+            {
+              "id": "quiz-react-s8-q2",
+              "type": "true-false",
+              "prompt": "screen.getByRole(\"button\") can find a button even without a test id.",
+              "answer": true,
+              "explanation": "getByRole queries by accessible role, which is more robust than test IDs and matches how users perceive the UI."
+            },
+            {
+              "id": "quiz-react-s8-q3",
+              "type": "multiple-choice",
+              "prompt": "Which function finds elements that appear after an async action?",
+              "options": [
+                "getByText",
+                "queryByText",
+                "findByText",
+                "waitFor"
+              ],
+              "answer": 2,
+              "explanation": "findByText returns a promise that resolves when the element appears, retrying until it times out."
+            },
+            {
+              "id": "quiz-react-s8-q4",
+              "type": "blank",
+              "prompt": "What Testing Library function returns null instead of throwing when not found?",
+              "answers": [
+                "queryByText",
+                "queryBy"
+              ],
+              "explanation": "The query* family returns null when not found, unlike get* which throws and find* which waits."
+            },
+            {
+              "id": "quiz-react-s8-q5",
+              "type": "identify-error",
+              "prompt": "What is wrong with this test approach?",
+              "code": "const container = render(<App />)\nconst button = container.querySelector(\".submit\")\nbutton.click()",
+              "options": [
+                "querySelector is slower than getBy",
+                "querySelector bypasses Testing Library and should be avoided for queries",
+                "It is missing an await",
+                "The render result is wrong"
+              ],
+              "answer": 1,
+              "explanation": "Testing Library recommends using screen queries (getByRole, getByText) rather than container.querySelector, because the former matches how users interact."
+            }
+          ]
+        }
+      },
+      {
+        "id": "react-s9",
+        "title": "React Project — Dashboard Application",
+        "description": "Build a full dashboard with routing, typed state, charts, and authentication flow.",
+        "lessons": [
+          {
+            "id": "react-l26",
+            "title": "Project scaffolding and routing",
+            "description": "Set up Vite + React + TypeScript, configure React Router with layout routes.",
+            "duration": 10,
+            "objectives": [
+              "Scaffold a Vite + React + TypeScript project with React Router",
+              "Create a layout route with a shared sidebar and header",
+              "Define protected routes for authenticated pages"
+            ],
+            "xp": 55,
+            "exerciseCount": 0
+          },
+          {
+            "id": "react-l27",
+            "title": "Typed state and context",
+            "description": "A typed context provider for user authentication and dashboard data.",
+            "duration": 10,
+            "objectives": [
+              "Create a typed User and Session context",
+              "Build a provider component with typed state",
+              "Consume context in deeply nested components with no any"
+            ],
+            "xp": 55,
+            "exerciseCount": 0
+          },
+          {
+            "id": "react-l28",
+            "title": "Data fetching with types",
+            "description": "Fetching dashboard metrics with typed responses and loading states.",
+            "duration": 10,
+            "objectives": [
+              "Write a typed fetchData function with generics",
+              "Handle loading, success, and error states with a discriminated union",
+              "Cache responses in context with a typed Map"
+            ],
+            "xp": 55,
+            "exerciseCount": 0
+          },
+          {
+            "id": "react-l29",
+            "title": "Charts and visual components",
+            "description": "Building reusable, typed chart components from scratch.",
+            "duration": 8,
+            "objectives": [
+              "Create a BarChart component that accepts typed data points",
+              "Use generics to accept different data shapes",
+              "Style with CSS modules or styled-components"
+            ],
+            "xp": 45,
+            "exerciseCount": 0
+          },
+          {
+            "id": "react-l30",
+            "title": "Testing and deployment",
+            "description": "Writing component tests and building for production.",
+            "duration": 7,
+            "objectives": [
+              "Write tests for components with Testing Library",
+              "Test protected routes with a mock auth context",
+              "Build for production with Vite and verify the output"
+            ],
+            "xp": 40,
+            "exerciseCount": 0
+          }
+        ],
+        "quiz": {
+          "id": "quiz-react-s9",
+          "title": "Dashboard Application check",
+          "passingScore": 60,
+          "questions": [
+            {
+              "id": "quiz-react-s9-q1",
+              "type": "multiple-choice",
+              "prompt": "What is the purpose of a layout route?",
+              "options": [
+                "To group routes that share a common UI",
+                "To speed up builds",
+                "To define API endpoints",
+                "To handle 404 pages"
+              ],
+              "answer": 0,
+              "explanation": "Layout routes share a common element (header, sidebar, etc.) across multiple child routes without duplicating it."
+            },
+            {
+              "id": "quiz-react-s9-q2",
+              "type": "true-false",
+              "prompt": "React Context is the best solution for state used by less than 3 components.",
+              "answer": false,
+              "explanation": "Context adds complexity. For simple prop passing, use props. Context shines when many components at different levels need the same data."
+            },
+            {
+              "id": "quiz-react-s9-q3",
+              "type": "multiple-choice",
+              "prompt": "Which testing approach is most robust?",
+              "options": [
+                "Querying by test ID exclusively",
+                "Querying by display value and role",
+                "Querying by class name",
+                "Querying by element type"
+              ],
+              "answer": 1,
+              "explanation": "Testing Library prioritizes role, text, label, and display queries — the same way users find things on the page."
+            },
+            {
+              "id": "quiz-react-s9-q4",
+              "type": "blank",
+              "prompt": "What hook provides typed context to descendants?",
+              "answers": [
+                "useContext",
+                "useContext<ContextType>"
+              ],
+              "explanation": "useContext returns the current context value, typed by the Context<T> you created."
+            },
+            {
+              "id": "quiz-react-s9-q5",
+              "type": "identify-error",
+              "prompt": "What does React.memo not help with?",
+              "code": "// A list of 1000 memoized items, each receiving a new inline object as prop",
+              "options": [
+                "Passing a new object literal as a prop every render defeats memoization",
+                "The items are not memoized themselves",
+                "React.memo is not needed for lists",
+                "Inline objects are always fast"
+              ],
+              "answer": 0,
+              "explanation": "React.memo does a shallow comparison of props. If you pass a new object literal each render, the comparison always fails and memoization is wasted."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "course-frontend-projects",
+    "slug": "frontend-projects",
+    "title": "Frontend Projects",
+    "shortTitle": "Projects",
+    "description": "Build real applications that combine everything: semantic HTML, responsive CSS, interactive JavaScript, and accessibility. Five projects from a profile page to a data table, each teaching a different skill, each deployable to the web.",
+    "technology": "html",
+    "category": "projects",
+    "type": "course",
+    "difficulty": "beginner",
+    "badges": [
+      "project",
+      "popular"
+    ],
+    "topics": [
+      "project-planning",
+      "semantic-html",
+      "responsive-design",
+      "accessibility",
+      "forms",
+      "layout",
+      "deployment"
+    ],
+    "icon": "◆",
+    "projects": [],
+    "sections": [
+      {
+        "id": "fp-s1",
+        "title": "Frontend Projects HOME",
+        "description": "How to approach a full frontend project from blank file to deployed site, and what each of the five projects exercises.",
+        "lessons": [
+          {
+            "id": "fp-l1",
+            "title": "Project planning and structure",
+            "description": "Breaking a design into HTML, CSS, and JavaScript, and setting up a maintainable folder.",
+            "duration": 4,
+            "objectives": [
+              "Read a design and list the components and sections it contains",
+              "Set up a project structure with html, css, js folders",
+              "Set up a dev server with livereload for fast iteration"
+            ],
+            "xp": 30,
+            "exerciseCount": 0
+          },
+          {
+            "id": "fp-l2",
+            "title": "Building the first project from scratch",
+            "description": "Taking a design from idea to a working project, step by step.",
+            "duration": 8,
+            "objectives": [
+              "Write the HTML structure before any styling",
+              "Apply CSS grid for the main layout",
+              "Wire up interactivity with progressive enhancement"
+            ],
+            "xp": 50,
+            "exerciseCount": 0
+          }
+        ],
+        "quiz": {
+          "id": "quiz-fp-s1",
+          "title": "Frontend Projects HOME check",
+          "passingScore": 60,
+          "questions": [
+            {
+              "id": "quiz-fp-s1-q1",
+              "type": "multiple-choice",
+              "prompt": "What is the first step when starting a frontend project?",
+              "options": [
+                "Write the CSS styles",
+                "Write the HTML structure",
+                "Set up the JavaScript logic",
+                "Pick a color scheme"
+              ],
+              "answer": 1,
+              "explanation": "Start with HTML structure: semantics and content come first, then styling, then behavior."
+            },
+            {
+              "id": "quiz-fp-s1-q2",
+              "type": "true-false",
+              "prompt": "Progressive enhancement means building with JavaScript first and adding HTML as a fallback.",
+              "answer": false,
+              "explanation": "Progressive enhancement means building from core HTML content upward, adding CSS for layout and styling, then JavaScript for enhanced behavior."
+            },
+            {
+              "id": "quiz-fp-s1-q3",
+              "type": "multiple-choice",
+              "prompt": "Which CSS layout method is best for two-dimensional layouts?",
+              "options": [
+                "Flexbox",
+                "Float",
+                "Grid",
+                "Positioning"
+              ],
+              "answer": 2,
+              "explanation": "CSS Grid handles two dimensions (rows and columns). Flexbox is one-dimensional and best for single-axis layouts."
+            },
+            {
+              "id": "quiz-fp-s1-q4",
+              "type": "blank",
+              "prompt": "What does a <section> element represent?",
+              "answers": [
+                "a thematic grouping of content",
+                "a section of content",
+                "a content section"
+              ],
+              "explanation": "A section element groups related content, typically with a heading."
+            },
+            {
+              "id": "quiz-fp-s1-q5",
+              "type": "identify-error",
+              "prompt": "What is wrong with this approach?",
+              "code": "<div class=\"header\">\n  <div class=\"logo\">Brand</div>\n  <div class=\"nav\">...</div>\n</div>",
+              "options": [
+                "Nothing — divs are fine",
+                "Should use header for the top banner and nav for navigation",
+                "Class names should be lowercase",
+                "There is no closing tag"
+              ],
+              "answer": 1,
+              "explanation": "Use semantic elements: <header> for the top banner, <nav> for navigation. This conveys meaning to assistive technology."
+            }
+          ]
+        }
+      },
+      {
+        "id": "fp-s2",
+        "title": "Responsive Design",
+        "description": "Making projects work on every screen size, from mobile to wide desktop.",
+        "lessons": [
+          {
+            "id": "fp-l3",
+            "title": "Mobile-first breakpoints",
+            "description": "Starting from the smallest screen and adding breakpoints where the design needs them.",
+            "duration": 6,
+            "objectives": [
+              "Write styles that work on a narrow screen first",
+              "Add breakpoints based on content, not device sizes",
+              "Use relative units for scaling"
+            ],
+            "xp": 40,
+            "exerciseCount": 0
+          },
+          {
+            "id": "fp-l4",
+            "title": "Images and media in responsive layouts",
+            "description": "Serving the right image for the right viewport, and handling videos.",
+            "duration": 5,
+            "objectives": [
+              "Use srcset and sizes for responsive images",
+              "Constrain media with max-width",
+              "Use picture for art direction"
+            ],
+            "xp": 35,
+            "exerciseCount": 0
+          }
+        ],
+        "quiz": {
+          "id": "quiz-fp-s2",
+          "title": "Responsive Design check",
+          "passingScore": 60,
+          "questions": [
+            {
+              "id": "quiz-fp-s2-q1",
+              "type": "multiple-choice",
+              "prompt": "What does \"mobile-first\" mean in CSS?",
+              "options": [
+                "Designing for phones only",
+                "Writing styles for mobile first, then adding breakpoints for larger screens",
+                "Testing on a phone first",
+                "Using media queries that only target mobile"
+              ],
+              "answer": 1,
+              "explanation": "Mobile-first means your base styles target the smallest screen, and media queries add complexity for larger screens."
+            },
+            {
+              "id": "quiz-fp-s2-q2",
+              "type": "true-false",
+              "prompt": "The viewport meta tag is not needed if you use responsive CSS.",
+              "answer": false,
+              "explanation": "Without <meta name=\"viewport\">, mobile browsers render at a virtual width and your responsive CSS has no effect."
+            },
+            {
+              "id": "quiz-fp-s2-q3",
+              "type": "multiple-choice",
+              "prompt": "Which unit scales with the root font size?",
+              "options": [
+                "px",
+                "em",
+                "rem",
+                "vh"
+              ],
+              "answer": 2,
+              "explanation": "rem is relative to the root element's font size, making it ideal for consistent scaling."
+            },
+            {
+              "id": "quiz-fp-s2-q4",
+              "type": "blank",
+              "prompt": "What attribute on img makes it responsive with max-width: 100%?",
+              "answers": [
+                "srcset",
+                "sizes",
+                "max-width on the img"
+              ],
+              "explanation": "srcset provides multiple image sources for different resolutions. max-width: 100% on img ensures it never overflows."
+            },
+            {
+              "id": "quiz-fp-s2-q5",
+              "type": "identify-error",
+              "prompt": "What is the problem with this CSS?",
+              "code": "@media (min-width: 768px) {\n  .card { width: 50%; }\n}\n@media (max-width: 768px) {\n  .card { width: 100%; }\n}",
+              "options": [
+                "Nothing is wrong",
+                "Using min-width and max-width for the same breakpoint double-applies at 768px",
+                "The card should use flex instead",
+                "Both media queries should use min-width"
+              ],
+              "answer": 3,
+              "explanation": "Using both min-width and max-width at the same breakpoint creates ambiguity at exactly 768px. Stick to one direction (usually min-width/mobile-first)."
+            }
+          ]
+        }
+      },
+      {
+        "id": "fp-s3",
+        "title": "Accessibility and Forms",
+        "description": "Making projects work for everyone, including keyboard and screen reader users.",
+        "lessons": [
+          {
+            "id": "fp-l5",
+            "title": "Semantic HTML and ARIA",
+            "description": "Using the right elements for the right job, and ARIA only when semantics fall short.",
+            "duration": 6,
+            "objectives": [
+              "Choose native elements over ARIA whenever possible",
+              "Add ARIA roles, states, and properties where semantics are insufficient",
+              "Label form controls correctly"
+            ],
+            "xp": 40,
+            "exerciseCount": 0
+          },
+          {
+            "id": "fp-l6",
+            "title": "Keyboard navigation and focus",
+            "description": "Ensuring every interactive element is reachable, visible, and usable with a keyboard.",
+            "duration": 5,
+            "objectives": [
+              "Test tab order and ensure it follows the visual layout",
+              "Provide visible focus indicators",
+              "Trap focus in modal or dialog components"
+            ],
+            "xp": 35,
+            "exerciseCount": 0
+          }
+        ],
+        "quiz": {
+          "id": "quiz-fp-s3",
+          "title": "Accessibility check",
+          "passingScore": 60,
+          "questions": [
+            {
+              "id": "quiz-fp-s3-q1",
+              "type": "multiple-choice",
+              "prompt": "Which should you use first for accessibility?",
+              "options": [
+                "ARIA attributes",
+                "Native HTML elements with built-in semantics",
+                "JavaScript event handlers",
+                "CSS :focus-visible"
+              ],
+              "answer": 1,
+              "explanation": "Native elements like button, label, nav, and section have built-in semantics. Use ARIA only when native semantics are not enough."
+            },
+            {
+              "id": "quiz-fp-s3-q2",
+              "type": "true-false",
+              "prompt": "Every form input must have an id.",
+              "answer": false,
+              "explanation": "An input needs an id only if it is associated with a label via for. A label can also wrap the input, which does not need an id."
+            },
+            {
+              "id": "quiz-fp-s3-q3",
+              "type": "multiple-choice",
+              "prompt": "What does aria-live do?",
+              "options": [
+                "Makes an element visible",
+                "Announces changes to the element to screen readers",
+                "Adds keyboard navigation",
+                "Hides the element from all users"
+              ],
+              "answer": 1,
+              "explanation": "aria-live tells screen readers to announce content changes in that region, useful for status messages and alerts."
+            },
+            {
+              "id": "quiz-fp-s3-q4",
+              "type": "blank",
+              "prompt": "What CSS pseudo-class shows keyboard focus?",
+              "answers": [
+                ":focus-visible",
+                ":focus",
+                "focus-visible"
+              ],
+              "explanation": ":focus-visible shows focus only when the user is navigating with the keyboard, not on mouse click."
+            },
+            {
+              "id": "quiz-fp-s3-q5",
+              "type": "identify-error",
+              "prompt": "What is wrong with this button?",
+              "code": "<div onClick=\"handleClick()\">Click me</div>",
+              "options": [
+                "Nothing is wrong",
+                "A div is not keyboard accessible and should be a button",
+                "onClick should be on:click for Svelte",
+                "The function call is wrong"
+              ],
+              "answer": 1,
+              "explanation": "A div is not focusable by default and does not respond to Enter. Use a <button> element which is natively keyboard-accessible."
+            }
+          ]
+        }
+      }
+    ]
   }
 ]

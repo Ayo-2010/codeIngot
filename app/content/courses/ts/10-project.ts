@@ -1,0 +1,127 @@
+import type { Section } from '~/types/content'
+
+export const tsProjectSections: Section[] = [
+  {
+    id: 'ts-s10',
+    title: 'TypeScript Project — Typed Task Tracker',
+    description: 'Build a fully typed task tracker with local storage, filtering, and drag-and-drop.',
+    lessons: [
+      {
+        id: 'ts-l29',
+        title: 'Project setup and domain types',
+        description: 'Initialize the project, define the Task and Filter types, and set up strict tsconfig.',
+        duration: 10,
+        objectives: [
+          'Scaffold a Vite + TypeScript project',
+          'Define the domain types: Task, Filter, Priority',
+          'Configure strict mode and path aliases',
+        ],
+        xp: 60,
+        content: [],
+      },
+      {
+        id: 'ts-l30',
+        title: 'State management with type-safe reducers',
+        description: 'A Redux-style reducer with discriminated union actions, fully typed.',
+        duration: 10,
+        objectives: [
+          'Define action types as a discriminated union',
+          'Write a reducer that narrows on action.type',
+          'Use ReturnType<typeof reducer> for the state type',
+        ],
+        xp: 60,
+        content: [],
+      },
+      {
+        id: 'ts-l31',
+        title: 'DOM layer with typed event handlers',
+        description: 'Querying elements safely, typing form events, and delegating clicks.',
+        duration: 10,
+        objectives: [
+          'Type querySelector with non-null assertions or guards',
+          'Handle submit, input, click with correct event types',
+          'Delegate events on a list with a single listener',
+        ],
+        xp: 55,
+        content: [],
+      },
+      {
+        id: 'ts-l32',
+        title: 'Persistence and filtering',
+        description: 'localStorage with JSON reviver, and derived state for filters.',
+        duration: 8,
+        objectives: [
+          'Save and load typed state from localStorage',
+          'Write a reviver to reconstruct Date objects',
+          'Compute filtered views without mutating state',
+        ],
+        xp: 50,
+        content: [],
+      },
+      {
+        id: 'ts-l33',
+        title: 'Polish: drag-and-drop and keyboard shortcuts',
+        description: 'Native drag-and-drop API with typed data transfer, and global key handling.',
+        duration: 8,
+        objectives: [
+          'Implement drag-and-drop with DataTransfer typing',
+          'Add keyboard shortcuts with keydown event types',
+          'Ensure accessibility with ARIA attributes',
+        ],
+        xp: 50,
+        content: [],
+      },
+    ],
+    quiz: {
+      id: 'quiz-ts-s10',
+      title: 'Typed Task Tracker check',
+      passingScore: 60,
+      questions: [
+        {
+          id: 'quiz-ts-s10-q1',
+          type: 'multiple-choice',
+          prompt: 'Why use a discriminated union for reducer actions?',
+          options: [
+            'It makes the code shorter',
+            'TypeScript narrows the action type based on action.type',
+            'It runs faster at runtime',
+            'It is required by Redux',
+          ],
+          answer: 1,
+          explanation: 'Discriminated unions let TypeScript narrow the action shape in each case branch, giving full type safety for payloads.',
+        },
+        {
+          id: 'quiz-ts-s10-q2',
+          type: 'true-false',
+          prompt: 'localStorage stores only strings, so Date objects must be serialized and revived.',
+          answer: true,
+          explanation: 'localStorage only stores strings. Dates must be serialized (toISOString) and revived (new Date(str)) when loading.',
+        },
+        {
+          id: 'quiz-ts-s10-q3',
+          type: 'multiple-choice',
+          prompt: 'What event type do you use for a form submit handler?',
+          options: ['Event', 'SubmitEvent', 'FormEvent', 'InputEvent'],
+          answer: 1,
+          explanation: 'SubmitEvent is the specific type for form submit events, with access to event.submitter.',
+        },
+        {
+          id: 'quiz-ts-s10-q4',
+          type: 'blank',
+          prompt: 'What DataTransfer method sets the drag data for a custom type?',
+          answers: ['setData', 'dataTransfer.setData'],
+          explanation: 'dataTransfer.setData(format, data) sets the drag payload. Use a custom format like "application/x-task-id".',
+        },
+        {
+          id: 'quiz-ts-s10-q5',
+          type: 'identify-error',
+          prompt: 'What is the type of e.currentTarget in a click handler on a button?',
+          code: 'button.addEventListener("click", (e) => {\n  console.log(e.currentTarget)\n})',
+          options: ['HTMLButtonElement', 'EventTarget', 'HTMLElement', 'Element'],
+          answer: 1,
+          explanation: 'Event.currentTarget is typed as EventTarget because the same handler could be attached to different element types. Cast or use a type guard for specificity.',
+        },
+      ],
+    },
+  },
+]
