@@ -1929,7 +1929,7 @@ toggle.addEventListener('click', () => {
   <a href="/">Home</a>
   <a href="/about">About</a>
 </nav>`,
-                js: '',
+                javascript: '',
               },
               expectedOutput: 'accessible menu toggle',
               tests: [
@@ -1951,7 +1951,7 @@ return document.querySelector('#primary-nav').hidden === false`,
                 'Toggle nav.hidden on click.',
               ],
               solution: {
-                js: `const toggle = document.getElementById('nav-toggle');
+                javascript: `const toggle = document.getElementById('nav-toggle');
 const nav = document.getElementById('primary-nav');
 toggle.addEventListener('click', () => {
   const expanded = toggle.getAttribute('aria-expanded') === 'true';
@@ -2371,6 +2371,40 @@ body {
             ],
           },
           {
+            type: 'heading',
+            id: 'r-l17-h3',
+            level: 3,
+            body: 'Catching overflow without a browser in your hand',
+          },
+          {
+            type: 'code',
+            id: 'r-l17-c1',
+            language: 'javascript',
+            title: 'A viewport check that runs in CI',
+            code: `import { test, expect } from '@playwright/test'
+
+// One test per viewport the layout has to survive.
+const widths = [320, 768, 1024, 1440]
+
+for (const width of widths) {
+  test('no horizontal overflow at ' + width + 'px', async ({ page }) => {
+    await page.setViewportSize({ width: width, height: 800 })
+    await page.goto('/')
+
+    const scrolled = await page.evaluate(
+      () => document.documentElement.scrollWidth > document.documentElement.clientWidth,
+    )
+
+    expect(scrolled).toBe(false)
+  })
+}`,
+          },
+          {
+            type: 'text',
+            id: 'r-l17-b2',
+            body: 'The order of the two calls is the point: `setViewportSize` runs before `page.goto`, so the page loads with its media queries already resolved at that width. `page.evaluate` then runs a function inside the page, where it can measure the document. `scrollWidth` is the widest the document ever gets and `clientWidth` is the width of the visible viewport, so `scrollWidth > clientWidth` is the exact condition behind the sideways scrollbar — the same symptom the responsive mode shows you, checked by a machine, at every width, on every commit.',
+          },
+          {
             type: 'tip',
             id: 'r-l17-t1',
             title: 'Test at common breakpoints',
@@ -2445,7 +2479,7 @@ body {
           {
             type: 'code',
             id: 'r-l18-c1',
-            language: 'typescript',
+            language: 'javascript',
             title: 'Screenshot test with Playwright',
             code: `import { test, devices } from '@playwright/test';
 
@@ -2487,9 +2521,9 @@ test.describe('Responsive screenshots', () => {
               id: 'ex-rwd-l18',
               instructions:
                 'Write a Playwright-style test that takes a screenshot at 375px and 1440px viewport sizes.',
-              languages: ['typescript'],
+              languages: ['javascript'],
               starterCode: {
-                ts: `import { test, devices } from '@playwright/test';
+                javascript: `import { test, devices } from '@playwright/test';
 
 test('homepage responsive', async ({ page }) => {
   // add mobile and desktop screenshot tests
@@ -2502,19 +2536,19 @@ test('homepage responsive', async ({ page }) => {
                 {
                   id: 'ex-rwd-l18-t1',
                   label: 'Uses setViewportSize',
-                  body: `return true`,
+                  body: `return /setViewportSize/.test(code);`,
                 },
                 {
                   id: 'ex-rwd-l18-t2',
                   label: 'Calls screenshot',
-                  body: `return true`,
+                  body: `return /screenshot/.test(code);`,
                 },
               ],
               hints: [
                 'Use page.setViewportSize twice and page.screenshot once for each.',
               ],
               solution: {
-                ts: `import { test, devices } from '@playwright/test';
+                javascript: `import { test, devices } from '@playwright/test';
 
 test('homepage responsive', async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 667 });

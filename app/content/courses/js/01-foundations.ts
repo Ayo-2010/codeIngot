@@ -3,7 +3,7 @@ import type { Section } from '~/types/content'
 export const jsFoundationsSections: Section[] = [
   {
     id: 'js-s1',
-    title: 'JS HOME',
+    title: 'Getting started',
     description:
       'What JavaScript adds to a page, what the browser does with a script the moment it loads, and how to use the console while you work.',
     lessons: [
@@ -213,7 +213,7 @@ console.log(site, count)`,
     ],
     quiz: {
       id: 'quiz-js-s1',
-      title: 'JS HOME check',
+      title: 'Getting started check',
       passingScore: 60,
       questions: [
         {

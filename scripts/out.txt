@@ -1,0 +1,36 @@
+LENGTH: 53137
+FIRST id pos: 102
+START SNIPPET:
+import type { Section } from '~/types/content'
+
+export const htmlIntroSections: Section[] = [
+  {
+    id: 'html-s1',
+    title: 'HTML HOME',
+    description: 'What this course covers, how every lesson is built, and what you will be able to do at the end.',
+    lessons: [
+      {
+        id: 'html-l1',
+        title: 'HTML HOME',
+        description: 'A tour of the course, the shape of every lesson, and the four things you will be able to do when you finish.',
+        duration: 4,
+        objectives: [
+          'Describe what this course covers and in what order it builds',
+          'Explain the shape of every lesson: live result, then markup, then a challenge',
+          'Name the four things you will be able to do once you finish',
+        ],
+        xp: 30,
+        content: [
+          {
+            type: 'text',
+            id: 'c-l1-b1',
+            body: 'HTML is the structure of the web. Every page you will ever open is a tree of elements, and everything else in the browser — the styling, the behaviour, the way a screen reader announces things — hangs off that tree. This course takes you from an empty file to a complete, accessible page.',
+          },
+          {
+            type: 'demo',
+            id: 'c-l1-d1',
+            title: 'The same page, before and after the course',
+            body: 'Two cards, identical in meaning. The left one is a pile of unlabelled divs. The right one is the same content marked up so a browser, a search engine and a screen reader al
+text: 16
+code: 4
+example: 0

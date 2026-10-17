@@ -1242,12 +1242,12 @@ return Array.isArray(parts) && parts.length === 2 && parts[0] === 'method' && pa
                 },
                 {
                   id: 'ex-js-ajax-parts-t3',
-                  label: 'A JSON POST lists three parts',
+                  label: 'Headers count as a part when present',
                   body: `if (typeof describeRequest !== 'function') return 'Define a function called describeRequest.'
-var parts = describeRequest({ method: 'POST', url: '/api/posts', headers: { 'Content-Type': 'application/json' }, body: '{}' })
-return Array.isArray(parts) && parts.length === 3 && parts[2] === 'body'
+var parts = describeRequest({ method: 'POST', url: '/api/posts', headers: { 'Content-Type': 'application/json' } })
+return Array.isArray(parts) && parts.join(',') === 'method,url,headers'
   ? true
-  : 'A POST with a Content-Type header and a body has three parts: method, url, body.';`,
+  : 'A POST with headers but no body lists method, url and headers, in that order.';`,
                 },
                 {
                   id: 'ex-js-ajax-parts-t4',
@@ -1481,7 +1481,7 @@ xhr.open('POST', '/api/posts')
 xhr.setRequestHeader('Content-Type', 'application/json')
 return Array.isArray(xhr.headers) && xhr.headers.length === 1 && xhr.headers[0] === 'Content-Type: application/json'
   ? true
-  : 'Push the header as name + \': \' + value onto the headers array.';`,
+  : "Push the header as name + ': ' + value onto the headers array.";`,
                 },
                 {
                   id: 'ex-js-xhr-object-t4',
@@ -1697,7 +1697,7 @@ document.getElementById('new-post').addEventListener('submit', function (event) 
             exercise: {
               id: 'ex-js-ajax-request',
               instructions:
-                'Write `buildRequest(options)` that turns `{ url, body }` into a request description. It returns `{ method, url, headers, body }`. The method is `options.method` or `\'GET\'` when there is none. If `options.body` is present, set `body` to `JSON.stringify(options.body)` and set `headers` to `{ \'Content-Type\': \'application/json\' }`; otherwise `body` is `null` and `headers` is `{}`.',
+                'Write `buildRequest(options)` that turns `{ url, body }` into a request description. It returns `{ method, url, headers, body }`. Use `options.method` when one is given, otherwise POST when there is a body and GET when there is not. If `options.body` is present, set `body` to `JSON.stringify(options.body)` and set `headers` to `{ \'Content-Type\': \'application/json\' }`; otherwise `body` is `null` and `headers` is `{}`.',
               languages: ['javascript'],
               starterCode: {
                 javascript: `function buildRequest(options) {
@@ -1750,11 +1750,10 @@ return req.method === 'POST' && req.headers['Content-Type'] === 'application/jso
               hints: [
                 'Start from the shape of the return value: `return { method: ..., url: options.url, headers: ..., body: ... }`.',
                 'One `if (options.body)` is enough - the serialised body and the header are both set inside it.',
-                'Use `options.method || \'GET\'` for the default, and `null` rather than an empty string for an absent body.',
+                'Use `options.method || (body !== null ? \'POST\' : \'GET\')` so a body defaults to POST, and `null` rather than an empty string for an absent body.',
               ],
               solution: {
                 javascript: `function buildRequest(options) {
-  const method = options.method || 'GET'
   let headers = {}
   let body = null
 
@@ -1762,6 +1761,8 @@ return req.method === 'POST' && req.headers['Content-Type'] === 'application/jso
     headers = { 'Content-Type': 'application/json' }
     body = JSON.stringify(options.body)
   }
+
+  const method = options.method || (body !== null ? 'POST' : 'GET')
 
   return { method: method, url: options.url, headers: headers, body: body }
 }

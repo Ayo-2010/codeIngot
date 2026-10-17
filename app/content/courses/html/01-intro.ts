@@ -3,12 +3,12 @@ import type { Section } from '~/types/content'
 export const htmlIntroSections: Section[] = [
   {
     id: 'html-s1',
-    title: 'HTML HOME',
+    title: 'Getting started',
     description: 'What this course covers, how every lesson is built, and what you will be able to do at the end.',
     lessons: [
       {
         id: 'html-l1',
-        title: 'HTML HOME',
+        title: 'How this course works',
         description: 'A tour of the course, the shape of every lesson, and the four things you will be able to do when you finish.',
         duration: 4,
         objectives: [
@@ -159,7 +159,7 @@ export const htmlIntroSections: Section[] = [
     ],
     quiz: {
       id: 'quiz-html-s1',
-      title: 'HTML HOME quiz',
+      title: 'Getting started check',
       passingScore: 60,
       questions: [
         {
@@ -250,7 +250,7 @@ export const htmlIntroSections: Section[] = [
             type: 'demo',
             id: 'c-l2-d1',
             title: 'An element and an attribute',
-            body: 'The link below is one element, <code>&lt;a&gt;</code>. Its <code>href</code> is one attribute. The text between the tags is the content.',
+            body: 'The link below is one element, `<a>`. Its `href` is one attribute. The text between the tags is the content.',
             html: `<p>Here is a <a href="https://developer.mozilla.org" title="The MDN documentation site">link to the documentation</a>.</p>
 <p>The tag is <code>&lt;a&gt;</code>, the attribute is <code>href</code>, and everything between the two tags is the content of the element.</p>`,
             css: `body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; line-height: 1.6; }
@@ -266,7 +266,7 @@ a { color: #0f766e; }`,
           {
             type: 'text',
             id: 'c-l2-b2',
-            body: 'Every HTML file is a tree with one root, and the root is the <code>&lt;html&gt;</code> element. Inside it sit exactly two children: <code>&lt;head&gt;</code> for information about the page, and <code>&lt;body&gt;</code> for the content itself. Getting this wrong is the single most common cause of a page behaving in ways you did not expect.',
+            body: 'Every HTML file is a tree with one root, and the root is the `<html>` element. Inside it sit exactly two children: `<head>` for information about the page, and `<body>` for the content itself. Getting this wrong is the single most common cause of a page behaving in ways you did not expect.',
           },
           {
             type: 'list',

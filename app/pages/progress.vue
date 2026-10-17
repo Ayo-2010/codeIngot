@@ -62,7 +62,7 @@
             <span class="text-sm text-muted">day streak</span>
           </p>
           <p class="mt-1 font-mono text-xs text-dim">Longest: {{ streak.longest }} days</p>
-          <p class="mt-1 font-mono text-xs text-dim">Total active days: {{ progress.value.streak.days.length }}</p>
+          <p class="mt-1 font-mono text-xs text-dim">Total active days: {{ progress.streak.days.length }}</p>
 
           <div class="mt-4 space-y-3">
             <h3 class="text-xs uppercase tracking-wider text-dim">This week</h3>

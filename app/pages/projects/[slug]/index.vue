@@ -359,19 +359,22 @@ const technologies = computed(() =>
   ),
 )
 
+const STARTER_ORDER: EditorLanguage[] = ['tsx', 'jsx', 'typescript', 'javascript', 'css', 'html']
+
 const firstLanguage = computed<EditorLanguage>(() => {
-  const list = project.value?.technologies ?? []
-  if (list.includes('javascript')) return 'javascript'
-  if (list.includes('css')) return 'css'
-  return 'html'
+  const starter = project.value?.starterFiles ?? {}
+  return STARTER_ORDER.find((language) => typeof starter[language] === 'string') ?? 'html'
 })
 
 const thumbnailDoc = computed(() => (project.value ? designThumbnailDocument(project.value) : ''))
 
-const FILE_NAMES: Record<EditorLanguage, string> = {
+const FILE_NAMES: Partial<Record<EditorLanguage, string>> = {
   html: 'index.html',
   css: 'style.css',
   javascript: 'script.js',
+  typescript: 'index.ts',
+  jsx: 'App.jsx',
+  tsx: 'App.tsx',
 }
 
 /**
@@ -447,9 +450,20 @@ function verifyItem(item: ChecklistItem): boolean {
   if (verify.kind === 'selector') return selectorResults.value[item.id] === true
   if (verify.kind === 'text') return matchesText(files.value.html ?? '', verify.needle)
   if (verify.kind === 'css-rule') return matchesCssRule(files.value.css ?? '', verify.needle)
-  if (verify.kind === 'js-call') return matchesJsCall(files.value.javascript ?? '', verify.needle)
+  if (verify.kind === 'js-call') return matchesJsCall(scriptSource.value, verify.needle)
   return false
 }
+
+/**
+ * A script check reads whichever script file the project actually
+ * has. React and TypeScript projects carry `tsx`/`jsx`/`typescript`,
+ * so checking only `javascript` would leave their lists dead.
+ */
+const scriptSource = computed(() =>
+  [files.value.javascript, files.value.typescript, files.value.jsx, files.value.tsx]
+    .filter((source): source is string => typeof source === 'string')
+    .join('\n'),
+)
 
 function isChecked(itemId: string) {
   const item = project.value?.checklist.find((entry) => entry.id === itemId)

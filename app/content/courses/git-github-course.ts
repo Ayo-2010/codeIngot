@@ -29,6 +29,6 @@ export const gitGitHubCourse: Course = {
     'best-practices',
   ],
   icon: '±',
-  projects: projectsForCourse('git-github').map((p) => p.slug),
+  projects: projectsForCourse('git-github'),
   sections: gitGitHubSections,
 }

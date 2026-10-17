@@ -35,12 +35,28 @@ export interface SandboxRunOptions {
   /** Correlates `postMessage` payloads with the document that produced them. */
   runId?: string
   timeoutMs?: number
+  /**
+   * Library source evaluated before the learner script — the React UMD build
+   * for JSX exercises. Left out of every other run so the sandbox stays small.
+   */
+  runtime?: string
+  /** Markup prepended to the body, e.g. the `<div id="root">` React mounts into. */
+  mount?: string
 }
 
 const CHANNEL = 'codeingot:run'
 
 function escapeForScript(json: string): string {
   return json.replace(/<\//g, '<\\/')
+}
+
+/**
+ * Guard a raw script body before it goes inside a `<script>` element. A literal
+ * `</script` would end the element early; escaping the slash is inert in real
+ * JavaScript, so the library keeps working while the parser stays safe.
+ */
+function escapeScriptBody(code: string): string {
+  return code.replace(/<\/script/gi, '<\\/script')
 }
 
 /** Base document that hosts the learner code. Written as a function so it is never
@@ -62,7 +78,7 @@ function buildDocument(options: SandboxRunOptions): string {
 <style id="learner-css">${options.css}</style>
 </head>
 <body>
-${options.html}
+${options.mount ?? ''}${options.html}
 <script id="__cases" type="application/json">${escapeForScript(cases)}</script>
 <script>
 (function () {
@@ -142,8 +158,11 @@ ${options.html}
 
   window.__ingotRunTests = runTests;
   window.addEventListener('load', function () {
-    if (cases_ready()) runTests();
-    else emit({ type: 'done' });
+    if (!cases_ready()) { emit({ type: 'done' }); return; }
+    // Wait one macrotask before testing. React commits through the scheduler
+    // (a MessageChannel task) rather than synchronously, so a test that ran the
+    // instant load fired would query the DOM before the first render landed.
+    setTimeout(runTests, 0);
   });
   function cases_ready() {
     var raw = document.getElementById('__cases');
@@ -151,6 +170,7 @@ ${options.html}
   }
 })();
 </script>
+${options.runtime ? '<script id="vendor-runtime">\n' + escapeScriptBody(options.runtime) + '\n</script>' : ''}
 <script id="learner-js">
 ${options.javascript}
 </script>

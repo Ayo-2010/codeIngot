@@ -28,6 +28,6 @@ export const responsiveWebDesignCourse: Course = {
     'testing',
   ],
   icon: '< >',
-  projects: projectsForCourse('responsive-web-design').map((p) => p.slug),
+  projects: projectsForCourse('responsive-web-design'),
   sections: responsiveWebDesignSections,
 }

@@ -1905,37 +1905,65 @@ p { font-size: clamp(1rem, 2vw + 0.5rem, 1.25rem); line-height: 1.6; }`,
     exercise: {
       id: 'ex-ch-git-workflow',
       instructions:
-        'Complete the daily Git workflow with conventional commits.',
-      languages: ['bash'],
-      starterCode: {},
+        'Record the daily Git workflow as a JavaScript array of commands. Add one object per step, each with a `cmd` string, in the order you would run them.',
+      languages: ['javascript'],
+      starterCode: {
+        javascript: `// One step per line, in the order you would run them.
+const commands = [
+  // { cmd: "git init" },
+];
+`,
+      },
+      expectedOutput: 'A repository with one conventional commit, pushed to a remote.',
       tests: [
         {
           id: 't1',
-          label: 'Repository is initialized',
-          body: `return true`,
+          label: 'Initialises a repository',
+          body: `const list = Array.isArray(commands) ? commands.map((s) => String(s.cmd || s)) : [];
+return list.some((c) => c.trim() === 'git init');`,
         },
         {
           id: 't2',
-          label: 'Commit uses conventional format',
-          body: `return true`,
+          label: 'Stages a file before committing',
+          body: `const list = Array.isArray(commands) ? commands.map((s) => String(s.cmd || s)) : [];
+const add = list.findIndex((c) => c.trim().startsWith('git add'));
+const commit = list.findIndex((c) => c.trim().startsWith('git commit'));
+return add !== -1 && commit !== -1 && add < commit;`,
+        },
+        {
+          id: 't3',
+          label: 'Commits with a conventional message',
+          body: `const list = Array.isArray(commands) ? commands.map((s) => String(s.cmd || s)) : [];
+const commit = list.find((c) => c.trim().startsWith('git commit')) || '';
+const prefixes = ['feat', 'fix', 'docs', 'chore', 'refactor', 'test', 'style', 'perf', 'build', 'ci'];
+return commit.includes('-m') && prefixes.some((p) => commit.includes(p + ':') || commit.includes(p + '('));`,
+        },
+        {
+          id: 't4',
+          label: 'Pushes to a remote',
+          body: `const list = Array.isArray(commands) ? commands.map((s) => String(s.cmd || s)) : [];
+return list.some((c) => c.trim().startsWith('git push'));`,
         },
       ],
       hints: [
-        'git init to initialize.',
-        'git add . to stage all changes.',
-        'git commit -m "feat: your message" for conventional commits.',
-        'git push origin main to push.',
+        'Start with `{ cmd: "git init" }`.',
+        'Stage before you commit: `{ cmd: "git add README.md" }`, then the commit.',
+        'A conventional message looks like `feat: add login form`, `docs: add readme`, or `fix: handle empty input`.',
+        'Finish with a push: `{ cmd: "git push -u origin main" }`.',
       ],
       solution: {
-        bash: `git init
-echo "# My Project" > README.md
-git add README.md
-git commit -m "docs: add project readme"
-git remote add origin https://github.com/user/repo.git
-git push -u origin main`,
+        javascript: `const commands = [
+  { cmd: "git init" },
+  { cmd: 'echo "# My Project" > README.md' },
+  { cmd: "git add README.md" },
+  { cmd: 'git commit -m "docs: add project readme"' },
+  { cmd: "git remote add origin https://github.com/user/repo.git" },
+  { cmd: "git push -u origin main" },
+];
+`,
       },
       testNotes:
-        'Tests verify the Git workflow commands.',
+        'The tests read your command array rather than running a real repository: they check the steps exist and happen in a sensible order.',
     },
   },
   {
@@ -1958,37 +1986,65 @@ git push -u origin main`,
     exercise: {
       id: 'ex-ch-git-branching',
       instructions:
-        'Practice the feature branch workflow with a simulated pull request.',
-      languages: ['bash'],
-      starterCode: {},
+        'Record the feature-branch workflow as a JavaScript array of commands: branch off main, commit on the branch, return to main, then merge the branch back.',
+      languages: ['javascript'],
+      starterCode: {
+        javascript: `// One step per line, in the order you would run them.
+const commands = [
+  // { cmd: "git switch -c feature/login" },
+];
+`,
+      },
+      expectedOutput: 'A feature branch merged back into main.',
       tests: [
         {
           id: 't1',
-          label: 'Feature branch is created',
-          body: `return true`,
+          label: 'Creates a feature branch',
+          body: `const list = Array.isArray(commands) ? commands.map((s) => String(s.cmd || s)) : [];
+return list.some((c) => c.trim().startsWith('git switch -c') || c.trim().startsWith('git checkout -b'));`,
         },
         {
           id: 't2',
-          label: 'Changes are committed on the feature branch',
-          body: `return true`,
+          label: 'Commits on the feature branch',
+          body: `const list = Array.isArray(commands) ? commands.map((s) => String(s.cmd || s)) : [];
+const branch = list.findIndex((c) => c.trim().startsWith('git switch -c') || c.trim().startsWith('git checkout -b'));
+const commit = list.findIndex((c) => c.trim().startsWith('git commit'));
+return branch !== -1 && commit !== -1 && branch < commit;`,
+        },
+        {
+          id: 't3',
+          label: 'Returns to main before merging',
+          body: `const list = Array.isArray(commands) ? commands.map((s) => String(s.cmd || s)) : [];
+const backToMain = list.findIndex((c) => /^git (switch|checkout)\\s+main\\b/.test(c.trim()));
+const merge = list.findIndex((c) => c.trim().startsWith('git merge'));
+return backToMain !== -1 && merge !== -1 && backToMain < merge;`,
+        },
+        {
+          id: 't4',
+          label: 'Merges the feature branch back into main',
+          body: `const list = Array.isArray(commands) ? commands.map((s) => String(s.cmd || s)) : [];
+return list.some((c) => c.trim().startsWith('git merge'));`,
         },
       ],
       hints: [
-        'git switch -c feature/name to create and switch.',
-        'Make changes, git add, git commit.',
-        'git switch main, then git merge feature/name.',
-        'For conflicts: edit files, git add, git commit.',
+        'Create and switch in one step: `{ cmd: "git switch -c feature/login" }`.',
+        'Make your changes, then `{ cmd: "git add login.html" }` and a commit.',
+        'Switch back with `{ cmd: "git switch main" }` before merging.',
+        'Merge the branch with `{ cmd: "git merge feature/login" }`.',
       ],
       solution: {
-        bash: `git switch -c feature/login
-echo "Login form added" > login.html
-git add login.html
-git commit -m "feat: add login form"
-git switch main
-git merge feature/login`,
+        javascript: `const commands = [
+  { cmd: "git switch -c feature/login" },
+  { cmd: 'echo "Login form added" > login.html' },
+  { cmd: "git add login.html" },
+  { cmd: 'git commit -m "feat: add login form"' },
+  { cmd: "git switch main" },
+  { cmd: "git merge feature/login" },
+];
+`,
       },
       testNotes:
-        'Tests verify the branching and merging workflow.',
+        'The tests read your command array rather than running a real repository: they check the branch, commit and merge happen in order.',
     },
   },
 ]

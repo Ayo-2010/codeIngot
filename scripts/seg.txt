@@ -1,0 +1,51 @@
+react-l16',
+        title: 'useRef for DOM access',
+        description: 'Accessing DOM elements and storing mutable values.',
+        duration: 5,
+        objectives: [
+          'Create a ref and attach it to a DOM element',
+          'Use useRef to store a mutable value across renders',
+          'Focus an input programmatically on mount',
+        ],
+        xp: 35,
+        content: [
+        {
+          type: 'text',
+          id: 'react-l16-intro',
+          body: '<strong>useRef for DOM access.</strong> Accessing DOM elements and storing mutable values with useRef.'
+        },
+        {
+          type: 'heading',
+          id: 'react-l16-h1',
+          level: 3,
+          body: 'Key concepts'
+        },
+        {
+          type: 'list',
+          id: 'react-l16-list',
+          style: 'bullet',
+          items: [
+            'useRef returns { current }',
+            'Attach ref to DOM element',
+            'Persists across renders without re-rendering'
+          ]
+        },
+        {
+          type: 'code',
+          id: 'react-l16-code',
+          language: 'javascript',
+          title: 'Example',
+          code: "const input = useRef(null)\nuseEffect(() => input.current.focus(), [])\nreturn <input ref={input} placeholder='Focus me' />"
+        },
+        {
+          type: 'tip',
+          id: 'react-l16-tip',
+          title: 'Tip',
+          body: 'Edit the example above and watch the preview update.'
+        }
+      ],,
+      },
+      {
+        id: 'react-l42',
+        title: 'useTransition',
+        description: 'Marking updates as non-urgent so the UI stays re

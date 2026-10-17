@@ -91,7 +91,7 @@
         </div>
 
         <div v-show="activePanel === 'preview'" class="min-h-0 flex-1">
-          <EditorSandboxPreview ref="previewRef" :files="files" :auto-run="true" @result="onResult" />
+          <EditorSandboxPreview ref="previewRef" :files="files" :auto-run="!heavyRuntime" @result="onResult" />
         </div>
 
         <div
@@ -222,7 +222,7 @@ const previewRef = ref<{ run: (tests?: unknown[]) => Promise<SandboxRunResult> }
 
 const localFiles = ref<Partial<Record<EditorLanguage, string>>>({ ...props.files })
 const active = ref<EditorLanguage>(props.activeLanguage)
-const activePanel = ref<'preview' | 'console' | 'tests'>('preview')
+const activePanel = ref<'preview' | 'console' | 'tests'>(defaultPanel())
 const logs = ref<SandboxLog[]>([])
 const runtimeError = ref<string | null>(null)
 const testResults = ref<SandboxTestResult[]>([])
@@ -290,14 +290,49 @@ watch(
   },
 )
 
+const LANGUAGE_LABEL: Record<EditorLanguage, string> = {
+  html: 'HTML',
+  css: 'CSS',
+  javascript: 'JS',
+  typescript: 'TS',
+  jsx: 'JSX',
+  tsx: 'TSX',
+}
+
+const LANGUAGE_ORDER: EditorLanguage[] = ['html', 'css', 'javascript', 'typescript', 'jsx', 'tsx']
+
 const tabs = computed(() => {
-  const available: EditorLanguage[] = ['html', 'css', 'javascript']
-  const wanted = props.exercise?.languages ?? available
-  return wanted.map((language) => ({
-    id: language,
-    label: language === 'javascript' ? 'JS' : language.toUpperCase(),
-  }))
+  const wanted = props.exercise?.languages ?? fileLanguages()
+  return wanted.map((language) => ({ id: language, label: LANGUAGE_LABEL[language] }))
 })
+
+/** With no exercise to declare its languages, the files on screen are the tabs. */
+function fileLanguages(): EditorLanguage[] {
+  const present = LANGUAGE_ORDER.filter(
+    (language) =>
+      typeof props.files[language] === 'string' ||
+      typeof props.starterCode?.[language] === 'string',
+  )
+  return present.length > 0 ? present : ['html', 'css', 'javascript']
+}
+
+/**
+ * JSX and TSX pull in the React runtime, which is a megabyte of library. Those
+ * runs are opt-in (Run/Check) rather than fired on every keystroke, so the
+ * editor stays responsive while the learner types.
+ */
+const heavyRuntime = computed(() => {
+  const languages = props.exercise?.languages ?? []
+  if (languages.includes('jsx') || languages.includes('tsx')) return true
+  return Boolean(localFiles.value.jsx || localFiles.value.tsx)
+})
+
+/** With no page to render, the console is the useful first panel. */
+function defaultPanel(): 'preview' | 'console' {
+  const languages = props.exercise?.languages ?? fileLanguages()
+  if (languages.includes('html') || languages.includes('jsx') || languages.includes('tsx')) return 'preview'
+  return 'console'
+}
 
 const panels = computed(() => {
   const list: { id: typeof activePanel.value; label: string }[] = [{ id: 'preview', label: 'Preview' }]

@@ -7155,18 +7155,50 @@ var reactProjects = [
       }
     ],
     starterFiles: {
-      typescript: `// React Dashboard - Starter
-// Set up your routing, context, and chart components here.
+      tsx: `// React Dashboard \u2014 starter
+//
+// A real project gets React from npm and adds a URL library for the address
+// bar. This editor has no module loader, so the React runtime is already on
+// the page: call React.useState, React.useReducer and React.useContext
+// directly, and model the navigation as data.
+//
 // The dashboard should have:
-// - A sidebar with links to Dashboard, Settings, and Profile
-// - A protected Profile route
-// - At least two chart components
+// - A sidebar with links to Dashboard, Settings and Profile
+// - A protected Profile view that sends a signed-out reader back
+// - At least two chart components driven by typed data
 // - Tests for one component and one hook
 
-import { createContext, useContext, useState, useEffect } from 'react'
-import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom'
+// The three views the sidebar links to.
+const views = ['dashboard', 'settings', 'profile']
 
-// Define your types and components here.
+// TODO: hold the current view and the signed-in user here, and return a new
+// object for each action \u2014 the same state for anything else.
+function dashboardReducer(state, action) {
+  return state
+}
+
+function App() {
+  const [state, dispatch] = React.useReducer(dashboardReducer, {
+    view: 'dashboard',
+    user: null,
+  })
+
+  return (
+    <div className="app-shell">
+      <header className="app-header">
+        <h1>Dashboard</h1>
+      </header>
+      <main className="app-main">
+        <p>Showing: {state.view}</p>
+        <button type="button" onClick={() => dispatch({ type: 'signIn' })}>
+          Sign in
+        </button>
+      </main>
+    </div>
+  )
+}
+
+render(<App />)
 `
     },
     designPreviewHtml: `<section class="dashboard-preview">
@@ -7333,24 +7365,48 @@ body {
       }
     ],
     starterFiles: {
-      typescript: `// E-Commerce Cart - Starter
-// Define your types, create the CartContext, and build the checkout flow.
+      tsx: `// E-Commerce Cart \u2014 starter
+//
+// React is already on the page in this editor, so call React.useReducer and
+// React.useContext directly rather than importing them.
 
 interface Product {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
+  id: number
+  name: string
+  price: number
+  image: string
+}
+
+interface CartItem {
+  product: Product
+  quantity: number
 }
 
 type CartAction =
   | { type: 'add'; product: Product }
   | { type: 'remove'; id: number }
-  | { type: 'update'; id: number; quantity: number };
+  | { type: 'update'; id: number; quantity: number }
+
+const emptyCart: CartItem[] = []
 
 function cartReducer(state: CartItem[], action: CartAction): CartItem[] {
-  // Implement the reducer
+  // TODO: return the next cart for each action in the union above.
+  return state
 }
+
+function App() {
+  const [cart, dispatch] = React.useReducer(cartReducer, emptyCart)
+  const count = cart.reduce((total, item) => total + item.quantity, 0)
+
+  return (
+    <section className="cart-preview">
+      <h1>Shopping Cart</h1>
+      <p>{count} item(s) in the cart</p>
+    </section>
+  )
+}
+
+render(<App />)
 `
     },
     designPreviewHtml: `<section class="cart-preview">
@@ -7463,12 +7519,12 @@ function projectsForCourse(courseSlug) {
 var cssIntroSections = [
   {
     id: "css-s1",
-    title: "CSS HOME",
+    title: "Getting started",
     description: "What this course covers, how it is organised, and how to get the most out of it.",
     lessons: [
       {
         id: "css-l1",
-        title: "CSS HOME",
+        title: "How this course works",
         description: "A tour of the course, the way the lessons are built, and what you will be able to do at the end.",
         duration: 4,
         objectives: [
@@ -7619,7 +7675,7 @@ var cssIntroSections = [
     ],
     quiz: {
       id: "quiz-css-s1",
-      title: "CSS HOME quiz",
+      title: "Getting started check",
       passingScore: 60,
       questions: [
         {
@@ -33744,12 +33800,12 @@ var cssFundamentals = {
 var htmlIntroSections = [
   {
     id: "html-s1",
-    title: "HTML HOME",
+    title: "Getting started",
     description: "What this course covers, how every lesson is built, and what you will be able to do at the end.",
     lessons: [
       {
         id: "html-l1",
-        title: "HTML HOME",
+        title: "How this course works",
         description: "A tour of the course, the shape of every lesson, and the four things you will be able to do when you finish.",
         duration: 4,
         objectives: [
@@ -33898,7 +33954,7 @@ var htmlIntroSections = [
     ],
     quiz: {
       id: "quiz-html-s1",
-      title: "HTML HOME quiz",
+      title: "Getting started check",
       passingScore: 60,
       questions: [
         {
@@ -33983,7 +34039,7 @@ var htmlIntroSections = [
             type: "demo",
             id: "c-l2-d1",
             title: "An element and an attribute",
-            body: "The link below is one element, <code>&lt;a&gt;</code>. Its <code>href</code> is one attribute. The text between the tags is the content.",
+            body: "The link below is one element, `<a>`. Its `href` is one attribute. The text between the tags is the content.",
             html: `<p>Here is a <a href="https://developer.mozilla.org" title="The MDN documentation site">link to the documentation</a>.</p>
 <p>The tag is <code>&lt;a&gt;</code>, the attribute is <code>href</code>, and everything between the two tags is the content of the element.</p>`,
             css: `body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; line-height: 1.6; }
@@ -33999,7 +34055,7 @@ a { color: #0f766e; }`,
           {
             type: "text",
             id: "c-l2-b2",
-            body: "Every HTML file is a tree with one root, and the root is the <code>&lt;html&gt;</code> element. Inside it sit exactly two children: <code>&lt;head&gt;</code> for information about the page, and <code>&lt;body&gt;</code> for the content itself. Getting this wrong is the single most common cause of a page behaving in ways you did not expect."
+            body: "Every HTML file is a tree with one root, and the root is the `<html>` element. Inside it sit exactly two children: `<head>` for information about the page, and `<body>` for the content itself. Getting this wrong is the single most common cause of a page behaving in ways you did not expect."
           },
           {
             type: "list",
@@ -49311,7 +49367,7 @@ var htmlFundamentals = {
 var jsFoundationsSections = [
   {
     id: "js-s1",
-    title: "JS HOME",
+    title: "Getting started",
     description: "What JavaScript adds to a page, what the browser does with a script the moment it loads, and how to use the console while you work.",
     lessons: [
       {
@@ -49517,7 +49573,7 @@ console.log(site, count)`
     ],
     quiz: {
       id: "quiz-js-s1",
-      title: "JS HOME check",
+      title: "Getting started check",
       passingScore: 60,
       questions: [
         {
@@ -60161,13 +60217,13 @@ return first.greet() === 'Hi, Cleo' && second.greet() === 'Hi, Dev'
               ],
               hints: [
                 "The name has to survive after makeGreeter returns, so it cannot be passed in as an argument to greet \u2014 it has to be captured from the enclosing scope. That capture is what a closure does.",
-                'Return an object literal: return { greet: () => "Hi, " + name + "!" }. Remembering an object literal needs the parentheses.',
+                'Return an object literal: return { greet: () => "Hi, " + name }. Remembering an object literal needs the parentheses.',
                 "A method shorthand, greet() {}, would lose this the moment you pull it off the object. An arrow closes over name and does not care."
               ],
               solution: {
                 javascript: `function makeGreeter(name) {
   return {
-    greet: () => 'Hi, ' + name + '!'
+    greet: () => 'Hi, ' + name
   }
 }
 
@@ -74922,12 +74978,12 @@ return Array.isArray(parts) && parts.length === 2 && parts[0] === 'method' && pa
                 },
                 {
                   id: "ex-js-ajax-parts-t3",
-                  label: "A JSON POST lists three parts",
+                  label: "Headers count as a part when present",
                   body: `if (typeof describeRequest !== 'function') return 'Define a function called describeRequest.'
-var parts = describeRequest({ method: 'POST', url: '/api/posts', headers: { 'Content-Type': 'application/json' }, body: '{}' })
-return Array.isArray(parts) && parts.length === 3 && parts[2] === 'body'
+var parts = describeRequest({ method: 'POST', url: '/api/posts', headers: { 'Content-Type': 'application/json' } })
+return Array.isArray(parts) && parts.join(',') === 'method,url,headers'
   ? true
-  : 'A POST with a Content-Type header and a body has three parts: method, url, body.';`
+  : 'A POST with headers but no body lists method, url and headers, in that order.';`
                 },
                 {
                   id: "ex-js-ajax-parts-t4",
@@ -75159,7 +75215,7 @@ xhr.open('POST', '/api/posts')
 xhr.setRequestHeader('Content-Type', 'application/json')
 return Array.isArray(xhr.headers) && xhr.headers.length === 1 && xhr.headers[0] === 'Content-Type: application/json'
   ? true
-  : 'Push the header as name + ': ' + value onto the headers array.';`
+  : "Push the header as name + ': ' + value onto the headers array.";`
                 },
                 {
                   id: "ex-js-xhr-object-t4",
@@ -75373,7 +75429,7 @@ document.getElementById('new-post').addEventListener('submit', function (event) 
             id: "j-l90-x1",
             exercise: {
               id: "ex-js-ajax-request",
-              instructions: "Write `buildRequest(options)` that turns `{ url, body }` into a request description. It returns `{ method, url, headers, body }`. The method is `options.method` or `'GET'` when there is none. If `options.body` is present, set `body` to `JSON.stringify(options.body)` and set `headers` to `{ 'Content-Type': 'application/json' }`; otherwise `body` is `null` and `headers` is `{}`.",
+              instructions: "Write `buildRequest(options)` that turns `{ url, body }` into a request description. It returns `{ method, url, headers, body }`. Use `options.method` when one is given, otherwise POST when there is a body and GET when there is not. If `options.body` is present, set `body` to `JSON.stringify(options.body)` and set `headers` to `{ 'Content-Type': 'application/json' }`; otherwise `body` is `null` and `headers` is `{}`.",
               languages: ["javascript"],
               starterCode: {
                 javascript: `function buildRequest(options) {
@@ -75426,11 +75482,10 @@ return req.method === 'POST' && req.headers['Content-Type'] === 'application/jso
               hints: [
                 "Start from the shape of the return value: `return { method: ..., url: options.url, headers: ..., body: ... }`.",
                 "One `if (options.body)` is enough - the serialised body and the header are both set inside it.",
-                "Use `options.method || 'GET'` for the default, and `null` rather than an empty string for an absent body."
+                "Use `options.method || (body !== null ? 'POST' : 'GET')` so a body defaults to POST, and `null` rather than an empty string for an absent body."
               ],
               solution: {
                 javascript: `function buildRequest(options) {
-  const method = options.method || 'GET'
   let headers = {}
   let body = null
 
@@ -75438,6 +75493,8 @@ return req.method === 'POST' && req.headers['Content-Type'] === 'application/jso
     headers = { 'Content-Type': 'application/json' }
     body = JSON.stringify(options.body)
   }
+
+  const method = options.method || (body !== null ? 'POST' : 'GET')
 
   return { method: method, url: options.url, headers: headers, body: body }
 }
@@ -81410,10 +81467,38 @@ darkMode.addEventListener('change', (event) => {
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')`
           },
           {
+            type: "text",
+            id: "d-l20-b2",
+            body: "The object `matchMedia` returns holds one useful value, `matches`, and one useful event, `change`. The value is a snapshot taken when the query was created, which is why the listener matters: a preference can change while the page is open \u2014 the reader flips their system theme at dusk \u2014 and the page should follow without a reload. The listener receives an event whose `matches` is the current state, so the handler applies it rather than reading the old snapshot."
+          },
+          {
+            type: "heading",
+            id: "d-l20-h1",
+            level: 3,
+            body: "The preferences worth reading"
+          },
+          {
+            type: "list",
+            id: "d-l20-l1",
+            style: "bullet",
+            items: [
+              "`prefers-color-scheme` \u2014 the reader wants light or dark. Usually handled in CSS alone.",
+              "`prefers-reduced-motion` \u2014 animation should be reduced. Worth reading in JavaScript when a script drives the motion.",
+              "`prefers-contrast` \u2014 the reader has asked for more contrast.",
+              "`prefers-reduced-transparency` \u2014 translucent surfaces should be made opaque."
+            ]
+          },
+          {
             type: "tip",
             id: "d-l20-t1",
             title: "Prefer CSS over JS for media queries",
             body: "Use prefers-color-scheme in CSS whenever possible. matchMedia is for things CSS cannot do, like loading a different font file or changing JavaScript animation behaviour."
+          },
+          {
+            type: "warning",
+            id: "d-l20-w1",
+            title: "Apply once, then listen",
+            body: "A media query check that only runs inside the `change` handler does nothing on the first load, because no change has happened yet. Read `matches` immediately, apply it, and use the listener only for later updates. Polling in a `setInterval` does the same job badly and never stops."
           },
           {
             type: "exercise",
@@ -81751,7 +81836,7 @@ svg.appendChild(circle)`
             type: "tip",
             id: "d-l22-t1",
             title: "Inline SVG is part of the DOM",
-            body: "An inline <svg> in your HTML is fully accessible to JavaScript and CSS. You only need createElementNS when you are building SVG from script."
+            body: "An inline `<svg>` in your HTML is fully accessible to JavaScript and CSS. You only need createElementNS when you are building SVG from script."
           },
           {
             type: "exercise",
@@ -81861,6 +81946,7 @@ svg.appendChild(rect)
             "When you need scalable vector graphics",
             "When you need CSS styling of individual shapes"
           ],
+          answer: 1,
           explanation: "Canvas is faster for high-frequency redraws of many objects. SVG is better for interactive, styled vector graphics."
         }
       ]
@@ -82202,7 +82288,7 @@ var domBrowserApisCourse = {
     "svg"
   ],
   icon: "{ }",
-  projects: projectsForCourse("dom-browser-apis").map((p) => p.slug),
+  projects: projectsForCourse("dom-browser-apis"),
   sections: domBrowserApisSections
 };
 
@@ -84109,7 +84195,7 @@ toggle.addEventListener('click', () => {
   <a href="/">Home</a>
   <a href="/about">About</a>
 </nav>`,
-                js: ""
+                javascript: ""
               },
               expectedOutput: "accessible menu toggle",
               tests: [
@@ -84131,7 +84217,7 @@ return document.querySelector('#primary-nav').hidden === false`
                 "Toggle nav.hidden on click."
               ],
               solution: {
-                js: `const toggle = document.getElementById('nav-toggle');
+                javascript: `const toggle = document.getElementById('nav-toggle');
 const nav = document.getElementById('primary-nav');
 toggle.addEventListener('click', () => {
   const expanded = toggle.getAttribute('aria-expanded') === 'true';
@@ -84546,6 +84632,40 @@ body {
             ]
           },
           {
+            type: "heading",
+            id: "r-l17-h3",
+            level: 3,
+            body: "Catching overflow without a browser in your hand"
+          },
+          {
+            type: "code",
+            id: "r-l17-c1",
+            language: "javascript",
+            title: "A viewport check that runs in CI",
+            code: `import { test, expect } from '@playwright/test'
+
+// One test per viewport the layout has to survive.
+const widths = [320, 768, 1024, 1440]
+
+for (const width of widths) {
+  test('no horizontal overflow at ' + width + 'px', async ({ page }) => {
+    await page.setViewportSize({ width: width, height: 800 })
+    await page.goto('/')
+
+    const scrolled = await page.evaluate(
+      () => document.documentElement.scrollWidth > document.documentElement.clientWidth,
+    )
+
+    expect(scrolled).toBe(false)
+  })
+}`
+          },
+          {
+            type: "text",
+            id: "r-l17-b2",
+            body: "The order of the two calls is the point: `setViewportSize` runs before `page.goto`, so the page loads with its media queries already resolved at that width. `page.evaluate` then runs a function inside the page, where it can measure the document. `scrollWidth` is the widest the document ever gets and `clientWidth` is the width of the visible viewport, so `scrollWidth > clientWidth` is the exact condition behind the sideways scrollbar \u2014 the same symptom the responsive mode shows you, checked by a machine, at every width, on every commit."
+          },
+          {
             type: "tip",
             id: "r-l17-t1",
             title: "Test at common breakpoints",
@@ -84618,7 +84738,7 @@ body {
           {
             type: "code",
             id: "r-l18-c1",
-            language: "typescript",
+            language: "javascript",
             title: "Screenshot test with Playwright",
             code: `import { test, devices } from '@playwright/test';
 
@@ -84659,9 +84779,9 @@ test.describe('Responsive screenshots', () => {
             exercise: {
               id: "ex-rwd-l18",
               instructions: "Write a Playwright-style test that takes a screenshot at 375px and 1440px viewport sizes.",
-              languages: ["typescript"],
+              languages: ["javascript"],
               starterCode: {
-                ts: `import { test, devices } from '@playwright/test';
+                javascript: `import { test, devices } from '@playwright/test';
 
 test('homepage responsive', async ({ page }) => {
   // add mobile and desktop screenshot tests
@@ -84674,19 +84794,19 @@ test('homepage responsive', async ({ page }) => {
                 {
                   id: "ex-rwd-l18-t1",
                   label: "Uses setViewportSize",
-                  body: `return true`
+                  body: `return /setViewportSize/.test(code);`
                 },
                 {
                   id: "ex-rwd-l18-t2",
                   label: "Calls screenshot",
-                  body: `return true`
+                  body: `return /screenshot/.test(code);`
                 }
               ],
               hints: [
                 "Use page.setViewportSize twice and page.screenshot once for each."
               ],
               solution: {
-                ts: `import { test, devices } from '@playwright/test';
+                javascript: `import { test, devices } from '@playwright/test';
 
 test('homepage responsive', async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 667 });
@@ -85117,7 +85237,7 @@ var responsiveWebDesignCourse = {
     "testing"
   ],
   icon: "< >",
-  projects: projectsForCourse("responsive-web-design").map((p) => p.slug),
+  projects: projectsForCourse("responsive-web-design"),
   sections: responsiveWebDesignSections
 };
 
@@ -85164,7 +85284,7 @@ var gitGitHubSections = [
           {
             type: "code",
             id: "g-l1-c1",
-            language: "bash",
+            language: "plaintext",
             title: "Git in the terminal",
             code: `# check git is installed
 git --version
@@ -85184,24 +85304,30 @@ git config --global user.email "ada@example.com"`
             id: "g-l1-x1",
             exercise: {
               id: "ex-git-l1",
-              instructions: 'Run git --version and git config --global user.name "Your Name" in the terminal.',
-              languages: ["bash"],
-              starterCode: "",
-              expectedOutput: "git version displayed and user.name configured",
+              instructions: "Configure your Git identity by writing a JavaScript object with a user name and email.",
+              languages: ["javascript"],
+              starterCode: { javascript: '// Configure your Git identity\n\nconst gitConfig = {\n  user: {\n    name: "",\n    email: ""\n  }\n};\n' },
+              expectedOutput: "Git identity configured with name and email",
               tests: [
                 {
                   id: "ex-git-l1-t1",
-                  label: "git config is set",
-                  body: `return true`
+                  label: "Config has a user.name",
+                  body: `return typeof gitConfig === 'object' && gitConfig.user && typeof gitConfig.user.name === 'string' && gitConfig.user.name.length > 0;`
+                },
+                {
+                  id: "ex-git-l1-t2",
+                  label: "Config has a user.email with @",
+                  body: `return typeof gitConfig === 'object' && gitConfig.user && typeof gitConfig.user.email === 'string' && gitConfig.user.email.includes('@');`
                 }
               ],
               hints: [
-                'Run git config --global user.name "Your Name" to set your name.'
+                "Create a gitConfig object with a user property containing name and email.",
+                'Give name a non-empty string and email a string containing "@".'
               ],
               solution: {
-                bash: 'git --version\ngit config --global user.name "Ada Lovelace"\ngit config --global user.email "ada@example.com"'
+                javascript: '// Configure your Git identity\n\nconst gitConfig = {\n  user: {\n    name: "Ada Lovelace",\n    email: "ada@example.com"\n  }\n};\n'
               },
-              testNotes: "The exercise verifies the commands are run."
+              testNotes: "The exercise verifies the Git identity object has a name and a valid email."
             }
           }
         ]
@@ -85242,7 +85368,7 @@ git config --global user.email "ada@example.com"`
           {
             type: "code",
             id: "g-l2-c1",
-            language: "bash",
+            language: "plaintext",
             title: "Inspecting the repository",
             code: `git status
 git log --oneline
@@ -85276,29 +85402,30 @@ git log --oneline --graph --all`
             id: "g-l2-x1",
             exercise: {
               id: "ex-git-l2",
-              instructions: "Create a new Git repository, create a file, stage it, and make your first commit.",
-              languages: ["bash"],
-              starterCode: "",
-              expectedOutput: "repository created with one commit",
+              instructions: "Write a JavaScript array of commands that creates a repository, adds a file, and makes the first commit.",
+              languages: ["javascript"],
+              starterCode: { javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  // e.g. { cmd: "git init" },\n];\n' },
+              expectedOutput: "Repository created with one commit",
               tests: [
                 {
                   id: "ex-git-l2-t1",
-                  label: "Repository initialised",
-                  body: `return true`
+                  label: "Includes git init",
+                  body: `return Array.isArray(commands) && commands.some(c => String(c.cmd || c).includes('git init'));`
                 },
                 {
                   id: "ex-git-l2-t2",
-                  label: "File committed",
-                  body: `return true`
+                  label: "Includes git add and git commit",
+                  body: `return Array.isArray(commands) && commands.some(c => String(c.cmd || c).includes('git add')) && commands.some(c => String(c.cmd || c).includes('git commit'));`
                 }
               ],
               hints: [
-                'Use git init, echo "hello" > README.md, git add README.md, git commit -m "Initial commit".'
+                "Create a commands array where each item has a cmd property with a git command.",
+                "Include git init, git add, and git commit -m."
               ],
               solution: {
-                bash: 'git init\necho "hello" > README.md\ngit add README.md\ngit commit -m "Initial commit"'
+                javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  { cmd: "git init" },\n  { cmd: "echo \\"hello\\" > README.md" },\n  { cmd: "git add README.md" },\n  { cmd: "git commit -m \\"Initial commit\\"" },\n];\n'
               },
-              testNotes: "The exercise verifies the git commands are run."
+              testNotes: "The exercise verifies the command array includes init, add, and commit."
             }
           }
         ]
@@ -85396,7 +85523,7 @@ git log --oneline --graph --all`
           {
             type: "code",
             id: "g-l3-c1",
-            language: "bash",
+            language: "plaintext",
             title: "Clone and inspect remotes",
             code: `git clone https://github.com/user/repo.git
 cd repo
@@ -85423,24 +85550,30 @@ git remote -v`
             id: "g-l3-x1",
             exercise: {
               id: "ex-git-l3",
-              instructions: "Clone the example repository and verify the remote is named origin.",
-              languages: ["bash"],
-              starterCode: "",
-              expectedOutput: "repository cloned with origin remote",
+              instructions: "Write a JavaScript array of commands that clones a repository and verifies the remote is named origin.",
+              languages: ["javascript"],
+              starterCode: { javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  // e.g. { cmd: "git clone <url>" },\n];\n' },
+              expectedOutput: "Repository cloned with origin remote",
               tests: [
                 {
                   id: "ex-git-l3-t1",
-                  label: "Clone completed",
-                  body: `return true`
+                  label: "Includes git clone",
+                  body: `return Array.isArray(commands) && commands.some(c => String(c.cmd || c).includes('git clone'));`
+                },
+                {
+                  id: "ex-git-l3-t2",
+                  label: "Includes git remote -v",
+                  body: `return Array.isArray(commands) && commands.some(c => String(c.cmd || c).includes('git remote -v'));`
                 }
               ],
               hints: [
-                "Use git clone and git remote -v."
+                "Include git clone with a repository URL.",
+                "Include git remote -v to list remotes and verify origin."
               ],
               solution: {
-                bash: "git clone https://github.com/user/repo.git\ncd repo\ngit remote -v"
+                javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  { cmd: "git clone https://github.com/user/repo.git" },\n  { cmd: "cd repo" },\n  { cmd: "git remote -v" },\n];\n'
               },
-              testNotes: "The exercise verifies the clone and remote commands."
+              testNotes: "The exercise verifies the clone and remote inspection commands."
             }
           }
         ]
@@ -85484,7 +85617,7 @@ git remote -v`
           {
             type: "code",
             id: "g-l4-c1",
-            language: "bash",
+            language: "plaintext",
             title: "The core loop",
             code: `# modify files
 echo "new feature" > app.js
@@ -85526,22 +85659,23 @@ git push origin main`
             id: "g-l4-x1",
             exercise: {
               id: "ex-git-l4",
-              instructions: "Create a new file, stage it, commit with a conventional commit message, and push to origin.",
-              languages: ["bash"],
-              starterCode: "",
-              expectedOutput: "file committed and pushed",
+              instructions: "Write a JavaScript array of commands that creates a file, stages it, commits with a conventional message, and pushes to origin.",
+              languages: ["javascript"],
+              starterCode: { javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  // e.g. { cmd: "echo \\"feature\\" > feature.js" },\n];\n' },
+              expectedOutput: "File committed and pushed",
               tests: [
                 {
                   id: "ex-git-l4-t1",
-                  label: "Commit message follows convention",
-                  body: `return true`
+                  label: "Uses conventional commit format",
+                  body: `return Array.isArray(commands) && commands.some(c => String(c.cmd || c).match(/feat|fix|docs|refactor|test|chore:/)) && commands.some(c => String(c.cmd || c).includes('git push'));`
                 }
               ],
               hints: [
-                'Use git add, git commit -m "type: message", git push.'
+                'Include git add, git commit -m "type: message", and git push origin main.',
+                "Use a conventional commit type like feat:, fix:, or docs:."
               ],
               solution: {
-                bash: 'echo "feature" > feature.js\ngit add feature.js\ngit commit -m "feat: add feature.js"\ngit push origin main'
+                javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  { cmd: "echo \\"feature\\" > feature.js" },\n  { cmd: "git add feature.js" },\n  { cmd: "git commit -m \\"feat: add feature.js\\"" },\n  { cmd: "git push origin main" },\n];\n'
               },
               testNotes: "The exercise verifies the conventional commit pattern."
             }
@@ -85636,7 +85770,7 @@ git push origin main`
           {
             type: "code",
             id: "g-l5-c1",
-            language: "bash",
+            language: "plaintext",
             title: "Create and switch",
             code: `# create a new branch
 git branch feature-login
@@ -85680,22 +85814,22 @@ git switch -c feature-login`
             id: "g-l5-x1",
             exercise: {
               id: "ex-git-l5",
-              instructions: "Create a new branch called feature/hello and switch to it.",
-              languages: ["bash"],
-              starterCode: "",
-              expectedOutput: "new branch created and checked out",
+              instructions: "Write a JavaScript array of commands that creates a new branch called feature/hello and switches to it.",
+              languages: ["javascript"],
+              starterCode: { javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  // e.g. { cmd: "git switch -c feature/hello" },\n];\n' },
+              expectedOutput: "New branch created and checked out",
               tests: [
                 {
                   id: "ex-git-l5-t1",
-                  label: "Branch created",
-                  body: `return true`
+                  label: "Creates and switches to feature/hello",
+                  body: `return Array.isArray(commands) && commands.some(c => String(c.cmd || c).includes('feature/hello') && String(c.cmd || c).includes('git switch -c'));`
                 }
               ],
               hints: [
-                "Use git switch -c feature/hello."
+                "Use git switch -c feature/hello to create and switch in one step."
               ],
               solution: {
-                bash: "git switch -c feature/hello"
+                javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  { cmd: "git switch -c feature/hello" },\n];\n'
               },
               testNotes: "The exercise verifies branch creation and switch."
             }
@@ -85755,6 +85889,29 @@ git switch -c feature-login`
             ]
           },
           {
+            type: "code",
+            id: "g-l6-c1",
+            language: "plaintext",
+            title: "One feature branch, start to finish",
+            code: `# Start from an up-to-date main
+git switch main
+git pull
+
+# Create the feature branch and work on it
+git switch -c feature/button-colour
+
+git add .
+git commit -m "Add a colour variable for the button"
+
+# Push the branch and open a pull request
+git push -u origin feature/button-colour`
+          },
+          {
+            type: "text",
+            id: "g-l6-b2",
+            body: "Three of those commands carry more than they look like. `git switch -c` creates the branch and moves onto it in one step \u2014 the older `git checkout -b` does the same and is still common in scripts. `git push -u` sets the upstream, so every later push on that branch is just `git push`. And the pull request is not a Git concept at all: the branch is already on the remote, and the PR is the GitHub layer that runs the checks and collects the approval that stands between the branch and `main`."
+          },
+          {
             type: "tip",
             id: "g-l6-t1",
             title: "Start with GitHub Flow",
@@ -85765,23 +85922,28 @@ git switch -c feature-login`
             id: "g-l6-x1",
             exercise: {
               id: "ex-git-l6",
-              instructions: "Create a feature branch from main, make a change, and open a pull request description.",
-              languages: ["bash", "markdown"],
-              starterCode: "",
-              expectedOutput: "feature branch with PR description",
+              instructions: "Write JavaScript that creates a feature branch from main and defines a pull request description.",
+              languages: ["javascript"],
+              starterCode: { javascript: '// Write your git workflow as JavaScript\n\nconst commands = [\n  // e.g. { cmd: "git switch -c feature/button-color" },\n];\n\nconst prDescription = "";\n' },
+              expectedOutput: "Feature branch with PR description",
               tests: [
                 {
                   id: "ex-git-l6-t1",
-                  label: "Feature branch created",
-                  body: `return true`
+                  label: "Creates a feature branch",
+                  body: `return Array.isArray(commands) && commands.some(c => String(c.cmd || c).includes('git switch -c') && String(c.cmd || c).includes('feature/'));`
+                },
+                {
+                  id: "ex-git-l6-t2",
+                  label: "PR description has sections",
+                  body: `return typeof prDescription === 'string' && prDescription.includes('## Summary') && prDescription.includes('## Changes');`
                 }
               ],
               hints: [
-                "Use git switch -c feature/branch-name from main."
+                "Use git switch -c feature/branch-name from main.",
+                "Write a PR description with Summary and Changes sections."
               ],
               solution: {
-                bash: 'git switch -c feature/button-color\necho "<button>Click</button>" > button.html\ngit add button.html\ngit commit -m "feat: add button component"',
-                markdown: "# Pull Request\n\n## Description\nAdds a new button component with accessible markup.\n\n## Changes\n- Created button.html\n- Added commit with conventional message"
+                javascript: '// Write your git workflow as JavaScript\n\nconst commands = [\n  { cmd: "git switch main" },\n  { cmd: "git switch -c feature/button-color" },\n  { cmd: "echo \\"<button>Click</button>\\" > button.html" },\n  { cmd: "git add button.html" },\n  { cmd: "git commit -m \\"feat: add button component\\"" },\n];\n\nconst prDescription = "# Pull Request\\n\\n## Summary\\nAdds a new button component with accessible markup.\\n\\n## Changes\\n- Created button.html\\n- Added commit with conventional message";\n'
               },
               testNotes: "The exercise verifies the branching workflow."
             }
@@ -85876,7 +86038,7 @@ git switch -c feature-login`
           {
             type: "code",
             id: "g-l7-c1",
-            language: "text",
+            language: "plaintext",
             title: "Conflict example",
             code: `<<<<<<< HEAD
 const color = "blue";
@@ -85898,7 +86060,7 @@ const color = "red";
           {
             type: "code",
             id: "g-l7-c2",
-            language: "bash",
+            language: "plaintext",
             title: "Merging",
             code: `git switch main
 git merge feature-login
@@ -85918,22 +86080,22 @@ git commit -m "merge: resolve conflict in app.js"`
             id: "g-l7-x1",
             exercise: {
               id: "ex-git-l7",
-              instructions: "Create a conflict by editing the same line on two branches, then resolve it.",
-              languages: ["bash"],
-              starterCode: "",
-              expectedOutput: "conflict resolved",
+              instructions: "Write a JavaScript array of commands that creates a conflict by editing the same line on two branches, then resolves it.",
+              languages: ["javascript"],
+              starterCode: { javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  // e.g. { cmd: "git switch -c branch-a" },\n];\n' },
+              expectedOutput: "Conflict resolved",
               tests: [
                 {
                   id: "ex-git-l7-t1",
-                  label: "Conflict created and resolved",
-                  body: `return true`
+                  label: "Creates and merges branches with conflict",
+                  body: `return Array.isArray(commands) && commands.some(c => String(c.cmd || c).includes('git switch -c')) && commands.some(c => String(c.cmd || c).includes('git merge'));`
                 }
               ],
               hints: [
                 "Change the same line on two branches and merge."
               ],
               solution: {
-                bash: 'git switch -c branch-a\necho "blue" > color.txt\ngit add color.txt\ngit commit -m "set blue"\ngit switch main\ngit switch -c branch-b\necho "red" > color.txt\ngit add color.txt\ngit commit -m "set red"\ngit switch main\ngit merge branch-a\ngit merge branch-b'
+                javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  { cmd: "git switch -c branch-a" },\n  { cmd: "echo \\"blue\\" > color.txt" },\n  { cmd: "git add color.txt" },\n  { cmd: "git commit -m \\"set blue\\"" },\n  { cmd: "git switch main" },\n  { cmd: "git switch -c branch-b" },\n  { cmd: "echo \\"red\\" > color.txt" },\n  { cmd: "git add color.txt" },\n  { cmd: "git commit -m \\"set red\\"" },\n  { cmd: "git switch main" },\n  { cmd: "git merge branch-a" },\n  { cmd: "git merge branch-b" },\n];\n'
               },
               testNotes: "The exercise demonstrates creating and resolving a merge conflict."
             }
@@ -85976,7 +86138,7 @@ git commit -m "merge: resolve conflict in app.js"`
           {
             type: "code",
             id: "g-l8-c1",
-            language: "bash",
+            language: "plaintext",
             title: "Rebase and interactive rebase",
             code: `# rebase feature onto main
 git switch feature-login
@@ -86013,22 +86175,22 @@ git rebase -i HEAD~3`
             id: "g-l8-x1",
             exercise: {
               id: "ex-git-l8",
-              instructions: "Rebase a feature branch onto main using git rebase.",
-              languages: ["bash"],
-              starterCode: "",
-              expectedOutput: "branch rebased onto main",
+              instructions: "Write a JavaScript array of commands that rebases a feature branch onto main.",
+              languages: ["javascript"],
+              starterCode: { javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  // e.g. { cmd: "git switch feature-login" },\n];\n' },
+              expectedOutput: "Branch rebased onto main",
               tests: [
                 {
                   id: "ex-git-l8-t1",
                   label: "Rebase completed",
-                  body: `return true`
+                  body: `return Array.isArray(commands) && commands.some(c => String(c.cmd || c).includes('git rebase main'));`
                 }
               ],
               hints: [
                 "Use git switch feature && git rebase main."
               ],
               solution: {
-                bash: "git switch feature\ngit rebase main"
+                javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  { cmd: "git switch feature" },\n  { cmd: "git rebase main" },\n];\n'
               },
               testNotes: "The exercise verifies the rebase workflow."
             }
@@ -86128,7 +86290,7 @@ git rebase -i HEAD~3`
           {
             type: "code",
             id: "g-l9-c1",
-            language: "bash",
+            language: "plaintext",
             title: "Fetch and inspect",
             code: `git fetch origin
 git log origin/main --oneline
@@ -86156,22 +86318,22 @@ git log main..origin/main --oneline`
             id: "g-l9-x1",
             exercise: {
               id: "ex-git-l9",
-              instructions: "Use git fetch to download remote changes and inspect the new commits.",
-              languages: ["bash"],
-              starterCode: "",
-              expectedOutput: "remote changes fetched and inspected",
+              instructions: "Write a JavaScript array of commands that fetches remote changes and inspects the new commits.",
+              languages: ["javascript"],
+              starterCode: { javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  // e.g. { cmd: "git fetch origin" },\n];\n' },
+              expectedOutput: "Remote changes fetched and inspected",
               tests: [
                 {
                   id: "ex-git-l9-t1",
                   label: "Fetch used",
-                  body: `return true`
+                  body: `return Array.isArray(commands) && commands.some(c => String(c.cmd || c).includes('git fetch origin')) && commands.some(c => String(c.cmd || c).includes('git log origin/main'));`
                 }
               ],
               hints: [
                 "Use git fetch origin then git log origin/main --oneline."
               ],
               solution: {
-                bash: "git fetch origin\ngit log origin/main --oneline"
+                javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  { cmd: "git fetch origin" },\n  { cmd: "git log origin/main --oneline" },\n];\n'
               },
               testNotes: "The exercise verifies the fetch and log commands."
             }
@@ -86229,6 +86391,26 @@ git log main..origin/main --oneline`
             ]
           },
           {
+            type: "code",
+            id: "g-l10-c1",
+            language: "plaintext",
+            title: "Opening a pull request",
+            code: `# The branch is pushed and up to date
+git push -u origin feature/dark-mode
+
+# Open the pull request into main, with a title and a body file
+gh pr create --base main --title "feat: add a dark mode toggle" --body-file pr.md
+
+# Watch the checks, then merge once approved
+gh pr checks
+gh pr merge --squash`
+          },
+          {
+            type: "text",
+            id: "g-l10-b2",
+            body: '`--base main` is the branch the proposal merges into, and `--body-file pr.md` pulls the description from a file \u2014 which matters because the description is the part of a pull request a reviewer reads first. It carries the same three headings as the exercise below: what changed and why, what a reader should look at, and how to check it. `gh pr checks` waits on CI, and `gh pr merge --squash` collapses the branch into a single commit, which is the strategy to choose when the branch history is a trail of "fix typo" rather than a story worth keeping.'
+          },
+          {
             type: "tip",
             id: "g-l10-t1",
             title: "Keep PRs small",
@@ -86239,22 +86421,22 @@ git log main..origin/main --oneline`
             id: "g-l10-x1",
             exercise: {
               id: "ex-git-l10",
-              instructions: "Write a pull request description following best practices for a feature that adds a dark mode toggle.",
-              languages: ["markdown"],
-              starterCode: "",
+              instructions: "Write a JavaScript string containing a pull request description for a dark mode toggle feature.",
+              languages: ["javascript"],
+              starterCode: { javascript: '// Write your pull request description as JavaScript\n\nconst prDescription = "";\n' },
               expectedOutput: "PR description",
               tests: [
                 {
                   id: "ex-git-l10-t1",
                   label: "Description includes summary",
-                  body: `return true`
+                  body: `return typeof prDescription === 'string' && prDescription.includes('## Summary') && prDescription.includes('## Changes') && prDescription.includes('## Testing');`
                 }
               ],
               hints: [
                 "Include a summary, what changed, testing steps, and screenshots if relevant."
               ],
               solution: {
-                markdown: "# feat: add dark mode toggle\n\n## Summary\nAdds a theme toggle that switches between light and dark mode using CSS custom properties and a class on the html element.\n\n## Changes\n- Added theme-toggle.js\n- Added dark mode CSS variables\n- Updated header component\n\n## Testing\n1. Open the site\n2. Click the theme toggle\n3. Verify the theme persists on reload\n\n## Screenshots\n<!-- Add before/after screenshots here -->"
+                javascript: '// Write your pull request description as JavaScript\n\nconst prDescription = "# feat: add dark mode toggle\\n\\n## Summary\\nAdds a theme toggle that switches between light and dark mode using CSS custom properties and a class on the html element.\\n\\n## Changes\\n- Added theme-toggle.js\\n- Added dark mode CSS variables\\n- Updated header component\\n\\n## Testing\\n1. Open the site\\n2. Click the theme toggle\\n3. Verify the theme persists on reload\\n\\n## Screenshots\\n<!-- Add before/after screenshots here -->";\n'
               },
               testNotes: "The exercise verifies PR description structure."
             }
@@ -86354,7 +86536,7 @@ git log main..origin/main --oneline`
           {
             type: "code",
             id: "g-l11-c1",
-            language: "bash",
+            language: "plaintext",
             title: "Restore and clean",
             code: `# restore a single file
 git restore app.js
@@ -86364,6 +86546,17 @@ git restore .
 
 # unstage a file (keep working tree changes)
 git restore --staged app.js`
+          },
+          {
+            type: "text",
+            id: "g-l11-b2",
+            body: "The three commands do three different jobs. `git restore app.js` copies the committed version of that one file back over the working copy, leaving every other file alone. `git restore .` does it for the whole tree. `git restore --staged app.js` is the odd one out: it takes the file out of the index but leaves the file on disk exactly as it is, so the change survives and simply becomes unstaged again. That last one is the command people reach for as `git reset HEAD app.js`, which does the same thing under an older name."
+          },
+          {
+            type: "warning",
+            id: "g-l11-w1",
+            title: "Restore discards, it does not store",
+            body: "There is no reflog entry for work that was never committed. A restored file is overwritten by the committed version and the change is gone \u2014 `git restore` is not an undo, it is a discard. If there is any doubt, commit it on a throwaway branch or run `git stash` first; both are reversible, and a restore is not."
           },
           {
             type: "tip",
@@ -86376,22 +86569,22 @@ git restore --staged app.js`
             id: "g-l11-x1",
             exercise: {
               id: "ex-git-l11",
-              instructions: "Modify a file, then use git restore to discard the changes.",
-              languages: ["bash"],
-              starterCode: "",
-              expectedOutput: "file restored to last committed state",
+              instructions: "Write a JavaScript array of commands that modifies a file then uses git restore to discard the changes.",
+              languages: ["javascript"],
+              starterCode: { javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  // e.g. { cmd: "git restore app.js" },\n];\n' },
+              expectedOutput: "File restored to last committed state",
               tests: [
                 {
                   id: "ex-git-l11-t1",
-                  label: "File restored",
-                  body: `return true`
+                  label: "Uses git restore",
+                  body: `return Array.isArray(commands) && commands.some(c => String(c.cmd || c).includes('git restore'));`
                 }
               ],
               hints: [
                 "Use git restore file.js after modifying it."
               ],
               solution: {
-                bash: 'echo "broken" > app.js\ngit restore app.js'
+                javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  { cmd: "echo \\"broken\\" > app.js" },\n  { cmd: "git restore app.js" },\n];\n'
               },
               testNotes: "The exercise verifies the restore workflow."
             }
@@ -86434,7 +86627,7 @@ git restore --staged app.js`
           {
             type: "code",
             id: "g-l12-c1",
-            language: "bash",
+            language: "plaintext",
             title: "Revert and reset",
             code: `# safe undo: create a new commit
 git revert abc123
@@ -86459,22 +86652,22 @@ git reset --hard HEAD~1`
             id: "g-l12-x1",
             exercise: {
               id: "ex-git-l12",
-              instructions: "Revert the last commit on the current branch safely.",
-              languages: ["bash"],
-              starterCode: "",
-              expectedOutput: "revert commit created",
+              instructions: "Write a JavaScript array of commands that reverts the last commit on the current branch safely.",
+              languages: ["javascript"],
+              starterCode: { javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  // e.g. { cmd: "git revert HEAD" },\n];\n' },
+              expectedOutput: "Revert commit created",
               tests: [
                 {
                   id: "ex-git-l12-t1",
                   label: "Revert used",
-                  body: `return true`
+                  body: `return Array.isArray(commands) && commands.some(c => String(c.cmd || c).includes('git revert HEAD'));`
                 }
               ],
               hints: [
                 "Use git revert HEAD."
               ],
               solution: {
-                bash: "git revert HEAD"
+                javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  { cmd: "git revert HEAD" },\n];\n'
               },
               testNotes: "The exercise verifies the revert command."
             }
@@ -86574,7 +86767,7 @@ git reset --hard HEAD~1`
           {
             type: "code",
             id: "g-l13-c1",
-            language: "bash",
+            language: "plaintext",
             title: "Stash workflow",
             code: `# save changes
 git stash
@@ -86592,6 +86785,17 @@ git stash apply stash@{1}
 git stash drop stash@{0}`
           },
           {
+            type: "text",
+            id: "g-l13-b2",
+            body: "A stash is a stack, and the numbering runs backwards: `stash@{0}` is the most recent entry, and each new stash pushes everything else down. `git stash` is a shortcut for `git stash push`, and the default message is the branch and the commit you were on, which is rarely enough to identify it later. `git stash pop` is exactly `git stash apply` followed by `git stash drop`, which is why a conflict during a pop leaves the stash in place \u2014 the apply failed, so the drop never ran."
+          },
+          {
+            type: "warning",
+            id: "g-l13-w1",
+            title: "A stash is easy to forget",
+            body: "Stashes live only on your machine. They are not pushed, not shared, and invisible to everyone else working on the branch \u2014 so a stash is the wrong place for anything that has to outlive the afternoon. They are also easy to lose: `git stash pop` an old stash and the conflict can be genuinely confusing. For anything longer than a quick branch switch, a WIP commit on a scratch branch is safer."
+          },
+          {
             type: "tip",
             id: "g-l13-t1",
             title: "Include untracked files",
@@ -86602,22 +86806,22 @@ git stash drop stash@{0}`
             id: "g-l13-x1",
             exercise: {
               id: "ex-git-l13",
-              instructions: "Stash your current changes, switch to another branch, then pop the stash.",
-              languages: ["bash"],
-              starterCode: "",
-              expectedOutput: "changes stashed and restored",
+              instructions: "Write a JavaScript array of commands that stashes changes, switches branches, then pops the stash.",
+              languages: ["javascript"],
+              starterCode: { javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  // e.g. { cmd: "git stash" },\n];\n' },
+              expectedOutput: "Changes stashed and restored",
               tests: [
                 {
                   id: "ex-git-l13-t1",
                   label: "Stash used",
-                  body: `return true`
+                  body: `return Array.isArray(commands) && commands.some(c => String(c.cmd || c).includes('git stash')) && commands.some(c => String(c.cmd || c).includes('git switch')) && commands.some(c => String(c.cmd || c).includes('git stash pop'));`
                 }
               ],
               hints: [
                 "Use git stash, git switch, then git stash pop."
               ],
               solution: {
-                bash: "git stash\ngit switch main\ngit stash pop"
+                javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  { cmd: "git stash" },\n  { cmd: "git switch main" },\n  { cmd: "git stash pop" },\n];\n'
               },
               testNotes: "The exercise verifies the stash workflow."
             }
@@ -86650,7 +86854,7 @@ git stash drop stash@{0}`
           {
             type: "code",
             id: "g-l14-c1",
-            language: "bash",
+            language: "plaintext",
             title: "Reflog and recovery",
             code: `# see every HEAD move
 git reflog
@@ -86683,22 +86887,22 @@ git show HEAD@{2}`
             id: "g-l14-x1",
             exercise: {
               id: "ex-git-l14",
-              instructions: "Use git reflog to find the last HEAD position and recover it.",
-              languages: ["bash"],
-              starterCode: "",
-              expectedOutput: "reflog used for recovery",
+              instructions: "Write a JavaScript array of commands that uses git reflog to find the last HEAD position and recover it.",
+              languages: ["javascript"],
+              starterCode: { javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  // e.g. { cmd: "git reflog" },\n];\n' },
+              expectedOutput: "Reflog used for recovery",
               tests: [
                 {
                   id: "ex-git-l14-t1",
                   label: "Reflog used",
-                  body: `return true`
+                  body: `return Array.isArray(commands) && commands.some(c => String(c.cmd || c).includes('git reflog')) && commands.some(c => String(c.cmd || c).includes('git reset --hard HEAD@'));`
                 }
               ],
               hints: [
                 "Run git reflog and use git reset --hard HEAD@{1}."
               ],
               solution: {
-                bash: "git reflog\ngit reset --hard HEAD@{1}"
+                javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  { cmd: "git reflog" },\n  { cmd: "git reset --hard HEAD@{1}" },\n];\n'
               },
               testNotes: "The exercise verifies the reflog workflow."
             }
@@ -86798,7 +87002,7 @@ git show HEAD@{2}`
           {
             type: "code",
             id: "g-l15-c1",
-            language: "text",
+            language: "plaintext",
             title: "Conventional commit format",
             code: `type(scope): short description
 
@@ -86829,21 +87033,22 @@ Footer: reference issue number or breaking change.`
             exercise: {
               id: "ex-git-l15",
               instructions: "Write three conventional commit messages for a feature that adds a login form, fixes a layout bug, and updates tests.",
-              languages: ["text"],
-              starterCode: "",
-              expectedOutput: "three conventional commit messages",
+              languages: ["javascript"],
+              starterCode: { javascript: '// Write your commit messages as JavaScript\n\nconst messages = [\n  // e.g. "feat(auth): add login form",\n];\n' },
+              expectedOutput: "Three conventional commit messages",
               tests: [
                 {
                   id: "ex-git-l15-t1",
                   label: "Messages follow convention",
-                  body: `return true`
+                  body: `return Array.isArray(messages) && messages.length === 3 && messages.every(m => typeof m === 'string' && /^(feat|fix|docs|refactor|test|chore)\\(.+\\): .+/.test(m));`
                 }
               ],
               hints: [
-                "Use the format: type(scope): short description"
+                "Use the format: type(scope): short description",
+                "Types include feat, fix, docs, refactor, test, chore."
               ],
               solution: {
-                text: "feat(auth): add login form component\nfix(layout): correct padding on mobile nav\ntest(auth): add tests for login validation"
+                javascript: '// Write your commit messages as JavaScript\n\nconst messages = [\n  "feat(auth): add login form component",\n  "fix(layout): correct padding on mobile nav",\n  "test(auth): add tests for login validation",\n];\n'
               },
               testNotes: "The exercise verifies conventional commit format."
             }
@@ -86876,7 +87081,7 @@ Footer: reference issue number or breaking change.`
           {
             type: "code",
             id: "g-l16-c1",
-            language: "text",
+            language: "plaintext",
             title: ".gitignore",
             code: `# dependencies
 node_modules/
@@ -86907,7 +87112,7 @@ Thumbs.db`
           {
             type: "code",
             id: "g-l16-c2",
-            language: "bash",
+            language: "plaintext",
             title: "Simple pre-commit hook",
             code: `#!/bin/sh
 # .git/hooks/pre-commit
@@ -86925,22 +87130,22 @@ npm test`
             id: "g-l16-x1",
             exercise: {
               id: "ex-git-l16",
-              instructions: "Create a .gitignore file for a Node.js project that ignores node_modules, .env and dist.",
-              languages: ["text"],
-              starterCode: "",
+              instructions: "Write a JavaScript string containing a .gitignore file for a Node.js project.",
+              languages: ["javascript"],
+              starterCode: { javascript: '// Write your .gitignore content as JavaScript\n\nconst gitignoreContent = "";\n' },
               expectedOutput: ".gitignore file with common patterns",
               tests: [
                 {
                   id: "ex-git-l16-t1",
                   label: "node_modules ignored",
-                  body: `return true`
+                  body: `return typeof gitignoreContent === 'string' && gitignoreContent.includes('node_modules/') && gitignoreContent.includes('.env') && gitignoreContent.includes('dist/');`
                 }
               ],
               hints: [
                 "Create .gitignore with node_modules/, .env and dist/."
               ],
               solution: {
-                text: "node_modules/\n.env\ndist/\n.vscode/\n.DS_Store"
+                javascript: '// Write your .gitignore content as JavaScript\n\nconst gitignoreContent = "node_modules/\\n.env\\ndist/\\n.vscode/\\n.DS_Store";\n'
               },
               testNotes: "The exercise verifies .gitignore patterns."
             }
@@ -87038,7 +87243,7 @@ var gitGitHubCourse = {
     "best-practices"
   ],
   icon: "\xB1",
-  projects: projectsForCourse("git-github").map((p) => p.slug),
+  projects: projectsForCourse("git-github"),
   sections: gitGitHubSections
 };
 
@@ -87046,7 +87251,7 @@ var gitGitHubCourse = {
 var tsHomeSections = [
   {
     id: "ts-s1",
-    title: "TS HOME",
+    title: "Getting started",
     description: "What TypeScript adds to JavaScript, how the compiler works, and what you will be able to do at the end.",
     lessons: [
       {
@@ -87060,7 +87265,130 @@ var tsHomeSections = [
           "Name the three classes of bugs TypeScript prevents"
         ],
         xp: 40,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "ts-l1-intro",
+            body: "**What TypeScript is and why it exists.** TypeScript is a superset of JavaScript: every valid JavaScript program is already valid TypeScript. It lets you describe the *shape* of your data, then checks that you use that data consistently. Every type is erased before the code reaches the browser, so the JavaScript that runs is exactly the JavaScript you would have written by hand."
+          },
+          {
+            type: "text",
+            id: "ts-l1-b2",
+            body: 'The value is not a new runtime. It is a second reader of your code \u2014 a compiler that says "you said this was a number, but here you are treating it as a string." That conversation happens while you type, long before a user clicks anything.'
+          },
+          {
+            type: "heading",
+            id: "ts-l1-h1",
+            level: 2,
+            body: "The three classes of bugs it removes"
+          },
+          {
+            type: "list",
+            id: "ts-l1-list",
+            style: "ordered",
+            items: [
+              '**Wrong values at the wrong time.** Passing a string to a function that adds numbers, and getting `"12"` instead of `3`.',
+              "**Mistyped property names.** Reading `user.nam` when the key is really `name`.",
+              "**Missing null.** Reaching into `user.address.city` when `address` might be undefined."
+            ]
+          },
+          {
+            type: "heading",
+            id: "ts-l1-h2",
+            level: 2,
+            body: "Worked example"
+          },
+          {
+            type: "code",
+            id: "ts-l1-code",
+            language: "typescript",
+            title: "describe a value, then use it",
+            code: `// The annotation says: this parameter must be a string.
+function shout(message: string) {
+  return message.toUpperCase() + '!'
+}
+
+console.log(shout('hello world'))   // HELLO WORLD!
+
+// shout(42)   // the compiler rejects this before the code ever runs`
+          },
+          {
+            type: "list",
+            id: "ts-l1-list2",
+            style: "bullet",
+            items: [
+              "`message: string` is an annotation \u2014 the only new syntax in the example.",
+              "Inside the function the editor now knows `message` has `.toUpperCase()`, so it autocompletes it and flags typos.",
+              "Calling `shout(42)` is a compile-time error. In plain JavaScript it would only fail when that line happened to run."
+            ]
+          },
+          {
+            type: "tip",
+            id: "ts-l1-tip",
+            title: "Types disappear at runtime",
+            body: "Compile `shout` and the annotation is gone \u2014 the browser receives the same two lines you would have written in JavaScript. TypeScript costs nothing at runtime; it only costs the moment it takes to run the compiler."
+          },
+          {
+            type: "heading",
+            id: "ts-l1-h3",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "ts-l1-b3",
+            body: "Declare two typed values, then build a sentence from them. The editor runs your real TypeScript, so the annotations you write are checked as you go."
+          },
+          {
+            type: "exercise",
+            id: "ts-l1-x1",
+            exercise: {
+              id: "ex-ts-l1",
+              instructions: "Give course the type string and lessonCount the type number, then set summary to a sentence that contains both.",
+              languages: ["typescript"],
+              starterCode: {
+                typescript: `// Annotate both variables.
+const course = 'TypeScript'
+const lessonCount = 33
+
+// Build a sentence such as "TypeScript has 33 lessons".
+const summary = ''
+`
+              },
+              tests: [
+                {
+                  id: "ts-l1-t1",
+                  label: "course is a non-empty string",
+                  body: "return typeof course === 'string' && course.length > 0"
+                },
+                {
+                  id: "ts-l1-t2",
+                  label: "lessonCount is the number 33",
+                  body: "return typeof lessonCount === 'number' && lessonCount === 33"
+                },
+                {
+                  id: "ts-l1-t3",
+                  label: "summary mentions both values",
+                  body: "return typeof summary === 'string' && summary.includes(course) && summary.includes(String(lessonCount))"
+                }
+              ],
+              hints: [
+                "An annotation goes after the name, before the equals sign: const course: string = ...",
+                "lessonCount is already a number because of its value \u2014 annotate it anyway so the intent is written down.",
+                "Join the parts with concatenation: course + ' has ' + lessonCount + ' lessons'."
+              ],
+              solution: {
+                typescript: `const course: string = 'TypeScript'
+const lessonCount: number = 33
+
+const summary = course + ' has ' + lessonCount + ' lessons'
+console.log(summary)
+`
+              },
+              testNotes: "The tests run after your code and read the variables you created, so they check the values you produced rather than the exact syntax you used."
+            }
+          }
+        ]
       },
       {
         id: "ts-l2",
@@ -87073,7 +87401,136 @@ var tsHomeSections = [
           "Read compiler output and jump to the failing line"
         ],
         xp: 35,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "ts-l2-intro",
+            body: "**How the compiler fits in your workflow.** The TypeScript compiler, `tsc`, is the program that turns your `.ts` files into `.js` files \u2014 and that reports type errors while it does so. You rarely run it by hand: your editor runs it in the background, and your build tool runs it before shipping."
+          },
+          {
+            type: "text",
+            id: "ts-l2-b2",
+            body: "A single file, `tsconfig.json`, tells the compiler what to check and what to produce. Once that file exists, running `tsc` with no arguments reads it automatically, so the project behaves the same on every machine."
+          },
+          {
+            type: "heading",
+            id: "ts-l2-h1",
+            level: 2,
+            body: "The smallest useful tsconfig.json"
+          },
+          {
+            type: "code",
+            id: "ts-l2-code",
+            language: "plaintext",
+            title: "tsconfig.json",
+            code: `{
+  "compilerOptions": {
+    "target": "ES2022",      // how modern the output JavaScript is
+    "module": "ESNext",      // keep import/export as written
+    "strict": true,          // turn on every safety check
+    "noEmit": true           // check types, let the bundler emit files
+  },
+  "include": ["src"]         // which files to check
+}`
+          },
+          {
+            type: "list",
+            id: "ts-l2-list",
+            style: "bullet",
+            items: [
+              "`strict` is the setting that matters most. It enables `strictNullChecks` and the rest of the family that finds real bugs.",
+              "`include` lists the folders to check. Without it the compiler falls back to every `.ts` file it can find.",
+              "`noEmit` is common in modern setups: Vite or webpack strips the types, and `tsc` is used purely as a checker."
+            ]
+          },
+          {
+            type: "heading",
+            id: "ts-l2-h2",
+            level: 2,
+            body: "Watch mode"
+          },
+          {
+            type: "code",
+            id: "ts-l2-code2",
+            language: "plaintext",
+            title: "terminal",
+            code: `# check once and exit
+tsc --noEmit
+
+# re-check on every save
+tsc --noEmit --watch`
+          },
+          {
+            type: "tip",
+            id: "ts-l2-tip",
+            title: "You already have this in your editor",
+            body: "VS Code runs the same compiler for the red squiggles under your code. The terminal command is useful in CI, where there is no editor \u2014 an error there should fail the build."
+          },
+          {
+            type: "heading",
+            id: "ts-l2-h3",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "ts-l2-b3",
+            body: "A tsconfig is just data, so you can model it in TypeScript and check your understanding. Fill in a configuration that would enable strict checking on a modern project."
+          },
+          {
+            type: "exercise",
+            id: "ts-l2-x1",
+            exercise: {
+              id: "ex-ts-l2",
+              instructions: "Fill the tsconfig object so the compiler would target ES2022, enable strict mode, and check the src folder.",
+              languages: ["typescript"],
+              starterCode: {
+                typescript: `// Fill in compilerOptions, then list the folder to check.
+const tsconfig = {
+  compilerOptions: {
+    target: '',
+    strict: false,
+  },
+  include: [],
+}
+`
+              },
+              tests: [
+                {
+                  id: "ts-l2-t1",
+                  label: "target is ES2022",
+                  body: "return typeof tsconfig.compilerOptions.target === 'string' && tsconfig.compilerOptions.target.toLowerCase() === 'es2022'"
+                },
+                {
+                  id: "ts-l2-t2",
+                  label: "strict is enabled",
+                  body: "return tsconfig.compilerOptions.strict === true"
+                },
+                {
+                  id: "ts-l2-t3",
+                  label: "the src folder is included",
+                  body: "return Array.isArray(tsconfig.include) && tsconfig.include.includes('src')"
+                }
+              ],
+              hints: [
+                "The target is written as a string: target: 'ES2022'.",
+                'strict is a boolean, so it wants true rather than the string "true".',
+                "include is an array of folder paths: include: ['src']."
+              ],
+              solution: {
+                typescript: `const tsconfig = {
+  compilerOptions: {
+    target: 'ES2022',
+    strict: true,
+  },
+  include: ['src'],
+}
+`
+              },
+              testNotes: "This checks your understanding of the configuration shape, not the compiler itself \u2014 the values you set are what a real tsconfig.json would contain."
+            }
+          }
+        ]
       },
       {
         id: "ts-l3",
@@ -87086,12 +87543,117 @@ var tsHomeSections = [
           "Distinguish a compile error from a runtime error"
         ],
         xp: 40,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "ts-l3-intro",
+            body: "**Your first typed file.** Renaming a file from `.js` to `.ts` is the whole migration. The JavaScript still works; the difference is that now a mistake like assigning a number to a variable you have called a string is reported before the program runs."
+          },
+          {
+            type: "text",
+            id: "ts-l3-b2",
+            body: "An annotation is optional. TypeScript infers the type from the value you assign, so `const name = 'Ada'` is already a string without writing anything. You add an annotation when the inference is not obvious, when you want to *constrain* a value, or when a parameter has no value to infer from."
+          },
+          {
+            type: "heading",
+            id: "ts-l3-h1",
+            level: 2,
+            body: "Compile errors versus runtime errors"
+          },
+          {
+            type: "code",
+            id: "ts-l3-code",
+            language: "typescript",
+            title: "the compiler has your back",
+            code: `let message: string = 'Hello'
+message = 42   // \u2717 compile error: number is not assignable to string
+
+let count = 0
+count = count + 1   // \u2713 inferred number, so this is fine
+
+// A runtime error still happens at run time:
+const user: { name?: string } = {}
+// user.name.toUpperCase()   // compiles, but would crash \u2014 name may be undefined`
+          },
+          {
+            type: "list",
+            id: "ts-l3-list",
+            style: "bullet",
+            items: [
+              "A **compile error** never ships. It is a promise you broke, caught early.",
+              "A **runtime error** is a promise you kept about the type but not about the value \u2014 an empty array, a missing record, a `null` from an API.",
+              "Annotations go on the *binding*, not on every use. One `message: string` is enough for the whole file."
+            ]
+          },
+          {
+            type: "warning",
+            id: "ts-l3-warn",
+            title: "Annotating is not a substitute for handling null",
+            body: "Writing `user: { name: string }` does not make the name exist. With `strictNullChecks` the compiler will force you to prove it does \u2014 usually with a guard \u2014 before you can call methods on it."
+          },
+          {
+            type: "heading",
+            id: "ts-l3-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "ts-l3-b3",
+            body: "Here is the lesson of this section in one exercise: the types below are *correct*, and the function is still wrong. A type cannot check that your arithmetic is the arithmetic you meant \u2014 only that you handle the right kinds of value. Fix the body so the function does what its name promises."
+          },
+          {
+            type: "exercise",
+            id: "ts-l3-x1",
+            exercise: {
+              id: "ex-ts-l3",
+              instructions: "The annotations are already right. Correct the body so add(2, 3) returns 5 instead of the wrong number.",
+              languages: ["typescript"],
+              starterCode: {
+                typescript: `// Types are correct \u2014 the result is not.
+// Make add(2, 3) return 5.
+function add(a: number, b: number): number {
+  return a - b
+}
+`
+              },
+              tests: [
+                {
+                  id: "ts-l3-t1",
+                  label: "add is a function",
+                  body: "return typeof add === 'function'"
+                },
+                {
+                  id: "ts-l3-t2",
+                  label: "add(2, 3) returns the number 5",
+                  body: "return typeof add(2, 3) === 'number' && add(2, 3) === 5"
+                },
+                {
+                  id: "ts-l3-t3",
+                  label: "add(-1, 1) returns 0",
+                  body: "return add(-1, 1) === 0"
+                }
+              ],
+              hints: [
+                "Nothing is wrong with the annotations: a: number and the : number return type are both correct.",
+                "Read the body literally. The operator between the two parameters is subtraction.",
+                "The fix is one character: use + so the two numbers are added."
+              ],
+              solution: {
+                typescript: `function add(a: number, b: number): number {
+  return a + b
+}
+`
+              },
+              testNotes: "The tests call your function with real numbers. They cannot see your annotations, so what they prove is the behaviour \u2014 which is the point: types describe the shape of a value, not whether the logic is right."
+            }
+          }
+        ]
       }
     ],
     quiz: {
       id: "quiz-ts-s1",
-      title: "TS HOME check",
+      title: "Getting started check",
       passingScore: 60,
       questions: [
         {
@@ -87132,16 +87694,17 @@ var tsHomeSections = [
         {
           id: "quiz-ts-s1-q5",
           type: "identify-error",
-          prompt: "What is wrong with this tsconfig.json?",
-          code: '{\n  "compilerOptions": {\n    "target": "es2020",\n    "module": "commonjs"\n  }\n}',
+          prompt: "Which line is a compile error?",
+          code: `let message: string = 'Hello'
+message = 42`,
           options: [
             "Nothing is wrong",
-            'Missing "strict": true',
-            "target and module are incompatible",
-            "The file must be named typescript.config.json"
+            "The second line: a number cannot be assigned to a string",
+            "The first line: string needs a capital S",
+            "message is a reserved word"
           ],
-          answer: 0,
-          explanation: 'This is a valid minimal tsconfig.json. Adding "strict": true is recommended but not required.'
+          answer: 1,
+          explanation: "message was annotated as a string, so assigning the number 42 is rejected before the code runs. In plain JavaScript it would silently change the type."
         }
       ]
     }
@@ -87166,7 +87729,114 @@ var tsBasicsSections = [
           "Choose between const and let for narrower types"
         ],
         xp: 40,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "ts-l4-intro",
+            body: "**Primitive types and inference.** The primitive types are the atoms of the type system: `string`, `number`, `boolean`, `null`, `undefined`, `symbol` and `bigint`. You write them in lowercase \u2014 `string`, never `String`. The uppercase versions are the object wrappers and are almost never what you want."
+          },
+          {
+            type: "text",
+            id: "ts-l4-b2",
+            body: "Inference means you usually do not write them at all. TypeScript reads the value on the right and works out the type on the left, so `const title = 'Dune'` is already a string. Annotate when there is no value to infer from \u2014 a function parameter \u2014 or when you want to be stricter than the value alone would be."
+          },
+          {
+            type: "heading",
+            id: "ts-l4-h1",
+            level: 2,
+            body: "Inference in practice"
+          },
+          {
+            type: "code",
+            id: "ts-l4-code",
+            language: "typescript",
+            title: "what the compiler infers",
+            code: `let title = 'Dune'      // inferred string
+let pages = 412         // inferred number
+let inPrint = true      // inferred boolean
+
+const edition = 'first' // inferred the literal 'first', not string
+let reprint = 'first'   // inferred string (let may be reassigned)
+
+// No value to learn from, so the annotation is required:
+function format(pages: number, title: string) {
+  return title + ' (' + pages + ' pages)'
+}
+
+// A variable with no value needs one too:
+let subtitle: string | undefined`
+          },
+          {
+            type: "list",
+            id: "ts-l4-list",
+            style: "bullet",
+            items: [
+              "`const` infers the narrow literal (`'first'`); `let` widens to `string` because it can change.",
+              "Parameters have nothing to infer from \u2014 always annotate them.",
+              "A variable declared without a value has no inferred type, so give it one: `let subtitle: string | undefined`."
+            ]
+          },
+          {
+            type: "tip",
+            id: "ts-l4-tip",
+            title: "Let inference do the typing",
+            body: "Add annotations at the boundaries \u2014 parameters, return types on exported functions, and empty containers \u2014 and let the compiler infer the rest. A file where every local repeats its type is noisier than plain JavaScript and catches nothing extra."
+          },
+          {
+            type: "heading",
+            id: "ts-l4-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "ts-l4-b3",
+            body: "Fill in values that match each annotation, then bundle them into an object. The object is inferred \u2014 no annotation needed there."
+          },
+          {
+            type: "exercise",
+            id: "ts-l4-x1",
+            exercise: {
+              id: "ex-ts-l4",
+              instructions: "Set title to a non-empty string, pages to a positive number and inPrint to a boolean, then make book bundle all three.",
+              languages: ["typescript"],
+              starterCode: {
+                typescript: `// Fill each value in so it matches its annotation.
+const title: string = ''
+const pages: number = 0
+const inPrint: boolean = false
+
+// Bundle them. The object needs no annotation of its own.
+const book = { title, pages, inPrint }
+`
+              },
+              tests: [
+                { id: "ts-l4-t1", label: "title is a non-empty string", body: "return typeof title === 'string' && title.length > 0" },
+                { id: "ts-l4-t2", label: "pages is a positive number", body: "return typeof pages === 'number' && pages > 0" },
+                { id: "ts-l4-t3", label: "inPrint is a boolean", body: "return typeof inPrint === 'boolean'" },
+                {
+                  id: "ts-l4-t4",
+                  label: "book bundles all three values",
+                  body: "return !!book && book.title === title && book.pages === pages && book.inPrint === inPrint"
+                }
+              ],
+              hints: [
+                "title is a string, so use quotes: title = 'something'.",
+                "pages already has the type number from its annotation \u2014 only the value is missing.",
+                "inPrint is a boolean, so true or false works; the tests accept either, they only check the type."
+              ],
+              solution: {
+                typescript: `const title: string = 'Dune'
+const pages: number = 412
+const inPrint: boolean = true
+
+const book = { title, pages, inPrint }
+`
+              },
+              testNotes: "The tests check both the value and its runtime type. They cannot see your annotations, so they prove the value is the kind of thing the annotation allowed."
+            }
+          }
+        ]
       },
       {
         id: "ts-l5",
@@ -87179,7 +87849,102 @@ var tsBasicsSections = [
           "Use readonly to make arrays and tuples immutable"
         ],
         xp: 40,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "ts-l5-intro",
+            body: "**Arrays, tuples and readonly.** An array type records the type of every element: `number[]` (or its long form, `Array<number>`) is a list of numbers. The compiler then knows that `prices[0]` is a number, and it rejects a push of anything else."
+          },
+          {
+            type: "text",
+            id: "ts-l5-b2",
+            body: "A tuple is an array with a fixed length and a type per position: `[number, number]` is exactly two numbers. Tuples are how you return more than one value without inventing an object \u2014 a coordinate, a min-and-max pair, a key and its value."
+          },
+          {
+            type: "heading",
+            id: "ts-l5-h1",
+            level: 2,
+            body: "Arrays and tuples"
+          },
+          {
+            type: "code",
+            id: "ts-l5-code",
+            language: "typescript",
+            title: "lists that know their contents",
+            code: `const ids: number[] = [1, 2, 3]
+const names: Array<string> = ['Ada', 'Grace']   // same as string[]
+
+const pair: [string, number] = ['Ada', 36]      // exactly two entries
+const point: [number, number] = [3, 4]
+
+// A tuple element is narrowed by position:
+const [label, value] = pair   // label: string, value: number
+
+// readonly stops the array being changed after it is created:
+const locked: readonly string[] = ['a', 'b']
+// locked.push('c')   // \u2717 compile error`
+          },
+          {
+            type: "list",
+            id: "ts-l5-list",
+            style: "bullet",
+            items: [
+              "`number[]` and `Array<number>` mean the same thing; pick one and be consistent.",
+              "A tuple names a type per position, so destructuring carries those types with it.",
+              "`readonly` removes the mutating methods (`push`, `pop`, index assignment) from the type."
+            ]
+          },
+          {
+            type: "warning",
+            id: "ts-l5-warn",
+            title: "A tuple is a promise about length",
+            body: "TypeScript checks `[number, number]` at the point you build it, but the runtime array is still a plain array. Assigning a tuple to a variable then pushing onto it is caught as a type error \u2014 which is exactly the value of the tuple."
+          },
+          {
+            type: "heading",
+            id: "ts-l5-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "ts-l5-b3",
+            body: "Return two numbers from one function using a tuple: the smallest and largest value in a list."
+          },
+          {
+            type: "exercise",
+            id: "ts-l5-x1",
+            exercise: {
+              id: "ex-ts-l5",
+              instructions: "Write minMax(numbers) so it returns a two-element tuple [smallest, largest]. Assume the list is never empty.",
+              languages: ["typescript"],
+              starterCode: {
+                typescript: `// Return [smallest, largest] as a tuple.
+function minMax(numbers: number[]): [number, number] {
+  return [0, 0]
+}
+`
+              },
+              tests: [
+                { id: "ts-l5-t1", label: "minMax([3, 1, 2]) is [1, 3]", body: "return JSON.stringify(minMax([3, 1, 2])) === '[1,3]'" },
+                { id: "ts-l5-t2", label: "it handles negative numbers", body: "return JSON.stringify(minMax([-5, -1, -9])) === '[-9,-1]'" },
+                { id: "ts-l5-t3", label: "a single element is both ends", body: "return JSON.stringify(minMax([7])) === '[7,7]'" }
+              ],
+              hints: [
+                "Math.min and Math.max do the work \u2014 the tuple is just how you return both.",
+                "Both take a list of numbers, not an array, so spread it: Math.min(...numbers).",
+                "Return them in order: small first, large second, as [small, large]."
+              ],
+              solution: {
+                typescript: `function minMax(numbers: number[]): [number, number] {
+  return [Math.min(...numbers), Math.max(...numbers)]
+}
+`
+              },
+              testNotes: "The tests compare the returned pair position by position. A tuple type would reject returning a single number or three of them \u2014 the tests confirm the order is right."
+            }
+          }
+        ]
       },
       {
         id: "ts-l6",
@@ -87192,7 +87957,126 @@ var tsBasicsSections = [
           "Distinguish excess property checks from structural typing"
         ],
         xp: 40,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "ts-l6-intro",
+            body: "**Objects, optional properties and index signatures.** Most data in a real program is an object, and an object type describes which keys it has and what each one holds: `{ name: string; age: number }`. TypeScript checks that you only reach for keys that exist."
+          },
+          {
+            type: "text",
+            id: "ts-l6-b2",
+            body: "A question mark makes a key optional: `{ name: string; age?: number }` means `age` may be missing or undefined, so the compiler forces you to handle that before using it. An index signature covers the opposite case \u2014 an object whose keys you do not know in advance, like a word count."
+          },
+          {
+            type: "heading",
+            id: "ts-l6-h1",
+            level: 2,
+            body: "Object types and index signatures"
+          },
+          {
+            type: "code",
+            id: "ts-l6-code",
+            language: "typescript",
+            title: "named keys, optional keys, and open keys",
+            code: `type User = {
+  name: string
+  age?: number            // optional: may be absent
+}
+
+function greet(user: User) {
+  // user.age is number | undefined here, so guard before using it:
+  return user.age === undefined
+    ? 'Hello, ' + user.name
+    : 'Hello, ' + user.name + ' (' + user.age + ')'
+}
+
+// An index signature says every key maps to a value of one type:
+type WordCount = { [word: string]: number }
+
+const counts: WordCount = {}
+counts['hello'] = 1        // any string key is allowed`
+          },
+          {
+            type: "list",
+            id: "ts-l6-list",
+            style: "bullet",
+            items: [
+              "`age?: number` is shorthand for `age: number | undefined`.",
+              "Reading an optional property gives `T | undefined`, so narrowing comes first.",
+              "An index signature `{ [key: string]: number }` lets you read and write any string key \u2014 good for maps, risky for records with known fields."
+            ]
+          },
+          {
+            type: "tip",
+            id: "ts-l6-tip",
+            title: "Prefer a Map for truly dynamic keys",
+            body: "When keys are added and removed at runtime, a `Map<string, number>` is usually clearer than an index signature, and it carries its type through iteration. Reach for the index signature when you are describing plain JSON-shaped data."
+          },
+          {
+            type: "heading",
+            id: "ts-l6-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "ts-l6-b3",
+            body: "Build the classic index-signature example: count how often each word appears in a sentence."
+          },
+          {
+            type: "exercise",
+            id: "ts-l6-x1",
+            exercise: {
+              id: "ex-ts-l6",
+              instructions: "Write wordCount(text) that returns an object mapping each whitespace-separated word to how many times it appears.",
+              languages: ["typescript"],
+              starterCode: {
+                typescript: `// Return { word: count } for every word in the text.
+function wordCount(text: string): { [word: string]: number } {
+  return {}
+}
+`
+              },
+              tests: [
+                {
+                  id: "ts-l6-t1",
+                  label: "counts a repeated word",
+                  body: "const c = wordCount('a b a'); return c.a === 2 && c.b === 1"
+                },
+                {
+                  id: "ts-l6-t2",
+                  label: "handles a single word",
+                  body: "const c = wordCount('solo'); return c.solo === 1 && Object.keys(c).length === 1"
+                },
+                {
+                  id: "ts-l6-t3",
+                  label: "empty text gives an empty object",
+                  body: "return Object.keys(wordCount('')).length === 0"
+                }
+              ],
+              hints: [
+                "Start with an empty object and a loop over the words.",
+                "Split on whitespace with text.split(' '), then read and update a count per word.",
+                "Guard the increment so a missing key starts at zero: counts[word] = (counts[word] || 0) + 1."
+              ],
+              solution: {
+                typescript: `function wordCount(text: string): { [word: string]: number } {
+  const counts: { [word: string]: number } = {}
+  const words = text.split(' ').filter((word) => word.length > 0)
+
+  for (const word of words) {
+    counts[word] = (counts[word] || 0) + 1
+  }
+
+  return counts
+}
+`
+              },
+              testNotes: "The tests read named keys from the returned object. The index signature is what tells the compiler those dynamic keys are numbers."
+            }
+          }
+        ]
       },
       {
         id: "ts-l7",
@@ -87205,7 +88089,110 @@ var tsBasicsSections = [
           "Use a discriminant property for exhaustive narrowing"
         ],
         xp: 45,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "ts-l7-intro",
+            body: "**Union and intersection types.** A union says a value is one of several types: `string | number`. An intersection says it is all of them at once, which for object types means combined: `{ a: number } & { b: number }` has both keys. Unions are by far the more common of the two."
+          },
+          {
+            type: "text",
+            id: "ts-l7-b2",
+            body: "Before you can use a union, you have to *narrow* it \u2014 prove which member you are holding. `typeof`, `Array.isArray`, a comparison, or the presence of a shared key all narrow a union inside an `if`. After the check, the compiler treats the value as the narrowed type only."
+          },
+          {
+            type: "heading",
+            id: "ts-l7-h1",
+            level: 2,
+            body: "Narrowing a union"
+          },
+          {
+            type: "code",
+            id: "ts-l7-code",
+            language: "typescript",
+            title: "one value, several possible shapes",
+            code: `type Id = string | number
+
+function idLabel(id: Id): string {
+  if (typeof id === 'string') {
+    // here id is string, so .toUpperCase() is allowed
+    return id.toUpperCase()
+  }
+  // here id is number
+  return '#' + id
+}
+
+// A discriminated union: a shared literal key picks the branch.
+type Result =
+  | { status: 'ok'; value: number }
+  | { status: 'error'; message: string }
+
+function render(result: Result): string {
+  return result.status === 'ok' ? String(result.value) : result.message
+}`
+          },
+          {
+            type: "list",
+            id: "ts-l7-list",
+            style: "bullet",
+            items: [
+              "`typeof` narrows primitives; `Array.isArray`, `in` and equality narrow the rest.",
+              "A **discriminated union** gives every member a shared literal key (`status`) so one check selects a branch.",
+              'Intersections (`&`) merge object shapes; they are not the same as "either", which is what a union means.'
+            ]
+          },
+          {
+            type: "tip",
+            id: "ts-l7-tip",
+            title: "Unions replace flags and optional soup",
+            body: "Two booleans can express four states, only three of which make sense. A discriminated union of three members makes the impossible state unrepresentable \u2014 and the compiler will tell you if you forget to handle one."
+          },
+          {
+            type: "heading",
+            id: "ts-l7-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "ts-l7-b3",
+            body: "Write a function that accepts a union and returns a different answer per member, using a guard to narrow."
+          },
+          {
+            type: "exercise",
+            id: "ts-l7-x1",
+            exercise: {
+              id: "ex-ts-l7",
+              instructions: "Write describe(value) for a string | number. Return 'text' when it is a string and 'number' when it is a number.",
+              languages: ["typescript"],
+              starterCode: {
+                typescript: `// Narrow the union, then return the right word.
+function describe(value: string | number): string {
+  return ''
+}
+`
+              },
+              tests: [
+                { id: "ts-l7-t1", label: "describe('hi') is 'text'", body: "return describe('hi') === 'text'" },
+                { id: "ts-l7-t2", label: "describe(3) is 'number'", body: "return describe(3) === 'number'" },
+                { id: "ts-l7-t3", label: "describe(3.5) is 'number'", body: "return describe(3.5) === 'number'" },
+                { id: "ts-l7-t4", label: "describe('') is 'text'", body: "return describe('') === 'text'" }
+              ],
+              hints: [
+                'A single guard is enough: typeof value === "string".',
+                "Return early for the string case, then return the other value for the number case.",
+                "Return exactly the words text and number \u2014 the tests compare them as strings."
+              ],
+              solution: {
+                typescript: `function describe(value: string | number): string {
+  return typeof value === 'string' ? 'text' : 'number'
+}
+`
+              },
+              testNotes: "The tests pass a string and two numbers. They prove the branch you take is driven by typeof, which is the guard the union needs."
+            }
+          }
+        ]
       }
     ],
     quiz: {
@@ -87285,7 +88272,111 @@ var tsFunctionsSections = [
           "Type a rest parameter as an array"
         ],
         xp: 40,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "ts-l8-intro",
+            body: "**Parameter and return types.** A function is where annotations earn their keep. A caller has no value to infer from, so the signature is the contract: these are the types that go in, and this is the type that comes out. Get the signature right and every call site is checked against it."
+          },
+          {
+            type: "text",
+            id: "ts-l8-b2",
+            body: "Annotations go after the parameter name: `name: string`. The return type goes after the closing parenthesis: `): string`. You can leave the return type off and let it be inferred, but writing it down turns the function into documentation and catches a `return` that drifts from the intent."
+          },
+          {
+            type: "heading",
+            id: "ts-l8-h1",
+            level: 2,
+            body: "Optional, default, and rest parameters"
+          },
+          {
+            type: "code",
+            id: "ts-l8-code",
+            language: "typescript",
+            title: "a signature with all three",
+            code: `// A required parameter, then an optional one (note the ?).
+function greet(name: string, greeting?: string): string {
+  return (greeting ?? 'Hello') + ', ' + name + '!'
+}
+
+greet('Ada')            // 'Hello, Ada!'
+greet('Ada', 'Hi')      // 'Hi, Ada!'
+
+// A default value behaves like an optional parameter with a fallback:
+function repeat(text: string, times: number = 2): string {
+  return text.repeat(times)
+}
+
+// A rest parameter collects the remaining arguments into an array:
+function sum(...numbers: number[]): number {
+  return numbers.reduce((total, n) => total + n, 0)
+}
+
+sum(1, 2, 3)            // 6
+sum()                   // 0`
+          },
+          {
+            type: "list",
+            id: "ts-l8-list",
+            style: "bullet",
+            items: [
+              "`greeting?: string` is `string | undefined` inside the body, so guard it \u2014 the `??` here supplies a fallback.",
+              "A parameter with a default (`times = 2`) is optional at the call site and never undefined inside the body.",
+              "A rest parameter is typed as an *array*: `...numbers: number[]`, not `number`."
+            ]
+          },
+          {
+            type: "tip",
+            id: "ts-l8-tip",
+            title: "Annotate the boundary, infer the middle",
+            body: "Write parameter and return types; let local variables inside the body infer. The signature is what callers depend on, and it is the part that stays stable when the implementation changes."
+          },
+          {
+            type: "heading",
+            id: "ts-l8-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "ts-l8-b3",
+            body: "Use a rest parameter to accept any number of arguments and total them."
+          },
+          {
+            type: "exercise",
+            id: "ts-l8-x1",
+            exercise: {
+              id: "ex-ts-l8",
+              instructions: "Write sumAll(...numbers) that returns the total of every argument. Calling it with no arguments returns 0.",
+              languages: ["typescript"],
+              starterCode: {
+                typescript: `// Accept any number of numbers and return their total.
+function sumAll(...numbers: number[]): number {
+  return 0
+}
+`
+              },
+              tests: [
+                { id: "ts-l8-t1", label: "sumAll(1, 2, 3) is 6", body: "return sumAll(1, 2, 3) === 6" },
+                { id: "ts-l8-t2", label: "sumAll() is 0", body: "return sumAll() === 0" },
+                { id: "ts-l8-t3", label: "sumAll(5) is 5", body: "return sumAll(5) === 5" },
+                { id: "ts-l8-t4", label: "sumAll(-1, 1) is 0", body: "return sumAll(-1, 1) === 0" }
+              ],
+              hints: [
+                "The rest parameter is already an array, so numbers has every argument in it.",
+                "reduce is the natural fit: start at 0 and add each number.",
+                "numbers.reduce((total, n) => total + n, 0) \u2014 the 0 is the starting total for the empty case."
+              ],
+              solution: {
+                typescript: `function sumAll(...numbers: number[]): number {
+  return numbers.reduce((total, n) => total + n, 0)
+}
+`
+              },
+              testNotes: "The empty call is the interesting one: it proves the rest parameter produces an empty array rather than throwing."
+            }
+          }
+        ]
       },
       {
         id: "ts-l9",
@@ -87298,7 +88389,105 @@ var tsFunctionsSections = [
           "Explain when void return is appropriate"
         ],
         xp: 35,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "ts-l9-intro",
+            body: "**Function types and callbacks.** Functions are values, so they have types too. The syntax mirrors the arrow function: `(a: number, b: number) => number` is a function that takes two numbers and returns one. Giving that type a name \u2014 `type Math = (a: number, b: number) => number` \u2014 makes signatures reusable across call sites."
+          },
+          {
+            type: "text",
+            id: "ts-l9-b2",
+            body: 'A parameter typed as a function is a *callback*: the function you receive runs later, once per item, or after something finishes. The important rule is that a callback returning `void` means "I ignore whatever you return" \u2014 which is why `forEach` accepts a callback that happens to return a value.'
+          },
+          {
+            type: "heading",
+            id: "ts-l9-h1",
+            level: 2,
+            body: "Naming a function type"
+          },
+          {
+            type: "code",
+            id: "ts-l9-code",
+            language: "typescript",
+            title: "a callback is just a typed parameter",
+            code: `// Give the function shape a name and reuse it.
+type Transform = (value: number) => number
+
+function applyTwice(value: number, transform: Transform): number {
+  return transform(transform(value))
+}
+
+applyTwice(3, (n) => n * 2)     // 12
+
+// A callback that returns void promises nothing about its result:
+function forEach(items: string[], visit: (item: string) => void) {
+  for (const item of items) visit(item)
+}
+
+forEach(['a', 'b'], (item) => console.log(item))`
+          },
+          {
+            type: "list",
+            id: "ts-l9-list",
+            style: "bullet",
+            items: [
+              "`(value: number) => number` is a type, not code \u2014 the parameter names are documentation.",
+              "Passing a callback inline still checks it: `(n) => n * 2` is inferred as `number` from the parameter type.",
+              "`void` means the caller does not use the return value, so callbacks may return anything."
+            ]
+          },
+          {
+            type: "warning",
+            id: "ts-l9-warn",
+            title: "void is not undefined",
+            body: "A function typed `() => void` may return a value; the type only says the caller ignores it. If you want to forbid a return value entirely, the type is the misleading one \u2014 `void` is about intent, not enforcement."
+          },
+          {
+            type: "heading",
+            id: "ts-l9-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "ts-l9-b3",
+            body: "Write a higher-order function that takes a value and a callback, and runs the callback twice. This is the shape every `map`, `filter` and `onClick` shares."
+          },
+          {
+            type: "exercise",
+            id: "ts-l9-x1",
+            exercise: {
+              id: "ex-ts-l9",
+              instructions: "Write applyTwice(value, transform) that returns the result of applying transform to value, then to the result again.",
+              languages: ["typescript"],
+              starterCode: {
+                typescript: `// Run transform twice: transform(transform(value)).
+function applyTwice(value: number, transform: (n: number) => number): number {
+  return value
+}
+`
+              },
+              tests: [
+                { id: "ts-l9-t1", label: "applyTwice(1, +1) is 3", body: "return applyTwice(1, (n) => n + 1) === 3" },
+                { id: "ts-l9-t2", label: "applyTwice(3, *2) is 12", body: "return applyTwice(3, (n) => n * 2) === 12" },
+                { id: "ts-l9-t3", label: "the callback really runs twice", body: "let calls = 0; applyTwice(0, (n) => { calls = calls + 1; return n }); return calls === 2" }
+              ],
+              hints: [
+                "Calling a function you received works exactly like calling any other: transform(value).",
+                "Do it twice \u2014 call transform, then call transform again on that result.",
+                "One expression does it: return transform(transform(value))."
+              ],
+              solution: {
+                typescript: `function applyTwice(value: number, transform: (n: number) => number): number {
+  return transform(transform(value))
+}
+`
+              },
+              testNotes: "The third check counts how many times the callback ran, which proves you applied it twice rather than finding a shortcut."
+            }
+          }
+        ]
       },
       {
         id: "ts-l10",
@@ -87311,7 +88500,139 @@ var tsFunctionsSections = [
           "Use bind or arrow functions to preserve this"
         ],
         xp: 35,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "ts-l10-intro",
+            body: "**Overloads and this typing.** Sometimes one function should answer to more than one signature. Overloads let you list the allowed calls above a single implementation \u2014 the compiler checks callers against the list, and you write the handling once. `this` is the other half: in a method, `this` must be typed explicitly when it is not obvious from the enclosing object."
+          },
+          {
+            type: "text",
+            id: "ts-l10-b2",
+            body: "The classic `this` bug is detachment. A method that reads `this` stops working the moment you pass it somewhere else \u2014 an event handler, a timer, a callback. An arrow function captures `this` from where it was written, so it survives that journey. That is the fix you will write again and again."
+          },
+          {
+            type: "heading",
+            id: "ts-l10-h1",
+            level: 2,
+            body: "Overload signatures and a typed this"
+          },
+          {
+            type: "code",
+            id: "ts-l10-code",
+            language: "typescript",
+            title: "several signatures, one implementation",
+            code: `// The allowed calls, one signature per line\u2026
+function pad(value: string): string
+function pad(value: number): string
+// \u2026and a single implementation that handles all of them:
+function pad(value: string | number): string {
+  return String(value).padStart(4, '0')
+}
+
+pad('42')       // '0042'
+pad(42)         // '0042'
+
+// A standalone function can declare its this type:
+function label(this: { name: string }): string {
+  return '#' + this.name
+}
+
+// An arrow keeps the this of where it was written:
+const counter = {
+  count: 0,
+  start() {
+    return () => {
+      this.count += 1
+      return this.count
+    }
+  },
+}`
+          },
+          {
+            type: "list",
+            id: "ts-l10-list",
+            style: "bullet",
+            items: [
+              "Overload signatures come first and have no body; the implementation comes last and is not visible to callers.",
+              "The implementation signature must be compatible with every overload \u2014 usually a union of their parameter types.",
+              "`this` is a fake first parameter in the type: `function f(this: T)`. It is erased at runtime."
+            ]
+          },
+          {
+            type: "tip",
+            id: "ts-l10-tip",
+            title: "Prefer arrows when you hand a function out",
+            body: "Reach for an arrow function whenever a method will be passed somewhere else. It closes over the right `this` automatically, so you never need `bind` or a cached `const self = this`."
+          },
+          {
+            type: "heading",
+            id: "ts-l10-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "ts-l10-b3",
+            body: "Build a counter whose increment method keeps working after you pull it off the object \u2014 the exact case where a `this`-using method breaks."
+          },
+          {
+            type: "exercise",
+            id: "ts-l10-x1",
+            exercise: {
+              id: "ex-ts-l10",
+              instructions: "Write createCounter() returning an object with total() and increment(). increment adds one and returns the new total; total() reports it. Both must keep working when detached from the object.",
+              languages: ["typescript"],
+              starterCode: {
+                typescript: `// increment and total must still work when pulled off the object.
+function createCounter() {
+  return {
+    total() {
+      return 0
+    },
+    increment() {
+      return 0
+    },
+  }
+}
+`
+              },
+              tests: [
+                { id: "ts-l10-t1", label: "a new counter totals 0", body: "const c = createCounter(); return c.total() === 0" },
+                {
+                  id: "ts-l10-t2",
+                  label: "increment returns the running total",
+                  body: "const c = createCounter(); c.increment(); c.increment(); return c.total() === 2 && c.increment() === 3"
+                },
+                {
+                  id: "ts-l10-t3",
+                  label: "a detached increment still updates the counter",
+                  body: "const c = createCounter(); const inc = c.increment; inc(); return c.total() === 1"
+                }
+              ],
+              hints: [
+                "Keep the count in a local variable that both methods close over.",
+                "With a private count, total() returns it and increment() adds one to it.",
+                "Avoid this: write both methods as arrow functions so they capture the local count even when detached."
+              ],
+              solution: {
+                typescript: `function createCounter() {
+  let count = 0
+
+  return {
+    total: () => count,
+    increment: () => {
+      count += 1
+      return count
+    },
+  }
+}
+`
+              },
+              testNotes: "The last check is the point: a method shorthand that used this.count would return NaN or throw once detached, while the arrow version keeps working."
+            }
+          }
+        ]
       }
     ],
     quiz: {
@@ -87396,7 +88717,137 @@ var tsInterfacesSections = [
           "List the features only type aliases have (unions, primitives)"
         ],
         xp: 35,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "ts-l11-intro",
+            body: "**Interfaces vs type aliases.** There are two ways to name a shape in TypeScript, and for object shapes they are nearly interchangeable. `interface User { name: string }` and `type User = { name: string }` describe exactly the same thing, and both can be used anywhere a type is expected."
+          },
+          {
+            type: "text",
+            id: "ts-l11-b2",
+            body: "The differences are small but real. An interface can be opened again and added to \u2014 that is declaration merging. A type alias can name anything, including a union, a tuple or a primitive; an interface can only describe an object. When the two are equal, reach for the interface for public object shapes and the alias for everything else."
+          },
+          {
+            type: "heading",
+            id: "ts-l11-h1",
+            level: 2,
+            body: "The same shape, two spellings"
+          },
+          {
+            type: "code",
+            id: "ts-l11-code",
+            language: "typescript",
+            title: "interface and type side by side",
+            code: `interface User {
+  name: string
+  age: number
+}
+
+// The identical shape as a type alias:
+type Person = { name: string; age: number }
+
+function describe(user: User): string {
+  return user.name + ' (' + user.age + ')'
+}
+
+// Only a type alias can name a union, a tuple or a primitive:
+type Id = string | number
+type Pair = [number, number]
+type Name = string`
+          },
+          {
+            type: "list",
+            id: "ts-l11-list",
+            style: "bullet",
+            items: [
+              "For plain object shapes the choice is style, not capability \u2014 pick one and stay consistent.",
+              "An **interface** may be declared more than once; the declarations merge.",
+              "A **type alias** may name a union (`string | number`), a tuple, or a primitive, which an interface cannot."
+            ]
+          },
+          {
+            type: "tip",
+            id: "ts-l11-tip",
+            title: "A rule of thumb that avoids bikeshedding",
+            body: "Use `interface` for objects that other code will consume or extend, and `type` for everything else \u2014 unions, function types, and short aliases. Both compile to nothing, so this is a readability decision, not a performance one."
+          },
+          {
+            type: "heading",
+            id: "ts-l11-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "ts-l11-b3",
+            body: "Create an object that matches a named shape, then write the function that consumes it."
+          },
+          {
+            type: "exercise",
+            id: "ts-l11-x1",
+            exercise: {
+              id: "ex-ts-l11",
+              instructions: "Write makeUser(name, age) returning an object with those two properties, then label(user) returning the text name followed by space age in parentheses \u2014 for example 'Ada (36)'.",
+              languages: ["typescript"],
+              starterCode: {
+                typescript: `interface User {
+  name: string
+  age: number
+}
+
+// Return an object that matches User.
+function makeUser(name: string, age: number): User {
+  return { name: '', age: 0 }
+}
+
+// Return "name (age)", e.g. "Ada (36)".
+function label(user: User): string {
+  return ''
+}
+`
+              },
+              tests: [
+                {
+                  id: "ts-l11-t1",
+                  label: "makeUser builds the object from its arguments",
+                  body: "const u = makeUser('Ada', 36); return u.name === 'Ada' && u.age === 36"
+                },
+                {
+                  id: "ts-l11-t2",
+                  label: "label formats a user",
+                  body: "return label({ name: 'Grace', age: 45 }) === 'Grace (45)'"
+                },
+                {
+                  id: "ts-l11-t3",
+                  label: "label works with makeUser output",
+                  body: "return label(makeUser('Ada', 36)) === 'Ada (36)'"
+                }
+              ],
+              hints: [
+                "makeUser already receives name and age \u2014 return an object built from them.",
+                "label receives a user object, so read user.name and user.age.",
+                'Join the parts exactly: user.name + " (" + user.age + ")".'
+              ],
+              solution: {
+                typescript: `interface User {
+  name: string
+  age: number
+}
+
+function makeUser(name: string, age: number): User {
+  return { name: name, age: age }
+}
+
+function label(user: User): string {
+  return user.name + ' (' + user.age + ')'
+}
+`
+              },
+              testNotes: "The tests read the properties off your objects, which is exactly what the interface promises they will have."
+            }
+          }
+        ]
       },
       {
         id: "ts-l12",
@@ -87409,7 +88860,145 @@ var tsInterfacesSections = [
           "Explain when merging is useful (augmenting library types)"
         ],
         xp: 35,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "ts-l12-intro",
+            body: "**Extending and merging interfaces.** An interface can build on another with `extends`: the child has every member of the parent plus its own. This is how you model a hierarchy without repeating yourself \u2014 `Dog extends Animal` already has everything an animal has."
+          },
+          {
+            type: "text",
+            id: "ts-l12-b2",
+            body: "Interfaces have a second trick that type aliases do not. If you declare the same name twice, the declarations *merge* into one. This is how libraries let you add a field to a type you did not write, and how a global augmentation slots into an existing interface."
+          },
+          {
+            type: "heading",
+            id: "ts-l12-h1",
+            level: 2,
+            body: "Extending, and merging a second declaration"
+          },
+          {
+            type: "code",
+            id: "ts-l12-code",
+            language: "typescript",
+            title: "inheritance and merging",
+            code: `interface Animal {
+  name: string
+}
+
+// Dog has name AND breed:
+interface Dog extends Animal {
+  breed: string
+}
+
+const rex: Dog = { name: 'Rex', breed: 'Corgi' }
+
+// Declaring Dog again adds to the first declaration:
+interface Dog {
+  goodBoy?: boolean
+}
+
+// Now all three keys are allowed:
+const bella: Dog = { name: 'Bella', breed: 'Poodle', goodBoy: true }`
+          },
+          {
+            type: "list",
+            id: "ts-l12-list",
+            style: "bullet",
+            items: [
+              "`extends` creates a new interface; it does not change the parent.",
+              "A child can override a parent member only with a compatible type.",
+              "Merging is additive and usually reserved for library authors augmenting existing types."
+            ]
+          },
+          {
+            type: "warning",
+            id: "ts-l12-warn",
+            title: "Merging is a sharp tool",
+            body: "Because two declarations of the same interface combine silently, a stray duplicate in your own code can change a type without a visible error. Prefer inheritance for your own code and keep merging for deliberate augmentation."
+          },
+          {
+            type: "heading",
+            id: "ts-l12-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "ts-l12-b3",
+            body: "Build an admin from a base account, then type-check the result with a guard."
+          },
+          {
+            type: "exercise",
+            id: "ts-l12-x1",
+            exercise: {
+              id: "ex-ts-l12",
+              instructions: "Write makeAdmin(name) returning an object with name and role set to 'admin', then isAdmin(account) returning true only when account.role is 'admin'.",
+              languages: ["typescript"],
+              starterCode: {
+                typescript: `interface Account {
+  name: string
+}
+
+interface Admin extends Account {
+  role: 'admin'
+}
+
+// Build an admin from the name it receives.
+function makeAdmin(name: string): Admin {
+  return { name: '', role: 'admin' }
+}
+
+// Return true only for an admin account.
+function isAdmin(account: Account): boolean {
+  return false
+}
+`
+              },
+              tests: [
+                {
+                  id: "ts-l12-t1",
+                  label: "makeAdmin sets the role to 'admin'",
+                  body: "const a = makeAdmin('Ada'); return a.name === 'Ada' && a.role === 'admin'"
+                },
+                {
+                  id: "ts-l12-t2",
+                  label: "isAdmin accepts an admin",
+                  body: "return isAdmin(makeAdmin('Ada')) === true"
+                },
+                {
+                  id: "ts-l12-t3",
+                  label: "isAdmin rejects a plain account",
+                  body: "return isAdmin({ name: 'Ada' }) === false"
+                }
+              ],
+              hints: [
+                "makeAdmin ignores its argument \u2014 it always stores an empty name. Use the name it received.",
+                "A plain account has no role, so reading account.role gives undefined.",
+                'Compare directly: return account.role === "admin".'
+              ],
+              solution: {
+                typescript: `interface Account {
+  name: string
+}
+
+interface Admin extends Account {
+  role: 'admin'
+}
+
+function makeAdmin(name: string): Admin {
+  return { name: name, role: 'admin' }
+}
+
+function isAdmin(account: Account): boolean {
+  return account.role === 'admin'
+}
+`
+              },
+              testNotes: "The third check passes a plain account with no role. The guard has to say false for it rather than assume every account is an admin."
+            }
+          }
+        ]
       },
       {
         id: "ts-l13",
@@ -87422,7 +89011,135 @@ var tsInterfacesSections = [
           "Use implements to catch missing members at compile time"
         ],
         xp: 35,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "ts-l13-intro",
+            body: "**Implementing interfaces in classes.** The `implements` clause tells the compiler a class promises to provide every member of an interface. Forget one and the class fails to compile \u2014 a checklist attached to your class."
+          },
+          {
+            type: "text",
+            id: "ts-l13-b2",
+            body: "It is worth knowing that `implements` is optional. TypeScript is *structurally typed*: a class matches an interface if it happens to have the right members, whether or not it says `implements`. The keyword does not change what matches; it only asks the compiler to check your intent at the declaration."
+          },
+          {
+            type: "heading",
+            id: "ts-l13-h1",
+            level: 2,
+            body: "A class and the shape it satisfies"
+          },
+          {
+            type: "code",
+            id: "ts-l13-code",
+            language: "typescript",
+            title: "implements, and matching without it",
+            code: `interface Shape {
+  area(): number
+}
+
+class Square implements Shape {
+  side: number
+
+  constructor(side: number) {
+    this.side = side
+  }
+
+  area(): number {
+    return this.side * this.side
+  }
+}
+
+const square: Shape = new Square(3)   // Square is usable as a Shape
+
+// This plain object also satisfies Shape, with no class and no implements:
+const rect: Shape = { area: () => 12 }`
+          },
+          {
+            type: "list",
+            id: "ts-l13-list",
+            style: "bullet",
+            items: [
+              "`implements` is checked at compile time and adds nothing at runtime.",
+              "A class can implement several interfaces: `class C implements A, B`.",
+              "Structural typing means an object literal with the right method already counts as a `Shape`."
+            ]
+          },
+          {
+            type: "tip",
+            id: "ts-l13-tip",
+            title: "implements is documentation the compiler enforces",
+            body: "Even though matching happens structurally, writing `implements Shape` moves the error to the class declaration, right next to the code you are about to fix \u2014 instead of surfacing far away at a call site."
+          },
+          {
+            type: "heading",
+            id: "ts-l13-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "ts-l13-b3",
+            body: "Implement a class that satisfies a shape, storing its inputs and returning a computed value."
+          },
+          {
+            type: "exercise",
+            id: "ts-l13-x1",
+            exercise: {
+              id: "ex-ts-l13",
+              instructions: "Complete the Rectangle class so area() returns width multiplied by height.",
+              languages: ["typescript"],
+              starterCode: {
+                typescript: `// Make area() return width * height.
+class Rectangle {
+  width: number
+  height: number
+
+  constructor(width: number, height: number) {
+    this.width = width
+    this.height = height
+  }
+
+  area(): number {
+    return 0
+  }
+}
+`
+              },
+              tests: [
+                { id: "ts-l13-t1", label: "area is a method", body: "return typeof new Rectangle(1, 1).area === 'function'" },
+                { id: "ts-l13-t2", label: "a 3 by 4 rectangle has area 12", body: "return new Rectangle(3, 4).area() === 12" },
+                { id: "ts-l13-t3", label: "a square works too", body: "return new Rectangle(5, 5).area() === 25" },
+                {
+                  id: "ts-l13-t4",
+                  label: "each instance keeps its own dimensions",
+                  body: "const a = new Rectangle(2, 3); const b = new Rectangle(4, 5); return a.area() === 6 && b.area() === 20"
+                }
+              ],
+              hints: [
+                "The constructor already stored width and height on this.",
+                "Inside a method, this refers to the instance you called it on.",
+                "Return this.width * this.height from area()."
+              ],
+              solution: {
+                typescript: `class Rectangle {
+  width: number
+  height: number
+
+  constructor(width: number, height: number) {
+    this.width = width
+    this.height = height
+  }
+
+  area(): number {
+    return this.width * this.height
+  }
+}
+`
+              },
+              testNotes: "The last check builds two rectangles to prove the value lives on each instance rather than in a shared variable."
+            }
+          }
+        ]
       }
     ],
     quiz: {
@@ -87502,7 +89219,105 @@ var tsGenericsSections = [
           "Let TypeScript infer the type argument from the call"
         ],
         xp: 45,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "ts-l14-intro",
+            body: "**Generic functions and type parameters.** A generic is a function that works for many types while remembering *which* type it is working with. The placeholder in the angle brackets \u2014 `<T>` \u2014 stands in for whatever the caller passes, and the compiler keeps track of it."
+          },
+          {
+            type: "text",
+            id: "ts-l14-b2",
+            body: "Without generics you would reach for `any`, which throws the type information away: the function accepts anything and returns an untyped anything. A type parameter preserves the link between input and output, so `wrap(42)` is a number and `wrap(\u2019hi\u2019)` is a string, from the same code."
+          },
+          {
+            type: "heading",
+            id: "ts-l14-h1",
+            level: 2,
+            body: "A placeholder that keeps its identity"
+          },
+          {
+            type: "code",
+            id: "ts-l14-code",
+            language: "typescript",
+            title: "type parameters and constraints",
+            code: `function wrap<T>(value: T): T {
+  return value
+}
+
+wrap<string>('hi')      // T given explicitly
+wrap(42)                // T inferred as number
+
+// A constraint says what T must at least be:
+function longest<T extends { length: number }>(a: T, b: T): T {
+  return a.length >= b.length ? a : b
+}
+
+longest('ab', 'abc')    // 'abc'
+longest([1, 2], [1])    // [1, 2]`
+          },
+          {
+            type: "list",
+            id: "ts-l14-list",
+            style: "bullet",
+            items: [
+              "`<T>` names a type the caller supplies; call sites usually have it inferred for them.",
+              "`extends` constrains what `T` may be, so the body is allowed to use the members it guarantees.",
+              "Type parameters are erased at runtime \u2014 generics cost nothing and produce the same JavaScript."
+            ]
+          },
+          {
+            type: "tip",
+            id: "ts-l14-tip",
+            title: "A generic should link two positions",
+            body: "If a type parameter appears only once, it is not really doing anything \u2014 you have written a fancy `any`. Generics earn their place when the input type determines the output type, as in `wrap<T>(value: T): T`."
+          },
+          {
+            type: "heading",
+            id: "ts-l14-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "ts-l14-b3",
+            body: "Write your first generic function: return the first element of any array, or undefined when it is empty."
+          },
+          {
+            type: "exercise",
+            id: "ts-l14-x1",
+            exercise: {
+              id: "ex-ts-l14",
+              instructions: "Write first(items) so it returns the first element of the array, or undefined if the array is empty. It must work for arrays of numbers and arrays of strings.",
+              languages: ["typescript"],
+              starterCode: {
+                typescript: `// Return the first item, or undefined when there is none.
+function first<T>(items: T[]): T | undefined {
+  return undefined
+}
+`
+              },
+              tests: [
+                { id: "ts-l14-t1", label: "first([1, 2, 3]) is 1", body: "return first([1, 2, 3]) === 1" },
+                { id: "ts-l14-t2", label: "first([]) is undefined", body: "return first([]) === undefined" },
+                { id: "ts-l14-t3", label: "it works for strings too", body: "return first(['a', 'b']) === 'a'" },
+                { id: "ts-l14-t4", label: "a single-element array returns that element", body: "return first([9]) === 9" }
+              ],
+              hints: [
+                "Arrays are indexed from zero, so the first element is items[0].",
+                "The empty array case already works: items[0] is undefined when there is nothing there.",
+                "Return items[0] \u2014 that single expression covers both the filled and the empty case."
+              ],
+              solution: {
+                typescript: `function first<T>(items: T[]): T | undefined {
+  return items[0]
+}
+`
+              },
+              testNotes: "The same function is called with numbers and with strings. That it answers correctly for both is the whole point of the type parameter."
+            }
+          }
+        ]
       },
       {
         id: "ts-l15",
@@ -87515,7 +89330,147 @@ var tsGenericsSections = [
           "Provide a default so callers can omit the argument"
         ],
         xp: 40,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "ts-l15-intro",
+            body: "**Generic interfaces and classes.** The same placeholder works on interfaces and classes. `interface Box<T> { value: T }` describes a container whose contents you choose at the point of use: `Box<number>` or `Box<User>`."
+          },
+          {
+            type: "text",
+            id: "ts-l15-b2",
+            body: "A generic class carries the parameter through all of its methods. `class Store<T>` with an `add(item: T)` method means a `Store<string>` will only ever accept strings \u2014 the container remembers what it holds. You can also give the parameter a default, so a caller who does not care can leave it out."
+          },
+          {
+            type: "heading",
+            id: "ts-l15-h1",
+            level: 2,
+            body: "Containers that remember their contents"
+          },
+          {
+            type: "code",
+            id: "ts-l15-code",
+            language: "typescript",
+            title: "generic interface, class, and default",
+            code: `interface Box<T> {
+  value: T
+}
+
+const numeric: Box<number> = { value: 42 }
+
+class Store<T> {
+  items: T[] = []
+
+  add(item: T): void {
+    this.items.push(item)
+  }
+}
+
+const names = new Store<string>()
+names.add('Ada')          // ok
+// names.add(42)          // \u2717 number is not a string
+
+// A default is used when the caller omits the argument:
+interface Response<T = unknown> {
+  data: T
+}
+
+const empty: Response = { data: {} }`
+          },
+          {
+            type: "list",
+            id: "ts-l15-list",
+            style: "bullet",
+            items: [
+              "The type argument is written once on the interface or class and flows to every member.",
+              "`new Store<string>()` fixes `T` for the life of that instance.",
+              "A default (`<T = unknown>`) keeps the type usable without an argument while staying honest."
+            ]
+          },
+          {
+            type: "warning",
+            id: "ts-l15-warn",
+            title: "Box<T> is a type, not a class",
+            body: "Nothing named `Box` exists once the code runs \u2014 the interface vanishes with the rest of the types. If you need a value you can construct, make it a class; the interface is only a description."
+          },
+          {
+            type: "heading",
+            id: "ts-l15-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "ts-l15-b3",
+            body: "Build a small generic container. A stack is last-in, first-out: whatever you pushed most recently, you pop first."
+          },
+          {
+            type: "exercise",
+            id: "ts-l15-x1",
+            exercise: {
+              id: "ex-ts-l15",
+              instructions: "Complete the Stack class. push(item) adds an item on top; pop() removes and returns the most recent item, or undefined when the stack is empty.",
+              languages: ["typescript"],
+              starterCode: {
+                typescript: `// A last-in, first-out container.
+class Stack<T> {
+  items: T[] = []
+
+  push(item: T): void {
+    // add the item on top
+  }
+
+  pop(): T | undefined {
+    return undefined
+  }
+}
+`
+              },
+              tests: [
+                {
+                  id: "ts-l15-t1",
+                  label: "a new stack is empty",
+                  body: "const s = new Stack(); return s.pop() === undefined"
+                },
+                {
+                  id: "ts-l15-t2",
+                  label: "pop returns the most recently pushed item",
+                  body: "const s = new Stack(); s.push(1); s.push(2); return s.pop() === 2"
+                },
+                {
+                  id: "ts-l15-t3",
+                  label: "items come back in reverse order",
+                  body: "const s = new Stack(); s.push(1); s.push(2); s.push(3); return s.pop() === 3 && s.pop() === 2 && s.pop() === 1 && s.pop() === undefined"
+                },
+                {
+                  id: "ts-l15-t4",
+                  label: "it works with strings too",
+                  body: "const s = new Stack(); s.push('a'); s.push('b'); return s.pop() === 'b'"
+                }
+              ],
+              hints: [
+                "You already have an items array on the class; this.items is that array.",
+                "push is just this.items.push(item).",
+                "pop is this.items.pop() \u2014 JavaScript arrays already pop from the end, which is the top of the stack."
+              ],
+              solution: {
+                typescript: `class Stack<T> {
+  items: T[] = []
+
+  push(item: T): void {
+    this.items.push(item)
+  }
+
+  pop(): T | undefined {
+    return this.items.pop()
+  }
+}
+`
+              },
+              testNotes: "The tests build stacks of numbers and of strings from the same class. The empty case at the start proves pop returns undefined rather than throwing."
+            }
+          }
+        ]
       },
       {
         id: "ts-l16",
@@ -87528,7 +89483,109 @@ var tsGenericsSections = [
           "Distribute a conditional type over a union"
         ],
         xp: 45,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "ts-l16-intro",
+            body: "**Generic constraints and conditional types.** A free type parameter can be anything, which means the body cannot use any of its members \u2014 the compiler cannot know they exist. A constraint narrows the field: `<T extends { length: number }>` promises that whatever T turns out to be, it has a length."
+          },
+          {
+            type: "text",
+            id: "ts-l16-b2",
+            body: "The same `extends` keyword powers conditional types. `T extends string ? X : Y` is a type that resolves to X or Y depending on T. These live entirely in the type system \u2014 they choose a type, not a value \u2014 and they are how the standard utility types such as `Pick` and `ReturnType` are built."
+          },
+          {
+            type: "heading",
+            id: "ts-l16-h1",
+            level: 2,
+            body: "Constraints at runtime, conditionals in the type system"
+          },
+          {
+            type: "code",
+            id: "ts-l16-code",
+            language: "typescript",
+            title: "constrain, then choose a type",
+            code: `// T is only allowed to be something with a length:
+function logLength<T extends { length: number }>(item: T): number {
+  return item.length
+}
+
+logLength('hello')        // 5
+logLength([1, 2, 3])      // 3
+
+// Conditional types select a type based on another:
+type IsString<T> = T extends string ? 'yes' : 'no'
+
+type A = IsString<string>          // 'yes'
+type B = IsString<number>          // 'no'
+type C = IsString<string | Date>   // 'yes' | 'no'  (distributes over the union)`
+          },
+          {
+            type: "list",
+            id: "ts-l16-list",
+            style: "bullet",
+            items: [
+              "A constraint (`extends`) is checked at the call site, so an incompatible argument is a compile error.",
+              "A conditional type resolves to one type or another \u2014 it produces no runtime code at all.",
+              "Conditional types **distribute** over unions: `IsString<string | Date>` applies to each member."
+            ]
+          },
+          {
+            type: "tip",
+            id: "ts-l16-tip",
+            title: "Constraints let you use what you require",
+            body: "Inside a generic body you can only touch what every possible T is guaranteed to have. The constraint is how you widen that guarantee \u2014 ask for a length, an id, or a name, and then you may use it."
+          },
+          {
+            type: "heading",
+            id: "ts-l16-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "ts-l16-b3",
+            body: "Use a constraint to write one function that works for strings, arrays, and any other value that has a length."
+          },
+          {
+            type: "exercise",
+            id: "ts-l16-x1",
+            exercise: {
+              id: "ex-ts-l16",
+              instructions: "Write longest(a, b) so it returns whichever argument has the greater length. Assume the two are never equal.",
+              languages: ["typescript"],
+              starterCode: {
+                typescript: `// Return the argument with the greater length.
+function longest<T extends { length: number }>(a: T, b: T): T {
+  return a
+}
+`
+              },
+              tests: [
+                { id: "ts-l16-t1", label: "longest('ab', 'abc') is 'abc'", body: "return longest('ab', 'abc') === 'abc'" },
+                { id: "ts-l16-t2", label: "it works for arrays", body: "return longest([1, 2], [1, 2, 3]).length === 3" },
+                { id: "ts-l16-t3", label: "the smaller one loses", body: "return longest('abc', 'ab') === 'abc'" },
+                {
+                  id: "ts-l16-t4",
+                  label: "it works for any object with a length",
+                  body: "const longer = longest({ length: 5 }, { length: 2 }); return longer.length === 5"
+                }
+              ],
+              hints: [
+                "Both arguments are guaranteed to have a length, so compare a.length and b.length.",
+                "Return a when it is longer, otherwise b.",
+                "One line does it: return a.length >= b.length ? a : b."
+              ],
+              solution: {
+                typescript: `function longest<T extends { length: number }>(a: T, b: T): T {
+  return a.length >= b.length ? a : b
+}
+`
+              },
+              testNotes: "The last check passes plain objects with only a length property \u2014 exactly the shape the constraint asked for, and nothing more."
+            }
+          }
+        ]
       }
     ],
     quiz: {
@@ -87613,7 +89670,122 @@ var tsUtilitySections = [
           "Use Readonly<T> to freeze an object shape"
         ],
         xp: 35,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "ts-l17-intro",
+            body: "**Partial, Required, Readonly.** The built-in utility types transform an existing type into a new one, so you never hand-write a near-duplicate. `Partial<User>` turns every property optional \u2014 the shape of a patch. `Required` does the reverse; `Readonly` makes every property unassignable."
+          },
+          {
+            type: "text",
+            id: "ts-l17-b2",
+            body: "These are not runtime helpers; they rewrite types at compile time and vanish with the rest of the types. But they describe a runtime pattern you will write constantly: take a full object, accept a partial one, and merge them so the full shape survives."
+          },
+          {
+            type: "heading",
+            id: "ts-l17-h1",
+            level: 2,
+            body: "The same interface, three views of it"
+          },
+          {
+            type: "code",
+            id: "ts-l17-code",
+            language: "typescript",
+            title: "Partial, Required and Readonly",
+            code: `interface User {
+  name: string
+  age: number
+}
+
+type Patch = Partial<User>        // name? and age? \u2014 both optional
+type Complete = Required<Patch>   // back to required
+type Frozen = Readonly<User>      // properties cannot be reassigned
+
+const patch: Patch = { age: 30 }  // name may be omitted
+
+// The pattern these describe \u2014 merge a patch over a full object:
+function withDefaults(partial: Partial<User>, defaults: User): User {
+  return { ...defaults, ...partial }
+}`
+          },
+          {
+            type: "list",
+            id: "ts-l17-list",
+            style: "bullet",
+            items: [
+              '`Partial<T>` is the type for "some of these fields" \u2014 request bodies, options, patches.',
+              "`Required<T>` composes the other way, removing `?` from every property.",
+              "`Readonly<T>` blocks reassignment at compile time; it is not a runtime freeze."
+            ]
+          },
+          {
+            type: "tip",
+            id: "ts-l17-tip",
+            title: "Spread order is the whole trick",
+            body: "In `{ ...defaults, ...partial }` the later object wins. Put the defaults first and the patch second so a supplied value overrides the fallback \u2014 swap them and every default clobbers the real data."
+          },
+          {
+            type: "heading",
+            id: "ts-l17-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "ts-l17-b3",
+            body: "Implement the merge that `Partial` describes: fill any missing value from a set of defaults, without changing the defaults object."
+          },
+          {
+            type: "exercise",
+            id: "ts-l17-x1",
+            exercise: {
+              id: "ex-ts-l17",
+              instructions: "Write withDefaults(partial, defaults) returning a new object: values from partial win, and any key it omits falls back to defaults. Do not modify defaults.",
+              languages: ["typescript"],
+              starterCode: {
+                typescript: `// Merge: partial wins, defaults fill the gaps.
+function withDefaults(partial: object, defaults: object): object {
+  return { ...partial }
+}
+`
+              },
+              tests: [
+                {
+                  id: "ts-l17-t1",
+                  label: "supplied values win, missing keys fall back",
+                  body: "const r = withDefaults({ a: 1 }, { a: 0, b: 2 }); return r.a === 1 && r.b === 2"
+                },
+                {
+                  id: "ts-l17-t2",
+                  label: "an empty patch returns the defaults",
+                  body: "const r = withDefaults({}, { a: 1, b: 2 }); return r.a === 1 && r.b === 2 && Object.keys(r).length === 2"
+                },
+                {
+                  id: "ts-l17-t3",
+                  label: "a full patch overrides everything",
+                  body: "const r = withDefaults({ a: 9, b: 8 }, { a: 0, b: 0 }); return r.a === 9 && r.b === 8"
+                },
+                {
+                  id: "ts-l17-t4",
+                  label: "defaults is not modified",
+                  body: "const defaults = { a: 0, b: 2 }; withDefaults({ a: 1 }, defaults); return defaults.a === 0 && defaults.b === 2"
+                }
+              ],
+              hints: [
+                "You want a brand new object built from two others, with partial taking precedence.",
+                "Spread both objects into a new one, defaults first and partial second.",
+                "return { ...defaults, ...partial } \u2014 because object spread copies values, defaults is left untouched."
+              ],
+              solution: {
+                typescript: `function withDefaults(partial: object, defaults: object): object {
+  return { ...defaults, ...partial }
+}
+`
+              },
+              testNotes: "The last check re-reads the defaults object after the call, so an implementation that mutates instead of returning a new object is caught."
+            }
+          }
+        ]
       },
       {
         id: "ts-l18",
@@ -87626,7 +89798,129 @@ var tsUtilitySections = [
           "Use Record<K, V> for dictionary-like objects"
         ],
         xp: 35,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "ts-l18-intro",
+            body: "**Pick, Omit, Record.** Where `Partial` changes optionality, these three change which keys exist. `Pick<User, \u2019name\u2019>` keeps only the named keys; `Omit<User, \u2019age\u2019>` keeps everything except them; `Record<string, number>` builds a dictionary whose keys and values you choose."
+          },
+          {
+            type: "text",
+            id: "ts-l18-b2",
+            body: "Omit is not magic \u2014 it is Pick over the complement: `Omit<T, K>` is `Pick<T, Exclude<keyof T, K>>`. And these describe real functions: a client that must not send an `id` uses `Omit` on the type, and a `pick` helper that copies a subset is the runtime counterpart."
+          },
+          {
+            type: "heading",
+            id: "ts-l18-h1",
+            level: 2,
+            body: "Choose the keys"
+          },
+          {
+            type: "code",
+            id: "ts-l18-code",
+            language: "typescript",
+            title: "Pick, Omit and Record",
+            code: `interface User {
+  id: number
+  name: string
+  age: number
+}
+
+type NameOnly = Pick<User, 'name'>       // { name: string }
+type NewUser = Omit<User, 'id'>          // { name: string; age: number }
+
+type Scores = Record<string, number>     // every string key maps to number
+const scores: Scores = { ada: 10 }
+
+// The runtime version of Pick: copy the chosen keys only.
+function pick<T extends object, K extends keyof T>(obj: T, keys: K[]): Pick<T, K> {
+  const result = {} as Pick<T, K>
+  for (const key of keys) result[key] = obj[key]
+  return result
+}`
+          },
+          {
+            type: "list",
+            id: "ts-l18-list",
+            style: "bullet",
+            items: [
+              "`Pick<T, K>` is how you hand part of an object to a function that only needs that part.",
+              "`Omit<T, K>` is the safer choice for a create form, where the server assigns the id.",
+              "`Record<K, V>` is an object type with uniform values \u2014 the typed shape of a lookup table."
+            ]
+          },
+          {
+            type: "warning",
+            id: "ts-l18-warn",
+            title: "Pick and Omit are compile-time only",
+            body: "They change what the compiler allows, not what the object contains at runtime. A `pick` helper still has to copy the keys by hand \u2014 and if you forget one, the type will not save you, because the type is not running."
+          },
+          {
+            type: "heading",
+            id: "ts-l18-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "ts-l18-b3",
+            body: "Write the runtime counterpart of `Pick`: copy only the keys you are asked for."
+          },
+          {
+            type: "exercise",
+            id: "ts-l18-x1",
+            exercise: {
+              id: "ex-ts-l18",
+              instructions: "Write pick(obj, keys) returning a new object that contains only the listed keys, with their values from obj. Ignore keys that are not in obj.",
+              languages: ["typescript"],
+              starterCode: {
+                typescript: `// Copy only the requested keys into a new object.
+function pick<T extends object>(obj: T, keys: string[]): object {
+  return { ...obj }
+}
+`
+              },
+              tests: [
+                {
+                  id: "ts-l18-t1",
+                  label: "keeps only the requested keys",
+                  body: `return JSON.stringify(pick({ a: 1, b: 2, c: 3 }, ['a', 'c'])) === '{"a":1,"c":3}'`
+                },
+                {
+                  id: "ts-l18-t2",
+                  label: "an empty key list gives an empty object",
+                  body: "return Object.keys(pick({ a: 1, b: 2 }, [])).length === 0"
+                },
+                {
+                  id: "ts-l18-t3",
+                  label: "a single key gives a one-key object",
+                  body: "const r = pick({ a: 1, b: 2 }, ['b']); return Object.keys(r).length === 1 && r.b === 2"
+                },
+                {
+                  id: "ts-l18-t4",
+                  label: "the original object is unmodified",
+                  body: "const source = { a: 1, b: 2 }; pick(source, ['a']); return source.b === 2 && Object.keys(source).length === 2"
+                }
+              ],
+              hints: [
+                "Start with an empty object and add keys one at a time.",
+                "Loop over the keys array and copy each value: result[key] = obj[key].",
+                "Return the new object when the loop finishes \u2014 do not return obj itself."
+              ],
+              solution: {
+                typescript: `function pick<T extends object>(obj: T, keys: string[]): object {
+  const result: Record<string, unknown> = {}
+  for (const key of keys) {
+    if (key in obj) result[key] = (obj as Record<string, unknown>)[key]
+  }
+  return result
+}
+`
+              },
+              testNotes: "The empty-keys and single-key checks catch an implementation that copies everything and only pretends to filter."
+            }
+          }
+        ]
       },
       {
         id: "ts-l19",
@@ -87639,7 +89933,124 @@ var tsUtilitySections = [
           "Extract the return type of a function with ReturnType"
         ],
         xp: 35,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "ts-l19-intro",
+            body: "**Exclude, Extract, NonNullable, ReturnType.** The last family works on unions and functions. `Exclude` removes members of a union; `Extract` keeps only those that match; `NonNullable` strips `null` and `undefined` in one step. These are the building blocks of the conditional types you met earlier."
+          },
+          {
+            type: "text",
+            id: "ts-l19-b2",
+            body: "`ReturnType` and `Parameters` reach into a function type and pull out a piece of it \u2014 useful when you want to reuse a function\u2019s output type without importing it by name. Every one of these is a type, so their runtime echoes are ordinary functions that produce a filtered value."
+          },
+          {
+            type: "heading",
+            id: "ts-l19-h1",
+            level: 2,
+            body: "Filtering unions and reading functions"
+          },
+          {
+            type: "code",
+            id: "ts-l19-code",
+            language: "typescript",
+            title: "Exclude, Extract, NonNullable, ReturnType",
+            code: `type Mixed = string | number | null | undefined
+
+type Clean = NonNullable<Mixed>          // string | number
+type OnlyString = Extract<Mixed, string> // string
+type NoString = Exclude<Mixed, string>   // number | null | undefined
+
+function add(a: number, b: number) {
+  return a + b
+}
+
+type Sum = ReturnType<typeof add>        // number
+type Args = Parameters<typeof add>       // [number, number]
+
+// NonNullable has a runtime echo: drop the empty values.
+function compact<T>(items: (T | null | undefined)[]): T[] {
+  return items.filter((item): item is T => item !== null && item !== undefined)
+}`
+          },
+          {
+            type: "list",
+            id: "ts-l19-list",
+            style: "bullet",
+            items: [
+              "`Exclude<T, U>` and `Extract<T, U>` pull a union apart from opposite directions.",
+              "`NonNullable<T>` is `Exclude<T, null | undefined>` with a friendlier name.",
+              "`ReturnType<typeof f>` gives the return type of `f` without repeating it by hand."
+            ]
+          },
+          {
+            type: "tip",
+            id: "ts-l19-tip",
+            title: "Derive, do not duplicate",
+            body: "When a function\u2019s result type is needed elsewhere, write `ReturnType<typeof fetchUser>` instead of retyping the shape. If the function changes, the type follows automatically."
+          },
+          {
+            type: "heading",
+            id: "ts-l19-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "ts-l19-b3",
+            body: "Build the runtime version of `NonNullable`: a function that returns a list with the empty values taken out."
+          },
+          {
+            type: "exercise",
+            id: "ts-l19-x1",
+            exercise: {
+              id: "ex-ts-l19",
+              instructions: "Write compact(items) returning a new array with every null and undefined removed. Keep the order of the remaining items.",
+              languages: ["typescript"],
+              starterCode: {
+                typescript: `// Remove null and undefined, keeping the order.
+function compact(items: (number | null | undefined)[]): number[] {
+  return items.slice()
+}
+`
+              },
+              tests: [
+                {
+                  id: "ts-l19-t1",
+                  label: "drops null and undefined, keeps order",
+                  body: 'return JSON.stringify(compact([1, null, 2, undefined, 3])) === "[1,2,3]"'
+                },
+                {
+                  id: "ts-l19-t2",
+                  label: "an all-empty array becomes empty",
+                  body: "return compact([null, undefined]).length === 0"
+                },
+                {
+                  id: "ts-l19-t3",
+                  label: "a clean array is unchanged",
+                  body: 'return JSON.stringify(compact([4, 5])) === "[4,5]"'
+                },
+                {
+                  id: "ts-l19-t4",
+                  label: "zero is kept (it is not empty)",
+                  body: 'return JSON.stringify(compact([0, null, 1])) === "[0,1]"'
+                }
+              ],
+              hints: [
+                "filter builds a new array from the items that pass a test.",
+                "The test is: the item is neither null nor undefined.",
+                "Remember that 0 is a real value \u2014 check for null/undefined specifically, not for truthiness."
+              ],
+              solution: {
+                typescript: `function compact(items: (number | null | undefined)[]): number[] {
+  return items.filter((item): item is number => item !== null && item !== undefined)
+}
+`
+              },
+              testNotes: "The final check keeps 0. A filter written as if (item) would drop it, which is the classic bug this exercise is about."
+            }
+          }
+        ]
       }
     ],
     quiz: {
@@ -87689,7 +90100,7 @@ var tsUtilitySections = [
         },
         {
           id: "quiz-ts-s6-q5",
-          type: "identify-error",
+          type: "multiple-choice",
           prompt: "What is the type of ReturnType<() => string>?",
           options: ["string", "() => string", "void", "never"],
           answer: 0,
@@ -87718,7 +90129,144 @@ var tsAdvancedSections = [
           "Explain why this pattern scales to many variants"
         ],
         xp: 45,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "ts-l20-intro",
+            body: "**Discriminated unions and exhaustive matching.** A discriminated union gives every member a shared property whose value is a distinct literal \u2014 `kind: \u2019circle\u2019` versus `kind: \u2019rect\u2019`. Checking that one property narrows the whole value, so inside the `circle` branch the compiler knows `radius` exists."
+          },
+          {
+            type: "text",
+            id: "ts-l20-b2",
+            body: "This is the pattern that replaces a pile of optional fields and booleans. Instead of a shape where `radius` and `width` are both optional and only one is ever meaningful, you describe exactly the cases that exist. The compiler can then tell you when you have forgotten one."
+          },
+          {
+            type: "heading",
+            id: "ts-l20-h1",
+            level: 2,
+            body: "One tag, several shapes"
+          },
+          {
+            type: "code",
+            id: "ts-l20-code",
+            language: "typescript",
+            title: "narrowing with switch, exhaustiveness with never",
+            code: `type Shape =
+  | { kind: 'circle'; radius: number }
+  | { kind: 'rect'; width: number; height: number }
+
+function area(shape: Shape): number {
+  switch (shape.kind) {
+    case 'circle':
+      return Math.PI * shape.radius ** 2   // shape is the circle here
+    case 'rect':
+      return shape.width * shape.height    // and the rect here
+    default: {
+      // With every variant handled, shape is never here.
+      const exhaustive: never = shape
+      throw new Error('Unhandled shape: ' + String(exhaustive))
+    }
+  }
+}
+
+area({ kind: 'circle', radius: 2 })
+area({ kind: 'rect', width: 3, height: 4 })`
+          },
+          {
+            type: "list",
+            id: "ts-l20-list",
+            style: "bullet",
+            items: [
+              "Every member shares the tag (`kind`) with a different literal value \u2014 that value is the discriminant.",
+              "`case \u2019circle\u2019` narrows the union to the one member with that literal.",
+              "Assigning to `never` in the default turns a newly added, unhandled variant into a compile error."
+            ]
+          },
+          {
+            type: "tip",
+            id: "ts-l20-tip",
+            title: "Impossible states become unrepresentable",
+            body: "Three booleans describe eight combinations, most of them nonsense. Three union members describe exactly three real states. The type system is at its best when the wrong value cannot be written down."
+          },
+          {
+            type: "heading",
+            id: "ts-l20-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "ts-l20-b3",
+            body: "Handle a two-member union by switching on its tag. The runtime behaviour mirrors what the narrowing does at compile time."
+          },
+          {
+            type: "exercise",
+            id: "ts-l20-x1",
+            exercise: {
+              id: "ex-ts-l20",
+              instructions: "Write area(shape) for the Shape union. A circle returns PI times radius squared; a rectangle returns width times height.",
+              languages: ["typescript"],
+              starterCode: {
+                typescript: `type Shape =
+  | { kind: 'circle'; radius: number }
+  | { kind: 'rect'; width: number; height: number }
+
+// Switch on the tag and compute each area.
+function area(shape: Shape): number {
+  return 0
+}
+`
+              },
+              tests: [
+                {
+                  id: "ts-l20-t1",
+                  label: "a rectangle multiplies width by height",
+                  body: "return area({ kind: 'rect', width: 3, height: 4 }) === 12"
+                },
+                {
+                  id: "ts-l20-t2",
+                  label: "a unit circle has area PI",
+                  body: "return Math.abs(area({ kind: 'circle', radius: 1 }) - Math.PI) < 1e-9"
+                },
+                {
+                  id: "ts-l20-t3",
+                  label: "a radius-2 circle has area 4 PI",
+                  body: "return Math.abs(area({ kind: 'circle', radius: 2 }) - 4 * Math.PI) < 1e-9"
+                },
+                {
+                  id: "ts-l20-t4",
+                  label: "a 5-by-2 rectangle is 10",
+                  body: "return area({ kind: 'rect', width: 5, height: 2 }) === 10"
+                }
+              ],
+              hints: [
+                "switch (shape.kind) lets each case see the matching member.",
+                "In the circle case the member is shape.radius; in the rect case it is shape.width and shape.height.",
+                "A circle area is Math.PI * shape.radius ** 2; a rectangle is shape.width * shape.height."
+              ],
+              solution: {
+                typescript: `type Shape =
+  | { kind: 'circle'; radius: number }
+  | { kind: 'rect'; width: number; height: number }
+
+function area(shape: Shape): number {
+  switch (shape.kind) {
+    case 'circle':
+      return Math.PI * shape.radius ** 2
+    case 'rect':
+      return shape.width * shape.height
+    default: {
+      const exhaustive: never = shape
+      throw new Error('Unhandled shape: ' + String(exhaustive))
+    }
+  }
+}
+`
+              },
+              testNotes: "The tests pass one member and then the other from the same function, which is the proof that the tag is driving the branch."
+            }
+          }
+        ]
       },
       {
         id: "ts-l21",
@@ -87731,7 +90279,116 @@ var tsAdvancedSections = [
           "Generate event handler names from event names"
         ],
         xp: 40,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "ts-l21-intro",
+            body: "**Template literal types and key remapping.** A template literal type builds a new string type out of pieces, using the same backtick syntax as a template string: `on${Capitalize<\u2019click\u2019>}` is the single type `\u2019onClick\u2019`. When the pieces are unions, the result is every combination."
+          },
+          {
+            type: "text",
+            id: "ts-l21-b2",
+            body: "Mapped types can rename keys while they transform values, using `as`. That is how you generate a whole family of names \u2014 a `get` prefix on every property, or an `on` prefix on every event. The names are checked, so a typo in a handler name is a compile error rather than a silent no-op."
+          },
+          {
+            type: "heading",
+            id: "ts-l21-h1",
+            level: 2,
+            body: "Names built from other names"
+          },
+          {
+            type: "code",
+            id: "ts-l21-code",
+            language: "typescript",
+            title: "template literal types and as-remapping",
+            code: `// A string type assembled from pieces:
+type ClickHandler = \`on\${Capitalize<'click'>}\`     // 'onClick'
+type AnyHandler = \`on\${Capitalize<string>}\`       // any 'on'+Uppercase name
+
+// A mapped type that renames every key:
+type Getters<T> = {
+  [K in keyof T as \`get\${Capitalize<string & K>}\`]: () => T[K]
+}
+
+interface User {
+  name: string
+  age: number
+}
+
+type UserGetters = Getters<User>
+// { getName: () => string; getAge: () => number }
+
+// The runtime echo \u2014 the same name, as a value:
+function handlerName(event: string): string {
+  return 'on' + event.charAt(0).toUpperCase() + event.slice(1)
+}`
+          },
+          {
+            type: "list",
+            id: "ts-l21-list",
+            style: "bullet",
+            items: [
+              "A template literal type uses backticks and `${...}`, exactly like a template string \u2014 but it evaluates to a type.",
+              "`Capitalize`, `Lowercase`, `Uppercase` and `Uncapitalize` transform the string inside.",
+              "The `as` clause in a mapped type renames the key; `[K in keyof T as ...]` is the syntax."
+            ]
+          },
+          {
+            type: "warning",
+            id: "ts-l21-warn",
+            title: "These are compile-time names",
+            body: "A template literal type checks that a string *looks* like `onClick`; it does not create the property at runtime. If you need the value, a function like `handlerName` still has to concatenate the string."
+          },
+          {
+            type: "heading",
+            id: "ts-l21-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "ts-l21-b3",
+            body: "Build the value that the template literal type describes: turn an event name into its handler name."
+          },
+          {
+            type: "exercise",
+            id: "ts-l21-x1",
+            exercise: {
+              id: "ex-ts-l21",
+              instructions: 'Write handlerName(event) returning the text "on" followed by the event with its first letter upper-cased. handlerName("click") is "onClick".',
+              languages: ["typescript"],
+              starterCode: {
+                typescript: `// "click" -> "onClick"
+function handlerName(event: string): string {
+  return ''
+}
+`
+              },
+              tests: [
+                { id: "ts-l21-t1", label: "click becomes onClick", body: "return handlerName('click') === 'onClick'" },
+                { id: "ts-l21-t2", label: "change becomes onChange", body: "return handlerName('change') === 'onChange'" },
+                { id: "ts-l21-t3", label: "an empty name is just the prefix", body: "return handlerName('') === 'on'" },
+                {
+                  id: "ts-l21-t4",
+                  label: "the rest of the word is untouched",
+                  body: "return handlerName('mouseEnter') === 'onMouseEnter'"
+                }
+              ],
+              hints: [
+                'The prefix is the literal string "on".',
+                "Get the first character with event.charAt(0) and upper-case it with .toUpperCase().",
+                'Everything after the first character is event.slice(1): return "on" + event.charAt(0).toUpperCase() + event.slice(1).'
+              ],
+              solution: {
+                typescript: `function handlerName(event: string): string {
+  return 'on' + event.charAt(0).toUpperCase() + event.slice(1)
+}
+`
+              },
+              testNotes: "The empty-name check proves the function does not throw on a missing first character, and the camelCase case proves only the first letter is touched."
+            }
+          }
+        ]
       },
       {
         id: "ts-l22",
@@ -87744,7 +90401,120 @@ var tsAdvancedSections = [
           "Extract array element types with infer"
         ],
         xp: 40,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "ts-l22-intro",
+            body: "**The infer keyword and type inference in conditional types.** A conditional type asks whether one type extends another. `infer` lets the matching pattern name a piece of the type it matched \u2014 the element type of an array, the return type of a function \u2014 and use it in the result."
+          },
+          {
+            type: "text",
+            id: "ts-l22-b2",
+            body: "This is how the built-in utilities are written. `ReturnType<T>` is a conditional type with an `infer R` for the return position; `Parameters<T>` infers the argument list. Once you can read those definitions, the standard library stops looking like a collection of magic names."
+          },
+          {
+            type: "heading",
+            id: "ts-l22-h1",
+            level: 2,
+            body: "Capture a type while matching it"
+          },
+          {
+            type: "code",
+            id: "ts-l22-code",
+            language: "typescript",
+            title: "infer in three shapes",
+            code: `// The element type of an array:
+type Element<T> = T extends (infer U)[] ? U : never
+
+// The return type of a function:
+type MyReturn<T> = T extends (...args: never[]) => infer R ? R : never
+
+// The parameter types of a function:
+type MyParams<T> = T extends (...args: infer P) => unknown ? P : never
+
+function add(a: number, b: number) {
+  return a + b
+}
+
+type A = Element<string[]>       // string
+type R = MyReturn<typeof add>    // number
+type P = MyParams<typeof add>    // [number, number]
+
+// The same "capture and apply" idea, with values:
+function apply<T>(fn: (...args: any[]) => T, args: any[]): T {
+  return fn(...args)
+}`
+          },
+          {
+            type: "list",
+            id: "ts-l22-list",
+            style: "bullet",
+            items: [
+              "`infer U` declares a placeholder and asks the compiler to fill it from whatever matched.",
+              "`typeof add` turns a value into its type, which is what lets `MyReturn` reach into a real function.",
+              "If the pattern does not match, the conditional falls through to its `: never` branch."
+            ]
+          },
+          {
+            type: "tip",
+            id: "ts-l22-tip",
+            title: 'Read infer as "match here, name it"',
+            body: 'When a conditional type looks dense, replace `infer X` with "and call this part X". `T extends (infer U)[]` reads: if T is an array of something, call that something U \u2014 and then use U.'
+          },
+          {
+            type: "heading",
+            id: "ts-l22-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "ts-l22-b3",
+            body: "Write the value-level counterpart: a function that applies another function to an array of arguments."
+          },
+          {
+            type: "exercise",
+            id: "ts-l22-x1",
+            exercise: {
+              id: "ex-ts-l22",
+              instructions: "Write apply(fn, args) that calls fn with the items of args as its arguments and returns the result.",
+              languages: ["typescript"],
+              starterCode: {
+                typescript: `// Call fn with each item of args as a separate argument.
+function apply(fn: (...args: any[]) => any, args: any[]): any {
+  return fn()
+}
+`
+              },
+              tests: [
+                { id: "ts-l22-t1", label: "adds two arguments", body: "return apply((a, b) => a + b, [2, 3]) === 5" },
+                { id: "ts-l22-t2", label: "calls with no arguments", body: "return apply(() => 'x', []) === 'x'" },
+                {
+                  id: "ts-l22-t3",
+                  label: "passes a single string argument",
+                  body: "return apply((s) => s.toUpperCase(), ['hi']) === 'HI'"
+                },
+                {
+                  id: "ts-l22-t4",
+                  label: "passes three arguments",
+                  body: "return apply((a, b, c) => a + b + c, [1, 2, 3]) === 6"
+                }
+              ],
+              hints: [
+                "args is an array, but fn expects separate arguments.",
+                "The spread operator turns an array back into a list of arguments.",
+                "return fn(...args) \u2014 one line covers every argument count."
+              ],
+              solution: {
+                typescript: `function apply(fn: (...args: any[]) => any, args: any[]): any {
+  return fn(...args)
+}
+`
+              },
+              testNotes: "The tests call the helper with zero, one, two and three arguments, so only a real spread \u2014 not a hard-coded arg count \u2014 passes."
+            }
+          }
+        ]
       }
     ],
     quiz: {
@@ -87829,7 +90599,139 @@ var tsModulesSections = [
           "Explain the difference between import and require"
         ],
         xp: 35,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "ts-l23-intro",
+            body: "**ES modules in TypeScript.** A module is any file with an `import` or an `export`. What you export is public; everything else is private to the file. TypeScript adds types to that boundary, so the names you import arrive already understood."
+          },
+          {
+            type: "text",
+            id: "ts-l23-b2",
+            body: "Two tsconfig options control how those imports are resolved. `module` says which module format to emit; `moduleResolution` says how the compiler looks for the file you named. `paths` then lets you replace `../../../../utils` with a short alias such as `@/utils`."
+          },
+          {
+            type: "heading",
+            id: "ts-l23-h1",
+            level: 2,
+            body: "Exports, imports, and aliases"
+          },
+          {
+            type: "code",
+            id: "ts-l23-code",
+            language: "typescript",
+            title: "a module and its consumer",
+            code: `// math.ts \u2014 this file is a module because it exports.
+export function add(a: number, b: number): number {
+  return a + b
+}
+
+export const version = '1.0.0'
+
+// app.ts \u2014 importing the names it needs.
+import { add, version } from './math'
+
+add(1, 2)                 // names are typed at the import site
+
+// tsconfig paths turn a deep relative path into an alias:
+// {
+//   "compilerOptions": {
+//     "module": "ESNext",
+//     "moduleResolution": "Bundler",
+//     "baseUrl": ".",
+//     "paths": { "@/*": ["src/*"] }
+//   }
+// }
+import { format } from '@/utils/format'`
+          },
+          {
+            type: "list",
+            id: "ts-l23-list",
+            style: "bullet",
+            items: [
+              "An `export` makes a name part of the module\u2019s public surface; only exported names can be imported.",
+              "`import type { User } from ...` imports a type only and is erased entirely from the output.",
+              "`paths` aliases are a compile-time convenience \u2014 your bundler must be told about them too."
+            ]
+          },
+          {
+            type: "tip",
+            id: "ts-l23-tip",
+            title: "Prefer import type for types",
+            body: "Use `import type` when you only need the type. It documents intent and guarantees the import disappears from the compiled JavaScript, so it never drags a runtime dependency along."
+          },
+          {
+            type: "heading",
+            id: "ts-l23-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "ts-l23-b3",
+            body: "A module is a bag of named exports. Model the *act of importing*: pull one name out of an object that stands in for a module."
+          },
+          {
+            type: "exercise",
+            id: "ts-l23-x1",
+            exercise: {
+              id: "ex-ts-l23",
+              instructions: "Write use(mod, name) returning the export called name from a module object, or undefined when the module does not export it. This is what a named import does.",
+              languages: ["typescript"],
+              starterCode: {
+                typescript: `const mathModule = {
+  add: (a: number, b: number) => a + b,
+  multiply: (a: number, b: number) => a * b,
+}
+
+// Return the export called name, or undefined.
+function use(mod: Record<string, unknown>, name: string): unknown {
+  return undefined
+}
+`
+              },
+              tests: [
+                {
+                  id: "ts-l23-t1",
+                  label: "finds an exported function",
+                  body: "return typeof use(mathModule, 'add') === 'function'"
+                },
+                {
+                  id: "ts-l23-t2",
+                  label: "the imported function still works",
+                  body: "const add = use(mathModule, 'add'); return add(2, 3) === 5"
+                },
+                {
+                  id: "ts-l23-t3",
+                  label: "finds a second export",
+                  body: "const multiply = use(mathModule, 'multiply'); return multiply(4, 5) === 20"
+                },
+                {
+                  id: "ts-l23-t4",
+                  label: "a missing export is undefined",
+                  body: "return use(mathModule, 'divide') === undefined"
+                }
+              ],
+              hints: [
+                "The module is an object whose keys are the exported names.",
+                "Reading a key that does not exist already gives undefined in JavaScript.",
+                "return mod[name] is the whole function \u2014 the missing-name case is handled for free."
+              ],
+              solution: {
+                typescript: `const mathModule = {
+  add: (a: number, b: number) => a + b,
+  multiply: (a: number, b: number) => a * b,
+}
+
+function use(mod: Record<string, unknown>, name: string): unknown {
+  return mod[name]
+}
+`
+              },
+              testNotes: "The tests then call the imported function, which proves you returned the real export rather than a copy that lost its behaviour."
+            }
+          }
+        ]
       },
       {
         id: "ts-l24",
@@ -87842,7 +90744,123 @@ var tsModulesSections = [
           "Generate declarations with declaration: true"
         ],
         xp: 35,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "ts-l24-intro",
+            body: "**Declaration files and declare.** Plenty of JavaScript ships without types \u2014 an old library, a build script, a browser API. A *declaration file* is a file that contains types and no implementation, telling the compiler what that JavaScript looks like. The extension is `.d.ts` and the keyword is `declare`."
+          },
+          {
+            type: "text",
+            id: "ts-l24-b2",
+            body: "Inside a `.d.ts` file you describe shapes \u2014 function signatures, constants, classes \u2014 with no bodies. `declare module \u2019some-package\u2019` wraps that description in the module it belongs to, so your normal `import` statements find it. Many packages ship a `.d.ts` generated by the compiler itself."
+          },
+          {
+            type: "heading",
+            id: "ts-l24-h1",
+            level: 2,
+            body: "Typing JavaScript you did not write"
+          },
+          {
+            type: "code",
+            id: "ts-l24-code",
+            language: "typescript",
+            title: "an ambient declaration",
+            code: `// types/legacy-widget.d.ts \u2014 types only, no implementation.
+declare module 'legacy-widget' {
+  export function mount(el: Element): void
+  export const version: string
+}
+
+// Elsewhere, your normal import now type-checks:
+import { mount, version } from 'legacy-widget'
+mount(document.body)
+
+// Your own build can generate declarations too:
+// { "compilerOptions": { "declaration": true } }
+
+// A global value declared by a script tag:
+declare const APP_VERSION: string`
+          },
+          {
+            type: "list",
+            id: "ts-l24-list",
+            style: "bullet",
+            items: [
+              "A `.d.ts` file holds types only \u2014 no function bodies, no runtime values.",
+              "`declare module \u2019name\u2019` attaches a type description to a package that has none.",
+              "`declaration: true` makes the compiler emit `.d.ts` files next to your output."
+            ]
+          },
+          {
+            type: "warning",
+            id: "ts-l24-warn",
+            title: "A declaration is a promise you must keep",
+            body: "Writing `declare module \u2019legacy-widget\u2019` tells the compiler the shape exists; it does not create it. If the description is wrong, the compiler will happily trust you and the bug moves to run time."
+          },
+          {
+            type: "heading",
+            id: "ts-l24-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "ts-l24-b3",
+            body: "Declaration files are just text, so you can read them. Pull the package name out of a `declare module` line."
+          },
+          {
+            type: "exercise",
+            id: "ts-l24-x1",
+            exercise: {
+              id: "ex-ts-l24",
+              instructions: "Write moduleName(declaration) returning the package name written after declare module, or null when the text has no such declaration. Quotes may be single or double.",
+              languages: ["typescript"],
+              starterCode: {
+                typescript: `// Return the name inside declare module "name", or null.
+function moduleName(declaration: string): string | null {
+  return null
+}
+`
+              },
+              tests: [
+                {
+                  id: "ts-l24-t1",
+                  label: "reads a double-quoted name",
+                  body: `return moduleName('declare module "legacy-widget" { }') === 'legacy-widget'`
+                },
+                {
+                  id: "ts-l24-t2",
+                  label: "reads a single-quoted name",
+                  body: `return moduleName("declare module 'foo' { const x: number }") === 'foo'`
+                },
+                {
+                  id: "ts-l24-t3",
+                  label: "handles a scoped package name",
+                  body: `return moduleName('declare module "@scope/thing" {}') === '@scope/thing'`
+                },
+                {
+                  id: "ts-l24-t4",
+                  label: "returns null when there is no declaration",
+                  body: "return moduleName('const x = 1') === null"
+                }
+              ],
+              hints: [
+                "A regular expression is the shortest path: match declare module, then a quoted name.",
+                `The pattern /declare module ["\\']([^"\\']+)["\\']/ captures the name and allows either quote.`,
+                "Return the first capture, or null when the match fails: const m = declaration.match(...); return m ? m[1] : null."
+              ],
+              solution: {
+                typescript: `function moduleName(declaration: string): string | null {
+  const match = declaration.match(/declare module ["']([^"']+)["']/)
+  return match ? match[1] ?? null : null
+}
+`
+              },
+              testNotes: "Both quote styles and the no-match case are checked, so a hand-rolled substring search that only handles one style will fail."
+            }
+          }
+        ]
       },
       {
         id: "ts-l25",
@@ -87855,7 +90873,133 @@ var tsModulesSections = [
           "Verify the published types are consumable"
         ],
         xp: 30,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "ts-l25-intro",
+            body: "**Publishing a typed package.** A published package has two audiences: the runtime, which loads your JavaScript, and the compiler, which reads your types. `package.json` is where you point each of them at the right file \u2014 `main` for the entry point and `types` for its declarations."
+          },
+          {
+            type: "text",
+            id: "ts-l25-b2",
+            body: "Modern packages add an `exports` map, which lets one package expose different files to different consumers \u2014 an ESM build, a CommonJS build, and the types for each. Getting this right matters because a wrong path here is the difference between a package that type-checks in someone else\u2019s project and one that does not."
+          },
+          {
+            type: "heading",
+            id: "ts-l25-h1",
+            level: 2,
+            body: "The fields that matter"
+          },
+          {
+            type: "code",
+            id: "ts-l25-code",
+            language: "typescript",
+            title: "package.json for a typed library",
+            code: `{
+  "name": "tiny-math",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  }
+}
+
+// Check the shapes before publishing:
+// tsc --noEmit            \u2192 do the project's own types hold together?
+// attw --pack .           \u2192 will consumers resolve the types correctly?`
+          },
+          {
+            type: "list",
+            id: "ts-l25-list",
+            style: "bullet",
+            items: [
+              "`types` points at the generated `.d.ts` for the entry point.",
+              "`exports` takes precedence for modern resolvers, so keep its paths consistent with `main`.",
+              "Tools such as `attw` simulate a consumer install and fail if the types cannot be found."
+            ]
+          },
+          {
+            type: "tip",
+            id: "ts-l25-tip",
+            title: "Publish, then import your own package",
+            body: "The cheapest test of a package\u2019s types is a throwaway project that installs it and tries to import it. If the import resolves and the types appear, consumers will have the same experience."
+          },
+          {
+            type: "heading",
+            id: "ts-l25-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "ts-l25-b3",
+            body: "package.json is data, so shape it as an object and check your understanding of where each path goes."
+          },
+          {
+            type: "exercise",
+            id: "ts-l25-x1",
+            exercise: {
+              id: "ex-ts-l25",
+              instructions: 'Fill in packageJson: main is dist/index.js, types is dist/index.d.ts, and exports maps "." to an object whose types is ./dist/index.d.ts and default is ./dist/index.js.',
+              languages: ["typescript"],
+              starterCode: {
+                typescript: `const packageJson = {
+  name: 'tiny-math',
+  main: '',
+  types: '',
+  exports: {
+    '.': {
+      types: '',
+      default: '',
+    },
+  },
+}
+`
+              },
+              tests: [
+                { id: "ts-l25-t1", label: "main points at the JavaScript entry", body: "return packageJson.main === 'dist/index.js'" },
+                {
+                  id: "ts-l25-t2",
+                  label: "types points at the declarations",
+                  body: "return packageJson.types === 'dist/index.d.ts'"
+                },
+                {
+                  id: "ts-l25-t3",
+                  label: 'exports "." resolves to the declaration file',
+                  body: "return packageJson.exports['.'].types === './dist/index.d.ts'"
+                },
+                {
+                  id: "ts-l25-t4",
+                  label: 'exports "." default resolves to the entry',
+                  body: "return packageJson.exports['.'].default === './dist/index.js'"
+                }
+              ],
+              hints: [
+                "main and types are plain strings relative to the package root.",
+                "The exports entry is an object with types and default keys.",
+                'Note the leading ./ inside exports: "./dist/index.js" and "./dist/index.d.ts".'
+              ],
+              solution: {
+                typescript: `const packageJson = {
+  name: 'tiny-math',
+  main: 'dist/index.js',
+  types: 'dist/index.d.ts',
+  exports: {
+    '.': {
+      types: './dist/index.d.ts',
+      default: './dist/index.js',
+    },
+  },
+}
+`
+              },
+              testNotes: "The exports checks are exact down to the leading ./ \u2014 the detail that most often breaks a package for its consumers."
+            }
+          }
+        ]
       }
     ],
     quiz: {
@@ -87940,7 +91084,123 @@ var tsConfigSections = [
           "Enable strict mode in a new project from day one"
         ],
         xp: 35,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "ts-l26-intro",
+            body: "**strict and the flags it enables.** `strict: true` is one line in `tsconfig.json` that turns on a family of checks. Each can be set individually, but they belong together: together they are the difference between TypeScript as a syntax hint and TypeScript as a safety net."
+          },
+          {
+            type: "text",
+            id: "ts-l26-b2",
+            body: 'The three that catch the most real bugs are `noImplicitAny` (refuse to guess when a value has no type), `strictNullChecks` (treat `null` and `undefined` as their own types, not as members of every type) and `strictFunctionTypes` (check callback parameters strictly). The rest tighten property initialisation, `this`, and the emitted `"use strict"`.'
+          },
+          {
+            type: "heading",
+            id: "ts-l26-h1",
+            level: 2,
+            body: "One flag, seven checks"
+          },
+          {
+            type: "code",
+            id: "ts-l26-code",
+            language: "plaintext",
+            title: "tsconfig.json",
+            code: `{
+  "compilerOptions": {
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true
+  }
+}`
+          },
+          {
+            type: "list",
+            id: "ts-l26-list",
+            style: "bullet",
+            items: [
+              "`noImplicitAny`: a value with no inferable type is an error, not silently `any`.",
+              "`strictNullChecks`: `string` does not include `null`, so you must handle the missing case.",
+              "`strictFunctionTypes`: callback parameter types are checked, catching a whole class of runtime surprises."
+            ]
+          },
+          {
+            type: "tip",
+            id: "ts-l26-tip",
+            title: "Start strict or start over",
+            body: "Turning strictness on later means fixing years of accumulated looseness at once. A new project can begin with `strict: true` and stay clean for free; an old one has to earn it back gradually."
+          },
+          {
+            type: "heading",
+            id: "ts-l26-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "ts-l26-b3",
+            body: "Write the configuration a new project should start from, and switch on the individual checks you want made explicit."
+          },
+          {
+            type: "exercise",
+            id: "ts-l26-x1",
+            exercise: {
+              id: "ex-ts-l26",
+              instructions: "Fill tsconfig.compilerOptions so strict is true and noImplicitAny, strictNullChecks and strictFunctionTypes are each explicitly true.",
+              languages: ["typescript"],
+              starterCode: {
+                typescript: `const tsconfig = {
+  compilerOptions: {
+    strict: false,
+    noImplicitAny: false,
+    strictNullChecks: false,
+    strictFunctionTypes: false,
+  },
+}
+`
+              },
+              tests: [
+                { id: "ts-l26-t1", label: "strict is on", body: "return tsconfig.compilerOptions.strict === true" },
+                {
+                  id: "ts-l26-t2",
+                  label: "noImplicitAny is on",
+                  body: "return tsconfig.compilerOptions.noImplicitAny === true"
+                },
+                {
+                  id: "ts-l26-t3",
+                  label: "strictNullChecks is on",
+                  body: "return tsconfig.compilerOptions.strictNullChecks === true"
+                },
+                {
+                  id: "ts-l26-t4",
+                  label: "strictFunctionTypes is on",
+                  body: "return tsconfig.compilerOptions.strictFunctionTypes === true"
+                }
+              ],
+              hints: [
+                "Every one of these flags takes a boolean value.",
+                "strict is the umbrella; the other three are the members you are making explicit.",
+                "Set all four keys to true."
+              ],
+              solution: {
+                typescript: `const tsconfig = {
+  compilerOptions: {
+    strict: true,
+    noImplicitAny: true,
+    strictNullChecks: true,
+    strictFunctionTypes: true,
+  },
+}
+`
+              },
+              testNotes: "The tests read each key individually, mirroring how the compiler resolves the umbrella flag and its members."
+            }
+          }
+        ]
       },
       {
         id: "ts-l27",
@@ -87953,7 +91213,149 @@ var tsConfigSections = [
           "Enable flags one by one as the codebase improves"
         ],
         xp: 30,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "ts-l27-intro",
+            body: "**Tuning strictness for migration.** Turning a large JavaScript codebase strict all at once produces thousands of errors and no progress. The practical route is to switch strict on and then deliberately lift the individual flags that are not ready, one at a time, fixing as you go."
+          },
+          {
+            type: "text",
+            id: "ts-l27-b2",
+            body: "For a single stubborn line, `// @ts-expect-error` silences the error on the next line \u2014 and, importantly, fails if there is *no* error there. That second behaviour is the point: a suppression cannot quietly outlive the problem it was hiding."
+          },
+          {
+            type: "heading",
+            id: "ts-l27-h1",
+            level: 2,
+            body: "Migrating without stopping"
+          },
+          {
+            type: "code",
+            id: "ts-l27-code",
+            language: "typescript",
+            title: "lift one flag, silence one line",
+            code: `// Strict everywhere, except the one flag we are still paying down:
+{
+  "compilerOptions": {
+    "strict": true,
+    "noImplicitAny": false   // temporary: let untyped JavaScript in
+  }
+}
+
+// Silence a single, understood problem rather than the whole file:
+const parsed = JSON.parse(input)
+// @ts-expect-error \u2014 the payload is validated on the next line
+useAsUser(parsed)
+
+// @ts-expect-error errors when the next line has NO error, so it
+// cannot rot into a permanent, meaningless suppression.`
+          },
+          {
+            type: "list",
+            id: "ts-l27-list",
+            style: "bullet",
+            items: [
+              "Turn off the *smallest* flag that unblocks you, never the whole of `strict`.",
+              "`// @ts-expect-error` is self-cleaning: once the line is fixed, the comment itself becomes an error.",
+              "Track the flags you have lifted and put them back as the codebase catches up."
+            ]
+          },
+          {
+            type: "warning",
+            id: "ts-l27-warn",
+            title: "expect-error is not ignore",
+            body: "An old-style `// @ts-ignore` silences an error whether or not one exists, so it hides future mistakes silently. Prefer `@ts-expect-error`, which stops working the moment it is no longer needed."
+          },
+          {
+            type: "heading",
+            id: "ts-l27-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "ts-l27-b3",
+            body: "Model how the compiler resolves a migration config: an umbrella `strict` flag, plus a list of flags you have temporarily lifted."
+          },
+          {
+            type: "exercise",
+            id: "ts-l27-x1",
+            exercise: {
+              id: "ex-ts-l27",
+              instructions: "Write effectiveFlags(config) returning one entry per flag. Every flag is true when config.strict is true and it is not in config.disabled; otherwise false.",
+              languages: ["typescript"],
+              starterCode: {
+                typescript: `const ALL_FLAGS = [
+  'noImplicitAny',
+  'strictNullChecks',
+  'strictFunctionTypes',
+  'strictPropertyInitialization',
+  'noImplicitThis',
+  'alwaysStrict',
+]
+
+// Map every flag to its effective boolean.
+function effectiveFlags(config: { strict: boolean; disabled: string[] }): Record<string, boolean> {
+  return {}
+}
+`
+              },
+              tests: [
+                {
+                  id: "ts-l27-t1",
+                  label: "with nothing disabled, a flag is on",
+                  body: "return effectiveFlags({ strict: true, disabled: [] }).noImplicitAny === true"
+                },
+                {
+                  id: "ts-l27-t2",
+                  label: "a disabled flag is off",
+                  body: "return effectiveFlags({ strict: true, disabled: ['noImplicitAny'] }).noImplicitAny === false"
+                },
+                {
+                  id: "ts-l27-t3",
+                  label: "disabling one flag leaves the others on",
+                  body: "return effectiveFlags({ strict: true, disabled: ['noImplicitAny'] }).alwaysStrict === true"
+                },
+                {
+                  id: "ts-l27-t4",
+                  label: "strict off switches everything off",
+                  body: "return effectiveFlags({ strict: false, disabled: [] }).alwaysStrict === false"
+                },
+                {
+                  id: "ts-l27-t5",
+                  label: "every flag is reported",
+                  body: "return Object.keys(effectiveFlags({ strict: true, disabled: [] })).length === ALL_FLAGS.length"
+                }
+              ],
+              hints: [
+                "Build a new object with one key per entry of ALL_FLAGS.",
+                "A flag is on only when strict is true AND it is not in the disabled list.",
+                "In the loop: result[flag] = config.strict && !config.disabled.includes(flag)."
+              ],
+              solution: {
+                typescript: `const ALL_FLAGS = [
+  'noImplicitAny',
+  'strictNullChecks',
+  'strictFunctionTypes',
+  'strictPropertyInitialization',
+  'noImplicitThis',
+  'alwaysStrict',
+]
+
+function effectiveFlags(config: { strict: boolean; disabled: string[] }): Record<string, boolean> {
+  const result: Record<string, boolean> = {}
+  for (const flag of ALL_FLAGS) {
+    result[flag] = config.strict && !config.disabled.includes(flag)
+  }
+  return result
+}
+`
+              },
+              testNotes: "The last check counts the keys, so an implementation that only reports the disabled flags is caught."
+            }
+          }
+        ]
       },
       {
         id: "ts-l28",
@@ -87966,7 +91368,141 @@ var tsConfigSections = [
           "Structure a monorepo with shared type packages"
         ],
         xp: 30,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "ts-l28-intro",
+            body: "**Project references and incremental builds.** In a monorepo, one giant tsconfig re-checks everything on every change. Project references split it into smaller projects that each compile on their own, with a root config that lists them and a `--build` command that walks the graph."
+          },
+          {
+            type: "text",
+            id: "ts-l28-b2",
+            body: "A referenced project must be *composite*, which means it emits declarations and remembers what it has already compiled in a `.tsbuildinfo` file. That memory is what makes the second build so much faster than the first: only the projects whose files changed are rebuilt."
+          },
+          {
+            type: "heading",
+            id: "ts-l28-h1",
+            level: 2,
+            body: "A solution config and its members"
+          },
+          {
+            type: "code",
+            id: "ts-l28-code",
+            language: "plaintext",
+            title: "monorepo tsconfig files",
+            code: `// tsconfig.json \u2014 the solution file: no code of its own, only references.
+{
+  "files": [],
+  "references": [
+    { "path": "packages/core" },
+    { "path": "packages/app" }
+  ]
+}
+
+// packages/core/tsconfig.json \u2014 a referenced project must be composite.
+{
+  "compilerOptions": {
+    "composite": true,
+    "declaration": true,
+    "incremental": true
+  }
+}
+
+// Build in dependency order, rebuilding only what changed:
+// tsc --build`
+          },
+          {
+            type: "list",
+            id: "ts-l28-list",
+            style: "bullet",
+            items: [
+              "The root config uses `files: []` and `references` \u2014 it coordinates rather than compiles.",
+              "`composite: true` is required for any project that others reference, and implies declaration output.",
+              "`tsc --build` understands the graph, so a change in `core` rebuilds `app` after it."
+            ]
+          },
+          {
+            type: "tip",
+            id: "ts-l28-tip",
+            title: "Builds are a graph, not a list",
+            body: "Once projects reference each other, build order is determined for you. Add a reference and the dependency is respected automatically \u2014 no more hand-ordered build scripts that break when a package moves."
+          },
+          {
+            type: "heading",
+            id: "ts-l28-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "ts-l28-b3",
+            body: "Write the two configs a referenced project needs: the solution file at the root, and a member that can itself be referenced."
+          },
+          {
+            type: "exercise",
+            id: "ts-l28-x1",
+            exercise: {
+              id: "ex-ts-l28",
+              instructions: "Fill rootConfig so it references packages/core and packages/app and has no files of its own. Fill coreConfig.compilerOptions so the project is composite, emits declarations, and builds incrementally.",
+              languages: ["typescript"],
+              starterCode: {
+                typescript: `// The root solution file: only references, no files.
+const rootConfig = {
+  files: [],
+  references: [],
+}
+
+// A referenced member project.
+const coreConfig = {
+  compilerOptions: {
+    composite: false,
+    declaration: false,
+    incremental: false,
+  },
+}
+`
+              },
+              tests: [
+                {
+                  id: "ts-l28-t1",
+                  label: "the root lists both member projects",
+                  body: "return rootConfig.references.length === 2 && rootConfig.references[0].path === 'packages/core' && rootConfig.references[1].path === 'packages/app'"
+                },
+                { id: "ts-l28-t2", label: "the root has no files of its own", body: "return Array.isArray(rootConfig.files) && rootConfig.files.length === 0" },
+                { id: "ts-l28-t3", label: "the member is composite", body: "return coreConfig.compilerOptions.composite === true" },
+                {
+                  id: "ts-l28-t4",
+                  label: "the member emits declarations and builds incrementally",
+                  body: "return coreConfig.compilerOptions.declaration === true && coreConfig.compilerOptions.incremental === true"
+                }
+              ],
+              hints: [
+                "references is an array of objects, each with a path string.",
+                "The two paths are packages/core and packages/app, in that order.",
+                "For the member, set composite, declaration and incremental all to true."
+              ],
+              solution: {
+                typescript: `const rootConfig = {
+  files: [],
+  references: [
+    { path: 'packages/core' },
+    { path: 'packages/app' },
+  ],
+}
+
+const coreConfig = {
+  compilerOptions: {
+    composite: true,
+    declaration: true,
+    incremental: true,
+  },
+}
+`
+              },
+              testNotes: "The reference order is checked as well as the paths, matching the dependency order the build would follow."
+            }
+          }
+        ]
       }
     ],
     quiz: {
@@ -88046,7 +91582,148 @@ var tsProjectSections = [
           "Configure strict mode and path aliases"
         ],
         xp: 60,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "ts-l29-intro",
+            body: "**Project setup and domain types.** A typed project starts from its types, not its UI. Before writing a single handler, describe the data \u2014 a `Task`, the `Priority` values it may hold, and the `Filter` the user can apply. Everything else is built on those words."
+          },
+          {
+            type: "text",
+            id: "ts-l29-b2",
+            body: "The goal of this section is a small task tracker: add tasks, toggle them done, filter the list, and keep it in `localStorage`. Each lesson builds one layer, and every layer is typed. Start the project with `strict: true` so the compiler works for you from the first file."
+          },
+          {
+            type: "heading",
+            id: "ts-l29-h1",
+            level: 2,
+            body: "The domain model"
+          },
+          {
+            type: "code",
+            id: "ts-l29-code",
+            language: "typescript",
+            title: "Task, Priority and Filter",
+            code: `type Priority = 'low' | 'normal' | 'high'
+
+interface Task {
+  id: string
+  title: string
+  done: boolean
+  priority: Priority
+}
+
+type Filter = 'all' | 'active' | 'done'
+
+// npm create vite@latest task-tracker -- --template vanilla-ts
+// then in tsconfig.json:
+// { "compilerOptions": { "strict": true, "baseUrl": ".", "paths": { "@/*": ["src/*"] } } }
+
+function makeTask(id: string, title: string, priority: Priority = 'normal'): Task {
+  return { id, title, done: false, priority }
+}`
+          },
+          {
+            type: "list",
+            id: "ts-l29-list",
+            style: "bullet",
+            items: [
+              "A union of string literals (`Priority`) prevents a typo like `hihg` from ever compiling.",
+              "The interface names the shape once, so every function that touches a task agrees on it.",
+              "A default parameter (`priority = \u2019normal\u2019`) keeps the common case short at the call site."
+            ]
+          },
+          {
+            type: "tip",
+            id: "ts-l29-tip",
+            title: "Model the words before the widgets",
+            body: "Naming `Task`, `Priority` and `Filter` first means the rest of the project reads like the problem. When you later need a new state, you add it to the union and the compiler points at every place that must handle it."
+          },
+          {
+            type: "heading",
+            id: "ts-l29-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "ts-l29-b3",
+            body: "Write the factory that creates a task, with the defaults the rest of the project will rely on."
+          },
+          {
+            type: "exercise",
+            id: "ts-l29-x1",
+            exercise: {
+              id: "ex-ts-l29",
+              instructions: "Write makeTask(id, title, priority) returning a task with priority defaulting to 'normal' and done starting false. Each call must return a brand-new object.",
+              languages: ["typescript"],
+              starterCode: {
+                typescript: `type Priority = 'low' | 'normal' | 'high'
+
+type Task = {
+  id: string
+  title: string
+  done: boolean
+  priority: Priority
+}
+
+// Build a task from its parts.
+function makeTask(id: string, title: string, priority: Priority = 'normal'): Task {
+  return { id: '', title: '', done: false, priority: 'normal' }
+}
+`
+              },
+              tests: [
+                {
+                  id: "ts-l29-t1",
+                  label: "uses the id and title it is given",
+                  body: "const t = makeTask('1', 'Write the plan'); return t.id === '1' && t.title === 'Write the plan'"
+                },
+                {
+                  id: "ts-l29-t2",
+                  label: "new tasks start unfinished",
+                  body: "return makeTask('1', 'x').done === false"
+                },
+                {
+                  id: "ts-l29-t3",
+                  label: "priority defaults to normal",
+                  body: "return makeTask('1', 'x').priority === 'normal'"
+                },
+                {
+                  id: "ts-l29-t4",
+                  label: "an explicit priority is kept",
+                  body: "return makeTask('2', 'x', 'high').priority === 'high'"
+                },
+                {
+                  id: "ts-l29-t5",
+                  label: "each call returns a new object",
+                  body: "return makeTask('1', 'x') !== makeTask('1', 'x')"
+                }
+              ],
+              hints: [
+                "Return an object literal built from the parameters, not fixed values.",
+                "done is always false for a task you have just created.",
+                "The priority parameter already has a default, so just pass it through: { id, title, done: false, priority }."
+              ],
+              solution: {
+                typescript: `type Priority = 'low' | 'normal' | 'high'
+
+type Task = {
+  id: string
+  title: string
+  done: boolean
+  priority: Priority
+}
+
+function makeTask(id: string, title: string, priority: Priority = 'normal'): Task {
+  return { id: id, title: title, done: false, priority: priority }
+}
+`
+              },
+              testNotes: "The last check calls the factory twice and compares the results \u2014 an implementation that returns a shared, module-level object would fail."
+            }
+          }
+        ]
       },
       {
         id: "ts-l30",
@@ -88059,7 +91736,149 @@ var tsProjectSections = [
           "Use ReturnType<typeof reducer> for the state type"
         ],
         xp: 60,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "ts-l30-intro",
+            body: "**State management with type-safe reducers.** A reducer is a pure function: it takes the current state and an action, and returns the next state. Making the action a discriminated union means each `case` knows exactly which payload it carries \u2014 the compiler narrows it for you."
+          },
+          {
+            type: "text",
+            id: "ts-l30-b2",
+            body: "The rule that keeps a reducer predictable is *no mutation*: return a new array or object rather than editing the old one. Then the UI can compare references to know what changed, and a mistake in one action cannot corrupt state another action is reading."
+          },
+          {
+            type: "heading",
+            id: "ts-l30-h1",
+            level: 2,
+            body: "A reducer over discriminated actions"
+          },
+          {
+            type: "code",
+            id: "ts-l30-code",
+            language: "typescript",
+            title: "narrow on action.type, return new state",
+            code: `type Action =
+  | { type: 'add'; task: Task }
+  | { type: 'toggle'; id: string }
+
+function taskReducer(tasks: Task[], action: Action): Task[] {
+  switch (action.type) {
+    case 'add':
+      return [...tasks, action.task]        // a new array
+    case 'toggle':
+      return tasks.map((task) =>
+        task.id === action.id ? { ...task, done: !task.done } : task,
+      )
+    default: {
+      const never: never = action          // all actions handled
+      return tasks
+    }
+  }
+}
+
+// Derive the state type from the reducer itself:
+type State = ReturnType<typeof taskReducer>   // Task[]`
+          },
+          {
+            type: "list",
+            id: "ts-l30-list",
+            style: "bullet",
+            items: [
+              "Each action is a member of the union with its own payload shape \u2014 `add` has a task, `toggle` has an id.",
+              "`action.type` is the discriminant; the matching `case` narrows the whole action.",
+              "Spread (`[...tasks, task]`, `{ ...task, done: !task.done }`) returns new values instead of mutating."
+            ]
+          },
+          {
+            type: "tip",
+            id: "ts-l30-tip",
+            title: "Derive the state type, do not restate it",
+            body: "`ReturnType<typeof taskReducer>` reads the state type straight from the reducer. If the reducer later returns something richer, every consumer follows with no edits."
+          },
+          {
+            type: "heading",
+            id: "ts-l30-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "ts-l30-b3",
+            body: "Implement the reducer. It must return a new list and must never change the list it was given."
+          },
+          {
+            type: "exercise",
+            id: "ts-l30-x1",
+            exercise: {
+              id: "ex-ts-l30",
+              instructions: "Write taskReducer(tasks, action). add returns a new list with the task appended; toggle flips the done flag of the task whose id matches. Never mutate the input array or its tasks.",
+              languages: ["typescript"],
+              starterCode: {
+                typescript: `type Task = { id: string; title: string; done: boolean }
+
+type Action =
+  | { type: 'add'; task: Task }
+  | { type: 'toggle'; id: string }
+
+// Return the next state; do not change the one you were given.
+function taskReducer(tasks: Task[], action: Action): Task[] {
+  return tasks
+}
+`
+              },
+              tests: [
+                {
+                  id: "ts-l30-t1",
+                  label: "add appends the task",
+                  body: "const s = taskReducer([], { type: 'add', task: { id: '1', title: 'a', done: false } }); return s.length === 1 && s[0].id === '1'"
+                },
+                {
+                  id: "ts-l30-t2",
+                  label: "toggle flips the matching task",
+                  body: "const one = taskReducer([], { type: 'add', task: { id: '1', title: 'a', done: false } }); const two = taskReducer(one, { type: 'toggle', id: '1' }); return two[0].done === true"
+                },
+                {
+                  id: "ts-l30-t3",
+                  label: "toggle leaves other tasks alone",
+                  body: "const one = [{ id: '1', title: 'a', done: false }, { id: '2', title: 'b', done: false }]; const two = taskReducer(one, { type: 'toggle', id: '2' }); return two[0].done === false && two[1].done === true"
+                },
+                {
+                  id: "ts-l30-t4",
+                  label: "the input state is not mutated",
+                  body: "const base = [{ id: '1', title: 'a', done: false }]; const next = taskReducer(base, { type: 'toggle', id: '1' }); return base[0].done === false && next !== base"
+                }
+              ],
+              hints: [
+                "Switch on action.type, exactly like the example.",
+                "add: return a new array with the task at the end \u2014 [...tasks, action.task].",
+                "toggle: map over the tasks and return a copy with done flipped for the matching id, returning the task unchanged otherwise."
+              ],
+              solution: {
+                typescript: `type Task = { id: string; title: string; done: boolean }
+
+type Action =
+  | { type: 'add'; task: Task }
+  | { type: 'toggle'; id: string }
+
+function taskReducer(tasks: Task[], action: Action): Task[] {
+  switch (action.type) {
+    case 'add':
+      return [...tasks, action.task]
+    case 'toggle':
+      return tasks.map((task) =>
+        task.id === action.id ? { ...task, done: !task.done } : task,
+      )
+    default:
+      return tasks
+  }
+}
+`
+              },
+              testNotes: "The last check inspects the original array after the call. An in-place toggle would show true there and fail."
+            }
+          }
+        ]
       },
       {
         id: "ts-l31",
@@ -88072,7 +91891,135 @@ var tsProjectSections = [
           "Delegate events on a list with a single listener"
         ],
         xp: 55,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "ts-l31-intro",
+            body: "**DOM layer with typed event handlers.** The DOM is full of things that might be `null` and events that might be any shape. This is where `strictNullChecks` earns its keep: `document.querySelector` returns `Element | null`, so you cannot use the result until you have handled the missing case."
+          },
+          {
+            type: "text",
+            id: "ts-l31-b2",
+            body: "Events are typed too. A submit handler receives a `SubmitEvent`; a click handler a `MouseEvent`. `event.currentTarget` is the element the listener was attached to, and it is typed loosely, so a cast or a guard is honest about what you expect. Delegation \u2014 one listener on the list instead of one per row \u2014 keeps both the DOM and the types small."
+          },
+          {
+            type: "heading",
+            id: "ts-l31-h1",
+            level: 2,
+            body: "Querying, typing, and delegating"
+          },
+          {
+            type: "code",
+            id: "ts-l31-code",
+            language: "typescript",
+            title: "typed DOM access and event handling",
+            code: `// querySelector is generic \u2014 name the element you expect.
+const list = document.querySelector<HTMLUListElement>('#tasks')
+if (!list) throw new Error('Missing #tasks')
+
+// A submit handler gets a SubmitEvent; read the form from currentTarget.
+form.addEventListener('submit', (event: SubmitEvent) => {
+  event.preventDefault()
+  const form = event.currentTarget as HTMLFormElement
+  const title = (form.elements.namedItem('title') as HTMLInputElement).value
+})
+
+// Delegate: one listener, find the row that was clicked.
+list.addEventListener('click', (event: MouseEvent) => {
+  const target = event.target as HTMLElement
+  const id = target.closest('[data-id]')?.getAttribute('data-id')
+  if (id) toggle(id)
+})`
+          },
+          {
+            type: "list",
+            id: "ts-l31-list",
+            style: "bullet",
+            items: [
+              "`querySelector<T>` returns `T | null`; a guard (or an early throw) is required before use.",
+              "Listeners are typed by the event name, so `event` arrives with the right members.",
+              "Delegation binds one listener on a parent and reads `event.target`, avoiding a listener per row."
+            ]
+          },
+          {
+            type: "warning",
+            id: "ts-l31-warn",
+            title: "A cast is a promise, not a check",
+            body: "`event.currentTarget as HTMLFormElement` tells the compiler to trust you. If the listener is ever attached to something else, the promise breaks at run time. Cast only where you control how the listener is wired."
+          },
+          {
+            type: "heading",
+            id: "ts-l31-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "ts-l31-b3",
+            body: "Model delegation as a plain function: given a map of handlers and an event, route to the matching handler. This is the logic the single list listener runs."
+          },
+          {
+            type: "exercise",
+            id: "ts-l31-x1",
+            exercise: {
+              id: "ex-ts-l31",
+              instructions: "Write delegate(handlers, event) that calls the handler named after event.type with the event, and returns its result. Return undefined when no handler matches.",
+              languages: ["typescript"],
+              starterCode: {
+                typescript: `type Handlers = Record<string, (event: { type: string; target?: string }) => unknown>
+
+// Route the event to its handler.
+function delegate(
+  handlers: Handlers,
+  event: { type: string; target?: string },
+): unknown {
+  return undefined
+}
+`
+              },
+              tests: [
+                {
+                  id: "ts-l31-t1",
+                  label: "calls the handler for the event type",
+                  body: "return delegate({ click: () => 'clicked' }, { type: 'click' }) === 'clicked'"
+                },
+                {
+                  id: "ts-l31-t2",
+                  label: "passes the event to the handler",
+                  body: "return delegate({ submit: (e) => e.target }, { type: 'submit', target: 'form' }) === 'form'"
+                },
+                {
+                  id: "ts-l31-t3",
+                  label: "an unmatched type returns undefined",
+                  body: "return delegate({ click: () => 1 }, { type: 'submit' }) === undefined"
+                },
+                {
+                  id: "ts-l31-t4",
+                  label: "it does not call the wrong handler",
+                  body: "let called = ''; delegate({ click: () => { called = 'click' }, submit: () => { called = 'submit' } }, { type: 'submit' }); return called === 'submit'"
+                }
+              ],
+              hints: [
+                "The handlers map is keyed by event type.",
+                "Look the handler up by event.type and call it with the event.",
+                "Guard the missing case: const handler = handlers[event.type]; return handler ? handler(event) : undefined."
+              ],
+              solution: {
+                typescript: `type Handlers = Record<string, (event: { type: string; target?: string }) => unknown>
+
+function delegate(
+  handlers: Handlers,
+  event: { type: string; target?: string },
+): unknown {
+  const handler = handlers[event.type]
+  return handler ? handler(event) : undefined
+}
+`
+              },
+              testNotes: "The last check records which handler ran, so calling every handler or the first one in the map is caught."
+            }
+          }
+        ]
       },
       {
         id: "ts-l32",
@@ -88085,7 +92032,137 @@ var tsProjectSections = [
           "Compute filtered views without mutating state"
         ],
         xp: 50,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "ts-l32-intro",
+            body: "**Persistence and filtering.** `localStorage` stores strings, so saving state means serializing it and loading means parsing it back. Because the value that comes out of `JSON.parse` is `any`, the type you claim on the way out is a promise the compiler cannot check \u2014 you assert it once, at the boundary."
+          },
+          {
+            type: "text",
+            id: "ts-l32-b2",
+            body: "Filtering is the other half of this layer, and it should be *derived*: compute the visible list from the stored list every render rather than keeping a second copy in sync. A small pure function \u2014 `filterTasks(tasks, filter)` \u2014 is all the UI needs."
+          },
+          {
+            type: "heading",
+            id: "ts-l32-h1",
+            level: 2,
+            body: "Serialize at the edge, filter as a pure function"
+          },
+          {
+            type: "code",
+            id: "ts-l32-code",
+            language: "typescript",
+            title: "persistence and derived state",
+            code: `function save(tasks: Task[]): void {
+  localStorage.setItem('tasks', JSON.stringify(tasks))
+}
+
+function load(): Task[] {
+  const raw = localStorage.getItem('tasks')
+  if (!raw) return []
+  // JSON.parse returns any; we assert the shape we wrote.
+  return JSON.parse(raw) as Task[]
+}
+
+// A reviver turns stored ISO strings back into Dates:
+function reviver(key: string, value: unknown) {
+  return key === 'createdAt' && typeof value === 'string' ? new Date(value) : value
+}
+
+// Derived state: filter without touching the stored list.
+function filterTasks(tasks: Task[], filter: Filter): Task[] {
+  if (filter === 'active') return tasks.filter((task) => !task.done)
+  if (filter === 'done') return tasks.filter((task) => task.done)
+  return [...tasks]
+}`
+          },
+          {
+            type: "list",
+            id: "ts-l32-list",
+            style: "bullet",
+            items: [
+              "`JSON.stringify` loses `Date` objects, so the reviver rebuilds them on the way in.",
+              "`JSON.parse` returns `any`; asserting `as Task[]` is the one honest cast in the layer.",
+              "`filterTasks(\u2019all\u2019)` returns a copy, so callers can sort or slice the view without touching stored state."
+            ]
+          },
+          {
+            type: "tip",
+            id: "ts-l32-tip",
+            title: "Derive, do not duplicate",
+            body: "Storing `visibleTasks` alongside `tasks` means keeping them in sync forever. Computing the visible list from the full list and the current filter removes a whole class of bug."
+          },
+          {
+            type: "heading",
+            id: "ts-l32-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "ts-l32-b3",
+            body: "Write the derived filter. It must never change the list it is given, even for the all case."
+          },
+          {
+            type: "exercise",
+            id: "ts-l32-x1",
+            exercise: {
+              id: "ex-ts-l32",
+              instructions: "Write filterTasks(tasks, filter). 'active' returns the unfinished tasks, 'done' returns the finished ones, and 'all' returns a copy of the whole list. Always return a new array.",
+              languages: ["typescript"],
+              starterCode: {
+                typescript: `type Task = { id: string; title: string; done: boolean }
+type Filter = 'all' | 'active' | 'done'
+
+// Return a new array of the matching tasks.
+function filterTasks(tasks: Task[], filter: Filter): Task[] {
+  return tasks
+}
+`
+              },
+              tests: [
+                {
+                  id: "ts-l32-t1",
+                  label: "all returns every task, as a new array",
+                  body: "const tasks = [{ id: '1', title: 'a', done: false }, { id: '2', title: 'b', done: true }]; const r = filterTasks(tasks, 'all'); return r.length === 2 && r !== tasks"
+                },
+                {
+                  id: "ts-l32-t2",
+                  label: "active returns only unfinished tasks",
+                  body: "const tasks = [{ id: '1', title: 'a', done: false }, { id: '2', title: 'b', done: true }]; const r = filterTasks(tasks, 'active'); return r.length === 1 && r[0].id === '1'"
+                },
+                {
+                  id: "ts-l32-t3",
+                  label: "done returns only finished tasks",
+                  body: "const tasks = [{ id: '1', title: 'a', done: false }, { id: '2', title: 'b', done: true }]; const r = filterTasks(tasks, 'done'); return r.length === 1 && r[0].id === '2'"
+                },
+                {
+                  id: "ts-l32-t4",
+                  label: "an empty list stays empty",
+                  body: "return filterTasks([], 'active').length === 0"
+                }
+              ],
+              hints: [
+                "active and done are just filters on the done flag.",
+                "filter returns a new array, so it fits active and done directly.",
+                "For all, copy the list with the spread: [...tasks]."
+              ],
+              solution: {
+                typescript: `type Task = { id: string; title: string; done: boolean }
+type Filter = 'all' | 'active' | 'done'
+
+function filterTasks(tasks: Task[], filter: Filter): Task[] {
+  if (filter === 'active') return tasks.filter((task) => !task.done)
+  if (filter === 'done') return tasks.filter((task) => task.done)
+  return [...tasks]
+}
+`
+              },
+              testNotes: "The all case checks r !== tasks, so returning the same reference \u2014 which a later sort would mutate \u2014 is caught."
+            }
+          }
+        ]
       },
       {
         id: "ts-l33",
@@ -88098,7 +92175,120 @@ var tsProjectSections = [
           "Ensure accessibility with ARIA attributes"
         ],
         xp: 50,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "ts-l33-intro",
+            body: "**Polish: drag-and-drop and keyboard shortcuts.** The final layer adds the interactions that make the tracker feel finished: dragging rows to reorder, and keyboard shortcuts for the common actions. Both are typed, and both are optional \u2014 a mouse is not the only way in."
+          },
+          {
+            type: "text",
+            id: "ts-l33-b2",
+            body: 'The drag API carries data on a `DataTransfer` object, which may be null on some events, so the code handles that. Keyboard handling reads `event.key` on a `KeyboardEvent`. Wrapping a decision like "which command does this key mean?" in a small pure function keeps the DOM listener thin and testable.'
+          },
+          {
+            type: "heading",
+            id: "ts-l33-h1",
+            level: 2,
+            body: "Drag payloads and key handling"
+          },
+          {
+            type: "code",
+            id: "ts-l33-code",
+            language: "typescript",
+            title: "dragging, dropping, and shortcuts",
+            code: `row.addEventListener('dragstart', (event: DragEvent) => {
+  // dataTransfer can be null, so guard it.
+  event.dataTransfer?.setData('application/x-task-id', row.dataset.id ?? '')
+})
+
+dropZone.addEventListener('dragover', (event: DragEvent) => {
+  event.preventDefault()   // allow the drop
+})
+
+dropZone.addEventListener('drop', (event: DragEvent) => {
+  const id = event.dataTransfer?.getData('application/x-task-id')
+  if (id) move(id, dropZone.dataset.id ?? '')
+})
+
+window.addEventListener('keydown', (event: KeyboardEvent) => {
+  const command = shortcutFor(event.key)
+  if (command === 'new') openNewTaskForm()
+})
+
+// A tiny pure function is easier to test than the listener itself:
+function shortcutFor(key: string): string | null {
+  if (key === 'n') return 'new'
+  if (key === '/') return 'search'
+  if (key === 'Escape') return 'close'
+  return null
+}`
+          },
+          {
+            type: "list",
+            id: "ts-l33-list",
+            style: "bullet",
+            items: [
+              "`dataTransfer` is nullable, so `?.` keeps the handler honest about the drag not carrying data.",
+              "`dragover` must call `preventDefault()` or the browser will refuse the drop.",
+              "A named key (`\u2019Escape\u2019`) is more reliable than a key code, and reads better in the source."
+            ]
+          },
+          {
+            type: "warning",
+            id: "ts-l33-warn",
+            title: "Do not make drag the only way",
+            body: "Drag-and-drop is invisible to a keyboard and to a screen reader. Keep a button or a shortcut for the same action, and set `aria-label`s so the row announces what it does."
+          },
+          {
+            type: "heading",
+            id: "ts-l33-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "ts-l33-b3",
+            body: "Write the pure decision the keydown listener depends on: which command does a key mean?"
+          },
+          {
+            type: "exercise",
+            id: "ts-l33-x1",
+            exercise: {
+              id: "ex-ts-l33",
+              instructions: "Write shortcutFor(key) returning 'new' for the n key, 'search' for /, 'close' for Escape, and null for any other key.",
+              languages: ["typescript"],
+              starterCode: {
+                typescript: `// Map a key to a command name, or null.
+function shortcutFor(key: string): string | null {
+  return null
+}
+`
+              },
+              tests: [
+                { id: "ts-l33-t1", label: "n starts a new task", body: "return shortcutFor('n') === 'new'" },
+                { id: "ts-l33-t2", label: "slash opens search", body: "return shortcutFor('/') === 'search'" },
+                { id: "ts-l33-t3", label: "Escape closes", body: "return shortcutFor('Escape') === 'close'" },
+                { id: "ts-l33-t4", label: "other keys do nothing", body: "return shortcutFor('x') === null && shortcutFor('Enter') === null" }
+              ],
+              hints: [
+                "Compare the key against each known value and return the matching command.",
+                'Escape is the exact string "Escape", not the word escape in lower case.',
+                'Fall through to null when nothing matches \u2014 that is the "no command" answer.'
+              ],
+              solution: {
+                typescript: `function shortcutFor(key: string): string | null {
+  if (key === 'n') return 'new'
+  if (key === '/') return 'search'
+  if (key === 'Escape') return 'close'
+  return null
+}
+`
+              },
+              testNotes: "The checks include an unknown key, so a function that returns a command for everything is caught."
+            }
+          }
+        ]
       }
     ],
     quiz: {
@@ -88199,7 +92389,7 @@ var typescriptFundamentals = {
 var reactHomeSections = [
   {
     id: "react-s1",
-    title: "React HOME",
+    title: "Getting started",
     description: "What React adds, how components work, and how to set up your first project.",
     lessons: [
       {
@@ -88213,7 +92403,105 @@ var reactHomeSections = [
           "Name the three principles of React design"
         ],
         xp: 40,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l1-intro",
+            body: "**What React is and why it exists.** Building a UI by hand means changing the DOM yourself: create an element, find it again, update its text. Every new feature adds more of those steps, and the page slowly drifts out of sync with your data. React changes the question from *how* the DOM changes to *what* the page should show."
+          },
+          {
+            type: "text",
+            id: "react-l1-b2",
+            body: "You describe the interface as a function of your data, and React works out the DOM changes. The description is written in **components** \u2014 functions that return markup \u2014 and in **JSX**, the syntax that lets markup live inside JavaScript. Because a component is just a function returning a value, it can be reused, composed, and tested like any other function."
+          },
+          {
+            type: "heading",
+            id: "react-l1-h1",
+            level: 2,
+            body: "A component is a function that returns markup"
+          },
+          {
+            type: "code",
+            id: "react-l1-code",
+            language: "jsx",
+            title: "the smallest component",
+            code: `// A component is a function whose name is capitalised.
+function Welcome() {
+  return <h1>Hello, world</h1>
+}
+
+// JSX is not HTML. It becomes a call that builds an element object:
+// React.createElement('h1', null, 'Hello, world')`
+          },
+          {
+            type: "list",
+            id: "react-l1-list",
+            style: "bullet",
+            items: [
+              "**Declarative.** You say what the UI looks like for the current data; React does the DOM work.",
+              "**Component-based.** A UI is a tree of small functions, each owning a piece of the page.",
+              "**Composable.** Components take inputs (props) and can render other components, like functions calling functions."
+            ]
+          },
+          {
+            type: "tip",
+            id: "react-l1-tip",
+            title: "Capital letters matter",
+            body: "A lowercase tag like `<div>` becomes a real DOM element. A capitalised name like `<Welcome />` becomes a call to *your* function. That single rule is how JSX tells built-in tags apart from your components."
+          },
+          {
+            type: "heading",
+            id: "react-l1-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l1-b3",
+            body: "Write your first component. The editor runs real JSX, and the tests call your component and inspect the element it returns."
+          },
+          {
+            type: "exercise",
+            id: "react-l1-x1",
+            exercise: {
+              id: "ex-react-l1",
+              instructions: "Write a component called Welcome that returns an h1 element whose text is exactly: Hello, world",
+              languages: ["jsx"],
+              starterCode: {
+                jsx: `// Return an <h1> with the text Hello, world.
+function Welcome() {
+  return <div />
+}
+`
+              },
+              tests: [
+                { id: "ex-react-l1-t1", label: "Welcome is a function", body: "return typeof Welcome === 'function'" },
+                {
+                  id: "ex-react-l1-t2",
+                  label: "it renders an h1",
+                  body: "return Welcome().type === 'h1'"
+                },
+                {
+                  id: "ex-react-l1-t3",
+                  label: "the h1 contains exactly the right text",
+                  body: "return Welcome().props.children === 'Hello, world'"
+                }
+              ],
+              hints: [
+                "A component returns JSX. Return the <h1> directly.",
+                "The text goes between the tags, with no extra punctuation: <h1>Hello, world</h1>.",
+                "Do not wrap it in a <div> \u2014 the tests expect the element type to be h1."
+              ],
+              solution: {
+                jsx: `function Welcome() {
+  return <h1>Hello, world</h1>
+}
+`
+              },
+              testNotes: "The tests call Welcome() and read the element it returns, so they check the markup without needing a rendered page."
+            }
+          }
+        ]
       },
       {
         id: "react-l2",
@@ -88226,7 +92514,130 @@ var reactHomeSections = [
           "Run the dev server and open the browser"
         ],
         xp: 40,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l2-intro",
+            body: "**Getting started with Vite.** A modern React project is created with a scaffold tool. Vite sets up the folder, the development server, and a production build, so you start on your first component instead of on a bundler config."
+          },
+          {
+            type: "text",
+            id: "react-l2-b2",
+            body: 'The layout is small and predictable. `index.html` is the single page, with a `<div id="root">` where React will mount. `src/` holds your components, and `public/` holds static files served as-is. A few scripts in `package.json` drive the whole workflow.'
+          },
+          {
+            type: "heading",
+            id: "react-l2-h1",
+            level: 2,
+            body: "Scaffold, run, and the folder it makes"
+          },
+          {
+            type: "code",
+            id: "react-l2-code",
+            language: "plaintext",
+            title: "create and run a Vite project",
+            code: `npm create vite@latest my-app -- --template react
+cd my-app
+npm install
+npm run dev
+
+# folder layout
+# index.html          the single page, with <div id="root">
+# src/main.jsx        mounts <App /> into that div
+# src/App.jsx         your first component
+# public/             static files served unchanged`
+          },
+          {
+            type: "list",
+            id: "react-l2-list",
+            style: "bullet",
+            items: [
+              "`npm run dev` starts a dev server with instant reload as you edit.",
+              "`npm run build` produces the optimised files for deployment.",
+              "`package.json` holds the scripts and the dependency list \u2014 React and ReactDOM are entries there."
+            ]
+          },
+          {
+            type: "tip",
+            id: "react-l2-tip",
+            title: "Read package.json before anything else",
+            body: "In any unfamiliar project the scripts and dependencies tell you how to run it and what it is built on. It is a two-minute read that saves an hour of guessing."
+          },
+          {
+            type: "heading",
+            id: "react-l2-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l2-b3",
+            body: "Describe the project the scaffold creates. Fill in the scripts and the two runtime dependencies."
+          },
+          {
+            type: "exercise",
+            id: "react-l2-x1",
+            exercise: {
+              id: "ex-react-l2",
+              instructions: 'Fill packageJson so dev runs "vite", build runs "vite build" and preview runs "vite preview", and so react and react-dom are listed as dependencies.',
+              languages: ["javascript"],
+              starterCode: {
+                javascript: `const packageJson = {
+  name: 'my-app',
+  scripts: {
+    dev: '',
+    build: '',
+    preview: '',
+  },
+  dependencies: {
+    react: '',
+    'react-dom': '',
+  },
+}
+`
+              },
+              tests: [
+                { id: "ex-react-l2-t1", label: "dev starts the dev server", body: "return packageJson.scripts.dev === 'vite'" },
+                {
+                  id: "ex-react-l2-t2",
+                  label: "build makes a production build",
+                  body: "return packageJson.scripts.build === 'vite build'"
+                },
+                {
+                  id: "ex-react-l2-t3",
+                  label: "preview serves the build",
+                  body: "return packageJson.scripts.preview === 'vite preview'"
+                },
+                {
+                  id: "ex-react-l2-t4",
+                  label: "react and react-dom are dependencies",
+                  body: "const deps = packageJson.dependencies; return typeof deps.react === 'string' && deps.react.length > 0 && typeof deps['react-dom'] === 'string' && deps['react-dom'].length > 0"
+                }
+              ],
+              hints: [
+                'The three scripts are the exact strings Vite uses: "vite", "vite build", and "vite preview".',
+                "react-dom keeps its hyphen, so it is written as a quoted key.",
+                "Any non-empty version string works for the dependencies \u2014 the tests only check that the entries exist."
+              ],
+              solution: {
+                javascript: `const packageJson = {
+  name: 'my-app',
+  scripts: {
+    dev: 'vite',
+    build: 'vite build',
+    preview: 'vite preview',
+  },
+  dependencies: {
+    react: '^18.3.1',
+    'react-dom': '^18.3.1',
+  },
+}
+`
+              },
+              testNotes: "The scripts are checked exactly, because a typo there is the difference between a project that runs and one that does not."
+            }
+          }
+        ]
       },
       {
         id: "react-l3",
@@ -88239,7 +92650,124 @@ var reactHomeSections = [
           "Explain the difference between the source and the DOM"
         ],
         xp: 45,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l3-intro",
+            body: "**Your first component.** A component returns a description of part of the page. When several elements sit side by side, JSX asks you to wrap them in a single parent \u2014 usually a `<div>`, or a fragment when you do not want an extra element in the DOM."
+          },
+          {
+            type: "text",
+            id: "react-l3-b2",
+            body: "To put that description on the page, you mount it once with `createRoot`. After the first render React owns that part of the DOM: you change your data and re-render, and React updates only what needs to change. In these exercises the preview is already mounted for you, and `render(<App />)` draws your component."
+          },
+          {
+            type: "heading",
+            id: "react-l3-h1",
+            level: 2,
+            body: "A tree of elements, rendered once"
+          },
+          {
+            type: "code",
+            id: "react-l3-code",
+            language: "jsx",
+            title: "wrapping with a parent, then rendering",
+            code: `function App() {
+  return (
+    <div>
+      <h1>Tasks</h1>
+      <p>Nothing here yet.</p>
+    </div>
+  )
+}
+
+// Mount it once. The preview in this editor does this for you.
+render(<App />)
+
+// A fragment groups elements without adding a real node:
+// return <><h1>Tasks</h1><p>Empty</p></>`
+          },
+          {
+            type: "list",
+            id: "react-l3-list",
+            style: "bullet",
+            items: [
+              "JSX must return a single root element \u2014 wrap siblings in a `<div>` or a fragment.",
+              "Each element becomes an object describing what to render; the DOM is produced from that description.",
+              "`render(<App />)` mounts the tree into the preview\u2019s `#root` element."
+            ]
+          },
+          {
+            type: "warning",
+            id: "react-l3-warn",
+            title: "The source is not the DOM",
+            body: "You never edit the DOM by hand in React. Change the data, let the component re-run, and React reconciles the result. Reaching for `document.querySelector` to patch things usually means the data is not driving the view."
+          },
+          {
+            type: "heading",
+            id: "react-l3-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l3-b3",
+            body: "Build the component from the example: a heading and a paragraph wrapped in a single parent."
+          },
+          {
+            type: "exercise",
+            id: "react-l3-x1",
+            exercise: {
+              id: "ex-react-l3",
+              instructions: 'Write App to return a div containing an h1 with the text "Tasks" and a p with the text "Nothing here yet.". Finish by rendering it with render(<App />).',
+              languages: ["jsx"],
+              starterCode: {
+                jsx: `// Return a div holding an <h1> and a <p>.
+function App() {
+  return <div />
+}
+`
+              },
+              tests: [
+                { id: "ex-react-l3-t1", label: "the root element is a div", body: "return App().type === 'div'" },
+                {
+                  id: "ex-react-l3-t2",
+                  label: "the div has exactly two children",
+                  body: "const kids = App().props.children; return Array.isArray(kids) && kids.length === 2"
+                },
+                {
+                  id: "ex-react-l3-t3",
+                  label: "the first child is the Tasks heading",
+                  body: "const kids = App().props.children; return kids[0].type === 'h1' && kids[0].props.children === 'Tasks'"
+                },
+                {
+                  id: "ex-react-l3-t4",
+                  label: "the second child is the empty message",
+                  body: "const kids = App().props.children; return kids[1].type === 'p' && kids[1].props.children === 'Nothing here yet.'"
+                }
+              ],
+              hints: [
+                "Two elements side by side need one parent around them, so the <div> wraps both.",
+                "The order matters: the <h1> comes first, then the <p>.",
+                "Text goes between the tags, exactly as written: <h1>Tasks</h1> and <p>Nothing here yet.</p>."
+              ],
+              solution: {
+                jsx: `function App() {
+  return (
+    <div>
+      <h1>Tasks</h1>
+      <p>Nothing here yet.</p>
+    </div>
+  )
+}
+
+render(<App />)
+`
+              },
+              testNotes: "The tests read the two children by position, so both the order and the wrapping parent are checked."
+            }
+          }
+        ]
       },
       {
         id: "react-l35",
@@ -88253,7 +92781,125 @@ var reactHomeSections = [
           "Import and export modules with ESM syntax"
         ],
         xp: 40,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l35-intro",
+            body: "**ES6 essentials for React.** React code is modern JavaScript first. Four features show up on almost every line: arrow functions, destructuring, the spread operator, and modules. Learning them well makes the React itself read clearly."
+          },
+          {
+            type: "text",
+            id: "react-l35-b2",
+            body: "Destructuring is how you read props \u2014 `function Card({ title })` instead of `props.title` everywhere. Spread is how you update immutably \u2014 `{ ...task, done: true }` instead of editing the original. Immutability is not style: React relies on new references to detect change."
+          },
+          {
+            type: "heading",
+            id: "react-l35-h1",
+            level: 2,
+            body: "The four features, in one place"
+          },
+          {
+            type: "code",
+            id: "react-l35-code",
+            language: "javascript",
+            title: "arrows, destructuring, spread, modules",
+            code: `// Arrow functions keep the surrounding this and read tidily.
+const double = (n) => n * 2
+
+// Object destructuring pulls named fields out of props.
+function Card({ title, done }) {
+  return title
+}
+
+// Array destructuring takes position one and gathers the rest.
+const names = ['Ada', 'Grace', 'Alan']
+const [first, ...rest] = names   // first = 'Ada', rest = ['Grace', 'Alan']
+
+// Spread copies into a new object or array \u2014 never mutate the original.
+const task = { id: '1', done: false }
+const finished = { ...task, done: true }
+
+// Modules: export a name, import it elsewhere.
+export function greet(name) {
+  return 'Hi, ' + name
+}
+// import { greet } from './greet'`
+          },
+          {
+            type: "list",
+            id: "react-l35-list",
+            style: "bullet",
+            items: [
+              "Arrow functions (`=>`) are shorter and capture `this` from where they are written.",
+              "Destructuring names the fields you need: `const { title } = props` or `function C({ title })`.",
+              "Spread (`...`) builds new values; the original stays untouched, which React depends on."
+            ]
+          },
+          {
+            type: "tip",
+            id: "react-l35-tip",
+            title: "Treat every value as read-only",
+            body: "Inside React, never write `task.done = true`. Write `const next = { ...task, done: true }`. The new object is a different reference, so React sees the change; the old one is left alone."
+          },
+          {
+            type: "heading",
+            id: "react-l35-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l35-b3",
+            body: "Practise destructuring: split the first name from the rest without touching the array."
+          },
+          {
+            type: "exercise",
+            id: "react-l35-x1",
+            exercise: {
+              id: "ex-react-l35",
+              instructions: "Write unpack(names) that returns an object with first equal to the first name and rest an array of the remaining names. Use array destructuring.",
+              languages: ["javascript"],
+              starterCode: {
+                javascript: `// Return { first, rest } using destructuring.
+function unpack(names) {
+  return { first: undefined, rest: [] }
+}
+`
+              },
+              tests: [
+                { id: "ex-react-l35-t1", label: "first is the first name", body: "return unpack(['Ada', 'Grace', 'Alan']).first === 'Ada'" },
+                {
+                  id: "ex-react-l35-t2",
+                  label: "rest holds the remaining names in order",
+                  body: `return JSON.stringify(unpack(['Ada', 'Grace', 'Alan']).rest) === '["Grace","Alan"]'`
+                },
+                {
+                  id: "ex-react-l35-t3",
+                  label: "an empty list gives undefined and an empty rest",
+                  body: "const r = unpack([]); return r.first === undefined && r.rest.length === 0"
+                },
+                {
+                  id: "ex-react-l35-t4",
+                  label: "a single name leaves rest empty",
+                  body: "return unpack(['x']).rest.length === 0"
+                }
+              ],
+              hints: [
+                "Array destructuring reads by position: const [first] = names.",
+                "The rest element gathers everything after the first: const [first, ...rest] = names.",
+                "Return an object literal: { first, rest }."
+              ],
+              solution: {
+                javascript: `function unpack(names) {
+  const [first, ...rest] = names
+  return { first, rest }
+}
+`
+              },
+              testNotes: "The empty-list check confirms rest is really an array (not undefined), which is what the rest element always produces."
+            }
+          }
+        ]
       },
       {
         id: "react-l36",
@@ -88267,12 +92913,128 @@ var reactHomeSections = [
           "Use the react-codemod script to automate large migrations"
         ],
         xp: 35,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l36-intro",
+            body: "**Upgrading to modern React.** Older React code is written as classes: `this.state`, `setState`, and lifecycle methods such as `componentDidMount`. Modern React uses function components with hooks, which express the same ideas in less code and without `this`."
+          },
+          {
+            type: "text",
+            id: "react-l36-b2",
+            body: "The mapping is direct once you see it. `this.state` becomes `useState`; `setState` becomes the setter the hook returns; `componentDidMount` and `componentDidUpdate` become a single `useEffect`. Because `setState` already expected a new value rather than a mutation, the update style barely changes."
+          },
+          {
+            type: "heading",
+            id: "react-l36-h1",
+            level: 2,
+            body: "From class to hooks"
+          },
+          {
+            type: "code",
+            id: "react-l36-code",
+            language: "jsx",
+            title: "the same counter, two ways",
+            code: `// Before: a class with state and a lifecycle method.
+class Counter extends React.Component {
+  state = { count: 0 }
+  componentDidMount() {
+    document.title = 'Count: ' + this.state.count
+  }
+  increment = () => this.setState({ count: this.state.count + 1 })
+  render() {
+    return <button onClick={this.increment}>{this.state.count}</button>
+  }
+}
+
+// After: a function with hooks. No this, no class.
+function Counter() {
+  const [count, setCount] = useState(0)
+  useEffect(() => {
+    document.title = 'Count: ' + count
+  }, [count])
+  return <button onClick={() => setCount(count + 1)}>{count}</button>
+}`
+          },
+          {
+            type: "list",
+            id: "react-l36-list",
+            style: "bullet",
+            items: [
+              "`this.state` and `setState` map to a `useState` pair: the value and its setter.",
+              "`componentDidMount` / `componentDidUpdate` fold into one `useEffect` with a dependency array.",
+              "Hooks remove `this` entirely, so no more binding methods in the constructor."
+            ]
+          },
+          {
+            type: "tip",
+            id: "react-l36-tip",
+            title: "Update with a value, not an edit",
+            body: "Both styles want a new value, never an in-place edit. `setState({ count: this.state.count + 1 })` and `setCount(count + 1)` both build the next state; neither mutates the old one."
+          },
+          {
+            type: "heading",
+            id: "react-l36-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l36-b3",
+            body: "Write the pure update both `setState` and `setCount` rely on: produce the next state without changing the current one."
+          },
+          {
+            type: "exercise",
+            id: "react-l36-x1",
+            exercise: {
+              id: "ex-react-l36",
+              instructions: "Write nextCount(state, delta) returning a new state object whose count is state.count plus delta. Do not change the object you were given.",
+              languages: ["javascript"],
+              starterCode: {
+                javascript: `// Return a new state with count increased by delta.
+function nextCount(state, delta) {
+  return state
+}
+`
+              },
+              tests: [
+                { id: "ex-react-l36-t1", label: "adds the delta to the count", body: "return nextCount({ count: 1 }, 2).count === 3" },
+                {
+                  id: "ex-react-l36-t2",
+                  label: "handles a negative delta",
+                  body: "return nextCount({ count: 5 }, -2).count === 3"
+                },
+                {
+                  id: "ex-react-l36-t3",
+                  label: "the original state is not changed",
+                  body: "const base = { count: 1 }; nextCount(base, 1); return base.count === 1"
+                },
+                {
+                  id: "ex-react-l36-t4",
+                  label: "a new object is returned",
+                  body: "const base = { count: 0 }; return nextCount(base, 0) !== base"
+                }
+              ],
+              hints: [
+                "Copy the state and override count, rather than editing it.",
+                "Object spread makes the copy: { ...state }.",
+                "Combine them: return { ...state, count: state.count + delta }."
+              ],
+              solution: {
+                javascript: `function nextCount(state, delta) {
+  return { ...state, count: state.count + delta }
+}
+`
+              },
+              testNotes: "The immutability checks re-read the original object and compare references \u2014 exactly how React notices that state has changed."
+            }
+          }
+        ]
       }
     ],
     quiz: {
       id: "quiz-react-s1",
-      title: "React HOME check",
+      title: "Getting started check",
       passingScore: 60,
       questions: [
         {
@@ -88319,7 +93081,7 @@ var reactHomeSections = [
             "Missing return statement",
             "Props needs to be destructured",
             "Missing closing parenthesis",
-            "Nothing \u2014 it is valid JSX"
+            "Nothing - it is valid JSX"
           ],
           answer: 3,
           explanation: "This is valid JSX. Props is the implicit parameter of a function component. With TypeScript you would annotate it, but plain JS accepts this."
@@ -88347,7 +93109,124 @@ var reactComponentsSections = [
           "Return valid JSX from every code path"
         ],
         xp: 40,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l4-intro",
+            body: "**Function components and JSX.** A component is a function that takes a single object of inputs \u2014 **props** \u2014 and returns the markup for one piece of the page. Props are read-only: a component receives them and describes what to show, but never writes to them."
+          },
+          {
+            type: "text",
+            id: "react-l4-b2",
+            body: "Almost every component destructures the props it needs directly in the signature, so the body reads as plain variables. Destructuring also lets you give a **default value**, which is how a component stays usable when the caller omits an optional prop."
+          },
+          {
+            type: "heading",
+            id: "react-l4-h1",
+            level: 2,
+            body: "Props in, JSX out"
+          },
+          {
+            type: "code",
+            id: "react-l4-code",
+            language: "jsx",
+            title: "a component with defaults and children",
+            code: `function Card({ title, count = 0, children }) {
+  return (
+    <div className="card">
+      <h2>{title}</h2>
+      <span>{count}</span>
+      {children}
+    </div>
+  )
+}
+
+// The caller supplies the values as attributes:
+// <Card title="Inbox" count={3} />`
+          },
+          {
+            type: "list",
+            id: "react-l4-list",
+            style: "bullet",
+            items: [
+              "Props flow one way, from parent to child \u2014 a child cannot change the props it was given.",
+              "Destructure in the signature: `function Card({ title })` rather than `props.title` throughout.",
+              "Defaults live in the destructuring: `count = 0` covers a missing prop."
+            ]
+          },
+          {
+            type: "tip",
+            id: "react-l4-tip",
+            title: "A component must always return something",
+            body: 'Every path through the function must return JSX. If there is nothing to show, return `null` \u2014 that is a valid React result meaning "render nothing here".'
+          },
+          {
+            type: "heading",
+            id: "react-l4-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l4-b3",
+            body: "Write a `Card` component and check the markup it produces. The tests call the component and inspect the element it returns."
+          },
+          {
+            type: "exercise",
+            id: "react-l4-x1",
+            exercise: {
+              id: "ex-react-l4",
+              instructions: 'Write Card({ title, count }) returning a div with className "card" that holds an h2 containing the title and a span containing the count. count defaults to 0.',
+              languages: ["jsx"],
+              starterCode: {
+                jsx: `// Return a div.card holding an <h2> and a <span>.
+function Card({ title, count }) {
+  return <div />
+}
+`
+              },
+              tests: [
+                {
+                  id: "ex-react-l4-t1",
+                  label: "the root is a div with the card class",
+                  body: "const el = Card({ title: 'Inbox' }); return el.type === 'div' && el.props.className === 'card'"
+                },
+                {
+                  id: "ex-react-l4-t2",
+                  label: "the h2 shows the title",
+                  body: "const kids = Card({ title: 'Inbox' }).props.children; return kids[0].type === 'h2' && kids[0].props.children === 'Inbox'"
+                },
+                {
+                  id: "ex-react-l4-t3",
+                  label: "the span shows the count",
+                  body: "const kids = Card({ title: 'Inbox', count: 3 }).props.children; return kids[1].type === 'span' && kids[1].props.children === 3"
+                },
+                {
+                  id: "ex-react-l4-t4",
+                  label: "count defaults to zero",
+                  body: "const kids = Card({ title: 'Inbox' }).props.children; return kids[1].props.children === 0"
+                }
+              ],
+              hints: [
+                "Destructure count with a default: function Card({ title, count = 0 }).",
+                "The div wraps two children in order: the <h2> first, then the <span>.",
+                'The class attribute is written className in JSX: <div className="card">.'
+              ],
+              solution: {
+                jsx: `function Card({ title, count = 0 }) {
+  return (
+    <div className="card">
+      <h2>{title}</h2>
+      <span>{count}</span>
+    </div>
+  )
+}
+`
+              },
+              testNotes: "The tests read the two children by position and check the default separately, so a missing default or a swapped order is caught."
+            }
+          }
+        ]
       },
       {
         id: "react-l5",
@@ -88360,7 +93239,122 @@ var reactComponentsSections = [
           "Apply conditional rendering with ternary and &&"
         ],
         xp: 40,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l5-intro",
+            body: "**Composing and children prop.** Components compose the way functions compose: one component renders another and hands it data. Anything nested between a component\u2019s opening and closing tags arrives as the `children` prop, which lets a layout wrap content it does not know in advance."
+          },
+          {
+            type: "text",
+            id: "react-l5-b2",
+            body: "That is the difference between a fixed component and a reusable shell. A `Panel` that renders `{children}` can hold a form on one page and a table on another, without knowing what either is."
+          },
+          {
+            type: "heading",
+            id: "react-l5-h1",
+            level: 2,
+            body: "A shell that renders whatever you nest"
+          },
+          {
+            type: "code",
+            id: "react-l5-code",
+            language: "jsx",
+            title: "children and conditional content",
+            code: `function Panel({ title, children }) {
+  return (
+    <section>
+      <h3>{title}</h3>
+      <div>{children}</div>
+    </section>
+  )
+}
+
+// Used like a normal tag \u2014 the inside becomes children:
+// <Panel title="Profile"><p>Ada Lovelace</p></Panel>
+
+// Either/or with a ternary:
+const message = loggedIn ? <p>Welcome back</p> : <p>Please sign in</p>`
+          },
+          {
+            type: "list",
+            id: "react-l5-list",
+            style: "bullet",
+            items: [
+              "`{children}` renders whatever was nested inside the component \u2014 markup, text, or other components.",
+              "A ternary (`cond ? a : b`) picks between two JSX values inline.",
+              "`cond && element` renders the element only when the condition is true."
+            ]
+          },
+          {
+            type: "tip",
+            id: "react-l5-tip",
+            title: "Prefer children over a new prop",
+            body: "If a component only needs to display some content, `children` is the natural prop. Adding a `content` prop that must be passed as JSX is usually a sign that nesting would read better."
+          },
+          {
+            type: "heading",
+            id: "react-l5-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l5-b3",
+            body: "Build the reusable shell. Notice that the component never mentions what the content is."
+          },
+          {
+            type: "exercise",
+            id: "react-l5-x1",
+            exercise: {
+              id: "ex-react-l5",
+              instructions: "Write Panel({ title, children }) returning a section that contains an h3 with the title and a div wrapping the children.",
+              languages: ["jsx"],
+              starterCode: {
+                jsx: `// Return a <section> with an <h3> and a <div> holding children.
+function Panel({ title, children }) {
+  return <div />
+}
+`
+              },
+              tests: [
+                { id: "ex-react-l5-t1", label: "the root is a section", body: "return Panel({ title: 'Profile', children: 'x' }).type === 'section'" },
+                {
+                  id: "ex-react-l5-t2",
+                  label: "the h3 shows the title",
+                  body: "const kids = Panel({ title: 'Profile', children: 'x' }).props.children; return kids[0].type === 'h3' && kids[0].props.children === 'Profile'"
+                },
+                {
+                  id: "ex-react-l5-t3",
+                  label: "the content sits in a div",
+                  body: "const kids = Panel({ title: 'Profile', children: 'x' }).props.children; return kids[1].type === 'div'"
+                },
+                {
+                  id: "ex-react-l5-t4",
+                  label: "the div renders the nested content",
+                  body: "const kids = Panel({ title: 'Profile', children: 'Ada Lovelace' }).props.children; return kids[1].props.children === 'Ada Lovelace'"
+                }
+              ],
+              hints: [
+                "The section wraps two children, in order: the <h3> and the <div>.",
+                "Render the nested content by placing {children} inside the div.",
+                "The div is not just decoration \u2014 the tests check that the content is inside it."
+              ],
+              solution: {
+                jsx: `function Panel({ title, children }) {
+  return (
+    <section>
+      <h3>{title}</h3>
+      <div>{children}</div>
+    </section>
+  )
+}
+`
+              },
+              testNotes: "The tests pass different values for children each time, so the component must render whatever it is given rather than fixed text."
+            }
+          }
+        ]
       },
       {
         id: "react-l6",
@@ -88373,7 +93367,125 @@ var reactComponentsSections = [
           "Explain why using array index as key breaks reordering"
         ],
         xp: 35,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l6-intro",
+            body: "**Lists and keys.** A list in React is an array of elements, usually produced by mapping over data. Each element needs a `key` \u2014 a stable, unique identifier \u2014 so React can tell which items stayed, moved, or disappeared when the list changes."
+          },
+          {
+            type: "text",
+            id: "react-l6-b2",
+            body: "The key is not rendered and is not a normal prop: React reads it off the element to track identity. Using the array index as the key works only as long as the list never reorders; insert an item at the top and every following row is now a different item wearing the old identity."
+          },
+          {
+            type: "heading",
+            id: "react-l6-h1",
+            level: 2,
+            body: "map over data, key by identity"
+          },
+          {
+            type: "code",
+            id: "react-l6-code",
+            language: "jsx",
+            title: "building a list",
+            code: `function TaskList({ items }) {
+  return (
+    <ul>
+      {items.map((item) => (
+        <li key={item.id}>{item.title}</li>
+      ))}
+    </ul>
+  )
+}
+
+// <TaskList items={[{ id: 'a', title: 'Write' }]} />`
+          },
+          {
+            type: "list",
+            id: "react-l6-list",
+            style: "bullet",
+            items: [
+              "`.map()` turns each item into an element; the result is an array React can render.",
+              "The `key` must be stable and unique among siblings \u2014 an id from the data, not a random number or the index.",
+              "Keys are internal to React: they appear on the element, not in the rendered DOM, and not in the child\u2019s props."
+            ]
+          },
+          {
+            type: "warning",
+            id: "react-l6-warn",
+            title: "Do not key by index",
+            body: "Index keys look harmless and are correct until the list changes order. Then React reuses the wrong DOM nodes and the UI shows stale state \u2014 an input keeps the value that belonged to a different row."
+          },
+          {
+            type: "heading",
+            id: "react-l6-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l6-b3",
+            body: "Turn an array of tasks into a list. The tests check both the rendered text and the identity React uses to track each row."
+          },
+          {
+            type: "exercise",
+            id: "react-l6-x1",
+            exercise: {
+              id: "ex-react-l6",
+              instructions: "Write TaskList({ items }) returning a ul with one li per item, keyed by item.id and showing item.title.",
+              languages: ["jsx"],
+              starterCode: {
+                jsx: `// Map the items into <li> elements keyed by item.id.
+function TaskList({ items }) {
+  return <ul />
+}
+`
+              },
+              tests: [
+                { id: "ex-react-l6-t1", label: "the root is a ul", body: "return TaskList({ items: [] }).type === 'ul'" },
+                {
+                  id: "ex-react-l6-t2",
+                  label: "there is one li per item",
+                  body: "const kids = TaskList({ items: [{ id: 'a', title: 'A' }, { id: 'b', title: 'B' }] }).props.children; return kids.length === 2"
+                },
+                {
+                  id: "ex-react-l6-t3",
+                  label: "each li shows the item title",
+                  body: "const kids = TaskList({ items: [{ id: 'a', title: 'Write the plan' }] }).props.children; return kids[0].type === 'li' && kids[0].props.children === 'Write the plan'"
+                },
+                {
+                  id: "ex-react-l6-t4",
+                  label: "each li is keyed by the item id",
+                  body: "const kids = TaskList({ items: [{ id: 'a', title: 'A' }, { id: 'b', title: 'B' }] }).props.children; return kids[0].key === 'a' && kids[1].key === 'b'"
+                },
+                {
+                  id: "ex-react-l6-t5",
+                  label: "an empty list renders no rows",
+                  body: "return TaskList({ items: [] }).props.children.length === 0"
+                }
+              ],
+              hints: [
+                "Map over items inside the ul: {items.map((item) => ...)}.",
+                "Return the <li> from the map callback, and give it key={item.id}.",
+                "The visible text is a child of the li, so the arrow function should return a single element: <li key={item.id}>{item.title}</li>."
+              ],
+              solution: {
+                jsx: `function TaskList({ items }) {
+  return (
+    <ul>
+      {items.map((item) => (
+        <li key={item.id}>{item.title}</li>
+      ))}
+    </ul>
+  )
+}
+`
+              },
+              testNotes: "The key check reads element.key directly, because React stores the key on the element rather than in props."
+            }
+          }
+        ]
       },
       {
         id: "react-l37",
@@ -88387,7 +93499,118 @@ var reactComponentsSections = [
           "Explain why className is used instead of class"
         ],
         xp: 40,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l37-intro",
+            body: "**JSX expressions and attributes.** Curly braces switch from markup back to JavaScript. Anything that produces a value \u2014 a variable, arithmetic, a function call \u2014 can go inside `{ }`, and the same braces set an attribute to a computed value instead of a fixed string."
+          },
+          {
+            type: "text",
+            id: "react-l37-b2",
+            body: 'Attributes use JavaScript names, not HTML ones. `class` becomes `className` because `class` is a reserved word, and `for` becomes `htmlFor`. Strings stay quoted; everything else is wrapped in braces: `src={url}` rather than `src="url"`.'
+          },
+          {
+            type: "heading",
+            id: "react-l37-h1",
+            level: 2,
+            body: "Braces for values, quotes for fixed strings"
+          },
+          {
+            type: "code",
+            id: "react-l37-code",
+            language: "jsx",
+            title: "expressions and attributes",
+            code: `const name = 'Ada'
+const url = '/ada.png'
+
+function Avatar({ name, url }) {
+  return (
+    <div>
+      <h1>{'Hello, ' + name}</h1>
+      <img src={url} alt={name} className="avatar" />
+    </div>
+  )
+}
+
+// Comparison: HTML vs JSX
+// <img class="avatar" src="x">
+// <img className="avatar" src={x} />`
+          },
+          {
+            type: "list",
+            id: "react-l37-list",
+            style: "bullet",
+            items: [
+              '`{expression}` embeds a value; a string literal is written as `{"text"}`.',
+              "`className` and `htmlFor` replace the HTML `class` and `for` attributes.",
+              "Spread (`{...props}`) forwards many attributes at once, which is how wrappers stay transparent."
+            ]
+          },
+          {
+            type: "tip",
+            id: "react-l37-tip",
+            title: "An expression, not a statement",
+            body: "Only expressions may appear in braces \u2014 no `if` or `for`. Anything that computes a value works, which is why ternaries and `&&` show up where an `if` would be in ordinary code."
+          },
+          {
+            type: "heading",
+            id: "react-l37-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l37-b3",
+            body: "Set attributes from the props you receive, remembering the JSX names."
+          },
+          {
+            type: "exercise",
+            id: "react-l37-x1",
+            exercise: {
+              id: "ex-react-l37",
+              instructions: 'Write Avatar({ name, url }) returning an img whose src is the url, whose alt is the name, and whose className is "avatar".',
+              languages: ["jsx"],
+              starterCode: {
+                jsx: `// Return an <img> built from the props.
+function Avatar({ name, url }) {
+  return <div />
+}
+`
+              },
+              tests: [
+                { id: "ex-react-l37-t1", label: "the element is an img", body: "return Avatar({ name: 'Ada', url: '/a.png' }).type === 'img'" },
+                {
+                  id: "ex-react-l37-t2",
+                  label: "src comes from the url prop",
+                  body: "return Avatar({ name: 'Ada', url: '/a.png' }).props.src === '/a.png'"
+                },
+                {
+                  id: "ex-react-l37-t3",
+                  label: "alt comes from the name prop",
+                  body: "return Avatar({ name: 'Ada', url: '/a.png' }).props.alt === 'Ada'"
+                },
+                {
+                  id: "ex-react-l37-t4",
+                  label: "the class is set with className",
+                  body: "return Avatar({ name: 'Ada', url: '/a.png' }).props.className === 'avatar'"
+                }
+              ],
+              hints: [
+                "Computed attributes are wrapped in braces: src={url}.",
+                "The image class attribute is className, not class.",
+                'A self-closing tag is enough here: <img src={url} alt={name} className="avatar" />.'
+              ],
+              solution: {
+                jsx: `function Avatar({ name, url }) {
+  return <img src={url} alt={name} className="avatar" />
+}
+`
+              },
+              testNotes: "The tests change the url and name between checks, so hard-coded attribute values fail."
+            }
+          }
+        ]
       },
       {
         id: "react-l38",
@@ -88401,7 +93624,121 @@ var reactComponentsSections = [
           "Choose the right pattern for readability and accessibility"
         ],
         xp: 40,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l38-intro",
+            body: "**Conditional rendering.** There is no special syntax for showing one thing or another \u2014 conditions are just JavaScript inside the component. What varies is where you put them: an early return at the top, a ternary inside JSX, or the `&&` shorthand for something that may not be there at all."
+          },
+          {
+            type: "text",
+            id: "react-l38-b2",
+            body: "Both branches of a ternary are always the same kind of value \u2014 two elements. With `&&`, a false left side renders nothing. That is convenient, but a falsy value such as `0` printed by `&&` shows up as a stray zero, so guard the condition itself rather than relying on the value."
+          },
+          {
+            type: "heading",
+            id: "react-l38-h1",
+            level: 2,
+            body: "Three ways, one idea"
+          },
+          {
+            type: "code",
+            id: "react-l38-code",
+            language: "jsx",
+            title: "early return, ternary, and &&",
+            code: `function Status({ loggedIn }) {
+  // Early return: a guard for a whole-different view.
+  if (!loggedIn) return <p>Please sign in</p>
+
+  return (
+    <div>
+      <p>Welcome back</p>
+      {unreadCount > 0 && <span>{unreadCount} unread</span>}
+    </div>
+  )
+}
+
+// A ternary when both sides are elements:
+// {loggedIn ? <p>Welcome back</p> : <p>Please sign in</p>}`
+          },
+          {
+            type: "list",
+            id: "react-l38-list",
+            style: "bullet",
+            items: [
+              "An early return keeps the happy path flat when the alternative is a whole different view.",
+              "A ternary chooses between two values inline and always renders one of them.",
+              "`cond && element` renders the element only when the condition holds \u2014 and nothing otherwise."
+            ]
+          },
+          {
+            type: "warning",
+            id: "react-l38-warn",
+            title: "Beware && with a number",
+            body: "If the left side is `0`, React renders the number zero rather than nothing. Write `count > 0 && ...` so the left side is always a boolean."
+          },
+          {
+            type: "heading",
+            id: "react-l38-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l38-b3",
+            body: "Return different markup depending on a single boolean, with the same element type in both cases."
+          },
+          {
+            type: "exercise",
+            id: "react-l38-x1",
+            exercise: {
+              id: "ex-react-l38",
+              instructions: 'Write Status({ loggedIn }) returning a p with the text "Welcome back" when loggedIn is true, and the text "Please sign in" when it is false.',
+              languages: ["jsx"],
+              starterCode: {
+                jsx: `// Return a <p> whose text depends on loggedIn.
+function Status({ loggedIn }) {
+  return <p>Please sign in</p>
+}
+`
+              },
+              tests: [
+                {
+                  id: "ex-react-l38-t1",
+                  label: "the element is always a p",
+                  body: 'return Status({ loggedIn: true }).type === "p" && Status({ loggedIn: false }).type === "p"'
+                },
+                {
+                  id: "ex-react-l38-t2",
+                  label: "a signed-in user is welcomed back",
+                  body: 'return Status({ loggedIn: true }).props.children === "Welcome back"'
+                },
+                {
+                  id: "ex-react-l38-t3",
+                  label: "a signed-out user is asked to sign in",
+                  body: 'return Status({ loggedIn: false }).props.children === "Please sign in"'
+                },
+                {
+                  id: "ex-react-l38-t4",
+                  label: "the condition is what changes, not the tag",
+                  body: "const a = Status({ loggedIn: true }); const b = Status({ loggedIn: false }); return a.type === b.type && a.props.children !== b.props.children"
+                }
+              ],
+              hints: [
+                "A ternary fits here because both sides are the same element with different text.",
+                "Write the condition in braces inside the JSX: {loggedIn ? <p>...</p> : <p>...</p>}.",
+                "Both branches must be a <p>, so only the text differs."
+              ],
+              solution: {
+                jsx: `function Status({ loggedIn }) {
+  return loggedIn ? <p>Welcome back</p> : <p>Please sign in</p>
+}
+`
+              },
+              testNotes: "The last check confirms the two states share an element type but differ in content \u2014 the exact shape a ternary produces."
+            }
+          }
+        ]
       },
       {
         id: "react-l39",
@@ -88415,7 +93752,112 @@ var reactComponentsSections = [
           "Understand why function components with hooks are preferred"
         ],
         xp: 35,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l39-intro",
+            body: "**Class components.** Before hooks, components were classes that extended `React.Component` and returned markup from a `render` method. You will still meet them in older code and in many tutorials, so it is worth being able to read one \u2014 and to write its function-component equivalent."
+          },
+          {
+            type: "text",
+            id: "react-l39-b2",
+            body: "A class reads state from `this.state` and changes it with `this.setState`, which merges the given fields into the existing state. Lifecycle methods such as `componentDidMount` run at fixed points in the component\u2019s life. Every one of these has a direct hook equivalent in a function component."
+          },
+          {
+            type: "heading",
+            id: "react-l39-h1",
+            level: 2,
+            body: "The class form, and its modern twin"
+          },
+          {
+            type: "code",
+            id: "react-l39-code",
+            language: "jsx",
+            title: "a class component and the same component as a function",
+            code: `// Legacy class syntax:
+class Welcome extends React.Component {
+  render() {
+    return <h1>{'Hello, ' + this.props.name}</h1>
+  }
+}
+
+// The modern equivalent \u2014 a function is enough for this component:
+function Welcome({ name }) {
+  return <h1>{'Hello, ' + name}</h1>
+}
+
+// When state is needed, the class adds this.state...
+// ...which becomes a useState pair in a function.`
+          },
+          {
+            type: "list",
+            id: "react-l39-list",
+            style: "bullet",
+            items: [
+              "`render()` returns the JSX, and `this.props` holds the props.",
+              "`this.setState({ ... })` merges into state and triggers a re-render.",
+              "`componentDidMount` and friends map onto `useEffect`, which is why function components are now the default."
+            ]
+          },
+          {
+            type: "tip",
+            id: "react-l39-tip",
+            title: "Read the class, write the function",
+            body: "When you find a class component, translate it: props destructured in the signature, `this.state` to `useState`, and each lifecycle method to a `useEffect`. The behaviour is the same, and there is no `this` to bind."
+          },
+          {
+            type: "heading",
+            id: "react-l39-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l39-b3",
+            body: "Write the function-component version of the greeting class above. It renders the same output with no `this`."
+          },
+          {
+            type: "exercise",
+            id: "react-l39-x1",
+            exercise: {
+              id: "ex-react-l39",
+              instructions: 'Write a function component Welcome({ name }) returning an h1 with the text "Hello, " followed by the name. For name "Ada" the visible text is "Hello, Ada".',
+              languages: ["jsx"],
+              starterCode: {
+                jsx: `// Return an <h1> greeting the person in props.name.
+function Welcome({ name }) {
+  return <h1 />
+}
+`
+              },
+              tests: [
+                { id: "ex-react-l39-t1", label: "the element is an h1", body: "return Welcome({ name: 'Ada' }).type === 'h1'" },
+                {
+                  id: "ex-react-l39-t2",
+                  label: "it greets the given name",
+                  body: "const kids = Welcome({ name: 'Ada' }).props.children; return (Array.isArray(kids) ? kids.join('') : kids) === 'Hello, Ada'"
+                },
+                {
+                  id: "ex-react-l39-t3",
+                  label: "a different name produces different text",
+                  body: "const kids = Welcome({ name: 'Grace' }).props.children; return (Array.isArray(kids) ? kids.join('') : kids) === 'Hello, Grace'"
+                }
+              ],
+              hints: [
+                "Destructure the prop: function Welcome({ name }).",
+                "Mix text and a value inside the heading: <h1>Hello, {name}</h1>.",
+                'Keep the comma and the space after "Hello" exactly as written.'
+              ],
+              solution: {
+                jsx: `function Welcome({ name }) {
+  return <h1>Hello, {name}</h1>
+}
+`
+              },
+              testNotes: "The tests join the children before comparing, because JSX turns mixed text and expressions into a small array of parts."
+            }
+          }
+        ]
       }
     ],
     quiz: {
@@ -88441,7 +93883,7 @@ var reactComponentsSections = [
           type: "true-false",
           prompt: "Components must return a single root element.",
           answer: false,
-          explanation: "React 19 (and React 18 with the fragments proposal) supports returning arrays and strings. Fragments also allow multiple roots."
+          explanation: "A component can return a fragment or a single element; a fragment groups siblings without adding a wrapper node to the DOM."
         },
         {
           id: "quiz-react-s2-q3",
@@ -88469,7 +93911,7 @@ var reactComponentsSections = [
           prompt: "What is wrong with using array index as key?",
           code: "items.map((item, index) => (\n  <li key={index}>{item.name}</li>\n))",
           options: [
-            "Nothing \u2014 index keys are always fine",
+            "Nothing - index keys are always fine",
             "The list will not sort correctly",
             "Reordering, inserting or removing items breaks reconciliation",
             "TypeScript will not compile"
@@ -88500,7 +93942,139 @@ var reactStateSections = [
           "Never mutate state directly, always replace it"
         ],
         xp: 40,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l7-intro",
+            body: "**useState hook.** State is data a component remembers between renders. `useState(initial)` returns a pair: the current value and a function that sets it. Calling the setter tells React the data changed and the component should run again."
+          },
+          {
+            type: "text",
+            id: "react-l7-b2",
+            body: "Two details matter. First, state is replaced, never edited: you pass a new value, not a mutation of the old one. Second, several updates in one event are queued and applied in order, so an update that depends on the previous value should use the function form \u2014 `setCount(c => c + 1)` \u2014 which receives the latest value rather than the one captured when the handler was created."
+          },
+          {
+            type: "heading",
+            id: "react-l7-h1",
+            level: 2,
+            body: "A value, a setter, and a queue of updates"
+          },
+          {
+            type: "code",
+            id: "react-l7-code",
+            language: "jsx",
+            title: "useState, the functional updater, and immutable lists",
+            code: `function Counter() {
+  const [count, setCount] = useState(0)
+  return (
+    <button onClick={() => setCount((c) => c + 1)}>{count}</button>
+  )
+}
+
+// Three updates in one handler all apply, because each receives the latest value:
+// setCount((c) => c + 1)
+// setCount((c) => c + 1)
+// setCount((c) => c + 1)   // count grows by 3
+
+// A list is state too \u2014 build a new array, never push:
+// setTasks((tasks) => [...tasks, newTask])`
+          },
+          {
+            type: "list",
+            id: "react-l7-list",
+            style: "bullet",
+            items: [
+              "`useState` returns `[value, setter]`; destructure both.",
+              "The setter takes a new value, or a function that receives the previous value and returns the next.",
+              "Never `push` into a state array or assign into a state object \u2014 `[...tasks, task]` and `{ ...obj, key: v }` instead."
+            ]
+          },
+          {
+            type: "warning",
+            id: "react-l7-warn",
+            title: "Mutating state silently does nothing",
+            body: "React decides whether to re-render by comparing the new state to the old by reference. If you mutate the array in place, the reference is unchanged and React sees no update \u2014 the screen stays stale."
+          },
+          {
+            type: "heading",
+            id: "react-l7-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l7-b3",
+            body: "Write the two pure operations a stateful component runs: applying a queue of updater functions, and adding to a list without mutating it."
+          },
+          {
+            type: "exercise",
+            id: "react-l7-x1",
+            exercise: {
+              id: "ex-react-l7",
+              instructions: "Write stepCount(count, steps) returning count after applying every step in order. Write addTask(tasks, task) returning a NEW array with the task added.",
+              languages: ["javascript"],
+              starterCode: {
+                javascript: `// 1) Apply each step to the count, in order.
+function stepCount(count, steps) {
+  return count
+}
+
+// 2) Return a new list with the task added.
+function addTask(tasks, task) {
+  return tasks
+}
+`
+              },
+              tests: [
+                {
+                  id: "ex-react-l7-t1",
+                  label: "three +1 steps add three",
+                  body: "return stepCount(0, [1, 1, 1]) === 3"
+                },
+                {
+                  id: "ex-react-l7-t2",
+                  label: "no steps leaves the count alone",
+                  body: "return stepCount(5, []) === 5"
+                },
+                {
+                  id: "ex-react-l7-t3",
+                  label: "steps apply in order",
+                  body: "return stepCount(2, [3, -1]) === 4"
+                },
+                {
+                  id: "ex-react-l7-t4",
+                  label: "addTask appends and returns a new array",
+                  body: "const before = [{ id: 'a' }]; const after = addTask(before, { id: 'b' }); return after.length === 2 && after !== before"
+                },
+                {
+                  id: "ex-react-l7-t5",
+                  label: "the original list is not changed",
+                  body: "const before = [{ id: 'a' }]; addTask(before, { id: 'b' }); return before.length === 1"
+                }
+              ],
+              hints: [
+                "For stepCount, add each step to a running total \u2014 a loop or reduce both work.",
+                "stepCount(0, [1, 1, 1]) is three separate increments, which is why it reaches 3.",
+                "For addTask, copy the list and put the new task at the end: [...tasks, task]."
+              ],
+              solution: {
+                javascript: `function stepCount(count, steps) {
+  let total = count
+  for (const step of steps) {
+    total += step
+  }
+  return total
+}
+
+function addTask(tasks, task) {
+  return [...tasks, task]
+}
+`
+              },
+              testNotes: "The addTask checks compare the input after the call and the array reference, so an in-place push is caught."
+            }
+          }
+        ]
       },
       {
         id: "react-l8",
@@ -88513,7 +94087,116 @@ var reactStateSections = [
           "Avoid stale closures with correct dependency arrays"
         ],
         xp: 40,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l8-intro",
+            body: "**useEffect hook.** Rendering should be pure, so anything that reaches outside the component \u2014 talking to the network, listening to an event, setting a document title \u2014 goes in an effect. `useEffect` runs your function *after* the render is on screen."
+          },
+          {
+            type: "text",
+            id: "react-l8-b2",
+            body: "The second argument is the dependency list, and it decides when the effect re-runs. Omit it and the effect runs after every render; pass `[]` and it runs once on mount; list values and it re-runs when any of them change (compared with `Object.is`). The function an effect returns is its cleanup, run before the next effect and on unmount."
+          },
+          {
+            type: "heading",
+            id: "react-l8-h1",
+            level: 2,
+            body: "Three dependency lists, and a cleanup"
+          },
+          {
+            type: "code",
+            id: "react-l8-code",
+            language: "jsx",
+            title: "when an effect runs",
+            code: `// Every render (no list) \u2014 usually a bug, it re-runs constantly:
+useEffect(() => {
+  document.title = 'Count: ' + count
+})
+
+// On mount only, with cleanup on unmount:
+useEffect(() => {
+  const id = setInterval(tick, 1000)
+  return () => clearInterval(id)
+}, [])
+
+// Re-run whenever count changes:
+useEffect(() => {
+  document.title = 'Count: ' + count
+}, [count])`
+          },
+          {
+            type: "list",
+            id: "react-l8-list",
+            style: "bullet",
+            items: [
+              "No dependency list: run after every render. `[]`: run once on mount. `[value]`: run when `value` changes.",
+              "The returned function is the cleanup \u2014 remove listeners, clear timers, cancel requests.",
+              "Dependencies are compared with `Object.is`, so a newly created object or array each render always counts as changed."
+            ]
+          },
+          {
+            type: "tip",
+            id: "react-l8-tip",
+            title: "Name every value the effect reads",
+            body: "If the effect uses a prop or state value, it belongs in the dependency list. Leaving it out creates a stale closure: the effect keeps reading the value from the render when it was created."
+          },
+          {
+            type: "heading",
+            id: "react-l8-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l8-b3",
+            body: "Write the comparison React uses to decide whether an effect must re-run."
+          },
+          {
+            type: "exercise",
+            id: "react-l8-x1",
+            exercise: {
+              id: "ex-react-l8",
+              instructions: "Write depsChanged(prev, next) returning true when the two dependency arrays differ: a different length, or any element not equal under Object.is. Two identical arrays return false.",
+              languages: ["javascript"],
+              starterCode: {
+                javascript: `// Does this dependency list trigger the effect again?
+function depsChanged(prev, next) {
+  return true
+}
+`
+              },
+              tests: [
+                { id: "ex-react-l8-t1", label: "two empty lists do not change", body: "return depsChanged([], []) === false" },
+                { id: "ex-react-l8-t2", label: "equal values do not change", body: "return depsChanged([1, 2], [1, 2]) === false" },
+                { id: "ex-react-l8-t3", label: "a different value changes", body: "return depsChanged([1], [2]) === true" },
+                {
+                  id: "ex-react-l8-t4",
+                  label: "a different length changes",
+                  body: "return depsChanged([1], [1, 2]) === true"
+                },
+                {
+                  id: "ex-react-l8-t5",
+                  label: "two equal-looking objects are still different",
+                  body: "return depsChanged([{ a: 1 }], [{ a: 1 }]) === true"
+                }
+              ],
+              hints: [
+                "First compare the lengths; if they differ, the answer is true.",
+                "Then compare element by element with Object.is.",
+                "A new object each render is never Object.is-equal to the previous one, which is why objects in dependency lists cause repeated effects."
+              ],
+              solution: {
+                javascript: `function depsChanged(prev, next) {
+  if (prev.length !== next.length) return true
+  return prev.some((value, index) => !Object.is(value, next[index]))
+}
+`
+              },
+              testNotes: "The last check uses two structurally equal but distinct objects, pinning down that the comparison is by identity, not by value."
+            }
+          }
+        ]
       },
       {
         id: "react-l9",
@@ -88526,7 +94209,127 @@ var reactStateSections = [
           "Recognize and fix invalid hook call warnings"
         ],
         xp: 30,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l9-intro",
+            body: "**Rules of hooks.** React tracks hooks by the order they are called, not by name. That single fact produces two rules: call hooks at the top level of a component, and call them only from React functions. Break either and the order changes between renders, so React hands the wrong state to the wrong hook."
+          },
+          {
+            type: "text",
+            id: "react-l9-b2",
+            body: "This is why a hook inside an `if` or a loop is a bug even when the condition looks safe. On the render where the branch is skipped, the following hooks shift up one slot. The fix is almost always to move the condition *inside* the hook, or to split the component in two."
+          },
+          {
+            type: "heading",
+            id: "react-l9-h1",
+            level: 2,
+            body: "Two rules, one reason"
+          },
+          {
+            type: "code",
+            id: "react-l9-code",
+            language: "javascript",
+            title: "valid and invalid hook calls",
+            code: `// Valid: top level of a component or a custom hook.
+function Panel({ items }) {
+  const [open, setOpen] = useState(false)
+  useEffect(() => {}, [])
+}
+
+// Invalid: the hook is conditional, so the order can change.
+function Panel({ items }) {
+  const [open, setOpen] = useState(false)
+  if (items.length > 0) {
+    useEffect(() => {}, [])   // breaks the rules of hooks
+  }
+}
+
+// The fix is to move the condition inside the hook:
+useEffect(() => {
+  if (items.length > 0) {
+    // ...
+  }
+}, [items])`
+          },
+          {
+            type: "list",
+            id: "react-l9-list",
+            style: "bullet",
+            items: [
+              "Call hooks at the top level \u2014 never inside a condition, loop, or nested function.",
+              "Call hooks only from a function component or another hook (a name starting with `use`).",
+              "Move the condition inside the hook rather than wrapping the hook in it."
+            ]
+          },
+          {
+            type: "tip",
+            id: "react-l9-tip",
+            title: "The lint rule knows this for you",
+            body: "The React hooks ESLint rule reports conditional or misplaced hook calls, and missing dependencies. Let the linter enforce the rules so you do not have to remember them while writing."
+          },
+          {
+            type: "heading",
+            id: "react-l9-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l9-b3",
+            body: "Write the check a linter performs: given a record describing one hook call, decide whether it breaks a rule."
+          },
+          {
+            type: "exercise",
+            id: "react-l9-x1",
+            exercise: {
+              id: "ex-react-l9",
+              instructions: "Write violatesRules(call) returning true when the hook call breaks a rule. A call is valid only when call.insideComponent is true and call.topLevel is true.",
+              languages: ["javascript"],
+              starterCode: {
+                javascript: `// A hook call must be inside a component and at the top level.
+function violatesRules(call) {
+  return false
+}
+`
+              },
+              tests: [
+                {
+                  id: "ex-react-l9-t1",
+                  label: "a top-level call inside a component is valid",
+                  body: "return violatesRules({ name: 'useState', insideComponent: true, topLevel: true }) === false"
+                },
+                {
+                  id: "ex-react-l9-t2",
+                  label: "a conditional call is invalid",
+                  body: "return violatesRules({ name: 'useEffect', insideComponent: true, topLevel: false }) === true"
+                },
+                {
+                  id: "ex-react-l9-t3",
+                  label: "a call outside a component is invalid",
+                  body: "return violatesRules({ name: 'useState', insideComponent: false, topLevel: true }) === true"
+                },
+                {
+                  id: "ex-react-l9-t4",
+                  label: "a call that is both is invalid",
+                  body: "return violatesRules({ name: 'useEffect', insideComponent: false, topLevel: false }) === true"
+                }
+              ],
+              hints: [
+                "A call is valid only when both flags are true.",
+                "Negate that: invalid when either flag is false.",
+                "Return the negation of the valid condition: !(call.insideComponent && call.topLevel)."
+              ],
+              solution: {
+                javascript: `function violatesRules(call) {
+  return !(call.insideComponent && call.topLevel)
+}
+`
+              },
+              testNotes: "The four checks cover every combination of the two flags, so both rules must be implemented."
+            }
+          }
+        ]
       }
     ],
     quiz: {
@@ -88538,12 +94341,7 @@ var reactStateSections = [
           id: "quiz-react-s3-q1",
           type: "multiple-choice",
           prompt: "What does useState return?",
-          options: [
-            "A single value",
-            "An array of [value, setter]",
-            "An object with val and set",
-            "A promise"
-          ],
+          options: ["A single value", "An array of [value, setter]", "An object with val and set", "A promise"],
           answer: 1,
           explanation: "useState returns a tuple: the current state value and a function to update it."
         },
@@ -88611,7 +94409,131 @@ var reactEventsFormsSections = [
           "Read the event target and its value"
         ],
         xp: 35,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l10-intro",
+            body: "**Event handling.** Attaching a handler in React looks like an HTML attribute: `onClick`, `onChange`, `onSubmit`. The names are camelCase, and the value is a function \u2014 not a string of code."
+          },
+          {
+            type: "text",
+            id: "react-l10-b2",
+            body: "The function receives an **event object**. React wraps the native event in a synthetic event with the same useful fields \u2014 `event.target` is the element that fired it, and for inputs `event.target.value` is the current text. When a handler needs extra data, wrap it in an arrow function: `onClick={() => select(id)}`."
+          },
+          {
+            type: "heading",
+            id: "react-l10-h1",
+            level: 2,
+            body: "Handlers, arguments, and the event object"
+          },
+          {
+            type: "code",
+            id: "react-l10-code",
+            language: "jsx",
+            title: "attaching handlers and passing arguments",
+            code: `function List({ items }) {
+  return (
+    <ul>
+      {items.map((item) => (
+        // The arrow wraps the call, so select runs on click, not on render.
+        <li key={item.id} onClick={() => select(item.id)}>
+          {item.name}
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+// Read the current text out of an input event:
+function onChange(event) {
+  setValue(event.target.value)
+}
+
+// <input value={value} onChange={onChange} />`
+          },
+          {
+            type: "list",
+            id: "react-l10-list",
+            style: "bullet",
+            items: [
+              "Event props are camelCase: `onClick`, `onChange`, `onSubmit`, `onKeyDown`.",
+              "Pass the function itself \u2014 `onClick={handleClick}` \u2014 or an arrow that calls it with arguments.",
+              "`event.target` is the element that fired the event; `event.target.value` reads an input\u2019s text."
+            ]
+          },
+          {
+            type: "warning",
+            id: "react-l10-warn",
+            title: "Do not call the handler while rendering",
+            body: "`onClick={handleClick()}` calls the function immediately, during the render, and passes its return value as the handler. Write `onClick={handleClick}` \u2014 or `onClick={() => handleClick(id)}` when you need arguments."
+          },
+          {
+            type: "heading",
+            id: "react-l10-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l10-b3",
+            body: "Write the two small pieces every event handler relies on: reading a value out of the event, and binding an argument to a handler."
+          },
+          {
+            type: "exercise",
+            id: "react-l10-x1",
+            exercise: {
+              id: "ex-react-l10",
+              instructions: "Write readValue(event) returning event.target.value as a string. Write withArg(handler, arg) returning a new function that calls handler with arg when it is invoked.",
+              languages: ["javascript"],
+              starterCode: {
+                javascript: `// 1) Read the current value from an input event.
+function readValue(event) {
+  return ''
+}
+
+// 2) Return a function that calls handler with arg.
+function withArg(handler, arg) {
+  return handler
+}
+`
+              },
+              tests: [
+                { id: "ex-react-l10-t1", label: "reads the value from the target", body: "return readValue({ target: { value: 'hello' } }) === 'hello'" },
+                {
+                  id: "ex-react-l10-t2",
+                  label: "reads an empty value too",
+                  body: "return readValue({ target: { value: '' } }) === ''"
+                },
+                {
+                  id: "ex-react-l10-t3",
+                  label: "the returned function passes the argument",
+                  body: "const bound = withArg((id) => 'id:' + id, 7); return bound() === 'id:7'"
+                },
+                {
+                  id: "ex-react-l10-t4",
+                  label: "the handler is only called when invoked",
+                  body: "let calls = 0; const bound = withArg(() => { calls++ }, 1); if (calls !== 0) return false; bound(); return calls === 1"
+                }
+              ],
+              hints: [
+                "readValue just follows the object the event gives it: event.target.value.",
+                "withArg must return a function, not the result of calling one.",
+                "The returned function closes over handler and arg: return () => handler(arg)."
+              ],
+              solution: {
+                javascript: `function readValue(event) {
+  return event.target.value
+}
+
+function withArg(handler, arg) {
+  return () => handler(arg)
+}
+`
+              },
+              testNotes: "The last check proves the wrapping function is returned un-called, which is the difference between onClick={h} and onClick={h()}."
+            }
+          }
+        ]
       },
       {
         id: "react-l11",
@@ -88624,7 +94546,126 @@ var reactEventsFormsSections = [
           "Extract the current value from the event object"
         ],
         xp: 40,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l11-intro",
+            body: "**Controlled components.** In an uncontrolled input the DOM remembers what you typed and React only reads it when asked. In a controlled input React state is the single source of truth: the state value is passed to the input, and every keystroke updates the state."
+          },
+          {
+            type: "text",
+            id: "react-l11-b2",
+            body: "The loop is `value={state}` plus `onChange` writing back to state. It costs a small amount of code and buys real benefits: you can validate as the user types, transform input on the way in, or reset the field by setting state. A controlled input given a `value` but no `onChange` is read-only \u2014 that is React telling you the loop is incomplete."
+          },
+          {
+            type: "heading",
+            id: "react-l11-h1",
+            level: 2,
+            body: "State drives the input, the input drives state"
+          },
+          {
+            type: "code",
+            id: "react-l11-code",
+            language: "jsx",
+            title: "one field, then many",
+            code: `function NameForm() {
+  const [name, setName] = useState('')
+
+  return (
+    <form>
+      <input
+        value={name}
+        onChange={(event) => setName(event.target.value)}
+      />
+      <p>{name}</p>
+    </form>
+  )
+}
+
+// With several fields, one handler keyed by the input name:
+function handleChange(event) {
+  const { name, value } = event.target
+  setForm((form) => ({ ...form, [name]: value }))
+}`
+          },
+          {
+            type: "list",
+            id: "react-l11-list",
+            style: "bullet",
+            items: [
+              "A controlled input takes its value from state: `value={name}`.",
+              "`onChange` writes the new text back: `setName(event.target.value)`.",
+              "The state update is immutable \u2014 `{ ...form, [name]: value }` \u2014 so React sees a new object."
+            ]
+          },
+          {
+            type: "tip",
+            id: "react-l11-tip",
+            title: "One handler, many fields",
+            body: "Give each input a `name`, then use a computed key: `[event.target.name]: event.target.value`. The same handler serves the whole form, and adding a field means adding markup, not code."
+          },
+          {
+            type: "heading",
+            id: "react-l11-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l11-b3",
+            body: "Write the immutable field update the onChange handler performs."
+          },
+          {
+            type: "exercise",
+            id: "react-l11-x1",
+            exercise: {
+              id: "ex-react-l11",
+              instructions: "Write updateField(state, name, value) returning a NEW state object with the field name set to value, leaving every other field unchanged.",
+              languages: ["javascript"],
+              starterCode: {
+                javascript: `// Return a new state with one field updated.
+function updateField(state, name, value) {
+  return state
+}
+`
+              },
+              tests: [
+                {
+                  id: "ex-react-l11-t1",
+                  label: "sets the named field",
+                  body: "return updateField({}, 'title', 'Hello').title === 'Hello'"
+                },
+                {
+                  id: "ex-react-l11-t2",
+                  label: "leaves the other fields alone",
+                  body: "const next = updateField({ title: 'a', done: false }, 'title', 'b'); return next.title === 'b' && next.done === false"
+                },
+                {
+                  id: "ex-react-l11-t3",
+                  label: "returns a new object",
+                  body: "const base = { title: 'a' }; return updateField(base, 'title', 'b') !== base"
+                },
+                {
+                  id: "ex-react-l11-t4",
+                  label: "the original state is not changed",
+                  body: "const base = { title: 'a' }; updateField(base, 'title', 'b'); return base.title === 'a'"
+                }
+              ],
+              hints: [
+                "Copy the state, then override one key.",
+                "The key comes from a variable, so use a computed property name.",
+                "Object spread plus a computed key: { ...state, [name]: value }."
+              ],
+              solution: {
+                javascript: `function updateField(state, name, value) {
+  return { ...state, [name]: value }
+}
+`
+              },
+              testNotes: "The reference and original-value checks confirm the update is a copy, which is what lets React detect the change."
+            }
+          }
+        ]
       },
       {
         id: "react-l12",
@@ -88637,7 +94678,134 @@ var reactEventsFormsSections = [
           "Show feedback for invalid fields"
         ],
         xp: 35,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l12-intro",
+            body: "**Forms and validation.** Submitting a form in the browser normally reloads the page \u2014 a leftover from server-rendered pages. In a React app you handle `onSubmit` and call `event.preventDefault()` first, then do the work yourself."
+          },
+          {
+            type: "text",
+            id: "react-l12-b2",
+            body: "Validation belongs in a pure function that takes the form and returns the problems, if any. Keeping it separate from the handler means the same rules can run on submit, on blur, or on every keystroke without duplicating logic \u2014 and they can be tested without a browser."
+          },
+          {
+            type: "heading",
+            id: "react-l12-h1",
+            level: 2,
+            body: "Stop the reload, then validate"
+          },
+          {
+            type: "code",
+            id: "react-l12-code",
+            language: "jsx",
+            title: "onSubmit and a pure validate function",
+            code: `function handleSubmit(event) {
+  event.preventDefault()      // stop the browser reloading the page
+  const errors = validate(form)
+  if (Object.keys(errors).length > 0) {
+    setErrors(errors)
+    return
+  }
+  save(form)
+}
+
+// <form onSubmit={handleSubmit}> ... </form>
+
+// Validation is a pure function: form in, problems out.
+function validate(form) {
+  const errors = {}
+  if (!form.title.trim()) errors.title = 'A title is required'
+  if (!form.email.includes('@')) errors.email = 'Enter a valid email'
+  return errors
+}`
+          },
+          {
+            type: "list",
+            id: "react-l12-list",
+            style: "bullet",
+            items: [
+              "`event.preventDefault()` stops the browser\u2019s default form submission and the page reload.",
+              "A validation function returns an object of messages, keyed by field \u2014 an empty object means valid.",
+              "`Object.keys(errors).length` is the simple test for whether anything failed."
+            ]
+          },
+          {
+            type: "tip",
+            id: "react-l12-tip",
+            title: "Validate with the data, not the DOM",
+            body: "Because the form lives in state, validation reads plain values. There is no need to query the DOM for input values, which makes the rules easy to reuse and test."
+          },
+          {
+            type: "heading",
+            id: "react-l12-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l12-b3",
+            body: "Write the validation function. Return messages keyed by the field that failed, and nothing when the form is valid."
+          },
+          {
+            type: "exercise",
+            id: "react-l12-x1",
+            exercise: {
+              id: "ex-react-l12",
+              instructions: "Write validate(form) returning an object of error messages. Require form.title (after trimming) and require form.email to contain an '@'. Return an empty object when the form is valid.",
+              languages: ["javascript"],
+              starterCode: {
+                javascript: `// Return { field: 'message' } for each problem, or {} when valid.
+function validate(form) {
+  return {}
+}
+`
+              },
+              tests: [
+                {
+                  id: "ex-react-l12-t1",
+                  label: "a valid form has no errors",
+                  body: "return Object.keys(validate({ title: 'Write it', email: 'a@b.com' })).length === 0"
+                },
+                {
+                  id: "ex-react-l12-t2",
+                  label: "a missing title is reported",
+                  body: "return 'title' in validate({ title: '', email: 'a@b.com' })"
+                },
+                {
+                  id: "ex-react-l12-t3",
+                  label: "whitespace is not a title",
+                  body: "return 'title' in validate({ title: '   ', email: 'a@b.com' })"
+                },
+                {
+                  id: "ex-react-l12-t4",
+                  label: "an email without @ is reported",
+                  body: "return 'email' in validate({ title: 'Write it', email: 'nope' })"
+                },
+                {
+                  id: "ex-react-l12-t5",
+                  label: "two problems give two messages",
+                  body: "return Object.keys(validate({ title: '', email: 'nope' })).length === 2"
+                }
+              ],
+              hints: [
+                "Start with an empty object and add a key only when a rule fails.",
+                "Trim before testing the title so spaces do not count as content.",
+                'Check for the @ with form.email.includes("@") \u2014 note the quotes.'
+              ],
+              solution: {
+                javascript: `function validate(form) {
+  const errors = {}
+  if (!form.title.trim()) errors.title = 'A title is required'
+  if (!form.email.includes('@')) errors.email = 'Enter a valid email'
+  return errors
+}
+`
+              },
+              testNotes: "The whitespace check is what separates trim() from a plain emptiness test, and the two-problem case ensures both rules run."
+            }
+          }
+        ]
       },
       {
         id: "react-l40",
@@ -88651,7 +94819,129 @@ var reactEventsFormsSections = [
           "Handle multi-select with an array of values"
         ],
         xp: 40,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l40-intro",
+            body: "**Textarea and Select.** The two form controls that look different from inputs still work the same way: you hold the value in state and update it from the change event. A `textarea` takes its text from `value`, not from children."
+          },
+          {
+            type: "text",
+            id: "react-l40-b2",
+            body: "A `select` keeps a single string in state \u2014 the value of the chosen option. Add the `multiple` attribute and the value becomes an array of the selected options instead. That one difference is worth remembering, because a single-select handler that returns a string will misbehave on a multi-select."
+          },
+          {
+            type: "heading",
+            id: "react-l40-h1",
+            level: 2,
+            body: "One string, or an array of strings"
+          },
+          {
+            type: "code",
+            id: "react-l40-code",
+            language: "jsx",
+            title: "controlled textarea and select",
+            code: `// textarea takes value/onChange like an input \u2014 no children.
+<textarea value={notes} onChange={(e) => setNotes(e.target.value)} />
+
+// A single select holds one string:
+<select value={priority} onChange={(e) => setPriority(e.target.value)}>
+  <option value="low">Low</option>
+  <option value="high">High</option>
+</select>
+
+// A multi-select holds an array of the chosen values:
+<select
+  multiple
+  value={tags}
+  onChange={(e) => setTags(Array.from(e.target.selectedOptions, (o) => o.value))}
+>
+  <option value="a">A</option>
+  <option value="b">B</option>
+</select>`
+          },
+          {
+            type: "list",
+            id: "react-l40-list",
+            style: "bullet",
+            items: [
+              "A `textarea` is controlled with `value`, not with text between the tags.",
+              "A single `select` stores one string; the `multiple` version stores an array.",
+              "For multi-select, read the selected options rather than `value`, so you get them all."
+            ]
+          },
+          {
+            type: "tip",
+            id: "react-l40-tip",
+            title: "An empty option is a real choice",
+            body: 'For an optional field, add an option with `value=""` and label it "Choose one". It keeps the select controlled from the first render and gives the user a way back to "unset".'
+          },
+          {
+            type: "heading",
+            id: "react-l40-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l40-b3",
+            body: "Write the helper that reads the chosen values from a select, whether it is single or multiple."
+          },
+          {
+            type: "exercise",
+            id: "ex-react-l40-x1",
+            exercise: {
+              id: "ex-react-l40",
+              instructions: 'Write selectedValues(select). For a single select (select.multiple is false) return the value of the selected option as a string, or "" when nothing is selected. For a multiple select return an array of the selected option values.',
+              languages: ["javascript"],
+              starterCode: {
+                javascript: `// A select looks like { multiple, options: [{ value, selected }] }.
+function selectedValues(select) {
+  return ''
+}
+`
+              },
+              tests: [
+                {
+                  id: "ex-react-l40-t1",
+                  label: "a single select returns the chosen value",
+                  body: "const s = { multiple: false, options: [{ value: 'low', selected: false }, { value: 'high', selected: true }] }; return selectedValues(s) === 'high'"
+                },
+                {
+                  id: "ex-react-l40-t2",
+                  label: "a single select with nothing chosen is empty",
+                  body: "const s = { multiple: false, options: [{ value: 'low', selected: false }] }; return selectedValues(s) === ''"
+                },
+                {
+                  id: "ex-react-l40-t3",
+                  label: "a multiple select returns every chosen value",
+                  body: `const s = { multiple: true, options: [{ value: 'a', selected: true }, { value: 'b', selected: false }, { value: 'c', selected: true }] }; return JSON.stringify(selectedValues(s)) === '[\\"a\\",\\"c\\"]'`
+                },
+                {
+                  id: "ex-react-l40-t4",
+                  label: "a multiple select with nothing chosen is an empty array",
+                  body: "const s = { multiple: true, options: [{ value: 'a', selected: false }] }; return Array.isArray(selectedValues(s)) && selectedValues(s).length === 0"
+                }
+              ],
+              hints: [
+                "Check select.multiple first \u2014 the two cases return different types.",
+                "For a single select, find the option whose selected flag is true.",
+                "For multiple, filter the options and map them to their values."
+              ],
+              solution: {
+                javascript: `function selectedValues(select) {
+  const chosen = select.options.filter((option) => option.selected)
+  if (select.multiple) {
+    return chosen.map((option) => option.value)
+  }
+  return chosen.length > 0 ? chosen[0].value : ''
+}
+`
+              },
+              testNotes: "The tests check the type as well as the contents \u2014 a single select must return a string, a multiple select an array."
+            }
+          }
+        ]
       },
       {
         id: "react-l41",
@@ -88665,7 +94955,129 @@ var reactEventsFormsSections = [
           "Use radio buttons for mutually exclusive choices"
         ],
         xp: 45,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l41-intro",
+            body: "**Multiple inputs, Checkbox and Radio.** A form with many fields does not need many handlers. Give each control a `name`, and a single change handler can update the right field by reading that name off the event."
+          },
+          {
+            type: "text",
+            id: "react-l41-b2",
+            body: "Checkboxes are the one control that differs in an important way: their state is a boolean read from `event.target.checked`, not a string from `value`. Radio buttons look like checkboxes but behave like a select \u2014 all the radios in a group share a `name`, and the value in state is which one is chosen."
+          },
+          {
+            type: "heading",
+            id: "react-l41-h1",
+            level: 2,
+            body: "One handler for a whole form"
+          },
+          {
+            type: "code",
+            id: "react-l41-code",
+            language: "jsx",
+            title: "text, checkbox, and radio with one handler",
+            code: `const [form, setForm] = useState({ title: '', done: false, priority: 'low' })
+
+// One handler for every field, keyed by the input name:
+function handleChange(event) {
+  const { name, type, value, checked } = event.target
+  setForm((form) => ({
+    ...form,
+    [name]: type === 'checkbox' ? checked : value,
+  }))
+}
+
+// <input name="title" value={form.title} onChange={handleChange} />
+// <input name="done" type="checkbox" checked={form.done} onChange={handleChange} />
+// <input name="priority" type="radio" value="low"
+//        checked={form.priority === 'low'} onChange={handleChange} />`
+          },
+          {
+            type: "list",
+            id: "react-l41-list",
+            style: "bullet",
+            items: [
+              "The `name` attribute is the key the handler writes to: `[event.target.name]`.",
+              "A checkbox carries a boolean in `checked`; everything else carries a string in `value`.",
+              "Radio buttons in a group share a `name`; state holds the chosen value, and each radio compares itself to it."
+            ]
+          },
+          {
+            type: "warning",
+            id: "react-l41-warn",
+            title: "A controlled checkbox needs checked",
+            body: "For a checkbox, `value` is not the state \u2014 it is the submitted value. Bind the boolean with `checked={form.done}` and read it back from `event.target.checked`, or the box will not toggle."
+          },
+          {
+            type: "heading",
+            id: "react-l41-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l41-b3",
+            body: "Write the shared change handler: it reads the field name off the event and stores either the checked flag or the value."
+          },
+          {
+            type: "exercise",
+            id: "ex-react-l41-x1",
+            exercise: {
+              id: "ex-react-l41",
+              instructions: "Write applyChange(state, event) returning a NEW state. Use event.target.name as the key; when event.target.type is 'checkbox' store event.target.checked, otherwise store event.target.value. Leave other fields unchanged.",
+              languages: ["javascript"],
+              starterCode: {
+                javascript: `// event.target looks like { name, type, value, checked }.
+function applyChange(state, event) {
+  return state
+}
+`
+              },
+              tests: [
+                {
+                  id: "ex-react-l41-t1",
+                  label: "a text field stores its value",
+                  body: "const next = applyChange({}, { target: { name: 'title', type: 'text', value: 'Hello' } }); return next.title === 'Hello'"
+                },
+                {
+                  id: "ex-react-l41-t2",
+                  label: "a checkbox stores its checked flag",
+                  body: "const next = applyChange({}, { target: { name: 'done', type: 'checkbox', value: 'on', checked: true } }); return next.done === true"
+                },
+                {
+                  id: "ex-react-l41-t3",
+                  label: "an unchecked box stores false",
+                  body: "const next = applyChange({}, { target: { name: 'done', type: 'checkbox', value: 'on', checked: false } }); return next.done === false"
+                },
+                {
+                  id: "ex-react-l41-t4",
+                  label: "other fields are kept",
+                  body: "const next = applyChange({ title: 'a', done: false }, { target: { name: 'title', type: 'text', value: 'b' } }); return next.title === 'b' && next.done === false"
+                },
+                {
+                  id: "ex-react-l41-t5",
+                  label: "the original state is not changed",
+                  body: "const base = { title: 'a' }; applyChange(base, { target: { name: 'title', type: 'text', value: 'b' } }); return base.title === 'a'"
+                }
+              ],
+              hints: [
+                "Read the field name and type off event.target first.",
+                "Pick the value: checked for a checkbox, value for anything else.",
+                "Return a copy with the computed key set: { ...state, [name]: next }."
+              ],
+              solution: {
+                javascript: `function applyChange(state, event) {
+  const { name, type, value, checked } = event.target
+  const next = type === 'checkbox' ? checked : value
+  return { ...state, [name]: next }
+}
+`
+              },
+              testNotes: "Separate checks for a checked and an unchecked box confirm the boolean is stored rather than a string."
+            }
+          }
+        ]
       }
     ],
     quiz: {
@@ -88677,12 +95089,7 @@ var reactEventsFormsSections = [
           id: "quiz-react-s4-q1",
           type: "multiple-choice",
           prompt: "In a controlled component, where does the input value come from?",
-          options: [
-            "The DOM element itself",
-            "React state",
-            "localStorage",
-            "A global variable"
-          ],
+          options: ["The DOM element itself", "React state", "localStorage", "A global variable"],
           answer: 1,
           explanation: "In a controlled component, the value is held in React state and passed back to the input via the value prop."
         },
@@ -88745,7 +95152,124 @@ var reactAdvancedHooksSections = [
           "Consume context with useContext in any descendant"
         ],
         xp: 40,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l13-intro",
+            body: "**useContext for shared state.** Props travel one level at a time, so a value needed three levels down has to be passed through every component in between \u2014 the problem known as prop drilling. Context solves it: a value is provided high in the tree and read directly by any descendant."
+          },
+          {
+            type: "text",
+            id: "react-l13-b2",
+            body: "A context is created once, with a default value, and given a value by a `Provider`. Components read it with `useContext` and re-render when the provided value changes. Providers nest, and the *nearest* one above the consumer wins \u2014 which is how a subtree can override a theme or a locale."
+          },
+          {
+            type: "heading",
+            id: "react-l13-h1",
+            level: 2,
+            body: "Provide high, read low"
+          },
+          {
+            type: "code",
+            id: "react-l13-code",
+            language: "jsx",
+            title: "a theme context",
+            code: `const ThemeContext = createContext('light')   // the default
+
+function App() {
+  return (
+    <ThemeContext.Provider value="dark">
+      <Toolbar />
+    </ThemeContext.Provider>
+  )
+}
+
+// Toolbar is somewhere below App and receives no theme prop.
+function Toolbar() {
+  const theme = useContext(ThemeContext)
+  return <button className={theme}>Save</button>
+}
+
+// Nesting providers: the nearest one wins for the components inside it.`
+          },
+          {
+            type: "list",
+            id: "react-l13-list",
+            style: "bullet",
+            items: [
+              "`createContext(defaultValue)` makes the context; the default is used when there is no provider.",
+              "`Context.Provider value={...}` supplies the value to everything inside it.",
+              "`useContext(Context)` reads the nearest provided value \u2014 no props in between."
+            ]
+          },
+          {
+            type: "tip",
+            id: "react-l13-tip",
+            title: "Context is not a state manager",
+            body: "Context only carries a value down the tree. The state itself still lives in a `useState` or `useReducer`, usually one level above the provider \u2014 context is how that state is delivered."
+          },
+          {
+            type: "heading",
+            id: "react-l13-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l13-b3",
+            body: "Write the rule React follows when several providers are nested around a consumer."
+          },
+          {
+            type: "exercise",
+            id: "react-l13-x1",
+            exercise: {
+              id: "ex-react-l13",
+              instructions: "Write resolveTheme(providers, fallback) returning the value a consumer sees. providers is ordered outermost first, so the innermost (last) value wins; when there are no providers, return the fallback.",
+              languages: ["javascript"],
+              starterCode: {
+                javascript: `// Providers are ordered outermost to innermost.
+function resolveTheme(providers, fallback) {
+  return fallback
+}
+`
+              },
+              tests: [
+                {
+                  id: "ex-react-l13-t1",
+                  label: "the innermost provider wins",
+                  body: "return resolveTheme(['light', 'dark'], 'system') === 'dark'"
+                },
+                {
+                  id: "ex-react-l13-t2",
+                  label: "with no providers the default is used",
+                  body: "return resolveTheme([], 'system') === 'system'"
+                },
+                {
+                  id: "ex-react-l13-t3",
+                  label: "a single provider supplies its value",
+                  body: "return resolveTheme(['dark'], 'system') === 'dark'"
+                },
+                {
+                  id: "ex-react-l13-t4",
+                  label: "the last of several is the nearest",
+                  body: "return resolveTheme(['a', 'b', 'c'], 'x') === 'c'"
+                }
+              ],
+              hints: [
+                "The array is ordered from the outermost provider to the innermost.",
+                "The nearest provider to the consumer is the last one in the array.",
+                "Return the last element, or the fallback when the array is empty."
+              ],
+              solution: {
+                javascript: `function resolveTheme(providers, fallback) {
+  return providers.length > 0 ? providers[providers.length - 1] : fallback
+}
+`
+              },
+              testNotes: 'The ordering checks are what distinguish "nearest wins" from a first-match implementation.'
+            }
+          }
+        ]
       },
       {
         id: "react-l14",
@@ -88758,7 +95282,129 @@ var reactAdvancedHooksSections = [
           "Explain when to use useReducer instead of useState"
         ],
         xp: 40,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l14-intro",
+            body: "**useReducer for state logic.** When state updates have names and rules \u2014 increment, add, remove, reset \u2014 a reducer puts those rules in one place. `useReducer(reducer, initial)` returns the current state and a `dispatch` function."
+          },
+          {
+            type: "text",
+            id: "react-l14-b2",
+            body: "The reducer is a pure function: `(state, action) => nextState`. Components dispatch *what happened* and stay free of update logic, which makes the rules easy to read, test, and share. Reach for it when the next state depends on several pieces of the current one; a single boolean is still simpler with `useState`."
+          },
+          {
+            type: "heading",
+            id: "react-l14-h1",
+            level: 2,
+            body: "Name the actions, centralise the rules"
+          },
+          {
+            type: "code",
+            id: "react-l14-code",
+            language: "jsx",
+            title: "a counter reducer",
+            code: `const initialState = 0
+
+function counterReducer(state, action) {
+  switch (action.type) {
+    case 'increment':
+      return state + 1
+    case 'decrement':
+      return state - 1
+    case 'reset':
+      return initialState
+    default:
+      return state          // an unknown action changes nothing
+  }
+}
+
+function Counter() {
+  const [count, dispatch] = useReducer(counterReducer, initialState)
+  return (
+    <button onClick={() => dispatch({ type: 'increment' })}>{count}</button>
+  )
+}`
+          },
+          {
+            type: "list",
+            id: "react-l14-list",
+            style: "bullet",
+            items: [
+              "The reducer takes `(state, action)` and returns the next state \u2014 it never mutates.",
+              "`dispatch({ type: \u2019increment\u2019 })` sends an action; the reducer decides what it means.",
+              "An unrecognised action should return the current state, so the reducer is total."
+            ]
+          },
+          {
+            type: "tip",
+            id: "react-l14-tip",
+            title: "Test the reducer, not the component",
+            body: "A reducer is a pure function, so it can be tested with plain calls \u2014 no renderer, no DOM. Putting update logic in a reducer is often the easiest way to make it verifiable."
+          },
+          {
+            type: "heading",
+            id: "react-l14-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l14-b3",
+            body: "Implement the counter reducer with its three actions and a safe default."
+          },
+          {
+            type: "exercise",
+            id: "react-l14-x1",
+            exercise: {
+              id: "ex-react-l14",
+              instructions: "Write counterReducer(state, action) where state is a number. 'increment' adds one, 'decrement' subtracts one, 'reset' returns 0, and any other action returns the state unchanged.",
+              languages: ["javascript"],
+              starterCode: {
+                javascript: `// state is a number: increment, decrement, reset.
+function counterReducer(state, action) {
+  return state
+}
+`
+              },
+              tests: [
+                { id: "ex-react-l14-t1", label: "increment adds one", body: "return counterReducer(0, { type: 'increment' }) === 1" },
+                {
+                  id: "ex-react-l14-t2",
+                  label: "decrement subtracts one",
+                  body: "return counterReducer(1, { type: 'decrement' }) === 0"
+                },
+                { id: "ex-react-l14-t3", label: "reset returns to zero", body: "return counterReducer(5, { type: 'reset' }) === 0" },
+                {
+                  id: "ex-react-l14-t4",
+                  label: "an unknown action changes nothing",
+                  body: "return counterReducer(3, { type: 'explode' }) === 3"
+                }
+              ],
+              hints: [
+                "Switch on action.type, exactly as in the example.",
+                "Each case returns the next number; increment is state + 1.",
+                "The default case returns the state unchanged, so the reducer never corrupts on an unknown action."
+              ],
+              solution: {
+                javascript: `function counterReducer(state, action) {
+  switch (action.type) {
+    case 'increment':
+      return state + 1
+    case 'decrement':
+      return state - 1
+    case 'reset':
+      return 0
+    default:
+      return state
+  }
+}
+`
+              },
+              testNotes: "The unknown-action check is the one that catches a reducer written as a chain of ifs without a fallback."
+            }
+          }
+        ]
       },
       {
         id: "react-l15",
@@ -88771,7 +95417,149 @@ var reactAdvancedHooksSections = [
           "Explain the dependency arrays for each hook"
         ],
         xp: 35,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l15-intro",
+            body: "**useMemo and useCallback.** Both hooks remember something between renders. `useMemo` remembers a computed value and recomputes it only when its dependencies change. `useCallback` does the same for a function, handing back the same reference until a dependency changes."
+          },
+          {
+            type: "text",
+            id: "react-l15-b2",
+            body: "The dependencies are compared with `Object.is`, so a freshly created array or object always counts as a change. That is the whole mechanism: cache the value, compare the inputs, recompute when they differ. These are performance tools, not correctness tools \u2014 reach for them when a render is measurably doing work it does not need to do."
+          },
+          {
+            type: "heading",
+            id: "react-l15-h1",
+            level: 2,
+            body: "Cache a value, cache a callback"
+          },
+          {
+            type: "code",
+            id: "react-l15-code",
+            language: "jsx",
+            title: "memoised value and stable callback",
+            code: `function TaskList({ items, query }) {
+  // Recomputed only when items or query change:
+  const visible = useMemo(
+    () => items.filter((item) => item.name.includes(query)),
+    [items, query],
+  )
+
+  // The same function reference until doSelect changes:
+  const handleSelect = useCallback((id) => doSelect(id), [doSelect])
+
+  return (
+    <ul>
+      {visible.map((item) => (
+        <li key={item.id} onClick={() => handleSelect(item.id)}>{item.name}</li>
+      ))}
+    </ul>
+  )
+}`
+          },
+          {
+            type: "list",
+            id: "react-l15-list",
+            style: "bullet",
+            items: [
+              "`useMemo(fn, deps)` returns the cached result of `fn`, calling it again only when deps change.",
+              "`useCallback(fn, deps)` returns a memoised `fn` \u2014 useful when passing it to a memoised child.",
+              "Both use `Object.is` per dependency, so inline objects and arrays defeat the memo."
+            ]
+          },
+          {
+            type: "warning",
+            id: "react-l15-warn",
+            title: "Do not memoise by reflex",
+            body: "A memo has its own cost: storing the value and comparing the dependencies. Adding `useMemo` around cheap calculations usually makes code harder to read for no measurable gain. Measure first."
+          },
+          {
+            type: "heading",
+            id: "react-l15-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l15-b3",
+            body: "Build the cache underneath `useMemo`: keep the last dependencies and value, and recompute only when the dependencies change."
+          },
+          {
+            type: "exercise",
+            id: "react-l15-x1",
+            exercise: {
+              id: "ex-react-l15",
+              instructions: "Complete memoCache() so run(deps, compute) calls compute only when deps differ from the previous call, and returns the cached value otherwise. The first call always computes.",
+              languages: ["javascript"],
+              starterCode: {
+                javascript: `// A tiny useMemo: recompute only when the dependencies change.
+function memoCache() {
+  let lastDeps = null
+  let lastValue
+
+  return {
+    run(deps, compute) {
+      // TODO: compare deps with lastDeps, recompute when they differ.
+      return compute()
+    },
+  }
+}
+`
+              },
+              tests: [
+                {
+                  id: "ex-react-l15-t1",
+                  label: "equal dependencies reuse the cached value",
+                  body: "let calls = 0; const cache = memoCache(); const first = cache.run([1], () => { calls++; return 'a' }); const second = cache.run([1], () => { calls++; return 'b' }); return calls === 1 && first === 'a' && second === 'a'"
+                },
+                {
+                  id: "ex-react-l15-t2",
+                  label: "changed dependencies recompute",
+                  body: "let calls = 0; const cache = memoCache(); cache.run([1], () => { calls++; return 'a' }); const second = cache.run([2], () => { calls++; return 'b' }); return calls === 2 && second === 'b'"
+                },
+                {
+                  id: "ex-react-l15-t3",
+                  label: "the first call always computes",
+                  body: "let calls = 0; const cache = memoCache(); cache.run([], () => { calls++; return 'x' }); return calls === 1"
+                },
+                {
+                  id: "ex-react-l15-t4",
+                  label: "equal-looking objects still count as a change",
+                  body: "let calls = 0; const cache = memoCache(); cache.run([{ a: 1 }], () => { calls++; return 1 }); cache.run([{ a: 1 }], () => { calls++; return 2 }); return calls === 2"
+                }
+              ],
+              hints: [
+                "Remember both the previous dependencies and the previous value.",
+                "Compare lengths first, then element by element with Object.is.",
+                "When nothing changed, return lastValue without calling compute."
+              ],
+              solution: {
+                javascript: `function memoCache() {
+  let lastDeps = null
+  let lastValue
+
+  return {
+    run(deps, compute) {
+      const changed =
+        lastDeps === null ||
+        lastDeps.length !== deps.length ||
+        lastDeps.some((value, index) => !Object.is(value, deps[index]))
+
+      if (changed) {
+        lastValue = compute()
+        lastDeps = deps
+      }
+      return lastValue
+    },
+  }
+}
+`
+              },
+              testNotes: "The object check pins down reference comparison, which is exactly why an inline object in a dependency array causes repeated work."
+            }
+          }
+        ]
       },
       {
         id: "react-l16",
@@ -88784,7 +95572,126 @@ var reactAdvancedHooksSections = [
           "Focus an input programmatically on mount"
         ],
         xp: 35,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l16-intro",
+            body: "**useRef for DOM access.** A ref is a small box with one property, `current`. Attach it to an element with the `ref` prop and React puts the DOM node in that box, giving you a handle for things state cannot express \u2014 focusing an input, measuring a node, scrolling."
+          },
+          {
+            type: "text",
+            id: "react-l16-b2",
+            body: "The same box also stores any mutable value that should survive renders. Writing to `ref.current` does *not* re-render, which is the important difference from state: use a ref for a value the UI does not display, and state for a value it does."
+          },
+          {
+            type: "heading",
+            id: "react-l16-h1",
+            level: 2,
+            body: "A box that survives renders"
+          },
+          {
+            type: "code",
+            id: "react-l16-code",
+            language: "jsx",
+            title: "focusing an input, and counting renders",
+            code: `function SearchBox() {
+  const inputRef = useRef(null)
+
+  useEffect(() => {
+    inputRef.current.focus()      // after the first render
+  }, [])
+
+  return <input ref={inputRef} placeholder="Search" />
+}
+
+// The same ref holds any mutable value across renders:
+const rendersRef = useRef(0)
+rendersRef.current += 1          // no re-render triggered`
+          },
+          {
+            type: "list",
+            id: "react-l16-list",
+            style: "bullet",
+            items: [
+              "`useRef(initial)` returns `{ current: initial }`, the same object on every render.",
+              "Attach it with `ref={inputRef}`; React sets `current` to the DOM node.",
+              "Changing `current` does not re-render \u2014 use state when the UI must update."
+            ]
+          },
+          {
+            type: "tip",
+            id: "react-l16-tip",
+            title: "Reach for a ref last",
+            body: "Most values belong in state or are derived during render. A ref is for the genuinely imperative cases \u2014 focus, scroll, media playback \u2014 where you need the DOM node itself."
+          },
+          {
+            type: "heading",
+            id: "react-l16-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l16-b3",
+            body: "Write the box a ref is made of, and update it the way a ref would be updated."
+          },
+          {
+            type: "exercise",
+            id: "react-l16-x1",
+            exercise: {
+              id: "ex-react-l16",
+              instructions: "Write createRefBox(initial) returning an object with a current property set to initial. Write bump(box) that increases box.current by one and returns the new value.",
+              languages: ["javascript"],
+              starterCode: {
+                javascript: `// A ref is a box with a mutable current value.
+function createRefBox(initial) {
+  return { current: null }
+}
+
+// Increase box.current by one and return it.
+function bump(box) {
+  return box.current
+}
+`
+              },
+              tests: [
+                { id: "ex-react-l16-t1", label: "the box starts at the initial value", body: "return createRefBox(5).current === 5" },
+                {
+                  id: "ex-react-l16-t2",
+                  label: "bump counts up and returns the new value",
+                  body: "const box = createRefBox(0); return bump(box) === 1 && bump(box) === 2"
+                },
+                {
+                  id: "ex-react-l16-t3",
+                  label: "bump mutates the same box",
+                  body: "const box = createRefBox(10); bump(box); return box.current === 11"
+                },
+                {
+                  id: "ex-react-l16-t4",
+                  label: "two boxes are independent",
+                  body: "const a = createRefBox(0); const b = createRefBox(0); bump(a); return a.current === 1 && b.current === 0"
+                }
+              ],
+              hints: [
+                "createRefBox returns { current: initial } \u2014 the parameter is the starting value.",
+                "bump writes straight to the box: box.current += 1.",
+                "Return the new value, not the box, so the caller can use it immediately."
+              ],
+              solution: {
+                javascript: `function createRefBox(initial) {
+  return { current: initial }
+}
+
+function bump(box) {
+  box.current += 1
+  return box.current
+}
+`
+              },
+              testNotes: "The two-boxes check confirms each ref is its own box rather than shared module state."
+            }
+          }
+        ]
       },
       {
         id: "react-l42",
@@ -88798,7 +95705,132 @@ var reactAdvancedHooksSections = [
           "Distinguish between urgent and transition updates"
         ],
         xp: 40,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l42-intro",
+            body: "**useTransition.** Not every update is equally urgent. Typing in a field must feel instant; the filtered list that follows can wait. `useTransition` lets you mark the second kind of update as a transition, so React keeps the urgent one responsive and interrupts the slow one if a newer input arrives."
+          },
+          {
+            type: "text",
+            id: "react-l42-b2",
+            body: "It returns a pending flag and a `startTransition` function. State updates made inside `startTransition` are deferred; `isPending` is true while they are in flight, which is where you show a subtle indicator. Because transitions supersede one another, only the latest matters once the user stops typing."
+          },
+          {
+            type: "heading",
+            id: "react-l42-h1",
+            level: 2,
+            body: "Urgent now, everything else in a transition"
+          },
+          {
+            type: "code",
+            id: "react-l42-code",
+            language: "jsx",
+            title: "keeping the input responsive",
+            code: `function Search({ items }) {
+  const [query, setQuery] = useState('')
+  const [results, setResults] = useState(items)
+  const [isPending, startTransition] = useTransition()
+
+  function onChange(event) {
+    const next = event.target.value
+    setQuery(next)                     // urgent: the input must keep up
+    startTransition(() => {
+      setResults(items.filter((item) => item.includes(next)))  // non-urgent
+    })
+  }
+
+  return (
+    <div>
+      <input value={query} onChange={onChange} />
+      {isPending && <span>Updating...</span>}
+      <ul>{results.map((item) => <li key={item}>{item}</li>)}</ul>
+    </div>
+  )
+}`
+          },
+          {
+            type: "list",
+            id: "react-l42-list",
+            style: "bullet",
+            items: [
+              "`startTransition(() => setX(...))` marks the update as non-urgent and interruptible.",
+              "`isPending` is true while a transition is rendering \u2014 the natural place for a spinner.",
+              "Urgent updates (the input value) run immediately; only the transition can be superseded."
+            ]
+          },
+          {
+            type: "warning",
+            id: "react-l42-warn",
+            title: "Transitions are not a scheduler",
+            body: "A transition does not make work faster \u2014 it lets React abandon outdated work. If a render is slow because it does too much, fix the work itself rather than hiding it behind a transition."
+          },
+          {
+            type: "heading",
+            id: "react-l42-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l42-b3",
+            body: 'Model the "latest wins" rule: several transition updates may pile up, but only the last one should be applied.'
+          },
+          {
+            type: "exercise",
+            id: "ex-react-l42-x1",
+            exercise: {
+              id: "ex-react-l42",
+              instructions: "Write finalTransition(updates) returning the value of the last entry whose kind is 'transition', or null when there is none. Entries look like { kind: 'urgent' | 'transition', value }.",
+              languages: ["javascript"],
+              starterCode: {
+                javascript: `// Return the last transition's value, or null.
+function finalTransition(updates) {
+  return null
+}
+`
+              },
+              tests: [
+                {
+                  id: "ex-react-l42-t1",
+                  label: "the last transition wins over earlier ones",
+                  body: "return finalTransition([{ kind: 'urgent', value: 'a' }, { kind: 'transition', value: 'b' }, { kind: 'transition', value: 'c' }]) === 'c'"
+                },
+                {
+                  id: "ex-react-l42-t2",
+                  label: "urgent updates are ignored",
+                  body: "return finalTransition([{ kind: 'urgent', value: 'a' }]) === null"
+                },
+                {
+                  id: "ex-react-l42-t3",
+                  label: "no updates means nothing to apply",
+                  body: "return finalTransition([]) === null"
+                },
+                {
+                  id: "ex-react-l42-t4",
+                  label: "a single transition is applied",
+                  body: "return finalTransition([{ kind: 'transition', value: 'only' }]) === 'only'"
+                }
+              ],
+              hints: [
+                "Walk the list and remember the last transition value you saw.",
+                "Filtering to the transitions and taking the last one is the shortest route.",
+                "Return null when nothing was a transition \u2014 including an empty list."
+              ],
+              solution: {
+                javascript: `function finalTransition(updates) {
+  let value = null
+  for (const update of updates) {
+    if (update.kind === 'transition') value = update.value
+  }
+  return value
+}
+`
+              },
+              testNotes: "The mixed list confirms that urgent entries are skipped rather than simply taking the last element."
+            }
+          }
+        ]
       },
       {
         id: "react-l43",
@@ -88812,7 +95844,126 @@ var reactAdvancedHooksSections = [
           "Use forwardRef with function components that use hooks"
         ],
         xp: 40,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l43-intro",
+            body: "**forwardRef.** A `ref` on a DOM element is straightforward, but a component does not receive `ref` as a prop \u2014 it is reserved. To let a parent reach the element inside your component, you wrap the component with `forwardRef` and pass the ref down to the element that should receive it."
+          },
+          {
+            type: "text",
+            id: "react-l43-b2",
+            body: "The wrapped function takes `(props, ref)` instead of just props, and the usual job is to put that ref on the underlying input or button while spreading the rest of the props through. This keeps the wrapper transparent: focus, measurement, and scroll all pass straight to the real element."
+          },
+          {
+            type: "heading",
+            id: "react-l43-h1",
+            level: 2,
+            body: "Hand the ref down to the element"
+          },
+          {
+            type: "code",
+            id: "react-l43-code",
+            language: "jsx",
+            title: "forwarding a ref to an input",
+            code: `const TextInput = forwardRef(function TextInput(props, ref) {
+  return <input ref={ref} {...props} />
+})
+
+function Form() {
+  const inputRef = useRef(null)
+  return (
+    <>
+      <TextInput ref={inputRef} placeholder="Name" />
+      <button onClick={() => inputRef.current.focus()}>Focus</button>
+    </>
+  )
+}
+
+// Spreading props keeps the wrapper transparent: the placeholder,
+// id and handlers all land on the real input.`
+          },
+          {
+            type: "list",
+            id: "react-l43-list",
+            style: "bullet",
+            items: [
+              "`ref` is not a normal prop \u2014 `forwardRef` is how a component receives one.",
+              "Put the ref on the DOM element that should be reachable, and spread the remaining props through.",
+              "When a component must expose both its own ref and an inner element\u2019s, merge them with a helper."
+            ]
+          },
+          {
+            type: "tip",
+            id: "react-l43-tip",
+            title: "Prefer a prop-based API when you can",
+            body: "Forwarding refs is sometimes needed for focus and measurement, but if you only want to trigger an action, an `onOpen`-style callback prop is simpler and easier to test than reach-through imperative code."
+          },
+          {
+            type: "heading",
+            id: "react-l43-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l43-b3",
+            body: "When two refs must point at the same element, a small helper wires both at once. Write that helper."
+          },
+          {
+            type: "exercise",
+            id: "ex-react-l43-x1",
+            exercise: {
+              id: "ex-react-l43",
+              instructions: "Write mergeRefs(a, b) returning a function that, when called with a value, sets a.current and b.current to that value. Refs are objects with a current property.",
+              languages: ["javascript"],
+              starterCode: {
+                javascript: `// Return a function that fills both refs with the same value.
+function mergeRefs(a, b) {
+  return () => {}
+}
+`
+              },
+              tests: [
+                {
+                  id: "ex-react-l43-t1",
+                  label: "both refs receive the value",
+                  body: "const a = { current: null }; const b = { current: null }; mergeRefs(a, b)('el'); return a.current === 'el' && b.current === 'el'"
+                },
+                {
+                  id: "ex-react-l43-t2",
+                  label: "a returned function is a function",
+                  body: 'const a = { current: null }; const b = { current: null }; return typeof mergeRefs(a, b) === "function"'
+                },
+                {
+                  id: "ex-react-l43-t3",
+                  label: "a later value replaces the earlier one",
+                  body: "const a = { current: null }; const b = { current: null }; const set = mergeRefs(a, b); set('first'); set(null); return a.current === null && b.current === null"
+                },
+                {
+                  id: "ex-react-l43-t4",
+                  label: "the work happens when the function is called",
+                  body: "const a = { current: null }; const b = { current: null }; mergeRefs(a, b); return a.current === null"
+                }
+              ],
+              hints: [
+                "mergeRefs must return a function, not the result of assigning.",
+                "The returned function closes over a and b.",
+                "Assign both inside it: (value) => { a.current = value; b.current = value }."
+              ],
+              solution: {
+                javascript: `function mergeRefs(a, b) {
+  return (value) => {
+    a.current = value
+    b.current = value
+  }
+}
+`
+              },
+              testNotes: "The last check confirms nothing is assigned until the callback runs \u2014 the behaviour React needs when it attaches refs after render."
+            }
+          }
+        ]
       },
       {
         id: "react-l44",
@@ -88826,7 +95977,127 @@ var reactAdvancedHooksSections = [
           "Return whatever state or functions the consuming component needs"
         ],
         xp: 45,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l44-intro",
+            body: "**Custom Hooks.** When two components need the same behaviour, the logic can be lifted into a function that itself calls hooks. A custom hook is exactly that: a function whose name starts with `use`, which composes built-in hooks and returns whatever the caller needs."
+          },
+          {
+            type: "text",
+            id: "react-l44-b2",
+            body: "The `use` prefix is not decoration \u2014 it is how React and the linter know the function may contain hooks, and it is why the rules of hooks apply. Each component that calls the hook gets its own independent state; the hook shares the *logic*, not the values."
+          },
+          {
+            type: "heading",
+            id: "react-l44-h1",
+            level: 2,
+            body: "Logic, not state, is what is shared"
+          },
+          {
+            type: "code",
+            id: "react-l44-code",
+            language: "jsx",
+            title: "a counter hook and its caller",
+            code: `function useCounter(initial = 0) {
+  const [count, setCount] = useState(initial)
+  const increment = useCallback(() => setCount((c) => c + 1), [])
+  const reset = useCallback(() => setCount(initial), [initial])
+  return { count, increment, reset }
+}
+
+function Counter() {
+  const { count, increment, reset } = useCounter()
+  return (
+    <div>
+      <span>{count}</span>
+      <button onClick={increment}>+</button>
+      <button onClick={reset}>reset</button>
+    </div>
+  )
+}
+
+// Two components calling useCounter each get their own count.`
+          },
+          {
+            type: "list",
+            id: "react-l44-list",
+            style: "bullet",
+            items: [
+              "The name must start with `use` so the rules of hooks apply and the linter can check it.",
+              "A custom hook calls other hooks; it is not a place for plain helpers that use no hooks.",
+              "Return an object or array shaped for the caller \u2014 values, setters, derived flags, callbacks."
+            ]
+          },
+          {
+            type: "tip",
+            id: "react-l44-tip",
+            title: "Extract the pure part first",
+            body: "The most testable part of a custom hook is often a plain function it calls \u2014 a filter, a formatter, a calculation. Extract that, test it directly, and keep the hook thin."
+          },
+          {
+            type: "heading",
+            id: "react-l44-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l44-b3",
+            body: "Write the pure function behind a search hook: the filter a `useSearch` hook would expose."
+          },
+          {
+            type: "exercise",
+            id: "ex-react-l44-x1",
+            exercise: {
+              id: "ex-react-l44",
+              instructions: "Write filterByQuery(items, query) returning a NEW array of the items whose name contains query, ignoring case. An empty query returns a copy of every item.",
+              languages: ["javascript"],
+              starterCode: {
+                javascript: `// Return matching items; the query is case-insensitive.
+function filterByQuery(items, query) {
+  return items
+}
+`
+              },
+              tests: [
+                {
+                  id: "ex-react-l44-t1",
+                  label: "matches on part of the name",
+                  body: "const items = [{ name: 'Apple' }, { name: 'Banana' }]; const r = filterByQuery(items, 'app'); return r.length === 1 && r[0].name === 'Apple'"
+                },
+                {
+                  id: "ex-react-l44-t2",
+                  label: "the match ignores case",
+                  body: "return filterByQuery([{ name: 'Apple' }], 'APPLE').length === 1"
+                },
+                {
+                  id: "ex-react-l44-t3",
+                  label: "an empty query returns every item, as a copy",
+                  body: "const items = [{ name: 'A' }]; const r = filterByQuery(items, ''); return r.length === 1 && r !== items"
+                },
+                {
+                  id: "ex-react-l44-t4",
+                  label: "no match gives an empty array",
+                  body: "return filterByQuery([{ name: 'Apple' }], 'zzz').length === 0"
+                }
+              ],
+              hints: [
+                "Lower-case both the query and the name before comparing.",
+                "filter already returns a new array, so it fits the empty-query case too.",
+                "const q = query.toLowerCase(); return items.filter((item) => item.name.toLowerCase().includes(q))."
+              ],
+              solution: {
+                javascript: `function filterByQuery(items, query) {
+  const needle = query.toLowerCase()
+  return items.filter((item) => item.name.toLowerCase().includes(needle))
+}
+`
+              },
+              testNotes: "The empty-query check compares against the original array reference, so returning the input unchanged is caught."
+            }
+          }
+        ]
       },
       {
         id: "react-l45",
@@ -88840,7 +96111,131 @@ var reactAdvancedHooksSections = [
           "Recognize HOC patterns in older codebases"
         ],
         xp: 35,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l45-intro",
+            body: "**Higher-Order Components.** An HOC is a function that takes a component and returns a new component with extra behaviour. It was the standard way to share logic before hooks: wrap, add props, render the original inside."
+          },
+          {
+            type: "text",
+            id: "react-l45-b2",
+            body: "It still appears in older code and in libraries. The pattern works, but it costs a wrapper component in the tree, makes the prop names harder to trace, and hides where data came from. A custom hook shares the same logic without adding a component or changing the props."
+          },
+          {
+            type: "heading",
+            id: "react-l45-h1",
+            level: 2,
+            body: "A function that returns a component"
+          },
+          {
+            type: "code",
+            id: "react-l45-code",
+            language: "jsx",
+            title: "an HOC, and its hook-shaped replacement",
+            code: `function withLoading(Component) {
+  return function WithLoading({ loading, ...rest }) {
+    if (loading) return <p>Loading...</p>
+    return <Component {...rest} />
+  }
+}
+
+const UserList = withLoading(function UserList({ users }) {
+  return <ul>{users.map((u) => <li key={u.id}>{u.name}</li>)}</ul>
+})
+
+// The hook version: no wrapper component, no prop renaming.
+// const loading = useLoading()`
+          },
+          {
+            type: "list",
+            id: "react-l45-list",
+            style: "bullet",
+            items: [
+              "An HOC takes a component and returns a new one \u2014 often with a name like `withSomething`.",
+              "It merges the props it adds with the props it was given, and spreads the rest through.",
+              "Hooks usually replace HOCs nowadays: same logic sharing, no extra component in the tree."
+            ]
+          },
+          {
+            type: "warning",
+            id: "react-l45-warn",
+            title: "Watch what the wrapper swallows",
+            body: "An HOC that destructures a prop it adds will hide that prop from the wrapped component. Spread the remaining props through so nothing the caller passes is silently dropped."
+          },
+          {
+            type: "heading",
+            id: "react-l45-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l45-b3",
+            body: "Write an HOC that injects fixed props into whatever component it wraps."
+          },
+          {
+            type: "exercise",
+            id: "ex-react-l45-x1",
+            exercise: {
+              id: "ex-react-l45",
+              instructions: "Write withProps(Component, extraProps) returning a new function component that renders Component with the incoming props and extraProps combined. On a name clash the extra props win.",
+              languages: ["jsx"],
+              starterCode: {
+                jsx: `// Base renders the props it is given.
+function Base(props) {
+  return <div data-title={props.title} data-extra={props.extra} />
+}
+
+// Return a component that renders Base with extraProps merged in.
+function withProps(Component, extraProps) {
+  return Component
+}
+`
+              },
+              tests: [
+                {
+                  id: "ex-react-l45-t1",
+                  label: "returns a new component",
+                  body: 'const Enhanced = withProps(Base, { extra: "y" }); return typeof Enhanced === "function" && Enhanced !== Base'
+                },
+                {
+                  id: "ex-react-l45-t2",
+                  label: "incoming and extra props are both visible",
+                  body: 'const Enhanced = withProps(Base, { extra: "y" }); const el = Enhanced({ title: "x" }); const child = el.type(el.props); return child.props["data-title"] === "x" && child.props["data-extra"] === "y"'
+                },
+                {
+                  id: "ex-react-l45-t3",
+                  label: "extra props win on a clash",
+                  body: 'const Enhanced = withProps(Base, { title: "z" }); const el = Enhanced({ title: "x" }); const child = el.type(el.props); return child.props["data-title"] === "z"'
+                },
+                {
+                  id: "ex-react-l45-t4",
+                  label: "it renders the wrapped component",
+                  body: 'const Enhanced = withProps(Base, { extra: "y" }); return Enhanced({ title: "x" }).type === Base'
+                }
+              ],
+              hints: [
+                "Return a new function component, not the component that was passed in.",
+                "Render <Component {...props} {...extraProps} /> so both sets of props arrive.",
+                "Order matters: put extraProps last so it overrides a clashing name."
+              ],
+              solution: {
+                jsx: `function Base(props) {
+  return <div data-title={props.title} data-extra={props.extra} />
+}
+
+function withProps(Component, extraProps) {
+  return function WithProps(props) {
+    return <Component {...props} {...extraProps} />
+  }
+}
+`
+              },
+              testNotes: "The clash check is what forces the spread order, and the render check confirms the wrapped component is still used."
+            }
+          }
+        ]
       }
     ],
     quiz: {
@@ -88925,7 +96320,121 @@ var reactRoutingSections = [
           "Navigate with Link and NavLink components"
         ],
         xp: 40,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l17-intro",
+            body: "**React Router basics.** A single-page app has one HTML file, so \u2019navigating\u2019 means matching the current URL against a list of routes and rendering the component that fits. React Router does that matching and hands you links that change the URL without a page load."
+          },
+          {
+            type: "text",
+            id: "react-l17-b2",
+            body: "The router is configured once, either as a data router passed to `RouterProvider` or with `BrowserRouter` wrapping the app. Routes are a list of `{ path, element }` entries. Matching walks that list and renders the first entry whose path fits the URL \u2014 so a route that no path matches renders nothing, which is why a catch-all `*` route is worth adding."
+          },
+          {
+            type: "heading",
+            id: "react-l17-h1",
+            level: 2,
+            body: "One URL, one matched route"
+          },
+          {
+            type: "code",
+            id: "react-l17-code",
+            language: "jsx",
+            title: "configuring the router",
+            code: `import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+
+const router = createBrowserRouter([
+  { path: '/', element: <Home /> },
+  { path: '/tasks', element: <Tasks /> },
+  { path: '*', element: <NotFound /> },
+])
+
+// <RouterProvider router={router} />
+
+// Links change the URL without reloading the page:
+// <Link to="/tasks">Tasks</Link>
+// <NavLink to="/tasks" className={({ isActive }) => (isActive ? 'on' : '')}>Tasks</NavLink>`
+          },
+          {
+            type: "list",
+            id: "react-l17-list",
+            style: "bullet",
+            items: [
+              "The router wraps the app once, at the root; everything below can use routing hooks.",
+              "Each route is a `{ path, element }` pair, and matching is against the current URL.",
+              "`Link` renders an anchor that navigates in-app; `NavLink` also tells you when it is active."
+            ]
+          },
+          {
+            type: "tip",
+            id: "react-l17-tip",
+            title: "Add a catch-all route",
+            body: "Without a catch-all (`path: '*'`) entry an unknown URL renders an empty page, which looks like a crash. A small NotFound route turns it into a dead end the user can navigate out of."
+          },
+          {
+            type: "heading",
+            id: "react-l17-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l17-b3",
+            body: "Write the matching rule under the router: find the first route whose path equals the URL."
+          },
+          {
+            type: "exercise",
+            id: "react-l17-x1",
+            exercise: {
+              id: "ex-react-l17",
+              instructions: "Write resolveRoute(routes, pathname) returning the element of the first route whose path equals pathname, or null when nothing matches. Routes look like { path, element }.",
+              languages: ["javascript"],
+              starterCode: {
+                javascript: `// Return the element of the first matching route, or null.
+function resolveRoute(routes, pathname) {
+  return null
+}
+`
+              },
+              tests: [
+                {
+                  id: "ex-react-l17-t1",
+                  label: "a matching path resolves",
+                  body: "const routes = [{ path: '/', element: 'Home' }]; return resolveRoute(routes, '/') === 'Home'"
+                },
+                {
+                  id: "ex-react-l17-t2",
+                  label: "the right route is chosen from several",
+                  body: "const routes = [{ path: '/a', element: 'A' }, { path: '/b', element: 'B' }]; return resolveRoute(routes, '/b') === 'B'"
+                },
+                {
+                  id: "ex-react-l17-t3",
+                  label: "an unknown path resolves to nothing",
+                  body: "const routes = [{ path: '/a', element: 'A' }]; return resolveRoute(routes, '/missing') === null"
+                },
+                {
+                  id: "ex-react-l17-t4",
+                  label: "the first match wins",
+                  body: "const routes = [{ path: '/a', element: 'first' }, { path: '/a', element: 'second' }]; return resolveRoute(routes, '/a') === 'first'"
+                }
+              ],
+              hints: [
+                "Look through the routes for one whose path equals the pathname.",
+                "find returns the first match, which is what a router does.",
+                "Return the element of the match, or null when find gives undefined."
+              ],
+              solution: {
+                javascript: `function resolveRoute(routes, pathname) {
+  const match = routes.find((route) => route.path === pathname)
+  return match ? match.element : null
+}
+`
+              },
+              testNotes: "The duplicate-path check pins down first-match-wins, and the unknown path confirms the null case is handled."
+            }
+          }
+        ]
       },
       {
         id: "react-l18",
@@ -88938,7 +96447,135 @@ var reactRoutingSections = [
           "Use Outlet to render nested route content"
         ],
         xp: 40,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l18-intro",
+            body: "**URL parameters and nested routes.** A path like `/tasks/:id` matches `/tasks/42` and hands the component `{ id: \u201942\u2019 }`. The colon marks a parameter; whatever sits in that segment becomes a value. This is how one component serves every task without a route per task."
+          },
+          {
+            type: "text",
+            id: "react-l18-b2",
+            body: "Nested routes let a parent path own the layout. The parent renders shared chrome and an `<Outlet />` where the matched child appears. The full path is the parent path plus the child path, so a layout at `/tasks` with a child `:id` handles `/tasks/42` while keeping one sidebar and one header."
+          },
+          {
+            type: "heading",
+            id: "react-l18-h1",
+            level: 2,
+            body: "Parameters, and a layout with an Outlet"
+          },
+          {
+            type: "code",
+            id: "react-l18-code",
+            language: "jsx",
+            title: "reading params and nesting a layout",
+            code: `function TaskDetail() {
+  const { id } = useParams()      // '/tasks/42' gives { id: '42' }
+  return <h1>Task {id}</h1>
+}
+
+// The parent path owns the layout; children render into its Outlet.
+// { path: '/tasks', element: <TasksLayout />, children: [
+//     { index: true, element: <TaskList /> },
+//     { path: ':id', element: <TaskDetail /> },
+// ] }
+
+function TasksLayout() {
+  return (
+    <>
+      <Sidebar />
+      <main><Outlet /></main>
+    </>
+  )
+}`
+          },
+          {
+            type: "list",
+            id: "react-l18-list",
+            style: "bullet",
+            items: [
+              "A `:name` segment is a parameter; `useParams()` returns the values as strings.",
+              "A parent route with a layout renders `<Outlet />` where the matched child goes.",
+              "An `index` child matches the parent path exactly, with no extra segment."
+            ]
+          },
+          {
+            type: "tip",
+            id: "react-l18-tip",
+            title: "Parameters are strings",
+            body: "`id` arrives as `\u201942\u2019`, not the number 42. Convert explicitly \u2014 `Number(id)` \u2014 and handle the case where the URL contains something that is not a number at all."
+          },
+          {
+            type: "heading",
+            id: "react-l18-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l18-b3",
+            body: "Write the matcher that extracts parameters from a pattern and a pathname."
+          },
+          {
+            type: "exercise",
+            id: "ex-react-l18-x1",
+            exercise: {
+              id: "ex-react-l18",
+              instructions: "Write readParams(pattern, pathname) returning an object of parameter values. Segments in the pattern that start with ':' capture the matching segment of the pathname. Return null when the patterns do not match.",
+              languages: ["javascript"],
+              starterCode: {
+                javascript: `// Match '/tasks/:id' against '/tasks/42' and capture the id.
+function readParams(pattern, pathname) {
+  return {}
+}
+`
+              },
+              tests: [
+                { id: "ex-react-l18-t1", label: "captures a single parameter", body: "return readParams('/tasks/:id', '/tasks/42').id === '42'" },
+                {
+                  id: "ex-react-l18-t2",
+                  label: "captures two parameters",
+                  body: "const p = readParams('/users/:userId/posts/:postId', '/users/7/posts/9'); return p.userId === '7' && p.postId === '9'"
+                },
+                {
+                  id: "ex-react-l18-t3",
+                  label: "a static pattern captures nothing",
+                  body: "return Object.keys(readParams('/about', '/about')).length === 0"
+                },
+                {
+                  id: "ex-react-l18-t4",
+                  label: "a different segment count does not match",
+                  body: "return readParams('/tasks/:id', '/tasks') === null"
+                }
+              ],
+              hints: [
+                'Split both strings on "/" and compare them segment by segment.',
+                "If the segment counts differ, the pattern cannot match \u2014 return null.",
+                'A segment starting with ":" is a parameter: store the pathname segment under the name after the colon.'
+              ],
+              solution: {
+                javascript: `function readParams(pattern, pathname) {
+  const patternParts = pattern.split('/')
+  const pathParts = pathname.split('/')
+  if (patternParts.length !== pathParts.length) return null
+
+  const params = {}
+  for (let i = 0; i < patternParts.length; i++) {
+    const part = patternParts[i]
+    if (part.startsWith(':')) {
+      params[part.slice(1)] = pathParts[i]
+    } else if (part !== pathParts[i]) {
+      return null
+    }
+  }
+  return params
+}
+`
+              },
+              testNotes: "The length check and the static-segment comparison together make a real matcher rather than one that accepts any path."
+            }
+          }
+        ]
       },
       {
         id: "react-l19",
@@ -88951,7 +96588,124 @@ var reactRoutingSections = [
           "Combine route protection with lazy loading"
         ],
         xp: 35,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l19-intro",
+            body: "**Protected and lazy routes.** Two independent concerns meet at the route level. Some routes should not render at all unless the visitor is signed in; others should not be downloaded until the visitor asks for them. Both are expressed as wrappers around the route element."
+          },
+          {
+            type: "text",
+            id: "react-l19-b2",
+            body: 'A guard is a tiny component: if the user is missing, render `<Navigate to="/login" />` instead of its children. Lazy loading splits a component into its own chunk with `lazy(() => import(...))` and shows a fallback from `Suspense` while it arrives. Composing them \u2014 guard on the outside, suspense on the inside \u2014 gives a protected, code-split route.'
+          },
+          {
+            type: "heading",
+            id: "react-l19-h1",
+            level: 2,
+            body: "A guard, and a chunk that loads on demand"
+          },
+          {
+            type: "code",
+            id: "react-l19-code",
+            language: "jsx",
+            title: "protection and code splitting",
+            code: `function RequireUser({ children }) {
+  const user = useCurrentUser()
+  if (!user) return <Navigate to="/login" replace />
+  return children
+}
+
+// The component is downloaded only when its route is visited:
+const TaskDetail = lazy(() => import('./TaskDetail'))
+
+// <Route
+//   path="/tasks/:id"
+//   element={
+//     <RequireUser>
+//       <Suspense fallback={<Spinner />}><TaskDetail /></Suspense>
+//     </RequireUser>
+//   }
+// />`
+          },
+          {
+            type: "list",
+            id: "react-l19-list",
+            style: "bullet",
+            items: [
+              "A guard returns `<Navigate />` instead of its children when access is denied.",
+              "`lazy(() => import(...))` loads the component\u2019s code only when its route renders.",
+              "`Suspense` supplies the fallback UI while the lazy chunk is in flight."
+            ]
+          },
+          {
+            type: "warning",
+            id: "react-l19-warn",
+            title: "Client guards are not security",
+            body: "A route guard only decides what the app renders \u2014 the data is still one request away. Real protection is enforced on the server: an API that refuses unauthenticated reads, not a hidden screen."
+          },
+          {
+            type: "heading",
+            id: "react-l19-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l19-b3",
+            body: "Write the decision a guard makes about where the visitor should end up."
+          },
+          {
+            type: "exercise",
+            id: "ex-react-l19-x1",
+            exercise: {
+              id: "ex-react-l19",
+              instructions: "Write targetPath(user, path, isPrivate) returning '/login' when the route is private and there is no user, and path otherwise. A user is missing when it is null or undefined.",
+              languages: ["javascript"],
+              starterCode: {
+                javascript: `// Where should the visitor land?
+function targetPath(user, path, isPrivate) {
+  return path
+}
+`
+              },
+              tests: [
+                {
+                  id: "ex-react-l19-t1",
+                  label: "a private route sends a signed-out visitor to login",
+                  body: "return targetPath(null, '/tasks', true) === '/login'"
+                },
+                {
+                  id: "ex-react-l19-t2",
+                  label: "a signed-in visitor reaches the private route",
+                  body: "return targetPath({ id: 'u1' }, '/tasks', true) === '/tasks'"
+                },
+                {
+                  id: "ex-react-l19-t3",
+                  label: "a public route is open to everyone",
+                  body: "return targetPath(null, '/about', false) === '/about'"
+                },
+                {
+                  id: "ex-react-l19-t4",
+                  label: "an undefined user also redirects",
+                  body: "return targetPath(undefined, '/tasks/7', true) === '/login'"
+                }
+              ],
+              hints: [
+                "The redirect happens only when the route is private AND there is no user.",
+                "A falsy check covers null and undefined at once.",
+                'Return "/login" when isPrivate && !user, otherwise the requested path.'
+              ],
+              solution: {
+                javascript: `function targetPath(user, path, isPrivate) {
+  return isPrivate && !user ? '/login' : path
+}
+`
+              },
+              testNotes: "The undefined check makes sure the guard treats a missing user the same way it treats null."
+            }
+          }
+        ]
       },
       {
         id: "react-l46",
@@ -88965,7 +96719,260 @@ var reactRoutingSections = [
           "Clean up the portal DOM node on unmount"
         ],
         xp: 35,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l46-intro",
+            body: "**React Portals.** A modal rendered inside a deeply nested element inherits that element\u2019s stacking context and can end up clipped or hidden behind something else. A portal renders the markup into a different DOM node \u2014 usually one near the end of the body \u2014 while keeping it a child of the component in the React tree."
+          },
+          {
+            type: "text",
+            id: "react-l46-b2",
+            body: "That split is the useful part: the DOM position escapes the parent layout, but React context and event bubbling still behave as if nothing moved. Portals need an existing host node, so the usual pattern is a second root in `index.html` that the app fills once and reuses."
+          },
+          {
+            type: "heading",
+            id: "react-l46-h1",
+            level: 2,
+            body: "Render elsewhere, behave as if nested"
+          },
+          {
+            type: "code",
+            id: "react-l46-code",
+            language: "jsx",
+            title: "a modal in its own root",
+            code: `// index.html: <div id="root"></div><div id="modal-root"></div>
+
+function Modal({ open, onClose, children }) {
+  if (!open) return null
+  return createPortal(
+    <div className="modal" role="dialog" aria-modal="true">
+      {children}
+      <button onClick={onClose}>Close</button>
+    </div>,
+    document.getElementById('modal-root'),
+  )
+}
+
+// In the DOM the modal sits in #modal-root; in the React tree it is
+// still a child of Modal, so context and event bubbling still work.`
+          },
+          {
+            type: "list",
+            id: "react-l46-list",
+            style: "bullet",
+            items: [
+              "`createPortal(element, node)` renders the element into the given DOM node.",
+              "CSS still applies: a modal in a portal escapes the parent\u2019s overflow and stacking context.",
+              "React context and event bubbling cross the portal boundary unchanged."
+            ]
+          },
+          {
+            type: "warning",
+            id: "react-l46-warn",
+            title: "A portal is not a focus strategy",
+            body: "Moving markup outside the page does not move the user\u2019s focus. A modal opened in a portal must still move focus into it, trap Tab, and return focus to the trigger on close \u2014 otherwise keyboard users are left behind."
+          },
+          {
+            type: "heading",
+            id: "react-l46-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l46-b3",
+            body: "A portal needs a stable host node. Write the helper that creates it once and reuses it afterwards."
+          },
+          {
+            type: "exercise",
+            id: "ex-react-l46-x1",
+            exercise: {
+              id: "ex-react-l46",
+              instructions: "Write ensureHost(hosts, id, create). If hosts[id] already exists, return it. Otherwise call create(), store the result at hosts[id], and return it. This is how a portal host node is created once and reused.",
+              languages: ["javascript"],
+              starterCode: {
+                javascript: `// hosts is an object of portal nodes, keyed by id.
+function ensureHost(hosts, id, create) {
+  return create()
+}
+`
+              },
+              tests: [
+                {
+                  id: "ex-react-l46-t1",
+                  label: "a created host is stored and returned",
+                  body: "const hosts = {}; const host = ensureHost(hosts, 'modal-root', () => ({ id: 'modal-root' })); return hosts['modal-root'] === host"
+                },
+                {
+                  id: "ex-react-l46-t2",
+                  label: "the host is created only once",
+                  body: "let created = 0; const hosts = {}; const make = () => { created++; return { n: created } }; ensureHost(hosts, 'a', make); ensureHost(hosts, 'a', make); return created === 1"
+                },
+                {
+                  id: "ex-react-l46-t3",
+                  label: "an existing host is reused without creating",
+                  body: "const existing = { id: 'modal-root' }; const hosts = { 'modal-root': existing }; return ensureHost(hosts, 'modal-root', () => ({ other: true })) === existing"
+                },
+                {
+                  id: "ex-react-l46-t4",
+                  label: "different ids get different hosts",
+                  body: "let created = 0; const hosts = {}; const make = () => { created++; return created }; ensureHost(hosts, 'a', make); ensureHost(hosts, 'b', make); return created === 2 && hosts['a'] !== hosts['b']"
+                }
+              ],
+              hints: [
+                "Check whether hosts[id] is already set before doing anything.",
+                "Only call create() when there is nothing stored yet.",
+                "Store the new host, then return hosts[id] in both cases."
+              ],
+              solution: {
+                javascript: `function ensureHost(hosts, id, create) {
+  if (!hosts[id]) {
+    hosts[id] = create()
+  }
+  return hosts[id]
+}
+`
+              },
+              testNotes: "The creation count is what proves the host is reused \u2014 the detail that stops a new modal root being added on every render."
+            }
+          }
+        ]
+      },
+      {
+        id: "react-l50",
+        title: "React Transitions",
+        description: "Animating elements entering and leaving the DOM: TransitionGroup, react-transition-group, and the built-in Transition API.",
+        duration: 6,
+        objectives: [
+          "Mount and unmount a child with a Transition component",
+          "Track enter, appear, and leave states with status names",
+          "Combine transitions with routing for page animations",
+          "Use TransitionGroup to animate a list of items together"
+        ],
+        xp: 40,
+        content: [
+          {
+            type: "text",
+            id: "react-l50-intro",
+            body: "**React Transitions.** React removes an element the moment it leaves the tree, which leaves no time to animate it out. A transition component delays that removal: it keeps the element mounted, tells you which phase it is in, and unmounts it when the animation reports it is done."
+          },
+          {
+            type: "text",
+            id: "react-l50-b2",
+            body: "The phases have names \u2014 `entering`, `entered`, `exiting`, and `unmounted` \u2014 and the typical use is a child function that receives the current status and picks CSS from it. The same four states serve a single element and, with a group wrapper, a whole list being added to or removed from."
+          },
+          {
+            type: "heading",
+            id: "react-l50-h1",
+            level: 2,
+            body: "Four phases, driven by one boolean"
+          },
+          {
+            type: "code",
+            id: "react-l50-code",
+            language: "jsx",
+            title: "a fade driven by status",
+            code: `const duration = 300
+
+const styles = {
+  entering: { opacity: 0 },
+  entered: { opacity: 1 },
+  exiting: { opacity: 0 },
+  unmounted: { opacity: 0 },
+}
+
+function Panel({ open }) {
+  return (
+    <Transition in={open} timeout={duration} mountOnEnter unmountOnExit>
+      {(status) => (
+        <div style={{ transition: 'opacity ' + duration + 'ms', ...styles[status] }}>
+          Content
+        </div>
+      )}
+    </Transition>
+  )
+}`
+          },
+          {
+            type: "list",
+            id: "react-l50-list",
+            style: "bullet",
+            items: [
+              "`entering` is the frame the element appears in; `entered` is the resting state.",
+              "`exiting` keeps the element mounted while it animates out; `unmounted` means it is gone.",
+              "The status comes from the transition\u2019s `in` prop and the previous value of that prop."
+            ]
+          },
+          {
+            type: "tip",
+            id: "react-l50-tip",
+            title: "Respect reduced motion",
+            body: "Some users ask their system to reduce motion. Check `prefers-reduced-motion` and skip straight to `entered` \u2014 the component works the same way, it just does not travel."
+          },
+          {
+            type: "heading",
+            id: "react-l50-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l50-b3",
+            body: "Write the phase the transition computes from the previous and current values of `in`."
+          },
+          {
+            type: "exercise",
+            id: "ex-react-l50-x1",
+            exercise: {
+              id: "ex-react-l50",
+              instructions: "Write transitionStatus(wasActive, active) returning the phase: false/true is 'entering', true/true is 'entered', true/false is 'exiting', and false/false is 'unmounted'.",
+              languages: ["javascript"],
+              starterCode: {
+                javascript: `// wasActive is the previous value of the in prop, active the current one.
+function transitionStatus(wasActive, active) {
+  return 'unmounted'
+}
+`
+              },
+              tests: [
+                {
+                  id: "ex-react-l50-t1",
+                  label: "appearing for the first time is entering",
+                  body: "return transitionStatus(false, true) === 'entering'"
+                },
+                {
+                  id: "ex-react-l50-t2",
+                  label: "staying visible is entered",
+                  body: "return transitionStatus(true, true) === 'entered'"
+                },
+                {
+                  id: "ex-react-l50-t3",
+                  label: "disappearing is exiting",
+                  body: "return transitionStatus(true, false) === 'exiting'"
+                },
+                {
+                  id: "ex-react-l50-t4",
+                  label: "staying hidden is unmounted",
+                  body: "return transitionStatus(false, false) === 'unmounted'"
+                }
+              ],
+              hints: [
+                "The two booleans give exactly four combinations \u2014 one phase each.",
+                "When active is true the answer depends on whether it was already active.",
+                "Branch on active first, then on wasActive."
+              ],
+              solution: {
+                javascript: `function transitionStatus(wasActive, active) {
+  if (active) return wasActive ? 'entered' : 'entering'
+  return wasActive ? 'exiting' : 'unmounted'
+}
+`
+              },
+              testNotes: "All four combinations are checked, which pins the phase table down completely."
+            }
+          }
+        ]
       }
     ],
     quiz: {
@@ -89006,7 +97013,7 @@ var reactRoutingSections = [
         {
           id: "quiz-react-s6-q5",
           type: "identify-error",
-          prompt: "How do you redirect a user in a React Router loader or effect?",
+          prompt: "How do you redirect a user in a route component?",
           code: 'if (!user) return <Navigate to="/login" />',
           options: [
             "<Navigate /> only works in route components, not loaders",
@@ -89040,7 +97047,137 @@ var reactPerformanceSections = [
           "Code-split by route for faster initial load"
         ],
         xp: 35,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l20-intro",
+            body: "**Code splitting with Suspense.** A bundler normally ships one large JavaScript file, so the first paint waits for code the visitor may never need. Splitting breaks the bundle into chunks that load on demand \u2014 usually one per route."
+          },
+          {
+            type: "text",
+            id: "react-l20-b2",
+            body: "`lazy(() => import(\u2019./Page\u2019))` turns a static import into a chunk fetched the first time the component renders. `Suspense` wraps it and shows a fallback until the chunk arrives. Once loaded, the module is cached \u2014 a second visit is instant."
+          },
+          {
+            type: "heading",
+            id: "react-l20-h1",
+            level: 2,
+            body: "Load only what the screen needs"
+          },
+          {
+            type: "code",
+            id: "react-l20-code",
+            language: "jsx",
+            title: "a lazy route behind a fallback",
+            code: `const TaskDetail = lazy(() => import('./TaskDetail'))
+
+function AppRoutes() {
+  return (
+    <Suspense fallback={<p>Loading...</p>}>
+      <TaskDetail />
+    </Suspense>
+  )
+}
+
+// Split by route so the first paint downloads only the shell:
+// { path: '/tasks/:id', element: <TaskDetail /> }
+// The chunk for TaskDetail is fetched the first time that route matches,
+// then reused for every later visit.`
+          },
+          {
+            type: "list",
+            id: "react-l20-list",
+            style: "bullet",
+            items: [
+              "`lazy(factory)` takes a function returning an import promise, not the import itself.",
+              "`Suspense` provides the fallback shown while the chunk is in flight.",
+              "One chunk per route is the usual split: users download the pages they open."
+            ]
+          },
+          {
+            type: "tip",
+            id: "react-l20-tip",
+            title: "Split where it pays",
+            body: "Splitting a component used on the first screen only adds a round trip. Split the heavy, occasionally used parts \u2014 a settings page, a charting library, an editor \u2014 and leave the shell in the main bundle."
+          },
+          {
+            type: "heading",
+            id: "react-l20-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l20-b3",
+            body: "Write the cache behind lazy loading: a chunk is loaded once and then reused by key."
+          },
+          {
+            type: "exercise",
+            id: "ex-react-l20-x1",
+            exercise: {
+              id: "ex-react-l20",
+              instructions: "Write lazyCache() returning an object with load(key, factory). The first load for a key calls factory() and caches the result; later loads return the cached module without calling factory again.",
+              languages: ["javascript"],
+              starterCode: {
+                javascript: `// A cache for lazily loaded chunks.
+function lazyCache() {
+  const modules = {}
+
+  return {
+    load(key, factory) {
+      // TODO: load once, then reuse.
+      return factory()
+    },
+  }
+}
+`
+              },
+              tests: [
+                {
+                  id: "ex-react-l20-t1",
+                  label: "the first load runs the factory",
+                  body: "let loads = 0; const cache = lazyCache(); const first = cache.load('page', () => { loads++; return 'Page' }); return loads === 1 && first === 'Page'"
+                },
+                {
+                  id: "ex-react-l20-t2",
+                  label: "the second load reuses the cached module",
+                  body: "let loads = 0; const cache = lazyCache(); const make = () => { loads++; return 'Page' }; cache.load('page', make); const again = cache.load('page', make); return loads === 1 && again === 'Page'"
+                },
+                {
+                  id: "ex-react-l20-t3",
+                  label: "different keys load separately",
+                  body: "let loads = 0; const cache = lazyCache(); const make = () => { loads++; return 'm' + loads }; const a = cache.load('a', make); const b = cache.load('b', make); return loads === 2 && a !== b"
+                },
+                {
+                  id: "ex-react-l20-t4",
+                  label: "a cached null is still a cache hit",
+                  body: "let loads = 0; const cache = lazyCache(); const make = () => { loads++; return null }; cache.load('x', make); const value = cache.load('x', make); return value === null && loads === 1"
+                }
+              ],
+              hints: [
+                "Store loaded modules in the modules object, keyed by key.",
+                "Only call factory() when nothing has been stored for that key yet.",
+                'Test for the key with "key in modules" so a cached falsy value is not mistaken for a miss.'
+              ],
+              solution: {
+                javascript: `function lazyCache() {
+  const modules = {}
+
+  return {
+    load(key, factory) {
+      if (!(key in modules)) {
+        modules[key] = factory()
+      }
+      return modules[key]
+    },
+  }
+}
+`
+              },
+              testNotes: "The fourth check caches a null and expects one load, which is why the cache must test for the key rather than for a truthy value."
+            }
+          }
+        ]
       },
       {
         id: "react-l21",
@@ -89053,7 +97190,129 @@ var reactPerformanceSections = [
           "Apply useCallback to functions passed to memoized children"
         ],
         xp: 40,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l21-intro",
+            body: "**Memoization techniques.** When a parent re-renders, React re-renders its children too. `React.memo` interrupts that: a memoized component compares its new props with the old ones and skips the render when they are shallowly equal."
+          },
+          {
+            type: "text",
+            id: "react-l21-b2",
+            body: "The catch is that a comparison by value still fails for new objects and new functions, which is what an inline arrow or an object literal is on every render. `useCallback` and `useMemo` exist to keep those references stable \u2014 and applying `memo` without them is usually wasted effort."
+          },
+          {
+            type: "heading",
+            id: "react-l21-h1",
+            level: 2,
+            body: "Compare props, keep references stable"
+          },
+          {
+            type: "code",
+            id: "react-l21-code",
+            language: "jsx",
+            title: "memo, and the stable callback it needs",
+            code: `const Item = React.memo(function Item({ label, onSelect }) {
+  return <li onClick={onSelect}>{label}</li>
+})
+
+// An inline function is a new reference every render, so memo never helps:
+// <Item label={label} onSelect={() => select(id)} />
+
+// useCallback keeps that reference stable, so the memo can do its job:
+const handleSelect = useCallback(() => select(id), [id])
+// <Item label={label} onSelect={handleSelect} />`
+          },
+          {
+            type: "list",
+            id: "react-l21-list",
+            style: "bullet",
+            items: [
+              "`React.memo(Component)` skips a re-render when props compare equal by `Object.is` per key.",
+              "A new object or function each render defeats the comparison, so the child re-renders anyway.",
+              "`useCallback` stabilises functions; `useMemo` stabilises objects and arrays."
+            ]
+          },
+          {
+            type: "warning",
+            id: "react-l21-warn",
+            title: "Memo is not free",
+            body: "Every memoized component stores its previous props and compares them on each render. For cheap components that is more work than rendering again. Memoize where the render is expensive or the list is long."
+          },
+          {
+            type: "heading",
+            id: "react-l21-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l21-b3",
+            body: "Write the comparison React.memo performs by default."
+          },
+          {
+            type: "exercise",
+            id: "ex-react-l21-x1",
+            exercise: {
+              id: "ex-react-l21",
+              instructions: "Write shallowEqual(a, b) returning true when both objects have the same keys and each value compares equal with Object.is. The comparison is one level deep, not recursive.",
+              languages: ["javascript"],
+              starterCode: {
+                javascript: `// The default comparison used by React.memo.
+function shallowEqual(a, b) {
+  return false
+}
+`
+              },
+              tests: [
+                {
+                  id: "ex-react-l21-t1",
+                  label: "equal primitive values compare equal",
+                  body: "return shallowEqual({ a: 1 }, { a: 1 }) === true"
+                },
+                {
+                  id: "ex-react-l21-t2",
+                  label: "a different value is not equal",
+                  body: "return shallowEqual({ a: 1 }, { a: 2 }) === false"
+                },
+                {
+                  id: "ex-react-l21-t3",
+                  label: "a shared object reference compares equal",
+                  body: "const inner = { x: 1 }; return shallowEqual({ a: inner }, { a: inner }) === true"
+                },
+                {
+                  id: "ex-react-l21-t4",
+                  label: "a different key count is not equal",
+                  body: "return shallowEqual({ a: 1 }, { a: 1, b: 2 }) === false"
+                },
+                {
+                  id: "ex-react-l21-t5",
+                  label: "two equal-looking objects are not equal",
+                  body: "return shallowEqual({ a: { x: 1 } }, { a: { x: 1 } }) === false"
+                }
+              ],
+              hints: [
+                "Compare the key counts first \u2014 a different count is an immediate false.",
+                "Then check every key of a against the same key of b.",
+                "Use Object.is for each value: Object.keys(a).every((key) => Object.is(a[key], b[key]))."
+              ],
+              solution: {
+                javascript: `function shallowEqual(a, b) {
+  if (a === b) return true
+  if (!a || !b) return false
+
+  const aKeys = Object.keys(a)
+  const bKeys = Object.keys(b)
+  if (aKeys.length !== bKeys.length) return false
+
+  return aKeys.every((key) => Object.is(a[key], b[key]))
+}
+`
+              },
+              testNotes: "The shared-reference and equal-looking-object checks together pin down that the comparison is by identity and one level deep."
+            }
+          }
+        ]
       },
       {
         id: "react-l22",
@@ -89066,7 +97325,125 @@ var reactPerformanceSections = [
           "Understand the relationship between props and re-renders"
         ],
         xp: 30,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l22-intro",
+            body: '**Measuring and debugging renders.** Optimising before measuring is guesswork. The React DevTools Profiler records an interaction and shows which components rendered, how long each took, and why \u2014 the flame chart answers "what is slow" before you change anything.'
+          },
+          {
+            type: "text",
+            id: "react-l22-b2",
+            body: 'The simplest measurement is also often the most useful: count renders. A component that renders far more often than its data changes is the place to look. The Profiler adds "why did this render?" for the specific prop or state that changed, which is usually the fact you need.'
+          },
+          {
+            type: "heading",
+            id: "react-l22-h1",
+            level: 2,
+            body: "Record first, then change one thing"
+          },
+          {
+            type: "code",
+            id: "react-l22-code",
+            language: "javascript",
+            title: "profiling and counting renders",
+            code: `// React DevTools -> Profiler -> record an interaction.
+// The flame chart shows which components rendered and how long they took.
+
+// A blunt instrument that finds the culprit surprisingly often:
+const renderCounts = {}
+
+function Item({ label }) {
+  renderCounts[label] = (renderCounts[label] ?? 0) + 1
+  return <li>{label}</li>
+}
+
+// "Why did this render?" in the Profiler names the prop or state that
+// changed, which is usually the fact the fix depends on.`
+          },
+          {
+            type: "list",
+            id: "react-l22-list",
+            style: "bullet",
+            items: [
+              "Record an interaction in the Profiler, then read which components rendered and for how long.",
+              "Counting renders finds the hot component without any tooling.",
+              '"Why did this render?" points at the changing prop or state, not just the component.'
+            ]
+          },
+          {
+            type: "tip",
+            id: "react-l22-tip",
+            title: "Measure the development build, judge the production build",
+            body: "Development builds run extra checks and are much slower. Use them to find what renders, but confirm real timings against a production build before drawing conclusions about speed."
+          },
+          {
+            type: "heading",
+            id: "react-l22-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l22-b3",
+            body: "Turn a render log into an answer: which component rendered most often?"
+          },
+          {
+            type: "exercise",
+            id: "ex-react-l22-x1",
+            exercise: {
+              id: "ex-react-l22",
+              instructions: "Write busiest(log) returning the component name that appears most often in the log, or null when the log is empty. When two names tie, return the one that appears first.",
+              languages: ["javascript"],
+              starterCode: {
+                javascript: `// Find the component with the most renders.
+function busiest(log) {
+  return null
+}
+`
+              },
+              tests: [
+                { id: "ex-react-l22-t1", label: "the most frequent name wins", body: "return busiest(['A', 'B', 'A']) === 'A'" },
+                {
+                  id: "ex-react-l22-t2",
+                  label: "a tie returns the first seen",
+                  body: "return busiest(['B', 'A']) === 'B'"
+                },
+                { id: "ex-react-l22-t3", label: "an empty log has no answer", body: "return busiest([]) === null" },
+                { id: "ex-react-l22-t4", label: "a single render is the busiest", body: "return busiest(['Only']) === 'Only'" },
+                {
+                  id: "ex-react-l22-t5",
+                  label: "a later name can overtake",
+                  body: "return busiest(['A', 'A', 'B', 'B', 'B']) === 'B'"
+                }
+              ],
+              hints: [
+                "Count each name as you walk the log, keeping the order you first saw them.",
+                "Track the best name and count so far as you go.",
+                "Only replace the best when the new count is strictly greater, so earlier names win ties."
+              ],
+              solution: {
+                javascript: `function busiest(log) {
+  const counts = {}
+  let best = null
+  let bestCount = 0
+
+  for (const name of log) {
+    counts[name] = (counts[name] ?? 0) + 1
+    if (counts[name] > bestCount) {
+      best = name
+      bestCount = counts[name]
+    }
+  }
+
+  return best
+}
+`
+              },
+              testNotes: "The tie check distinguishes a strict greater-than from a greater-or-equal comparison, which is the difference between first-seen and last-seen."
+            }
+          }
+        ]
       },
       {
         id: "react-l47",
@@ -89079,7 +97456,118 @@ var reactPerformanceSections = [
           "Choose between CSS files and inline styles based on reuse and dynamism"
         ],
         xp: 40,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l47-intro",
+            body: "**CSS styling approaches.** The simplest way to style a React component is still a CSS file. Import it, and the classes it defines are available to the JSX in that module \u2014 hovering, focus states, media queries and pseudo-elements all keep working."
+          },
+          {
+            type: "text",
+            id: "react-l47-b2",
+            body: "Inline styles cover the other half: a value that comes from data. The `style` prop takes an object with camelCase keys, which makes a computed width or a colour from state straightforward. Where a class name is conditional, a small join helper keeps the JSX readable."
+          },
+          {
+            type: "heading",
+            id: "react-l47-h1",
+            level: 2,
+            body: "A stylesheet for rules, an object for data"
+          },
+          {
+            type: "code",
+            id: "react-l47-code",
+            language: "jsx",
+            title: "class names and a dynamic style",
+            code: `import './App.css'
+
+function Card({ title, highlighted }) {
+  return (
+    <div className={highlighted ? 'card card--active' : 'card'}>
+      <h2 className="card__title">{title}</h2>
+    </div>
+  )
+}
+
+// Inline styles carry values that come from data:
+function Bar({ value }) {
+  return <div className="bar" style={{ width: value + '%' }} />
+}`
+          },
+          {
+            type: "list",
+            id: "react-l47-list",
+            style: "bullet",
+            items: [
+              "A CSS file imported by the component works exactly as in plain HTML \u2014 one class name, one rule.",
+              "The `style` prop takes an object with camelCase keys: `style={{ fontSize: \u201912px\u2019 }}`.",
+              "Build a conditional class list by joining the truthy names, not by string concatenation."
+            ]
+          },
+          {
+            type: "tip",
+            id: "react-l47-tip",
+            title: "Keep class names predictable",
+            body: "A stable naming pattern \u2014 `card`, `card__title`, `card--active` \u2014 makes styles easy to find from the markup. Consistency matters more than the exact scheme."
+          },
+          {
+            type: "heading",
+            id: "react-l47-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l47-b3",
+            body: "Write the helper that builds a class string from a mix of names and conditions."
+          },
+          {
+            type: "exercise",
+            id: "ex-react-l47-x1",
+            exercise: {
+              id: "ex-react-l47",
+              instructions: "Write cx(...parts) returning the truthy parts joined by a single space. Falsy parts \u2014 false, null, undefined, or an empty string \u2014 are skipped, and no part produces a leading or trailing space.",
+              languages: ["javascript"],
+              starterCode: {
+                javascript: `// Join the truthy class names with a single space.
+function cx(...parts) {
+  return ''
+}
+`
+              },
+              tests: [
+                { id: "ex-react-l47-t1", label: "joins two names", body: "return cx('a', 'b') === 'a b'" },
+                {
+                  id: "ex-react-l47-t2",
+                  label: "skips a false condition",
+                  body: "return cx('a', false, 'b') === 'a b'"
+                },
+                { id: "ex-react-l47-t3", label: "no parts means no classes", body: "return cx() === ''" },
+                {
+                  id: "ex-react-l47-t4",
+                  label: "falsy parts are all skipped",
+                  body: "return cx(false, null, undefined, '') === ''"
+                },
+                {
+                  id: "ex-react-l47-t5",
+                  label: "a single name has no stray space",
+                  body: "return cx('only') === 'only'"
+                }
+              ],
+              hints: [
+                "Filter out the falsy parts first, then join what is left.",
+                "Boolean filtering removes false, null, undefined and the empty string in one step.",
+                'return parts.filter(Boolean).join(" ").'
+              ],
+              solution: {
+                javascript: `function cx(...parts) {
+  return parts.filter(Boolean).join(' ')
+}
+`
+              },
+              testNotes: "The single-name and all-falsy checks catch implementations that add a leading or trailing space."
+            }
+          }
+        ]
       },
       {
         id: "react-l48",
@@ -89092,7 +97580,126 @@ var reactPerformanceSections = [
           "Use the :global selector for styles that should not be scoped"
         ],
         xp: 35,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l48-intro",
+            body: "**CSS Modules.** A plain CSS file is global: two components that both define `.card` collide, and the winner depends on import order. A file ending in `.module.css` is scoped instead \u2014 each class name is rewritten to a unique one, and the mapping is exported from the import."
+          },
+          {
+            type: "text",
+            id: "react-l48-b2",
+            body: 'You reference classes through the imported object: `className={styles.card}` rather than `className="card"`. Because the generated names are unique, styles can be written with short, natural names and never leak. `:global(...)` is the escape hatch when something genuinely must stay unscoped.'
+          },
+          {
+            type: "heading",
+            id: "react-l48-h1",
+            level: 2,
+            body: "Short names, unique output"
+          },
+          {
+            type: "code",
+            id: "react-l48-code",
+            language: "jsx",
+            title: "a scoped stylesheet",
+            code: `// Card.module.css
+// .card { border-radius: 8px; }
+// .title { font-size: 1.25rem; }
+
+import styles from './Card.module.css'
+
+function Card({ title }) {
+  return (
+    <div className={styles.card}>
+      <h2 className={styles.title}>{title}</h2>
+    </div>
+  )
+}
+
+// The build rewrites .card to something like Card_module__card_3x9f,
+// so it can never clash with another component's .card.`
+          },
+          {
+            type: "list",
+            id: "react-l48-list",
+            style: "bullet",
+            items: [
+              "Only `.module.css` files are scoped; a plain `.css` import stays global.",
+              "Classes are used through the imported object: `styles.card`.",
+              "The scope is per file, so `.card` in two modules are different classes."
+            ]
+          },
+          {
+            type: "tip",
+            id: "react-l48-tip",
+            title: "Composing classes still works",
+            body: "Because each class is a string, you can combine them as usual \u2014 `[styles.card, active && styles.active].filter(Boolean).join(\u2019 \u2019)` \u2014 exactly like plain CSS class names."
+          },
+          {
+            type: "heading",
+            id: "react-l48-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l48-b3",
+            body: "Write the naming rule the build applies: a class name scoped to the file it was declared in."
+          },
+          {
+            type: "exercise",
+            id: "ex-react-l48-x1",
+            exercise: {
+              id: "ex-react-l48",
+              instructions: "Write scopedName(file, className) returning a unique name built from the file and the class. Take the file name without its folder, drop the final extension, then join it to the class with an underscore. Example: ('Card.module.css', 'card') gives 'Card.module_card'.",
+              languages: ["javascript"],
+              starterCode: {
+                javascript: `// 'Card.module.css' + 'card' -> 'Card.module_card'
+function scopedName(file, className) {
+  return className
+}
+`
+              },
+              tests: [
+                {
+                  id: "ex-react-l48-t1",
+                  label: "combines the file and the class",
+                  body: "return scopedName('Card.module.css', 'card') === 'Card.module_card'"
+                },
+                {
+                  id: "ex-react-l48-t2",
+                  label: "ignores the folder",
+                  body: "return scopedName('src/Button.module.css', 'btn') === 'Button.module_btn'"
+                },
+                {
+                  id: "ex-react-l48-t3",
+                  label: "two classes from one file differ",
+                  body: "return scopedName('A.module.css', 'x') !== scopedName('A.module.css', 'y')"
+                },
+                {
+                  id: "ex-react-l48-t4",
+                  label: "two files with the same class differ",
+                  body: "return scopedName('A.module.css', 'card') !== scopedName('B.module.css', 'card')"
+                }
+              ],
+              hints: [
+                'Start by taking the last path segment: file.split("/").pop().',
+                "Drop the final extension by cutting at the last dot.",
+                "Remember to guard the no-dot case, then join with an underscore."
+              ],
+              solution: {
+                javascript: `function scopedName(file, className) {
+  const base = file.split('/').pop()
+  const dot = base.lastIndexOf('.')
+  const name = dot === -1 ? base : base.slice(0, dot)
+  return name + '_' + className
+}
+`
+              },
+              testNotes: "The uniqueness checks are what matter here: the point of CSS Modules is that two files can use the same class name safely."
+            }
+          }
+        ]
       },
       {
         id: "react-l49",
@@ -89106,7 +97713,113 @@ var reactPerformanceSections = [
           "Compare runtime CSS-in-JS with build-time extraction"
         ],
         xp: 35,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l49-intro",
+            body: "**CSS-in-JS and Sass.** Two approaches trade off differently. CSS-in-JS writes styles as JavaScript values, so a prop can drive a colour or a size directly; the styles are computed at run time. Sass goes the other way \u2014 variables, nesting and mixins, compiled to plain CSS before the browser sees anything."
+          },
+          {
+            type: "text",
+            id: "react-l49-b2",
+            body: "Both reduce to text in the end. A styled component eventually produces a class and a rule, and a Sass file produces a stylesheet the bundler links. Knowing that a style is a value \u2014 and that a value can be printed as CSS text \u2014 makes either library easier to reason about."
+          },
+          {
+            type: "heading",
+            id: "react-l49-h1",
+            level: 2,
+            body: "Styles as values, styles built ahead of time"
+          },
+          {
+            type: "code",
+            id: "react-l49-code",
+            language: "javascript",
+            title: "a dynamic style object, and a Sass variable",
+            code: `// CSS-in-JS: styles are values, so props can drive them.
+const Button = styled.button({
+  color: (props) => (props.primary ? 'white' : '#333'),
+  background: (props) => (props.primary ? '#2563eb' : '#eee'),
+})
+
+// A style object prints as CSS declarations \u2014 camelCase becomes kebab-case:
+// { fontSize: '12px' }   ->   font-size: 12px
+
+// Sass is the opposite trade: compiled at build time, no runtime cost.
+// @use './variables' as vars;
+// .card { color: vars.$ink; }`
+          },
+          {
+            type: "list",
+            id: "react-l49-list",
+            style: "bullet",
+            items: [
+              "A styled component takes props, so one definition serves every variant.",
+              "Style objects use camelCase keys; the printed CSS uses kebab-case.",
+              "Sass is resolved during the build, so it costs the browser nothing at run time."
+            ]
+          },
+          {
+            type: "warning",
+            id: "react-l49-warn",
+            title: "Runtime styling has a runtime cost",
+            body: "CSS-in-JS libraries generate and inject rules while the page runs, which adds work on every new style. Some libraries extract the CSS at build time to avoid it; if you use a runtime one, keep an eye on what it emits."
+          },
+          {
+            type: "heading",
+            id: "react-l49-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l49-b3",
+            body: "Write the step every CSS-in-JS library must perform: turn a style object into CSS declarations."
+          },
+          {
+            type: "exercise",
+            id: "ex-react-l49-x1",
+            exercise: {
+              id: "ex-react-l49",
+              instructions: "Write toCss(styles) returning the declarations of a style object. Convert each camelCase key to kebab-case, follow it with ': ' and the value, and join the declarations with '; '. Example: toCss({ color: 'red', fontSize: '12px' }) gives 'color: red; font-size: 12px'.",
+              languages: ["javascript"],
+              starterCode: {
+                javascript: `// Serialise a style object to CSS declarations.
+function toCss(styles) {
+  return ''
+}
+`
+              },
+              tests: [
+                { id: "ex-react-l49-t1", label: "a single declaration", body: "return toCss({ color: 'red' }) === 'color: red'" },
+                {
+                  id: "ex-react-l49-t2",
+                  label: "camelCase becomes kebab-case",
+                  body: "return toCss({ fontSize: '12px' }) === 'font-size: 12px'"
+                },
+                {
+                  id: "ex-react-l49-t3",
+                  label: "several declarations are joined with a semicolon",
+                  body: "return toCss({ backgroundColor: 'blue', marginTop: '4px' }) === 'background-color: blue; margin-top: 4px'"
+                },
+                { id: "ex-react-l49-t4", label: "an empty style object gives no text", body: "return toCss({}) === ''" }
+              ],
+              hints: [
+                "Work over Object.keys(styles) and build one declaration per key.",
+                "Convert camelCase by inserting a dash before each capital letter, then lower-casing.",
+                'Join the declarations with "; " \u2014 not with a trailing semicolon.'
+              ],
+              solution: {
+                javascript: `function toCss(styles) {
+  return Object.keys(styles)
+    .map((key) => key.replace(/([A-Z])/g, '-$1').toLowerCase() + ': ' + styles[key])
+    .join('; ')
+}
+`
+              },
+              testNotes: "The multi-declaration check pins down the join separator, and the camelCase checks confirm the conversion runs."
+            }
+          }
+        ]
       }
     ],
     quiz: {
@@ -89158,7 +97871,7 @@ var reactPerformanceSections = [
           id: "quiz-react-s7-q5",
           type: "identify-error",
           prompt: "What is the issue with this component?",
-          code: "function Item({ data, onClick }) {\n  const processed = expensiveCalc(data)\n  return <divonClick={onClick}>{processed}</div>\n}",
+          code: "function Item({ data, onClick }) {\n  const processed = expensiveCalc(data)\n  return <div onClick={onClick}>{processed}</div>\n}",
           options: [
             "No issue",
             "The div has no children",
@@ -89191,7 +97904,124 @@ var reactTestingSections = [
           "Configure jsdom for DOM simulation in tests"
         ],
         xp: 35,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l23-intro",
+            body: "**Setting up Vitest and Testing Library.** React components are functions that return elements, so the most direct test calls the component and reads the result. For anything involving state, events or effects, the test renders the component into jsdom and asserts on what a user would see."
+          },
+          {
+            type: "text",
+            id: "react-l23-b2",
+            body: "Vitest shares Vite\u2019s config, so a project already using Vite needs one line to set the test environment to `jsdom`. React Testing Library then supplies `render` and a set of queries. The queries are the important part: they deliberately look things up the way a person does \u2014 by visible text, by role, by label \u2014 so the tests survive a refactor that renames a class."
+          },
+          {
+            type: "heading",
+            id: "react-l23-h1",
+            level: 2,
+            body: "A runner, a DOM, and queries that read like a user"
+          },
+          {
+            type: "code",
+            id: "react-l23-code",
+            language: "jsx",
+            title: "the first test",
+            code: `// vitest.config.ts
+// { test: { environment: 'jsdom' } }
+
+import { render, screen } from '@testing-library/react'
+
+test('shows the button label', () => {
+  render(<Button label="Submit" />)
+  expect(screen.getByText('Submit')).toBeInTheDocument()
+})
+
+// Querying by role, text or label matches how a user finds things:
+// screen.getByRole('button', { name: 'Submit' })`
+          },
+          {
+            type: "list",
+            id: "react-l23-list",
+            style: "bullet",
+            items: [
+              "Vitest reads the Vite config; `environment: \u2019jsdom\u2019` gives tests a DOM.",
+              "`render(<Component />)` mounts the component and returns queries plus a container.",
+              "Prefer `getByRole` and `getByText` \u2014 they match the accessible UI, not the implementation."
+            ]
+          },
+          {
+            type: "tip",
+            id: "react-l23-tip",
+            title: "If a query is awkward, the UI may be",
+            body: "When you cannot find an element by text, role or label, that is usually a real accessibility gap rather than a testing problem. Adding the missing role or label fixes the test and the experience at once."
+          },
+          {
+            type: "heading",
+            id: "react-l23-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l23-b3",
+            body: "Write the lookup behind a text query: find the element whose text matches exactly."
+          },
+          {
+            type: "exercise",
+            id: "ex-react-l23-x1",
+            exercise: {
+              id: "ex-react-l23",
+              instructions: "Write byText(elements, text) returning the first element whose text property equals the given string exactly, or null when none matches. Elements look like { text }.",
+              languages: ["javascript"],
+              starterCode: {
+                javascript: `// Find an element by its exact text, like screen.getByText.
+function byText(elements, text) {
+  return null
+}
+`
+              },
+              tests: [
+                {
+                  id: "ex-react-l23-t1",
+                  label: "finds an element by its text",
+                  body: "return byText([{ text: 'Submit' }], 'Submit') !== null"
+                },
+                {
+                  id: "ex-react-l23-t2",
+                  label: "returns the element itself",
+                  body: "return byText([{ text: 'Submit' }], 'Submit').text === 'Submit'"
+                },
+                {
+                  id: "ex-react-l23-t3",
+                  label: "a partial match is not a match",
+                  body: "return byText([{ text: 'Sub' }], 'Submit') === null"
+                },
+                {
+                  id: "ex-react-l23-t4",
+                  label: "picks the right one from several",
+                  body: "return byText([{ text: 'A' }, { text: 'B' }], 'B').text === 'B'"
+                },
+                {
+                  id: "ex-react-l23-t5",
+                  label: "the first matching element is returned",
+                  body: "const els = [{ text: 'A' }, { text: 'A' }]; return byText(els, 'A') === els[0]"
+                }
+              ],
+              hints: [
+                "find returns the first element that satisfies the test.",
+                "Compare the text exactly \u2014 no substring matching.",
+                "Convert the missing case: find gives undefined, but the tests want null."
+              ],
+              solution: {
+                javascript: `function byText(elements, text) {
+  return elements.find((element) => element.text === text) ?? null
+}
+`
+              },
+              testNotes: "The partial-match check separates exact matching from a substring search, and the duplicate check pins down first-match."
+            }
+          }
+        ]
       },
       {
         id: "react-l24",
@@ -89204,7 +98034,125 @@ var reactTestingSections = [
           "Handle asynchronous behavior with waitFor and findBy"
         ],
         xp: 40,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l24-intro",
+            body: "**Testing user interactions.** The valuable tests exercise a flow: type into a field, click a button, and check what the user is left looking at. They describe behaviour rather than implementation, so they keep passing when the internals change."
+          },
+          {
+            type: "text",
+            id: "react-l24-b2",
+            body: "`userEvent` simulates a person more faithfully than a bare event: typing fires the keystrokes and the change events a real input would. Assertions then read the DOM \u2014 the text that appeared, the value in the field. When something arrives asynchronously, `findBy*` waits for it instead of asserting too early."
+          },
+          {
+            type: "heading",
+            id: "react-l24-h1",
+            level: 2,
+            body: "Type, click, then read what the user sees"
+          },
+          {
+            type: "code",
+            id: "react-l24-code",
+            language: "jsx",
+            title: "an interaction test",
+            code: `import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+
+test('adding a task shows it in the list', async () => {
+  const user = userEvent.setup()
+  render(<TaskApp />)
+
+  await user.type(screen.getByLabelText('New task'), 'Write the plan')
+  await user.click(screen.getByRole('button', { name: 'Add' }))
+
+  expect(screen.getByText('Write the plan')).toBeInTheDocument()
+})
+
+// For anything that arrives later, wait for it:
+// const item = await screen.findByText('Write the plan')`
+          },
+          {
+            type: "list",
+            id: "react-l24-list",
+            style: "bullet",
+            items: [
+              "Test a flow, then assert on the DOM the user would see \u2014 not on component state.",
+              "`userEvent.type` and `userEvent.click` are async, so await them.",
+              "`findBy*` retries until the element appears; `waitFor` does the same for other assertions."
+            ]
+          },
+          {
+            type: "tip",
+            id: "react-l24-tip",
+            title: "One flow per test",
+            body: 'A test named after a single user goal ("adding a task shows it in the list") tells you what broke when it fails. Tests that do five things leave you guessing.'
+          },
+          {
+            type: "heading",
+            id: "react-l24-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l24-b3",
+            body: "Model a keystroke the way a simulated user produces one, including the keys that do not add text."
+          },
+          {
+            type: "exercise",
+            id: "ex-react-l24-x1",
+            exercise: {
+              id: "ex-react-l24",
+              instructions: "Write typeInto(text, key) returning the field's text after the keystroke. A single-character key is appended; 'Backspace' removes the last character; any other named key such as 'Enter' leaves the text unchanged.",
+              languages: ["javascript"],
+              starterCode: {
+                javascript: `// Apply one keystroke to the field text.
+function typeInto(text, key) {
+  return text
+}
+`
+              },
+              tests: [
+                { id: "ex-react-l24-t1", label: "a character is appended", body: "return typeInto('Wri', 't') === 'Writ'" },
+                {
+                  id: "ex-react-l24-t2",
+                  label: "typing builds up the text",
+                  body: "return typeInto(typeInto('', 'a'), 'b') === 'ab'"
+                },
+                {
+                  id: "ex-react-l24-t3",
+                  label: "backspace removes the last character",
+                  body: "return typeInto('Writ', 'Backspace') === 'Wri'"
+                },
+                {
+                  id: "ex-react-l24-t4",
+                  label: "backspace on an empty field does nothing",
+                  body: "return typeInto('', 'Backspace') === ''"
+                },
+                {
+                  id: "ex-react-l24-t5",
+                  label: "a named key does not change the text",
+                  body: "return typeInto('Writ', 'Enter') === 'Writ'"
+                }
+              ],
+              hints: [
+                "Handle Backspace first \u2014 it is the special case.",
+                "Remove the last character with text.slice(0, -1), which is safe on an empty string.",
+                "Otherwise append only when the key is a single character; named keys like Enter are ignored."
+              ],
+              solution: {
+                javascript: `function typeInto(text, key) {
+  if (key === 'Backspace') return text.slice(0, -1)
+  if (key.length === 1) return text + key
+  return text
+}
+`
+              },
+              testNotes: "The empty-backspace and named-key checks catch implementations that assume a character is always present."
+            }
+          }
+        ]
       },
       {
         id: "react-l25",
@@ -89217,7 +98165,136 @@ var reactTestingSections = [
           "Test components that use async data and useEffect"
         ],
         xp: 35,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l25-intro",
+            body: "**Mocking modules and type safety.** A component that fetches data depends on the network, which makes its test slow and unreliable. Replacing that one module with a controlled stand-in keeps the test fast and lets you state exactly what the component will receive."
+          },
+          {
+            type: "text",
+            id: "react-l25-b2",
+            body: "`vi.mock` replaces a module for the whole file, and `vi.fn()` makes a function that records how it was called \u2014 which is how you assert that the component asked for what it should. Keeping the mock\u2019s shape the same as the real module is what stops the mock from agreeing with a bug in the component. End-to-end tools cover what unit tests cannot: real routing, real network, real layout."
+          },
+          {
+            type: "heading",
+            id: "react-l25-h1",
+            level: 2,
+            body: "Replace the dependency, keep the shape"
+          },
+          {
+            type: "code",
+            id: "react-l25-code",
+            language: "javascript",
+            title: "mocking a module and asserting on the call",
+            code: `// Replace ./api for this test file only:
+vi.mock('./api', () => ({
+  fetchTasks: vi.fn().mockResolvedValue([{ id: '1', title: 'Write' }]),
+}))
+
+test('renders the tasks it fetched', async () => {
+  render(<TaskList />)
+  expect(await screen.findByText('Write')).toBeInTheDocument()
+})
+
+// vi.fn() records calls, so the interaction can be asserted too:
+// expect(fetchTasks).toHaveBeenCalledTimes(1)
+
+// End-to-end runners (Playwright, Cypress) cover the real-browser paths:
+// page.goto('/'); await page.getByRole('button', { name: 'Add' }).click()`
+          },
+          {
+            type: "list",
+            id: "react-l25-list",
+            style: "bullet",
+            items: [
+              "`vi.mock(path, factory)` replaces a module with your own implementation.",
+              "`vi.fn()` records arguments and calls, so a test can assert on them.",
+              "Unit tests cover logic in isolation; end-to-end tests cover the wiring only a real browser exercises."
+            ]
+          },
+          {
+            type: "warning",
+            id: "react-l25-warn",
+            title: "A mock that drifts is worse than no mock",
+            body: "If the real module changes shape and the mock does not, the tests keep passing while the app breaks. Type the mock against the real interface where you can, so the compiler notices."
+          },
+          {
+            type: "heading",
+            id: "react-l25-h2",
+            level: 2,
+            body: "Your turn"
+          },
+          {
+            type: "text",
+            id: "react-l25-b3",
+            body: "Build the recording stand-in that `vi.fn()` gives you."
+          },
+          {
+            type: "exercise",
+            id: "ex-react-l25-x1",
+            exercise: {
+              id: "ex-react-l25",
+              instructions: "Write createMock(impl) returning an object with a mock(...args) function and a calls array. Calling mock records the argument list in calls and returns whatever impl returns for those arguments.",
+              languages: ["javascript"],
+              starterCode: {
+                javascript: `// A stand-in that records how it was called.
+function createMock(impl) {
+  const calls = []
+
+  function mock(...args) {
+    // TODO: record the call, then delegate.
+    return impl()
+  }
+
+  return { mock, calls }
+}
+`
+              },
+              tests: [
+                {
+                  id: "ex-react-l25-t1",
+                  label: "returns the implementation result",
+                  body: "const m = createMock((a, b) => a + b); return m.mock(1, 2) === 3"
+                },
+                {
+                  id: "ex-react-l25-t2",
+                  label: "records each call",
+                  body: "const m = createMock(() => null); m.mock('a'); m.mock('b', 'c'); return m.calls.length === 2"
+                },
+                {
+                  id: "ex-react-l25-t3",
+                  label: "records the arguments in order",
+                  body: `const m = createMock(() => null); m.mock('x', 1); return JSON.stringify(m.calls[0]) === '[\\"x\\",1]'`
+                },
+                {
+                  id: "ex-react-l25-t4",
+                  label: "the recorded arguments match the call",
+                  body: "const m = createMock((n) => n * 2); const result = m.mock(4); return result === 8 && JSON.stringify(m.calls[0]) === '[4]'"
+                }
+              ],
+              hints: [
+                "Record the arguments before delegating, so a throwing implementation still leaves a trace.",
+                "args is already an array of the arguments the mock received.",
+                "Push args into calls, then return impl(...args)."
+              ],
+              solution: {
+                javascript: `function createMock(impl) {
+  const calls = []
+
+  function mock(...args) {
+    calls.push(args)
+    return impl(...args)
+  }
+
+  return { mock, calls }
+}
+`
+              },
+              testNotes: "The argument checks compare the recorded arrays exactly, so a mock that records only the count fails."
+            }
+          }
+        ]
       }
     ],
     quiz: {
@@ -89297,7 +98374,149 @@ var reactProjectSections = [
           "Define protected routes for authenticated pages"
         ],
         xp: 55,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l26-intro",
+            body: "**Step 1: the shell.** A dashboard is a set of pages that share one frame \u2014 a header with the product name and the signed-in user, a sidebar for navigation, and an area that swaps as you move between sections. Building that frame first means every later page is added to a place that already exists."
+          },
+          {
+            type: "text",
+            id: "react-l26-b2",
+            body: "The frame is a layout route. The router renders it for every child path, and the layout renders an `Outlet` where the current child goes. Navigation lives in the sidebar as `NavLink`s, so the active section is visible without any extra state."
+          },
+          {
+            type: "heading",
+            id: "react-l26-h1",
+            level: 2,
+            body: "Requirements"
+          },
+          {
+            type: "list",
+            id: "react-l26-list",
+            style: "bullet",
+            items: [
+              "A layout route at `/` that renders the header, the sidebar and an `Outlet`.",
+              "Child routes for the overview (index), reports and settings pages.",
+              "A catch-all `*` route that renders a not-found page."
+            ]
+          },
+          {
+            type: "heading",
+            id: "react-l26-h2",
+            level: 2,
+            body: "The router and its layout"
+          },
+          {
+            type: "code",
+            id: "react-l26-code",
+            language: "tsx",
+            title: "main.tsx \u2014 routes and the shared layout",
+            code: `const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <DashboardLayout title="Dashboard" />,
+    children: [
+      { index: true, element: <Overview /> },
+      { path: 'reports', element: <RequireUser><Reports /></RequireUser> },
+      { path: 'settings', element: <RequireUser><Settings /></RequireUser> },
+    ],
+  },
+  { path: '*', element: <NotFound /> },
+])
+
+function DashboardLayout({ title }: { title: string }) {
+  return (
+    <div className="app-shell">
+      <header>
+        <h1>{title}</h1>
+        <UserMenu />
+      </header>
+      <main><Outlet /></main>
+    </div>
+  )
+}`
+          },
+          {
+            type: "tip",
+            id: "react-l26-tip",
+            title: "Build the frame before the pages",
+            body: "A placeholder in each child route \u2014 `<h2>Overview</h2>` is enough \u2014 lets you check navigation, the active link and the layout before writing any real page. It is much easier to fix the frame while it is empty."
+          },
+          {
+            type: "heading",
+            id: "react-l26-h3",
+            level: 2,
+            body: "Checkpoint"
+          },
+          {
+            type: "text",
+            id: "react-l26-b3",
+            body: "Build the layout component itself: the frame every page renders inside."
+          },
+          {
+            type: "exercise",
+            id: "react-l26-x1",
+            exercise: {
+              id: "ex-react-l26",
+              instructions: "Write DashboardLayout({ title, children }) returning a div with className 'app-shell'. Its first child is a header containing an h1 with the title; its second child is a main element containing the nested children. The tests read the element tree the component returns.",
+              languages: ["jsx"],
+              starterCode: {
+                jsx: `// The frame every page renders inside.
+function DashboardLayout({ title, children }) {
+  return <div />
+}
+`
+              },
+              tests: [
+                {
+                  id: "ex-react-l26-t1",
+                  label: "the root is the app shell div",
+                  body: "const el = DashboardLayout({ title: 'Dash', children: 'x' }); return el.type === 'div' && el.props.className === 'app-shell'"
+                },
+                {
+                  id: "ex-react-l26-t2",
+                  label: "the header comes first",
+                  body: "const kids = DashboardLayout({ title: 'Dash', children: 'x' }).props.children; return kids[0].type === 'header'"
+                },
+                {
+                  id: "ex-react-l26-t3",
+                  label: "the header shows the title in an h1",
+                  body: "const kids = DashboardLayout({ title: 'Dash', children: 'x' }).props.children; const header = kids[0]; const inner = Array.isArray(header.props.children) ? header.props.children[0] : header.props.children; return inner.type === 'h1' && inner.props.children === 'Dash'"
+                },
+                {
+                  id: "ex-react-l26-t4",
+                  label: "the content sits in main",
+                  body: "const kids = DashboardLayout({ title: 'Dash', children: 'Panel content' }).props.children; return kids[1].type === 'main' && kids[1].props.children === 'Panel content'"
+                },
+                {
+                  id: "ex-react-l26-t5",
+                  label: "nothing is rendered outside the shell",
+                  body: "const kids = DashboardLayout({ title: 'Dash', children: 'x' }).props.children; return Array.isArray(kids) && kids.length === 2"
+                }
+              ],
+              hints: [
+                "The div wraps exactly two children, in order: the <header> and the <main>.",
+                "The <h1> goes inside the header, with the title as its child.",
+                "Render the nested content inside main by placing {children} there."
+              ],
+              solution: {
+                jsx: `function DashboardLayout({ title, children }) {
+  return (
+    <div className="app-shell">
+      <header>
+        <h1>{title}</h1>
+      </header>
+      <main>{children}</main>
+    </div>
+  )
+}
+`
+              },
+              testNotes: "The header test tolerates extra header content by looking at the first child, so a user menu can be added without breaking the checkpoint."
+            }
+          }
+        ]
       },
       {
         id: "react-l27",
@@ -89310,7 +98529,143 @@ var reactProjectSections = [
           "Consume context in deeply nested components with no any"
         ],
         xp: 55,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l27-intro",
+            body: "**Step 2: the session.** Almost every page needs to know who is signed in \u2014 the header to show a name, the reports page to decide whether to render at all. Passing that down through props means every intermediate component carries it. A context provider holds it once and hands it to whoever asks."
+          },
+          {
+            type: "text",
+            id: "react-l27-b2",
+            body: "The state itself still belongs to a reducer: signing in and out are named events with clear rules, and keeping them in one function means the \u201Ccan this user see this\u201D question is answered by one piece of code rather than scattered across components."
+          },
+          {
+            type: "heading",
+            id: "react-l27-h1",
+            level: 2,
+            body: "Requirements"
+          },
+          {
+            type: "list",
+            id: "react-l27-list",
+            style: "bullet",
+            items: [
+              "A context holding the current session, with a null user when signed out.",
+              "A provider component that owns the state and supplies it to the tree.",
+              "A `useSession` hook so components never touch the context object directly."
+            ]
+          },
+          {
+            type: "heading",
+            id: "react-l27-h2",
+            level: 2,
+            body: "A typed provider"
+          },
+          {
+            type: "code",
+            id: "react-l27-code",
+            language: "tsx",
+            title: "the session context and provider",
+            code: `type Session = { user: User | null }
+
+const SessionContext = createContext<Session>({ user: null })
+
+export function SessionProvider({ children }: { children: ReactNode }) {
+  const [session, dispatch] = useReducer(sessionReducer, { user: null })
+
+  return (
+    <SessionContext.Provider value={session}>
+      {children}
+    </SessionContext.Provider>
+  )
+}
+
+// Components read the context through the hook, never directly:
+export function useSession() {
+  return useContext(SessionContext)
+}`
+          },
+          {
+            type: "tip",
+            id: "react-l27-tip",
+            title: "One hook, one access point",
+            body: "Wrapping `useContext` in a `useSession` hook means the context object appears in exactly one file. Later you can add a check for a missing provider, or derive values, without touching every consumer."
+          },
+          {
+            type: "heading",
+            id: "react-l27-h3",
+            level: 2,
+            body: "Checkpoint"
+          },
+          {
+            type: "text",
+            id: "react-l27-b3",
+            body: "Write the reducer the provider runs: the named events that sign a user in and out."
+          },
+          {
+            type: "exercise",
+            id: "react-l27-x1",
+            exercise: {
+              id: "ex-react-l27",
+              instructions: "Write sessionReducer(session, action) where session is { user }. A 'login' action stores action.user; a 'logout' action sets user to null; any other action returns the session unchanged. Always return a new object when something changes.",
+              languages: ["javascript"],
+              starterCode: {
+                javascript: `// session is { user: null }. Actions: login, logout.
+function sessionReducer(session, action) {
+  return session
+}
+`
+              },
+              tests: [
+                {
+                  id: "ex-react-l27-t1",
+                  label: "login stores the user",
+                  body: "const next = sessionReducer({ user: null }, { type: 'login', user: { id: 'u1' } }); return next.user.id === 'u1'"
+                },
+                {
+                  id: "ex-react-l27-t2",
+                  label: "logout clears the user",
+                  body: "const next = sessionReducer({ user: { id: 'u1' } }, { type: 'logout' }); return next.user === null"
+                },
+                {
+                  id: "ex-react-l27-t3",
+                  label: "a new session object is returned on change",
+                  body: "const before = { user: null }; const next = sessionReducer(before, { type: 'login', user: { id: 'u1' } }); return next !== before && next.user.id === 'u1'"
+                },
+                {
+                  id: "ex-react-l27-t4",
+                  label: "a later login replaces the user",
+                  body: "const before = { user: { id: 'u1' } }; const next = sessionReducer(before, { type: 'login', user: { id: 'u2' } }); return next.user.id === 'u2'"
+                },
+                {
+                  id: "ex-react-l27-t5",
+                  label: "an unknown action changes nothing",
+                  body: "const before = { user: { id: 'u1' } }; return sessionReducer(before, { type: 'nope' }) === before"
+                }
+              ],
+              hints: [
+                "Switch on action.type, exactly as in the session example.",
+                "Return a copy with one field replaced: { ...session, user: ... }.",
+                "For an unknown action return the same object so React sees no change at all."
+              ],
+              solution: {
+                javascript: `function sessionReducer(session, action) {
+  switch (action.type) {
+    case 'login':
+      return { ...session, user: action.user }
+    case 'logout':
+      return { ...session, user: null }
+    default:
+      return session
+  }
+}
+`
+              },
+              testNotes: "The identity check and the unknown-action check together confirm the reducer copies on change and stays put on anything else."
+            }
+          }
+        ]
       },
       {
         id: "react-l28",
@@ -89323,7 +98678,142 @@ var reactProjectSections = [
           "Cache responses in context with a typed Map"
         ],
         xp: 55,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l28-intro",
+            body: "**Step 3: data.** A request has three possible outcomes, and the pages that show data must handle all three. Modelling that as one state value with a `status` field \u2014 rather than a loose collection of booleans \u2014 makes it impossible to forget the error case."
+          },
+          {
+            type: "text",
+            id: "react-l28-b2",
+            body: "That is a discriminated union: a `status` of `\u2019loading\u2019`, `\u2019ready\u2019` or `\u2019error\u2019`, with the data or the message attached to the matching variant. The same shape works with `useReducer`, which is how the provider owns the request lifecycle."
+          },
+          {
+            type: "heading",
+            id: "react-l28-h1",
+            level: 2,
+            body: "Requirements"
+          },
+          {
+            type: "list",
+            id: "react-l28-list",
+            style: "bullet",
+            items: [
+              "A state shape of `{ status, data, error }` covering loading, ready and error.",
+              "A typed fetch helper that returns the parsed data and throws on a failed request.",
+              "Every page rendering all three states \u2014 a spinner, the data, or the message."
+            ]
+          },
+          {
+            type: "heading",
+            id: "react-l28-h2",
+            level: 2,
+            body: "One state, three variants"
+          },
+          {
+            type: "code",
+            id: "react-l28-code",
+            language: "tsx",
+            title: "a discriminated union and the states that read it",
+            code: `type LoadState<T> =
+  | { status: 'loading' }
+  | { status: 'ready'; data: T }
+  | { status: 'error'; message: string }
+
+async function fetchMetrics(): Promise<Metrics> {
+  const response = await fetch('/api/metrics')
+  if (!response.ok) throw new Error('Request failed')
+  return response.json() as Promise<Metrics>
+}
+
+// Each branch is handled explicitly, so none is forgotten:
+// if (state.status === 'loading') return <Spinner />
+// if (state.status === 'error') return <ErrorPanel message={state.message} />
+// return <MetricsGrid data={state.data} />`
+          },
+          {
+            type: "warning",
+            id: "react-l28-warn",
+            title: "A boolean per state does not scale",
+            body: "Loading, error and data as three separate fields allows states that cannot happen \u2014 loading and ready at the same time. One status field with the data attached makes those states unrepresentable."
+          },
+          {
+            type: "heading",
+            id: "react-l28-h3",
+            level: 2,
+            body: "Checkpoint"
+          },
+          {
+            type: "text",
+            id: "react-l28-b3",
+            body: "Write the reducer that moves the state through a request lifecycle."
+          },
+          {
+            type: "exercise",
+            id: "ex-react-l28-x1",
+            exercise: {
+              id: "ex-react-l28",
+              instructions: "Write loadReducer(state, action) with actions 'start', 'success' and 'error'. start gives { status: 'loading', data: null, error: null }; success gives { status: 'ready', data: action.data, error: null }; error gives { status: 'error', data: null, error: action.error }. Any other action returns the state unchanged.",
+              languages: ["javascript"],
+              starterCode: {
+                javascript: `// state is { status, data, error }.
+function loadReducer(state, action) {
+  return state
+}
+`
+              },
+              tests: [
+                {
+                  id: "ex-react-l28-t1",
+                  label: "starting a request moves to loading",
+                  body: "return loadReducer({ status: 'idle' }, { type: 'start' }).status === 'loading'"
+                },
+                {
+                  id: "ex-react-l28-t2",
+                  label: "success carries the data",
+                  body: "const next = loadReducer({ status: 'loading' }, { type: 'success', data: [1, 2] }); return next.status === 'ready' && next.data.length === 2"
+                },
+                {
+                  id: "ex-react-l28-t3",
+                  label: "an error carries the message",
+                  body: "const next = loadReducer({ status: 'loading' }, { type: 'error', error: 'Boom' }); return next.status === 'error' && next.error === 'Boom'"
+                },
+                {
+                  id: "ex-react-l28-t4",
+                  label: "a retry clears the previous result",
+                  body: "const next = loadReducer({ status: 'ready', data: [1], error: 'old' }, { type: 'start' }); return next.status === 'loading' && next.data === null && next.error === null"
+                },
+                {
+                  id: "ex-react-l28-t5",
+                  label: "an unknown action changes nothing",
+                  body: "const before = { status: 'idle' }; return loadReducer(before, { type: 'nope' }) === before"
+                }
+              ],
+              hints: [
+                "Each case returns a complete new state object, not a partially updated one.",
+                "On start, clear both the data and the error so a retry starts clean.",
+                "The default case returns the same object, so nothing re-renders."
+              ],
+              solution: {
+                javascript: `function loadReducer(state, action) {
+  switch (action.type) {
+    case 'start':
+      return { status: 'loading', data: null, error: null }
+    case 'success':
+      return { status: 'ready', data: action.data, error: null }
+    case 'error':
+      return { status: 'error', data: null, error: action.error }
+    default:
+      return state
+  }
+}
+`
+              },
+              testNotes: "The retry check is the one that catches a reducer that keeps stale data or an old error around during loading."
+            }
+          }
+        ]
       },
       {
         id: "react-l29",
@@ -89336,7 +98826,134 @@ var reactProjectSections = [
           "Style with CSS modules or styled-components"
         ],
         xp: 45,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l29-intro",
+            body: "**Step 4: the chart.** A chart is a list of items with a proportional height. There is no need for a charting library to draw one: the data is an array of points, and CSS does the drawing once each point knows what percentage of the largest value it represents."
+          },
+          {
+            type: "text",
+            id: "react-l29-b2",
+            body: "That percentage is the whole calculation, and it belongs in a plain function \u2014 easy to test, and unaware of React. The component then maps the points and applies the number as a height, which keeps the rendering trivial and the arithmetic verifiable."
+          },
+          {
+            type: "heading",
+            id: "react-l29-h1",
+            level: 2,
+            body: "Requirements"
+          },
+          {
+            type: "list",
+            id: "react-l29-list",
+            style: "bullet",
+            items: [
+              "A typed `Point` of `{ label, value }`, and a component that takes an array of them.",
+              "Each bar\u2019s height scaled against the largest value, so the tallest fills the chart.",
+              "Scale an empty or all-zero series without dividing by zero."
+            ]
+          },
+          {
+            type: "heading",
+            id: "react-l29-h2",
+            level: 2,
+            body: "Data in, bars out"
+          },
+          {
+            type: "code",
+            id: "react-l29-code",
+            language: "tsx",
+            title: "a typed bar chart",
+            code: `type Point = { label: string; value: number }
+
+function BarChart({ points }: { points: Point[] }) {
+  const max = Math.max(...points.map((point) => point.value), 1)
+
+  return (
+    <ul className="chart">
+      {points.map((point) => (
+        <li key={point.label} className="chart__bar">
+          <span
+            className="chart__fill"
+            style={{ height: (point.value / max) * 100 + '%' }}
+          />
+          <span className="chart__label">{point.label}</span>
+        </li>
+      ))}
+    </ul>
+  )
+}`
+          },
+          {
+            type: "tip",
+            id: "react-l29-tip",
+            title: "Guard the maximum",
+            body: "An empty series makes `Math.max()` return `-Infinity`. Seeding the comparison with a floor of 1 keeps every percentage finite, including for a series that is entirely zero."
+          },
+          {
+            type: "heading",
+            id: "react-l29-h3",
+            level: 2,
+            body: "Checkpoint"
+          },
+          {
+            type: "text",
+            id: "react-l29-b3",
+            body: "Write the scaling function the chart is built on."
+          },
+          {
+            type: "exercise",
+            id: "ex-react-l29-x1",
+            exercise: {
+              id: "ex-react-l29",
+              instructions: "Write barHeights(values) returning each value as a percentage of the largest value, rounded to the nearest whole number, in the same order. An empty array returns an empty array, and an array whose largest value is zero returns zeros.",
+              languages: ["javascript"],
+              starterCode: {
+                javascript: `// Each value as a percentage of the largest.
+function barHeights(values) {
+  return []
+}
+`
+              },
+              tests: [
+                {
+                  id: "ex-react-l29-t1",
+                  label: "the largest value is the full height",
+                  body: 'return JSON.stringify(barHeights([50, 100])) === "[50,100]"'
+                },
+                {
+                  id: "ex-react-l29-t2",
+                  label: "smaller values are scaled proportionally",
+                  body: 'return JSON.stringify(barHeights([1, 2, 4])) === "[25,50,100]"'
+                },
+                {
+                  id: "ex-react-l29-t3",
+                  label: "an empty series has no bars",
+                  body: 'return JSON.stringify(barHeights([])) === "[]"'
+                },
+                {
+                  id: "ex-react-l29-t4",
+                  label: "an all-zero series does not divide by zero",
+                  body: 'return JSON.stringify(barHeights([0, 0])) === "[0,0]"'
+                }
+              ],
+              hints: [
+                "Find the largest value once, then divide each value by it.",
+                "Multiply by 100 and round to get a whole-number percentage.",
+                "Handle a maximum of zero separately, otherwise every entry becomes NaN."
+              ],
+              solution: {
+                javascript: `function barHeights(values) {
+  const max = Math.max(...values, 0)
+  if (max === 0) return values.map(() => 0)
+  return values.map((value) => Math.round((value / max) * 100))
+}
+`
+              },
+              testNotes: "The all-zero check is what separates a guarded implementation from one that produces NaN for a flat series."
+            }
+          }
+        ]
       },
       {
         id: "react-l30",
@@ -89349,7 +98966,142 @@ var reactProjectSections = [
           "Build for production with Vite and verify the output"
         ],
         xp: 40,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "react-l30-intro",
+            body: "**Step 5: prove it, then ship it.** The dashboard is made of components that return element trees, which is exactly what a test can inspect. A component test renders the component, walks the returned tree for the text a user would read, and asserts on it."
+          },
+          {
+            type: "text",
+            id: "react-l30-b2",
+            body: "Protected pages are tested the same way, with a provider supplying a signed-out session: the test asserts that the page content is absent. Once the tests pass, `vite build` produces the production bundle, and `vite preview` serves it so the built output can be checked before it is deployed."
+          },
+          {
+            type: "heading",
+            id: "react-l30-h1",
+            level: 2,
+            body: "Requirements"
+          },
+          {
+            type: "list",
+            id: "react-l30-list",
+            style: "bullet",
+            items: [
+              "A test per page that renders it and asserts on the text a user would see.",
+              "A test for a protected route under a signed-out session, asserting the page is not rendered.",
+              "A production build checked locally with `vite preview`."
+            ]
+          },
+          {
+            type: "heading",
+            id: "react-l30-h2",
+            level: 2,
+            body: "Assert on what the user sees"
+          },
+          {
+            type: "code",
+            id: "react-l30-code",
+            language: "tsx",
+            title: "component tests, and the production build",
+            code: `import { render, screen } from '@testing-library/react'
+
+test('the overview shows the headline metric', async () => {
+  render(<Overview />)
+  expect(await screen.findByText('Active users')).toBeInTheDocument()
+})
+
+// A protected page under a signed-out session renders nothing:
+test('reports stay hidden when signed out', () => {
+  render(
+    <SessionContext.Provider value={{ user: null }}>
+      <Reports />
+    </SessionContext.Provider>,
+  )
+  expect(screen.queryByText('Revenue')).not.toBeInTheDocument()
+})
+
+// npm run build   then   npm run preview   to check the built output.`
+          },
+          {
+            type: "tip",
+            id: "react-l30-tip",
+            title: "If it renders, a test can read it",
+            body: "Because a component returns an element tree, its text can be collected without a browser at all. That makes the smallest assertion \u2014 the words on the screen \u2014 the easiest one to test."
+          },
+          {
+            type: "heading",
+            id: "react-l30-h3",
+            level: 2,
+            body: "Checkpoint"
+          },
+          {
+            type: "text",
+            id: "react-l30-b3",
+            body: "Write the helper a component test uses: collect every piece of text out of an element tree."
+          },
+          {
+            type: "exercise",
+            id: "ex-react-l30-x1",
+            exercise: {
+              id: "ex-react-l30",
+              instructions: "Write collectText(element) returning all text inside an element tree as one string, in order. An element looks like { type, props }; its props.children may be a single value or an array. String and number children are included, nested elements are traversed, and a missing or null child contributes nothing.",
+              languages: ["javascript"],
+              starterCode: {
+                javascript: `// Gather the text of an element and everything inside it.
+function collectText(element) {
+  return ''
+}
+`
+              },
+              tests: [
+                {
+                  id: "ex-react-l30-t1",
+                  label: "reads text from a single element",
+                  body: "return collectText({ type: 'p', props: { children: 'Hello' } }) === 'Hello'"
+                },
+                {
+                  id: "ex-react-l30-t2",
+                  label: "walks into an array of children",
+                  body: "const tree = { type: 'div', props: { children: [{ type: 'p', props: { children: 'A' } }, { type: 'p', props: { children: 'B' } }] } }; return collectText(tree) === 'AB'"
+                },
+                {
+                  id: "ex-react-l30-t3",
+                  label: "a number child is included",
+                  body: "return collectText({ type: 'p', props: { children: 42 } }) === '42'"
+                },
+                {
+                  id: "ex-react-l30-t4",
+                  label: "an element with no children contributes nothing",
+                  body: "return collectText({ type: 'p', props: {} }) === ''"
+                },
+                {
+                  id: "ex-react-l30-t5",
+                  label: "elements and bare text can be mixed",
+                  body: "const tree = { type: 'div', props: { children: [{ type: 'span', props: { children: 'x' } }, 'y'] } }; return collectText(tree) === 'xy'"
+                }
+              ],
+              hints: [
+                "Start with the text case: a string or a number is the answer itself.",
+                "The children of an element live at element.props.children, which may be one value or an array.",
+                "Recurse: map an array through the same function and join, or recurse once on a single child."
+              ],
+              solution: {
+                javascript: `function collectText(element) {
+  if (element === null || element === undefined) return ''
+  if (typeof element === 'string' || typeof element === 'number') return String(element)
+
+  const children = element.props ? element.props.children : null
+  if (children === null || children === undefined) return ''
+  if (Array.isArray(children)) return children.map(collectText).join('')
+  return collectText(children)
+}
+`
+              },
+              testNotes: "The mixed element-and-text check is what forces the handling of both an array of children and a single child."
+            }
+          }
+        ]
       }
     ],
     quiz: {
@@ -89467,8 +99219,8 @@ var reactCourse = {
 var frontendProjectsSections = [
   {
     id: "fp-s1",
-    title: "Frontend Projects HOME",
-    description: "How to approach a full frontend project from blank file to deployed site, and what each of the five projects exercises.",
+    title: "Project foundations",
+    description: "How to take a project from a design and a brief to a structured, styled, working page \u2014 and the habits that keep a build maintainable.",
     lessons: [
       {
         id: "fp-l1",
@@ -89481,7 +99233,202 @@ var frontendProjectsSections = [
           "Set up a dev server with livereload for fast iteration"
         ],
         xp: 30,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "fp-l1-intro",
+            body: "**Project planning and structure.** Every project on this path starts the same way: a picture of what the page should look like and a sentence about what it must do. Before a line of markup, turn both into a plan \u2014 an inventory of the pieces on the page, and a folder that will still make sense in a month."
+          },
+          {
+            type: "text",
+            id: "fp-l1-b2",
+            body: "The inventory is three lists. **Sections** are the large regions of the page: a header, a hero, a gallery, a footer. **Components** are the pieces that repeat inside them: a card, a button, a form field. **Behaviour** is everything that changes after the page loads: a menu that opens, a filter that hides rows, a form that checks itself. Writing the three lists before you start is what turns a daunting brief into a sequence of small, obvious steps."
+          },
+          {
+            type: "heading",
+            id: "fp-l1-h1",
+            level: 3,
+            body: "The three lists"
+          },
+          {
+            type: "list",
+            id: "fp-l1-list",
+            style: "bullet",
+            items: [
+              "**Sections** \u2014 header, hero, gallery, footer. Each one becomes a single landmark element in the HTML.",
+              "**Components** \u2014 card, button, field, badge. Each one becomes one class and one reusable block of markup.",
+              "**Behaviour** \u2014 menu, filter, validate. Each one becomes a small, separate piece of JavaScript."
+            ]
+          },
+          {
+            type: "heading",
+            id: "fp-l1-h2",
+            level: 3,
+            body: "A folder where each file has one job"
+          },
+          {
+            type: "code",
+            id: "fp-l1-code",
+            language: "plaintext",
+            title: "One job per file",
+            code: `project/
+  index.html      the content and its structure
+  css/
+    reset.css     normalise the browser defaults
+    main.css      the site's own rules
+  js/
+    main.js       behaviour, loaded with defer
+  img/
+    portrait.jpg`
+          },
+          {
+            type: "text",
+            id: "fp-l1-b3",
+            body: "The names say what each file is for, and the separation is what lets you change one without touching the others. A stylesheet loaded from `css/main.css` is cached by the browser and reused on every page; a behaviour file loaded with `defer` runs after the document is parsed, so it can find the elements it needs without a `DOMContentLoaded` wrapper."
+          },
+          {
+            type: "heading",
+            id: "fp-l1-h3",
+            level: 3,
+            body: "Start with the landmarks"
+          },
+          {
+            type: "text",
+            id: "fp-l1-b5",
+            body: "The first thing a page gets is not styling \u2014 it is an outline. A region becomes a landmark when it uses the matching semantic element, and landmarks are what let a screen reader user jump straight to the navigation or the main content instead of reading everything from the top."
+          },
+          {
+            type: "code",
+            id: "fp-l1-code2",
+            language: "html",
+            title: "The outline, before any CSS",
+            code: `<header>
+  <p class="brand">Ingot Times</p>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+  </nav>
+</header>
+
+<main>
+  <h1>Release notes</h1>
+  <p>A short summary of what shipped this week.</p>
+</main>
+
+<footer>
+  <p>Copyright 2026</p>
+</footer>`
+          },
+          {
+            type: "warning",
+            id: "fp-l1-warn",
+            title: "A div says nothing",
+            body: "A page built from `div` elements works for anyone using a mouse and a pair of eyes. It gives a screen reader no landmarks, an assistive tool no structure, and the next developer no clue which box is which. The outline above is not extra work \u2014 it is the same tags, chosen for what they mean."
+          },
+          {
+            type: "tip",
+            id: "fp-l1-tip",
+            title: "Serve the folder, do not open the file",
+            body: "Opening `index.html` from the file system works until the page uses a module, a `fetch`, or a service worker \u2014 then the browser blocks it. Run a local server (`npx serve`, the Live Server extension, or `python -m http.server`) and the page loads over HTTP with live reload."
+          },
+          {
+            type: "heading",
+            id: "fp-l1-h4",
+            level: 3,
+            body: "Checkpoint"
+          },
+          {
+            type: "text",
+            id: "fp-l1-b4",
+            body: "Take the pile of boxes below and give it the landmark outline every project starts from."
+          },
+          {
+            type: "exercise",
+            id: "fp-l1-x1",
+            exercise: {
+              id: "ex-fp-l1",
+              instructions: "Turn the page built from divs into a landmark outline. The brand and the links belong together at the top in a header, with the links inside a nav. The heading and its paragraph are the page content, and belong in a main. The copyright line belongs in a footer.",
+              languages: ["html"],
+              starterCode: {
+                html: `<div class="top">
+  <div class="brand">Ingot Times</div>
+</div>
+<div class="menu">
+  <a href="/">Home</a>
+  <a href="/about">About</a>
+</div>
+<div class="content">
+  <h1>Release notes</h1>
+  <p>A short summary of what shipped this week.</p>
+</div>
+<div class="bottom">
+  <p>Copyright 2026</p>
+</div>
+`
+              },
+              tests: [
+                {
+                  id: "ex-fp-l1-t1",
+                  label: "the banner is a header",
+                  body: "return document.querySelector('header') !== null"
+                },
+                {
+                  id: "ex-fp-l1-t2",
+                  label: "the links live in a nav",
+                  body: "return document.querySelector('nav') !== null"
+                },
+                {
+                  id: "ex-fp-l1-t3",
+                  label: "the content is inside main",
+                  body: "return document.querySelector('main') !== null"
+                },
+                {
+                  id: "ex-fp-l1-t4",
+                  label: "the copyright line is a footer",
+                  body: "return document.querySelector('footer') !== null"
+                },
+                {
+                  id: "ex-fp-l1-t5",
+                  label: "the brand sits inside the header",
+                  body: "const header = document.querySelector('header'); return !!header && /Ingot Times/.test(header.textContent)"
+                },
+                {
+                  id: "ex-fp-l1-t6",
+                  label: "the nav holds both links",
+                  body: "return document.querySelectorAll('nav a').length >= 2"
+                },
+                {
+                  id: "ex-fp-l1-t7",
+                  label: "the heading and paragraph are inside main",
+                  body: "const main = document.querySelector('main'); return !!main && !!main.querySelector('h1') && !!main.querySelector('p')"
+                }
+              ],
+              hints: [
+                "The brand and the navigation belong in the same top region, so they share one `<header>`.",
+                "The links go inside a `<nav>`; the nav can sit inside the header.",
+                "The heading and paragraph are the page content \u2014 one `<main>` holds both, and the copyright line becomes a `<footer>`."
+              ],
+              solution: {
+                html: `<header>
+  <p class="brand">Ingot Times</p>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+  </nav>
+</header>
+<main>
+  <h1>Release notes</h1>
+  <p>A short summary of what shipped this week.</p>
+</main>
+<footer>
+  <p>Copyright 2026</p>
+</footer>
+`
+              },
+              testNotes: "The last test checks that the heading and its paragraph moved inside main, not just that a main exists \u2014 the content has to end up in the right region, not merely somewhere on the page."
+            }
+          }
+        ]
       },
       {
         id: "fp-l2",
@@ -89494,12 +99441,175 @@ var frontendProjectsSections = [
           "Wire up interactivity with progressive enhancement"
         ],
         xp: 50,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "fp-l2-intro",
+            body: "**Content, then looks, then behaviour.** The order is not a style preference. HTML that is complete and correct works before a single rule of CSS exists \u2014 it is readable, scrollable and selectable. Layered on top of that, CSS changes how it looks without changing what it says. JavaScript goes last, and only for what the first two cannot do."
+          },
+          {
+            type: "text",
+            id: "fp-l2-b2",
+            body: "This is where the first project begins: a single-page profile. It has a portrait, a name and a role, and a link to more of the person's work. The whole page is small enough to hold in your head, which is exactly why it is the right place to practise the order \u2014 every project after this one uses the same sequence on a larger scale."
+          },
+          {
+            type: "heading",
+            id: "fp-l2-h1",
+            level: 3,
+            body: "The finished card"
+          },
+          {
+            type: "demo",
+            id: "fp-l2-d1",
+            title: "A profile card, built from content outward",
+            body: "A figure with a real image, a caption holding the name as the page heading, and a single link. The image carries alt text; the name is an `h1`, not a styled `div`.",
+            html: `<figure class="profile">
+  <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect width='120' height='120' fill='%23c7d2fe'/%3E%3Ccircle cx='60' cy='46' r='20' fill='%236366f1'/%3E%3Crect x='30' y='74' width='60' height='34' rx='16' fill='%236366f1'/%3E%3C/svg%3E" alt="Portrait of Ada Lovelace" width="120" height="120">
+  <figcaption>
+    <h1>Ada Lovelace</h1>
+    <p class="role">Frontend engineer</p>
+  </figcaption>
+  <p><a href="#work">Read more about Ada</a></p>
+</figure>`,
+            css: `body { font-family: system-ui, sans-serif; line-height: 1.5; margin: 0; padding: 1rem; }
+.profile { margin: 0; max-width: 22rem; }
+.profile img { display: block; border-radius: 0.75rem; }
+h1 { font-size: 1.25rem; margin: 0.75rem 0 0.25rem; }
+.role { margin: 0; color: #475569; }
+a { color: #0f766e; }`
+          },
+          {
+            type: "heading",
+            id: "fp-l2-h2",
+            level: 3,
+            body: "The markup, before any CSS"
+          },
+          {
+            type: "code",
+            id: "fp-l2-code",
+            language: "html",
+            title: "Structure first",
+            code: `<figure class="profile">
+  <img src="img/portrait.jpg" alt="Portrait of Ada Lovelace" width="160" height="160">
+  <figcaption>
+    <h1>Ada Lovelace</h1>
+    <p class="role">Frontend engineer</p>
+  </figcaption>
+  <p><a href="#work">Read more about Ada</a></p>
+</figure>`
+          },
+          {
+            type: "text",
+            id: "fp-l2-b3",
+            body: "Read that as a sentence and it is the whole page: a figure containing a portrait, a caption with the name and role, and a link. The `width` and `height` attributes are not decoration \u2014 they tell the browser how much room to reserve, so the text does not jump when the image finishes loading."
+          },
+          {
+            type: "list",
+            id: "fp-l2-list",
+            style: "ordered",
+            items: [
+              "Write every element the content needs, with no styling at all.",
+              "Add the stylesheet and style block by block: the type first, then the spacing, then the layout.",
+              "Add a little behaviour only where the page genuinely cannot work without it.",
+              "Check the page at a narrow width before you check it at a wide one."
+            ]
+          },
+          {
+            type: "warning",
+            id: "fp-l2-warn",
+            title: "Styling a structure that is wrong",
+            body: "A CSS problem is easy to see and easy to fix. A structure problem is invisible until someone using a screen reader, a search engine, or a phone keyboard runs into it. If you style first, you spend the rest of the project working around markup you should have fixed in the first ten minutes."
+          },
+          {
+            type: "tip",
+            id: "fp-l2-tip",
+            title: "Read the page out loud",
+            body: 'Before writing any CSS, read the markup from top to bottom as a sentence. If it does not describe the page \u2014 "a figure with a portrait, captioned Ada Lovelace, a frontend engineer, then a link" \u2014 the structure is not finished yet.'
+          },
+          {
+            type: "heading",
+            id: "fp-l2-h3",
+            level: 3,
+            body: "Checkpoint"
+          },
+          {
+            type: "text",
+            id: "fp-l2-b4",
+            body: "The card below has the right content in the wrong markup. Rebuild it so the structure carries the meaning."
+          },
+          {
+            type: "exercise",
+            id: "fp-l2-x1",
+            exercise: {
+              id: "ex-fp-l2",
+              instructions: "Rebuild the profile card. Wrap the portrait and the name together in a figure, give the image alt text that describes it, and make the name the page heading. Keep the role line and the link. No image may be left without an alt attribute.",
+              languages: ["html"],
+              starterCode: {
+                html: `<div class="profile">
+  <img src="img/portrait.jpg">
+  <h2>Ada Lovelace</h2>
+  <p>Frontend engineer</p>
+  <a href="#work">Read more</a>
+</div>
+`
+              },
+              tests: [
+                {
+                  id: "ex-fp-l2-t1",
+                  label: "the card is a figure",
+                  body: "return document.querySelector('figure') !== null"
+                },
+                {
+                  id: "ex-fp-l2-t2",
+                  label: "the portrait has real alt text",
+                  body: "const img = document.querySelector('img'); return !!img && (img.getAttribute('alt') || '').trim().length >= 10"
+                },
+                {
+                  id: "ex-fp-l2-t3",
+                  label: "the name is the page heading",
+                  body: "const heading = document.querySelector('h1'); return !!heading && /Ada/.test(heading.textContent)"
+                },
+                {
+                  id: "ex-fp-l2-t4",
+                  label: "no image is missing its alt attribute",
+                  body: "return document.querySelectorAll('img:not([alt])').length === 0"
+                },
+                {
+                  id: "ex-fp-l2-t5",
+                  label: "the role line is still shown",
+                  body: "return /engineer/i.test(document.body.textContent)"
+                },
+                {
+                  id: "ex-fp-l2-t6",
+                  label: "the link keeps a destination and a label",
+                  body: "const link = document.querySelector('a[href]'); return !!link && link.textContent.trim().length > 0"
+                }
+              ],
+              hints: [
+                "A `<figure>` groups an image with its caption; the caption element is `<figcaption>`.",
+                'Alt text describes the picture for someone who cannot see it \u2014 "Portrait of Ada Lovelace", not "portrait.jpg".',
+                "The name is the most important heading on the page, so it is an `<h1>`, not an `<h2>`."
+              ],
+              solution: {
+                html: `<figure class="profile">
+  <img src="img/portrait.jpg" alt="Portrait of Ada Lovelace smiling in a garden" width="160" height="160">
+  <figcaption>
+    <h1>Ada Lovelace</h1>
+    <p class="role">Frontend engineer</p>
+  </figcaption>
+  <p><a href="#work">Read more about Ada</a></p>
+</figure>
+`
+              },
+              testNotes: "Two tests guard the alt attribute from different sides: one wants real words, the other refuses any image left without the attribute at all."
+            }
+          }
+        ]
       }
     ],
     quiz: {
       id: "quiz-fp-s1",
-      title: "Frontend Projects HOME check",
+      title: "Project foundations check",
       passingScore: 60,
       questions: [
         {
@@ -89570,7 +99680,153 @@ var frontendProjectsSections = [
           "Use relative units for scaling"
         ],
         xp: 40,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "fp-l3-intro",
+            body: "**Write the narrow version first.** A phone is the simplest case: one column, everything stacked, nothing to arrange. Once that works, a breakpoint adds the extra columns a wider screen has room for. Starting from the wide version and shrinking it means every rule is a subtraction, and something is always left over."
+          },
+          {
+            type: "text",
+            id: "fp-l3-b2",
+            body: "A breakpoint is a measurement of your own content, not a device. You add one at the width where the layout starts to look wrong \u2014 a column too narrow to read, a row that wraps badly \u2014 and you write it as `min-width`, so it only ever adds. Device lists go stale the moment a new phone ships, and they miss split-screen windows, browser sidebars and foldables."
+          },
+          {
+            type: "heading",
+            id: "fp-l3-h1",
+            level: 3,
+            body: "Base rules, then one query"
+          },
+          {
+            type: "code",
+            id: "fp-l3-code",
+            language: "css",
+            title: "Mobile first, one breakpoint",
+            code: `.cards {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* The wide layout only adds to what is already there. */
+@media (min-width: 40rem) {
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}`
+          },
+          {
+            type: "text",
+            id: "fp-l3-b3",
+            body: "Read the file from top to bottom and it describes the build: the base rules make a single stack, and the query says what changes once there is room for three. Nothing has to be undone. The `40rem` is not the width of any particular phone \u2014 it is the point at which three cards of that size stop being too cramped."
+          },
+          {
+            type: "list",
+            id: "fp-l3-list",
+            style: "bullet",
+            items: [
+              "Base rules target the smallest screen and use no media query at all.",
+              "Every query is `min-width`, so it adds complexity rather than removing it.",
+              "Sizes use `rem`, which scales with the reader's own text size setting.",
+              "The viewport meta tag goes in the head, before any stylesheet."
+            ]
+          },
+          {
+            type: "warning",
+            id: "fp-l3-warn",
+            title: "Do not write both directions",
+            body: "A `min-width` query and a `max-width` query at the same number both apply at exactly that width, and which one wins comes down to source order. Pick one direction \u2014 for mobile-first, always `min-width` \u2014 and the ambiguity disappears."
+          },
+          {
+            type: "tip",
+            id: "fp-l3-tip",
+            title: "Drag the window, do not guess",
+            body: "Start with the window as narrow as it goes and drag it wider slowly. Add a breakpoint at the first width where the layout breaks, not at a number you read on a device spec sheet. The drag is the design tool."
+          },
+          {
+            type: "heading",
+            id: "fp-l3-h2",
+            level: 3,
+            body: "Checkpoint"
+          },
+          {
+            type: "text",
+            id: "fp-l3-b4",
+            body: "Write the base rules and the one breakpoint the card grid needs."
+          },
+          {
+            type: "exercise",
+            id: "fp-l3-x1",
+            exercise: {
+              id: "ex-fp-l3",
+              instructions: "Write the CSS mobile-first. Make `.cards` a grid that stacks in one column with a `gap` measured in rem. Add a single `min-width: 40rem` media query that turns it into three equal columns. Do not add a max-width query.",
+              languages: ["html", "css"],
+              starterCode: {
+                html: `<ul class="cards">
+  <li class="card">Plan</li>
+  <li class="card">Build</li>
+  <li class="card">Ship</li>
+</ul>
+`,
+                css: `.cards {
+  
+}
+`
+              },
+              tests: [
+                {
+                  id: "ex-fp-l3-t1",
+                  label: "the cards are a grid by default",
+                  body: "const rules = Array.from(document.styleSheets).flatMap((sheet) => { try { return Array.from(sheet.cssRules) } catch { return [] } }); const base = rules.find((rule) => rule.selectorText === '.cards'); return !!base && base.style.display === 'grid'"
+                },
+                {
+                  id: "ex-fp-l3-t2",
+                  label: "the gap uses a relative unit",
+                  body: "const rules = Array.from(document.styleSheets).flatMap((sheet) => { try { return Array.from(sheet.cssRules) } catch { return [] } }); const base = rules.find((rule) => rule.selectorText === '.cards'); return !!base && /rem/.test(base.style.gap || '')"
+                },
+                {
+                  id: "ex-fp-l3-t3",
+                  label: "there is one min-width query at 40rem",
+                  body: "const rules = Array.from(document.styleSheets).flatMap((sheet) => { try { return Array.from(sheet.cssRules) } catch { return [] } }); return rules.some((rule) => rule.conditionText && /min-width/.test(rule.conditionText) && /40rem/.test(rule.conditionText))"
+                },
+                {
+                  id: "ex-fp-l3-t4",
+                  label: "no max-width query is used",
+                  body: "const rules = Array.from(document.styleSheets).flatMap((sheet) => { try { return Array.from(sheet.cssRules) } catch { return [] } }); return !rules.some((rule) => rule.conditionText && /max-width/.test(rule.conditionText))"
+                },
+                {
+                  id: "ex-fp-l3-t5",
+                  label: "the wide layout is three equal columns",
+                  body: "const rules = Array.from(document.styleSheets).flatMap((sheet) => { try { return Array.from(sheet.cssRules) } catch { return [] } }); const media = rules.find((rule) => rule.conditionText && /min-width/.test(rule.conditionText)); if (!media) return false; const inner = Array.from(media.cssRules).find((rule) => rule.selectorText === '.cards'); return !!inner && (inner.style.gridTemplateColumns || '').includes('repeat(3')"
+                }
+              ],
+              hints: [
+                "The default block needs `display: grid` and a `gap` in `rem` \u2014 no media query yet.",
+                "The query is written `@media (min-width: 40rem) { ... }` and only contains the column rule.",
+                "Three equal columns is `grid-template-columns: repeat(3, 1fr)`."
+              ],
+              solution: {
+                css: `.cards {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 40rem) {
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+`
+              },
+              testNotes: "The tests read the parsed stylesheet rather than the text, so the checks survive reformatting, extra comments and a different but equivalent way of writing the same declarations."
+            }
+          }
+        ]
       },
       {
         id: "fp-l4",
@@ -89583,7 +99839,173 @@ var frontendProjectsSections = [
           "Use picture for art direction"
         ],
         xp: 35,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "fp-l4-intro",
+            body: "**An image is the heaviest thing on most pages.** A single 2400-pixel-wide photograph sent to a phone on a slow connection is the difference between a page that appears and a page that is still arriving. Responsive images fix that by letting the browser choose the file, before it downloads it."
+          },
+          {
+            type: "text",
+            id: "fp-l4-b2",
+            body: "There are two separate jobs here, and they use two different attributes. `srcset` offers the browser a set of candidates \u2014 different widths or different resolutions of the same crop \u2014 and `sizes` tells it how wide the image will be displayed. The browser picks the smallest candidate that still looks sharp. `picture` with a `source` is for the other job: a genuinely different crop on a narrow screen, which is called art direction."
+          },
+          {
+            type: "heading",
+            id: "fp-l4-h1",
+            level: 3,
+            body: "Candidates, and art direction"
+          },
+          {
+            type: "code",
+            id: "fp-l4-code",
+            language: "html",
+            title: "One crop, several sizes",
+            code: `<img
+  src="img/portrait.jpg"
+  srcset="img/portrait.jpg 1x, img/portrait-2x.jpg 2x"
+  sizes="(min-width: 40rem) 20rem, 100vw"
+  alt="Portrait of Ada Lovelace"
+  width="320"
+  height="320"
+>`
+          },
+          {
+            type: "code",
+            id: "fp-l4-code2",
+            language: "html",
+            title: "A different crop on a narrow screen",
+            code: `<picture>
+  <source media="(min-width: 40rem)" srcset="img/hero-wide.jpg">
+  <img src="img/hero-tall.jpg" alt="The workshop at sunrise" width="800" height="600">
+</picture>`
+          },
+          {
+            type: "code",
+            id: "fp-l4-code3",
+            language: "css",
+            title: "Never let media overflow its column",
+            code: `img,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}`
+          },
+          {
+            type: "list",
+            id: "fp-l4-list",
+            style: "bullet",
+            items: [
+              "`srcset` plus `sizes` picks the right **file** for the space available.",
+              "`picture` with a `media` source picks a different **crop** or composition.",
+              "`max-width: 100%` stops any media from overflowing its container.",
+              "A bare `height` of `auto` keeps the intrinsic proportion while the width shrinks."
+            ]
+          },
+          {
+            type: "warning",
+            id: "fp-l4-warn",
+            title: "The alt attribute is not optional",
+            body: 'A missing `alt` attribute is not the same as an empty one. Missing means the file name is read out to anyone using a screen reader; `alt=""` says the image is purely decorative and should be skipped. Decide which one you mean, every time.'
+          },
+          {
+            type: "tip",
+            id: "fp-l4-tip",
+            title: "Check the network panel, not the preview",
+            body: "A responsive image looks identical no matter which candidate the browser chose. Open the network panel, throttle the connection, and reload \u2014 the file name and size in the list is the only way to see that the phone is not downloading the desktop crop."
+          },
+          {
+            type: "heading",
+            id: "fp-l4-h2",
+            level: 3,
+            body: "Checkpoint"
+          },
+          {
+            type: "text",
+            id: "fp-l4-b3",
+            body: "Give the hero image a wide-screen crop, a set of candidates, and a rule that keeps it inside its column."
+          },
+          {
+            type: "exercise",
+            id: "fp-l4-x1",
+            exercise: {
+              id: "ex-fp-l4",
+              instructions: "Wrap the image in a `picture` and add a `source` with a `media` attribute for the wide crop. Give the `img` a `srcset` of candidates, a `sizes` hint, and real alt text. In the CSS, make the image never wider than its container.",
+              languages: ["html", "css"],
+              starterCode: {
+                html: `<div class="hero">
+  <img src="img/hero.jpg">
+</div>
+`,
+                css: `.hero img {
+  
+}
+`
+              },
+              tests: [
+                {
+                  id: "ex-fp-l4-t1",
+                  label: "a picture offers a media source",
+                  body: "const source = document.querySelector('picture source'); return !!source && !!source.getAttribute('media')"
+                },
+                {
+                  id: "ex-fp-l4-t2",
+                  label: "the image offers more than one candidate",
+                  body: "const img = document.querySelector('img'); return !!img && !!img.getAttribute('srcset')"
+                },
+                {
+                  id: "ex-fp-l4-t3",
+                  label: "the image carries a sizes hint",
+                  body: "const img = document.querySelector('img'); return !!img && !!img.getAttribute('sizes')"
+                },
+                {
+                  id: "ex-fp-l4-t4",
+                  label: "the image has alt text",
+                  body: "const img = document.querySelector('img'); return !!img && (img.getAttribute('alt') || '').trim().length > 0"
+                },
+                {
+                  id: "ex-fp-l4-t5",
+                  label: "the image can never overflow its column",
+                  body: "const img = document.querySelector('img'); return !!img && getComputedStyle(img).maxWidth === '100%'"
+                },
+                {
+                  id: "ex-fp-l4-t6",
+                  label: "the image keeps its proportion",
+                  body: "const img = document.querySelector('img'); return !!img && getComputedStyle(img).height === 'auto'"
+                }
+              ],
+              hints: [
+                "`<picture>` holds one or more `<source>` elements and exactly one `<img>`, which is the fallback.",
+                'The `source` for the wide crop needs `media="(min-width: 40rem)"`.',
+                "The `img` carries `srcset` and `sizes`; the CSS rule is `max-width: 100%` with `height: auto`."
+              ],
+              solution: {
+                html: `<div class="hero">
+  <picture>
+    <source media="(min-width: 40rem)" srcset="img/hero-wide.jpg">
+    <img
+      src="img/hero.jpg"
+      srcset="img/hero.jpg 1x, img/hero-2x.jpg 2x"
+      sizes="(min-width: 40rem) 30rem, 100vw"
+      alt="The workshop at sunrise"
+      width="800"
+      height="600"
+    >
+  </picture>
+</div>
+`,
+                css: `.hero img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+`
+              },
+              testNotes: "The last two tests read the computed style, so they check the rule is actually winning the cascade rather than merely present somewhere in the file."
+            }
+          }
+        ]
       }
     ],
     quiz: {
@@ -89609,7 +100031,7 @@ var frontendProjectsSections = [
           type: "true-false",
           prompt: "The viewport meta tag is not needed if you use responsive CSS.",
           answer: false,
-          explanation: 'Without <meta name="viewport">, mobile browsers render at a virtual width and your responsive CSS has no effect.'
+          explanation: "Without a viewport meta tag, mobile browsers render at a virtual width and your responsive CSS has no effect."
         },
         {
           id: "quiz-fp-s2-q3",
@@ -89622,9 +100044,9 @@ var frontendProjectsSections = [
         {
           id: "quiz-fp-s2-q4",
           type: "blank",
-          prompt: "What attribute on img makes it responsive with max-width: 100%?",
-          answers: ["srcset", "sizes", "max-width on the img"],
-          explanation: "srcset provides multiple image sources for different resolutions. max-width: 100% on img ensures it never overflows."
+          prompt: "What attribute on img offers the browser several candidate files to choose from?",
+          answers: ["srcset", "sizes", "the srcset attribute"],
+          explanation: "srcset lists the candidates and sizes describes how wide the image will be displayed, so the browser can pick the smallest one that still looks sharp."
         },
         {
           id: "quiz-fp-s2-q5",
@@ -89659,7 +100081,145 @@ var frontendProjectsSections = [
           "Label form controls correctly"
         ],
         xp: 40,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "fp-l5-intro",
+            body: "**The right element does most of the accessibility work for you.** A `button` is focusable, responds to Enter and Space, and is announced as a button \u2014 all without a single attribute. A `div` with a click handler is none of those things, and no amount of ARIA turns it into a real control. So the first question is always whether a native element already does the job."
+          },
+          {
+            type: "text",
+            id: "fp-l5-b2",
+            body: 'ARIA is for the gaps. A `label` tied to its input handles the naming; a `role="status"` region announces changes when a search result arrives. Used for those jobs it is precise. Used to fake a widget out of boxes, it becomes a promise the page cannot keep.'
+          },
+          {
+            type: "heading",
+            id: "fp-l5-h1",
+            level: 3,
+            body: "Labels, hints and live regions"
+          },
+          {
+            type: "demo",
+            id: "fp-l5-d1",
+            title: "A search form that explains itself",
+            body: 'The field is a real `input type="search"` with a visible `<label>`, a hint linked by `aria-describedby`, and a results region marked `role="status"` so screen readers announce it when it fills.',
+            html: `<form class="search" role="search">
+  <label for="q">Search articles</label>
+  <input id="q" name="q" type="search" aria-describedby="q-hint">
+  <p id="q-hint">Search by title, author or tag.</p>
+  <button type="submit">Search</button>
+</form>
+<p class="results" role="status" aria-live="polite">Type to search\u2026</p>`,
+            css: `body { font-family: system-ui, sans-serif; line-height: 1.5; margin: 0; padding: 1rem; }
+.search { display: grid; gap: 0.5rem; max-width: 24rem; }
+label { font-weight: 600; }
+input { padding: 0.5rem 0.6rem; border: 1px solid #cbd5e1; border-radius: 0.5rem; font: inherit; }
+input:focus-visible { outline: 2px solid #0f766e; outline-offset: 2px; }
+#q-hint { margin: 0; font-size: 0.85rem; color: #475569; }
+button { justify-self: start; padding: 0.5rem 0.9rem; border: 0; border-radius: 0.5rem; background: #0f766e; color: white; font: inherit; cursor: pointer; }
+.results { color: #475569; }`
+          },
+          {
+            type: "heading",
+            id: "fp-l5-h2",
+            level: 3,
+            body: "The rule to remember"
+          },
+          {
+            type: "list",
+            id: "fp-l5-list",
+            style: "ordered",
+            items: [
+              "Is there a native element that already means this? Use it \u2014 `button`, `nav`, `label`, `input`.",
+              "If not, is there an ARIA role that matches? Add it, and the attributes it requires.",
+              'Only then reach for `role="presentation"` or a custom widget \u2014 and only with a keyboard plan.',
+              "Never use ARIA to describe something you could have built natively."
+            ]
+          },
+          {
+            type: "warning",
+            id: "fp-l5-warn",
+            title: "A placeholder is not a label",
+            body: "A placeholder disappears the moment someone types, is often missed by screen readers, and usually fails contrast. It is fine as a hint about format. Every control still needs a real `<label>` \u2014 or, when there is genuinely no room for visible text, an `aria-label`."
+          },
+          {
+            type: "tip",
+            id: "fp-l5-tip",
+            title: "Look for the role, not the element",
+            body: "Screen readers announce roles, not tag names. When you are unsure whether a control is right, ask what role it will be read as. If you cannot name the role in one word, assistive technology cannot either."
+          },
+          {
+            type: "heading",
+            id: "fp-l5-h3",
+            level: 3,
+            body: "Checkpoint"
+          },
+          {
+            type: "text",
+            id: "fp-l5-b3",
+            body: "The form below relies on a placeholder for its only label. Give the field a real label and a linked hint, and make the results region announce itself."
+          },
+          {
+            type: "exercise",
+            id: "fp-l5-x1",
+            exercise: {
+              id: "ex-fp-l5",
+              instructions: 'Make the search field accessible. It must be an `input type="search"` with a real `<label>` that names it. Add a hint paragraph and connect it with `aria-describedby`, and give the results region a role that announces updates.',
+              languages: ["html"],
+              starterCode: {
+                html: `<form class="search">
+  <input placeholder="Search articles">
+  <button type="submit">Search</button>
+</form>
+<div class="results"></div>
+`
+              },
+              tests: [
+                {
+                  id: "ex-fp-l5-t1",
+                  label: "the field is a real search input",
+                  body: `return document.querySelector('input[type="search"]') !== null`
+                },
+                {
+                  id: "ex-fp-l5-t2",
+                  label: "the field has a label that names it",
+                  body: `const input = document.querySelector('input[type="search"]'); if (!input) return false; const label = Array.from(document.querySelectorAll('label')).find((element) => element.htmlFor === input.id || element.contains(input)); return !!label && label.textContent.trim().length > 0`
+                },
+                {
+                  id: "ex-fp-l5-t3",
+                  label: "the field points at its hint",
+                  body: `const input = document.querySelector('input[type="search"]'); if (!input) return false; const id = input.getAttribute('aria-describedby'); return !!id && !!document.getElementById(id)`
+                },
+                {
+                  id: "ex-fp-l5-t4",
+                  label: "the hint is linked and not empty",
+                  body: `const input = document.querySelector('input[type="search"]'); if (!input) return false; const id = input.getAttribute('aria-describedby'); const hint = id ? document.getElementById(id) : null; return !!hint && hint.textContent.trim().length > 5`
+                },
+                {
+                  id: "ex-fp-l5-t5",
+                  label: "the results region announces updates",
+                  body: `return document.querySelector('[role="status"], [aria-live]') !== null`
+                }
+              ],
+              hints: [
+                'A `<label for="...">` names the control whose `id` matches the `for` value.',
+                "The hint is a paragraph with an `id`; the input references that id with `aria-describedby`.",
+                '`role="status"` (or `aria-live="polite"`) makes a region announce its changes without stealing focus.'
+              ],
+              solution: {
+                html: `<form class="search" role="search">
+  <label for="q">Search articles</label>
+  <input id="q" name="q" type="search" aria-describedby="q-hint">
+  <p id="q-hint">Search by title, author or tag.</p>
+  <button type="submit">Search</button>
+</form>
+<div class="results" role="status" aria-live="polite"></div>
+`
+              },
+              testNotes: "Labels are accepted either way \u2014 the `for` attribute pointing at the id, or the input nested inside the label \u2014 because both are valid and both name the control."
+            }
+          }
+        ]
       },
       {
         id: "fp-l6",
@@ -89672,7 +100232,162 @@ var frontendProjectsSections = [
           "Trap focus in modal or dialog components"
         ],
         xp: 35,
-        content: []
+        content: [
+          {
+            type: "text",
+            id: "fp-l6-intro",
+            body: "**Every interactive thing on the page has to be reachable without a mouse.** For most people that is invisible work until it is missing: press Tab and watch where the focus ring goes. If it skips a control, the control cannot be used by anyone navigating with a keyboard, a switch, a head pointer or a screen reader."
+          },
+          {
+            type: "text",
+            id: "fp-l6-b2",
+            body: "Tab order follows the document, so a layout that reads sensibly usually tabs sensibly too. Each focusable element is announced with a role and a name, which is another reason a real `button` beats a clickable `div` \u2014 the button is in the tab order and announces itself, and the div is neither."
+          },
+          {
+            type: "heading",
+            id: "fp-l6-h1",
+            level: 3,
+            body: "From a clickable div to a real control"
+          },
+          {
+            type: "code",
+            id: "fp-l6-code",
+            language: "html",
+            title: "The same thing, done two ways",
+            code: `<!-- Not focusable, not announced, needs a click handler -->
+<div class="toggle" onclick="toggle()">Menu</div>
+
+<!-- Focusable, announced, works with Enter and Space for free -->
+<button type="button" class="toggle">Menu</button>`
+          },
+          {
+            type: "text",
+            id: "fp-l6-b3",
+            body: "The two lines do the same thing when clicked with a mouse. Only one of them can be reached at all without one. That is the whole argument, and it is why the `div` version is treated as a bug rather than a shortcut."
+          },
+          {
+            type: "heading",
+            id: "fp-l6-h2",
+            level: 3,
+            body: "Making focus visible"
+          },
+          {
+            type: "code",
+            id: "fp-l6-code2",
+            language: "css",
+            title: "A focus ring for keyboard users only",
+            code: `.toggle:focus-visible {
+  outline: 3px solid #0f766e;
+  outline-offset: 2px;
+}`
+          },
+          {
+            type: "list",
+            id: "fp-l6-list",
+            style: "bullet",
+            items: [
+              "`:focus-visible` matches keyboard focus, not a mouse click \u2014 so the ring never appears when it is not wanted.",
+              "Never remove a focus ring without replacing it; `outline: none` alone makes the page unusable.",
+              "`outline-offset` keeps the ring clear of the element's own border.",
+              "Tab through the page yourself, in order, before you call it finished."
+            ]
+          },
+          {
+            type: "warning",
+            id: "fp-l6-warn",
+            title: "Threading the tab trap",
+            body: "A dialog that opens has to take focus, keep Tab inside itself while it is open, return focus to whatever opened it when it closes, and answer Escape. Skip any of those and a keyboard user can end up stuck behind the overlay with no way out."
+          },
+          {
+            type: "tip",
+            id: "fp-l6-tip",
+            title: "Unplug the mouse",
+            body: "Put the mouse aside for one pass through the page. Tab forward, Shift+Tab back, activate everything with Enter and Space. It takes two minutes and finds problems that no amount of reading the markup will."
+          },
+          {
+            type: "heading",
+            id: "fp-l6-h3",
+            level: 3,
+            body: "Checkpoint"
+          },
+          {
+            type: "text",
+            id: "fp-l6-b4",
+            body: "The toolbar below uses a clickable div. Make it a real control, and give keyboard users a focus ring they can see."
+          },
+          {
+            type: "exercise",
+            id: "fp-l6-x1",
+            exercise: {
+              id: "ex-fp-l6",
+              instructions: "Replace the clickable div with a real button that keeps its text. Remove the inline handler entirely. Then add CSS so keyboard focus is visible, using `:focus-visible` rather than `:focus`.",
+              languages: ["html", "css"],
+              starterCode: {
+                html: `<div class="toolbar">
+  <div class="toggle" onclick="toggle()">Menu</div>
+</div>
+`,
+                css: `.toggle {
+  display: inline-block;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+}
+`
+              },
+              tests: [
+                {
+                  id: "ex-fp-l6-t1",
+                  label: "the control is a real button",
+                  body: "return document.querySelector('button') !== null"
+                },
+                {
+                  id: "ex-fp-l6-t2",
+                  label: "nothing clickable is a div any more",
+                  body: "return document.querySelectorAll('div[onclick]').length === 0"
+                },
+                {
+                  id: "ex-fp-l6-t3",
+                  label: "the control has an accessible name",
+                  body: "const button = document.querySelector('button'); return !!button && button.textContent.trim().length > 0"
+                },
+                {
+                  id: "ex-fp-l6-t4",
+                  label: "keyboard focus is styled",
+                  body: "const rules = Array.from(document.styleSheets).flatMap((sheet) => { try { return Array.from(sheet.cssRules) } catch { return [] } }); return rules.some((rule) => rule.selectorText && rule.selectorText.indexOf('focus-visible') !== -1)"
+                },
+                {
+                  id: "ex-fp-l6-t5",
+                  label: "the focus ring is actually visible",
+                  body: "const rules = Array.from(document.styleSheets).flatMap((sheet) => { try { return Array.from(sheet.cssRules) } catch { return [] } }); const rule = rules.find((item) => item.selectorText && item.selectorText.indexOf('focus-visible') !== -1); if (!rule) return false; return (rule.style.outline || '').length > 0 || (rule.style.outlineWidth || '').length > 0 || (rule.style.boxShadow || '').length > 0"
+                }
+              ],
+              hints: [
+                'A `<button type="button">` does not submit a form and is focusable and announced on its own.',
+                "The `onclick` attribute disappears with the div \u2014 there is nothing it needs to do.",
+                "The focus rule is `.toggle:focus-visible { outline: ... }`; an outline (or a box-shadow) is what makes it visible."
+              ],
+              solution: {
+                html: `<div class="toolbar">
+  <button type="button" class="toggle">Menu</button>
+</div>
+`,
+                css: `.toggle {
+  display: inline-block;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  font: inherit;
+}
+
+.toggle:focus-visible {
+  outline: 3px solid #0f766e;
+  outline-offset: 2px;
+}
+`
+              },
+              testNotes: "The last test refuses a rule that merely names `:focus-visible` \u2014 it has to actually set an outline or a shadow, because removing the browser ring without replacing it is the failure this lesson warns about."
+            }
+          }
+        ]
       }
     ],
     quiz: {
@@ -89716,19 +100431,19 @@ var frontendProjectsSections = [
         {
           id: "quiz-fp-s3-q4",
           type: "blank",
-          prompt: "What CSS pseudo-class shows keyboard focus?",
-          answers: [":focus-visible", ":focus", "focus-visible"],
+          prompt: "What CSS pseudo-class shows focus only for keyboard users?",
+          answers: [":focus-visible", "focus-visible"],
           explanation: ":focus-visible shows focus only when the user is navigating with the keyboard, not on mouse click."
         },
         {
           id: "quiz-fp-s3-q5",
           type: "identify-error",
-          prompt: "What is wrong with this button?",
-          code: '<div onClick="handleClick()">Click me</div>',
+          prompt: "What is wrong with this control?",
+          code: '<div onclick="handleClick()">Click me</div>',
           options: [
             "Nothing is wrong",
             "A div is not keyboard accessible and should be a button",
-            "onClick should be on:click for Svelte",
+            "onclick should be on:click",
             "The function call is wrong"
           ],
           answer: 1,
@@ -89745,7 +100460,7 @@ var frontendProjectsCourse = {
   slug: "frontend-projects",
   title: "Frontend Projects",
   shortTitle: "Projects",
-  description: "Build real applications that combine everything: semantic HTML, responsive CSS, interactive JavaScript, and accessibility. Five projects from a profile page to a data table, each teaching a different skill, each deployable to the web.",
+  description: "Take a page from brief to built: plan the structure, write mobile-first responsive CSS, and make every control work for keyboard and screen-reader users. Every lesson ends in a checkpoint you can test.",
   technology: "html",
   category: "projects",
   type: "course",

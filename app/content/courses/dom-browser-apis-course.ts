@@ -30,6 +30,6 @@ export const domBrowserApisCourse: Course = {
     'svg',
   ],
   icon: '{ }',
-  projects: projectsForCourse('dom-browser-apis').map((p) => p.slug),
+  projects: projectsForCourse('dom-browser-apis'),
   sections: domBrowserApisSections,
 }

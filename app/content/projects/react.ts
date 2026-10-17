@@ -55,18 +55,50 @@ export const reactProjects: Project[] = [
       },
     ],
     starterFiles: {
-      typescript: `// React Dashboard - Starter
-// Set up your routing, context, and chart components here.
+      tsx: `// React Dashboard — starter
+//
+// A real project gets React from npm and adds a URL library for the address
+// bar. This editor has no module loader, so the React runtime is already on
+// the page: call React.useState, React.useReducer and React.useContext
+// directly, and model the navigation as data.
+//
 // The dashboard should have:
-// - A sidebar with links to Dashboard, Settings, and Profile
-// - A protected Profile route
-// - At least two chart components
+// - A sidebar with links to Dashboard, Settings and Profile
+// - A protected Profile view that sends a signed-out reader back
+// - At least two chart components driven by typed data
 // - Tests for one component and one hook
 
-import { createContext, useContext, useState, useEffect } from 'react'
-import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom'
+// The three views the sidebar links to.
+const views = ['dashboard', 'settings', 'profile']
 
-// Define your types and components here.
+// TODO: hold the current view and the signed-in user here, and return a new
+// object for each action — the same state for anything else.
+function dashboardReducer(state, action) {
+  return state
+}
+
+function App() {
+  const [state, dispatch] = React.useReducer(dashboardReducer, {
+    view: 'dashboard',
+    user: null,
+  })
+
+  return (
+    <div className="app-shell">
+      <header className="app-header">
+        <h1>Dashboard</h1>
+      </header>
+      <main className="app-main">
+        <p>Showing: {state.view}</p>
+        <button type="button" onClick={() => dispatch({ type: 'signIn' })}>
+          Sign in
+        </button>
+      </main>
+    </div>
+  )
+}
+
+render(<App />)
 `,
     },
     designPreviewHtml: `<section class="dashboard-preview">
@@ -235,24 +267,48 @@ body {
       },
     ],
     starterFiles: {
-      typescript: `// E-Commerce Cart - Starter
-// Define your types, create the CartContext, and build the checkout flow.
+      tsx: `// E-Commerce Cart — starter
+//
+// React is already on the page in this editor, so call React.useReducer and
+// React.useContext directly rather than importing them.
 
 interface Product {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
+  id: number
+  name: string
+  price: number
+  image: string
+}
+
+interface CartItem {
+  product: Product
+  quantity: number
 }
 
 type CartAction =
   | { type: 'add'; product: Product }
   | { type: 'remove'; id: number }
-  | { type: 'update'; id: number; quantity: number };
+  | { type: 'update'; id: number; quantity: number }
+
+const emptyCart: CartItem[] = []
 
 function cartReducer(state: CartItem[], action: CartAction): CartItem[] {
-  // Implement the reducer
+  // TODO: return the next cart for each action in the union above.
+  return state
 }
+
+function App() {
+  const [cart, dispatch] = React.useReducer(cartReducer, emptyCart)
+  const count = cart.reduce((total, item) => total + item.quantity, 0)
+
+  return (
+    <section className="cart-preview">
+      <h1>Shopping Cart</h1>
+      <p>{count} item(s) in the cart</p>
+    </section>
+  )
+}
+
+render(<App />)
 `,
     },
     designPreviewHtml: `<section class="cart-preview">

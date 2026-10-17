@@ -29,6 +29,20 @@ const JS_KEYWORDS = new Set([
   'undefined', 'true', 'false', 'NaN',
 ])
 
+/**
+ * TypeScript keeps every JavaScript keyword and adds type-level ones. The
+ * editor has no semantic model, so this is a lexical pass: it only needs to
+ * make `interface`, `type`, `readonly` and friends read as keywords rather
+ * than as ordinary identifiers.
+ */
+const TS_KEYWORDS = new Set([
+  ...JS_KEYWORDS,
+  'interface', 'type', 'enum', 'implements', 'readonly', 'public', 'private',
+  'protected', 'abstract', 'declare', 'namespace', 'keyof', 'infer', 'satisfies',
+  'override', 'any', 'unknown', 'never', 'string', 'number', 'boolean', 'object',
+  'symbol', 'bigint',
+])
+
 const JS_BUILTINS = new Set([
   'console', 'document', 'window', 'Math', 'JSON', 'Object', 'Array', 'String', 'Number',
   'Boolean', 'Promise', 'Set', 'Map', 'Date', 'RegExp', 'Error', 'Symbol', 'parseInt',
@@ -243,6 +257,15 @@ function findPrevNonSpace(source: string, index: number): string {
 }
 
 export function highlightJs(source: string): Token[] {
+  return highlightJsLike(source, JS_KEYWORDS)
+}
+
+/** TypeScript and JSX share JavaScript's grammar; only the keyword set differs. */
+export function highlightTs(source: string): Token[] {
+  return highlightJsLike(source, TS_KEYWORDS)
+}
+
+function highlightJsLike(source: string, keywords: Set<string>): Token[] {
   const tokens: Token[] = []
   let index = 0
   let prevMeaningful: Token | null = null
@@ -307,7 +330,7 @@ export function highlightJs(source: string): Token[] {
       while (after < source.length && /\s/.test(source[after]!)) after += 1
       const nextChar = source[after] ?? ''
       let kind: TokenKind = 'plain'
-      if (JS_KEYWORDS.has(word)) kind = 'keyword'
+      if (keywords.has(word)) kind = 'keyword'
       else if (nextChar === '(') kind = 'function'
       else if (JS_BUILTINS.has(word)) kind = 'property'
       else if (prevMeaningful && (prevMeaningful.kind === 'property' || prevMeaningful.value === '.')) {
@@ -357,6 +380,10 @@ export function highlight(source: string, language: EditorLanguage | 'plaintext'
       return highlightCss(source)
     case 'javascript':
       return highlightJs(source)
+    case 'typescript':
+    case 'jsx':
+    case 'tsx':
+      return highlightTs(source)
     default:
       return highlightPlain(source)
   }

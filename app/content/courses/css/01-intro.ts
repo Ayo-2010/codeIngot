@@ -3,12 +3,12 @@ import type { Section } from '~/types/content'
 export const cssIntroSections: Section[] = [
   {
     id: 'css-s1',
-    title: 'CSS HOME',
+    title: 'Getting started',
     description: 'What this course covers, how it is organised, and how to get the most out of it.',
     lessons: [
       {
         id: 'css-l1',
-        title: 'CSS HOME',
+        title: 'How this course works',
         description: 'A tour of the course, the way the lessons are built, and what you will be able to do at the end.',
         duration: 4,
         objectives: [
@@ -161,7 +161,7 @@ export const cssIntroSections: Section[] = [
     ],
     quiz: {
       id: 'quiz-css-s1',
-      title: 'CSS HOME quiz',
+      title: 'Getting started check',
       passingScore: 60,
       questions: [
         {

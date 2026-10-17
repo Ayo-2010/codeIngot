@@ -42,7 +42,7 @@ export const gitGitHubSections: Section[] = [
           {
             type: 'code',
             id: 'g-l1-c1',
-            language: 'bash',
+            language: 'plaintext',
             title: 'Git in the terminal',
             code: `# check git is installed
 git --version
@@ -62,25 +62,31 @@ git config --global user.email "ada@example.com"`,
             id: 'g-l1-x1',
             exercise: {
               id: 'ex-git-l1',
-              instructions: 'Run git --version and git config --global user.name "Your Name" in the terminal.',
-              languages: ['bash'],
-              starterCode: '',
-              expectedOutput: 'git version displayed and user.name configured',
+              instructions: 'Configure your Git identity by writing a JavaScript object with a user name and email.',
+              languages: ['javascript'],
+              starterCode: { javascript: '// Configure your Git identity\n\nconst gitConfig = {\n  user: {\n    name: "",\n    email: ""\n  }\n};\n' },
+              expectedOutput: 'Git identity configured with name and email',
               tests: [
                 {
                   id: 'ex-git-l1-t1',
-                  label: 'git config is set',
-                  body: `return true`,
+                  label: 'Config has a user.name',
+                  body: `return typeof gitConfig === 'object' && gitConfig.user && typeof gitConfig.user.name === 'string' && gitConfig.user.name.length > 0;`,
+                },
+                {
+                  id: 'ex-git-l1-t2',
+                  label: 'Config has a user.email with @',
+                  body: `return typeof gitConfig === 'object' && gitConfig.user && typeof gitConfig.user.email === 'string' && gitConfig.user.email.includes('@');`,
                 },
               ],
               hints: [
-                'Run git config --global user.name "Your Name" to set your name.',
+                'Create a gitConfig object with a user property containing name and email.',
+                'Give name a non-empty string and email a string containing "@".',
               ],
               solution: {
-                bash: 'git --version\ngit config --global user.name "Ada Lovelace"\ngit config --global user.email "ada@example.com"',
+                javascript: '// Configure your Git identity\n\nconst gitConfig = {\n  user: {\n    name: "Ada Lovelace",\n    email: "ada@example.com"\n  }\n};\n',
               },
               testNotes:
-                'The exercise verifies the commands are run.',
+                'The exercise verifies the Git identity object has a name and a valid email.',
             },
           },
         ],
@@ -121,7 +127,7 @@ git config --global user.email "ada@example.com"`,
           {
             type: 'code',
             id: 'g-l2-c1',
-            language: 'bash',
+            language: 'plaintext',
             title: 'Inspecting the repository',
             code: `git status
 git log --oneline
@@ -155,30 +161,31 @@ git log --oneline --graph --all`,
             id: 'g-l2-x1',
             exercise: {
               id: 'ex-git-l2',
-              instructions: 'Create a new Git repository, create a file, stage it, and make your first commit.',
-              languages: ['bash'],
-              starterCode: '',
-              expectedOutput: 'repository created with one commit',
+              instructions: 'Write a JavaScript array of commands that creates a repository, adds a file, and makes the first commit.',
+              languages: ['javascript'],
+              starterCode: { javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  // e.g. { cmd: "git init" },\n];\n' },
+              expectedOutput: 'Repository created with one commit',
               tests: [
                 {
                   id: 'ex-git-l2-t1',
-                  label: 'Repository initialised',
-                  body: `return true`,
+                  label: 'Includes git init',
+                  body: `return Array.isArray(commands) && commands.some(c => String(c.cmd || c).includes('git init'));`,
                 },
                 {
                   id: 'ex-git-l2-t2',
-                  label: 'File committed',
-                  body: `return true`,
+                  label: 'Includes git add and git commit',
+                  body: `return Array.isArray(commands) && commands.some(c => String(c.cmd || c).includes('git add')) && commands.some(c => String(c.cmd || c).includes('git commit'));`,
                 },
               ],
               hints: [
-                'Use git init, echo "hello" > README.md, git add README.md, git commit -m "Initial commit".',
+                'Create a commands array where each item has a cmd property with a git command.',
+                'Include git init, git add, and git commit -m.',
               ],
               solution: {
-                bash: 'git init\necho "hello" > README.md\ngit add README.md\ngit commit -m "Initial commit"',
+                javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  { cmd: "git init" },\n  { cmd: "echo \\"hello\\" > README.md" },\n  { cmd: "git add README.md" },\n  { cmd: "git commit -m \\"Initial commit\\"" },\n];\n',
               },
               testNotes:
-                'The exercise verifies the git commands are run.',
+                'The exercise verifies the command array includes init, add, and commit.',
             },
           },
         ],
@@ -276,7 +283,7 @@ git log --oneline --graph --all`,
           {
             type: 'code',
             id: 'g-l3-c1',
-            language: 'bash',
+            language: 'plaintext',
             title: 'Clone and inspect remotes',
             code: `git clone https://github.com/user/repo.git
 cd repo
@@ -303,25 +310,31 @@ git remote -v`,
             id: 'g-l3-x1',
             exercise: {
               id: 'ex-git-l3',
-              instructions: 'Clone the example repository and verify the remote is named origin.',
-              languages: ['bash'],
-              starterCode: '',
-              expectedOutput: 'repository cloned with origin remote',
+              instructions: 'Write a JavaScript array of commands that clones a repository and verifies the remote is named origin.',
+              languages: ['javascript'],
+              starterCode: { javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  // e.g. { cmd: "git clone <url>" },\n];\n' },
+              expectedOutput: 'Repository cloned with origin remote',
               tests: [
                 {
                   id: 'ex-git-l3-t1',
-                  label: 'Clone completed',
-                  body: `return true`,
+                  label: 'Includes git clone',
+                  body: `return Array.isArray(commands) && commands.some(c => String(c.cmd || c).includes('git clone'));`,
+                },
+                {
+                  id: 'ex-git-l3-t2',
+                  label: 'Includes git remote -v',
+                  body: `return Array.isArray(commands) && commands.some(c => String(c.cmd || c).includes('git remote -v'));`,
                 },
               ],
               hints: [
-                'Use git clone and git remote -v.',
+                'Include git clone with a repository URL.',
+                'Include git remote -v to list remotes and verify origin.',
               ],
               solution: {
-                bash: 'git clone https://github.com/user/repo.git\ncd repo\ngit remote -v',
+                javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  { cmd: "git clone https://github.com/user/repo.git" },\n  { cmd: "cd repo" },\n  { cmd: "git remote -v" },\n];\n',
               },
               testNotes:
-                'The exercise verifies the clone and remote commands.',
+                'The exercise verifies the clone and remote inspection commands.',
             },
           },
         ],
@@ -365,7 +378,7 @@ git remote -v`,
           {
             type: 'code',
             id: 'g-l4-c1',
-            language: 'bash',
+            language: 'plaintext',
             title: 'The core loop',
             code: `# modify files
 echo "new feature" > app.js
@@ -407,22 +420,23 @@ git push origin main`,
             id: 'g-l4-x1',
             exercise: {
               id: 'ex-git-l4',
-              instructions: 'Create a new file, stage it, commit with a conventional commit message, and push to origin.',
-              languages: ['bash'],
-              starterCode: '',
-              expectedOutput: 'file committed and pushed',
+              instructions: 'Write a JavaScript array of commands that creates a file, stages it, commits with a conventional message, and pushes to origin.',
+              languages: ['javascript'],
+              starterCode: { javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  // e.g. { cmd: "echo \\"feature\\" > feature.js" },\n];\n' },
+              expectedOutput: 'File committed and pushed',
               tests: [
                 {
                   id: 'ex-git-l4-t1',
-                  label: 'Commit message follows convention',
-                  body: `return true`,
+                  label: 'Uses conventional commit format',
+                  body: `return Array.isArray(commands) && commands.some(c => String(c.cmd || c).match(/feat|fix|docs|refactor|test|chore:/)) && commands.some(c => String(c.cmd || c).includes('git push'));`,
                 },
               ],
               hints: [
-                'Use git add, git commit -m "type: message", git push.',
+                'Include git add, git commit -m "type: message", and git push origin main.',
+                'Use a conventional commit type like feat:, fix:, or docs:.',
               ],
               solution: {
-                bash: 'echo "feature" > feature.js\ngit add feature.js\ngit commit -m "feat: add feature.js"\ngit push origin main',
+                javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  { cmd: "echo \\"feature\\" > feature.js" },\n  { cmd: "git add feature.js" },\n  { cmd: "git commit -m \\"feat: add feature.js\\"" },\n  { cmd: "git push origin main" },\n];\n',
               },
               testNotes:
                 'The exercise verifies the conventional commit pattern.',
@@ -518,7 +532,7 @@ git push origin main`,
           {
             type: 'code',
             id: 'g-l5-c1',
-            language: 'bash',
+            language: 'plaintext',
             title: 'Create and switch',
             code: `# create a new branch
 git branch feature-login
@@ -562,22 +576,22 @@ git switch -c feature-login`,
             id: 'g-l5-x1',
             exercise: {
               id: 'ex-git-l5',
-              instructions: 'Create a new branch called feature/hello and switch to it.',
-              languages: ['bash'],
-              starterCode: '',
-              expectedOutput: 'new branch created and checked out',
+              instructions: 'Write a JavaScript array of commands that creates a new branch called feature/hello and switches to it.',
+              languages: ['javascript'],
+              starterCode: { javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  // e.g. { cmd: "git switch -c feature/hello" },\n];\n' },
+              expectedOutput: 'New branch created and checked out',
               tests: [
                 {
                   id: 'ex-git-l5-t1',
-                  label: 'Branch created',
-                  body: `return true`,
+                  label: 'Creates and switches to feature/hello',
+                  body: `return Array.isArray(commands) && commands.some(c => String(c.cmd || c).includes('feature/hello') && String(c.cmd || c).includes('git switch -c'));`,
                 },
               ],
               hints: [
-                'Use git switch -c feature/hello.',
+                'Use git switch -c feature/hello to create and switch in one step.',
               ],
               solution: {
-                bash: 'git switch -c feature/hello',
+                javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  { cmd: "git switch -c feature/hello" },\n];\n',
               },
               testNotes:
                 'The exercise verifies branch creation and switch.',
@@ -638,6 +652,29 @@ git switch -c feature-login`,
             ],
           },
           {
+            type: 'code',
+            id: 'g-l6-c1',
+            language: 'plaintext',
+            title: 'One feature branch, start to finish',
+            code: `# Start from an up-to-date main
+git switch main
+git pull
+
+# Create the feature branch and work on it
+git switch -c feature/button-colour
+
+git add .
+git commit -m "Add a colour variable for the button"
+
+# Push the branch and open a pull request
+git push -u origin feature/button-colour`,
+          },
+          {
+            type: 'text',
+            id: 'g-l6-b2',
+            body: 'Three of those commands carry more than they look like. `git switch -c` creates the branch and moves onto it in one step — the older `git checkout -b` does the same and is still common in scripts. `git push -u` sets the upstream, so every later push on that branch is just `git push`. And the pull request is not a Git concept at all: the branch is already on the remote, and the PR is the GitHub layer that runs the checks and collects the approval that stands between the branch and `main`.',
+          },
+          {
             type: 'tip',
             id: 'g-l6-t1',
             title: 'Start with GitHub Flow',
@@ -648,23 +685,28 @@ git switch -c feature-login`,
             id: 'g-l6-x1',
             exercise: {
               id: 'ex-git-l6',
-              instructions: 'Create a feature branch from main, make a change, and open a pull request description.',
-              languages: ['bash', 'markdown'],
-              starterCode: '',
-              expectedOutput: 'feature branch with PR description',
+              instructions: 'Write JavaScript that creates a feature branch from main and defines a pull request description.',
+              languages: ['javascript'],
+              starterCode: { javascript: '// Write your git workflow as JavaScript\n\nconst commands = [\n  // e.g. { cmd: "git switch -c feature/button-color" },\n];\n\nconst prDescription = "";\n' },
+              expectedOutput: 'Feature branch with PR description',
               tests: [
                 {
                   id: 'ex-git-l6-t1',
-                  label: 'Feature branch created',
-                  body: `return true`,
+                  label: 'Creates a feature branch',
+                  body: `return Array.isArray(commands) && commands.some(c => String(c.cmd || c).includes('git switch -c') && String(c.cmd || c).includes('feature/'));`,
+                },
+                {
+                  id: 'ex-git-l6-t2',
+                  label: 'PR description has sections',
+                  body: `return typeof prDescription === 'string' && prDescription.includes('## Summary') && prDescription.includes('## Changes');`,
                 },
               ],
               hints: [
                 'Use git switch -c feature/branch-name from main.',
+                'Write a PR description with Summary and Changes sections.',
               ],
               solution: {
-                bash: 'git switch -c feature/button-color\necho "<button>Click</button>" > button.html\ngit add button.html\ngit commit -m "feat: add button component"',
-                markdown: '# Pull Request\n\n## Description\nAdds a new button component with accessible markup.\n\n## Changes\n- Created button.html\n- Added commit with conventional message',
+                javascript: '// Write your git workflow as JavaScript\n\nconst commands = [\n  { cmd: "git switch main" },\n  { cmd: "git switch -c feature/button-color" },\n  { cmd: "echo \\"<button>Click</button>\\" > button.html" },\n  { cmd: "git add button.html" },\n  { cmd: "git commit -m \\"feat: add button component\\"" },\n];\n\nconst prDescription = "# Pull Request\\n\\n## Summary\\nAdds a new button component with accessible markup.\\n\\n## Changes\\n- Created button.html\\n- Added commit with conventional message";\n',
               },
               testNotes:
                 'The exercise verifies the branching workflow.',
@@ -760,7 +802,7 @@ git switch -c feature-login`,
           {
             type: 'code',
             id: 'g-l7-c1',
-            language: 'text',
+            language: 'plaintext',
             title: 'Conflict example',
             code: `<<<<<<< HEAD
 const color = "blue";
@@ -783,7 +825,7 @@ const color = "red";
           {
             type: 'code',
             id: 'g-l7-c2',
-            language: 'bash',
+            language: 'plaintext',
             title: 'Merging',
             code: `git switch main
 git merge feature-login
@@ -803,22 +845,22 @@ git commit -m "merge: resolve conflict in app.js"`,
             id: 'g-l7-x1',
             exercise: {
               id: 'ex-git-l7',
-              instructions: 'Create a conflict by editing the same line on two branches, then resolve it.',
-              languages: ['bash'],
-              starterCode: '',
-              expectedOutput: 'conflict resolved',
+              instructions: 'Write a JavaScript array of commands that creates a conflict by editing the same line on two branches, then resolves it.',
+              languages: ['javascript'],
+              starterCode: { javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  // e.g. { cmd: "git switch -c branch-a" },\n];\n' },
+              expectedOutput: 'Conflict resolved',
               tests: [
                 {
                   id: 'ex-git-l7-t1',
-                  label: 'Conflict created and resolved',
-                  body: `return true`,
+                  label: 'Creates and merges branches with conflict',
+                  body: `return Array.isArray(commands) && commands.some(c => String(c.cmd || c).includes('git switch -c')) && commands.some(c => String(c.cmd || c).includes('git merge'));`,
                 },
               ],
               hints: [
                 'Change the same line on two branches and merge.',
               ],
               solution: {
-                bash: 'git switch -c branch-a\necho "blue" > color.txt\ngit add color.txt\ngit commit -m "set blue"\ngit switch main\ngit switch -c branch-b\necho "red" > color.txt\ngit add color.txt\ngit commit -m "set red"\ngit switch main\ngit merge branch-a\ngit merge branch-b',
+                javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  { cmd: "git switch -c branch-a" },\n  { cmd: "echo \\"blue\\" > color.txt" },\n  { cmd: "git add color.txt" },\n  { cmd: "git commit -m \\"set blue\\"" },\n  { cmd: "git switch main" },\n  { cmd: "git switch -c branch-b" },\n  { cmd: "echo \\"red\\" > color.txt" },\n  { cmd: "git add color.txt" },\n  { cmd: "git commit -m \\"set red\\"" },\n  { cmd: "git switch main" },\n  { cmd: "git merge branch-a" },\n  { cmd: "git merge branch-b" },\n];\n',
               },
               testNotes:
                 'The exercise demonstrates creating and resolving a merge conflict.',
@@ -862,7 +904,7 @@ git commit -m "merge: resolve conflict in app.js"`,
           {
             type: 'code',
             id: 'g-l8-c1',
-            language: 'bash',
+            language: 'plaintext',
             title: 'Rebase and interactive rebase',
             code: `# rebase feature onto main
 git switch feature-login
@@ -899,22 +941,22 @@ git rebase -i HEAD~3`,
             id: 'g-l8-x1',
             exercise: {
               id: 'ex-git-l8',
-              instructions: 'Rebase a feature branch onto main using git rebase.',
-              languages: ['bash'],
-              starterCode: '',
-              expectedOutput: 'branch rebased onto main',
+              instructions: 'Write a JavaScript array of commands that rebases a feature branch onto main.',
+              languages: ['javascript'],
+              starterCode: { javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  // e.g. { cmd: "git switch feature-login" },\n];\n' },
+              expectedOutput: 'Branch rebased onto main',
               tests: [
                 {
                   id: 'ex-git-l8-t1',
                   label: 'Rebase completed',
-                  body: `return true`,
+                  body: `return Array.isArray(commands) && commands.some(c => String(c.cmd || c).includes('git rebase main'));`,
                 },
               ],
               hints: [
                 'Use git switch feature && git rebase main.',
               ],
               solution: {
-                bash: 'git switch feature\ngit rebase main',
+                javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  { cmd: "git switch feature" },\n  { cmd: "git rebase main" },\n];\n',
               },
               testNotes:
                 'The exercise verifies the rebase workflow.',
@@ -1015,7 +1057,7 @@ git rebase -i HEAD~3`,
           {
             type: 'code',
             id: 'g-l9-c1',
-            language: 'bash',
+            language: 'plaintext',
             title: 'Fetch and inspect',
             code: `git fetch origin
 git log origin/main --oneline
@@ -1043,22 +1085,22 @@ git log main..origin/main --oneline`,
             id: 'g-l9-x1',
             exercise: {
               id: 'ex-git-l9',
-              instructions: 'Use git fetch to download remote changes and inspect the new commits.',
-              languages: ['bash'],
-              starterCode: '',
-              expectedOutput: 'remote changes fetched and inspected',
+              instructions: 'Write a JavaScript array of commands that fetches remote changes and inspects the new commits.',
+              languages: ['javascript'],
+              starterCode: { javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  // e.g. { cmd: "git fetch origin" },\n];\n' },
+              expectedOutput: 'Remote changes fetched and inspected',
               tests: [
                 {
                   id: 'ex-git-l9-t1',
                   label: 'Fetch used',
-                  body: `return true`,
+                  body: `return Array.isArray(commands) && commands.some(c => String(c.cmd || c).includes('git fetch origin')) && commands.some(c => String(c.cmd || c).includes('git log origin/main'));`,
                 },
               ],
               hints: [
                 'Use git fetch origin then git log origin/main --oneline.',
               ],
               solution: {
-                bash: 'git fetch origin\ngit log origin/main --oneline',
+                javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  { cmd: "git fetch origin" },\n  { cmd: "git log origin/main --oneline" },\n];\n',
               },
               testNotes:
                 'The exercise verifies the fetch and log commands.',
@@ -1117,6 +1159,26 @@ git log main..origin/main --oneline`,
             ],
           },
           {
+            type: 'code',
+            id: 'g-l10-c1',
+            language: 'plaintext',
+            title: 'Opening a pull request',
+            code: `# The branch is pushed and up to date
+git push -u origin feature/dark-mode
+
+# Open the pull request into main, with a title and a body file
+gh pr create --base main --title "feat: add a dark mode toggle" --body-file pr.md
+
+# Watch the checks, then merge once approved
+gh pr checks
+gh pr merge --squash`,
+          },
+          {
+            type: 'text',
+            id: 'g-l10-b2',
+            body: '`--base main` is the branch the proposal merges into, and `--body-file pr.md` pulls the description from a file — which matters because the description is the part of a pull request a reviewer reads first. It carries the same three headings as the exercise below: what changed and why, what a reader should look at, and how to check it. `gh pr checks` waits on CI, and `gh pr merge --squash` collapses the branch into a single commit, which is the strategy to choose when the branch history is a trail of "fix typo" rather than a story worth keeping.',
+          },
+          {
             type: 'tip',
             id: 'g-l10-t1',
             title: 'Keep PRs small',
@@ -1127,22 +1189,22 @@ git log main..origin/main --oneline`,
             id: 'g-l10-x1',
             exercise: {
               id: 'ex-git-l10',
-              instructions: 'Write a pull request description following best practices for a feature that adds a dark mode toggle.',
-              languages: ['markdown'],
-              starterCode: '',
+              instructions: 'Write a JavaScript string containing a pull request description for a dark mode toggle feature.',
+              languages: ['javascript'],
+              starterCode: { javascript: '// Write your pull request description as JavaScript\n\nconst prDescription = "";\n' },
               expectedOutput: 'PR description',
               tests: [
                 {
                   id: 'ex-git-l10-t1',
                   label: 'Description includes summary',
-                  body: `return true`,
+                  body: `return typeof prDescription === 'string' && prDescription.includes('## Summary') && prDescription.includes('## Changes') && prDescription.includes('## Testing');`,
                 },
               ],
               hints: [
                 'Include a summary, what changed, testing steps, and screenshots if relevant.',
               ],
               solution: {
-                markdown: '# feat: add dark mode toggle\n\n## Summary\nAdds a theme toggle that switches between light and dark mode using CSS custom properties and a class on the html element.\n\n## Changes\n- Added theme-toggle.js\n- Added dark mode CSS variables\n- Updated header component\n\n## Testing\n1. Open the site\n2. Click the theme toggle\n3. Verify the theme persists on reload\n\n## Screenshots\n<!-- Add before/after screenshots here -->',
+                javascript: '// Write your pull request description as JavaScript\n\nconst prDescription = "# feat: add dark mode toggle\\n\\n## Summary\\nAdds a theme toggle that switches between light and dark mode using CSS custom properties and a class on the html element.\\n\\n## Changes\\n- Added theme-toggle.js\\n- Added dark mode CSS variables\\n- Updated header component\\n\\n## Testing\\n1. Open the site\\n2. Click the theme toggle\\n3. Verify the theme persists on reload\\n\\n## Screenshots\\n<!-- Add before/after screenshots here -->";\n',
               },
               testNotes:
                 'The exercise verifies PR description structure.',
@@ -1243,7 +1305,7 @@ git log main..origin/main --oneline`,
           {
             type: 'code',
             id: 'g-l11-c1',
-            language: 'bash',
+            language: 'plaintext',
             title: 'Restore and clean',
             code: `# restore a single file
 git restore app.js
@@ -1253,6 +1315,17 @@ git restore .
 
 # unstage a file (keep working tree changes)
 git restore --staged app.js`,
+          },
+          {
+            type: 'text',
+            id: 'g-l11-b2',
+            body: 'The three commands do three different jobs. `git restore app.js` copies the committed version of that one file back over the working copy, leaving every other file alone. `git restore .` does it for the whole tree. `git restore --staged app.js` is the odd one out: it takes the file out of the index but leaves the file on disk exactly as it is, so the change survives and simply becomes unstaged again. That last one is the command people reach for as `git reset HEAD app.js`, which does the same thing under an older name.',
+          },
+          {
+            type: 'warning',
+            id: 'g-l11-w1',
+            title: 'Restore discards, it does not store',
+            body: 'There is no reflog entry for work that was never committed. A restored file is overwritten by the committed version and the change is gone — `git restore` is not an undo, it is a discard. If there is any doubt, commit it on a throwaway branch or run `git stash` first; both are reversible, and a restore is not.',
           },
           {
             type: 'tip',
@@ -1265,22 +1338,22 @@ git restore --staged app.js`,
             id: 'g-l11-x1',
             exercise: {
               id: 'ex-git-l11',
-              instructions: 'Modify a file, then use git restore to discard the changes.',
-              languages: ['bash'],
-              starterCode: '',
-              expectedOutput: 'file restored to last committed state',
+              instructions: 'Write a JavaScript array of commands that modifies a file then uses git restore to discard the changes.',
+              languages: ['javascript'],
+              starterCode: { javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  // e.g. { cmd: "git restore app.js" },\n];\n' },
+              expectedOutput: 'File restored to last committed state',
               tests: [
                 {
                   id: 'ex-git-l11-t1',
-                  label: 'File restored',
-                  body: `return true`,
+                  label: 'Uses git restore',
+                  body: `return Array.isArray(commands) && commands.some(c => String(c.cmd || c).includes('git restore'));`,
                 },
               ],
               hints: [
                 'Use git restore file.js after modifying it.',
               ],
               solution: {
-                bash: 'echo "broken" > app.js\ngit restore app.js',
+                javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  { cmd: "echo \\"broken\\" > app.js" },\n  { cmd: "git restore app.js" },\n];\n',
               },
               testNotes:
                 'The exercise verifies the restore workflow.',
@@ -1324,7 +1397,7 @@ git restore --staged app.js`,
           {
             type: 'code',
             id: 'g-l12-c1',
-            language: 'bash',
+            language: 'plaintext',
             title: 'Revert and reset',
             code: `# safe undo: create a new commit
 git revert abc123
@@ -1349,22 +1422,22 @@ git reset --hard HEAD~1`,
             id: 'g-l12-x1',
             exercise: {
               id: 'ex-git-l12',
-              instructions: 'Revert the last commit on the current branch safely.',
-              languages: ['bash'],
-              starterCode: '',
-              expectedOutput: 'revert commit created',
+              instructions: 'Write a JavaScript array of commands that reverts the last commit on the current branch safely.',
+              languages: ['javascript'],
+              starterCode: { javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  // e.g. { cmd: "git revert HEAD" },\n];\n' },
+              expectedOutput: 'Revert commit created',
               tests: [
                 {
                   id: 'ex-git-l12-t1',
                   label: 'Revert used',
-                  body: `return true`,
+                  body: `return Array.isArray(commands) && commands.some(c => String(c.cmd || c).includes('git revert HEAD'));`,
                 },
               ],
               hints: [
                 'Use git revert HEAD.',
               ],
               solution: {
-                bash: 'git revert HEAD',
+                javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  { cmd: "git revert HEAD" },\n];\n',
               },
               testNotes:
                 'The exercise verifies the revert command.',
@@ -1465,7 +1538,7 @@ git reset --hard HEAD~1`,
           {
             type: 'code',
             id: 'g-l13-c1',
-            language: 'bash',
+            language: 'plaintext',
             title: 'Stash workflow',
             code: `# save changes
 git stash
@@ -1483,6 +1556,17 @@ git stash apply stash@{1}
 git stash drop stash@{0}`,
           },
           {
+            type: 'text',
+            id: 'g-l13-b2',
+            body: 'A stash is a stack, and the numbering runs backwards: `stash@{0}` is the most recent entry, and each new stash pushes everything else down. `git stash` is a shortcut for `git stash push`, and the default message is the branch and the commit you were on, which is rarely enough to identify it later. `git stash pop` is exactly `git stash apply` followed by `git stash drop`, which is why a conflict during a pop leaves the stash in place — the apply failed, so the drop never ran.',
+          },
+          {
+            type: 'warning',
+            id: 'g-l13-w1',
+            title: 'A stash is easy to forget',
+            body: 'Stashes live only on your machine. They are not pushed, not shared, and invisible to everyone else working on the branch — so a stash is the wrong place for anything that has to outlive the afternoon. They are also easy to lose: `git stash pop` an old stash and the conflict can be genuinely confusing. For anything longer than a quick branch switch, a WIP commit on a scratch branch is safer.',
+          },
+          {
             type: 'tip',
             id: 'g-l13-t1',
             title: 'Include untracked files',
@@ -1493,22 +1577,22 @@ git stash drop stash@{0}`,
             id: 'g-l13-x1',
             exercise: {
               id: 'ex-git-l13',
-              instructions: 'Stash your current changes, switch to another branch, then pop the stash.',
-              languages: ['bash'],
-              starterCode: '',
-              expectedOutput: 'changes stashed and restored',
+              instructions: 'Write a JavaScript array of commands that stashes changes, switches branches, then pops the stash.',
+              languages: ['javascript'],
+              starterCode: { javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  // e.g. { cmd: "git stash" },\n];\n' },
+              expectedOutput: 'Changes stashed and restored',
               tests: [
                 {
                   id: 'ex-git-l13-t1',
                   label: 'Stash used',
-                  body: `return true`,
+                  body: `return Array.isArray(commands) && commands.some(c => String(c.cmd || c).includes('git stash')) && commands.some(c => String(c.cmd || c).includes('git switch')) && commands.some(c => String(c.cmd || c).includes('git stash pop'));`,
                 },
               ],
               hints: [
                 'Use git stash, git switch, then git stash pop.',
               ],
               solution: {
-                bash: 'git stash\ngit switch main\ngit stash pop',
+                javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  { cmd: "git stash" },\n  { cmd: "git switch main" },\n  { cmd: "git stash pop" },\n];\n',
               },
               testNotes:
                 'The exercise verifies the stash workflow.',
@@ -1542,7 +1626,7 @@ git stash drop stash@{0}`,
           {
             type: 'code',
             id: 'g-l14-c1',
-            language: 'bash',
+            language: 'plaintext',
             title: 'Reflog and recovery',
             code: `# see every HEAD move
 git reflog
@@ -1575,22 +1659,22 @@ git show HEAD@{2}`,
             id: 'g-l14-x1',
             exercise: {
               id: 'ex-git-l14',
-              instructions: 'Use git reflog to find the last HEAD position and recover it.',
-              languages: ['bash'],
-              starterCode: '',
-              expectedOutput: 'reflog used for recovery',
+              instructions: 'Write a JavaScript array of commands that uses git reflog to find the last HEAD position and recover it.',
+              languages: ['javascript'],
+              starterCode: { javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  // e.g. { cmd: "git reflog" },\n];\n' },
+              expectedOutput: 'Reflog used for recovery',
               tests: [
                 {
                   id: 'ex-git-l14-t1',
                   label: 'Reflog used',
-                  body: `return true`,
+                  body: `return Array.isArray(commands) && commands.some(c => String(c.cmd || c).includes('git reflog')) && commands.some(c => String(c.cmd || c).includes('git reset --hard HEAD@'));`,
                 },
               ],
               hints: [
                 'Run git reflog and use git reset --hard HEAD@{1}.',
               ],
               solution: {
-                bash: 'git reflog\ngit reset --hard HEAD@{1}',
+                javascript: '// Write your git commands as JavaScript\n\nconst commands = [\n  { cmd: "git reflog" },\n  { cmd: "git reset --hard HEAD@{1}" },\n];\n',
               },
               testNotes:
                 'The exercise verifies the reflog workflow.',
@@ -1691,7 +1775,7 @@ git show HEAD@{2}`,
           {
             type: 'code',
             id: 'g-l15-c1',
-            language: 'text',
+            language: 'plaintext',
             title: 'Conventional commit format',
             code: `type(scope): short description
 
@@ -1722,21 +1806,22 @@ Footer: reference issue number or breaking change.`,
             exercise: {
               id: 'ex-git-l15',
               instructions: 'Write three conventional commit messages for a feature that adds a login form, fixes a layout bug, and updates tests.',
-              languages: ['text'],
-              starterCode: '',
-              expectedOutput: 'three conventional commit messages',
+              languages: ['javascript'],
+              starterCode: { javascript: '// Write your commit messages as JavaScript\n\nconst messages = [\n  // e.g. "feat(auth): add login form",\n];\n' },
+              expectedOutput: 'Three conventional commit messages',
               tests: [
                 {
                   id: 'ex-git-l15-t1',
                   label: 'Messages follow convention',
-                  body: `return true`,
+                  body: `return Array.isArray(messages) && messages.length === 3 && messages.every(m => typeof m === 'string' && /^(feat|fix|docs|refactor|test|chore)\\(.+\\): .+/.test(m));`,
                 },
               ],
               hints: [
                 'Use the format: type(scope): short description',
+                'Types include feat, fix, docs, refactor, test, chore.',
               ],
               solution: {
-                text: 'feat(auth): add login form component\nfix(layout): correct padding on mobile nav\ntest(auth): add tests for login validation',
+                javascript: '// Write your commit messages as JavaScript\n\nconst messages = [\n  "feat(auth): add login form component",\n  "fix(layout): correct padding on mobile nav",\n  "test(auth): add tests for login validation",\n];\n',
               },
               testNotes:
                 'The exercise verifies conventional commit format.',
@@ -1770,7 +1855,7 @@ Footer: reference issue number or breaking change.`,
           {
             type: 'code',
             id: 'g-l16-c1',
-            language: 'text',
+            language: 'plaintext',
             title: '.gitignore',
             code: `# dependencies
 node_modules/
@@ -1801,7 +1886,7 @@ Thumbs.db`,
           {
             type: 'code',
             id: 'g-l16-c2',
-            language: 'bash',
+            language: 'plaintext',
             title: 'Simple pre-commit hook',
             code: `#!/bin/sh
 # .git/hooks/pre-commit
@@ -1819,22 +1904,22 @@ npm test`,
             id: 'g-l16-x1',
             exercise: {
               id: 'ex-git-l16',
-              instructions: 'Create a .gitignore file for a Node.js project that ignores node_modules, .env and dist.',
-              languages: ['text'],
-              starterCode: '',
+              instructions: 'Write a JavaScript string containing a .gitignore file for a Node.js project.',
+              languages: ['javascript'],
+              starterCode: { javascript: '// Write your .gitignore content as JavaScript\n\nconst gitignoreContent = "";\n' },
               expectedOutput: '.gitignore file with common patterns',
               tests: [
                 {
                   id: 'ex-git-l16-t1',
                   label: 'node_modules ignored',
-                  body: `return true`,
+                  body: `return typeof gitignoreContent === 'string' && gitignoreContent.includes('node_modules/') && gitignoreContent.includes('.env') && gitignoreContent.includes('dist/');`,
                 },
               ],
               hints: [
                 'Create .gitignore with node_modules/, .env and dist/.',
               ],
               solution: {
-                text: 'node_modules/\n.env\ndist/\n.vscode/\n.DS_Store',
+                javascript: '// Write your .gitignore content as JavaScript\n\nconst gitignoreContent = "node_modules/\\n.env\\ndist/\\n.vscode/\\n.DS_Store";\n',
               },
               testNotes:
                 'The exercise verifies .gitignore patterns.',

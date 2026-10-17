@@ -40,12 +40,12 @@ export const courseMeta: CourseMeta[] = [
     "sections": [
       {
         "id": "html-s1",
-        "title": "HTML HOME",
+        "title": "Getting started",
         "description": "What this course covers, how every lesson is built, and what you will be able to do at the end.",
         "lessons": [
           {
             "id": "html-l1",
-            "title": "HTML HOME",
+            "title": "How this course works",
             "description": "A tour of the course, the shape of every lesson, and the four things you will be able to do when you finish.",
             "duration": 4,
             "objectives": [
@@ -59,7 +59,7 @@ export const courseMeta: CourseMeta[] = [
         ],
         "quiz": {
           "id": "quiz-html-s1",
-          "title": "HTML HOME quiz",
+          "title": "Getting started check",
           "passingScore": 60,
           "questions": [
             {
@@ -5739,12 +5739,12 @@ export const courseMeta: CourseMeta[] = [
     "sections": [
       {
         "id": "css-s1",
-        "title": "CSS HOME",
+        "title": "Getting started",
         "description": "What this course covers, how it is organised, and how to get the most out of it.",
         "lessons": [
           {
             "id": "css-l1",
-            "title": "CSS HOME",
+            "title": "How this course works",
             "description": "A tour of the course, the way the lessons are built, and what you will be able to do at the end.",
             "duration": 4,
             "objectives": [
@@ -5758,7 +5758,7 @@ export const courseMeta: CourseMeta[] = [
         ],
         "quiz": {
           "id": "quiz-css-s1",
-          "title": "CSS HOME quiz",
+          "title": "Getting started check",
           "passingScore": 60,
           "questions": [
             {
@@ -13226,7 +13226,7 @@ export const courseMeta: CourseMeta[] = [
     "sections": [
       {
         "id": "js-s1",
-        "title": "JS HOME",
+        "title": "Getting started",
         "description": "What JavaScript adds to a page, what the browser does with a script the moment it loads, and how to use the console while you work.",
         "lessons": [
           {
@@ -13245,7 +13245,7 @@ export const courseMeta: CourseMeta[] = [
         ],
         "quiz": {
           "id": "quiz-js-s1",
-          "title": "JS HOME check",
+          "title": "Getting started check",
           "passingScore": 60,
           "questions": [
             {
@@ -21548,6 +21548,7 @@ export const courseMeta: CourseMeta[] = [
                 "When you need scalable vector graphics",
                 "When you need CSS styling of individual shapes"
               ],
+              "answer": 1,
               "explanation": "Canvas is faster for high-frequency redraws of many objects. SVG is better for interactive, styled vector graphics."
             }
           ]
@@ -23461,7 +23462,7 @@ export const courseMeta: CourseMeta[] = [
     "sections": [
       {
         "id": "ts-s1",
-        "title": "TS HOME",
+        "title": "Getting started",
         "description": "What TypeScript adds to JavaScript, how the compiler works, and what you will be able to do at the end.",
         "lessons": [
           {
@@ -23475,7 +23476,7 @@ export const courseMeta: CourseMeta[] = [
               "Name the three classes of bugs TypeScript prevents"
             ],
             "xp": 40,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "ts-l2",
@@ -23488,7 +23489,7 @@ export const courseMeta: CourseMeta[] = [
               "Read compiler output and jump to the failing line"
             ],
             "xp": 35,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "ts-l3",
@@ -23501,12 +23502,12 @@ export const courseMeta: CourseMeta[] = [
               "Distinguish a compile error from a runtime error"
             ],
             "xp": 40,
-            "exerciseCount": 0
+            "exerciseCount": 1
           }
         ],
         "quiz": {
           "id": "quiz-ts-s1",
-          "title": "TS HOME check",
+          "title": "Getting started check",
           "passingScore": 60,
           "questions": [
             {
@@ -23556,16 +23557,16 @@ export const courseMeta: CourseMeta[] = [
             {
               "id": "quiz-ts-s1-q5",
               "type": "identify-error",
-              "prompt": "What is wrong with this tsconfig.json?",
-              "code": "{\n  \"compilerOptions\": {\n    \"target\": \"es2020\",\n    \"module\": \"commonjs\"\n  }\n}",
+              "prompt": "Which line is a compile error?",
+              "code": "let message: string = 'Hello'\nmessage = 42",
               "options": [
                 "Nothing is wrong",
-                "Missing \"strict\": true",
-                "target and module are incompatible",
-                "The file must be named typescript.config.json"
+                "The second line: a number cannot be assigned to a string",
+                "The first line: string needs a capital S",
+                "message is a reserved word"
               ],
-              "answer": 0,
-              "explanation": "This is a valid minimal tsconfig.json. Adding \"strict\": true is recommended but not required."
+              "answer": 1,
+              "explanation": "message was annotated as a string, so assigning the number 42 is rejected before the code runs. In plain JavaScript it would silently change the type."
             }
           ]
         }
@@ -23586,7 +23587,7 @@ export const courseMeta: CourseMeta[] = [
               "Choose between const and let for narrower types"
             ],
             "xp": 40,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "ts-l5",
@@ -23599,7 +23600,7 @@ export const courseMeta: CourseMeta[] = [
               "Use readonly to make arrays and tuples immutable"
             ],
             "xp": 40,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "ts-l6",
@@ -23612,7 +23613,7 @@ export const courseMeta: CourseMeta[] = [
               "Distinguish excess property checks from structural typing"
             ],
             "xp": 40,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "ts-l7",
@@ -23625,7 +23626,7 @@ export const courseMeta: CourseMeta[] = [
               "Use a discriminant property for exhaustive narrowing"
             ],
             "xp": 45,
-            "exerciseCount": 0
+            "exerciseCount": 1
           }
         ],
         "quiz": {
@@ -23709,7 +23710,7 @@ export const courseMeta: CourseMeta[] = [
               "Type a rest parameter as an array"
             ],
             "xp": 40,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "ts-l9",
@@ -23722,7 +23723,7 @@ export const courseMeta: CourseMeta[] = [
               "Explain when void return is appropriate"
             ],
             "xp": 35,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "ts-l10",
@@ -23735,7 +23736,7 @@ export const courseMeta: CourseMeta[] = [
               "Use bind or arrow functions to preserve this"
             ],
             "xp": 35,
-            "exerciseCount": 0
+            "exerciseCount": 1
           }
         ],
         "quiz": {
@@ -23819,7 +23820,7 @@ export const courseMeta: CourseMeta[] = [
               "List the features only type aliases have (unions, primitives)"
             ],
             "xp": 35,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "ts-l12",
@@ -23832,7 +23833,7 @@ export const courseMeta: CourseMeta[] = [
               "Explain when merging is useful (augmenting library types)"
             ],
             "xp": 35,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "ts-l13",
@@ -23845,7 +23846,7 @@ export const courseMeta: CourseMeta[] = [
               "Use implements to catch missing members at compile time"
             ],
             "xp": 35,
-            "exerciseCount": 0
+            "exerciseCount": 1
           }
         ],
         "quiz": {
@@ -23929,7 +23930,7 @@ export const courseMeta: CourseMeta[] = [
               "Let TypeScript infer the type argument from the call"
             ],
             "xp": 45,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "ts-l15",
@@ -23942,7 +23943,7 @@ export const courseMeta: CourseMeta[] = [
               "Provide a default so callers can omit the argument"
             ],
             "xp": 40,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "ts-l16",
@@ -23955,7 +23956,7 @@ export const courseMeta: CourseMeta[] = [
               "Distribute a conditional type over a union"
             ],
             "xp": 45,
-            "exerciseCount": 0
+            "exerciseCount": 1
           }
         ],
         "quiz": {
@@ -24040,7 +24041,7 @@ export const courseMeta: CourseMeta[] = [
               "Use Readonly<T> to freeze an object shape"
             ],
             "xp": 35,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "ts-l18",
@@ -24053,7 +24054,7 @@ export const courseMeta: CourseMeta[] = [
               "Use Record<K, V> for dictionary-like objects"
             ],
             "xp": 35,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "ts-l19",
@@ -24066,7 +24067,7 @@ export const courseMeta: CourseMeta[] = [
               "Extract the return type of a function with ReturnType"
             ],
             "xp": 35,
-            "exerciseCount": 0
+            "exerciseCount": 1
           }
         ],
         "quiz": {
@@ -24119,7 +24120,7 @@ export const courseMeta: CourseMeta[] = [
             },
             {
               "id": "quiz-ts-s6-q5",
-              "type": "identify-error",
+              "type": "multiple-choice",
               "prompt": "What is the type of ReturnType<() => string>?",
               "options": [
                 "string",
@@ -24149,7 +24150,7 @@ export const courseMeta: CourseMeta[] = [
               "Explain why this pattern scales to many variants"
             ],
             "xp": 45,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "ts-l21",
@@ -24162,7 +24163,7 @@ export const courseMeta: CourseMeta[] = [
               "Generate event handler names from event names"
             ],
             "xp": 40,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "ts-l22",
@@ -24175,7 +24176,7 @@ export const courseMeta: CourseMeta[] = [
               "Extract array element types with infer"
             ],
             "xp": 40,
-            "exerciseCount": 0
+            "exerciseCount": 1
           }
         ],
         "quiz": {
@@ -24259,7 +24260,7 @@ export const courseMeta: CourseMeta[] = [
               "Explain the difference between import and require"
             ],
             "xp": 35,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "ts-l24",
@@ -24272,7 +24273,7 @@ export const courseMeta: CourseMeta[] = [
               "Generate declarations with declaration: true"
             ],
             "xp": 35,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "ts-l25",
@@ -24285,7 +24286,7 @@ export const courseMeta: CourseMeta[] = [
               "Verify the published types are consumable"
             ],
             "xp": 30,
-            "exerciseCount": 0
+            "exerciseCount": 1
           }
         ],
         "quiz": {
@@ -24370,7 +24371,7 @@ export const courseMeta: CourseMeta[] = [
               "Enable strict mode in a new project from day one"
             ],
             "xp": 35,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "ts-l27",
@@ -24383,7 +24384,7 @@ export const courseMeta: CourseMeta[] = [
               "Enable flags one by one as the codebase improves"
             ],
             "xp": 30,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "ts-l28",
@@ -24396,7 +24397,7 @@ export const courseMeta: CourseMeta[] = [
               "Structure a monorepo with shared type packages"
             ],
             "xp": 30,
-            "exerciseCount": 0
+            "exerciseCount": 1
           }
         ],
         "quiz": {
@@ -24481,7 +24482,7 @@ export const courseMeta: CourseMeta[] = [
               "Configure strict mode and path aliases"
             ],
             "xp": 60,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "ts-l30",
@@ -24494,7 +24495,7 @@ export const courseMeta: CourseMeta[] = [
               "Use ReturnType<typeof reducer> for the state type"
             ],
             "xp": 60,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "ts-l31",
@@ -24507,7 +24508,7 @@ export const courseMeta: CourseMeta[] = [
               "Delegate events on a list with a single listener"
             ],
             "xp": 55,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "ts-l32",
@@ -24520,7 +24521,7 @@ export const courseMeta: CourseMeta[] = [
               "Compute filtered views without mutating state"
             ],
             "xp": 50,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "ts-l33",
@@ -24533,7 +24534,7 @@ export const courseMeta: CourseMeta[] = [
               "Ensure accessibility with ARIA attributes"
             ],
             "xp": 50,
-            "exerciseCount": 0
+            "exerciseCount": 1
           }
         ],
         "quiz": {
@@ -24645,7 +24646,7 @@ export const courseMeta: CourseMeta[] = [
     "sections": [
       {
         "id": "react-s1",
-        "title": "React HOME",
+        "title": "Getting started",
         "description": "What React adds, how components work, and how to set up your first project.",
         "lessons": [
           {
@@ -24659,7 +24660,7 @@ export const courseMeta: CourseMeta[] = [
               "Name the three principles of React design"
             ],
             "xp": 40,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "react-l2",
@@ -24672,7 +24673,7 @@ export const courseMeta: CourseMeta[] = [
               "Run the dev server and open the browser"
             ],
             "xp": 40,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "react-l3",
@@ -24685,7 +24686,7 @@ export const courseMeta: CourseMeta[] = [
               "Explain the difference between the source and the DOM"
             ],
             "xp": 45,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "react-l35",
@@ -24699,7 +24700,7 @@ export const courseMeta: CourseMeta[] = [
               "Import and export modules with ESM syntax"
             ],
             "xp": 40,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "react-l36",
@@ -24713,12 +24714,12 @@ export const courseMeta: CourseMeta[] = [
               "Use the react-codemod script to automate large migrations"
             ],
             "xp": 35,
-            "exerciseCount": 0
+            "exerciseCount": 1
           }
         ],
         "quiz": {
           "id": "quiz-react-s1",
-          "title": "React HOME check",
+          "title": "Getting started check",
           "passingScore": 60,
           "questions": [
             {
@@ -24773,7 +24774,7 @@ export const courseMeta: CourseMeta[] = [
                 "Missing return statement",
                 "Props needs to be destructured",
                 "Missing closing parenthesis",
-                "Nothing — it is valid JSX"
+                "Nothing - it is valid JSX"
               ],
               "answer": 3,
               "explanation": "This is valid JSX. Props is the implicit parameter of a function component. With TypeScript you would annotate it, but plain JS accepts this."
@@ -24797,7 +24798,7 @@ export const courseMeta: CourseMeta[] = [
               "Return valid JSX from every code path"
             ],
             "xp": 40,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "react-l5",
@@ -24810,7 +24811,7 @@ export const courseMeta: CourseMeta[] = [
               "Apply conditional rendering with ternary and &&"
             ],
             "xp": 40,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "react-l6",
@@ -24823,7 +24824,7 @@ export const courseMeta: CourseMeta[] = [
               "Explain why using array index as key breaks reordering"
             ],
             "xp": 35,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "react-l37",
@@ -24837,7 +24838,7 @@ export const courseMeta: CourseMeta[] = [
               "Explain why className is used instead of class"
             ],
             "xp": 40,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "react-l38",
@@ -24851,7 +24852,7 @@ export const courseMeta: CourseMeta[] = [
               "Choose the right pattern for readability and accessibility"
             ],
             "xp": 40,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "react-l39",
@@ -24865,7 +24866,7 @@ export const courseMeta: CourseMeta[] = [
               "Understand why function components with hooks are preferred"
             ],
             "xp": 35,
-            "exerciseCount": 0
+            "exerciseCount": 1
           }
         ],
         "quiz": {
@@ -24891,7 +24892,7 @@ export const courseMeta: CourseMeta[] = [
               "type": "true-false",
               "prompt": "Components must return a single root element.",
               "answer": false,
-              "explanation": "React 19 (and React 18 with the fragments proposal) supports returning arrays and strings. Fragments also allow multiple roots."
+              "explanation": "A component can return a fragment or a single element; a fragment groups siblings without adding a wrapper node to the DOM."
             },
             {
               "id": "quiz-react-s2-q3",
@@ -24922,7 +24923,7 @@ export const courseMeta: CourseMeta[] = [
               "prompt": "What is wrong with using array index as key?",
               "code": "items.map((item, index) => (\n  <li key={index}>{item.name}</li>\n))",
               "options": [
-                "Nothing — index keys are always fine",
+                "Nothing - index keys are always fine",
                 "The list will not sort correctly",
                 "Reordering, inserting or removing items breaks reconciliation",
                 "TypeScript will not compile"
@@ -24949,7 +24950,7 @@ export const courseMeta: CourseMeta[] = [
               "Never mutate state directly, always replace it"
             ],
             "xp": 40,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "react-l8",
@@ -24962,7 +24963,7 @@ export const courseMeta: CourseMeta[] = [
               "Avoid stale closures with correct dependency arrays"
             ],
             "xp": 40,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "react-l9",
@@ -24975,7 +24976,7 @@ export const courseMeta: CourseMeta[] = [
               "Recognize and fix invalid hook call warnings"
             ],
             "xp": 30,
-            "exerciseCount": 0
+            "exerciseCount": 1
           }
         ],
         "quiz": {
@@ -25060,7 +25061,7 @@ export const courseMeta: CourseMeta[] = [
               "Read the event target and its value"
             ],
             "xp": 35,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "react-l11",
@@ -25073,7 +25074,7 @@ export const courseMeta: CourseMeta[] = [
               "Extract the current value from the event object"
             ],
             "xp": 40,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "react-l12",
@@ -25086,7 +25087,7 @@ export const courseMeta: CourseMeta[] = [
               "Show feedback for invalid fields"
             ],
             "xp": 35,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "react-l40",
@@ -25100,7 +25101,7 @@ export const courseMeta: CourseMeta[] = [
               "Handle multi-select with an array of values"
             ],
             "xp": 40,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "react-l41",
@@ -25114,7 +25115,7 @@ export const courseMeta: CourseMeta[] = [
               "Use radio buttons for mutually exclusive choices"
             ],
             "xp": 45,
-            "exerciseCount": 0
+            "exerciseCount": 1
           }
         ],
         "quiz": {
@@ -25198,7 +25199,7 @@ export const courseMeta: CourseMeta[] = [
               "Consume context with useContext in any descendant"
             ],
             "xp": 40,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "react-l14",
@@ -25211,7 +25212,7 @@ export const courseMeta: CourseMeta[] = [
               "Explain when to use useReducer instead of useState"
             ],
             "xp": 40,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "react-l15",
@@ -25224,7 +25225,7 @@ export const courseMeta: CourseMeta[] = [
               "Explain the dependency arrays for each hook"
             ],
             "xp": 35,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "react-l16",
@@ -25237,7 +25238,7 @@ export const courseMeta: CourseMeta[] = [
               "Focus an input programmatically on mount"
             ],
             "xp": 35,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "react-l42",
@@ -25251,7 +25252,7 @@ export const courseMeta: CourseMeta[] = [
               "Distinguish between urgent and transition updates"
             ],
             "xp": 40,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "react-l43",
@@ -25265,7 +25266,7 @@ export const courseMeta: CourseMeta[] = [
               "Use forwardRef with function components that use hooks"
             ],
             "xp": 40,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "react-l44",
@@ -25279,7 +25280,7 @@ export const courseMeta: CourseMeta[] = [
               "Return whatever state or functions the consuming component needs"
             ],
             "xp": 45,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "react-l45",
@@ -25293,7 +25294,7 @@ export const courseMeta: CourseMeta[] = [
               "Recognize HOC patterns in older codebases"
             ],
             "xp": 35,
-            "exerciseCount": 0
+            "exerciseCount": 1
           }
         ],
         "quiz": {
@@ -25377,7 +25378,7 @@ export const courseMeta: CourseMeta[] = [
               "Navigate with Link and NavLink components"
             ],
             "xp": 40,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "react-l18",
@@ -25390,7 +25391,7 @@ export const courseMeta: CourseMeta[] = [
               "Use Outlet to render nested route content"
             ],
             "xp": 40,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "react-l19",
@@ -25403,7 +25404,7 @@ export const courseMeta: CourseMeta[] = [
               "Combine route protection with lazy loading"
             ],
             "xp": 35,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "react-l46",
@@ -25417,7 +25418,21 @@ export const courseMeta: CourseMeta[] = [
               "Clean up the portal DOM node on unmount"
             ],
             "xp": 35,
-            "exerciseCount": 0
+            "exerciseCount": 1
+          },
+          {
+            "id": "react-l50",
+            "title": "React Transitions",
+            "description": "Animating elements entering and leaving the DOM: TransitionGroup, react-transition-group, and the built-in Transition API.",
+            "duration": 6,
+            "objectives": [
+              "Mount and unmount a child with a Transition component",
+              "Track enter, appear, and leave states with status names",
+              "Combine transitions with routing for page animations",
+              "Use TransitionGroup to animate a list of items together"
+            ],
+            "xp": 40,
+            "exerciseCount": 1
           }
         ],
         "quiz": {
@@ -25471,7 +25486,7 @@ export const courseMeta: CourseMeta[] = [
             {
               "id": "quiz-react-s6-q5",
               "type": "identify-error",
-              "prompt": "How do you redirect a user in a React Router loader or effect?",
+              "prompt": "How do you redirect a user in a route component?",
               "code": "if (!user) return <Navigate to=\"/login\" />",
               "options": [
                 "<Navigate /> only works in route components, not loaders",
@@ -25501,7 +25516,7 @@ export const courseMeta: CourseMeta[] = [
               "Code-split by route for faster initial load"
             ],
             "xp": 35,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "react-l21",
@@ -25514,7 +25529,7 @@ export const courseMeta: CourseMeta[] = [
               "Apply useCallback to functions passed to memoized children"
             ],
             "xp": 40,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "react-l22",
@@ -25527,7 +25542,7 @@ export const courseMeta: CourseMeta[] = [
               "Understand the relationship between props and re-renders"
             ],
             "xp": 30,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "react-l47",
@@ -25540,7 +25555,7 @@ export const courseMeta: CourseMeta[] = [
               "Choose between CSS files and inline styles based on reuse and dynamism"
             ],
             "xp": 40,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "react-l48",
@@ -25553,7 +25568,7 @@ export const courseMeta: CourseMeta[] = [
               "Use the :global selector for styles that should not be scoped"
             ],
             "xp": 35,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "react-l49",
@@ -25567,7 +25582,7 @@ export const courseMeta: CourseMeta[] = [
               "Compare runtime CSS-in-JS with build-time extraction"
             ],
             "xp": 35,
-            "exerciseCount": 0
+            "exerciseCount": 1
           }
         ],
         "quiz": {
@@ -25622,7 +25637,7 @@ export const courseMeta: CourseMeta[] = [
               "id": "quiz-react-s7-q5",
               "type": "identify-error",
               "prompt": "What is the issue with this component?",
-              "code": "function Item({ data, onClick }) {\n  const processed = expensiveCalc(data)\n  return <divonClick={onClick}>{processed}</div>\n}",
+              "code": "function Item({ data, onClick }) {\n  const processed = expensiveCalc(data)\n  return <div onClick={onClick}>{processed}</div>\n}",
               "options": [
                 "No issue",
                 "The div has no children",
@@ -25651,7 +25666,7 @@ export const courseMeta: CourseMeta[] = [
               "Configure jsdom for DOM simulation in tests"
             ],
             "xp": 35,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "react-l24",
@@ -25664,7 +25679,7 @@ export const courseMeta: CourseMeta[] = [
               "Handle asynchronous behavior with waitFor and findBy"
             ],
             "xp": 40,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "react-l25",
@@ -25677,7 +25692,7 @@ export const courseMeta: CourseMeta[] = [
               "Test components that use async data and useEffect"
             ],
             "xp": 35,
-            "exerciseCount": 0
+            "exerciseCount": 1
           }
         ],
         "quiz": {
@@ -25761,7 +25776,7 @@ export const courseMeta: CourseMeta[] = [
               "Define protected routes for authenticated pages"
             ],
             "xp": 55,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "react-l27",
@@ -25774,7 +25789,7 @@ export const courseMeta: CourseMeta[] = [
               "Consume context in deeply nested components with no any"
             ],
             "xp": 55,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "react-l28",
@@ -25787,7 +25802,7 @@ export const courseMeta: CourseMeta[] = [
               "Cache responses in context with a typed Map"
             ],
             "xp": 55,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "react-l29",
@@ -25800,7 +25815,7 @@ export const courseMeta: CourseMeta[] = [
               "Style with CSS modules or styled-components"
             ],
             "xp": 45,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "react-l30",
@@ -25813,7 +25828,7 @@ export const courseMeta: CourseMeta[] = [
               "Build for production with Vite and verify the output"
             ],
             "xp": 40,
-            "exerciseCount": 0
+            "exerciseCount": 1
           }
         ],
         "quiz": {
@@ -25888,7 +25903,7 @@ export const courseMeta: CourseMeta[] = [
     "slug": "frontend-projects",
     "title": "Frontend Projects",
     "shortTitle": "Projects",
-    "description": "Build real applications that combine everything: semantic HTML, responsive CSS, interactive JavaScript, and accessibility. Five projects from a profile page to a data table, each teaching a different skill, each deployable to the web.",
+    "description": "Take a page from brief to built: plan the structure, write mobile-first responsive CSS, and make every control work for keyboard and screen-reader users. Every lesson ends in a checkpoint you can test.",
     "technology": "html",
     "category": "projects",
     "type": "course",
@@ -25911,8 +25926,8 @@ export const courseMeta: CourseMeta[] = [
     "sections": [
       {
         "id": "fp-s1",
-        "title": "Frontend Projects HOME",
-        "description": "How to approach a full frontend project from blank file to deployed site, and what each of the five projects exercises.",
+        "title": "Project foundations",
+        "description": "How to take a project from a design and a brief to a structured, styled, working page — and the habits that keep a build maintainable.",
         "lessons": [
           {
             "id": "fp-l1",
@@ -25925,7 +25940,7 @@ export const courseMeta: CourseMeta[] = [
               "Set up a dev server with livereload for fast iteration"
             ],
             "xp": 30,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "fp-l2",
@@ -25938,12 +25953,12 @@ export const courseMeta: CourseMeta[] = [
               "Wire up interactivity with progressive enhancement"
             ],
             "xp": 50,
-            "exerciseCount": 0
+            "exerciseCount": 1
           }
         ],
         "quiz": {
           "id": "quiz-fp-s1",
-          "title": "Frontend Projects HOME check",
+          "title": "Project foundations check",
           "passingScore": 60,
           "questions": [
             {
@@ -26023,7 +26038,7 @@ export const courseMeta: CourseMeta[] = [
               "Use relative units for scaling"
             ],
             "xp": 40,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "fp-l4",
@@ -26036,7 +26051,7 @@ export const courseMeta: CourseMeta[] = [
               "Use picture for art direction"
             ],
             "xp": 35,
-            "exerciseCount": 0
+            "exerciseCount": 1
           }
         ],
         "quiz": {
@@ -26062,7 +26077,7 @@ export const courseMeta: CourseMeta[] = [
               "type": "true-false",
               "prompt": "The viewport meta tag is not needed if you use responsive CSS.",
               "answer": false,
-              "explanation": "Without <meta name=\"viewport\">, mobile browsers render at a virtual width and your responsive CSS has no effect."
+              "explanation": "Without a viewport meta tag, mobile browsers render at a virtual width and your responsive CSS has no effect."
             },
             {
               "id": "quiz-fp-s2-q3",
@@ -26080,13 +26095,13 @@ export const courseMeta: CourseMeta[] = [
             {
               "id": "quiz-fp-s2-q4",
               "type": "blank",
-              "prompt": "What attribute on img makes it responsive with max-width: 100%?",
+              "prompt": "What attribute on img offers the browser several candidate files to choose from?",
               "answers": [
                 "srcset",
                 "sizes",
-                "max-width on the img"
+                "the srcset attribute"
               ],
-              "explanation": "srcset provides multiple image sources for different resolutions. max-width: 100% on img ensures it never overflows."
+              "explanation": "srcset lists the candidates and sizes describes how wide the image will be displayed, so the browser can pick the smallest one that still looks sharp."
             },
             {
               "id": "quiz-fp-s2-q5",
@@ -26121,7 +26136,7 @@ export const courseMeta: CourseMeta[] = [
               "Label form controls correctly"
             ],
             "xp": 40,
-            "exerciseCount": 0
+            "exerciseCount": 1
           },
           {
             "id": "fp-l6",
@@ -26134,7 +26149,7 @@ export const courseMeta: CourseMeta[] = [
               "Trap focus in modal or dialog components"
             ],
             "xp": 35,
-            "exerciseCount": 0
+            "exerciseCount": 1
           }
         ],
         "quiz": {
@@ -26178,10 +26193,9 @@ export const courseMeta: CourseMeta[] = [
             {
               "id": "quiz-fp-s3-q4",
               "type": "blank",
-              "prompt": "What CSS pseudo-class shows keyboard focus?",
+              "prompt": "What CSS pseudo-class shows focus only for keyboard users?",
               "answers": [
                 ":focus-visible",
-                ":focus",
                 "focus-visible"
               ],
               "explanation": ":focus-visible shows focus only when the user is navigating with the keyboard, not on mouse click."
@@ -26189,12 +26203,12 @@ export const courseMeta: CourseMeta[] = [
             {
               "id": "quiz-fp-s3-q5",
               "type": "identify-error",
-              "prompt": "What is wrong with this button?",
-              "code": "<div onClick=\"handleClick()\">Click me</div>",
+              "prompt": "What is wrong with this control?",
+              "code": "<div onclick=\"handleClick()\">Click me</div>",
               "options": [
                 "Nothing is wrong",
                 "A div is not keyboard accessible and should be a button",
-                "onClick should be on:click for Svelte",
+                "onclick should be on:click",
                 "The function call is wrong"
               ],
               "answer": 1,

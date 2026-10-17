@@ -159,6 +159,7 @@
 definePageMeta({ layout: 'learn' })
 
 import { loadLesson, nextLesson, previousLesson } from '~/composables/useCourses'
+import { scrollBlockIntoView } from '~/utils/scroll-to-block'
 
 const route = useRoute()
 const router = useRouter()
@@ -253,25 +254,50 @@ const autoHint = computed(() => {
   return `This lesson completes itself once you ${outstanding.join(' and ')}.`
 })
 
+/**
+ * A block id from the URL hash that has not been scrolled to yet. Lesson bodies
+ * load asynchronously, so a deep link can arrive before its target block
+ * exists; the id is held here and retried once the content is in.
+ */
+const pendingHash = ref('')
+
 watch(
   [lesson, () => route.hash],
-  async ([current, hash]) => {
+  ([current, hash]) => {
     if (!current) return
     visitLesson(current.id)
     drawerOpen.value = false
-    if (import.meta.client) {
-      if (hash) {
-        await nextTick()
-        document.querySelector(hash)?.scrollIntoView({ block: 'start' })
-      } else {
-        window.scrollTo(0, 0)
-        await nextTick()
-        scrollContainer.value?.scrollTo({ top: 0 })
-      }
-    }
+    pendingHash.value = hash ? decodeURIComponent(hash.replace(/^#/, '')) : ''
+    void applyScroll()
   },
   { immediate: true },
 )
+
+// The body arrives after the route changes, so a deep link asks again here.
+watch(lessonContent, () => {
+  void applyScroll()
+})
+
+/**
+ * Puts the reading container where the navigation asked. The document is reset
+ * on every pass: the shell is fixed to the viewport, so any document scroll —
+ * from a native fragment jump, or a browser revealing a focused control — would
+ * slide the lesson out of view with nothing to scroll it back.
+ */
+async function applyScroll() {
+  if (!import.meta.client) return
+  await nextTick()
+  window.scrollTo({ top: 0, behavior: 'auto' })
+  if (pendingHash.value) {
+    // `smooth: false` matches a native fragment jump: a deep link arrives
+    // already in place rather than animating down the page.
+    if (scrollBlockIntoView(pendingHash.value, { container: scrollContainer.value, smooth: false })) {
+      pendingHash.value = ''
+    }
+    return
+  }
+  scrollContainer.value?.scrollTo({ top: 0 })
+}
 
 function go(target: { href: string }) {
   void router.push(target.href)

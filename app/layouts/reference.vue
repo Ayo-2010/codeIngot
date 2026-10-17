@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-screen flex-col overflow-hidden bg-ink-950">
+  <div class="app-viewport flex flex-col overflow-hidden bg-ink-950">
     <AppHeader />
     <div class="flex min-h-0 flex-1 overflow-hidden">
       <aside class="hidden w-64 shrink-0 border-r border-ink-600 lg:block">
@@ -41,7 +41,7 @@
           </div>
         </div>
 
-        <main id="main" class="min-w-0 flex-1 overflow-y-auto">
+        <main id="main" ref="scrollEl" class="min-w-0 flex-1 overflow-y-auto">
           <slot />
         </main>
       </div>
@@ -80,11 +80,22 @@ const isJs = computed(
 
 const drawerOpen = ref(false)
 
+/** The shell's own scroller, not the document: see the route watcher below. */
+const scrollEl = ref<HTMLElement | null>(null)
+
 watch(
   () => route.fullPath,
   () => {
     drawerOpen.value = false
+    // The shell scrolls an inner element, so the document reset the router
+    // performs misses it: a new page would otherwise open at the previous
+    // page's offset, looking scrolled out of place.
+    if (import.meta.client) {
+      window.scrollTo({ top: 0, behavior: 'auto' })
+      scrollEl.value?.scrollTo({ top: 0 })
+    }
   },
+  { immediate: true },
 )
 
 /**

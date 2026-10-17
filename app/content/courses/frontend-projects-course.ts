@@ -8,7 +8,7 @@ export const frontendProjectsCourse: Course = {
   title: 'Frontend Projects',
   shortTitle: 'Projects',
   description:
-    'Build real applications that combine everything: semantic HTML, responsive CSS, interactive JavaScript, and accessibility. Five projects from a profile page to a data table, each teaching a different skill, each deployable to the web.',
+    'Take a page from brief to built: plan the structure, write mobile-first responsive CSS, and make every control work for keyboard and screen-reader users. Every lesson ends in a checkpoint you can test.',
   technology: 'html',
   category: 'projects',
   type: 'course',

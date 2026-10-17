@@ -24,6 +24,7 @@
 
 <script setup lang="ts">
 import type { LessonBlock } from '~/types/content'
+import { findScrollContainer, scrollBlockIntoView } from '~/utils/scroll-to-block'
 
 const props = defineProps<{ blocks: LessonBlock[]; xp: number; duration: number }>()
 
@@ -31,17 +32,7 @@ const active = ref<string>('')
 const tocEl = ref<HTMLElement | null>(null)
 const inBand = ref<Set<string>>(new Set())
 let observer: IntersectionObserver | null = null
-let scrollRoot: Element | null = null
-
-function findScrollRoot(): Element | null {
-  let node = tocEl.value?.parentElement ?? null
-  while (node) {
-    const style = getComputedStyle(node)
-    if (/(auto|scroll|overlay)/.test(style.overflowY)) return node
-    node = node.parentElement
-  }
-  return null
-}
+let scrollRoot: HTMLElement | null = null
 
 const entries = computed(() => {
   const out: { id: string; label: string }[] = []
@@ -68,36 +59,20 @@ const entries = computed(() => {
 /**
  * Handle the jump ourselves instead of letting the browser do a fragment
  * navigation. The learn layout is a fixed-height shell whose body scrolls in an
- * inner container, and `html`/`body` are `overflow: hidden`. A native fragment
- * jump scrolls every scrollable ancestor including the document - `overflow:
- * hidden` only stops the user, not `scrollTo` - so the whole shell would slide
- * up and the sticky header would scroll out of view. Scrolling the container
- * directly also lines the target up with the top of the reading area, which the
- * native jump does not reliably do inside a nested scroller.
+ * inner container, and a native jump - or a bare `scrollIntoView` - scrolls
+ * every scrollable ancestor including the document, so the whole shell would
+ * slide up and the header would scroll out of view. `scrollBlockIntoView`
+ * scrolls the container directly and resets the document.
  */
 function onLinkClick(event: MouseEvent, id: string) {
   // Leave modified clicks alone: they mean "open in a new tab".
   if (event.defaultPrevented || event.button !== 0) return
   if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
-
-  const target = document.getElementById(id)
-  if (!target) return
+  if (!document.getElementById(id)) return
 
   event.preventDefault()
 
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  const behavior: ScrollBehavior = reduced ? 'auto' : 'smooth'
-
-  if (scrollRoot) {
-    const rootTop = scrollRoot.getBoundingClientRect().top
-    const targetTop = target.getBoundingClientRect().top
-    scrollRoot.scrollTo({ top: scrollRoot.scrollTop + (targetTop - rootTop), behavior })
-  } else {
-    target.scrollIntoView({ behavior, block: 'start' })
-  }
-
-  // Belt and braces: undo any document scroll a previous native jump left behind.
-  window.scrollTo({ top: 0, behavior: 'auto' })
+  scrollBlockIntoView(id, { container: scrollRoot })
 
   // Keep the fragment shareable without re-triggering a native jump.
   history.replaceState(null, '', `#${id}`)
@@ -105,7 +80,7 @@ function onLinkClick(event: MouseEvent, id: string) {
 }
 
 onMounted(() => {
-  scrollRoot = findScrollRoot()
+  scrollRoot = findScrollContainer(tocEl.value)
   observer = new IntersectionObserver(
     (items) => {
       // Track which targets sit in the band rather than reacting to arrivals

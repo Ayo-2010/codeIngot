@@ -54,18 +54,40 @@ function hasWord(source: string, needle: string): boolean {
   return new RegExp(`${startBoundary}${escaped}${endBoundary}`, 'i').test(source)
 }
 
+/**
+ * True when a needle is written as a pattern rather than a literal: a few
+ * checklist entries read `a|b` or `a.*b`, which is how a reviewer would write
+ * the same check by hand. Those are compiled as case-insensitive regular
+ * expressions; the content is authored in-house, and anything that fails to
+ * compile falls back to a literal search so a bad pattern can never throw.
+ */
+function isPatternNeedle(needle: string): boolean {
+  return needle.includes('|') || needle.includes('.*')
+}
+
+function matchesPattern(source: string, needle: string): boolean {
+  try {
+    return new RegExp(needle, 'i').test(source)
+  } catch {
+    return source.toLowerCase().includes(needle.toLowerCase())
+  }
+}
+
 /** A css-rule check looks at the stylesheet and nothing else. */
 export function matchesCssRule(css: string, needle: string): boolean {
+  if (isPatternNeedle(needle)) return matchesPattern(css, needle)
   return hasWord(css, needle)
 }
 
 /** A js-call check looks at the script and nothing else. */
 export function matchesJsCall(javascript: string, needle: string): boolean {
+  if (isPatternNeedle(needle)) return matchesPattern(javascript, needle)
   if (/^[a-z][a-z0-9]*$/i.test(needle)) return hasWord(javascript, needle)
   return javascript.toLowerCase().includes(needle.toLowerCase())
 }
 
 /** A text check looks at the HTML and nothing else. */
 export function matchesText(html: string, needle: string): boolean {
+  if (isPatternNeedle(needle)) return matchesPattern(html, needle)
   return html.toLowerCase().includes(needle.toLowerCase())
 }

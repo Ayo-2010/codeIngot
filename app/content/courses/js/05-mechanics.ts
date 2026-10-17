@@ -1407,13 +1407,13 @@ return first.greet() === 'Hi, Cleo' && second.greet() === 'Hi, Dev'
               ],
               hints: [
                 'The name has to survive after makeGreeter returns, so it cannot be passed in as an argument to greet — it has to be captured from the enclosing scope. That capture is what a closure does.',
-                'Return an object literal: return { greet: () => "Hi, " + name + "!" }. Remembering an object literal needs the parentheses.',
+                'Return an object literal: return { greet: () => "Hi, " + name }. Remembering an object literal needs the parentheses.',
                 'A method shorthand, greet() {}, would lose this the moment you pull it off the object. An arrow closes over name and does not care.',
               ],
               solution: {
                 javascript: `function makeGreeter(name) {
   return {
-    greet: () => 'Hi, ' + name + '!'
+    greet: () => 'Hi, ' + name
   }
 }
 

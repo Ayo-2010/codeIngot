@@ -203,13 +203,18 @@ const nextCourse = computed(() => {
 
 const glance = computed(() => {
   if (!course.value) return []
-  return [
+  const entries = [
     { label: 'Lessons', value: stats.value.lessons },
     { label: 'Challenges', value: stats.value.challenges },
     { label: 'Quizzes', value: stats.value.quizzes },
-    { label: 'Projects', value: stats.value.projects },
     { label: 'Time', value: `${stats.value.minutes} min` },
   ]
+  // A course with no projects of its own reads "0 projects" badly; the row
+  // simply does not appear. Courses that do have projects keep it in place.
+  if (stats.value.projects > 0) {
+    entries.splice(3, 0, { label: 'Projects', value: stats.value.projects })
+  }
+  return entries
 })
 
 function quizScore(quiz: Quiz): number | null {

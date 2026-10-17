@@ -17,7 +17,139 @@ export const tsInterfacesSections: Section[] = [
           'List the features only type aliases have (unions, primitives)',
         ],
         xp: 35,
-        content: [],
+        content: [
+          {
+            type: 'text',
+            id: 'ts-l11-intro',
+            body: '**Interfaces vs type aliases.** There are two ways to name a shape in TypeScript, and for object shapes they are nearly interchangeable. `interface User { name: string }` and `type User = { name: string }` describe exactly the same thing, and both can be used anywhere a type is expected.',
+          },
+          {
+            type: 'text',
+            id: 'ts-l11-b2',
+            body: 'The differences are small but real. An interface can be opened again and added to — that is declaration merging. A type alias can name anything, including a union, a tuple or a primitive; an interface can only describe an object. When the two are equal, reach for the interface for public object shapes and the alias for everything else.',
+          },
+          {
+            type: 'heading',
+            id: 'ts-l11-h1',
+            level: 2,
+            body: 'The same shape, two spellings',
+          },
+          {
+            type: 'code',
+            id: 'ts-l11-code',
+            language: 'typescript',
+            title: 'interface and type side by side',
+            code: `interface User {
+  name: string
+  age: number
+}
+
+// The identical shape as a type alias:
+type Person = { name: string; age: number }
+
+function describe(user: User): string {
+  return user.name + ' (' + user.age + ')'
+}
+
+// Only a type alias can name a union, a tuple or a primitive:
+type Id = string | number
+type Pair = [number, number]
+type Name = string`,
+          },
+          {
+            type: 'list',
+            id: 'ts-l11-list',
+            style: 'bullet',
+            items: [
+              'For plain object shapes the choice is style, not capability — pick one and stay consistent.',
+              'An **interface** may be declared more than once; the declarations merge.',
+              'A **type alias** may name a union (`string | number`), a tuple, or a primitive, which an interface cannot.',
+            ],
+          },
+          {
+            type: 'tip',
+            id: 'ts-l11-tip',
+            title: 'A rule of thumb that avoids bikeshedding',
+            body: 'Use `interface` for objects that other code will consume or extend, and `type` for everything else — unions, function types, and short aliases. Both compile to nothing, so this is a readability decision, not a performance one.',
+          },
+          {
+            type: 'heading',
+            id: 'ts-l11-h2',
+            level: 2,
+            body: 'Your turn',
+          },
+          {
+            type: 'text',
+            id: 'ts-l11-b3',
+            body: 'Create an object that matches a named shape, then write the function that consumes it.',
+          },
+          {
+            type: 'exercise',
+            id: 'ts-l11-x1',
+            exercise: {
+              id: 'ex-ts-l11',
+              instructions:
+                "Write makeUser(name, age) returning an object with those two properties, then label(user) returning the text name followed by space age in parentheses — for example 'Ada (36)'.",
+              languages: ['typescript'],
+              starterCode: {
+                typescript: `interface User {
+  name: string
+  age: number
+}
+
+// Return an object that matches User.
+function makeUser(name: string, age: number): User {
+  return { name: '', age: 0 }
+}
+
+// Return "name (age)", e.g. "Ada (36)".
+function label(user: User): string {
+  return ''
+}
+`,
+              },
+              tests: [
+                {
+                  id: 'ts-l11-t1',
+                  label: 'makeUser builds the object from its arguments',
+                  body: "const u = makeUser('Ada', 36); return u.name === 'Ada' && u.age === 36",
+                },
+                {
+                  id: 'ts-l11-t2',
+                  label: 'label formats a user',
+                  body: "return label({ name: 'Grace', age: 45 }) === 'Grace (45)'",
+                },
+                {
+                  id: 'ts-l11-t3',
+                  label: 'label works with makeUser output',
+                  body: "return label(makeUser('Ada', 36)) === 'Ada (36)'",
+                },
+              ],
+              hints: [
+                'makeUser already receives name and age — return an object built from them.',
+                'label receives a user object, so read user.name and user.age.',
+                'Join the parts exactly: user.name + " (" + user.age + ")".',
+              ],
+              solution: {
+                typescript: `interface User {
+  name: string
+  age: number
+}
+
+function makeUser(name: string, age: number): User {
+  return { name: name, age: age }
+}
+
+function label(user: User): string {
+  return user.name + ' (' + user.age + ')'
+}
+`,
+              },
+              testNotes:
+                'The tests read the properties off your objects, which is exactly what the interface promises they will have.',
+            },
+          },
+        ],
       },
       {
         id: 'ts-l12',
@@ -30,7 +162,147 @@ export const tsInterfacesSections: Section[] = [
           'Explain when merging is useful (augmenting library types)',
         ],
         xp: 35,
-        content: [],
+        content: [
+          {
+            type: 'text',
+            id: 'ts-l12-intro',
+            body: '**Extending and merging interfaces.** An interface can build on another with `extends`: the child has every member of the parent plus its own. This is how you model a hierarchy without repeating yourself — `Dog extends Animal` already has everything an animal has.',
+          },
+          {
+            type: 'text',
+            id: 'ts-l12-b2',
+            body: 'Interfaces have a second trick that type aliases do not. If you declare the same name twice, the declarations *merge* into one. This is how libraries let you add a field to a type you did not write, and how a global augmentation slots into an existing interface.',
+          },
+          {
+            type: 'heading',
+            id: 'ts-l12-h1',
+            level: 2,
+            body: 'Extending, and merging a second declaration',
+          },
+          {
+            type: 'code',
+            id: 'ts-l12-code',
+            language: 'typescript',
+            title: 'inheritance and merging',
+            code: `interface Animal {
+  name: string
+}
+
+// Dog has name AND breed:
+interface Dog extends Animal {
+  breed: string
+}
+
+const rex: Dog = { name: 'Rex', breed: 'Corgi' }
+
+// Declaring Dog again adds to the first declaration:
+interface Dog {
+  goodBoy?: boolean
+}
+
+// Now all three keys are allowed:
+const bella: Dog = { name: 'Bella', breed: 'Poodle', goodBoy: true }`,
+          },
+          {
+            type: 'list',
+            id: 'ts-l12-list',
+            style: 'bullet',
+            items: [
+              '`extends` creates a new interface; it does not change the parent.',
+              'A child can override a parent member only with a compatible type.',
+              'Merging is additive and usually reserved for library authors augmenting existing types.',
+            ],
+          },
+          {
+            type: 'warning',
+            id: 'ts-l12-warn',
+            title: 'Merging is a sharp tool',
+            body: 'Because two declarations of the same interface combine silently, a stray duplicate in your own code can change a type without a visible error. Prefer inheritance for your own code and keep merging for deliberate augmentation.',
+          },
+          {
+            type: 'heading',
+            id: 'ts-l12-h2',
+            level: 2,
+            body: 'Your turn',
+          },
+          {
+            type: 'text',
+            id: 'ts-l12-b3',
+            body: 'Build an admin from a base account, then type-check the result with a guard.',
+          },
+          {
+            type: 'exercise',
+            id: 'ts-l12-x1',
+            exercise: {
+              id: 'ex-ts-l12',
+              instructions:
+                "Write makeAdmin(name) returning an object with name and role set to 'admin', then isAdmin(account) returning true only when account.role is 'admin'.",
+              languages: ['typescript'],
+              starterCode: {
+                typescript: `interface Account {
+  name: string
+}
+
+interface Admin extends Account {
+  role: 'admin'
+}
+
+// Build an admin from the name it receives.
+function makeAdmin(name: string): Admin {
+  return { name: '', role: 'admin' }
+}
+
+// Return true only for an admin account.
+function isAdmin(account: Account): boolean {
+  return false
+}
+`,
+              },
+              tests: [
+                {
+                  id: 'ts-l12-t1',
+                  label: "makeAdmin sets the role to 'admin'",
+                  body: "const a = makeAdmin('Ada'); return a.name === 'Ada' && a.role === 'admin'",
+                },
+                {
+                  id: 'ts-l12-t2',
+                  label: 'isAdmin accepts an admin',
+                  body: "return isAdmin(makeAdmin('Ada')) === true",
+                },
+                {
+                  id: 'ts-l12-t3',
+                  label: 'isAdmin rejects a plain account',
+                  body: "return isAdmin({ name: 'Ada' }) === false",
+                },
+              ],
+              hints: [
+                'makeAdmin ignores its argument — it always stores an empty name. Use the name it received.',
+                'A plain account has no role, so reading account.role gives undefined.',
+                'Compare directly: return account.role === "admin".',
+              ],
+              solution: {
+                typescript: `interface Account {
+  name: string
+}
+
+interface Admin extends Account {
+  role: 'admin'
+}
+
+function makeAdmin(name: string): Admin {
+  return { name: name, role: 'admin' }
+}
+
+function isAdmin(account: Account): boolean {
+  return account.role === 'admin'
+}
+`,
+              },
+              testNotes:
+                'The third check passes a plain account with no role. The guard has to say false for it rather than assume every account is an admin.',
+            },
+          },
+        ],
       },
       {
         id: 'ts-l13',
@@ -43,7 +315,137 @@ export const tsInterfacesSections: Section[] = [
           'Use implements to catch missing members at compile time',
         ],
         xp: 35,
-        content: [],
+        content: [
+          {
+            type: 'text',
+            id: 'ts-l13-intro',
+            body: '**Implementing interfaces in classes.** The `implements` clause tells the compiler a class promises to provide every member of an interface. Forget one and the class fails to compile — a checklist attached to your class.',
+          },
+          {
+            type: 'text',
+            id: 'ts-l13-b2',
+            body: 'It is worth knowing that `implements` is optional. TypeScript is *structurally typed*: a class matches an interface if it happens to have the right members, whether or not it says `implements`. The keyword does not change what matches; it only asks the compiler to check your intent at the declaration.',
+          },
+          {
+            type: 'heading',
+            id: 'ts-l13-h1',
+            level: 2,
+            body: 'A class and the shape it satisfies',
+          },
+          {
+            type: 'code',
+            id: 'ts-l13-code',
+            language: 'typescript',
+            title: 'implements, and matching without it',
+            code: `interface Shape {
+  area(): number
+}
+
+class Square implements Shape {
+  side: number
+
+  constructor(side: number) {
+    this.side = side
+  }
+
+  area(): number {
+    return this.side * this.side
+  }
+}
+
+const square: Shape = new Square(3)   // Square is usable as a Shape
+
+// This plain object also satisfies Shape, with no class and no implements:
+const rect: Shape = { area: () => 12 }`,
+          },
+          {
+            type: 'list',
+            id: 'ts-l13-list',
+            style: 'bullet',
+            items: [
+              '`implements` is checked at compile time and adds nothing at runtime.',
+              'A class can implement several interfaces: `class C implements A, B`.',
+              'Structural typing means an object literal with the right method already counts as a `Shape`.',
+            ],
+          },
+          {
+            type: 'tip',
+            id: 'ts-l13-tip',
+            title: 'implements is documentation the compiler enforces',
+            body: 'Even though matching happens structurally, writing `implements Shape` moves the error to the class declaration, right next to the code you are about to fix — instead of surfacing far away at a call site.',
+          },
+          {
+            type: 'heading',
+            id: 'ts-l13-h2',
+            level: 2,
+            body: 'Your turn',
+          },
+          {
+            type: 'text',
+            id: 'ts-l13-b3',
+            body: 'Implement a class that satisfies a shape, storing its inputs and returning a computed value.',
+          },
+          {
+            type: 'exercise',
+            id: 'ts-l13-x1',
+            exercise: {
+              id: 'ex-ts-l13',
+              instructions:
+                'Complete the Rectangle class so area() returns width multiplied by height.',
+              languages: ['typescript'],
+              starterCode: {
+                typescript: `// Make area() return width * height.
+class Rectangle {
+  width: number
+  height: number
+
+  constructor(width: number, height: number) {
+    this.width = width
+    this.height = height
+  }
+
+  area(): number {
+    return 0
+  }
+}
+`,
+              },
+              tests: [
+                { id: 'ts-l13-t1', label: 'area is a method', body: "return typeof new Rectangle(1, 1).area === 'function'" },
+                { id: 'ts-l13-t2', label: 'a 3 by 4 rectangle has area 12', body: 'return new Rectangle(3, 4).area() === 12' },
+                { id: 'ts-l13-t3', label: 'a square works too', body: 'return new Rectangle(5, 5).area() === 25' },
+                {
+                  id: 'ts-l13-t4',
+                  label: 'each instance keeps its own dimensions',
+                  body: 'const a = new Rectangle(2, 3); const b = new Rectangle(4, 5); return a.area() === 6 && b.area() === 20',
+                },
+              ],
+              hints: [
+                'The constructor already stored width and height on this.',
+                'Inside a method, this refers to the instance you called it on.',
+                'Return this.width * this.height from area().',
+              ],
+              solution: {
+                typescript: `class Rectangle {
+  width: number
+  height: number
+
+  constructor(width: number, height: number) {
+    this.width = width
+    this.height = height
+  }
+
+  area(): number {
+    return this.width * this.height
+  }
+}
+`,
+              },
+              testNotes:
+                'The last check builds two rectangles to prove the value lives on each instance rather than in a shared variable.',
+            },
+          },
+        ],
       },
     ],
     quiz: {

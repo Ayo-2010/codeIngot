@@ -27,7 +27,16 @@ export type CourseCategory = 'web' | 'programming' | 'computer-science' | 'tools
 
 export type CourseType = 'course' | 'project-course'
 
-export type EditorLanguage = 'html' | 'css' | 'javascript'
+/**
+ * Everything a learner can write in the editor.
+ *
+ * `html`, `css` and `javascript` run in the sandbox as they are. The other
+ * three are compiled to JavaScript first (see `~/utils/transpile`): a real
+ * `tsc`-style transform strips `typescript`, `jsx` becomes `React.createElement`
+ * calls, and `tsx` does both. React lessons get the vendored runtime injected
+ * so JSX renders for real rather than being read as text.
+ */
+export type EditorLanguage = 'html' | 'css' | 'javascript' | 'typescript' | 'jsx' | 'tsx'
 
 /* ---------------------------------- blocks --------------------------------- */
 
