@@ -19,6 +19,24 @@ export const reactHomeSections: Section[] = [
         xp: 40,
         content: [
           {
+            type: 'demo',
+            id: 'react-l1-d1',
+            title: 'A component, running for real',
+            body: 'Nothing in that heading was written by hand. The component returns the markup, and React puts it on screen.',
+            files: [
+              {
+                path: 'Greeting.jsx',
+                language: 'jsx',
+                content: `export default function Greeting() {
+  return <h2>Hello from a component</h2>
+}
+`,
+              },
+            ],
+            previewProps: {},
+            height: 110,
+          },
+          {
             type: 'text',
             id: 'react-l1-intro',
             body: '**What React is and why it exists.** Building a UI by hand means changing the DOM yourself: create an element, find it again, update its text. Every new feature adds more of those steps, and the page slowly drifts out of sync with your data. React changes the question from *how* the DOM changes to *what* the page should show.',
@@ -40,7 +58,7 @@ export const reactHomeSections: Section[] = [
             language: 'jsx',
             title: 'the smallest component',
             code: `// A component is a function whose name is capitalised.
-function Welcome() {
+export default function Welcome() {
   return <h1>Hello, world</h1>
 }
 
@@ -82,13 +100,18 @@ function Welcome() {
               instructions:
                 'Write a component called Welcome that returns an h1 element whose text is exactly: Hello, world',
               languages: ['jsx'],
-              starterCode: {
-                jsx: `// Return an <h1> with the text Hello, world.
-function Welcome() {
+              files: [
+                {
+                  path: 'Welcome.jsx',
+                  language: 'jsx',
+                  content: `// Return an <h1> with the text Hello, world.
+export default function Welcome() {
   return <div />
 }
 `,
-              },
+                },
+              ],
+              previewProps: {},
               tests: [
                 { id: 'ex-react-l1-t1', label: 'Welcome is a function', body: "return typeof Welcome === 'function'" },
                 {
@@ -107,12 +130,16 @@ function Welcome() {
                 'The text goes between the tags, with no extra punctuation: <h1>Hello, world</h1>.',
                 'Do not wrap it in a <div> — the tests expect the element type to be h1.',
               ],
-              solution: {
-                jsx: `function Welcome() {
+              solutionFiles: [
+                {
+                  path: 'Welcome.jsx',
+                  language: 'jsx',
+                  content: `export default function Welcome() {
   return <h1>Hello, world</h1>
 }
 `,
-              },
+                },
+              ],
               testNotes:
                 'The tests call Welcome() and read the element it returns, so they check the markup without needing a rendered page.',
             },
@@ -131,6 +158,35 @@ function Welcome() {
         ],
         xp: 40,
         content: [
+          {
+            type: 'demo',
+            id: 'react-l2-d1',
+            title: 'What the scaffold renders',
+            body: 'This is the app `npm create vite` produces, running here through the same module sandbox the exercises use. Click the button - the count is held in a component, not in the DOM.',
+            files: [
+              {
+                path: 'App.jsx',
+                language: 'jsx',
+                content: `import { useState } from 'react'
+
+export default function App() {
+  const [count, setCount] = useState(0)
+  return (
+    <div style={{ fontFamily: 'system-ui' }}>
+      <h3 style={{ margin: '0 0 8px' }}>Vite + React</h3>
+      <button onClick={() => setCount(count + 1)}>count is {count}</button>
+      <p style={{ margin: '8px 0 0', color: '#5b6470' }}>
+        Edit src/App.jsx and save to test HMR.
+      </p>
+    </div>
+  )
+}
+`,
+              },
+            ],
+            previewProps: {},
+            height: 170,
+          },
           {
             type: 'text',
             id: 'react-l2-intro',
@@ -198,8 +254,11 @@ npm run dev
               instructions:
                 'Fill packageJson so dev runs "vite", build runs "vite build" and preview runs "vite preview", and so react and react-dom are listed as dependencies.',
               languages: ['javascript'],
-              starterCode: {
-                javascript: `const packageJson = {
+              files: [
+                {
+                  path: 'package.js',
+                  language: 'javascript',
+                  content: `export const packageJson = {
   name: 'my-app',
   scripts: {
     dev: '',
@@ -212,7 +271,8 @@ npm run dev
   },
 }
 `,
-              },
+                },
+              ],
               tests: [
                 { id: 'ex-react-l2-t1', label: 'dev starts the dev server', body: "return packageJson.scripts.dev === 'vite'" },
                 {
@@ -236,8 +296,11 @@ npm run dev
                 'react-dom keeps its hyphen, so it is written as a quoted key.',
                 'Any non-empty version string works for the dependencies — the tests only check that the entries exist.',
               ],
-              solution: {
-                javascript: `const packageJson = {
+              solutionFiles: [
+                {
+                  path: 'package.js',
+                  language: 'javascript',
+                  content: `export const packageJson = {
   name: 'my-app',
   scripts: {
     dev: 'vite',
@@ -250,7 +313,8 @@ npm run dev
   },
 }
 `,
-              },
+                },
+              ],
               testNotes:
                 'The scripts are checked exactly, because a typo there is the difference between a project that runs and one that does not.',
             },
@@ -270,6 +334,29 @@ npm run dev
         xp: 45,
         content: [
           {
+            type: 'demo',
+            id: 'react-l3-d1',
+            title: 'One parent, two children',
+            body: 'Siblings are wrapped in a single `<div>`, then mounted once into `#root`. Change the code in the exercise below and this is the shape you are building.',
+            files: [
+              {
+                path: 'App.jsx',
+                language: 'jsx',
+                content: `export default function App() {
+  return (
+    <div style={{ fontFamily: 'system-ui' }}>
+      <h1 style={{ margin: '0 0 6px', fontSize: 22 }}>Tasks</h1>
+      <p style={{ margin: 0, color: '#5b6470' }}>Nothing here yet.</p>
+    </div>
+  )
+}
+`,
+              },
+            ],
+            previewProps: {},
+            height: 130,
+          },
+          {
             type: 'text',
             id: 'react-l3-intro',
             body: '**Your first component.** A component returns a description of part of the page. When several elements sit side by side, JSX asks you to wrap them in a single parent — usually a `<div>`, or a fragment when you do not want an extra element in the DOM.',
@@ -277,7 +364,7 @@ npm run dev
           {
             type: 'text',
             id: 'react-l3-b2',
-            body: 'To put that description on the page, you mount it once with `createRoot`. After the first render React owns that part of the DOM: you change your data and re-render, and React updates only what needs to change. In these exercises the preview is already mounted for you, and `render(<App />)` draws your component.',
+            body: 'To put that description on the page, you mount it once with `createRoot`. After the first render React owns that part of the DOM: you change your data and re-render, and React updates only what needs to change. In these exercises the React runtime is already loaded and the preview has a `#root` element waiting, so your component appears as soon as you write it.',
           },
           {
             type: 'heading',
@@ -290,7 +377,8 @@ npm run dev
             id: 'react-l3-code',
             language: 'jsx',
             title: 'wrapping with a parent, then rendering',
-            code: `function App() {
+            code: `// src/App.jsx
+export default function App() {
   return (
     <div>
       <h1>Tasks</h1>
@@ -299,8 +387,11 @@ npm run dev
   )
 }
 
-// Mount it once. The preview in this editor does this for you.
-render(<App />)
+// src/main.jsx - mount the tree once, into the #root div from index.html.
+import { createRoot } from 'react-dom/client'
+import App from './App'
+
+createRoot(document.getElementById('root')).render(<App />)
 
 // A fragment groups elements without adding a real node:
 // return <><h1>Tasks</h1><p>Empty</p></>`,
@@ -312,7 +403,7 @@ render(<App />)
             items: [
               'JSX must return a single root element — wrap siblings in a `<div>` or a fragment.',
               'Each element becomes an object describing what to render; the DOM is produced from that description.',
-              '`render(<App />)` mounts the tree into the preview’s `#root` element.',
+              "`createRoot(document.getElementById('root')).render(<App />)` mounts the tree into the page’s `#root` element.",
             ],
           },
           {
@@ -338,15 +429,19 @@ render(<App />)
             exercise: {
               id: 'ex-react-l3',
               instructions:
-                'Write App to return a div containing an h1 with the text "Tasks" and a p with the text "Nothing here yet.". Finish by rendering it with render(<App />).',
+                'Write App to return a div containing an h1 with the text "Tasks" and a p with the text "Nothing here yet.".',
               languages: ['jsx'],
-              starterCode: {
-                jsx: `// Return a div holding an <h1> and a <p>.
-function App() {
+              files: [
+                {
+                  path: 'App.jsx',
+                  language: 'jsx',
+                  content: `// Return a div holding an <h1> and a <p>.
+export default function App() {
   return <div />
 }
 `,
-              },
+                },
+              ],
               tests: [
                 { id: 'ex-react-l3-t1', label: 'the root element is a div', body: "return App().type === 'div'" },
                 {
@@ -370,8 +465,11 @@ function App() {
                 'The order matters: the <h1> comes first, then the <p>.',
                 'Text goes between the tags, exactly as written: <h1>Tasks</h1> and <p>Nothing here yet.</p>.',
               ],
-              solution: {
-                jsx: `function App() {
+              solutionFiles: [
+                {
+                  path: 'App.jsx',
+                  language: 'jsx',
+                  content: `export default function App() {
   return (
     <div>
       <h1>Tasks</h1>
@@ -379,10 +477,10 @@ function App() {
     </div>
   )
 }
-
-render(<App />)
 `,
-              },
+                },
+              ],
+              previewProps: {},
               testNotes:
                 'The tests read the two children by position, so both the order and the wrapping parent are checked.',
             },
@@ -402,6 +500,39 @@ render(<App />)
         ],
         xp: 40,
         content: [
+          {
+            type: 'demo',
+            id: 'react-l35-d1',
+            title: 'Destructuring and spread, live',
+            body: 'The component destructures its props, destructures an array with a rest element, and renders a small badge component. Everything shown is read from values, never copied by hand.',
+            files: [
+              {
+                path: 'App.jsx',
+                language: 'jsx',
+                content: `function Badge({ label, tone }) {
+  return (
+    <span style={{ padding: '2px 8px', borderRadius: 999, background: tone, fontSize: 13 }}>
+      {label}
+    </span>
+  )
+}
+
+export default function App({ items }) {
+  const [first, ...rest] = items
+  return (
+    <div style={{ fontFamily: 'system-ui' }}>
+      <p style={{ margin: '0 0 6px' }}>First: {first}</p>
+      <p style={{ margin: '0 0 10px' }}>Rest: {rest.join(', ')}</p>
+      <Badge label="ES6" tone="#e0f2fe" />
+    </div>
+  )
+}
+`,
+              },
+            ],
+            previewProps: { items: ['Ada', 'Grace', 'Alan'] },
+            height: 150,
+          },
           {
             type: 'text',
             id: 'react-l35-intro',
@@ -480,13 +611,17 @@ export function greet(name) {
               instructions:
                 'Write unpack(names) that returns an object with first equal to the first name and rest an array of the remaining names. Use array destructuring.',
               languages: ['javascript'],
-              starterCode: {
-                javascript: `// Return { first, rest } using destructuring.
-function unpack(names) {
+              files: [
+                {
+                  path: 'unpack.js',
+                  language: 'javascript',
+                  content: `// Return { first, rest } using destructuring.
+export function unpack(names) {
   return { first: undefined, rest: [] }
 }
 `,
-              },
+                },
+              ],
               tests: [
                 { id: 'ex-react-l35-t1', label: 'first is the first name', body: "return unpack(['Ada', 'Grace', 'Alan']).first === 'Ada'" },
                 {
@@ -510,13 +645,17 @@ function unpack(names) {
                 'The rest element gathers everything after the first: const [first, ...rest] = names.',
                 'Return an object literal: { first, rest }.',
               ],
-              solution: {
-                javascript: `function unpack(names) {
+              solutionFiles: [
+                {
+                  path: 'unpack.js',
+                  language: 'javascript',
+                  content: `export function unpack(names) {
   const [first, ...rest] = names
   return { first, rest }
 }
 `,
-              },
+                },
+              ],
               testNotes:
                 'The empty-list check confirms rest is really an array (not undefined), which is what the rest element always produces.',
             },
@@ -536,6 +675,34 @@ function unpack(names) {
         ],
         xp: 35,
         content: [
+          {
+            type: 'demo',
+            id: 'react-l36-d1',
+            title: 'The hooks version of the counter',
+            body: 'This is the "after" from the comparison below, running. There is no `this` and no class — one `useState` pair holds the count and one `useEffect` sets the document title as it changes.',
+            files: [
+              {
+                path: 'Counter.jsx',
+                language: 'jsx',
+                content: `import { useState, useEffect } from 'react'
+
+export default function Counter() {
+  const [count, setCount] = useState(0)
+  useEffect(() => {
+    document.title = 'Count: ' + count
+  }, [count])
+  return (
+    <button onClick={() => setCount(count + 1)} style={{ font: 'inherit', padding: '6px 12px' }}>
+      Count: {count}
+    </button>
+  )
+}
+`,
+              },
+            ],
+            previewProps: {},
+            height: 100,
+          },
           {
             type: 'text',
             id: 'react-l36-intro',
@@ -613,13 +780,17 @@ function Counter() {
               instructions:
                 'Write nextCount(state, delta) returning a new state object whose count is state.count plus delta. Do not change the object you were given.',
               languages: ['javascript'],
-              starterCode: {
-                javascript: `// Return a new state with count increased by delta.
-function nextCount(state, delta) {
+              files: [
+                {
+                  path: 'state.js',
+                  language: 'javascript',
+                  content: `// Return a new state with count increased by delta.
+export function nextCount(state, delta) {
   return state
 }
 `,
-              },
+                },
+              ],
               tests: [
                 { id: 'ex-react-l36-t1', label: 'adds the delta to the count', body: 'return nextCount({ count: 1 }, 2).count === 3' },
                 {
@@ -643,12 +814,16 @@ function nextCount(state, delta) {
                 'Object spread makes the copy: { ...state }.',
                 'Combine them: return { ...state, count: state.count + delta }.',
               ],
-              solution: {
-                javascript: `function nextCount(state, delta) {
+              solutionFiles: [
+                {
+                  path: 'state.js',
+                  language: 'javascript',
+                  content: `export function nextCount(state, delta) {
   return { ...state, count: state.count + delta }
 }
 `,
-              },
+                },
+              ],
               testNotes:
                 'The immutability checks re-read the original object and compare references — exactly how React notices that state has changed.',
             },

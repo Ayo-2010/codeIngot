@@ -19,6 +19,35 @@ export const tsFunctionsSections: Section[] = [
         xp: 40,
         content: [
           {
+            type: 'demo',
+            id: 'ts-l8-d1',
+            title: 'Optional and rest parameters at runtime',
+            body: 'The annotations are erased, but the behaviour they describe is real: an optional parameter falls back inside the body, and a rest parameter gathers every extra argument into an array.',
+            html: `<button id="go">Call both functions</button>
+<pre id="out">Press the button.</pre>`,
+            css: `body { font-family: system-ui, sans-serif; font-size: 14px; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #f4f6f8; border-radius: 6px; font-size: 12.5px; }`,
+            javascript: `function greet(name, greeting) {
+  return (greeting === undefined ? 'Hello' : greeting) + ', ' + name + '!'
+}
+
+function sum(...numbers) {
+  return numbers.reduce(function (total, n) { return total + n }, 0)
+}
+
+const out = document.querySelector('#out')
+document.querySelector('#go').addEventListener('click', function () {
+  out.textContent = [
+    greet('Ada'),
+    greet('Ada', 'Hi'),
+    'sum(1, 2, 3) = ' + sum(1, 2, 3),
+    'sum() = ' + sum(),
+  ].join('\n')
+})`,
+            height: 190,
+          },
+          {
             type: 'text',
             id: 'ts-l8-intro',
             body: '**Parameter and return types.** A function is where annotations earn their keep. A caller has no value to infer from, so the signature is the contract: these are the types that go in, and this is the type that comes out. Get the signature right and every call site is checked against it.',
@@ -138,6 +167,34 @@ function sumAll(...numbers: number[]): number {
         xp: 35,
         content: [
           {
+            type: 'demo',
+            id: 'ts-l9-d1',
+            title: 'A callback is just a function you pass',
+            body: 'A function described by its parameters and return value can be passed around like any value. The runtime simply calls it — the `Transform` name and the `void` return are type-level only.',
+            html: `<button id="go">Run the callbacks</button>
+<pre id="out">Press the button.</pre>`,
+            css: `body { font-family: system-ui, sans-serif; font-size: 14px; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #f4f6f8; border-radius: 6px; font-size: 12.5px; }`,
+            javascript: `function applyTwice(value, transform) {
+  return transform(transform(value))
+}
+
+function forEach(items, visit) {
+  for (let i = 0; i < items.length; i++) visit(items[i])
+}
+
+const out = document.querySelector('#out')
+document.querySelector('#go').addEventListener('click', function () {
+  const lines = ['applyTwice(3, double) = ' + applyTwice(3, function (n) { return n * 2 })]
+  forEach(['a', 'b', 'c'], function (item) {
+    lines.push('visited ' + item)
+  })
+  out.textContent = lines.join('\n')
+})`,
+            height: 190,
+          },
+          {
             type: 'text',
             id: 'ts-l9-intro',
             body: '**Function types and callbacks.** Functions are values, so they have types too. The syntax mirrors the arrow function: `(a: number, b: number) => number` is a function that takes two numbers and returns one. Giving that type a name — `type Math = (a: number, b: number) => number` — makes signatures reusable across call sites.',
@@ -250,6 +307,48 @@ function applyTwice(value: number, transform: (n: number) => number): number {
         ],
         xp: 35,
         content: [
+          {
+            type: 'demo',
+            id: 'ts-l10-d1',
+            title: 'Preserving this with an arrow',
+            body: 'Overloads vanish at runtime, but the `this` behaviour they warn about does not. A method shorthand reads `this` from its caller; the arrow version closes over a private count and keeps working when detached.',
+            html: `<button id="go">Detach both methods</button>
+<pre id="out">Press the button.</pre>`,
+            css: `body { font-family: system-ui, sans-serif; font-size: 14px; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #f4f6f8; border-radius: 6px; font-size: 12.5px; }`,
+            javascript: `const fragile = {
+  count: 0,
+  bump() { return ++this.count },
+}
+
+function makeCounter() {
+  let count = 0
+  return {
+    total: () => count,
+    bump: () => ++count,
+  }
+}
+
+const robust = makeCounter()
+
+const out = document.querySelector('#out')
+document.querySelector('#go').addEventListener('click', function () {
+  const detachedFragile = fragile.bump
+  let fragileResult
+  try {
+    fragileResult = String(detachedFragile())
+  } catch (error) {
+    fragileResult = 'threw ' + error.name
+  }
+  const detachedRobust = robust.bump
+  out.textContent = [
+    'detached shorthand bump() -> ' + fragileResult + ' (this was lost)',
+    'detached arrow bump() -> ' + detachedRobust() + ' (still counts)',
+  ].join('\n')
+})`,
+            height: 185,
+          },
           {
             type: 'text',
             id: 'ts-l10-intro',

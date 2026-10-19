@@ -19,6 +19,30 @@ export const reactComponentsSections: Section[] = [
         xp: 40,
         content: [
           {
+            type: 'demo',
+            id: 'react-l4-d1',
+            title: 'Props in, JSX out',
+            body: 'A function component takes one props object and returns JSX. The caller leaves `count` out here, so the **default** of 0 is used.',
+            files: [
+              {
+                path: 'Card.jsx',
+                language: 'jsx',
+                content: `export default function Card({ title, count = 0, children }) {
+  return (
+    <div style={{ fontFamily: 'system-ui', border: '1px solid #d0d7de', borderRadius: 8, padding: 12, width: 200 }}>
+      <h2 style={{ margin: 0, fontSize: 16 }}>{title}</h2>
+      <span style={{ color: '#5b6470' }}>{count}</span>
+      <p style={{ margin: '8px 0 0' }}>{children}</p>
+    </div>
+  )
+}
+`,
+              },
+            ],
+            previewProps: { title: 'Inbox', children: 'No count was passed, so the default is shown.' },
+            height: 175,
+          },
+          {
             type: 'text',
             id: 'react-l4-intro',
             body: '**Function components and JSX.** A component is a function that takes a single object of inputs — **props** — and returns the markup for one piece of the page. Props are read-only: a component receives them and describes what to show, but never writes to them.',
@@ -39,7 +63,7 @@ export const reactComponentsSections: Section[] = [
             id: 'react-l4-code',
             language: 'jsx',
             title: 'a component with defaults and children',
-            code: `function Card({ title, count = 0, children }) {\n  return (\n    <div className="card">\n      <h2>{title}</h2>\n      <span>{count}</span>\n      {children}\n    </div>\n  )\n}\n\n// The caller supplies the values as attributes:\n// <Card title="Inbox" count={3} />`,
+            code: `export default function Card({ title, count = 0, children }) {\n  return (\n    <div className="card">\n      <h2>{title}</h2>\n      <span>{count}</span>\n      {children}\n    </div>\n  )\n}\n\n// The caller supplies the values as attributes:\n// <Card title="Inbox" count={3} />`,
           },
           {
             type: 'list',
@@ -76,9 +100,14 @@ export const reactComponentsSections: Section[] = [
               instructions:
                 'Write Card({ title, count }) returning a div with className "card" that holds an h2 containing the title and a span containing the count. count defaults to 0.',
               languages: ['jsx'],
-              starterCode: {
-                jsx: `// Return a div.card holding an <h2> and a <span>.\nfunction Card({ title, count }) {\n  return <div />\n}\n`,
-              },
+              files: [
+                {
+                  path: 'Card.jsx',
+                  language: 'jsx',
+                  content: `// Return a div.card holding an <h2> and a <span>.\nexport default function Card({ title, count }) {\n  return <div />\n}\n`,
+                },
+              ],
+              previewProps: { title: 'Inbox', count: 3 },
               tests: [
                 {
                   id: 'ex-react-l4-t1',
@@ -106,9 +135,13 @@ export const reactComponentsSections: Section[] = [
                 'The div wraps two children in order: the <h2> first, then the <span>.',
                 'The class attribute is written className in JSX: <div className="card">.',
               ],
-              solution: {
-                jsx: `function Card({ title, count = 0 }) {\n  return (\n    <div className="card">\n      <h2>{title}</h2>\n      <span>{count}</span>\n    </div>\n  )\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'Card.jsx',
+                  language: 'jsx',
+                  content: `export default function Card({ title, count = 0 }) {\n  return (\n    <div className="card">\n      <h2>{title}</h2>\n      <span>{count}</span>\n    </div>\n  )\n}\n`,
+                },
+              ],
               testNotes:
                 'The tests read the two children by position and check the default separately, so a missing default or a swapped order is caught.',
             },
@@ -127,6 +160,42 @@ export const reactComponentsSections: Section[] = [
         ],
         xp: 40,
         content: [
+          {
+            type: 'demo',
+            id: 'react-l5-d1',
+            title: 'A shell that renders what you nest',
+            body: 'Panel never says what it will hold. Whatever sits between its tags arrives as the `children` prop, and the ternary picks one of two lines.',
+            files: [
+              {
+                path: 'App.jsx',
+                language: 'jsx',
+                content: `function Panel({ title, children }) {
+  return (
+    <section style={{ fontFamily: 'system-ui', border: '1px solid #d0d7de', borderRadius: 8, padding: 12, width: 220 }}>
+      <h3 style={{ margin: '0 0 6px', fontSize: 15 }}>{title}</h3>
+      <div>{children}</div>
+    </section>
+  )
+}
+
+export default function App({ title, detail, online }) {
+  return (
+    <div style={{ fontFamily: 'system-ui' }}>
+      <Panel title={title}>
+        <p style={{ margin: 0 }}>{detail}</p>
+      </Panel>
+      <p style={{ margin: '8px 0 0', color: '#5b6470' }}>
+        {online ? 'Online now' : 'Offline'}
+      </p>
+    </div>
+  )
+}
+`,
+              },
+            ],
+            previewProps: { title: 'Profile', detail: 'Ada Lovelace', online: true },
+            height: 185,
+          },
           {
             type: 'text',
             id: 'react-l5-intro',
@@ -148,7 +217,7 @@ export const reactComponentsSections: Section[] = [
             id: 'react-l5-code',
             language: 'jsx',
             title: 'children and conditional content',
-            code: `function Panel({ title, children }) {\n  return (\n    <section>\n      <h3>{title}</h3>\n      <div>{children}</div>\n    </section>\n  )\n}\n\n// Used like a normal tag — the inside becomes children:\n// <Panel title="Profile"><p>Ada Lovelace</p></Panel>\n\n// Either/or with a ternary:\nconst message = loggedIn ? <p>Welcome back</p> : <p>Please sign in</p>`,
+            code: `export default function Panel({ title, children }) {\n  return (\n    <section>\n      <h3>{title}</h3>\n      <div>{children}</div>\n    </section>\n  )\n}\n\n// Used like a normal tag — the inside becomes children:\n// <Panel title="Profile"><p>Ada Lovelace</p></Panel>\n\n// Either/or with a ternary:\nconst message = loggedIn ? <p>Welcome back</p> : <p>Please sign in</p>`,
           },
           {
             type: 'list',
@@ -185,9 +254,14 @@ export const reactComponentsSections: Section[] = [
               instructions:
                 'Write Panel({ title, children }) returning a section that contains an h3 with the title and a div wrapping the children.',
               languages: ['jsx'],
-              starterCode: {
-                jsx: `// Return a <section> with an <h3> and a <div> holding children.\nfunction Panel({ title, children }) {\n  return <div />\n}\n`,
-              },
+              files: [
+                {
+                  path: 'Panel.jsx',
+                  language: 'jsx',
+                  content: `// Return a <section> with an <h3> and a <div> holding children.\nexport default function Panel({ title, children }) {\n  return <div />\n}\n`,
+                },
+              ],
+              previewProps: { title: 'Profile', children: 'Signed in as Ada' },
               tests: [
                 { id: 'ex-react-l5-t1', label: 'the root is a section', body: "return Panel({ title: 'Profile', children: 'x' }).type === 'section'" },
                 {
@@ -211,9 +285,13 @@ export const reactComponentsSections: Section[] = [
                 'Render the nested content by placing {children} inside the div.',
                 'The div is not just decoration — the tests check that the content is inside it.',
               ],
-              solution: {
-                jsx: `function Panel({ title, children }) {\n  return (\n    <section>\n      <h3>{title}</h3>\n      <div>{children}</div>\n    </section>\n  )\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'Panel.jsx',
+                  language: 'jsx',
+                  content: `export default function Panel({ title, children }) {\n  return (\n    <section>\n      <h3>{title}</h3>\n      <div>{children}</div>\n    </section>\n  )\n}\n`,
+                },
+              ],
               testNotes:
                 'The tests pass different values for children each time, so the component must render whatever it is given rather than fixed text.',
             },
@@ -232,6 +310,30 @@ export const reactComponentsSections: Section[] = [
         ],
         xp: 35,
         content: [
+          {
+            type: 'demo',
+            id: 'react-l6-d1',
+            title: 'map over data, key by id',
+            body: 'The array becomes one list item per entry. Each gets a `key` taken from the data, which is how React tracks a row as the list changes.',
+            files: [
+              {
+                path: 'TaskList.jsx',
+                language: 'jsx',
+                content: `export default function TaskList({ items }) {
+  return (
+    <ul style={{ fontFamily: 'system-ui', margin: 0, paddingLeft: 20 }}>
+      {items.map((item) => (
+        <li key={item.id}>{item.title}</li>
+      ))}
+    </ul>
+  )
+}
+`,
+              },
+            ],
+            previewProps: { items: [{ id: 'a', title: 'Write the plan' }, { id: 'b', title: 'Ship it' }] },
+            height: 120,
+          },
           {
             type: 'text',
             id: 'react-l6-intro',
@@ -253,7 +355,7 @@ export const reactComponentsSections: Section[] = [
             id: 'react-l6-code',
             language: 'jsx',
             title: 'building a list',
-            code: `function TaskList({ items }) {\n  return (\n    <ul>\n      {items.map((item) => (\n        <li key={item.id}>{item.title}</li>\n      ))}\n    </ul>\n  )\n}\n\n// <TaskList items={[{ id: 'a', title: 'Write' }]} />`,
+            code: `export default function TaskList({ items }) {\n  return (\n    <ul>\n      {items.map((item) => (\n        <li key={item.id}>{item.title}</li>\n      ))}\n    </ul>\n  )\n}\n\n// <TaskList items={[{ id: 'a', title: 'Write' }]} />`,
           },
           {
             type: 'list',
@@ -290,8 +392,18 @@ export const reactComponentsSections: Section[] = [
               instructions:
                 'Write TaskList({ items }) returning a ul with one li per item, keyed by item.id and showing item.title.',
               languages: ['jsx'],
-              starterCode: {
-                jsx: `// Map the items into <li> elements keyed by item.id.\nfunction TaskList({ items }) {\n  return <ul />\n}\n`,
+              files: [
+                {
+                  path: 'TaskList.jsx',
+                  language: 'jsx',
+                  content: `// Map the items into <li> elements keyed by item.id.\nexport default function TaskList({ items }) {\n  return <ul />\n}\n`,
+                },
+              ],
+              previewProps: {
+                items: [
+                  { id: 'a', title: 'Write the reducer' },
+                  { id: 'b', title: 'Ship it' },
+                ],
               },
               tests: [
                 { id: 'ex-react-l6-t1', label: 'the root is a ul', body: "return TaskList({ items: [] }).type === 'ul'" },
@@ -321,9 +433,13 @@ export const reactComponentsSections: Section[] = [
                 'Return the <li> from the map callback, and give it key={item.id}.',
                 'The visible text is a child of the li, so the arrow function should return a single element: <li key={item.id}>{item.title}</li>.',
               ],
-              solution: {
-                jsx: `function TaskList({ items }) {\n  return (\n    <ul>\n      {items.map((item) => (\n        <li key={item.id}>{item.title}</li>\n      ))}\n    </ul>\n  )\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'TaskList.jsx',
+                  language: 'jsx',
+                  content: `export default function TaskList({ items }) {\n  return (\n    <ul>\n      {items.map((item) => (\n        <li key={item.id}>{item.title}</li>\n      ))}\n    </ul>\n  )\n}\n`,
+                },
+              ],
               testNotes:
                 'The key check reads element.key directly, because React stores the key on the element rather than in props.',
             },
@@ -343,6 +459,33 @@ export const reactComponentsSections: Section[] = [
         ],
         xp: 40,
         content: [
+          {
+            type: 'demo',
+            id: 'react-l37-d1',
+            title: 'Braces for values, quotes for strings',
+            body: 'A variable is embedded with `{ }`, and the same braces set attributes from values. The class attribute keeps its JSX name, `className`.',
+            files: [
+              {
+                path: 'Avatar.jsx',
+                language: 'jsx',
+                content: `export default function Avatar({ name, url }) {
+  const label = 'Hello, ' + name
+  return (
+    <div style={{ fontFamily: 'system-ui' }}>
+      <h4 style={{ margin: '0 0 6px', fontSize: 15 }}>{label}</h4>
+      <img src={url} alt={name} className="avatar" style={{ width: 64, height: 64, borderRadius: '50%' }} />
+    </div>
+  )
+}
+`,
+              },
+            ],
+            previewProps: {
+              name: 'Ada Lovelace',
+              url: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96'%3E%3Crect width='96' height='96' rx='48' fill='%232f6feb'/%3E%3C/svg%3E",
+            },
+            height: 150,
+          },
           {
             type: 'text',
             id: 'react-l37-intro',
@@ -364,7 +507,7 @@ export const reactComponentsSections: Section[] = [
             id: 'react-l37-code',
             language: 'jsx',
             title: 'expressions and attributes',
-            code: `const name = 'Ada'\nconst url = '/ada.png'\n\nfunction Avatar({ name, url }) {\n  return (\n    <div>\n      <h1>{'Hello, ' + name}</h1>\n      <img src={url} alt={name} className="avatar" />\n    </div>\n  )\n}\n\n// Comparison: HTML vs JSX\n// <img class="avatar" src="x">\n// <img className="avatar" src={x} />`,
+            code: `const name = 'Ada'\nconst url = '/ada.png'\n\n// Those two values arrive as props from the caller:\nexport default function Avatar({ name, url }) {\n  return (\n    <div>\n      <h1>{'Hello, ' + name}</h1>\n      <img src={url} alt={name} className="avatar" />\n    </div>\n  )\n}\n\n// Comparison: HTML vs JSX\n// <img class="avatar" src="x">\n// <img className="avatar" src={x} />`,
           },
           {
             type: 'list',
@@ -401,8 +544,18 @@ export const reactComponentsSections: Section[] = [
               instructions:
                 'Write Avatar({ name, url }) returning an img whose src is the url, whose alt is the name, and whose className is "avatar".',
               languages: ['jsx'],
-              starterCode: {
-                jsx: `// Return an <img> built from the props.\nfunction Avatar({ name, url }) {\n  return <div />\n}\n`,
+              files: [
+                {
+                  path: 'Avatar.jsx',
+                  language: 'jsx',
+                  content: `// Return an <img> built from the props.\nexport default function Avatar({ name, url }) {\n  return <div />\n}\n`,
+                },
+              ],
+              previewProps: {
+                name: 'Ada Lovelace',
+                // An inline placeholder, so the preview shows the image rather
+                // than a broken-image icon.
+                url: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96'%3E%3Crect width='96' height='96' rx='48' fill='%232f6feb'/%3E%3C/svg%3E",
               },
               tests: [
                 { id: 'ex-react-l37-t1', label: 'the element is an img', body: "return Avatar({ name: 'Ada', url: '/a.png' }).type === 'img'" },
@@ -427,9 +580,13 @@ export const reactComponentsSections: Section[] = [
                 'The image class attribute is className, not class.',
                 'A self-closing tag is enough here: <img src={url} alt={name} className="avatar" />.',
               ],
-              solution: {
-                jsx: `function Avatar({ name, url }) {\n  return <img src={url} alt={name} className="avatar" />\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'Avatar.jsx',
+                  language: 'jsx',
+                  content: `export default function Avatar({ name, url }) {\n  return <img src={url} alt={name} className="avatar" />\n}\n`,
+                },
+              ],
               testNotes:
                 'The tests change the url and name between checks, so hard-coded attribute values fail.',
             },
@@ -449,6 +606,31 @@ export const reactComponentsSections: Section[] = [
         ],
         xp: 40,
         content: [
+          {
+            type: 'demo',
+            id: 'react-l38-d1',
+            title: 'One boolean, two ways',
+            body: 'The ternary always renders one of the two lines, while the `&&` span appears only when the condition holds - a zero count would show nothing at all.',
+            files: [
+              {
+                path: 'Status.jsx',
+                language: 'jsx',
+                content: `export default function Status({ loggedIn, unread }) {
+  return (
+    <div style={{ fontFamily: 'system-ui' }}>
+      <p style={{ margin: 0 }}>{loggedIn ? 'Welcome back' : 'Please sign in'}</p>
+      {loggedIn && unread > 0 && (
+        <span style={{ color: '#bf3989' }}>{unread} unread</span>
+      )}
+    </div>
+  )
+}
+`,
+              },
+            ],
+            previewProps: { loggedIn: true, unread: 3 },
+            height: 130,
+          },
           {
             type: 'text',
             id: 'react-l38-intro',
@@ -470,7 +652,7 @@ export const reactComponentsSections: Section[] = [
             id: 'react-l38-code',
             language: 'jsx',
             title: 'early return, ternary, and &&',
-            code: `function Status({ loggedIn }) {\n  // Early return: a guard for a whole-different view.\n  if (!loggedIn) return <p>Please sign in</p>\n\n  return (\n    <div>\n      <p>Welcome back</p>\n      {unreadCount > 0 && <span>{unreadCount} unread</span>}\n    </div>\n  )\n}\n\n// A ternary when both sides are elements:\n// {loggedIn ? <p>Welcome back</p> : <p>Please sign in</p>}`,
+            code: `export default function Status({ loggedIn }) {\n  // Early return: a guard for a whole-different view.\n  if (!loggedIn) return <p>Please sign in</p>\n\n  return (\n    <div>\n      <p>Welcome back</p>\n      {unreadCount > 0 && <span>{unreadCount} unread</span>}\n    </div>\n  )\n}\n\n// A ternary when both sides are elements:\n// {loggedIn ? <p>Welcome back</p> : <p>Please sign in</p>}`,
           },
           {
             type: 'list',
@@ -507,9 +689,14 @@ export const reactComponentsSections: Section[] = [
               instructions:
                 'Write Status({ loggedIn }) returning a p with the text "Welcome back" when loggedIn is true, and the text "Please sign in" when it is false.',
               languages: ['jsx'],
-              starterCode: {
-                jsx: `// Return a <p> whose text depends on loggedIn.\nfunction Status({ loggedIn }) {\n  return <p>Please sign in</p>\n}\n`,
-              },
+              files: [
+                {
+                  path: 'Status.jsx',
+                  language: 'jsx',
+                  content: `// Return a <p> whose text depends on loggedIn.\nexport default function Status({ loggedIn }) {\n  return <p>Please sign in</p>\n}\n`,
+                },
+              ],
+              previewProps: { loggedIn: true },
               tests: [
                 {
                   id: 'ex-react-l38-t1',
@@ -537,9 +724,13 @@ export const reactComponentsSections: Section[] = [
                 'Write the condition in braces inside the JSX: {loggedIn ? <p>...</p> : <p>...</p>}.',
                 'Both branches must be a <p>, so only the text differs.',
               ],
-              solution: {
-                jsx: `function Status({ loggedIn }) {\n  return loggedIn ? <p>Welcome back</p> : <p>Please sign in</p>\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'Status.jsx',
+                  language: 'jsx',
+                  content: `export default function Status({ loggedIn }) {\n  return loggedIn ? <p>Welcome back</p> : <p>Please sign in</p>\n}\n`,
+                },
+              ],
               testNotes:
                 'The last check confirms the two states share an element type but differ in content — the exact shape a ternary produces.',
             },
@@ -559,6 +750,37 @@ export const reactComponentsSections: Section[] = [
         ],
         xp: 35,
         content: [
+          {
+            type: 'demo',
+            id: 'react-l39-d1',
+            title: 'The class form, actually running',
+            body: 'A class reads its inputs from `this.props` and returns markup from `render`. Importing `Component` replaces the older `React.Component` global.',
+            files: [
+              {
+                path: 'Welcome.jsx',
+                language: 'jsx',
+                content: `import { Component } from 'react'
+
+class Welcome extends Component {
+  render() {
+    return <h1 style={{ margin: 0, fontSize: 18 }}>Hello, {this.props.name}</h1>
+  }
+}
+
+export default function App({ name }) {
+  return (
+    <div style={{ fontFamily: 'system-ui' }}>
+      <Welcome name={name} />
+      <p style={{ margin: '6px 0 0', color: '#5b6470' }}>Rendered by a class component.</p>
+    </div>
+  )
+}
+`,
+              },
+            ],
+            previewProps: { name: 'Ada' },
+            height: 130,
+          },
           {
             type: 'text',
             id: 'react-l39-intro',
@@ -617,9 +839,14 @@ export const reactComponentsSections: Section[] = [
               instructions:
                 'Write a function component Welcome({ name }) returning an h1 with the text "Hello, " followed by the name. For name "Ada" the visible text is "Hello, Ada".',
               languages: ['jsx'],
-              starterCode: {
-                jsx: `// Return an <h1> greeting the person in props.name.\nfunction Welcome({ name }) {\n  return <h1 />\n}\n`,
-              },
+              files: [
+                {
+                  path: 'Welcome.jsx',
+                  language: 'jsx',
+                  content: `// Return an <h1> greeting the person in props.name.\nexport default function Welcome({ name }) {\n  return <h1 />\n}\n`,
+                },
+              ],
+              previewProps: { name: 'Ada' },
               tests: [
                 { id: 'ex-react-l39-t1', label: 'the element is an h1', body: "return Welcome({ name: 'Ada' }).type === 'h1'" },
                 {
@@ -638,9 +865,13 @@ export const reactComponentsSections: Section[] = [
                 'Mix text and a value inside the heading: <h1>Hello, {name}</h1>.',
                 'Keep the comma and the space after "Hello" exactly as written.',
               ],
-              solution: {
-                jsx: `function Welcome({ name }) {\n  return <h1>Hello, {name}</h1>\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'Welcome.jsx',
+                  language: 'jsx',
+                  content: `export default function Welcome({ name }) {\n  return <h1>Hello, {name}</h1>\n}\n`,
+                },
+              ],
               testNotes:
                 'The tests join the children before comparing, because JSX turns mixed text and expressions into a small array of parts.',
             },

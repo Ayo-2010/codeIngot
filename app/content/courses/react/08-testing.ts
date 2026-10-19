@@ -19,6 +19,35 @@ export const reactTestingSections: Section[] = [
         xp: 35,
         content: [
           {
+            type: 'demo',
+            id: 'react-l23-d1',
+            title: 'A component a test can read',
+            body: 'A test renders this component and reads the text a user would see. Clicking Submit is what a user-event fires; the paragraph is what a text query matches.',
+            files: [
+              {
+                path: 'App.jsx',
+                language: 'jsx',
+                content: `import { useState } from 'react'
+
+export default function App() {
+  const [submitted, setSubmitted] = useState(false)
+  return (
+    <div style={{ fontFamily: 'system-ui' }}>
+      <h3 style={{ margin: '0 0 8px' }}>Sign in</h3>
+      <button onClick={() => setSubmitted(true)}>Submit</button>
+      <p style={{ margin: '8px 0 0', color: '#5b6470' }}>
+        {submitted ? 'Submitted - getByText now finds this.' : 'Click Submit, then read this text.'}
+      </p>
+    </div>
+  )
+}
+`,
+              },
+            ],
+            previewProps: {},
+            height: 150,
+          },
+          {
             type: 'text',
             id: 'react-l23-intro',
             body: '**Setting up Vitest and Testing Library.** React components are functions that return elements, so the most direct test calls the component and reads the result. For anything involving state, events or effects, the test renders the component into jsdom and asserts on what a user would see.',
@@ -76,9 +105,13 @@ export const reactTestingSections: Section[] = [
               instructions:
                 'Write byText(elements, text) returning the first element whose text property equals the given string exactly, or null when none matches. Elements look like { text }.',
               languages: ['javascript'],
-              starterCode: {
-                javascript: `// Find an element by its exact text, like screen.getByText.\nfunction byText(elements, text) {\n  return null\n}\n`,
-              },
+              files: [
+                {
+                  path: 'queries.js',
+                  language: 'javascript',
+                  content: `// Find an element by its exact text, like screen.getByText.\nexport function byText(elements, text) {\n  return null\n}\n`,
+                },
+              ],
               tests: [
                 {
                   id: 'ex-react-l23-t1',
@@ -111,9 +144,13 @@ export const reactTestingSections: Section[] = [
                 'Compare the text exactly — no substring matching.',
                 'Convert the missing case: find gives undefined, but the tests want null.',
               ],
-              solution: {
-                javascript: `function byText(elements, text) {\n  return elements.find((element) => element.text === text) ?? null\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'queries.js',
+                  language: 'javascript',
+                  content: `export function byText(elements, text) {\n  return elements.find((element) => element.text === text) ?? null\n}\n`,
+                },
+              ],
               testNotes:
                 'The partial-match check separates exact matching from a substring search, and the duplicate check pins down first-match.',
             },
@@ -132,6 +169,50 @@ export const reactTestingSections: Section[] = [
         ],
         xp: 40,
         content: [
+          {
+            type: 'demo',
+            id: 'react-l24-d1',
+            title: 'Type, click, see the item appear',
+            body: 'This is the flow an interaction test drives: type into the field, click Add, then assert the new item is on screen.',
+            files: [
+              {
+                path: 'App.jsx',
+                language: 'jsx',
+                content: `import { useState } from 'react'
+
+export default function App() {
+  const [text, setText] = useState('')
+  const [tasks, setTasks] = useState([])
+
+  function add() {
+    if (text.trim() === '') return
+    setTasks([...tasks, text])
+    setText('')
+  }
+
+  return (
+    <div style={{ fontFamily: 'system-ui' }}>
+      <input
+        aria-label="New task"
+        value={text}
+        onChange={(event) => setText(event.target.value)}
+        placeholder="New task"
+      />
+      <button onClick={add} style={{ marginLeft: 6 }}>Add</button>
+      <ul style={{ margin: '8px 0 0', paddingLeft: 18 }}>
+        {tasks.map((task, index) => (
+          <li key={index}>{task}</li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+`,
+              },
+            ],
+            previewProps: {},
+            height: 190,
+          },
           {
             type: 'text',
             id: 'react-l24-intro',
@@ -190,9 +271,13 @@ export const reactTestingSections: Section[] = [
               instructions:
                 "Write typeInto(text, key) returning the field's text after the keystroke. A single-character key is appended; 'Backspace' removes the last character; any other named key such as 'Enter' leaves the text unchanged.",
               languages: ['javascript'],
-              starterCode: {
-                javascript: `// Apply one keystroke to the field text.\nfunction typeInto(text, key) {\n  return text\n}\n`,
-              },
+              files: [
+                {
+                  path: 'typing.js',
+                  language: 'javascript',
+                  content: `// Apply one keystroke to the field text.\nexport function typeInto(text, key) {\n  return text\n}\n`,
+                },
+              ],
               tests: [
                 { id: 'ex-react-l24-t1', label: 'a character is appended', body: "return typeInto('Wri', 't') === 'Writ'" },
                 {
@@ -221,9 +306,13 @@ export const reactTestingSections: Section[] = [
                 'Remove the last character with text.slice(0, -1), which is safe on an empty string.',
                 'Otherwise append only when the key is a single character; named keys like Enter are ignored.',
               ],
-              solution: {
-                javascript: `function typeInto(text, key) {\n  if (key === 'Backspace') return text.slice(0, -1)\n  if (key.length === 1) return text + key\n  return text\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'typing.js',
+                  language: 'javascript',
+                  content: `export function typeInto(text, key) {\n  if (key === 'Backspace') return text.slice(0, -1)\n  if (key.length === 1) return text + key\n  return text\n}\n`,
+                },
+              ],
               testNotes:
                 'The empty-backspace and named-key checks catch implementations that assume a character is always present.',
             },
@@ -242,6 +331,53 @@ export const reactTestingSections: Section[] = [
         ],
         xp: 35,
         content: [
+          {
+            type: 'demo',
+            id: 'react-l25-d1',
+            title: 'A controlled stand-in for the data',
+            body: 'The component asks a module for data and renders what it returns. A test replaces that module with a mock holding fixed data, which is the stand-in shown here.',
+            files: [
+              {
+                path: 'App.jsx',
+                language: 'jsx',
+                content: `import { useState, useEffect } from 'react'
+
+// A stand-in for the real ./api module a test would mock.
+function fetchTasks() {
+  return Promise.resolve([{ id: '1', title: 'Write the plan' }])
+}
+
+export default function App() {
+  const [tasks, setTasks] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetchTasks().then((data) => {
+      setTasks(data)
+      setLoading(false)
+    })
+  }, [])
+
+  return (
+    <div style={{ fontFamily: 'system-ui' }}>
+      {loading ? (
+        <p style={{ margin: 0 }}>Loading...</p>
+      ) : (
+        <ul style={{ margin: 0, paddingLeft: 18 }}>
+          {tasks.map((task) => (
+            <li key={task.id}>{task.title}</li>
+          ))}
+        </ul>
+      )}
+    </div>
+  )
+}
+`,
+              },
+            ],
+            previewProps: {},
+            height: 140,
+          },
           {
             type: 'text',
             id: 'react-l25-intro',
@@ -300,9 +436,13 @@ export const reactTestingSections: Section[] = [
               instructions:
                 'Write createMock(impl) returning an object with a mock(...args) function and a calls array. Calling mock records the argument list in calls and returns whatever impl returns for those arguments.',
               languages: ['javascript'],
-              starterCode: {
-                javascript: `// A stand-in that records how it was called.\nfunction createMock(impl) {\n  const calls = []\n\n  function mock(...args) {\n    // TODO: record the call, then delegate.\n    return impl()\n  }\n\n  return { mock, calls }\n}\n`,
-              },
+              files: [
+                {
+                  path: 'mock.js',
+                  language: 'javascript',
+                  content: `// A stand-in that records how it was called.\nexport function createMock(impl) {\n  const calls = []\n\n  function mock(...args) {\n    // TODO: record the call, then delegate.\n    return impl()\n  }\n\n  return { mock, calls }\n}\n`,
+                },
+              ],
               tests: [
                 {
                   id: 'ex-react-l25-t1',
@@ -330,9 +470,13 @@ export const reactTestingSections: Section[] = [
                 'args is already an array of the arguments the mock received.',
                 'Push args into calls, then return impl(...args).',
               ],
-              solution: {
-                javascript: `function createMock(impl) {\n  const calls = []\n\n  function mock(...args) {\n    calls.push(args)\n    return impl(...args)\n  }\n\n  return { mock, calls }\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'mock.js',
+                  language: 'javascript',
+                  content: `export function createMock(impl) {\n  const calls = []\n\n  function mock(...args) {\n    calls.push(args)\n    return impl(...args)\n  }\n\n  return { mock, calls }\n}\n`,
+                },
+              ],
               testNotes:
                 'The argument checks compare the recorded arrays exactly, so a mock that records only the count fails.',
             },

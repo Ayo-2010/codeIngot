@@ -112,10 +112,28 @@ export interface DemoBlock {
   id: string
   title: string
   body?: string
-  html: string
+  /** Markup for a plain demo. Omitted when the demo is written as `files`. */
+  html?: string
   css?: string
   javascript?: string
   height?: number
+  /**
+   * A demo written as real files, run through the same module sandbox the
+   * exercises use rather than as one classic script.
+   *
+   * A React demo is the reason this exists: a component is a `.jsx` module with
+   * an `export default`, and only the module path compiles it with the automatic
+   * runtime and mounts the default export. Given `files`, the `html` / `css` /
+   * `javascript` above are ignored — the files are the demo.
+   */
+  files?: ExerciseFile[]
+  /** The file to run first, when the demo names one. Inferred when absent. */
+  entry?: string
+  /**
+   * Props to mount the default export with, exactly as an exercise declares
+   * them. Present means "the default export is a component worth previewing".
+   */
+  previewProps?: Record<string, unknown>
 }
 
 export type LessonBlock =
@@ -139,12 +157,62 @@ export interface ExerciseTest {
   body: string
 }
 
+/**
+ * One file in an exercise, addressed the way a real project addresses it.
+ *
+ * The language-keyed `starterCode` below covers the common case of one file per
+ * language, which is every HTML, CSS and JavaScript lesson. A React exercise
+ * needs `App.jsx` *and* `main.jsx` at the same time, and one slot per language
+ * cannot express that, so those exercises list their files and get real imports
+ * between them instead.
+ */
+export interface ExerciseFile {
+  /** Path as it is written in an import, e.g. `App.jsx` or `components/List.jsx`. */
+  path: string
+  language: EditorLanguage
+  content: string
+  /**
+   * Tab caption. Falls back to the path, so a multi-file exercise shows its file
+   * names while the single-file courses keep their short language labels.
+   */
+  label?: string
+}
+
 export interface CodingExercise {
   id: string
   instructions: string
   /** Languages the learner may edit, in tab order. */
   languages: EditorLanguage[]
-  starterCode: Partial<Record<EditorLanguage, string>>
+  /**
+   * The single-script shorthand: one source per language, which is what every
+   * HTML, CSS and JavaScript exercise uses. A file-based exercise leaves it out
+   * and lists `files` instead.
+   */
+  starterCode?: Partial<Record<EditorLanguage, string>>
+  /**
+   * The files this exercise is made of, when it is a real multi-file project.
+   * Given these, the language-keyed `starterCode` and `solution` below are
+   * ignored — they are the single-file shorthand.
+   */
+  files?: ExerciseFile[]
+  solutionFiles?: ExerciseFile[]
+  /**
+   * Which file runs first. Inferred when absent: a `main.*` file if the exercise
+   * has one, otherwise the App file.
+   */
+  entry?: string
+  /**
+   * The props the sandbox passes when it mounts this exercise's default export
+   * into the preview.
+   *
+   * Declaring them is the exercise saying "the default export is a component
+   * worth looking at", and it is also the switch that turns mounting on: an
+   * exercise without them is never mounted. That matters, because a plain helper
+   * function renders nothing and a higher-order component returns another
+   * component, and React would throw on either. Use `{}` for a component that
+   * takes no props at all.
+   */
+  previewProps?: Record<string, unknown>
   expectedOutput?: string
   tests: ExerciseTest[]
   hints: string[]
@@ -243,7 +311,14 @@ export interface Project {
   brief: string[]
   requirements: string[]
   checklist: ChecklistItem[]
-  starterFiles: Partial<Record<EditorLanguage, string>>
+  /** The starter, keyed by language. Omitted by a project written as real files. */
+  starterFiles?: Partial<Record<EditorLanguage, string>>
+  /**
+   * The starter as real files, for a project whose point is the source tree.
+   * Given these, `starterFiles` above is ignored and the editor shows one tab
+   * per path, with the imports between them resolved as a real project would.
+   */
+  files?: ExerciseFile[]
   /** Images the learner needs, offered as one-click copy so URLs are never typed by hand. */
   assets?: ProjectAsset[]
   designPreviewHtml: string

@@ -19,6 +19,37 @@ export const tsGenericsSections: Section[] = [
         xp: 45,
         content: [
           {
+            type: 'demo',
+            id: 'ts-l14-d1',
+            title: 'One function, two kinds of input',
+            body: 'The `<T>` is erased, so the same `wrap` and `first` run for numbers and for strings. What differs is only what the compiler knew — the runtime values stay intact.',
+            html: `<button id="go">Run it for numbers and strings</button>
+<pre id="out">Press the button.</pre>`,
+            css: `body { font-family: system-ui, sans-serif; font-size: 14px; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #f4f6f8; border-radius: 6px; font-size: 12.5px; }`,
+            javascript: `function wrap(value) {
+  return value
+}
+
+function first(items) {
+  return items[0]
+}
+
+const out = document.querySelector('#out')
+document.querySelector('#go').addEventListener('click', function () {
+  const n = wrap(42)
+  const s = wrap('hi')
+  out.textContent = [
+    'wrap(42) -> ' + n + ' (typeof ' + typeof n + ')',
+    'wrap("hi") -> ' + s + ' (typeof ' + typeof s + ')',
+    'first([1, 2, 3]) -> ' + first([1, 2, 3]),
+    'first([]) -> ' + first([]),
+  ].join('\n')
+})`,
+            height: 190,
+          },
+          {
             type: 'text',
             id: 'ts-l14-intro',
             body: '**Generic functions and type parameters.** A generic is a function that works for many types while remembering *which* type it is working with. The placeholder in the angle brackets — `<T>` — stands in for whatever the caller passes, and the compiler keeps track of it.',
@@ -131,6 +162,38 @@ function first<T>(items: T[]): T | undefined {
         ],
         xp: 40,
         content: [
+          {
+            type: 'demo',
+            id: 'ts-l15-d1',
+            title: 'A container that remembers its contents',
+            body: 'A generic class keeps its type argument only at compile time; at runtime `Store` is ordinary code that stores whatever it is handed. This demo fills a `Box` object and a `Store` instance.',
+            html: `<button id="go">Fill the containers</button>
+<pre id="out">Press the button.</pre>`,
+            css: `body { font-family: system-ui, sans-serif; font-size: 14px; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #f4f6f8; border-radius: 6px; font-size: 12.5px; }`,
+            javascript: `class Store {
+  constructor() {
+    this.items = []
+  }
+  add(item) {
+    this.items.push(item)
+  }
+}
+
+const out = document.querySelector('#out')
+document.querySelector('#go').addEventListener('click', function () {
+  const box = { value: 42 }
+  const names = new Store()
+  names.add('Ada')
+  names.add('Grace')
+  out.textContent = [
+    'Box value -> ' + box.value,
+    'Store contents -> ' + names.items.join(', '),
+  ].join('\n')
+})`,
+            height: 175,
+          },
           {
             type: 'text',
             id: 'ts-l15-intro',
@@ -286,6 +349,30 @@ class Stack<T> {
         ],
         xp: 45,
         content: [
+          {
+            type: 'demo',
+            id: 'ts-l16-d1',
+            title: 'A constraint you can actually call',
+            body: 'A conditional type has no runtime form — it selects a type, not a value. The constraint does: `logLength` reads `.length`, so it works for strings, arrays, and any object that has one.',
+            html: `<button id="go">Log three lengths</button>
+<pre id="out">Press the button.</pre>`,
+            css: `body { font-family: system-ui, sans-serif; font-size: 14px; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #f4f6f8; border-radius: 6px; font-size: 12.5px; }`,
+            javascript: `function logLength(item) {
+  return item.length
+}
+
+const out = document.querySelector('#out')
+document.querySelector('#go').addEventListener('click', function () {
+  out.textContent = [
+    'logLength("hello") -> ' + logLength('hello'),
+    'logLength([1, 2, 3]) -> ' + logLength([1, 2, 3]),
+    'logLength({ length: 5 }) -> ' + logLength({ length: 5 }),
+  ].join('\n')
+})`,
+            height: 175,
+          },
           {
             type: 'text',
             id: 'ts-l16-intro',

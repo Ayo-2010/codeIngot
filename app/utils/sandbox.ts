@@ -5,7 +5,20 @@
  * `allow-same-origin`, so it executes in an opaque origin: it cannot read our DOM,
  * our localStorage, our cookies or our parent page. Console output, runtime errors and
  * test results travel back over `postMessage`.
+ *
+ * A multi-file exercise arrives as compiled `modules` instead of one `javascript`
+ * string. Those run through the registry in `~/utils/module-registry`, which is
+ * also where the reasoning about real `import` statements lives.
+ *
+ * The document deliberately has no network and loads no external code: everything
+ * is inline, including the module registry itself.
  */
+import {
+  ENTRY_BINDINGS_SOURCE,
+  MODULE_BOOTSTRAP_SOURCE,
+  MODULE_REGISTRY_SOURCE,
+  type SandboxModule,
+} from '~/utils/module-registry'
 
 export interface SandboxLog {
   level: 'log' | 'warn' | 'error' | 'info' | 'debug'
@@ -42,6 +55,22 @@ export interface SandboxRunOptions {
   runtime?: string
   /** Markup prepended to the body, e.g. the `<div id="root">` React mounts into. */
   mount?: string
+  /**
+   * Compiled learner files for a multi-file exercise. Given these, `javascript`
+   * stays empty: the entry module is executed through the registry and the other
+   * files are pulled in by the imports between them, exactly as in a real
+   * project.
+   */
+  modules?: SandboxModule[]
+  /** Path of the module to run first. */
+  entry?: string
+  /** Mount the entry module's default export into `#root` when it has one. */
+  autoMount?: boolean
+  /**
+   * Props to mount the default export with. Left out unless the exercise
+   * declared them, and the caller sets `autoMount` only when it did.
+   */
+  previewProps?: Record<string, unknown>
 }
 
 const CHANNEL = 'codeingot:run'
@@ -63,6 +92,7 @@ function escapeScriptBody(code: string): string {
  *  parsed by the host page. */
 function buildDocument(options: SandboxRunOptions): string {
   const cases = JSON.stringify(options.tests ?? [])
+  const moduleScripts = options.modules?.length ? buildModuleScripts(options) : ''
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -121,7 +151,16 @@ ${options.mount ?? ''}${options.html}
   var logTexts = [];
   window.__log = logTexts;
 
+  // A module that cannot be resolved or that throws while it is being defined
+  // reports here, so the learner reads one clear sentence instead of a page of
+  // tests failing for reasons that look unrelated.
+  window.__ingotReportError = function (message) {
+    runtimeError = message;
+    emit({ type: 'error', message: message });
+  };
+
   function runTests() {
+    if (runtimeError) { emit({ type: 'done' }); return; }
     var raw = document.getElementById('__cases');
     if (!raw || !raw.textContent) { emit({ type: 'tests', tests: [] }); return; }
     var cases;
@@ -130,8 +169,14 @@ ${options.mount ?? ''}${options.html}
     cases.forEach(function (testCase) {
       var outcome;
       try {
-        var fn = new Function(testCase.body);
-        outcome = fn();
+        // A module's tests see the entry's exports by name; a classic script's
+        // tests see its top-level bindings in scope. Either way the body is
+        // written the same and can just call the function it is testing.
+        var params = typeof window.__ingotTestParams === 'function'
+          ? window.__ingotTestParams(window.__ingotEntry || {})
+          : { names: [], values: [] };
+        var fn = new Function(params.names.join(','), testCase.body);
+        outcome = fn.apply(null, params.values);
       } catch (error) {
         results.push({
           id: testCase.id,
@@ -171,13 +216,38 @@ ${options.mount ?? ''}${options.html}
 })();
 </script>
 ${options.runtime ? '<script id="vendor-runtime">\n' + escapeScriptBody(options.runtime) + '\n</script>' : ''}
-<script id="learner-js">
+${moduleScripts}<script id="learner-js">
 ${options.javascript}
 </script>
 </body>
 </html>`
 }
 
+/**
+ * The registry, then the bootstrap that defines the learner's files and runs the
+ * entry. Both come after the vendored runtime, because the registry reads
+ * `window.React` when a module imports it.
+ */
+function buildModuleScripts(options: SandboxRunOptions): string {
+  const payload = JSON.stringify({
+    files: options.modules ?? [],
+    entry: options.entry ?? '',
+    autoMount: Boolean(options.autoMount),
+    // Dropped by `JSON.stringify` when absent, which is how "no preview" is said.
+    props: options.previewProps,
+  })
+  return (
+    '<script id="__modules" type="application/json">' +
+    escapeForScript(payload) +
+    '</script>\n<script id="module-registry">\n' +
+    escapeScriptBody(MODULE_REGISTRY_SOURCE) +
+    '</script>\n<script id="module-bindings">\n' +
+    escapeScriptBody(ENTRY_BINDINGS_SOURCE) +
+    '</script>\n<script id="module-bootstrap">\n' +
+    escapeScriptBody(MODULE_BOOTSTRAP_SOURCE) +
+    '</script>\n'
+  )
+}
 export function buildSrcdoc(options: SandboxRunOptions): string {
   return buildDocument(options)
 }

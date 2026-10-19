@@ -19,6 +19,56 @@ export const reactAdvancedHooksSections: Section[] = [
         xp: 40,
         content: [
           {
+            type: 'demo',
+            id: 'react-l13-d1',
+            title: 'Provide high, read low',
+            body: 'The button reads the theme straight from context. No prop is passed through the component in between.',
+            files: [
+              {
+                path: 'App.jsx',
+                language: 'jsx',
+                content: `import { createContext, useContext, useState } from 'react'
+
+const ThemeContext = createContext('light')
+
+function ThemeButton() {
+  const theme = useContext(ThemeContext)
+  const dark = theme === 'dark'
+  return (
+    <button
+      style={{
+        background: dark ? '#1e293b' : '#e2e8f0',
+        color: dark ? '#f8fafc' : '#0f172a',
+        padding: '6px 12px',
+        border: 'none',
+        borderRadius: 6,
+      }}
+    >
+      Theme: {theme}
+    </button>
+  )
+}
+
+export default function App() {
+  const [theme, setTheme] = useState('light')
+  return (
+    <ThemeContext.Provider value={theme}>
+      <div style={{ display: 'grid', gap: 8 }}>
+        <ThemeButton />
+        <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+          Toggle
+        </button>
+      </div>
+    </ThemeContext.Provider>
+  )
+}
+`,
+              },
+            ],
+            previewProps: {},
+            height: 150,
+          },
+          {
             type: 'text',
             id: 'react-l13-intro',
             body: '**useContext for shared state.** Props travel one level at a time, so a value needed three levels down has to be passed through every component in between — the problem known as prop drilling. Context solves it: a value is provided high in the tree and read directly by any descendant.',
@@ -39,7 +89,7 @@ export const reactAdvancedHooksSections: Section[] = [
             id: 'react-l13-code',
             language: 'jsx',
             title: 'a theme context',
-            code: `const ThemeContext = createContext('light')   // the default\n\nfunction App() {\n  return (\n    <ThemeContext.Provider value="dark">\n      <Toolbar />\n    </ThemeContext.Provider>\n  )\n}\n\n// Toolbar is somewhere below App and receives no theme prop.\nfunction Toolbar() {\n  const theme = useContext(ThemeContext)\n  return <button className={theme}>Save</button>\n}\n\n// Nesting providers: the nearest one wins for the components inside it.`,
+            code: `export const ThemeContext = createContext('light')   // the default\n\nexport default function App() {\n  return (\n    <ThemeContext.Provider value="dark">\n      <Toolbar />\n    </ThemeContext.Provider>\n  )\n}\n\n// Toolbar is somewhere below App and receives no theme prop.\nfunction Toolbar() {\n  const theme = useContext(ThemeContext)\n  return <button className={theme}>Save</button>\n}\n\n// Nesting providers: the nearest one wins for the components inside it.`,
           },
           {
             type: 'list',
@@ -76,9 +126,13 @@ export const reactAdvancedHooksSections: Section[] = [
               instructions:
                 'Write resolveTheme(providers, fallback) returning the value a consumer sees. providers is ordered outermost first, so the innermost (last) value wins; when there are no providers, return the fallback.',
               languages: ['javascript'],
-              starterCode: {
-                javascript: `// Providers are ordered outermost to innermost.\nfunction resolveTheme(providers, fallback) {\n  return fallback\n}\n`,
-              },
+              files: [
+                {
+                  path: 'theme.js',
+                  language: 'javascript',
+                  content: `// Providers are ordered outermost to innermost.\nexport function resolveTheme(providers, fallback) {\n  return fallback\n}\n`,
+                },
+              ],
               tests: [
                 {
                   id: 'ex-react-l13-t1',
@@ -106,9 +160,13 @@ export const reactAdvancedHooksSections: Section[] = [
                 'The nearest provider to the consumer is the last one in the array.',
                 'Return the last element, or the fallback when the array is empty.',
               ],
-              solution: {
-                javascript: `function resolveTheme(providers, fallback) {\n  return providers.length > 0 ? providers[providers.length - 1] : fallback\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'theme.js',
+                  language: 'javascript',
+                  content: `export function resolveTheme(providers, fallback) {\n  return providers.length > 0 ? providers[providers.length - 1] : fallback\n}\n`,
+                },
+              ],
               testNotes:
                 'The ordering checks are what distinguish "nearest wins" from a first-match implementation.',
             },
@@ -127,6 +185,51 @@ export const reactAdvancedHooksSections: Section[] = [
         ],
         xp: 40,
         content: [
+          {
+            type: 'demo',
+            id: 'react-l14-d1',
+            title: 'A counter reducer, live',
+            body: 'Every button dispatches a named action. The reducer decides what each name means, and an unknown action changes nothing.',
+            files: [
+              {
+                path: 'App.jsx',
+                language: 'jsx',
+                content: `import { useReducer } from 'react'
+
+const initial = 0
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'increment':
+      return state + 1
+    case 'decrement':
+      return state - 1
+    case 'reset':
+      return initial
+    default:
+      return state
+  }
+}
+
+export default function App() {
+  const [count, dispatch] = useReducer(reducer, initial)
+  return (
+    <div style={{ display: 'grid', gap: 8 }}>
+      <strong style={{ fontSize: 22 }}>Count: {count}</strong>
+      <div style={{ display: 'flex', gap: 6 }}>
+        <button onClick={() => dispatch({ type: 'increment' })}>+1</button>
+        <button onClick={() => dispatch({ type: 'decrement' })}>-1</button>
+        <button onClick={() => dispatch({ type: 'reset' })}>reset</button>
+      </div>
+    </div>
+  )
+}
+`,
+              },
+            ],
+            previewProps: {},
+            height: 150,
+          },
           {
             type: 'text',
             id: 'react-l14-intro',
@@ -148,7 +251,7 @@ export const reactAdvancedHooksSections: Section[] = [
             id: 'react-l14-code',
             language: 'jsx',
             title: 'a counter reducer',
-            code: `const initialState = 0\n\nfunction counterReducer(state, action) {\n  switch (action.type) {\n    case 'increment':\n      return state + 1\n    case 'decrement':\n      return state - 1\n    case 'reset':\n      return initialState\n    default:\n      return state          // an unknown action changes nothing\n  }\n}\n\nfunction Counter() {\n  const [count, dispatch] = useReducer(counterReducer, initialState)\n  return (\n    <button onClick={() => dispatch({ type: 'increment' })}>{count}</button>\n  )\n}`,
+            code: `import { useReducer } from 'react'\n\nconst initialState = 0\n\nexport function counterReducer(state, action) {\n  switch (action.type) {\n    case 'increment':\n      return state + 1\n    case 'decrement':\n      return state - 1\n    case 'reset':\n      return initialState\n    default:\n      return state          // an unknown action changes nothing\n  }\n}\n\nexport default function Counter() {\n  const [count, dispatch] = useReducer(counterReducer, initialState)\n  return (\n    <button onClick={() => dispatch({ type: 'increment' })}>{count}</button>\n  )\n}`,
           },
           {
             type: 'list',
@@ -185,9 +288,13 @@ export const reactAdvancedHooksSections: Section[] = [
               instructions:
                 "Write counterReducer(state, action) where state is a number. 'increment' adds one, 'decrement' subtracts one, 'reset' returns 0, and any other action returns the state unchanged.",
               languages: ['javascript'],
-              starterCode: {
-                javascript: `// state is a number: increment, decrement, reset.\nfunction counterReducer(state, action) {\n  return state\n}\n`,
-              },
+              files: [
+                {
+                  path: 'counter.js',
+                  language: 'javascript',
+                  content: `// state is a number: increment, decrement, reset.\nexport function counterReducer(state, action) {\n  return state\n}\n`,
+                },
+              ],
               tests: [
                 { id: 'ex-react-l14-t1', label: 'increment adds one', body: "return counterReducer(0, { type: 'increment' }) === 1" },
                 {
@@ -207,9 +314,13 @@ export const reactAdvancedHooksSections: Section[] = [
                 'Each case returns the next number; increment is state + 1.',
                 'The default case returns the state unchanged, so the reducer never corrupts on an unknown action.',
               ],
-              solution: {
-                javascript: `function counterReducer(state, action) {\n  switch (action.type) {\n    case 'increment':\n      return state + 1\n    case 'decrement':\n      return state - 1\n    case 'reset':\n      return 0\n    default:\n      return state\n  }\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'counter.js',
+                  language: 'javascript',
+                  content: `export function counterReducer(state, action) {\n  switch (action.type) {\n    case 'increment':\n      return state + 1\n    case 'decrement':\n      return state - 1\n    case 'reset':\n      return 0\n    default:\n      return state\n  }\n}\n`,
+                },
+              ],
               testNotes:
                 'The unknown-action check is the one that catches a reducer written as a chain of ifs without a fallback.',
             },
@@ -228,6 +339,51 @@ export const reactAdvancedHooksSections: Section[] = [
         ],
         xp: 35,
         content: [
+          {
+            type: 'demo',
+            id: 'react-l15-d1',
+            title: 'A memoised filter and a stable callback',
+            body: 'The filtered list is recomputed with **useMemo** only when the query changes, and the clear button uses a callback that keeps its identity.',
+            files: [
+              {
+                path: 'App.jsx',
+                language: 'jsx',
+                content: `import { useCallback, useMemo, useState } from 'react'
+
+const items = ['Apple', 'Banana', 'Cherry', 'Apricot']
+
+export default function App() {
+  const [query, setQuery] = useState('')
+
+  const visible = useMemo(
+    () => items.filter((item) => item.toLowerCase().includes(query.toLowerCase())),
+    [query],
+  )
+
+  const clear = useCallback(() => setQuery(''), [])
+
+  return (
+    <div style={{ display: 'grid', gap: 8 }}>
+      <input
+        value={query}
+        onChange={(event) => setQuery(event.target.value)}
+        placeholder="Filter fruit"
+      />
+      <ul style={{ margin: 0, paddingLeft: 18 }}>
+        {visible.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+      <button onClick={clear}>Clear</button>
+    </div>
+  )
+}
+`,
+              },
+            ],
+            previewProps: {},
+            height: 210,
+          },
           {
             type: 'text',
             id: 'react-l15-intro',
@@ -249,7 +405,7 @@ export const reactAdvancedHooksSections: Section[] = [
             id: 'react-l15-code',
             language: 'jsx',
             title: 'memoised value and stable callback',
-            code: `function TaskList({ items, query }) {\n  // Recomputed only when items or query change:\n  const visible = useMemo(\n    () => items.filter((item) => item.name.includes(query)),\n    [items, query],\n  )\n\n  // The same function reference until doSelect changes:\n  const handleSelect = useCallback((id) => doSelect(id), [doSelect])\n\n  return (\n    <ul>\n      {visible.map((item) => (\n        <li key={item.id} onClick={() => handleSelect(item.id)}>{item.name}</li>\n      ))}\n    </ul>\n  )\n}`,
+            code: `import { useCallback, useMemo } from 'react'\n\nexport default function TaskList({ items, query }) {\n  // Recomputed only when items or query change:\n  const visible = useMemo(\n    () => items.filter((item) => item.name.includes(query)),\n    [items, query],\n  )\n\n  // The same function reference until doSelect changes:\n  const handleSelect = useCallback((id) => doSelect(id), [doSelect])\n\n  return (\n    <ul>\n      {visible.map((item) => (\n        <li key={item.id} onClick={() => handleSelect(item.id)}>{item.name}</li>\n      ))}\n    </ul>\n  )\n}`,
           },
           {
             type: 'list',
@@ -286,9 +442,13 @@ export const reactAdvancedHooksSections: Section[] = [
               instructions:
                 'Complete memoCache() so run(deps, compute) calls compute only when deps differ from the previous call, and returns the cached value otherwise. The first call always computes.',
               languages: ['javascript'],
-              starterCode: {
-                javascript: `// A tiny useMemo: recompute only when the dependencies change.\nfunction memoCache() {\n  let lastDeps = null\n  let lastValue\n\n  return {\n    run(deps, compute) {\n      // TODO: compare deps with lastDeps, recompute when they differ.\n      return compute()\n    },\n  }\n}\n`,
-              },
+              files: [
+                {
+                  path: 'memoCache.js',
+                  language: 'javascript',
+                  content: `// A tiny useMemo: recompute only when the dependencies change.\nexport function memoCache() {\n  let lastDeps = null\n  let lastValue\n\n  return {\n    run(deps, compute) {\n      // TODO: compare deps with lastDeps, recompute when they differ.\n      return compute()\n    },\n  }\n}\n`,
+                },
+              ],
               tests: [
                 {
                   id: 'ex-react-l15-t1',
@@ -316,9 +476,13 @@ export const reactAdvancedHooksSections: Section[] = [
                 'Compare lengths first, then element by element with Object.is.',
                 'When nothing changed, return lastValue without calling compute.',
               ],
-              solution: {
-                javascript: `function memoCache() {\n  let lastDeps = null\n  let lastValue\n\n  return {\n    run(deps, compute) {\n      const changed =\n        lastDeps === null ||\n        lastDeps.length !== deps.length ||\n        lastDeps.some((value, index) => !Object.is(value, deps[index]))\n\n      if (changed) {\n        lastValue = compute()\n        lastDeps = deps\n      }\n      return lastValue\n    },\n  }\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'memoCache.js',
+                  language: 'javascript',
+                  content: `export function memoCache() {\n  let lastDeps = null\n  let lastValue\n\n  return {\n    run(deps, compute) {\n      const changed =\n        lastDeps === null ||\n        lastDeps.length !== deps.length ||\n        lastDeps.some((value, index) => !Object.is(value, deps[index]))\n\n      if (changed) {\n        lastValue = compute()\n        lastDeps = deps\n      }\n      return lastValue\n    },\n  }\n}\n`,
+                },
+              ],
               testNotes:
                 'The object check pins down reference comparison, which is exactly why an inline object in a dependency array causes repeated work.',
             },
@@ -337,6 +501,44 @@ export const reactAdvancedHooksSections: Section[] = [
         ],
         xp: 35,
         content: [
+          {
+            type: 'demo',
+            id: 'react-l16-d1',
+            title: 'Focus held in a ref',
+            body: 'The input is focused on mount through a ref, and the same handle lets the button focus it again later.',
+            files: [
+              {
+                path: 'App.jsx',
+                language: 'jsx',
+                content: `import { useEffect, useRef, useState } from 'react'
+
+export default function App() {
+  const inputRef = useRef(null)
+  const [text, setText] = useState('')
+
+  useEffect(() => {
+    inputRef.current.focus()
+  }, [])
+
+  return (
+    <div style={{ display: 'grid', gap: 8 }}>
+      <input
+        ref={inputRef}
+        value={text}
+        onChange={(event) => setText(event.target.value)}
+        placeholder="Focused on mount"
+      />
+      <p style={{ margin: 0 }}>Characters: {text.length}</p>
+      <button onClick={() => inputRef.current.focus()}>Focus the input</button>
+    </div>
+  )
+}
+`,
+              },
+            ],
+            previewProps: {},
+            height: 170,
+          },
           {
             type: 'text',
             id: 'react-l16-intro',
@@ -358,7 +560,7 @@ export const reactAdvancedHooksSections: Section[] = [
             id: 'react-l16-code',
             language: 'jsx',
             title: 'focusing an input, and counting renders',
-            code: `function SearchBox() {\n  const inputRef = useRef(null)\n\n  useEffect(() => {\n    inputRef.current.focus()      // after the first render\n  }, [])\n\n  return <input ref={inputRef} placeholder="Search" />\n}\n\n// The same ref holds any mutable value across renders:\nconst rendersRef = useRef(0)\nrendersRef.current += 1          // no re-render triggered`,
+            code: `import { useEffect, useRef } from 'react'\n\nexport default function SearchBox() {\n  const inputRef = useRef(null)\n\n  useEffect(() => {\n    inputRef.current.focus()      // after the first render\n  }, [])\n\n  return <input ref={inputRef} placeholder="Search" />\n}\n\n// The same ref holds any mutable value across renders:\nconst rendersRef = useRef(0)\nrendersRef.current += 1          // no re-render triggered`,
           },
           {
             type: 'list',
@@ -395,9 +597,13 @@ export const reactAdvancedHooksSections: Section[] = [
               instructions:
                 'Write createRefBox(initial) returning an object with a current property set to initial. Write bump(box) that increases box.current by one and returns the new value.',
               languages: ['javascript'],
-              starterCode: {
-                javascript: `// A ref is a box with a mutable current value.\nfunction createRefBox(initial) {\n  return { current: null }\n}\n\n// Increase box.current by one and return it.\nfunction bump(box) {\n  return box.current\n}\n`,
-              },
+              files: [
+                {
+                  path: 'refBox.js',
+                  language: 'javascript',
+                  content: `// A ref is a box with a mutable current value.\nexport function createRefBox(initial) {\n  return { current: null }\n}\n\n// Increase box.current by one and return it.\nexport function bump(box) {\n  return box.current\n}\n`,
+                },
+              ],
               tests: [
                 { id: 'ex-react-l16-t1', label: 'the box starts at the initial value', body: 'return createRefBox(5).current === 5' },
                 {
@@ -421,9 +627,13 @@ export const reactAdvancedHooksSections: Section[] = [
                 'bump writes straight to the box: box.current += 1.',
                 'Return the new value, not the box, so the caller can use it immediately.',
               ],
-              solution: {
-                javascript: `function createRefBox(initial) {\n  return { current: initial }\n}\n\nfunction bump(box) {\n  box.current += 1\n  return box.current\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'refBox.js',
+                  language: 'javascript',
+                  content: `export function createRefBox(initial) {\n  return { current: initial }\n}\n\nexport function bump(box) {\n  box.current += 1\n  return box.current\n}\n`,
+                },
+              ],
               testNotes:
                 'The two-boxes check confirms each ref is its own box rather than shared module state.',
             },
@@ -443,6 +653,50 @@ export const reactAdvancedHooksSections: Section[] = [
         ],
         xp: 40,
         content: [
+          {
+            type: 'demo',
+            id: 'react-l42-d1',
+            title: 'Urgent typing, deferred results',
+            body: 'The input updates immediately while the filtered list is marked as a transition, so it can be interrupted by newer keystrokes.',
+            files: [
+              {
+                path: 'App.jsx',
+                language: 'jsx',
+                content: `import { useState, useTransition } from 'react'
+
+const all = ['React', 'Vue', 'Svelte', 'Solid', 'Angular', 'Preact']
+
+export default function App() {
+  const [query, setQuery] = useState('')
+  const [results, setResults] = useState(all)
+  const [isPending, startTransition] = useTransition()
+
+  function onChange(event) {
+    const next = event.target.value
+    setQuery(next)
+    startTransition(() => {
+      setResults(all.filter((item) => item.toLowerCase().includes(next.toLowerCase())))
+    })
+  }
+
+  return (
+    <div style={{ display: 'grid', gap: 8 }}>
+      <input value={query} onChange={onChange} placeholder="Search frameworks" />
+      {isPending && <span style={{ color: '#64748b' }}>Updating...</span>}
+      <ul style={{ margin: 0, paddingLeft: 18 }}>
+        {results.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+`,
+              },
+            ],
+            previewProps: {},
+            height: 210,
+          },
           {
             type: 'text',
             id: 'react-l42-intro',
@@ -464,7 +718,7 @@ export const reactAdvancedHooksSections: Section[] = [
             id: 'react-l42-code',
             language: 'jsx',
             title: 'keeping the input responsive',
-            code: `function Search({ items }) {\n  const [query, setQuery] = useState('')\n  const [results, setResults] = useState(items)\n  const [isPending, startTransition] = useTransition()\n\n  function onChange(event) {\n    const next = event.target.value\n    setQuery(next)                     // urgent: the input must keep up\n    startTransition(() => {\n      setResults(items.filter((item) => item.includes(next)))  // non-urgent\n    })\n  }\n\n  return (\n    <div>\n      <input value={query} onChange={onChange} />\n      {isPending && <span>Updating...</span>}\n      <ul>{results.map((item) => <li key={item}>{item}</li>)}</ul>\n    </div>\n  )\n}`,
+            code: `import { useState, useTransition } from 'react'\n\nexport default function Search({ items }) {\n  const [query, setQuery] = useState('')\n  const [results, setResults] = useState(items)\n  const [isPending, startTransition] = useTransition()\n\n  function onChange(event) {\n    const next = event.target.value\n    setQuery(next)                     // urgent: the input must keep up\n    startTransition(() => {\n      setResults(items.filter((item) => item.includes(next)))  // non-urgent\n    })\n  }\n\n  return (\n    <div>\n      <input value={query} onChange={onChange} />\n      {isPending && <span>Updating...</span>}\n      <ul>{results.map((item) => <li key={item}>{item}</li>)}</ul>\n    </div>\n  )\n}`,
           },
           {
             type: 'list',
@@ -501,9 +755,13 @@ export const reactAdvancedHooksSections: Section[] = [
               instructions:
                 "Write finalTransition(updates) returning the value of the last entry whose kind is 'transition', or null when there is none. Entries look like { kind: 'urgent' | 'transition', value }.",
               languages: ['javascript'],
-              starterCode: {
-                javascript: `// Return the last transition's value, or null.\nfunction finalTransition(updates) {\n  return null\n}\n`,
-              },
+              files: [
+                {
+                  path: 'transitions.js',
+                  language: 'javascript',
+                  content: `// Return the last transition's value, or null.\nexport function finalTransition(updates) {\n  return null\n}\n`,
+                },
+              ],
               tests: [
                 {
                   id: 'ex-react-l42-t1',
@@ -531,9 +789,13 @@ export const reactAdvancedHooksSections: Section[] = [
                 'Filtering to the transitions and taking the last one is the shortest route.',
                 'Return null when nothing was a transition — including an empty list.',
               ],
-              solution: {
-                javascript: `function finalTransition(updates) {\n  let value = null\n  for (const update of updates) {\n    if (update.kind === 'transition') value = update.value\n  }\n  return value\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'transitions.js',
+                  language: 'javascript',
+                  content: `export function finalTransition(updates) {\n  let value = null\n  for (const update of updates) {\n    if (update.kind === 'transition') value = update.value\n  }\n  return value\n}\n`,
+                },
+              ],
               testNotes:
                 'The mixed list confirms that urgent entries are skipped rather than simply taking the last element.',
             },
@@ -553,6 +815,37 @@ export const reactAdvancedHooksSections: Section[] = [
         ],
         xp: 40,
         content: [
+          {
+            type: 'demo',
+            id: 'react-l43-d1',
+            title: 'A ref forwarded to the real input',
+            body: 'The wrapper receives a ref with **forwardRef** and puts it on the input, so the parent can focus it directly.',
+            files: [
+              {
+                path: 'App.jsx',
+                language: 'jsx',
+                content: `import { forwardRef, useRef } from 'react'
+
+const TextInput = forwardRef(function TextInput(props, ref) {
+  return <input ref={ref} {...props} />
+})
+
+export default function App() {
+  const inputRef = useRef(null)
+
+  return (
+    <div style={{ display: 'grid', gap: 8 }}>
+      <TextInput ref={inputRef} placeholder="Name" />
+      <button onClick={() => inputRef.current.focus()}>Focus the input</button>
+    </div>
+  )
+}
+`,
+              },
+            ],
+            previewProps: {},
+            height: 130,
+          },
           {
             type: 'text',
             id: 'react-l43-intro',
@@ -574,7 +867,7 @@ export const reactAdvancedHooksSections: Section[] = [
             id: 'react-l43-code',
             language: 'jsx',
             title: 'forwarding a ref to an input',
-            code: `const TextInput = forwardRef(function TextInput(props, ref) {\n  return <input ref={ref} {...props} />\n})\n\nfunction Form() {\n  const inputRef = useRef(null)\n  return (\n    <>\n      <TextInput ref={inputRef} placeholder="Name" />\n      <button onClick={() => inputRef.current.focus()}>Focus</button>\n    </>\n  )\n}\n\n// Spreading props keeps the wrapper transparent: the placeholder,\n// id and handlers all land on the real input.`,
+            code: `export const TextInput = forwardRef(function TextInput(props, ref) {\n  return <input ref={ref} {...props} />\n})\n\nfunction Form() {\n  const inputRef = useRef(null)\n  return (\n    <>\n      <TextInput ref={inputRef} placeholder="Name" />\n      <button onClick={() => inputRef.current.focus()}>Focus</button>\n    </>\n  )\n}\n\n// Spreading props keeps the wrapper transparent: the placeholder,\n// id and handlers all land on the real input.`,
           },
           {
             type: 'list',
@@ -611,9 +904,13 @@ export const reactAdvancedHooksSections: Section[] = [
               instructions:
                 'Write mergeRefs(a, b) returning a function that, when called with a value, sets a.current and b.current to that value. Refs are objects with a current property.',
               languages: ['javascript'],
-              starterCode: {
-                javascript: `// Return a function that fills both refs with the same value.\nfunction mergeRefs(a, b) {\n  return () => {}\n}\n`,
-              },
+              files: [
+                {
+                  path: 'mergeRefs.js',
+                  language: 'javascript',
+                  content: `// Return a function that fills both refs with the same value.\nexport function mergeRefs(a, b) {\n  return () => {}\n}\n`,
+                },
+              ],
               tests: [
                 {
                   id: 'ex-react-l43-t1',
@@ -641,9 +938,13 @@ export const reactAdvancedHooksSections: Section[] = [
                 'The returned function closes over a and b.',
                 'Assign both inside it: (value) => { a.current = value; b.current = value }.',
               ],
-              solution: {
-                javascript: `function mergeRefs(a, b) {\n  return (value) => {\n    a.current = value\n    b.current = value\n  }\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'mergeRefs.js',
+                  language: 'javascript',
+                  content: `export function mergeRefs(a, b) {\n  return (value) => {\n    a.current = value\n    b.current = value\n  }\n}\n`,
+                },
+              ],
               testNotes:
                 'The last check confirms nothing is assigned until the callback runs — the behaviour React needs when it attaches refs after render.',
             },
@@ -663,6 +964,51 @@ export const reactAdvancedHooksSections: Section[] = [
         ],
         xp: 45,
         content: [
+          {
+            type: 'demo',
+            id: 'react-l44-d1',
+            title: 'One hook, two independent counters',
+            body: 'Both components call the same **useCounter** hook, but each one keeps its own count. The hook shares the logic, not the values.',
+            files: [
+              {
+                path: 'App.jsx',
+                language: 'jsx',
+                content: `import { useCallback, useState } from 'react'
+
+function useCounter(initial) {
+  const [count, setCount] = useState(initial)
+  const increment = useCallback(() => setCount((value) => value + 1), [])
+  const reset = useCallback(() => setCount(initial), [initial])
+  return { count, increment, reset }
+}
+
+function Counter({ label }) {
+  const { count, increment, reset } = useCounter(0)
+  return (
+    <div style={{ display: 'grid', gap: 6 }}>
+      <strong>{label}: {count}</strong>
+      <div style={{ display: 'flex', gap: 6 }}>
+        <button onClick={increment}>+</button>
+        <button onClick={reset}>reset</button>
+      </div>
+    </div>
+  )
+}
+
+export default function App() {
+  return (
+    <div style={{ display: 'grid', gap: 10 }}>
+      <Counter label="First" />
+      <Counter label="Second" />
+    </div>
+  )
+}
+`,
+              },
+            ],
+            previewProps: {},
+            height: 210,
+          },
           {
             type: 'text',
             id: 'react-l44-intro',
@@ -684,7 +1030,7 @@ export const reactAdvancedHooksSections: Section[] = [
             id: 'react-l44-code',
             language: 'jsx',
             title: 'a counter hook and its caller',
-            code: `function useCounter(initial = 0) {\n  const [count, setCount] = useState(initial)\n  const increment = useCallback(() => setCount((c) => c + 1), [])\n  const reset = useCallback(() => setCount(initial), [initial])\n  return { count, increment, reset }\n}\n\nfunction Counter() {\n  const { count, increment, reset } = useCounter()\n  return (\n    <div>\n      <span>{count}</span>\n      <button onClick={increment}>+</button>\n      <button onClick={reset}>reset</button>\n    </div>\n  )\n}\n\n// Two components calling useCounter each get their own count.`,
+            code: `import { useCallback, useState } from 'react'\n\nexport function useCounter(initial = 0) {\n  const [count, setCount] = useState(initial)\n  const increment = useCallback(() => setCount((c) => c + 1), [])\n  const reset = useCallback(() => setCount(initial), [initial])\n  return { count, increment, reset }\n}\n\nexport default function Counter() {\n  const { count, increment, reset } = useCounter()\n  return (\n    <div>\n      <span>{count}</span>\n      <button onClick={increment}>+</button>\n      <button onClick={reset}>reset</button>\n    </div>\n  )\n}\n\n// Two components calling useCounter each get their own count.`,
           },
           {
             type: 'list',
@@ -721,9 +1067,13 @@ export const reactAdvancedHooksSections: Section[] = [
               instructions:
                 'Write filterByQuery(items, query) returning a NEW array of the items whose name contains query, ignoring case. An empty query returns a copy of every item.',
               languages: ['javascript'],
-              starterCode: {
-                javascript: `// Return matching items; the query is case-insensitive.\nfunction filterByQuery(items, query) {\n  return items\n}\n`,
-              },
+              files: [
+                {
+                  path: 'search.js',
+                  language: 'javascript',
+                  content: `// Return matching items; the query is case-insensitive.\nexport function filterByQuery(items, query) {\n  return items\n}\n`,
+                },
+              ],
               tests: [
                 {
                   id: 'ex-react-l44-t1',
@@ -751,9 +1101,13 @@ export const reactAdvancedHooksSections: Section[] = [
                 'filter already returns a new array, so it fits the empty-query case too.',
                 'const q = query.toLowerCase(); return items.filter((item) => item.name.toLowerCase().includes(q)).',
               ],
-              solution: {
-                javascript: `function filterByQuery(items, query) {\n  const needle = query.toLowerCase()\n  return items.filter((item) => item.name.toLowerCase().includes(needle))\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'search.js',
+                  language: 'javascript',
+                  content: `export function filterByQuery(items, query) {\n  const needle = query.toLowerCase()\n  return items.filter((item) => item.name.toLowerCase().includes(needle))\n}\n`,
+                },
+              ],
               testNotes:
                 'The empty-query check compares against the original array reference, so returning the input unchanged is caught.',
             },
@@ -773,6 +1127,51 @@ export const reactAdvancedHooksSections: Section[] = [
         ],
         xp: 35,
         content: [
+          {
+            type: 'demo',
+            id: 'react-l45-d1',
+            title: 'An HOC that wraps for loading',
+            body: '**withLoading** takes a component and returns an enhanced one. The wrapper destructures loading and spreads the remaining props through unchanged.',
+            files: [
+              {
+                path: 'App.jsx',
+                language: 'jsx',
+                content: `import { useState } from 'react'
+
+function List({ items }) {
+  return (
+    <ul style={{ margin: 0, paddingLeft: 18 }}>
+      {items.map((item) => (
+        <li key={item}>{item}</li>
+      ))}
+    </ul>
+  )
+}
+
+function withLoading(Component) {
+  return function WithLoading({ loading, ...rest }) {
+    if (loading) return <p style={{ margin: 0 }}>Loading...</p>
+    return <Component {...rest} />
+  }
+}
+
+const ListWithLoading = withLoading(List)
+
+export default function App() {
+  const [loading, setLoading] = useState(false)
+  return (
+    <div style={{ display: 'grid', gap: 8 }}>
+      <ListWithLoading loading={loading} items={['Alpha', 'Beta', 'Gamma']} />
+      <button onClick={() => setLoading(!loading)}>Toggle loading</button>
+    </div>
+  )
+}
+`,
+              },
+            ],
+            previewProps: {},
+            height: 170,
+          },
           {
             type: 'text',
             id: 'react-l45-intro',
@@ -794,7 +1193,7 @@ export const reactAdvancedHooksSections: Section[] = [
             id: 'react-l45-code',
             language: 'jsx',
             title: 'an HOC, and its hook-shaped replacement',
-            code: `function withLoading(Component) {\n  return function WithLoading({ loading, ...rest }) {\n    if (loading) return <p>Loading...</p>\n    return <Component {...rest} />\n  }\n}\n\nconst UserList = withLoading(function UserList({ users }) {\n  return <ul>{users.map((u) => <li key={u.id}>{u.name}</li>)}</ul>\n})\n\n// The hook version: no wrapper component, no prop renaming.\n// const loading = useLoading()`,
+            code: `export function withLoading(Component) {\n  return function WithLoading({ loading, ...rest }) {\n    if (loading) return <p>Loading...</p>\n    return <Component {...rest} />\n  }\n}\n\nexport const UserList = withLoading(function UserList({ users }) {\n  return <ul>{users.map((u) => <li key={u.id}>{u.name}</li>)}</ul>\n})\n\n// The hook version: no wrapper component, no prop renaming.\n// const loading = useLoading()`,
           },
           {
             type: 'list',
@@ -831,9 +1230,13 @@ export const reactAdvancedHooksSections: Section[] = [
               instructions:
                 'Write withProps(Component, extraProps) returning a new function component that renders Component with the incoming props and extraProps combined. On a name clash the extra props win.',
               languages: ['jsx'],
-              starterCode: {
-                jsx: `// Base renders the props it is given.\nfunction Base(props) {\n  return <div data-title={props.title} data-extra={props.extra} />\n}\n\n// Return a component that renders Base with extraProps merged in.\nfunction withProps(Component, extraProps) {\n  return Component\n}\n`,
-              },
+              files: [
+                {
+                  path: 'withProps.jsx',
+                  language: 'jsx',
+                  content: `// Base renders the props it is given.\nexport function Base(props) {\n  return <div data-title={props.title} data-extra={props.extra} />\n}\n\n// Return a component that renders Base with extraProps merged in.\nexport function withProps(Component, extraProps) {\n  return Component\n}\n`,
+                },
+              ],
               tests: [
                 {
                   id: 'ex-react-l45-t1',
@@ -861,9 +1264,13 @@ export const reactAdvancedHooksSections: Section[] = [
                 'Render <Component {...props} {...extraProps} /> so both sets of props arrive.',
                 'Order matters: put extraProps last so it overrides a clashing name.',
               ],
-              solution: {
-                jsx: `function Base(props) {\n  return <div data-title={props.title} data-extra={props.extra} />\n}\n\nfunction withProps(Component, extraProps) {\n  return function WithProps(props) {\n    return <Component {...props} {...extraProps} />\n  }\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'withProps.jsx',
+                  language: 'jsx',
+                  content: `export function Base(props) {\n  return <div data-title={props.title} data-extra={props.extra} />\n}\n\nexport function withProps(Component, extraProps) {\n  return function WithProps(props) {\n    return <Component {...props} {...extraProps} />\n  }\n}\n`,
+                },
+              ],
               testNotes:
                 'The clash check is what forces the spread order, and the render check confirms the wrapped component is still used.',
             },

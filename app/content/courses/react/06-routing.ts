@@ -19,6 +19,51 @@ export const reactRoutingSections: Section[] = [
         xp: 40,
         content: [
           {
+            type: 'demo',
+            id: 'react-l17-d1',
+            title: 'One URL, one matched route',
+            body: 'A router matches the current path against a list of routes. Click a link - the path changes and the switch picks the matching page.',
+            files: [
+              {
+                path: 'App.jsx',
+                language: 'jsx',
+                content: `import { useState } from 'react'
+
+const pages = { '/': 'Home', '/tasks': 'Tasks' }
+
+export default function App() {
+  const [path, setPath] = useState('/')
+  const page = pages[path] || 'Not found'
+
+  const link = (to) => (
+    <button
+      onClick={() => setPath(to)}
+      style={{ fontWeight: path === to ? 700 : 400, marginRight: 8 }}
+    >
+      {to}
+    </button>
+  )
+
+  return (
+    <div style={{ fontFamily: 'system-ui' }}>
+      <div style={{ marginBottom: 8 }}>
+        {link('/')}
+        {link('/tasks')}
+        {link('/missing')}
+      </div>
+      <p>
+        Path {path} matches <strong>{page}</strong>
+      </p>
+    </div>
+  )
+}
+`,
+              },
+            ],
+            previewProps: {},
+            height: 170,
+          },
+          {
             type: 'text',
             id: 'react-l17-intro',
             body: '**React Router basics.** A single-page app has one HTML file, so ’navigating’ means matching the current URL against a list of routes and rendering the component that fits. React Router does that matching and hands you links that change the URL without a page load.',
@@ -76,9 +121,13 @@ export const reactRoutingSections: Section[] = [
               instructions:
                 'Write resolveRoute(routes, pathname) returning the element of the first route whose path equals pathname, or null when nothing matches. Routes look like { path, element }.',
               languages: ['javascript'],
-              starterCode: {
-                javascript: `// Return the element of the first matching route, or null.\nfunction resolveRoute(routes, pathname) {\n  return null\n}\n`,
-              },
+              files: [
+                {
+                  path: 'routes.js',
+                  language: 'javascript',
+                  content: `// Return the element of the first matching route, or null.\nexport function resolveRoute(routes, pathname) {\n  return null\n}\n`,
+                },
+              ],
               tests: [
                 {
                   id: 'ex-react-l17-t1',
@@ -106,9 +155,13 @@ export const reactRoutingSections: Section[] = [
                 'find returns the first match, which is what a router does.',
                 'Return the element of the match, or null when find gives undefined.',
               ],
-              solution: {
-                javascript: `function resolveRoute(routes, pathname) {\n  const match = routes.find((route) => route.path === pathname)\n  return match ? match.element : null\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'routes.js',
+                  language: 'javascript',
+                  content: `export function resolveRoute(routes, pathname) {\n  const match = routes.find((route) => route.path === pathname)\n  return match ? match.element : null\n}\n`,
+                },
+              ],
               testNotes:
                 'The duplicate-path check pins down first-match-wins, and the unknown path confirms the null case is handled.',
             },
@@ -127,6 +180,43 @@ export const reactRoutingSections: Section[] = [
         ],
         xp: 40,
         content: [
+          {
+            type: 'demo',
+            id: 'react-l18-d1',
+            title: 'A param and a shared layout',
+            body: 'The path segment after /tasks is a parameter. The parent layout stays put while the matched child swaps.',
+            files: [
+              {
+                path: 'App.jsx',
+                language: 'jsx',
+                content: `import { useState } from 'react'
+
+const tasks = { 1: 'Write the intro', 2: 'Fix the loader' }
+
+export default function App() {
+  const [id, setId] = useState('1')
+
+  return (
+    <div style={{ fontFamily: 'system-ui' }}>
+      <button onClick={() => setId('1')}>/tasks/1</button>
+      <button onClick={() => setId('2')} style={{ marginLeft: 8 }}>/tasks/2</button>
+      <div
+        style={{ marginTop: 8, border: '1px solid #d8dee6', borderRadius: 6, padding: 8 }}
+      >
+        <div style={{ color: '#5b6470' }}>Tasks layout</div>
+        <strong>
+          Task {id}: {tasks[id]}
+        </strong>
+      </div>
+    </div>
+  )
+}
+`,
+              },
+            ],
+            previewProps: {},
+            height: 180,
+          },
           {
             type: 'text',
             id: 'react-l18-intro',
@@ -185,9 +275,13 @@ export const reactRoutingSections: Section[] = [
               instructions:
                 "Write readParams(pattern, pathname) returning an object of parameter values. Segments in the pattern that start with ':' capture the matching segment of the pathname. Return null when the patterns do not match.",
               languages: ['javascript'],
-              starterCode: {
-                javascript: `// Match '/tasks/:id' against '/tasks/42' and capture the id.\nfunction readParams(pattern, pathname) {\n  return {}\n}\n`,
-              },
+              files: [
+                {
+                  path: 'params.js',
+                  language: 'javascript',
+                  content: `// Match '/tasks/:id' against '/tasks/42' and capture the id.\nexport function readParams(pattern, pathname) {\n  return {}\n}\n`,
+                },
+              ],
               tests: [
                 { id: 'ex-react-l18-t1', label: 'captures a single parameter', body: "return readParams('/tasks/:id', '/tasks/42').id === '42'" },
                 {
@@ -211,9 +305,13 @@ export const reactRoutingSections: Section[] = [
                 'If the segment counts differ, the pattern cannot match — return null.',
                 'A segment starting with ":" is a parameter: store the pathname segment under the name after the colon.',
               ],
-              solution: {
-                javascript: `function readParams(pattern, pathname) {\n  const patternParts = pattern.split('/')\n  const pathParts = pathname.split('/')\n  if (patternParts.length !== pathParts.length) return null\n\n  const params = {}\n  for (let i = 0; i < patternParts.length; i++) {\n    const part = patternParts[i]\n    if (part.startsWith(':')) {\n      params[part.slice(1)] = pathParts[i]\n    } else if (part !== pathParts[i]) {\n      return null\n    }\n  }\n  return params\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'params.js',
+                  language: 'javascript',
+                  content: `export function readParams(pattern, pathname) {\n  const patternParts = pattern.split('/')\n  const pathParts = pathname.split('/')\n  if (patternParts.length !== pathParts.length) return null\n\n  const params = {}\n  for (let i = 0; i < patternParts.length; i++) {\n    const part = patternParts[i]\n    if (part.startsWith(':')) {\n      params[part.slice(1)] = pathParts[i]\n    } else if (part !== pathParts[i]) {\n      return null\n    }\n  }\n  return params\n}\n`,
+                },
+              ],
               testNotes:
                 'The length check and the static-segment comparison together make a real matcher rather than one that accepts any path.',
             },
@@ -232,6 +330,43 @@ export const reactRoutingSections: Section[] = [
         ],
         xp: 35,
         content: [
+          {
+            type: 'demo',
+            id: 'react-l19-d1',
+            title: 'A guard decides where you land',
+            body: 'The private route renders only when a user exists. Otherwise the guard sends the visitor to the login path instead.',
+            files: [
+              {
+                path: 'App.jsx',
+                language: 'jsx',
+                content: `import { useState } from 'react'
+
+export default function App() {
+  const [user, setUser] = useState(null)
+  const [path, setPath] = useState('/tasks')
+  const isPrivate = path === '/tasks'
+  const target = isPrivate && !user ? '/login' : path
+
+  return (
+    <div style={{ fontFamily: 'system-ui' }}>
+      <button onClick={() => setUser(user ? null : { name: 'Ada' })}>
+        {user ? 'Sign out' : 'Sign in'}
+      </button>
+      <button onClick={() => setPath('/tasks')} style={{ marginLeft: 8 }}>
+        Visit /tasks
+      </button>
+      <p style={{ marginTop: 8 }}>
+        {user ? 'Signed in' : 'Signed out'} - showing <strong>{target}</strong>
+      </p>
+    </div>
+  )
+}
+`,
+              },
+            ],
+            previewProps: {},
+            height: 190,
+          },
           {
             type: 'text',
             id: 'react-l19-intro',
@@ -253,7 +388,7 @@ export const reactRoutingSections: Section[] = [
             id: 'react-l19-code',
             language: 'jsx',
             title: 'protection and code splitting',
-            code: `function RequireUser({ children }) {\n  const user = useCurrentUser()\n  if (!user) return <Navigate to="/login" replace />\n  return children\n}\n\n// The component is downloaded only when its route is visited:\nconst TaskDetail = lazy(() => import('./TaskDetail'))\n\n// <Route\n//   path="/tasks/:id"\n//   element={\n//     <RequireUser>\n//       <Suspense fallback={<Spinner />}><TaskDetail /></Suspense>\n//     </RequireUser>\n//   }\n// />`,
+            code: `export default function RequireUser({ children }) {\n  const user = useCurrentUser()\n  if (!user) return <Navigate to="/login" replace />\n  return children\n}\n\n// The component is downloaded only when its route is visited:\nconst TaskDetail = lazy(() => import('./TaskDetail'))\n\n// <Route\n//   path="/tasks/:id"\n//   element={\n//     <RequireUser>\n//       <Suspense fallback={<Spinner />}><TaskDetail /></Suspense>\n//     </RequireUser>\n//   }\n// />`,
           },
           {
             type: 'list',
@@ -290,9 +425,13 @@ export const reactRoutingSections: Section[] = [
               instructions:
                 "Write targetPath(user, path, isPrivate) returning '/login' when the route is private and there is no user, and path otherwise. A user is missing when it is null or undefined.",
               languages: ['javascript'],
-              starterCode: {
-                javascript: `// Where should the visitor land?\nfunction targetPath(user, path, isPrivate) {\n  return path\n}\n`,
-              },
+              files: [
+                {
+                  path: 'guards.js',
+                  language: 'javascript',
+                  content: `// Where should the visitor land?\nexport function targetPath(user, path, isPrivate) {\n  return path\n}\n`,
+                },
+              ],
               tests: [
                 {
                   id: 'ex-react-l19-t1',
@@ -320,9 +459,13 @@ export const reactRoutingSections: Section[] = [
                 'A falsy check covers null and undefined at once.',
                 'Return "/login" when isPrivate && !user, otherwise the requested path.',
               ],
-              solution: {
-                javascript: `function targetPath(user, path, isPrivate) {\n  return isPrivate && !user ? '/login' : path\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'guards.js',
+                  language: 'javascript',
+                  content: `export function targetPath(user, path, isPrivate) {\n  return isPrivate && !user ? '/login' : path\n}\n`,
+                },
+              ],
               testNotes:
                 'The undefined check makes sure the guard treats a missing user the same way it treats null.',
             },
@@ -342,6 +485,48 @@ export const reactRoutingSections: Section[] = [
         ],
         xp: 35,
         content: [
+          {
+            type: 'demo',
+            id: 'react-l46-d1',
+            title: 'Rendered outside the parent box',
+            body: 'The dialog escapes the parent box with overflow hidden, just as a portal renders into a node near the end of the body.',
+            files: [
+              {
+                path: 'App.jsx',
+                language: 'jsx',
+                content: `import { useState } from 'react'
+
+export default function App() {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <div style={{ fontFamily: 'system-ui' }}>
+      <div
+        style={{
+          border: '1px solid #d8dee6',
+          borderRadius: 6,
+          padding: 8,
+          overflow: 'hidden',
+        }}
+      >
+        <p style={{ margin: 0 }}>Parent box with overflow hidden</p>
+        <button onClick={() => setOpen(!open)}>Toggle dialog</button>
+      </div>
+      <div style={{ marginTop: 8, color: '#5b6470' }}>Modal root</div>
+      {open ? (
+        <div style={{ border: '1px solid #2563eb', borderRadius: 6, padding: 8 }}>
+          <strong>Dialog</strong> - rendered by the portal
+        </div>
+      ) : null}
+    </div>
+  )
+}
+`,
+              },
+            ],
+            previewProps: {},
+            height: 230,
+          },
           {
             type: 'text',
             id: 'react-l46-intro',
@@ -363,7 +548,7 @@ export const reactRoutingSections: Section[] = [
             id: 'react-l46-code',
             language: 'jsx',
             title: 'a modal in its own root',
-            code: `// index.html: <div id="root"></div><div id="modal-root"></div>\n\nfunction Modal({ open, onClose, children }) {\n  if (!open) return null\n  return createPortal(\n    <div className="modal" role="dialog" aria-modal="true">\n      {children}\n      <button onClick={onClose}>Close</button>\n    </div>,\n    document.getElementById('modal-root'),\n  )\n}\n\n// In the DOM the modal sits in #modal-root; in the React tree it is\n// still a child of Modal, so context and event bubbling still work.`,
+            code: `// index.html: <div id="root"></div><div id="modal-root"></div>\n\nimport { createPortal } from 'react-dom'\n\nexport default function Modal({ open, onClose, children }) {\n  if (!open) return null\n  return createPortal(\n    <div className="modal" role="dialog" aria-modal="true">\n      {children}\n      <button onClick={onClose}>Close</button>\n    </div>,\n    document.getElementById('modal-root'),\n  )\n}\n\n// In the DOM the modal sits in #modal-root; in the React tree it is\n// still a child of Modal, so context and event bubbling still work.`,
           },
           {
             type: 'list',
@@ -400,9 +585,13 @@ export const reactRoutingSections: Section[] = [
               instructions:
                 'Write ensureHost(hosts, id, create). If hosts[id] already exists, return it. Otherwise call create(), store the result at hosts[id], and return it. This is how a portal host node is created once and reused.',
               languages: ['javascript'],
-              starterCode: {
-                javascript: `// hosts is an object of portal nodes, keyed by id.\nfunction ensureHost(hosts, id, create) {\n  return create()\n}\n`,
-              },
+              files: [
+                {
+                  path: 'portals.js',
+                  language: 'javascript',
+                  content: `// hosts is an object of portal nodes, keyed by id.\nexport function ensureHost(hosts, id, create) {\n  return create()\n}\n`,
+                },
+              ],
               tests: [
                 {
                   id: 'ex-react-l46-t1',
@@ -430,9 +619,13 @@ export const reactRoutingSections: Section[] = [
                 'Only call create() when there is nothing stored yet.',
                 'Store the new host, then return hosts[id] in both cases.',
               ],
-              solution: {
-                javascript: `function ensureHost(hosts, id, create) {\n  if (!hosts[id]) {\n    hosts[id] = create()\n  }\n  return hosts[id]\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'portals.js',
+                  language: 'javascript',
+                  content: `export function ensureHost(hosts, id, create) {\n  if (!hosts[id]) {\n    hosts[id] = create()\n  }\n  return hosts[id]\n}\n`,
+                },
+              ],
               testNotes:
                 'The creation count is what proves the host is reused — the detail that stops a new modal root being added on every render.',
             },
@@ -452,6 +645,59 @@ export const reactRoutingSections: Section[] = [
         ],
         xp: 40,
         content: [
+          {
+            type: 'demo',
+            id: 'react-l50-d1',
+            title: 'Four phases from one boolean',
+            body: 'The panel is kept mounted through exiting so it can animate out. The status names the phase as it moves.',
+            files: [
+              {
+                path: 'App.jsx',
+                language: 'jsx',
+                content: `import { useEffect, useRef, useState } from 'react'
+
+export default function App() {
+  const [open, setOpen] = useState(false)
+  const [status, setStatus] = useState('unmounted')
+  const wasOpen = useRef(false)
+
+  useEffect(() => {
+    if (open) {
+      setStatus(wasOpen.current ? 'entered' : 'entering')
+    } else {
+      setStatus(wasOpen.current ? 'exiting' : 'unmounted')
+    }
+    wasOpen.current = open
+  }, [open])
+
+  const visible = status !== 'unmounted'
+
+  return (
+    <div style={{ fontFamily: 'system-ui' }}>
+      <button onClick={() => setOpen(!open)}>{open ? 'Close' : 'Open'} panel</button>
+      <p>
+        Phase: <strong>{status}</strong>
+      </p>
+      <div
+        style={{
+          transition: 'opacity 300ms',
+          opacity: status === 'entered' ? 1 : 0,
+          border: '1px solid #d8dee6',
+          borderRadius: 6,
+          padding: 8,
+        }}
+      >
+        {visible ? 'Panel content' : 'Hidden'}
+      </div>
+    </div>
+  )
+}
+`,
+              },
+            ],
+            previewProps: {},
+            height: 200,
+          },
           {
             type: 'text',
             id: 'react-l50-intro',
@@ -473,7 +719,7 @@ export const reactRoutingSections: Section[] = [
             id: 'react-l50-code',
             language: 'jsx',
             title: 'a fade driven by status',
-            code: `const duration = 300\n\nconst styles = {\n  entering: { opacity: 0 },\n  entered: { opacity: 1 },\n  exiting: { opacity: 0 },\n  unmounted: { opacity: 0 },\n}\n\nfunction Panel({ open }) {\n  return (\n    <Transition in={open} timeout={duration} mountOnEnter unmountOnExit>\n      {(status) => (\n        <div style={{ transition: 'opacity ' + duration + 'ms', ...styles[status] }}>\n          Content\n        </div>\n      )}\n    </Transition>\n  )\n}`,
+            code: `import { Transition } from 'react-transition-group'\n\nconst duration = 300\n\nconst styles = {\n  entering: { opacity: 0 },\n  entered: { opacity: 1 },\n  exiting: { opacity: 0 },\n  unmounted: { opacity: 0 },\n}\n\nexport default function Panel({ open }) {\n  return (\n    <Transition in={open} timeout={duration} mountOnEnter unmountOnExit>\n      {(status) => (\n        <div style={{ transition: 'opacity ' + duration + 'ms', ...styles[status] }}>\n          Content\n        </div>\n      )}\n    </Transition>\n  )\n}`,
           },
           {
             type: 'list',
@@ -510,9 +756,13 @@ export const reactRoutingSections: Section[] = [
               instructions:
                 "Write transitionStatus(wasActive, active) returning the phase: false/true is 'entering', true/true is 'entered', true/false is 'exiting', and false/false is 'unmounted'.",
               languages: ['javascript'],
-              starterCode: {
-                javascript: `// wasActive is the previous value of the in prop, active the current one.\nfunction transitionStatus(wasActive, active) {\n  return 'unmounted'\n}\n`,
-              },
+              files: [
+                {
+                  path: 'transition.js',
+                  language: 'javascript',
+                  content: `// wasActive is the previous value of the in prop, active the current one.\nexport function transitionStatus(wasActive, active) {\n  return 'unmounted'\n}\n`,
+                },
+              ],
               tests: [
                 {
                   id: 'ex-react-l50-t1',
@@ -540,9 +790,13 @@ export const reactRoutingSections: Section[] = [
                 'When active is true the answer depends on whether it was already active.',
                 'Branch on active first, then on wasActive.',
               ],
-              solution: {
-                javascript: `function transitionStatus(wasActive, active) {\n  if (active) return wasActive ? 'entered' : 'entering'\n  return wasActive ? 'exiting' : 'unmounted'\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'transition.js',
+                  language: 'javascript',
+                  content: `export function transitionStatus(wasActive, active) {\n  if (active) return wasActive ? 'entered' : 'entering'\n  return wasActive ? 'exiting' : 'unmounted'\n}\n`,
+                },
+              ],
               testNotes:
                 'All four combinations are checked, which pins the phase table down completely.',
             },

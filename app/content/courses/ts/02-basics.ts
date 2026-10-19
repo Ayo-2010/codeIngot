@@ -19,6 +19,31 @@ export const tsBasicsSections: Section[] = [
         xp: 40,
         content: [
           {
+            type: 'demo',
+            id: 'ts-l4-d1',
+            title: 'Only the runtime value survives',
+            body: 'These values were written with annotations and inference, but at runtime the types are erased. `typeof` is the closest thing that remains — and it reports the value, not what you promised.',
+            html: `<button id="go">Report the runtime types</button>
+<pre id="out">Press the button.</pre>`,
+            css: `body { font-family: system-ui, sans-serif; font-size: 14px; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #f4f6f8; border-radius: 6px; font-size: 12.5px; }`,
+            javascript: `const out = document.querySelector('#out')
+document.querySelector('#go').addEventListener('click', function () {
+  const title = 'Dune'
+  const pages = 412
+  const inPrint = true
+  const subtitle = undefined
+  out.textContent = [
+    'title -> ' + typeof title,
+    'pages -> ' + typeof pages,
+    'inPrint -> ' + typeof inPrint,
+    'subtitle -> ' + typeof subtitle,
+  ].join('\\n')
+})`,
+            height: 170,
+          },
+          {
             type: 'text',
             id: 'ts-l4-intro',
             body: '**Primitive types and inference.** The primitive types are the atoms of the type system: `string`, `number`, `boolean`, `null`, `undefined`, `symbol` and `bigint`. You write them in lowercase — `string`, never `String`. The uppercase versions are the object wrappers and are almost never what you want.',
@@ -141,6 +166,29 @@ const book = { title, pages, inPrint }
         xp: 40,
         content: [
           {
+            type: 'demo',
+            id: 'ts-l5-d1',
+            title: 'readonly is a compile-time promise',
+            body: 'The array below is annotated `readonly`, which would make `push` a compile error. At runtime that annotation is gone, so the array is a normal array and the push succeeds. A tuple is likewise just a plain array, unpacked here by position.',
+            html: `<button id="go">Push and unpack</button>
+<pre id="out">Press the button.</pre>`,
+            css: `body { font-family: system-ui, sans-serif; font-size: 14px; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #f4f6f8; border-radius: 6px; font-size: 12.5px; }`,
+            javascript: `const out = document.querySelector('#out')
+document.querySelector('#go').addEventListener('click', function () {
+  const locked = ['a', 'b']
+  locked.push('c')
+
+  const pair = ['Ada', 36]
+  const label = pair[0]
+  const value = pair[1]
+
+  out.textContent = 'after push: ' + locked.join(', ') + '\\ntuple parts: ' + label + ' / ' + value
+})`,
+            height: 170,
+          },
+          {
             type: 'text',
             id: 'ts-l5-intro',
             body: '**Arrays, tuples and readonly.** An array type records the type of every element: `number[]` (or its long form, `Array<number>`) is a list of numbers. The compiler then knows that `prices[0]` is a number, and it rejects a push of anything else.',
@@ -250,6 +298,33 @@ function minMax(numbers: number[]): [number, number] {
         ],
         xp: 40,
         content: [
+          {
+            type: 'demo',
+            id: 'ts-l6-d1',
+            title: 'Guard an optional key, then count words',
+            body: 'The object type says `age` may be missing, so the code checks before using it. The word counter is the index-signature shape: any string key maps to a number. Both are still plain objects once the types are erased.',
+            html: `<button id="go">Greet and count</button>
+<pre id="out">Press the button.</pre>`,
+            css: `body { font-family: system-ui, sans-serif; font-size: 14px; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #f4f6f8; border-radius: 6px; font-size: 12.5px; }`,
+            javascript: `const out = document.querySelector('#out')
+document.querySelector('#go').addEventListener('click', function () {
+  const user = { name: 'Ada' }
+  const greeting = user.age === undefined
+    ? 'Hello, ' + user.name
+    : 'Hello, ' + user.name + ' (' + user.age + ')'
+
+  const counts = {}
+  const words = 'a b a'.split(' ')
+  for (const word of words) {
+    counts[word] = (counts[word] || 0) + 1
+  }
+
+  out.textContent = greeting + '\\ncounts: ' + JSON.stringify(counts)
+})`,
+            height: 170,
+          },
           {
             type: 'text',
             id: 'ts-l6-intro',
@@ -384,6 +459,28 @@ function wordCount(text: string): { [word: string]: number } {
         ],
         xp: 45,
         content: [
+          {
+            type: 'demo',
+            id: 'ts-l7-d1',
+            title: 'Narrow with typeof, merge with &',
+            body: 'A union is one of several types and a guard picks which; an intersection carries all the shapes at once. At runtime these are just a `typeof` check and merged keys — the unions and intersections were erased.',
+            html: `<button id="go">Narrow a union, merge two shapes</button>
+<pre id="out">Press the button.</pre>`,
+            css: `body { font-family: system-ui, sans-serif; font-size: 14px; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #f4f6f8; border-radius: 6px; font-size: 12.5px; }`,
+            javascript: `const out = document.querySelector('#out')
+document.querySelector('#go').addEventListener('click', function () {
+  function describe(value) {
+    return typeof value === 'string' ? 'text: ' + value : 'number: ' + value
+  }
+
+  const merged = Object.assign({}, { name: 'Ada' }, { age: 36 })
+
+  out.textContent = describe('hi') + '\\n' + describe(3) + '\\nmerged keys: ' + Object.keys(merged).join(', ')
+})`,
+            height: 170,
+          },
           {
             type: 'text',
             id: 'ts-l7-intro',

@@ -24,6 +24,12 @@ export const jsDomWritesSections: Section[] = [
             body: 'The **document** object is the root of the DOM tree. It represents the entire HTML document and is the entry point for every DOM operation — finding elements, creating new ones, and writing changes back to the page. Without document, JavaScript has no way to reach the markup.',
           },
           {
+            type: 'tip',
+            id: 'j-l65-dt',
+            title: 'Keep the developer tools open',
+            body: 'Open them with **F12**, **Ctrl + Shift + I** / **Cmd + Option + I**, or right-click the page and choose **Inspect**. The **Elements** panel is the live DOM; the **Console** panel shows logs and errors.',
+          },
+          {
             type: 'demo',
             id: 'j-l65-d1',
             title: 'The document object in action',

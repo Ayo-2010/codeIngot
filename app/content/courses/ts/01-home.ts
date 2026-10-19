@@ -19,6 +19,26 @@ export const tsHomeSections: Section[] = [
         xp: 40,
         content: [
           {
+            type: 'demo',
+            id: 'ts-l1-d1',
+            title: 'The annotation is gone by the time this runs',
+            body: 'The compiler would reject a string passed to `add`, but the annotation is erased before the code reaches the browser. Press the button and the plain JavaScript below happily concatenates a number and a string instead of adding.',
+            html: `<button id="go">Call add with a string</button>
+<pre id="out">Press the button.</pre>`,
+            css: `body { font-family: system-ui, sans-serif; font-size: 14px; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #f4f6f8; border-radius: 6px; font-size: 12.5px; }`,
+            javascript: `function add(a, b) {
+  return a + b
+}
+
+const out = document.querySelector('#out')
+document.querySelector('#go').addEventListener('click', function () {
+  out.textContent = 'add(1, 2) = ' + add(1, 2) + '\\nadd(1, "2") = ' + add(1, '2') + '\\nno type was checked at runtime'
+})`,
+            height: 170,
+          },
+          {
             type: 'text',
             id: 'ts-l1-intro',
             body: '**What TypeScript is and why it exists.** TypeScript is a superset of JavaScript: every valid JavaScript program is already valid TypeScript. It lets you describe the *shape* of your data, then checks that you use that data consistently. Every type is erased before the code reaches the browser, so the JavaScript that runs is exactly the JavaScript you would have written by hand.',
@@ -157,6 +177,30 @@ console.log(summary)
         ],
         xp: 35,
         content: [
+          {
+            type: 'demo',
+            id: 'ts-l2-d1',
+            title: 'Watch mode re-checks on every save',
+            body: 'This stands in for `tsc --watch`. Each press is one save; the compiler reads the whole project again and reports what it found that time.',
+            html: `<button id="go">Save a file</button>
+<pre id="out">Press the button to start watching.</pre>`,
+            css: `body { font-family: system-ui, sans-serif; font-size: 14px; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #f4f6f8; border-radius: 6px; font-size: 12.5px; }`,
+            javascript: `const report = [
+  'no errors',
+  'error TS2322: type string is not assignable to type number',
+  'no errors',
+]
+let save = 0
+
+const out = document.querySelector('#out')
+document.querySelector('#go').addEventListener('click', function () {
+  out.textContent = 'save ' + (save + 1) + ': ' + report[save % report.length]
+  save = save + 1
+})`,
+            height: 170,
+          },
           {
             type: 'text',
             id: 'ts-l2-intro',
@@ -302,6 +346,27 @@ const tsconfig = {
         ],
         xp: 40,
         content: [
+          {
+            type: 'demo',
+            id: 'ts-l3-d1',
+            title: 'A compile error is not a runtime error',
+            body: 'TypeScript can warn that `name` might be undefined before this runs, but the checker does not remove the problem. Press the button and the plain JavaScript still crashes on the missing value, caught here so you can read it.',
+            html: `<button id="go">Reach into a missing value</button>
+<pre id="out">Press the button.</pre>`,
+            css: `body { font-family: system-ui, sans-serif; font-size: 14px; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #f4f6f8; border-radius: 6px; font-size: 12.5px; }`,
+            javascript: `const out = document.querySelector('#out')
+document.querySelector('#go').addEventListener('click', function () {
+  const user = {}
+  try {
+    out.textContent = user.name.toUpperCase()
+  } catch (error) {
+    out.textContent = 'runtime error: ' + error.name + ' - ' + error.message
+  }
+})`,
+            height: 170,
+          },
           {
             type: 'text',
             id: 'ts-l3-intro',

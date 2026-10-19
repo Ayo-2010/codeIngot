@@ -1,14 +1,33 @@
 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="brand" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#29e2bd"/>
-      <stop offset="100%" stop-color="#12a184"/>
-    </linearGradient>
-  </defs>
-  <rect width="32" height="32" rx="6" fill="#0b0d10"/>
-  <g transform="translate(8, 8)" fill="none" stroke="url(#brand)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M4 8l-4 4 4 4"/>
-    <path d="M12 8l4 4-4 4"/>
-    <rect x="8" y="4" width="8" height="8" rx="1.5"/>
+  <!--
+    The app mark, drawn to match the logo in the site header (AppHeader.vue):
+    the brand chevrons on a rounded square tinted with brand at 15% and ringed
+    with brand at 30%. Keep the two in step by hand - a static file in public/
+    cannot share props with the component. The chevrons are set 50% of the
+    square rather than the 37.5% the header badge uses, so the mark still reads
+    at the 16px a browser tab draws it at.
+  -->
+  <rect width="32" height="32" rx="8" fill="#0b0d10" />
+  <rect width="32" height="32" rx="8" fill="#29e2bd" fill-opacity="0.15" />
+  <rect
+    x="0.5"
+    y="0.5"
+    width="31"
+    height="31"
+    rx="7.5"
+    fill="none"
+    stroke="#29e2bd"
+    stroke-opacity="0.3"
+  />
+  <g
+    transform="translate(4 4)"
+    fill="none"
+    stroke="#29e2bd"
+    stroke-width="2.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M9 8l-5 4 5 4" />
+    <path d="M15 8l5 4-5 4" />
   </g>
 </svg>

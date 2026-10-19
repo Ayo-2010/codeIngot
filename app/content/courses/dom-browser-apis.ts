@@ -24,6 +24,12 @@ export const domBrowserApisSections: Section[] = [
             body: 'The browser does not render your HTML file directly. It reads the bytes, parses them into a tree of nodes, repairs anything broken, and only then paints pixels. That tree is the DOM — the Document Object Model — and it is the thing JavaScript actually talks to. Every element, every attribute, every text node is a node in that tree, and every node is reachable from the single document object.',
           },
           {
+            type: 'tip',
+            id: 'd-l1-dt',
+            title: 'How to open the developer tools',
+            body: 'Press **F12**, or **Ctrl + Shift + I** on Windows and Linux / **Cmd + Option + I** on Mac, or right-click the page and choose **Inspect**. The **Elements** panel shows the live DOM the browser built: click a node to select it, and hover a node to highlight it on the page. The **Console** panel shows `console.log` output, warnings and errors, and you can type an expression there and press Enter to run it. Keep both panels open beside the demo as you read.',
+          },
+          {
             type: 'demo',
             id: 'd-l1-d1',
             title: 'Source versus DOM',
@@ -183,6 +189,12 @@ const heading = section.querySelector('h2').textContent.trim()
             type: 'text',
             id: 'd-l2-b1',
             body: 'Before you can change anything you have to find it. The DOM gives you two families of lookup: one that returns a single element or null, and one that returns a collection. In modern code the single-element family is querySelector, which accepts any CSS selector. The multi-element family is querySelectorAll, which returns a static NodeList you can loop over.',
+          },
+          {
+            type: 'tip',
+            id: 'd-l2-dt',
+            title: 'How to open the developer tools',
+            body: 'Press **F12**, or **Ctrl + Shift + I** on Windows and Linux / **Cmd + Option + I** on Mac, or right-click the page and choose **Inspect**. The **Elements** panel shows the live DOM the browser built: click a node to select it, and hover a node to highlight it on the page. The **Console** panel shows `console.log` output, warnings and errors, and you can type an expression there and press Enter to run it. Keep both panels open beside the demo as you read.',
           },
           {
             type: 'demo',
@@ -626,6 +638,12 @@ document.addEventListener('click', (event) => {
             id: 'd-l4-h2',
             level: 3,
             body: 'Node identity',
+          },
+          {
+            type: 'tip',
+            id: 'd-l4-dt',
+            title: 'Keep the developer tools open',
+            body: 'Open them with **F12**, **Ctrl + Shift + I** / **Cmd + Option + I**, or right-click the page and choose **Inspect**. The **Elements** panel is the live DOM; the **Console** panel shows logs and errors.',
           },
           {
             type: 'text',
@@ -4028,6 +4046,12 @@ heights.forEach((h, i) => {
 }
 
 requestAnimationFrame(animate)`,
+          },
+          {
+            type: 'tip',
+            id: 'd-l24-dt',
+            title: 'Keep the developer tools open',
+            body: 'Open them with **F12**, **Ctrl + Shift + I** / **Cmd + Option + I**, or right-click the page and choose **Inspect**. The **Elements** panel is the live DOM; the **Console** panel shows logs and errors.',
           },
           {
             type: 'tip',

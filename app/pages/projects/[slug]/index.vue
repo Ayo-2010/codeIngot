@@ -136,32 +136,42 @@
             </button>
           </div>
           <p class="text-xs text-muted">
-            Unpacks a <code class="font-mono text-mist-200">{{ project.slug }}/</code> folder with
-            <code class="font-mono text-mist-200">index.html</code>,
-            <code class="font-mono text-mist-200">style.css</code>, your
-            <code class="font-mono text-mist-200">script.js</code>, a
-            <code class="font-mono text-mist-200">README.md</code> and the design reference, so you
-            can work in your own editor.
+            <template v-if="projectIsFileSet">
+              Unpacks a <code class="font-mono text-mist-200">{{ project.slug }}/</code> folder with
+              the starter files above, a
+              <code class="font-mono text-mist-200">README.md</code> and the design reference, so you
+              can work in your own editor.
+            </template>
+            <template v-else>
+              Unpacks a <code class="font-mono text-mist-200">{{ project.slug }}/</code> folder with
+              <code class="font-mono text-mist-200">index.html</code>,
+              <code class="font-mono text-mist-200">style.css</code>, your
+              <code class="font-mono text-mist-200">script.js</code>, a
+              <code class="font-mono text-mist-200">README.md</code> and the design reference, so you
+              can work in your own editor.
+            </template>
           </p>
         </section>
 
         <EditorCodeWorkspace
           :files="files"
+          :file-set="starterFileSet"
           :starter-code="project.starterFiles"
           :active-language="firstLanguage"
           @update:files="files = $event"
+          @update:file-set="fileSet = $event"
         />
         <!--
-          Verification renders the learner's own page off-screen
+          Verification renders the learner's own files off-screen
           and runs the selector checks against that document.
         -->
-        <iframe
-          ref="verifyIframe"
+        <EditorSandboxPreview
+          ref="verifyPreview"
           class="sr-only"
-          aria-hidden="true"
-          tabindex="-1"
-          title="Project verification preview"
-        ></iframe>
+          :files="verificationFiles"
+          :modules="projectIsFileSet"
+          :auto-run="false"
+        />
       </div>
 
       <aside class="space-y-4 lg:sticky lg:top-20">
@@ -225,7 +235,8 @@
 </template>
 
 <script setup lang="ts">
-import type { ChecklistItem, EditorLanguage } from '~/types/content'
+import type { ChecklistItem, EditorLanguage, ExerciseFile } from '~/types/content'
+import { normaliseFiles } from '~/utils/exercise-files'
 import { renderInline } from '~/utils/inline-markdown'
 import { designDocument, designThumbnailDocument } from '~/utils/project-design'
 import {
@@ -234,7 +245,8 @@ import {
   matchesText,
   selectorTestBody,
 } from '~/utils/project-verify'
-import { createSandboxRunner } from '~/utils/sandbox'
+import type { SandboxRunResult } from '~/utils/sandbox'
+import { SCRIPT_LANGUAGES } from '~/utils/transpile'
 import { LocalDraftStorage, type ProjectDraft } from '~/utils/progress-storage'
 import { downloadZip } from '~/utils/zip'
 
@@ -245,6 +257,17 @@ const { isProjectComplete, completeProject } = useLearningProgress()
 useHead({ title: computed(() => project.value?.title ?? 'Project') })
 
 const files = ref<Partial<Record<EditorLanguage, string>>>({})
+/**
+ * A project whose source is a real file tree keeps its contents here. The
+ * editor is handed `starterFileSet` once, the way a lesson hands over its
+ * exercise, and every edit comes back through `@update:file-set`.
+ */
+const fileSet = ref<ExerciseFile[]>([])
+/** What that editor opens with, and resets to: the starter, or the saved draft. */
+const starterFileSet = ref<ExerciseFile[]>([])
+
+/** A project is written as real files, rather than the language-keyed shorthand. */
+const projectIsFileSet = computed(() => Boolean(project.value?.files?.length))
 const manualChecks = ref<Record<string, boolean>>({})
 const copiedUrl = ref('')
 let copyReset: ReturnType<typeof setTimeout> | undefined
@@ -275,59 +298,89 @@ const draftStorage = new LocalDraftStorage()
 const savedDrafts = ref<Record<string, ProjectDraft>>({})
 let draftTimer: ReturnType<typeof setTimeout> | undefined
 
+/**
+ * Open a project: the saved draft when there is one, the starter otherwise.
+ * A project written as real files fills the file list; the language-keyed
+ * shorthand fills `files` instead.
+ */
+function openProject(target: NonNullable<typeof project.value>) {
+  const draft = savedDrafts.value[target.slug]
+  if (target.files?.length) {
+    starterFileSet.value = target.files.map((file) => ({
+      ...file,
+      content: draft?.[file.path] ?? file.content,
+    }))
+    fileSet.value = starterFileSet.value.map((file) => ({ ...file }))
+    files.value = {}
+    return
+  }
+  starterFileSet.value = []
+  fileSet.value = []
+  files.value = draft ? { ...draft } : { ...target.starterFiles }
+}
+
+/** The draft shape for a project: by path for real files, by language otherwise. */
+function snapshot(target: NonNullable<typeof project.value>): ProjectDraft {
+  if (target.files?.length) {
+    return Object.fromEntries(fileSet.value.map((file) => [file.path, file.content]))
+  }
+  return { ...files.value }
+}
+
 onMounted(async () => {
   savedDrafts.value = await draftStorage.load()
   const target = project.value
-  if (target) {
-    const draft = savedDrafts.value[target.slug]
-    files.value = draft ? { ...draft } : { ...target.starterFiles }
-  }
+  if (target) openProject(target)
   void runVerification()
 })
 
-watch(files, (value) => {
+watch([files, fileSet], () => {
   const target = project.value
   if (!target) return
   clearTimeout(draftTimer)
   draftTimer = setTimeout(() => {
-    savedDrafts.value = { ...savedDrafts.value, [target.slug]: { ...value } }
+    savedDrafts.value = { ...savedDrafts.value, [target.slug]: snapshot(target) }
     void draftStorage.save(savedDrafts.value)
   }, 500)
 }, { deep: true })
 
 /* --------------------------- verification ------------------------------- */
 
-const verifyIframe = ref<HTMLIFrameElement | null>(null)
-const runner = createSandboxRunner()
+const verifyPreview = ref<{
+  run: (tests?: { id: string; label: string; body: string }[]) => Promise<SandboxRunResult>
+} | null>(null)
 const selectorResults = ref<Record<string, boolean>>({})
 let verifyTimer: ReturnType<typeof setTimeout> | undefined
 
+/** The learner's current files, whichever shape the project is written in. */
+const verificationFiles = computed<ExerciseFile[]>(() =>
+  projectIsFileSet.value ? fileSet.value : normaliseFiles(files.value),
+)
+
 /**
  * Selector checks are the only kind that needs the rendered
- * page, so they run in a sandboxed iframe off-screen and the
- * outcomes are matched back to their checklist items.
+ * page, so they run off-screen in a sandbox preview built from
+ * the same files the editor holds, and the outcomes are matched
+ * back to their checklist items.
  */
 async function runVerification() {
   const target = project.value
-  const iframe = verifyIframe.value
-  if (!target || !iframe) return
+  const preview = verifyPreview.value
+  if (!target || !preview) return
   const selectorItems = target.checklist.filter((item) => item.verify.kind === 'selector')
   if (selectorItems.length === 0) return
-  const result = await runner.run(iframe, {
-    html: files.value.html ?? '',
-    css: files.value.css ?? '',
-    javascript: files.value.javascript ?? '',
-    tests: selectorItems.map((item) => {
+  const result = await preview.run(
+    selectorItems.map((item) => {
       const verify = item.verify as { selector: string; count?: number }
       return { id: item.id, label: item.verify.label, body: selectorTestBody(verify) }
     }),
-  })
+  )
   const outcomes: Record<string, boolean> = {}
   for (const test of result.tests) outcomes[test.id] = test.passed
   selectorResults.value = outcomes
 }
 
-watch(files, () => {
+watch([files, fileSet], () => {
   clearTimeout(verifyTimer)
   verifyTimer = setTimeout(runVerification, 600)
 }, { deep: true })
@@ -336,15 +389,13 @@ onBeforeUnmount(() => {
   clearTimeout(copyReset)
   clearTimeout(draftTimer)
   clearTimeout(verifyTimer)
-  runner.dispose()
 })
 
 watch(
   project,
   (value) => {
     if (!value) return
-    const draft = savedDrafts.value[value.slug]
-    files.value = draft ? { ...draft } : { ...value.starterFiles }
+    openProject(value)
     selectorResults.value = {}
     void runVerification()
   },
@@ -386,12 +437,14 @@ function downloadFolder() {
   if (!current) return
 
   const folder = current.slug
-  const entries = (Object.keys(FILE_NAMES) as EditorLanguage[])
-    .filter((language) => files.value[language])
-    .map((language) => ({
-      path: `${folder}/${FILE_NAMES[language]}`,
-      content: files.value[language] as string,
-    }))
+  const entries = projectIsFileSet.value
+    ? fileSet.value.map((file) => ({ path: `${folder}/${file.path}`, content: file.content }))
+    : (Object.keys(FILE_NAMES) as EditorLanguage[])
+        .filter((language) => files.value[language])
+        .map((language) => ({
+          path: `${folder}/${FILE_NAMES[language]}`,
+          content: files.value[language] as string,
+        }))
 
   entries.push({
     path: `${folder}/reference/design-reference.html`,
@@ -402,6 +455,20 @@ function downloadFolder() {
   downloadZip(entries, `${folder}.zip`)
 }
 
+/** The file list for the README, matching whichever shape the project uses. */
+function fileLines(): string[] {
+  if (projectIsFileSet.value) {
+    return fileSet.value.map(
+      (file) => `- \`${file.path}\`${file.label ? ` - ${file.label}` : ''}`,
+    )
+  }
+  return [
+    '- `index.html` - the page structure',
+    '- `style.css` - the styles',
+    ...(files.value.javascript ? ['- `script.js` - the behaviour'] : []),
+  ]
+}
+
 function readme(target: NonNullable<typeof project.value>) {
   const lines = [
     `# ${target.title}`,
@@ -410,9 +477,7 @@ function readme(target: NonNullable<typeof project.value>) {
     '',
     '## Files',
     '',
-    '- `index.html` - the page structure',
-    '- `style.css` - the styles',
-    ...(files.value.javascript ? ['- `script.js` - the behaviour'] : []),
+    ...fileLines(),
     '- `reference/design-reference.html` - open this in a browser to see the target design',
     '',
     '## Brief',
@@ -448,10 +513,27 @@ function verifyItem(item: ChecklistItem): boolean {
   const verify = item.verify
   if (verify.kind === 'manual') return manualChecks.value[item.id] === true
   if (verify.kind === 'selector') return selectorResults.value[item.id] === true
-  if (verify.kind === 'text') return matchesText(files.value.html ?? '', verify.needle)
-  if (verify.kind === 'css-rule') return matchesCssRule(files.value.css ?? '', verify.needle)
+  if (verify.kind === 'text') return matchesText(fileContents('html'), verify.needle)
+  if (verify.kind === 'css-rule') return matchesCssRule(fileContents('css'), verify.needle)
   if (verify.kind === 'js-call') return matchesJsCall(scriptSource.value, verify.needle)
   return false
+}
+
+/**
+ * The learner's files of one extension, joined. A project written as real
+ * files spreads `index.css` and the rest across the tree, so a check reads
+ * every matching file rather than one fixed slot.
+ */
+function fileContents(extension: string): string {
+  if (projectIsFileSet.value) {
+    return fileSet.value
+      .filter((file) => file.path.endsWith(`.${extension}`))
+      .map((file) => file.content)
+      .join('\n')
+  }
+  if (extension === 'html') return files.value.html ?? ''
+  if (extension === 'css') return files.value.css ?? ''
+  return ''
 }
 
 /**
@@ -459,11 +541,17 @@ function verifyItem(item: ChecklistItem): boolean {
  * has. React and TypeScript projects carry `tsx`/`jsx`/`typescript`,
  * so checking only `javascript` would leave their lists dead.
  */
-const scriptSource = computed(() =>
-  [files.value.javascript, files.value.typescript, files.value.jsx, files.value.tsx]
+const scriptSource = computed(() => {
+  if (projectIsFileSet.value) {
+    return fileSet.value
+      .filter((file) => SCRIPT_LANGUAGES.includes(file.language))
+      .map((file) => file.content)
+      .join('\n')
+  }
+  return [files.value.javascript, files.value.typescript, files.value.jsx, files.value.tsx]
     .filter((source): source is string => typeof source === 'string')
-    .join('\n'),
-)
+    .join('\n')
+})
 
 function isChecked(itemId: string) {
   const item = project.value?.checklist.find((entry) => entry.id === itemId)

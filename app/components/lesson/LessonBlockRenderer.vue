@@ -119,6 +119,30 @@
           >{{ token.value }}</span></code></pre>
       </figure>
 
+      <!--
+        A demo written as real files runs through the module sandbox, so a React
+        demo is the actual component compiled and mounted rather than a picture
+        of one. It mounts on the client, which is when the sandbox exists.
+      -->
+      <figure
+        v-else-if="block.type === 'demo' && block.files?.length"
+        :id="block.id"
+        class="scroll-mt-20 overflow-hidden rounded-xl border border-[var(--color-code-border)] bg-[var(--color-code-header-bg)]"
+      >
+        <figcaption class="border-b border-[var(--color-code-header-border)] bg-[var(--color-code-header-bg)] px-3 py-2">
+          <p class="text-sm font-semibold text-mist-50">{{ block.title }}</p>
+          <p v-if="block.body" class="mt-0.5 text-xs leading-relaxed text-muted" v-html="inline(block.body)" />
+        </figcaption>
+        <EditorSandboxPreview
+          :files="block.files"
+          :modules="true"
+          :entry="block.entry"
+          :preview-props="block.previewProps"
+          class="w-full"
+          :style="{ height: `${block.height ?? 180}px` }"
+        />
+      </figure>
+
       <figure
         v-else-if="block.type === 'demo'"
         :id="block.id"
@@ -151,6 +175,7 @@
         </header>
         <EditorCodeWorkspace
           :files="starterFor(block.exercise)"
+          :file-set="block.exercise.files"
           :starter-code="block.exercise.starterCode"
           :exercise="block.exercise"
           :active-language="block.exercise.languages[0] ?? 'html'"
@@ -229,11 +254,15 @@ function exampleDoc(block: ExampleBlock): string {
 }
 
 function demoDoc(block: DemoBlock): string {
-  return wrapDoc(block.html, block.css ?? '', block.javascript ?? '')
+  return wrapDoc(block.html ?? '', block.css ?? '', block.javascript ?? '')
 }
 
+/**
+ * The language-keyed shorthand. A multi-file exercise declares `files` instead,
+ * which reaches the workspace through its own prop.
+ */
 function starterFor(exercise: CodingExercise): Partial<Record<EditorLanguage, string>> {
-  return { ...exercise.starterCode }
+  return { ...(exercise.starterCode ?? {}) }
 }
 
 function tokenClass(kind: TokenKind) {

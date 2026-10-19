@@ -25,6 +25,12 @@ export const jsDomEventsWindowSections: Section[] = [
             body: 'Every time the user clicks, types, submits or scrolls, the browser fires an **event**: a named signal that something happened. JavaScript listens for those signals and runs your code in response. This lesson covers the whole loop — attach a listener, work out which element the event came from, and cancel the browser default when you want to handle it yourself.',
           },
           {
+            type: 'tip',
+            id: 'j-l71-dt',
+            title: 'Keep the developer tools open',
+            body: 'Open them with **F12**, **Ctrl + Shift + I** / **Cmd + Option + I**, or right-click the page and choose **Inspect**. The **Elements** panel is the live DOM; the **Console** panel shows logs and errors.',
+          },
+          {
             type: 'demo',
             id: 'j-l71-d1',
             title: 'A form that does not navigate',

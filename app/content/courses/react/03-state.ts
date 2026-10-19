@@ -19,6 +19,32 @@ export const reactStateSections: Section[] = [
         xp: 40,
         content: [
           {
+            type: 'demo',
+            id: 'react-l7-d1',
+            title: 'A counter in state',
+            body: 'Each click calls the setter with a function that receives the previous value, so every click counts even when they come in a burst.',
+            files: [
+              {
+                path: 'Counter.jsx',
+                language: 'jsx',
+                content: `import { useState } from 'react'
+
+export default function Counter() {
+  const [count, setCount] = useState(0)
+  return (
+    <div style={{ fontFamily: 'system-ui' }}>
+      <button onClick={() => setCount((c) => c + 1)}>Clicked {count} times</button>
+      <button onClick={() => setCount(0)} style={{ marginLeft: 8 }}>Reset</button>
+    </div>
+  )
+}
+`,
+              },
+            ],
+            previewProps: {},
+            height: 130,
+          },
+          {
             type: 'text',
             id: 'react-l7-intro',
             body: '**useState hook.** State is data a component remembers between renders. `useState(initial)` returns a pair: the current value and a function that sets it. Calling the setter tells React the data changed and the component should run again.',
@@ -39,7 +65,7 @@ export const reactStateSections: Section[] = [
             id: 'react-l7-code',
             language: 'jsx',
             title: 'useState, the functional updater, and immutable lists',
-            code: `function Counter() {\n  const [count, setCount] = useState(0)\n  return (\n    <button onClick={() => setCount((c) => c + 1)}>{count}</button>\n  )\n}\n\n// Three updates in one handler all apply, because each receives the latest value:\n// setCount((c) => c + 1)\n// setCount((c) => c + 1)\n// setCount((c) => c + 1)   // count grows by 3\n\n// A list is state too — build a new array, never push:\n// setTasks((tasks) => [...tasks, newTask])`,
+            code: `import { useState } from 'react'\n\nexport default function Counter() {\n  const [count, setCount] = useState(0)\n  return (\n    <button onClick={() => setCount((c) => c + 1)}>{count}</button>\n  )\n}\n\n// Three updates in one handler all apply, because each receives the latest value:\n// setCount((c) => c + 1)\n// setCount((c) => c + 1)\n// setCount((c) => c + 1)   // count grows by 3\n\n// A list is state too — build a new array, never push:\n// setTasks((tasks) => [...tasks, newTask])`,
           },
           {
             type: 'list',
@@ -76,9 +102,13 @@ export const reactStateSections: Section[] = [
               instructions:
                 'Write stepCount(count, steps) returning count after applying every step in order. Write addTask(tasks, task) returning a NEW array with the task added.',
               languages: ['javascript'],
-              starterCode: {
-                javascript: `// 1) Apply each step to the count, in order.\nfunction stepCount(count, steps) {\n  return count\n}\n\n// 2) Return a new list with the task added.\nfunction addTask(tasks, task) {\n  return tasks\n}\n`,
-              },
+              files: [
+                {
+                  path: 'state.js',
+                  language: 'javascript',
+                  content: `// 1) Apply each step to the count, in order.\nexport function stepCount(count, steps) {\n  return count\n}\n\n// 2) Return a new list with the task added.\nexport function addTask(tasks, task) {\n  return tasks\n}\n`,
+                },
+              ],
               tests: [
                 {
                   id: 'ex-react-l7-t1',
@@ -111,9 +141,13 @@ export const reactStateSections: Section[] = [
                 'stepCount(0, [1, 1, 1]) is three separate increments, which is why it reaches 3.',
                 'For addTask, copy the list and put the new task at the end: [...tasks, task].',
               ],
-              solution: {
-                javascript: `function stepCount(count, steps) {\n  let total = count\n  for (const step of steps) {\n    total += step\n  }\n  return total\n}\n\nfunction addTask(tasks, task) {\n  return [...tasks, task]\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'state.js',
+                  language: 'javascript',
+                  content: `export function stepCount(count, steps) {\n  let total = count\n  for (const step of steps) {\n    total += step\n  }\n  return total\n}\n\nexport function addTask(tasks, task) {\n  return [...tasks, task]\n}\n`,
+                },
+              ],
               testNotes:
                 'The addTask checks compare the input after the call and the array reference, so an in-place push is caught.',
             },
@@ -132,6 +166,41 @@ export const reactStateSections: Section[] = [
         ],
         xp: 40,
         content: [
+          {
+            type: 'demo',
+            id: 'react-l8-d1',
+            title: 'An effect with cleanup',
+            body: 'The child sets an interval on mount and clears it in the cleanup the effect returns. Unmount the child and the timer stops with it.',
+            files: [
+              {
+                path: 'App.jsx',
+                language: 'jsx',
+                content: `import { useState, useEffect } from 'react'
+
+function Clock() {
+  const [seconds, setSeconds] = useState(0)
+  useEffect(() => {
+    const id = setInterval(() => setSeconds((s) => s + 1), 1000)
+    return () => clearInterval(id)
+  }, [])
+  return <p style={{ margin: 0 }}>Mounted for {seconds}s</p>
+}
+
+export default function App() {
+  const [show, setShow] = useState(true)
+  return (
+    <div style={{ fontFamily: 'system-ui' }}>
+      <button onClick={() => setShow((s) => !s)}>{show ? 'Unmount' : 'Mount'}</button>
+      {show && <Clock />}
+    </div>
+  )
+}
+`,
+              },
+            ],
+            previewProps: {},
+            height: 150,
+          },
           {
             type: 'text',
             id: 'react-l8-intro',
@@ -190,9 +259,13 @@ export const reactStateSections: Section[] = [
               instructions:
                 'Write depsChanged(prev, next) returning true when the two dependency arrays differ: a different length, or any element not equal under Object.is. Two identical arrays return false.',
               languages: ['javascript'],
-              starterCode: {
-                javascript: `// Does this dependency list trigger the effect again?\nfunction depsChanged(prev, next) {\n  return true\n}\n`,
-              },
+              files: [
+                {
+                  path: 'deps.js',
+                  language: 'javascript',
+                  content: `// Does this dependency list trigger the effect again?\nexport function depsChanged(prev, next) {\n  return true\n}\n`,
+                },
+              ],
               tests: [
                 { id: 'ex-react-l8-t1', label: 'two empty lists do not change', body: 'return depsChanged([], []) === false' },
                 { id: 'ex-react-l8-t2', label: 'equal values do not change', body: 'return depsChanged([1, 2], [1, 2]) === false' },
@@ -213,9 +286,13 @@ export const reactStateSections: Section[] = [
                 'Then compare element by element with Object.is.',
                 'A new object each render is never Object.is-equal to the previous one, which is why objects in dependency lists cause repeated effects.',
               ],
-              solution: {
-                javascript: `function depsChanged(prev, next) {\n  if (prev.length !== next.length) return true\n  return prev.some((value, index) => !Object.is(value, next[index]))\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'deps.js',
+                  language: 'javascript',
+                  content: `export function depsChanged(prev, next) {\n  if (prev.length !== next.length) return true\n  return prev.some((value, index) => !Object.is(value, next[index]))\n}\n`,
+                },
+              ],
               testNotes:
                 'The last check uses two structurally equal but distinct objects, pinning down that the comparison is by identity, not by value.',
             },
@@ -234,6 +311,34 @@ export const reactStateSections: Section[] = [
         ],
         xp: 30,
         content: [
+          {
+            type: 'demo',
+            id: 'react-l9-d1',
+            title: 'Hooks stay at the top level',
+            body: 'Both hooks are called before any condition, so the order is the same on every render. The `if` only decides what to draw.',
+            files: [
+              {
+                path: 'Panel.jsx',
+                language: 'jsx',
+                content: `import { useState } from 'react'
+
+export default function Panel() {
+  const [open, setOpen] = useState(false)
+  const [count, setCount] = useState(0)
+  return (
+    <div style={{ fontFamily: 'system-ui' }}>
+      <button onClick={() => setOpen((o) => !o)}>{open ? 'Hide' : 'Show'}</button>
+      <button onClick={() => setCount((c) => c + 1)} style={{ marginLeft: 8 }}>Count: {count}</button>
+      {open && <p style={{ margin: '8px 0 0' }}>Both hooks ran before this line.</p>}
+    </div>
+  )
+}
+`,
+              },
+            ],
+            previewProps: {},
+            height: 140,
+          },
           {
             type: 'text',
             id: 'react-l9-intro',
@@ -292,9 +397,13 @@ export const reactStateSections: Section[] = [
               instructions:
                 'Write violatesRules(call) returning true when the hook call breaks a rule. A call is valid only when call.insideComponent is true and call.topLevel is true.',
               languages: ['javascript'],
-              starterCode: {
-                javascript: `// A hook call must be inside a component and at the top level.\nfunction violatesRules(call) {\n  return false\n}\n`,
-              },
+              files: [
+                {
+                  path: 'rules.js',
+                  language: 'javascript',
+                  content: `// A hook call must be inside a component and at the top level.\nexport function violatesRules(call) {\n  return false\n}\n`,
+                },
+              ],
               tests: [
                 {
                   id: 'ex-react-l9-t1',
@@ -322,9 +431,13 @@ export const reactStateSections: Section[] = [
                 'Negate that: invalid when either flag is false.',
                 'Return the negation of the valid condition: !(call.insideComponent && call.topLevel).',
               ],
-              solution: {
-                javascript: `function violatesRules(call) {\n  return !(call.insideComponent && call.topLevel)\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'rules.js',
+                  language: 'javascript',
+                  content: `export function violatesRules(call) {\n  return !(call.insideComponent && call.topLevel)\n}\n`,
+                },
+              ],
               testNotes:
                 'The four checks cover every combination of the two flags, so both rules must be implemented.',
             },

@@ -54,53 +54,154 @@ export const reactProjects: Project[] = [
         verify: { kind: 'js-call', needle: 'getbyrole|screen', label: 'Testing Library queries' },
       },
     ],
-    starterFiles: {
-      tsx: `// React Dashboard — starter
-//
-// A real project gets React from npm and adds a URL library for the address
-// bar. This editor has no module loader, so the React runtime is already on
-// the page: call React.useState, React.useReducer and React.useContext
-// directly, and model the navigation as data.
-//
-// The dashboard should have:
-// - A sidebar with links to Dashboard, Settings and Profile
-// - A protected Profile view that sends a signed-out reader back
-// - At least two chart components driven by typed data
-// - Tests for one component and one hook
+    // A real project tree. `main.tsx` mounts, and everything else grows in
+    // `src/`, importing the way a Vite project does.
+    files: [
+      {
+        path: 'src/main.tsx',
+        language: 'tsx',
+        content: `import { createRoot } from 'react-dom/client'
+import App from './App'
+import './index.css'
+
+createRoot(document.getElementById('root')!).render(<App />)
+`,
+      },
+      {
+        path: 'src/App.tsx',
+        language: 'tsx',
+        content: `import { useReducer } from 'react'
 
 // The three views the sidebar links to.
-const views = ['dashboard', 'settings', 'profile']
+const views = ['dashboard', 'settings', 'profile'] as const
 
-// TODO: hold the current view and the signed-in user here, and return a new
-// object for each action — the same state for anything else.
-function dashboardReducer(state, action) {
+type View = (typeof views)[number]
+
+type DashboardState = {
+  view: View
+  user: { name: string } | null
+}
+
+type DashboardAction = { type: 'go'; view: View } | { type: 'signIn' } | { type: 'signOut' }
+
+// TODO: return the next state for each action, and the same state for anything
+// the union does not name.
+function dashboardReducer(state: DashboardState, action: DashboardAction): DashboardState {
   return state
 }
 
-function App() {
-  const [state, dispatch] = React.useReducer(dashboardReducer, {
-    view: 'dashboard',
-    user: null,
-  })
+export default function App() {
+  const [state, dispatch] = useReducer(dashboardReducer, { view: 'dashboard', user: null })
 
   return (
     <div className="app-shell">
-      <header className="app-header">
-        <h1>Dashboard</h1>
-      </header>
+      <aside className="sidebar">
+        <nav>
+          {views.map((view) => (
+            <button
+              key={view}
+              type="button"
+              className={view === state.view ? 'nav-link is-active' : 'nav-link'}
+              onClick={() => dispatch({ type: 'go', view })}
+            >
+              {view}
+            </button>
+          ))}
+        </nav>
+      </aside>
       <main className="app-main">
+        <header className="app-header">
+          <h1>Dashboard</h1>
+          <button
+            type="button"
+            onClick={() => dispatch({ type: state.user ? 'signOut' : 'signIn' })}
+          >
+            {state.user ? 'Sign out' : 'Sign in'}
+          </button>
+        </header>
         <p>Showing: {state.view}</p>
-        <button type="button" onClick={() => dispatch({ type: 'signIn' })}>
-          Sign in
-        </button>
+        {/* TODO: a protected Profile view, and two chart components. */}
       </main>
     </div>
   )
 }
-
-render(<App />)
 `,
-    },
+      },
+      {
+        path: 'src/index.css',
+        language: 'css',
+        content: `:root {
+  font-family: system-ui, sans-serif;
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 14rem 1fr;
+  min-height: 100vh;
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+.sidebar {
+  padding: 1.5rem 1rem;
+  background: #111c2e;
+  border-right: 1px solid #1e293b;
+}
+
+.nav-link {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 0;
+  border-radius: 0.5rem;
+  background: transparent;
+  color: #94a3b8;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+
+.nav-link.is-active {
+  background: #1e293b;
+  color: #f8fafc;
+}
+
+.app-main {
+  padding: 2rem;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid #1e293b;
+  padding-bottom: 1rem;
+}
+`,
+      },
+      {
+        path: 'src/App.test.tsx',
+        language: 'tsx',
+        content: `import { render } from '@testing-library/react'
+import { describe, expect, it } from 'vitest'
+import App from './App'
+
+describe('App', () => {
+  it('renders the heading', () => {
+    // TODO: ask for the heading by its accessible role instead of its text.
+    const { container } = render(<App />)
+    expect(container.textContent).toContain('Dashboard')
+  })
+})
+`,
+      },
+    ],
     designPreviewHtml: `<section class="dashboard-preview">
   <aside class="sidebar">
     <nav>
@@ -266,51 +367,137 @@ body {
         verify: { kind: 'manual', label: 'zero type errors under strict mode' },
       },
     ],
-    starterFiles: {
-      tsx: `// E-Commerce Cart — starter
-//
-// React is already on the page in this editor, so call React.useReducer and
-// React.useContext directly rather than importing them.
+    // Split the way a cart app is: types, the reducer, then the screen.
+    files: [
+      {
+        path: 'src/main.tsx',
+        language: 'tsx',
+        content: `import { createRoot } from 'react-dom/client'
+import App from './App'
+import './index.css'
 
-interface Product {
+createRoot(document.getElementById('root')!).render(<App />)
+`,
+      },
+      {
+        path: 'src/types.ts',
+        language: 'typescript',
+        content: `export interface Product {
   id: number
   name: string
   price: number
   image: string
 }
 
-interface CartItem {
+export interface CartItem {
   product: Product
   quantity: number
 }
 
-type CartAction =
+export type CartAction =
   | { type: 'add'; product: Product }
   | { type: 'remove'; id: number }
   | { type: 'update'; id: number; quantity: number }
+`,
+      },
+      {
+        path: 'src/cart.ts',
+        language: 'typescript',
+        content: `import type { CartAction, CartItem } from './types'
 
-const emptyCart: CartItem[] = []
+export const emptyCart: CartItem[] = []
 
-function cartReducer(state: CartItem[], action: CartAction): CartItem[] {
-  // TODO: return the next cart for each action in the union above.
+// TODO: return the next cart for each action in the union above.
+export function cartReducer(state: CartItem[], action: CartAction): CartItem[] {
   return state
 }
 
-function App() {
-  const [cart, dispatch] = React.useReducer(cartReducer, emptyCart)
-  const count = cart.reduce((total, item) => total + item.quantity, 0)
+/** How many items the cart holds, counting quantities. */
+export function cartCount(cart: CartItem[]): number {
+  return cart.reduce((total, item) => total + item.quantity, 0)
+}
+`,
+      },
+      {
+        path: 'src/App.tsx',
+        language: 'tsx',
+        content: `import { useReducer } from 'react'
+import { cartCount, cartReducer, emptyCart } from './cart'
+import type { Product } from './types'
+
+const sample: Product = {
+  id: 1,
+  name: 'Wireless Headphones',
+  price: 129,
+  image: 'https://placehold.co/200x150',
+}
+
+export default function App() {
+  const [cart, dispatch] = useReducer(cartReducer, emptyCart)
 
   return (
     <section className="cart-preview">
       <h1>Shopping Cart</h1>
-      <p>{count} item(s) in the cart</p>
+      <p>{cartCount(cart)} item(s) in the cart</p>
+      <button type="button" onClick={() => dispatch({ type: 'add', product: sample })}>
+        Add {sample.name}
+      </button>
+      {/* TODO: the product list, the quantity controls and the checkout form. */}
     </section>
   )
 }
-
-render(<App />)
 `,
-    },
+      },
+      {
+        path: 'src/index.css',
+        language: 'css',
+        content: `:root {
+  font-family: system-ui, sans-serif;
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+}
+
+.cart-preview {
+  min-height: 100vh;
+  padding: 2rem;
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+.cart-preview h1 {
+  margin: 0 0 1rem;
+  font-size: 1.5rem;
+}
+
+.cart-preview button {
+  margin-top: 1rem;
+  padding: 0.5rem 0.9rem;
+  border: 0;
+  border-radius: 0.5rem;
+  background: #2f6feb;
+  color: #f8fafc;
+  font: inherit;
+  cursor: pointer;
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  gap: 1rem;
+}
+
+.product-card {
+  padding: 1rem;
+  border: 1px solid #1e293b;
+  border-radius: 0.75rem;
+  background: #111c2e;
+}
+`,
+      },
+    ],
     designPreviewHtml: `<section class="cart-preview">
   <h1>Shopping Cart</h1>
   <div class="products">

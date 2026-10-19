@@ -25,16 +25,7 @@ export function loadReactRuntime(): Promise<string> {
         return response.text()
       }),
     )
-      .then(
-        (parts) =>
-          `${parts.join('\n;\n')}\n` +
-          // A one-line convenience so exercises can end with `render(<App />)`
-          // instead of repeating the createRoot + getElementById dance. React
-          // and ReactDOM stay available for lessons that want the full picture.
-          'function render(element) {\n' +
-          "  return ReactDOM.createRoot(document.getElementById('root')).render(element);\n" +
-          '}\nwindow.render = render;\n',
-      )
+      .then((parts) => `${parts.join('\n;\n')}\n`)
       .catch((error: unknown) => {
         // Don't cache a failed load, so a transient network blip can recover.
         runtime = null

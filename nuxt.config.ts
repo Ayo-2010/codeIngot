@@ -7,8 +7,25 @@ export default defineNuxtConfig({
   modules: ['@nuxtjs/color-mode' , '@vercel/analytics'],
   css: ['~/assets/css/main.css'],
   colorMode: {
-    preference: 'dark',
-    fallback: 'dark',
+    /**
+     * Light is the site's default, not the visitor's operating system: the
+     * preference is fixed rather than 'system', so a first visit always lands
+     * in the same mode.
+     */
+    preference: 'light',
+    fallback: 'light',
+    /**
+     * A fresh storage key, so the default below actually reaches a returning
+     * browser. The module lets a stored preference outrank the configured one,
+     * and the previous default had been written into storage automatically: the
+     * client plugin persists the preference as soon as it mounts, so every
+     * visitor's browser picked up `nuxt-color-mode = "dark"` without anyone
+     * choosing it. Under that key the silent value kept winning and the site
+     * opened dark no matter what `preference` said. Reading a new key once
+     * applies light everywhere; the price is that a dark choice made before this
+     * change is reset, and the next toggle is stored under the new key.
+     */
+    storageKey: 'codeingot-color-mode',
     classSuffix: '',
   },
   vite: {
@@ -25,7 +42,8 @@ export default defineNuxtConfig({
           content:
             'codeIngot is an interactive HTML, CSS and JavaScript learning platform. Learn by writing code, running it and solving challenges.',
         },
-        { name: 'theme-color', content: '#0B0D10' },
+        // `theme-color` is set per mode in app.vue, because it has to follow the
+        // active theme rather than the build-time default.
       ],
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },

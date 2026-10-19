@@ -154,9 +154,15 @@
     margin: 0;
   }
 
+  /*
+   * Selection takes its wash from the brand token, which is a different colour
+   * in each mode, and the text tone flips with it. The previous fixed
+   * `#fff` was only readable against the dark-mode wash: over the pale
+   * light-mode brand it left white on near-white.
+   */
   ::selection {
-    background: rgb(41 226 189 / 0.28);
-    color: #fff;
+    background: color-mix(in srgb, var(--color-brand) 28%, transparent);
+    color: var(--color-mist-50);
   }
 
   :focus-visible {

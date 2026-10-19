@@ -19,6 +19,28 @@ export const tsUtilitySections: Section[] = [
         xp: 35,
         content: [
           {
+            type: 'demo',
+            id: 'ts-l17-d1',
+            title: 'A patch merged over the defaults',
+            body: 'Partial describes a patch that supplies only some of the keys. Types are erased before code runs, so the live version of that idea is an object spread: the patch goes last so its values win, and the defaults object is left as it was.',
+            html: `<label>age <input id="age" type="number" value="30"></label>
+<button id="go">Merge the patch</button>
+<pre id="out">Press the button.</pre>`,
+            css: `body { font-family: system-ui, sans-serif; font-size: 14px; }
+button, input { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; }
+button { cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #f4f6f8; border-radius: 6px; font-size: 12.5px; }`,
+            javascript: `const out = document.querySelector('#out')
+const defaults = { name: 'Ada', age: 36 }
+
+document.querySelector('#go').addEventListener('click', function () {
+  const patch = { age: Number(document.querySelector('#age').value) }
+  const merged = { ...defaults, ...patch }
+  out.textContent = 'defaults ' + JSON.stringify(defaults) + ' | merged ' + JSON.stringify(merged)
+})`,
+            height: 190,
+          },
+          {
             type: 'text',
             id: 'ts-l17-intro',
             body: '**Partial, Required, Readonly.** The built-in utility types transform an existing type into a new one, so you never hand-write a near-duplicate. `Partial<User>` turns every property optional — the shape of a patch. `Required` does the reverse; `Readonly` makes every property unassignable.',
@@ -148,6 +170,44 @@ function withDefaults(partial: object, defaults: object): object {
         ],
         xp: 35,
         content: [
+          {
+            type: 'demo',
+            id: 'ts-l18-d1',
+            title: 'Pick and Omit by hand',
+            body: 'Pick keeps only the named keys and Omit keeps every key except them — Omit is just Pick over the rest. Since types are erased before code runs, the live version is a plain function that copies keys into a new object.',
+            html: `<button id="keep">Keep only name</button>
+<button id="drop">Drop the id</button>
+<pre id="out">Press a button.</pre>`,
+            css: `body { font-family: system-ui, sans-serif; font-size: 14px; }
+button { font: inherit; padding: 6px 12px; margin-right: 6px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #f4f6f8; border-radius: 6px; font-size: 12.5px; }`,
+            javascript: `const out = document.querySelector('#out')
+const user = { id: 7, name: 'Ada', age: 36 }
+
+function pick(obj, keys) {
+  const result = {}
+  for (const key of keys) {
+    if (key in obj) result[key] = obj[key]
+  }
+  return result
+}
+
+function omit(obj, keys) {
+  const rest = Object.keys(obj).filter(function (key) {
+    return keys.indexOf(key) === -1
+  })
+  return pick(obj, rest)
+}
+
+document.querySelector('#keep').addEventListener('click', function () {
+  out.textContent = 'keep only name: ' + JSON.stringify(pick(user, ['name']))
+})
+
+document.querySelector('#drop').addEventListener('click', function () {
+  out.textContent = 'drop the id: ' + JSON.stringify(omit(user, ['id']))
+})`,
+            height: 170,
+          },
           {
             type: 'text',
             id: 'ts-l18-intro',
@@ -285,6 +345,27 @@ function pick<T extends object>(obj: T, keys: string[]): object {
         ],
         xp: 35,
         content: [
+          {
+            type: 'demo',
+            id: 'ts-l19-d1',
+            title: 'Dropping the empty values',
+            body: 'NonNullable strips null and undefined from a union. Types do not run, so the live counterpart is a filter keeping every item that is neither null nor undefined — note that 0 is kept, because it is a real value.',
+            html: `<button id="go">Drop the empty values</button>
+<pre id="out">Press the button.</pre>`,
+            css: `body { font-family: system-ui, sans-serif; font-size: 14px; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #f4f6f8; border-radius: 6px; font-size: 12.5px; }`,
+            javascript: `const out = document.querySelector('#out')
+const items = [3, null, 0, undefined, 5]
+
+document.querySelector('#go').addEventListener('click', function () {
+  const kept = items.filter(function (item) {
+    return item !== null && item !== undefined
+  })
+  out.textContent = 'before ' + items.map(String).join(', ') + ' | after ' + kept.map(String).join(', ')
+})`,
+            height: 150,
+          },
           {
             type: 'text',
             id: 'ts-l19-intro',

@@ -3,6 +3,10 @@
     class="sticky top-0 z-50 h-16 border-b border-ink-600/70 bg-ink-950/85 backdrop-blur-md"
   >
     <div class="mx-auto flex h-full max-w-[1600px] items-center gap-4 px-4 sm:px-6 min-w-0">
+      <!--
+        The app mark: the chevrons below are mirrored in public/favicon.svg,
+        which draws the same badge for the browser tab. Change both together.
+      -->
       <NuxtLink
         to="/"
         class="group flex shrink-0 items-center gap-2.5 rounded-lg px-1 py-1"
@@ -43,7 +47,7 @@
                 <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </button>
-            <div class="absolute top-full left-0 mt-2 min-w-[160px] rounded-xl border border-ink-600 bg-ink-900 py-1.5 shadow-xl opacity-0 invisible translate-y-1 transition-all duration-150 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 z-50">
+            <div class="absolute top-full left-0 mt-2 max-h-[70vh] min-w-[200px] overflow-y-auto rounded-xl border border-ink-600 bg-ink-900 py-1.5 shadow-xl opacity-0 invisible translate-y-1 transition-all duration-150 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 z-50">
               <NuxtLink
                 v-for="child in item.children"
                 :key="child.to"
@@ -146,7 +150,7 @@
 <div
   v-if="mobileOpen"
   id="mobile-nav"
-  class="border-t border-ink-600 bg-ink-950 px-4 py-3 lg:hidden"
+  class="max-h-[calc(100vh-4rem)] overflow-y-auto border-t border-ink-600 bg-ink-950 px-4 py-3 lg:hidden"
 >
   <nav class="flex flex-col gap-1" aria-label="Mobile">
     <template v-for="item in primaryNav" :key="item.to || item.label">
@@ -218,9 +222,21 @@ const initials = computed(() => {
   return source.charAt(0).toUpperCase() || 'L'
 })
 
-const primaryNav = [
+/**
+ * The catalogue for the header's Courses menu. Course metadata is bundled
+ * eagerly, so the full list is available on the server with no fetch.
+ */
+const courseNav = [
+  { to: '/courses', label: 'All courses' },
+  ...allCoursesList().map((course) => ({
+    to: `/courses/${course.slug}`,
+    label: course.title,
+  })),
+]
+
+const primaryNav = computed(() => [
   { to: '/paths', label: 'Learn' },
-  { to: '/courses', label: 'Courses' },
+  { label: 'Courses', children: courseNav },
   {
     label: 'Practice',
     children: [
@@ -235,7 +251,7 @@ const primaryNav = [
       { to: '/playground', label: 'Playground' },
     ],
   },
-]
+])
 
 watch(() => useRoute().fullPath, () => {
   mobileOpen.value = false

@@ -19,6 +19,48 @@ export const tsProjectSections: Section[] = [
         xp: 60,
         content: [
           {
+            type: 'demo',
+            id: 'ts-l29-d1',
+            title: 'A task factory with defaults',
+            body: 'The domain types describe a `Task`, and one factory builds them. Add a task with and without a priority and watch the default fill in. Types are erased before this runs, so the demo shows the shape and defaults the types describe.',
+            html: `<button id="normal">Add a normal task</button>
+<button id="high">Add a high priority task</button>
+<pre id="out">No tasks yet.</pre>`,
+            css: `body { font-family: system-ui, sans-serif; font-size: 14px; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #f4f6f8; border-radius: 6px; font-size: 12.5px; }`,
+            javascript: `let nextId = 1
+const tasks = []
+
+function makeTask(title, priority) {
+  if (priority === undefined) priority = 'normal'
+  return { id: String(nextId++), title: title, done: false, priority: priority }
+}
+
+const out = document.querySelector('#out')
+
+function render() {
+  if (!tasks.length) {
+    out.textContent = 'No tasks yet.'
+    return
+  }
+  out.textContent = tasks.map(function (t) {
+    return t.id + '  ' + t.title + '  [' + t.priority + ']'
+  }).join('\n')
+}
+
+document.querySelector('#normal').addEventListener('click', function () {
+  tasks.push(makeTask('Write the plan'))
+  render()
+})
+
+document.querySelector('#high').addEventListener('click', function () {
+  tasks.push(makeTask('Ship it', 'high'))
+  render()
+})`,
+            height: 180,
+          },
+          {
             type: 'text',
             id: 'ts-l29-intro',
             body: '**Project setup and domain types.** A typed project starts from its types, not its UI. Before writing a single handler, describe the data — a `Task`, the `Priority` values it may hold, and the `Filter` the user can apply. Everything else is built on those words.',
@@ -174,6 +216,54 @@ function makeTask(id: string, title: string, priority: Priority = 'normal'): Tas
         ],
         xp: 60,
         content: [
+          {
+            type: 'demo',
+            id: 'ts-l30-d1',
+            title: 'A reducer returns a new list',
+            body: 'The reducer takes the current tasks and an action, and returns the next tasks — never editing the old list. Dispatch `add` then `toggle` and watch each action produce new state. Types are erased before this runs, so the demo shows the pure behaviour they describe.',
+            html: `<button id="add">Dispatch add</button>
+<button id="toggle">Dispatch toggle</button>
+<pre id="out">empty list</pre>`,
+            css: `body { font-family: system-ui, sans-serif; font-size: 14px; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #f4f6f8; border-radius: 6px; font-size: 12.5px; }`,
+            javascript: `function taskReducer(tasks, action) {
+  if (action.type === 'add') {
+    return [...tasks, action.task]
+  }
+  if (action.type === 'toggle') {
+    return tasks.map(function (task) {
+      return task.id === action.id
+        ? { id: task.id, title: task.title, done: !task.done }
+        : task
+    })
+  }
+  return tasks
+}
+
+let state = []
+let nextId = 1
+const out = document.querySelector('#out')
+
+function render() {
+  out.textContent = state.length
+    ? state.map(function (t) { return (t.done ? '[x] ' : '[ ] ') + t.title }).join('\n')
+    : 'empty list'
+}
+
+document.querySelector('#add').addEventListener('click', function () {
+  const id = String(nextId++)
+  state = taskReducer(state, { type: 'add', task: { id: id, title: 'Task ' + id, done: false } })
+  render()
+})
+
+document.querySelector('#toggle').addEventListener('click', function () {
+  if (!state.length) return
+  state = taskReducer(state, { type: 'toggle', id: state[state.length - 1].id })
+  render()
+})`,
+            height: 180,
+          },
           {
             type: 'text',
             id: 'ts-l30-intro',
@@ -332,6 +422,33 @@ function taskReducer(tasks: Task[], action: Action): Task[] {
         xp: 55,
         content: [
           {
+            type: 'demo',
+            id: 'ts-l31-d1',
+            title: 'One listener, delegated',
+            body: 'Instead of a listener per row, bind **one** on the list and read `event.target` to find the row. Click any row to see the delegated handler run. Types are erased before this runs, so the demo shows the delegation logic they describe.',
+            html: `<ul id="list">
+  <li data-id="1">Write the plan <button>toggle</button></li>
+  <li data-id="2">Review the plan <button>toggle</button></li>
+  <li data-id="3">Ship it <button>toggle</button></li>
+</ul>
+<pre id="out">Click a row or its button.</pre>`,
+            css: `body { font-family: system-ui, sans-serif; font-size: 14px; }
+ul { list-style: none; margin: 0; padding: 0; }
+li { padding: 6px 8px; border: 1px solid #d5dae0; border-radius: 6px; margin-bottom: 6px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+button { font: inherit; padding: 4px 10px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #f4f6f8; border-radius: 6px; font-size: 12.5px; }`,
+            javascript: `const out = document.querySelector('#out')
+const list = document.querySelector('#list')
+
+// One listener for every row, attached to the parent.
+list.addEventListener('click', function (event) {
+  const row = event.target.closest('[data-id]')
+  if (!row) return
+  out.textContent = 'the list listener handled data-id=' + row.getAttribute('data-id')
+})`,
+            height: 220,
+          },
+          {
             type: 'text',
             id: 'ts-l31-intro',
             body: '**DOM layer with typed event handlers.** The DOM is full of things that might be `null` and events that might be any shape. This is where `strictNullChecks` earns its keep: `document.querySelector` returns `Element | null`, so you cannot use the result until you have handled the missing case.',
@@ -474,6 +591,46 @@ function delegate(
         ],
         xp: 50,
         content: [
+          {
+            type: 'demo',
+            id: 'ts-l32-d1',
+            title: 'Filter a derived view',
+            body: 'The stored list never changes; each filter computes a fresh view from it. Switch filters and watch the same list produce different results. Types are erased before this runs, so the demo shows the derived filtering they describe.',
+            html: `<button id="all">Show all</button>
+<button id="active">Show active</button>
+<button id="done">Show done</button>
+<pre id="out"></pre>`,
+            css: `body { font-family: system-ui, sans-serif; font-size: 14px; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #f4f6f8; border-radius: 6px; font-size: 12.5px; }`,
+            javascript: `const tasks = [
+  { id: '1', title: 'Write the plan', done: false },
+  { id: '2', title: 'Review the plan', done: true },
+  { id: '3', title: 'Ship it', done: false },
+]
+
+function filterTasks(list, filter) {
+  if (filter === 'active') return list.filter(function (t) { return !t.done })
+  if (filter === 'done') return list.filter(function (t) { return t.done })
+  return list.slice()
+}
+
+const out = document.querySelector('#out')
+
+function show(filter) {
+  const view = filterTasks(tasks, filter)
+  out.textContent = view.length
+    ? view.map(function (t) { return t.title }).join('\n')
+    : '(none)'
+}
+
+document.querySelector('#all').addEventListener('click', function () { show('all') })
+document.querySelector('#active').addEventListener('click', function () { show('active') })
+document.querySelector('#done').addEventListener('click', function () { show('done') })
+
+show('all')`,
+            height: 190,
+          },
           {
             type: 'text',
             id: 'ts-l32-intro',
@@ -619,6 +776,39 @@ function filterTasks(tasks: Task[], filter: Filter): Task[] {
         ],
         xp: 50,
         content: [
+          {
+            type: 'demo',
+            id: 'ts-l33-d1',
+            title: 'Which command does a key mean',
+            body: 'A `keydown` listener stays thin by asking one small pure function what a key means. Press a key in the panel or use the buttons. Types are erased before this runs, so the demo shows the runtime key handling they describe.',
+            html: `<button id="n">Simulate n</button>
+<button id="slash">Simulate /</button>
+<button id="esc">Simulate Escape</button>
+<pre id="out">Press a key here or use a button.</pre>`,
+            css: `body { font-family: system-ui, sans-serif; font-size: 14px; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #f4f6f8; border-radius: 6px; font-size: 12.5px; }`,
+            javascript: `const out = document.querySelector('#out')
+
+function shortcutFor(key) {
+  if (key === 'n') return 'new'
+  if (key === '/') return 'search'
+  if (key === 'Escape') return 'close'
+  return null
+}
+
+function handle(key) {
+  const command = shortcutFor(key)
+  out.textContent = 'key ' + key + ' -> ' + (command === null ? 'no command' : command)
+}
+
+document.querySelector('#n').addEventListener('click', function () { handle('n') })
+document.querySelector('#slash').addEventListener('click', function () { handle('/') })
+document.querySelector('#esc').addEventListener('click', function () { handle('Escape') })
+
+window.addEventListener('keydown', function (event) { handle(event.key) })`,
+            height: 180,
+          },
           {
             type: 'text',
             id: 'ts-l33-intro',

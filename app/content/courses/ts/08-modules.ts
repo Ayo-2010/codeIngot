@@ -19,6 +19,46 @@ export const tsModulesSections: Section[] = [
         xp: 35,
         content: [
           {
+            type: 'demo',
+            id: 'ts-l23-d1',
+            title: 'One module, named exports',
+            body: 'A module is a bag of named exports, and only what it exports can be imported. Types are erased before this runs, so the demo shows the runtime half: which names actually resolve.',
+            html: `<button id="goAdd">Import add</button>
+<button id="goMultiply">Import multiply</button>
+<button id="goMissing">Import divide</button>
+<pre id="out">Press a button to import a name.</pre>`,
+            css: `body { font-family: system-ui, sans-serif; font-size: 14px; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #f4f6f8; border-radius: 6px; font-size: 12.5px; }`,
+            javascript: `const mathModule = {
+  add: function (a, b) { return a + b },
+  multiply: function (a, b) { return a * b },
+}
+
+const out = document.querySelector('#out')
+
+function use(name) {
+  const value = mathModule[name]
+  if (value === undefined) {
+    return 'no export called ' + name + ' -> undefined'
+  }
+  return name + ' imported; calling it with 2 and 3 gives ' + value(2, 3)
+}
+
+document.querySelector('#goAdd').addEventListener('click', function () {
+  out.textContent = use('add')
+})
+
+document.querySelector('#goMultiply').addEventListener('click', function () {
+  out.textContent = use('multiply')
+})
+
+document.querySelector('#goMissing').addEventListener('click', function () {
+  out.textContent = use('divide')
+})`,
+            height: 180,
+          },
+          {
             type: 'text',
             id: 'ts-l23-intro',
             body: '**ES modules in TypeScript.** A module is any file with an `import` or an `export`. What you export is public; everything else is private to the file. TypeScript adds types to that boundary, so the names you import arrive already understood.',
@@ -166,6 +206,35 @@ function use(mod: Record<string, unknown>, name: string): unknown {
         xp: 35,
         content: [
           {
+            type: 'demo',
+            id: 'ts-l24-d1',
+            title: 'A declaration describes, it does not create',
+            body: 'A `.d.ts` file adds types for JavaScript that already runs. **The declaration adds nothing at runtime** — it only tells the compiler what shape to expect. Try calling a name the declaration promises and one it does not.',
+            html: `<button id="mount">Call declared mount()</button>
+<button id="missing">Use a name with no runtime value</button>
+<pre id="out">Press a button.</pre>`,
+            css: `body { font-family: system-ui, sans-serif; font-size: 14px; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #f4f6f8; border-radius: 6px; font-size: 12.5px; }`,
+            javascript: `// This is the real JavaScript the .d.ts file describes:
+const legacyWidget = {
+  mount: function (el) { return 'mounted into ' + el },
+  version: '2.1.0',
+}
+
+const out = document.querySelector('#out')
+
+document.querySelector('#mount').addEventListener('click', function () {
+  out.textContent = legacyWidget.mount('#app') + ' (version ' + legacyWidget.version + ')'
+})
+
+document.querySelector('#missing').addEventListener('click', function () {
+  // A declaration could name unmount(), but nothing implemented it:
+  out.textContent = 'a declaration can describe unmount(), but at runtime it is ' + String(legacyWidget.unmount)
+})`,
+            height: 180,
+          },
+          {
             type: 'text',
             id: 'ts-l24-intro',
             body: '**Declaration files and declare.** Plenty of JavaScript ships without types — an old library, a build script, a browser API. A *declaration file* is a file that contains types and no implementation, telling the compiler what that JavaScript looks like. The extension is `.d.ts` and the keyword is `declare`.',
@@ -296,6 +365,33 @@ function moduleName(declaration: string): string | null {
         ],
         xp: 30,
         content: [
+          {
+            type: 'demo',
+            id: 'ts-l25-d1',
+            title: 'The same entry, two consumers',
+            body: 'A package points the **runtime** at JavaScript and the **compiler** at declarations. Resolve the entries map from each side to see which file each consumer receives. Types are erased before this runs, so the demo reads the same paths a resolver would.',
+            html: `<button id="types">Resolve for the compiler</button>
+<button id="default">Resolve for the runtime</button>
+<pre id="out">Press a button to resolve the package entry.</pre>`,
+            css: `body { font-family: system-ui, sans-serif; font-size: 14px; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #f4f6f8; border-radius: 6px; font-size: 12.5px; }`,
+            javascript: `const exportsMap = {
+  types: './dist/index.d.ts',
+  default: './dist/index.js',
+}
+
+const out = document.querySelector('#out')
+
+document.querySelector('#types').addEventListener('click', function () {
+  out.textContent = 'the compiler reads ' + exportsMap.types
+})
+
+document.querySelector('#default').addEventListener('click', function () {
+  out.textContent = 'the runtime loads ' + exportsMap.default
+})`,
+            height: 170,
+          },
           {
             type: 'text',
             id: 'ts-l25-intro',

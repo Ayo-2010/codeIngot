@@ -9,18 +9,41 @@
 </template>
 
 <script setup lang="ts">
-import type { EditorLanguage } from '~/types/content'
+import type { ExerciseFile } from '~/types/content'
+import type { SandboxModule } from '~/utils/module-registry'
 import { createSandboxRunner, type SandboxRunResult } from '~/utils/sandbox'
 import { SCRIPT_PRIORITY, transpileScript } from '~/utils/transpile'
+import {
+  entryPath,
+  mountsForPreview,
+  pageCss,
+  pageHtml,
+  scriptFiles,
+} from '~/utils/exercise-files'
 import { loadReactRuntime } from '~/utils/react-runtime'
 
 const props = withDefaults(
   defineProps<{
-    files: Partial<Record<EditorLanguage, string>>
+    /** The exercise's files, normalised by the workspace before they get here. */
+    files: ExerciseFile[]
+    /**
+     * Run the files as real modules, with `import` between them. True for a
+     * multi-file exercise. The single-script shorthand stays false, because a
+     * classic inline script cannot import anything.
+     */
+    modules?: boolean
+    /** The file to run first, when the exercise names one. */
+    entry?: string
+    /**
+     * Props for the preview when the exercise's default export is a component.
+     * Present only when the exercise declared them, and only then does the
+     * sandbox mount anything.
+     */
+    previewProps?: Record<string, unknown>
     tests?: { id: string; label: string; body: string }[]
     autoRun?: boolean
   }>(),
-  { autoRun: true },
+  { autoRun: true, modules: false },
 )
 
 const emit = defineEmits<{ result: [SandboxRunResult] }>()
@@ -30,49 +53,76 @@ const runner = createSandboxRunner()
 let timer: ReturnType<typeof setTimeout> | null = null
 let token = 0
 
+/** The one script a classic exercise runs, chosen the way the editor chose it. */
+function legacyScript(): ExerciseFile | null {
+  const scripts = scriptFiles(props.files)
+  for (const language of SCRIPT_PRIORITY) {
+    const file = scripts.find(
+      (candidate) => candidate.language === language && candidate.content.length > 0,
+    )
+    if (file) return file
+  }
+  return null
+}
+
+function failedResult(message: string): SandboxRunResult {
+  return { logs: [], runtimeError: message, tests: [], durationMs: 0 }
+}
+
 async function run(tests?: { id: string; label: string; body: string }[]): Promise<SandboxRunResult> {
   const frame = frameEl.value
   if (!frame) return emptyResult()
   const mine = ++token
 
-  const files = props.files
-  const language = SCRIPT_PRIORITY.find((candidate) => (files[candidate] ?? '').length > 0)
-  const compiled = await transpileScript(language ? files[language] ?? '' : '', language ?? 'javascript')
+  const scripts = scriptFiles(props.files)
+  const modules: SandboxModule[] = []
+  let javascript = ''
+  let entry: string | undefined
+  let autoMount = false
 
-  if (compiled.error) {
-    const failed: SandboxRunResult = {
-      logs: [],
-      runtimeError: `Could not compile your ${language ?? 'script'}: ${compiled.error}`,
-      tests: [],
-      durationMs: 0,
+  if (props.modules) {
+    // Every script is compiled as a module; the registry then loads them in the
+    // order the imports ask for, starting from the entry file.
+    for (const file of scripts) {
+      const compiled = await transpileScript(file.content, file.language, { modules: true })
+      if (compiled.error) {
+        return report(failedResult(`Could not compile ${file.path}: ${compiled.error}`), mine)
+      }
+      modules.push({ path: file.path, code: compiled.code })
     }
-    if (mine === token) emit('result', failed)
-    return failed
+    entry = entryPath(props.files, props.entry) ?? undefined
+    autoMount = mountsForPreview(props.files, props.entry, props.previewProps)
+  } else {
+    const script = legacyScript()
+    const compiled = await transpileScript(script?.content ?? '', script?.language ?? 'javascript')
+    if (compiled.error) {
+      const name = script?.language ?? 'script'
+      return report(failedResult(`Could not compile your ${name}: ${compiled.error}`), mine)
+    }
+    javascript = compiled.code
   }
 
   // JSX and TSX need the vendored React runtime and a node to mount into.
-  const react = Boolean(files.jsx || files.tsx)
+  const react = scripts.some((file) => file.language === 'jsx' || file.language === 'tsx')
   let runtime: string | undefined
   if (react) {
     try {
       runtime = await loadReactRuntime()
     } catch (error) {
-      const failed: SandboxRunResult = {
-        logs: [],
-        runtimeError: error instanceof Error ? error.message : 'Could not load the React runtime.',
-        tests: [],
-        durationMs: 0,
-      }
-      if (mine === token) emit('result', failed)
-      return failed
+      const message = error instanceof Error ? error.message : 'Could not load the React runtime.'
+      return report(failedResult(message), mine)
     }
   }
 
   return runner
     .run(frame, {
-      html: files.html ?? '',
-      css: files.css ?? '',
-      javascript: compiled.code,
+      html: pageHtml(props.files),
+      css: pageCss(props.files),
+      javascript,
+      modules: modules.length > 0 ? modules : undefined,
+      entry,
+      autoMount,
+      previewProps: props.previewProps,
       tests: tests ?? [],
       runtime,
       mount: react ? '<div id="root"></div>' : undefined,
@@ -81,6 +131,12 @@ async function run(tests?: { id: string; label: string; body: string }[]): Promi
       if (mine === token) emit('result', result)
       return result
     })
+}
+
+/** Show a failure the learner can act on, unless a newer run replaced it. */
+function report(result: SandboxRunResult, mine: number): SandboxRunResult {
+  if (mine === token) emit('result', result)
+  return result
 }
 
 function emptyResult(): SandboxRunResult {
@@ -96,14 +152,8 @@ function schedule() {
 }
 
 watch(
-  () => [
-    props.files.html,
-    props.files.css,
-    props.files.javascript,
-    props.files.typescript,
-    props.files.jsx,
-    props.files.tsx,
-  ],
+  () =>
+    `${props.modules}|${props.files.map((file) => `${file.path}:${file.content}`).join('\n')}`,
   schedule,
 )
 

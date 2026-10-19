@@ -19,6 +19,52 @@ export const reactProjectSections: Section[] = [
         xp: 55,
         content: [
           {
+            type: 'demo',
+            id: 'react-l26-d1',
+            title: 'A frame that swaps its page',
+            body: 'The layout route renders the header and sidebar once, and swaps only the child in the main area. Click a link to move between child routes.',
+            files: [
+              {
+                path: 'App.jsx',
+                language: 'jsx',
+                content: `import { useState } from 'react'
+
+const pages = ['Overview', 'Reports', 'Settings']
+
+export default function App() {
+  const [page, setPage] = useState('Overview')
+  return (
+    <div style={{ fontFamily: 'system-ui' }}>
+      <header style={{ borderBottom: '1px solid #e2e5ea', paddingBottom: 6 }}>
+        <strong>Dashboard</strong>
+      </header>
+      <div style={{ display: 'flex', gap: 16, marginTop: 10 }}>
+        <nav style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+          {pages.map((name) => (
+            <button
+              key={name}
+              onClick={() => setPage(name)}
+              style={{ textAlign: 'left', fontWeight: page === name ? 700 : 400 }}
+            >
+              {name}
+            </button>
+          ))}
+        </nav>
+        <main style={{ color: '#5b6470' }}>
+          <h3 style={{ margin: 0 }}>{page}</h3>
+          <p style={{ margin: '4px 0 0' }}>The child route renders here, in the Outlet.</p>
+        </main>
+      </div>
+    </div>
+  )
+}
+`,
+              },
+            ],
+            previewProps: {},
+            height: 200,
+          },
+          {
             type: 'text',
             id: 'react-l26-intro',
             body: '**Step 1: the shell.** A dashboard is a set of pages that share one frame — a header with the product name and the signed-in user, a sidebar for navigation, and an area that swaps as you move between sections. Building that frame first means every later page is added to a place that already exists.',
@@ -82,9 +128,14 @@ export const reactProjectSections: Section[] = [
               instructions:
                 "Write DashboardLayout({ title, children }) returning a div with className 'app-shell'. Its first child is a header containing an h1 with the title; its second child is a main element containing the nested children. The tests read the element tree the component returns.",
               languages: ['jsx'],
-              starterCode: {
-                jsx: `// The frame every page renders inside.\nfunction DashboardLayout({ title, children }) {\n  return <div />\n}\n`,
-              },
+              files: [
+                {
+                  path: 'DashboardLayout.jsx',
+                  language: 'jsx',
+                  content: `// The frame every page renders inside.\nexport default function DashboardLayout({ title, children }) {\n  return <div />\n}\n`,
+                },
+              ],
+              previewProps: { title: 'Dashboard', children: 'Your tasks appear here.' },
               tests: [
                 {
                   id: 'ex-react-l26-t1',
@@ -117,9 +168,13 @@ export const reactProjectSections: Section[] = [
                 'The <h1> goes inside the header, with the title as its child.',
                 'Render the nested content inside main by placing {children} there.',
               ],
-              solution: {
-                jsx: `function DashboardLayout({ title, children }) {\n  return (\n    <div className="app-shell">\n      <header>\n        <h1>{title}</h1>\n      </header>\n      <main>{children}</main>\n    </div>\n  )\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'DashboardLayout.jsx',
+                  language: 'jsx',
+                  content: `export default function DashboardLayout({ title, children }) {\n  return (\n    <div className="app-shell">\n      <header>\n        <h1>{title}</h1>\n      </header>\n      <main>{children}</main>\n    </div>\n  )\n}\n`,
+                },
+              ],
               testNotes:
                 'The header test tolerates extra header content by looking at the first child, so a user menu can be added without breaking the checkpoint.',
             },
@@ -138,6 +193,54 @@ export const reactProjectSections: Section[] = [
         ],
         xp: 55,
         content: [
+          {
+            type: 'demo',
+            id: 'react-l27-d1',
+            title: 'One provider, any depth',
+            body: 'A provider owns the session and the header reads it through context, with nothing passed down by props. Sign in and out to move the value.',
+            files: [
+              {
+                path: 'App.jsx',
+                language: 'jsx',
+                content: `import { createContext, useContext, useReducer } from 'react'
+
+const SessionContext = createContext({ user: null })
+
+function sessionReducer(session, action) {
+  if (action.type === 'login') return { user: { name: 'Ada' } }
+  if (action.type === 'logout') return { user: null }
+  return session
+}
+
+function UserMenu() {
+  const { user } = useContext(SessionContext)
+  return (
+    <span style={{ color: '#5b6470' }}>
+      {user ? 'Signed in as ' + user.name : 'Signed out'}
+    </span>
+  )
+}
+
+export default function App() {
+  const [session, dispatch] = useReducer(sessionReducer, { user: null })
+  return (
+    <SessionContext.Provider value={session}>
+      <div style={{ fontFamily: 'system-ui' }}>
+        <UserMenu />
+        <div style={{ marginTop: 8, display: 'flex', gap: 6 }}>
+          <button onClick={() => dispatch({ type: 'login' })}>Log in</button>
+          <button onClick={() => dispatch({ type: 'logout' })}>Log out</button>
+        </div>
+      </div>
+    </SessionContext.Provider>
+  )
+}
+`,
+              },
+            ],
+            previewProps: {},
+            height: 130,
+          },
           {
             type: 'text',
             id: 'react-l27-intro',
@@ -202,9 +305,13 @@ export const reactProjectSections: Section[] = [
               instructions:
                 "Write sessionReducer(session, action) where session is { user }. A 'login' action stores action.user; a 'logout' action sets user to null; any other action returns the session unchanged. Always return a new object when something changes.",
               languages: ['javascript'],
-              starterCode: {
-                javascript: `// session is { user: null }. Actions: login, logout.\nfunction sessionReducer(session, action) {\n  return session\n}\n`,
-              },
+              files: [
+                {
+                  path: 'session.js',
+                  language: 'javascript',
+                  content: `// session is { user: null }. Actions: login, logout.\nexport function sessionReducer(session, action) {\n  return session\n}\n`,
+                },
+              ],
               tests: [
                 {
                   id: 'ex-react-l27-t1',
@@ -237,9 +344,13 @@ export const reactProjectSections: Section[] = [
                 'Return a copy with one field replaced: { ...session, user: ... }.',
                 'For an unknown action return the same object so React sees no change at all.',
               ],
-              solution: {
-                javascript: `function sessionReducer(session, action) {\n  switch (action.type) {\n    case 'login':\n      return { ...session, user: action.user }\n    case 'logout':\n      return { ...session, user: null }\n    default:\n      return session\n  }\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'session.js',
+                  language: 'javascript',
+                  content: `export function sessionReducer(session, action) {\n  switch (action.type) {\n    case 'login':\n      return { ...session, user: action.user }\n    case 'logout':\n      return { ...session, user: null }\n    default:\n      return session\n  }\n}\n`,
+                },
+              ],
               testNotes:
                 'The identity check and the unknown-action check together confirm the reducer copies on change and stays put on anything else.',
             },
@@ -258,6 +369,64 @@ export const reactProjectSections: Section[] = [
         ],
         xp: 55,
         content: [
+          {
+            type: 'demo',
+            id: 'react-l28-d1',
+            title: 'Loading, ready, and error',
+            body: 'The same request lifecycle the checkpoint models: start moves to loading, and the outcome is either ready with data or error with a message.',
+            files: [
+              {
+                path: 'App.jsx',
+                language: 'jsx',
+                content: `import { useReducer } from 'react'
+
+function loadReducer(state, action) {
+  if (action.type === 'start') return { status: 'loading', data: null, error: null }
+  if (action.type === 'success') return { status: 'ready', data: action.data, error: null }
+  if (action.type === 'error') return { status: 'error', data: null, error: action.error }
+  return state
+}
+
+function request(shouldFail) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (shouldFail) reject(new Error('Request failed'))
+      else resolve([12, 30, 48])
+    }, 300)
+  })
+}
+
+export default function App() {
+  const [state, dispatch] = useReducer(loadReducer, { status: 'idle', data: null, error: null })
+
+  function load(shouldFail) {
+    dispatch({ type: 'start' })
+    request(shouldFail)
+      .then((data) => dispatch({ type: 'success', data }))
+      .catch((error) => dispatch({ type: 'error', error: error.message }))
+  }
+
+  return (
+    <div style={{ fontFamily: 'system-ui' }}>
+      <div style={{ display: 'flex', gap: 6 }}>
+        <button onClick={() => load(false)}>Load data</button>
+        <button onClick={() => load(true)}>Fail the request</button>
+      </div>
+      <div style={{ marginTop: 8, color: '#5b6470' }}>
+        {state.status === 'loading' && <p style={{ margin: 0 }}>Loading...</p>}
+        {state.status === 'error' && <p style={{ margin: 0 }}>Error: {state.error}</p>}
+        {state.status === 'ready' && <p style={{ margin: 0 }}>Metrics: {state.data.join(', ')}</p>}
+        {state.status === 'idle' && <p style={{ margin: 0 }}>No request yet.</p>}
+      </div>
+    </div>
+  )
+}
+`,
+              },
+            ],
+            previewProps: {},
+            height: 160,
+          },
           {
             type: 'text',
             id: 'react-l28-intro',
@@ -322,9 +491,13 @@ export const reactProjectSections: Section[] = [
               instructions:
                 "Write loadReducer(state, action) with actions 'start', 'success' and 'error'. start gives { status: 'loading', data: null, error: null }; success gives { status: 'ready', data: action.data, error: null }; error gives { status: 'error', data: null, error: action.error }. Any other action returns the state unchanged.",
               languages: ['javascript'],
-              starterCode: {
-                javascript: `// state is { status, data, error }.\nfunction loadReducer(state, action) {\n  return state\n}\n`,
-              },
+              files: [
+                {
+                  path: 'loader.js',
+                  language: 'javascript',
+                  content: `// state is { status, data, error }.\nexport function loadReducer(state, action) {\n  return state\n}\n`,
+                },
+              ],
               tests: [
                 {
                   id: 'ex-react-l28-t1',
@@ -357,9 +530,13 @@ export const reactProjectSections: Section[] = [
                 'On start, clear both the data and the error so a retry starts clean.',
                 'The default case returns the same object, so nothing re-renders.',
               ],
-              solution: {
-                javascript: `function loadReducer(state, action) {\n  switch (action.type) {\n    case 'start':\n      return { status: 'loading', data: null, error: null }\n    case 'success':\n      return { status: 'ready', data: action.data, error: null }\n    case 'error':\n      return { status: 'error', data: null, error: action.error }\n    default:\n      return state\n  }\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'loader.js',
+                  language: 'javascript',
+                  content: `export function loadReducer(state, action) {\n  switch (action.type) {\n    case 'start':\n      return { status: 'loading', data: null, error: null }\n    case 'success':\n      return { status: 'ready', data: action.data, error: null }\n    case 'error':\n      return { status: 'error', data: null, error: action.error }\n    default:\n      return state\n  }\n}\n`,
+                },
+              ],
               testNotes:
                 'The retry check is the one that catches a reducer that keeps stale data or an old error around during loading.',
             },
@@ -378,6 +555,53 @@ export const reactProjectSections: Section[] = [
         ],
         xp: 45,
         content: [
+          {
+            type: 'demo',
+            id: 'react-l29-d1',
+            title: 'Bars scaled to the largest value',
+            body: 'Each bar height is the value divided by the largest value. Change the data and the tallest bar always fills the chart.',
+            files: [
+              {
+                path: 'BarChart.jsx',
+                language: 'jsx',
+                content: `export default function BarChart({ points }) {
+  const max = Math.max(...points.map((point) => point.value), 1)
+
+  return (
+    <div style={{ fontFamily: 'system-ui' }}>
+      <div style={{ display: 'flex', alignItems: 'flex-end', gap: 10, height: 100 }}>
+        {points.map((point) => (
+          <div
+            key={point.label}
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'flex-end',
+              height: '100%',
+            }}
+          >
+            <div
+              style={{
+                width: 28,
+                background: '#7cb3f0',
+                height: (point.value / max) * 100 + '%',
+                borderRadius: '4px 4px 0 0',
+              }}
+            />
+            <span style={{ fontSize: 12, marginTop: 4, color: '#5b6470' }}>{point.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+`,
+              },
+            ],
+            previewProps: { points: [{ label: 'Mon', value: 12 }, { label: 'Tue', value: 30 }, { label: 'Wed', value: 48 }] },
+            height: 170,
+          },
           {
             type: 'text',
             id: 'react-l29-intro',
@@ -415,7 +639,7 @@ export const reactProjectSections: Section[] = [
             id: 'react-l29-code',
             language: 'tsx',
             title: 'a typed bar chart',
-            code: `type Point = { label: string; value: number }\n\nfunction BarChart({ points }: { points: Point[] }) {\n  const max = Math.max(...points.map((point) => point.value), 1)\n\n  return (\n    <ul className="chart">\n      {points.map((point) => (\n        <li key={point.label} className="chart__bar">\n          <span\n            className="chart__fill"\n            style={{ height: (point.value / max) * 100 + '%' }}\n          />\n          <span className="chart__label">{point.label}</span>\n        </li>\n      ))}\n    </ul>\n  )\n}`,
+            code: `type Point = { label: string; value: number }\n\nexport default function BarChart({ points }: { points: Point[] }) {\n  const max = Math.max(...points.map((point) => point.value), 1)\n\n  return (\n    <ul className="chart">\n      {points.map((point) => (\n        <li key={point.label} className="chart__bar">\n          <span\n            className="chart__fill"\n            style={{ height: (point.value / max) * 100 + '%' }}\n          />\n          <span className="chart__label">{point.label}</span>\n        </li>\n      ))}\n    </ul>\n  )\n}`,
           },
           {
             type: 'tip',
@@ -442,9 +666,13 @@ export const reactProjectSections: Section[] = [
               instructions:
                 'Write barHeights(values) returning each value as a percentage of the largest value, rounded to the nearest whole number, in the same order. An empty array returns an empty array, and an array whose largest value is zero returns zeros.',
               languages: ['javascript'],
-              starterCode: {
-                javascript: `// Each value as a percentage of the largest.\nfunction barHeights(values) {\n  return []\n}\n`,
-              },
+              files: [
+                {
+                  path: 'chart.js',
+                  language: 'javascript',
+                  content: `// Each value as a percentage of the largest.\nexport function barHeights(values) {\n  return []\n}\n`,
+                },
+              ],
               tests: [
                 {
                   id: 'ex-react-l29-t1',
@@ -472,9 +700,13 @@ export const reactProjectSections: Section[] = [
                 'Multiply by 100 and round to get a whole-number percentage.',
                 'Handle a maximum of zero separately, otherwise every entry becomes NaN.',
               ],
-              solution: {
-                javascript: `function barHeights(values) {\n  const max = Math.max(...values, 0)\n  if (max === 0) return values.map(() => 0)\n  return values.map((value) => Math.round((value / max) * 100))\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'chart.js',
+                  language: 'javascript',
+                  content: `export function barHeights(values) {\n  const max = Math.max(...values, 0)\n  if (max === 0) return values.map(() => 0)\n  return values.map((value) => Math.round((value / max) * 100))\n}\n`,
+                },
+              ],
               testNotes:
                 'The all-zero check is what separates a guarded implementation from one that produces NaN for a flat series.',
             },
@@ -493,6 +725,53 @@ export const reactProjectSections: Section[] = [
         ],
         xp: 40,
         content: [
+          {
+            type: 'demo',
+            id: 'react-l30-d1',
+            title: 'What a test asserts on',
+            body: 'A component test walks the returned tree for the text a user would read. Signed out, the reports component returns null, so its text is simply absent.',
+            files: [
+              {
+                path: 'App.jsx',
+                language: 'jsx',
+                content: `import { createContext, useContext, useState } from 'react'
+
+const SessionContext = createContext({ user: null })
+
+function Reports() {
+  const { user } = useContext(SessionContext)
+  if (!user) return null
+  return <h3 style={{ margin: 0 }}>Revenue: 42k</h3>
+}
+
+export default function App() {
+  const [signedIn, setSignedIn] = useState(false)
+  const session = signedIn ? { user: { name: 'Ada' } } : { user: null }
+
+  return (
+    <SessionContext.Provider value={session}>
+      <div style={{ fontFamily: 'system-ui' }}>
+        <button onClick={() => setSignedIn(!signedIn)}>
+          {signedIn ? 'Sign out' : 'Sign in'}
+        </button>
+        <div style={{ marginTop: 8 }}>
+          <Reports />
+          {!session.user && (
+            <p style={{ margin: 0, color: '#5b6470' }}>
+              Signed out: the report text is not in the tree.
+            </p>
+          )}
+        </div>
+      </div>
+    </SessionContext.Provider>
+  )
+}
+`,
+              },
+            ],
+            previewProps: {},
+            height: 160,
+          },
           {
             type: 'text',
             id: 'react-l30-intro',
@@ -557,9 +836,13 @@ export const reactProjectSections: Section[] = [
               instructions:
                 'Write collectText(element) returning all text inside an element tree as one string, in order. An element looks like { type, props }; its props.children may be a single value or an array. String and number children are included, nested elements are traversed, and a missing or null child contributes nothing.',
               languages: ['javascript'],
-              starterCode: {
-                javascript: `// Gather the text of an element and everything inside it.\nfunction collectText(element) {\n  return ''\n}\n`,
-              },
+              files: [
+                {
+                  path: 'text.js',
+                  language: 'javascript',
+                  content: `// Gather the text of an element and everything inside it.\nexport function collectText(element) {\n  return ''\n}\n`,
+                },
+              ],
               tests: [
                 {
                   id: 'ex-react-l30-t1',
@@ -592,9 +875,13 @@ export const reactProjectSections: Section[] = [
                 'The children of an element live at element.props.children, which may be one value or an array.',
                 'Recurse: map an array through the same function and join, or recurse once on a single child.',
               ],
-              solution: {
-                javascript: `function collectText(element) {\n  if (element === null || element === undefined) return ''\n  if (typeof element === 'string' || typeof element === 'number') return String(element)\n\n  const children = element.props ? element.props.children : null\n  if (children === null || children === undefined) return ''\n  if (Array.isArray(children)) return children.map(collectText).join('')\n  return collectText(children)\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'text.js',
+                  language: 'javascript',
+                  content: `export function collectText(element) {\n  if (element === null || element === undefined) return ''\n  if (typeof element === 'string' || typeof element === 'number') return String(element)\n\n  const children = element.props ? element.props.children : null\n  if (children === null || children === undefined) return ''\n  if (Array.isArray(children)) return children.map(collectText).join('')\n  return collectText(children)\n}\n`,
+                },
+              ],
               testNotes:
                 'The mixed element-and-text check is what forces the handling of both an array of children and a single child.',
             },

@@ -19,6 +19,39 @@ export const tsConfigSections: Section[] = [
         xp: 35,
         content: [
           {
+            type: 'demo',
+            id: 'ts-l26-d1',
+            title: 'One flag, a family of checks',
+            body: '`strict: true` is an umbrella: it resolves to a whole set of individual flags. Toggle it to see how one line in `tsconfig.json` decides every check at once. These flags only exist at compile time, so the demo shows the resolved outcome they describe.',
+            html: `<label><input type="checkbox" id="strict" checked> strict: true</label>
+<pre id="out"></pre>`,
+            css: `body { font-family: system-ui, sans-serif; font-size: 14px; }
+label { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #f4f6f8; border-radius: 6px; font-size: 12.5px; }`,
+            javascript: `const FLAGS = [
+  'noImplicitAny',
+  'strictNullChecks',
+  'strictFunctionTypes',
+  'strictPropertyInitialization',
+  'noImplicitThis',
+  'alwaysStrict',
+]
+
+const out = document.querySelector('#out')
+const box = document.querySelector('#strict')
+
+function render() {
+  const lines = FLAGS.map(function (flag) {
+    return flag + ': ' + (box.checked ? 'on' : 'off')
+  })
+  out.textContent = lines.join('\n')
+}
+
+box.addEventListener('change', render)
+render()`,
+            height: 190,
+          },
+          {
             type: 'text',
             id: 'ts-l26-intro',
             body: '**strict and the flags it enables.** `strict: true` is one line in `tsconfig.json` that turns on a family of checks. Each can be set individually, but they belong together: together they are the difference between TypeScript as a syntax hint and TypeScript as a safety net.',
@@ -149,6 +182,36 @@ export const tsConfigSections: Section[] = [
         ],
         xp: 30,
         content: [
+          {
+            type: 'demo',
+            id: 'ts-l27-d1',
+            title: 'Lift one flag, keep the rest',
+            body: 'During a migration you keep `strict: true` and turn off the *smallest* flag that unblocks you. Toggle the lifted flag to watch the effective checks change. Types are erased before this runs, so the demo computes the same on/off result the compiler would.',
+            html: `<button id="go">Toggle the lifted flag</button>
+<pre id="out"></pre>`,
+            css: `body { font-family: system-ui, sans-serif; font-size: 14px; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #f4f6f8; border-radius: 6px; font-size: 12.5px; }`,
+            javascript: `const FLAGS = ['noImplicitAny', 'strictNullChecks', 'strictFunctionTypes', 'alwaysStrict']
+let disabled = ['noImplicitAny']
+const out = document.querySelector('#out')
+
+function render() {
+  const lines = FLAGS.map(function (flag) {
+    const on = !disabled.includes(flag)
+    return flag + ': ' + (on ? 'on' : 'lifted (off)')
+  })
+  out.textContent = 'strict: true\n' + lines.join('\n')
+}
+
+document.querySelector('#go').addEventListener('click', function () {
+  disabled = disabled.length ? [] : ['noImplicitAny']
+  render()
+})
+
+render()`,
+            height: 180,
+          },
           {
             type: 'text',
             id: 'ts-l27-intro',
@@ -306,6 +369,43 @@ function effectiveFlags(config: { strict: boolean; disabled: string[] }): Record
         ],
         xp: 30,
         content: [
+          {
+            type: 'demo',
+            id: 'ts-l28-d1',
+            title: 'Rebuild only what changed',
+            body: 'With project references, `tsc --build` walks the graph and skips projects that have not changed, using the memory in `.tsbuildinfo`. Edit a file, then build, and watch which projects are rebuilt — a change in `core` pulls `app` along after it.',
+            html: `<button id="core">Edit a file in core</button>
+<button id="app">Edit a file in app</button>
+<button id="build">tsc --build</button>
+<pre id="out">Change a file, then build.</pre>`,
+            css: `body { font-family: system-ui, sans-serif; font-size: 14px; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #f4f6f8; border-radius: 6px; font-size: 12.5px; }`,
+            javascript: `// The .tsbuildinfo memory: what changed since the last build.
+const dirty = { core: false, app: false }
+const out = document.querySelector('#out')
+
+document.querySelector('#core').addEventListener('click', function () {
+  dirty.core = true
+  out.textContent = 'changed a file in packages/core. Now run the build.'
+})
+
+document.querySelector('#app').addEventListener('click', function () {
+  dirty.app = true
+  out.textContent = 'changed a file in packages/app. Now run the build.'
+})
+
+document.querySelector('#build').addEventListener('click', function () {
+  const lines = []
+  lines.push(dirty.core ? 'packages/core: rebuilt' : 'packages/core: up to date (skipped)')
+  // app references core, so a core change rebuilds app too.
+  lines.push(dirty.app || dirty.core ? 'packages/app: rebuilt' : 'packages/app: up to date (skipped)')
+  dirty.core = false
+  dirty.app = false
+  out.textContent = lines.join('\n')
+})`,
+            height: 180,
+          },
           {
             type: 'text',
             id: 'ts-l28-intro',

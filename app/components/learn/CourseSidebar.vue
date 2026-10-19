@@ -8,7 +8,7 @@
       <p class="mt-1.5 font-mono text-[11px] text-dim">{{ percent }}% · {{ completedCount }}/{{ total }} lessons</p>
     </div>
 
-    <ol class="min-h-0 flex-1 overflow-y-auto py-2">
+    <ol ref="listEl" class="min-h-0 flex-1 overflow-y-auto py-2">
       <li v-for="(section, sectionIndex) in course.sections" :key="section.id">
         <p class="px-4 pb-1 pt-3 font-mono text-[11px] uppercase tracking-wider text-dim">
           {{ String(sectionIndex + 1).padStart(2, '0') }} · {{ section.title }}
@@ -62,6 +62,37 @@ const props = defineProps<{
 }>()
 
 const { progress, courseProgressPercent } = useLearningProgress()
+
+const listEl = ref<HTMLElement | null>(null)
+
+/**
+ * Keep the active lesson visible in the sidebar. The list is a scroll container
+ * of its own, so a reload starts it at the top and a learner partway through a
+ * course would not see where they are. This centres the current lesson, and does
+ * nothing when it is already in view.
+ */
+function revealActive() {
+  if (!import.meta.client) return
+  const list = listEl.value
+  const active = list?.querySelector<HTMLElement>('[aria-current="page"]')
+  if (!list || !active) return
+  const listRect = list.getBoundingClientRect()
+  const activeRect = active.getBoundingClientRect()
+  if (activeRect.top >= listRect.top && activeRect.bottom <= listRect.bottom) return
+  list.scrollTop += activeRect.top - listRect.top - (list.clientHeight - activeRect.height) / 2
+}
+
+onMounted(() => {
+  void nextTick(revealActive)
+})
+
+// The sidebar stays mounted as lessons change, so the route change has to ask.
+watch(
+  () => props.currentLessonId,
+  () => {
+    void nextTick(revealActive)
+  },
+)
 
 const lessons = computed(() =>
   props.course.sections.flatMap((section) =>

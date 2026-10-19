@@ -19,6 +19,37 @@ export const reactEventsFormsSections: Section[] = [
         xp: 35,
         content: [
           {
+            type: 'demo',
+            id: 'react-l10-d1',
+            title: 'Handlers with an argument',
+            body: 'Each row wraps the call in an arrow, so the handler runs on click and receives that row value. Clicking a name selects it.',
+            files: [
+              {
+                path: 'Picker.jsx',
+                language: 'jsx',
+                content: `import { useState } from 'react'
+
+export default function Picker() {
+  const [picked, setPicked] = useState('none')
+  const names = ['Ada', 'Grace', 'Alan']
+  return (
+    <div style={{ fontFamily: 'system-ui' }}>
+      <ul style={{ margin: '0 0 8px', paddingLeft: 18 }}>
+        {names.map((name) => (
+          <li key={name} onClick={() => setPicked(name)} style={{ cursor: 'pointer' }}>{name}</li>
+        ))}
+      </ul>
+      <p style={{ margin: 0 }}>Picked: {picked}</p>
+    </div>
+  )
+}
+`,
+              },
+            ],
+            previewProps: {},
+            height: 150,
+          },
+          {
             type: 'text',
             id: 'react-l10-intro',
             body: '**Event handling.** Attaching a handler in React looks like an HTML attribute: `onClick`, `onChange`, `onSubmit`. The names are camelCase, and the value is a function — not a string of code.',
@@ -39,7 +70,7 @@ export const reactEventsFormsSections: Section[] = [
             id: 'react-l10-code',
             language: 'jsx',
             title: 'attaching handlers and passing arguments',
-            code: `function List({ items }) {\n  return (\n    <ul>\n      {items.map((item) => (\n        // The arrow wraps the call, so select runs on click, not on render.\n        <li key={item.id} onClick={() => select(item.id)}>\n          {item.name}\n        </li>\n      ))}\n    </ul>\n  )\n}\n\n// Read the current text out of an input event:\nfunction onChange(event) {\n  setValue(event.target.value)\n}\n\n// <input value={value} onChange={onChange} />`,
+            code: `import { useState } from 'react'\n\nexport default function List({ items }) {\n  return (\n    <ul>\n      {items.map((item) => (\n        // The arrow wraps the call, so select runs on click, not on render.\n        <li key={item.id} onClick={() => select(item.id)}>\n          {item.name}\n        </li>\n      ))}\n    </ul>\n  )\n}\n\n// Read the current text out of an input event:\nfunction onChange(event) {\n  setValue(event.target.value)\n}\n\n// <input value={value} onChange={onChange} />`,
           },
           {
             type: 'list',
@@ -76,9 +107,13 @@ export const reactEventsFormsSections: Section[] = [
               instructions:
                 'Write readValue(event) returning event.target.value as a string. Write withArg(handler, arg) returning a new function that calls handler with arg when it is invoked.',
               languages: ['javascript'],
-              starterCode: {
-                javascript: `// 1) Read the current value from an input event.\nfunction readValue(event) {\n  return ''\n}\n\n// 2) Return a function that calls handler with arg.\nfunction withArg(handler, arg) {\n  return handler\n}\n`,
-              },
+              files: [
+                {
+                  path: 'events.js',
+                  language: 'javascript',
+                  content: `// 1) Read the current value from an input event.\nexport function readValue(event) {\n  return ''\n}\n\n// 2) Return a function that calls handler with arg.\nexport function withArg(handler, arg) {\n  return handler\n}\n`,
+                },
+              ],
               tests: [
                 { id: 'ex-react-l10-t1', label: 'reads the value from the target', body: "return readValue({ target: { value: 'hello' } }) === 'hello'" },
                 {
@@ -102,9 +137,13 @@ export const reactEventsFormsSections: Section[] = [
                 'withArg must return a function, not the result of calling one.',
                 'The returned function closes over handler and arg: return () => handler(arg).',
               ],
-              solution: {
-                javascript: `function readValue(event) {\n  return event.target.value\n}\n\nfunction withArg(handler, arg) {\n  return () => handler(arg)\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'events.js',
+                  language: 'javascript',
+                  content: `export function readValue(event) {\n  return event.target.value\n}\n\nexport function withArg(handler, arg) {\n  return () => handler(arg)\n}\n`,
+                },
+              ],
               testNotes:
                 'The last check proves the wrapping function is returned un-called, which is the difference between onClick={h} and onClick={h()}.',
             },
@@ -123,6 +162,36 @@ export const reactEventsFormsSections: Section[] = [
         ],
         xp: 40,
         content: [
+          {
+            type: 'demo',
+            id: 'react-l11-d1',
+            title: 'A controlled input',
+            body: 'The input takes its value from state and writes every keystroke back, so the text below is always the same value the field shows.',
+            files: [
+              {
+                path: 'NameForm.jsx',
+                language: 'jsx',
+                content: `import { useState } from 'react'
+
+export default function NameForm() {
+  const [name, setName] = useState('')
+  return (
+    <div style={{ fontFamily: 'system-ui' }}>
+      <input
+        value={name}
+        onChange={(event) => setName(event.target.value)}
+        placeholder="Type your name"
+      />
+      <p style={{ margin: '8px 0 0' }}>Hello {name || 'stranger'}</p>
+    </div>
+  )
+}
+`,
+              },
+            ],
+            previewProps: {},
+            height: 130,
+          },
           {
             type: 'text',
             id: 'react-l11-intro',
@@ -144,7 +213,7 @@ export const reactEventsFormsSections: Section[] = [
             id: 'react-l11-code',
             language: 'jsx',
             title: 'one field, then many',
-            code: `function NameForm() {\n  const [name, setName] = useState('')\n\n  return (\n    <form>\n      <input\n        value={name}\n        onChange={(event) => setName(event.target.value)}\n      />\n      <p>{name}</p>\n    </form>\n  )\n}\n\n// With several fields, one handler keyed by the input name:\nfunction handleChange(event) {\n  const { name, value } = event.target\n  setForm((form) => ({ ...form, [name]: value }))\n}`,
+            code: `import { useState } from 'react'\n\nexport default function NameForm() {\n  const [name, setName] = useState('')\n\n  return (\n    <form>\n      <input\n        value={name}\n        onChange={(event) => setName(event.target.value)}\n      />\n      <p>{name}</p>\n    </form>\n  )\n}\n\n// With several fields, one handler keyed by the input name:\nfunction handleChange(event) {\n  const { name, value } = event.target\n  setForm((form) => ({ ...form, [name]: value }))\n}`,
           },
           {
             type: 'list',
@@ -181,9 +250,13 @@ export const reactEventsFormsSections: Section[] = [
               instructions:
                 'Write updateField(state, name, value) returning a NEW state object with the field name set to value, leaving every other field unchanged.',
               languages: ['javascript'],
-              starterCode: {
-                javascript: `// Return a new state with one field updated.\nfunction updateField(state, name, value) {\n  return state\n}\n`,
-              },
+              files: [
+                {
+                  path: 'formState.js',
+                  language: 'javascript',
+                  content: `// Return a new state with one field updated.\nexport function updateField(state, name, value) {\n  return state\n}\n`,
+                },
+              ],
               tests: [
                 {
                   id: 'ex-react-l11-t1',
@@ -211,9 +284,13 @@ export const reactEventsFormsSections: Section[] = [
                 'The key comes from a variable, so use a computed property name.',
                 'Object spread plus a computed key: { ...state, [name]: value }.',
               ],
-              solution: {
-                javascript: `function updateField(state, name, value) {\n  return { ...state, [name]: value }\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'formState.js',
+                  language: 'javascript',
+                  content: `export function updateField(state, name, value) {\n  return { ...state, [name]: value }\n}\n`,
+                },
+              ],
               testNotes:
                 'The reference and original-value checks confirm the update is a copy, which is what lets React detect the change.',
             },
@@ -232,6 +309,42 @@ export const reactEventsFormsSections: Section[] = [
         ],
         xp: 35,
         content: [
+          {
+            type: 'demo',
+            id: 'react-l12-d1',
+            title: 'Submit without a reload',
+            body: 'The submit handler stops the default reload with `preventDefault`, then validates. A bad email shows a message and a good one clears it.',
+            files: [
+              {
+                path: 'SignupForm.jsx',
+                language: 'jsx',
+                content: `import { useState } from 'react'
+
+export default function SignupForm() {
+  const [email, setEmail] = useState('')
+  const [error, setError] = useState('')
+  function handleSubmit(event) {
+    event.preventDefault()
+    if (!email.includes('@')) {
+      setError('Enter a valid email')
+      return
+    }
+    setError('')
+  }
+  return (
+    <form onSubmit={handleSubmit} style={{ fontFamily: 'system-ui' }}>
+      <input value={email} onChange={(event) => setEmail(event.target.value)} placeholder="you@example.com" />
+      <button type="submit" style={{ marginLeft: 8 }}>Submit</button>
+      {error && <p style={{ margin: '8px 0 0', color: '#b91c1c' }}>{error}</p>}
+    </form>
+  )
+}
+`,
+              },
+            ],
+            previewProps: {},
+            height: 150,
+          },
           {
             type: 'text',
             id: 'react-l12-intro',
@@ -290,9 +403,13 @@ export const reactEventsFormsSections: Section[] = [
               instructions:
                 "Write validate(form) returning an object of error messages. Require form.title (after trimming) and require form.email to contain an '@'. Return an empty object when the form is valid.",
               languages: ['javascript'],
-              starterCode: {
-                javascript: `// Return { field: 'message' } for each problem, or {} when valid.\nfunction validate(form) {\n  return {}\n}\n`,
-              },
+              files: [
+                {
+                  path: 'validation.js',
+                  language: 'javascript',
+                  content: `// Return { field: 'message' } for each problem, or {} when valid.\nexport function validate(form) {\n  return {}\n}\n`,
+                },
+              ],
               tests: [
                 {
                   id: 'ex-react-l12-t1',
@@ -325,9 +442,13 @@ export const reactEventsFormsSections: Section[] = [
                 'Trim before testing the title so spaces do not count as content.',
                 'Check for the @ with form.email.includes("@") — note the quotes.',
               ],
-              solution: {
-                javascript: `function validate(form) {\n  const errors = {}\n  if (!form.title.trim()) errors.title = 'A title is required'\n  if (!form.email.includes('@')) errors.email = 'Enter a valid email'\n  return errors\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'validation.js',
+                  language: 'javascript',
+                  content: `export function validate(form) {\n  const errors = {}\n  if (!form.title.trim()) errors.title = 'A title is required'\n  if (!form.email.includes('@')) errors.email = 'Enter a valid email'\n  return errors\n}\n`,
+                },
+              ],
               testNotes:
                 'The whitespace check is what separates trim() from a plain emptiness test, and the two-problem case ensures both rules run.',
             },
@@ -347,6 +468,39 @@ export const reactEventsFormsSections: Section[] = [
         ],
         xp: 40,
         content: [
+          {
+            type: 'demo',
+            id: 'react-l40-d1',
+            title: 'Controlled textarea and select',
+            body: 'The textarea holds its text in state as `value`, and the select holds the chosen option as a single string. Both update from the change event.',
+            files: [
+              {
+                path: 'Note.jsx',
+                language: 'jsx',
+                content: `import { useState } from 'react'
+
+export default function Note() {
+  const [notes, setNotes] = useState('')
+  const [priority, setPriority] = useState('low')
+  return (
+    <div style={{ fontFamily: 'system-ui' }}>
+      <textarea value={notes} onChange={(event) => setNotes(event.target.value)} rows={2} placeholder="Notes" />
+      <div style={{ marginTop: 8 }}>
+        <select value={priority} onChange={(event) => setPriority(event.target.value)}>
+          <option value="low">Low</option>
+          <option value="high">High</option>
+        </select>
+      </div>
+      <p style={{ margin: '8px 0 0' }}>{priority}: {notes || 'nothing yet'}</p>
+    </div>
+  )
+}
+`,
+              },
+            ],
+            previewProps: {},
+            height: 190,
+          },
           {
             type: 'text',
             id: 'react-l40-intro',
@@ -405,9 +559,13 @@ export const reactEventsFormsSections: Section[] = [
               instructions:
                 "Write selectedValues(select). For a single select (select.multiple is false) return the value of the selected option as a string, or \"\" when nothing is selected. For a multiple select return an array of the selected option values.",
               languages: ['javascript'],
-              starterCode: {
-                javascript: `// A select looks like { multiple, options: [{ value, selected }] }.\nfunction selectedValues(select) {\n  return ''\n}\n`,
-              },
+              files: [
+                {
+                  path: 'select.js',
+                  language: 'javascript',
+                  content: `// A select looks like { multiple, options: [{ value, selected }] }.\nexport function selectedValues(select) {\n  return ''\n}\n`,
+                },
+              ],
               tests: [
                 {
                   id: 'ex-react-l40-t1',
@@ -435,9 +593,13 @@ export const reactEventsFormsSections: Section[] = [
                 'For a single select, find the option whose selected flag is true.',
                 'For multiple, filter the options and map them to their values.',
               ],
-              solution: {
-                javascript: `function selectedValues(select) {\n  const chosen = select.options.filter((option) => option.selected)\n  if (select.multiple) {\n    return chosen.map((option) => option.value)\n  }\n  return chosen.length > 0 ? chosen[0].value : ''\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'select.js',
+                  language: 'javascript',
+                  content: `export function selectedValues(select) {\n  const chosen = select.options.filter((option) => option.selected)\n  if (select.multiple) {\n    return chosen.map((option) => option.value)\n  }\n  return chosen.length > 0 ? chosen[0].value : ''\n}\n`,
+                },
+              ],
               testNotes:
                 'The tests check the type as well as the contents — a single select must return a string, a multiple select an array.',
             },
@@ -457,6 +619,43 @@ export const reactEventsFormsSections: Section[] = [
         ],
         xp: 45,
         content: [
+          {
+            type: 'demo',
+            id: 'react-l41-d1',
+            title: 'One handler for the whole form',
+            body: 'Every control has a name, and one change handler writes the right field. A checkbox stores its checked flag; the radios share a name.',
+            files: [
+              {
+                path: 'TaskForm.jsx',
+                language: 'jsx',
+                content: `import { useState } from 'react'
+
+export default function TaskForm() {
+  const [form, setForm] = useState({ title: '', done: false, priority: 'low' })
+  function handleChange(event) {
+    const { name, type, value, checked } = event.target
+    setForm((prev) => ({ ...prev, [name]: type === 'checkbox' ? checked : value }))
+  }
+  return (
+    <div style={{ fontFamily: 'system-ui' }}>
+      <input name="title" value={form.title} onChange={handleChange} placeholder="Title" />
+      <label style={{ marginLeft: 8 }}>
+        <input name="done" type="checkbox" checked={form.done} onChange={handleChange} /> Done
+      </label>
+      <div style={{ marginTop: 8 }}>
+        <label><input name="priority" type="radio" value="low" checked={form.priority === 'low'} onChange={handleChange} /> Low</label>
+        <label style={{ marginLeft: 8 }}><input name="priority" type="radio" value="high" checked={form.priority === 'high'} onChange={handleChange} /> High</label>
+      </div>
+      <p style={{ margin: '8px 0 0' }}>{form.title || 'untitled'} - {form.priority}{form.done ? ' (done)' : ''}</p>
+    </div>
+  )
+}
+`,
+              },
+            ],
+            previewProps: {},
+            height: 210,
+          },
           {
             type: 'text',
             id: 'react-l41-intro',
@@ -515,9 +714,13 @@ export const reactEventsFormsSections: Section[] = [
               instructions:
                 "Write applyChange(state, event) returning a NEW state. Use event.target.name as the key; when event.target.type is 'checkbox' store event.target.checked, otherwise store event.target.value. Leave other fields unchanged.",
               languages: ['javascript'],
-              starterCode: {
-                javascript: `// event.target looks like { name, type, value, checked }.\nfunction applyChange(state, event) {\n  return state\n}\n`,
-              },
+              files: [
+                {
+                  path: 'changeEvents.js',
+                  language: 'javascript',
+                  content: `// event.target looks like { name, type, value, checked }.\nexport function applyChange(state, event) {\n  return state\n}\n`,
+                },
+              ],
               tests: [
                 {
                   id: 'ex-react-l41-t1',
@@ -550,9 +753,13 @@ export const reactEventsFormsSections: Section[] = [
                 'Pick the value: checked for a checkbox, value for anything else.',
                 'Return a copy with the computed key set: { ...state, [name]: next }.',
               ],
-              solution: {
-                javascript: `function applyChange(state, event) {\n  const { name, type, value, checked } = event.target\n  const next = type === 'checkbox' ? checked : value\n  return { ...state, [name]: next }\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'changeEvents.js',
+                  language: 'javascript',
+                  content: `export function applyChange(state, event) {\n  const { name, type, value, checked } = event.target\n  const next = type === 'checkbox' ? checked : value\n  return { ...state, [name]: next }\n}\n`,
+                },
+              ],
               testNotes:
                 'Separate checks for a checked and an unchecked box confirm the boolean is stored rather than a string.',
             },

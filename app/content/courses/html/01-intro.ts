@@ -24,6 +24,12 @@ export const htmlIntroSections: Section[] = [
             body: 'HTML is the structure of the web. Every page you will ever open is a tree of elements, and everything else in the browser — the styling, the behaviour, the way a screen reader announces things — hangs off that tree. This course takes you from an empty file to a complete, accessible page.',
           },
           {
+            type: 'tip',
+            id: 'c-l1-dt',
+            title: 'How to open the developer tools',
+            body: 'Press **F12**, or **Ctrl + Shift + I** on Windows and Linux / **Cmd + Option + I** on Mac, or right-click the page and choose **Inspect**. The **Elements** panel shows the live DOM the browser built: click a node to select it, and hover a node to highlight it on the page. The **Console** panel shows `console.log` output, warnings and errors, and you can type an expression there and press Enter to run it. Keep both panels open beside the demo as you read.',
+          },
+          {
             type: 'demo',
             id: 'c-l1-d1',
             title: 'The same page, before and after the course',

@@ -19,6 +19,32 @@ export const tsInterfacesSections: Section[] = [
         xp: 35,
         content: [
           {
+            type: 'demo',
+            id: 'ts-l11-d1',
+            title: 'The shape lives on in the value',
+            body: 'An interface disappears at compile time, yet the object it describes does not: `describe` still reads `name` and `age` off whatever you hand it. The demo builds the values and runs the same consumer for both.',
+            html: `<button id="go">Describe two users</button>
+<pre id="out">Press the button.</pre>`,
+            css: `body { font-family: system-ui, sans-serif; font-size: 14px; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #f4f6f8; border-radius: 6px; font-size: 12.5px; }`,
+            javascript: `function describe(user) {
+  return user.name + ' (' + user.age + ')'
+}
+
+const out = document.querySelector('#out')
+document.querySelector('#go').addEventListener('click', function () {
+  const ada = { name: 'Ada', age: 36 }
+  const grace = { name: 'Grace', age: 45 }
+  out.textContent = [
+    describe(ada),
+    describe(grace),
+    'keys: ' + Object.keys(ada).join(', '),
+  ].join('\n')
+})`,
+            height: 175,
+          },
+          {
             type: 'text',
             id: 'ts-l11-intro',
             body: '**Interfaces vs type aliases.** There are two ways to name a shape in TypeScript, and for object shapes they are nearly interchangeable. `interface User { name: string }` and `type User = { name: string }` describe exactly the same thing, and both can be used anywhere a type is expected.',
@@ -163,6 +189,30 @@ function label(user: User): string {
         ],
         xp: 35,
         content: [
+          {
+            type: 'demo',
+            id: 'ts-l12-d1',
+            title: 'Inherited and merged members on one object',
+            body: 'A `Dog` value carries the `name` it inherits from `Animal` plus its own `breed` and the merged `goodBoy`. Nothing enforces that at runtime, so the demo simply reads the keys the types promise.',
+            html: `<button id="go">Inspect two dogs</button>
+<pre id="out">Press the button.</pre>`,
+            css: `body { font-family: system-ui, sans-serif; font-size: 14px; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #f4f6f8; border-radius: 6px; font-size: 12.5px; }`,
+            javascript: `function describe(dog) {
+  const parts = ['name=' + dog.name, 'breed=' + dog.breed]
+  if (dog.goodBoy !== undefined) parts.push('goodBoy=' + dog.goodBoy)
+  return parts.join(' ')
+}
+
+const out = document.querySelector('#out')
+document.querySelector('#go').addEventListener('click', function () {
+  const rex = { name: 'Rex', breed: 'Corgi' }
+  const bella = { name: 'Bella', breed: 'Poodle', goodBoy: true }
+  out.textContent = [describe(rex), describe(bella)].join('\n')
+})`,
+            height: 170,
+          },
           {
             type: 'text',
             id: 'ts-l12-intro',
@@ -316,6 +366,41 @@ function isAdmin(account: Account): boolean {
         ],
         xp: 35,
         content: [
+          {
+            type: 'demo',
+            id: 'ts-l13-d1',
+            title: 'A class and a plain object, one consumer',
+            body: '`implements` is checked and then erased, but structural typing is observable: `measure` takes anything with an `area` method, so a `Square` instance and a bare object literal are interchangeable.',
+            html: `<button id="go">Measure both shapes</button>
+<pre id="out">Press the button.</pre>`,
+            css: `body { font-family: system-ui, sans-serif; font-size: 14px; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #f4f6f8; border-radius: 6px; font-size: 12.5px; }`,
+            javascript: `class Square {
+  constructor(side) {
+    this.side = side
+  }
+  area() {
+    return this.side * this.side
+  }
+}
+
+function measure(shape) {
+  return shape.area()
+}
+
+const out = document.querySelector('#out')
+document.querySelector('#go').addEventListener('click', function () {
+  const square = new Square(3)
+  const rect = { area: function () { return 12 } }
+  out.textContent = [
+    'Square(3) -> ' + measure(square),
+    'plain object -> ' + measure(rect),
+    'both satisfied the Shape interface.',
+  ].join('\n')
+})`,
+            height: 185,
+          },
           {
             type: 'text',
             id: 'ts-l13-intro',

@@ -19,6 +19,41 @@ export const reactPerformanceSections: Section[] = [
         xp: 35,
         content: [
           {
+            type: 'demo',
+            id: 'react-l20-d1',
+            title: 'A chunk that loads on demand',
+            body: 'The page is not fetched until it is asked for. A fallback stands in while the chunk is in flight, then the loaded view stays cached.',
+            files: [
+              {
+                path: 'App.jsx',
+                language: 'jsx',
+                content: `import { useState } from 'react'
+
+export default function App() {
+  const [state, setState] = useState('idle')
+
+  function loadChunk() {
+    setState('loading')
+    setTimeout(() => setState('ready'), 600)
+  }
+
+  return (
+    <div style={{ fontFamily: 'system-ui' }}>
+      <button onClick={loadChunk}>Open lazy page</button>
+      <div style={{ marginTop: 8 }}>
+        {state === 'loading' ? <em>Loading chunk...</em> : null}
+        {state === 'ready' ? <strong>Lazy page loaded and cached</strong> : null}
+      </div>
+    </div>
+  )
+}
+`,
+              },
+            ],
+            previewProps: {},
+            height: 170,
+          },
+          {
             type: 'text',
             id: 'react-l20-intro',
             body: '**Code splitting with Suspense.** A bundler normally ships one large JavaScript file, so the first paint waits for code the visitor may never need. Splitting breaks the bundle into chunks that load on demand — usually one per route.',
@@ -39,7 +74,7 @@ export const reactPerformanceSections: Section[] = [
             id: 'react-l20-code',
             language: 'jsx',
             title: 'a lazy route behind a fallback',
-            code: `const TaskDetail = lazy(() => import('./TaskDetail'))\n\nfunction AppRoutes() {\n  return (\n    <Suspense fallback={<p>Loading...</p>}>\n      <TaskDetail />\n    </Suspense>\n  )\n}\n\n// Split by route so the first paint downloads only the shell:\n// { path: '/tasks/:id', element: <TaskDetail /> }\n// The chunk for TaskDetail is fetched the first time that route matches,\n// then reused for every later visit.`,
+            code: `import { lazy, Suspense } from 'react'\n\nconst TaskDetail = lazy(() => import('./TaskDetail'))\n\nexport default function AppRoutes() {\n  return (\n    <Suspense fallback={<p>Loading...</p>}>\n      <TaskDetail />\n    </Suspense>\n  )\n}\n\n// Split by route so the first paint downloads only the shell:\n// { path: '/tasks/:id', element: <TaskDetail /> }\n// The chunk for TaskDetail is fetched the first time that route matches,\n// then reused for every later visit.`,
           },
           {
             type: 'list',
@@ -76,9 +111,13 @@ export const reactPerformanceSections: Section[] = [
               instructions:
                 'Write lazyCache() returning an object with load(key, factory). The first load for a key calls factory() and caches the result; later loads return the cached module without calling factory again.',
               languages: ['javascript'],
-              starterCode: {
-                javascript: `// A cache for lazily loaded chunks.\nfunction lazyCache() {\n  const modules = {}\n\n  return {\n    load(key, factory) {\n      // TODO: load once, then reuse.\n      return factory()\n    },\n  }\n}\n`,
-              },
+              files: [
+                {
+                  path: 'lazyCache.js',
+                  language: 'javascript',
+                  content: `// A cache for lazily loaded chunks.\nexport function lazyCache() {\n  const modules = {}\n\n  return {\n    load(key, factory) {\n      // TODO: load once, then reuse.\n      return factory()\n    },\n  }\n}\n`,
+                },
+              ],
               tests: [
                 {
                   id: 'ex-react-l20-t1',
@@ -106,9 +145,13 @@ export const reactPerformanceSections: Section[] = [
                 'Only call factory() when nothing has been stored for that key yet.',
                 'Test for the key with "key in modules" so a cached falsy value is not mistaken for a miss.',
               ],
-              solution: {
-                javascript: `function lazyCache() {\n  const modules = {}\n\n  return {\n    load(key, factory) {\n      if (!(key in modules)) {\n        modules[key] = factory()\n      }\n      return modules[key]\n    },\n  }\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'lazyCache.js',
+                  language: 'javascript',
+                  content: `export function lazyCache() {\n  const modules = {}\n\n  return {\n    load(key, factory) {\n      if (!(key in modules)) {\n        modules[key] = factory()\n      }\n      return modules[key]\n    },\n  }\n}\n`,
+                },
+              ],
               testNotes:
                 'The fourth check caches a null and expects one load, which is why the cache must test for the key rather than for a truthy value.',
             },
@@ -127,6 +170,48 @@ export const reactPerformanceSections: Section[] = [
         ],
         xp: 40,
         content: [
+          {
+            type: 'demo',
+            id: 'react-l21-d1',
+            title: 'Memo skips the child render',
+            body: 'Every parent render re-renders the plain child, but the memoized one compares its props and skips. Its counter stops moving.',
+            files: [
+              {
+                path: 'App.jsx',
+                language: 'jsx',
+                content: `import { memo, useState } from 'react'
+
+let plainRenders = 0
+let memoRenders = 0
+
+const MemoChild = memo(function MemoChild() {
+  memoRenders = memoRenders + 1
+  return <div>memo child renders: {memoRenders}</div>
+})
+
+function PlainChild() {
+  plainRenders = plainRenders + 1
+  return <div>plain child renders: {plainRenders}</div>
+}
+
+export default function App() {
+  const [n, setN] = useState(0)
+  return (
+    <div style={{ fontFamily: 'system-ui' }}>
+      <button onClick={() => setN(n + 1)}>Parent renders: {n}</button>
+      <div style={{ marginTop: 8 }}>
+        <PlainChild />
+        <MemoChild />
+      </div>
+    </div>
+  )
+}
+`,
+              },
+            ],
+            previewProps: {},
+            height: 190,
+          },
           {
             type: 'text',
             id: 'react-l21-intro',
@@ -148,7 +233,7 @@ export const reactPerformanceSections: Section[] = [
             id: 'react-l21-code',
             language: 'jsx',
             title: 'memo, and the stable callback it needs',
-            code: `const Item = React.memo(function Item({ label, onSelect }) {\n  return <li onClick={onSelect}>{label}</li>\n})\n\n// An inline function is a new reference every render, so memo never helps:\n// <Item label={label} onSelect={() => select(id)} />\n\n// useCallback keeps that reference stable, so the memo can do its job:\nconst handleSelect = useCallback(() => select(id), [id])\n// <Item label={label} onSelect={handleSelect} />`,
+            code: `import { memo, useCallback } from 'react'\n\nexport const Item = memo(function Item({ label, onSelect }) {\n  return <li onClick={onSelect}>{label}</li>\n})\n\n// An inline function is a new reference every render, so memo never helps:\n// <Item label={label} onSelect={() => select(id)} />\n\n// useCallback keeps that reference stable, so the memo can do its job:\nconst handleSelect = useCallback(() => select(id), [id])\n// <Item label={label} onSelect={handleSelect} />`,
           },
           {
             type: 'list',
@@ -185,9 +270,13 @@ export const reactPerformanceSections: Section[] = [
               instructions:
                 'Write shallowEqual(a, b) returning true when both objects have the same keys and each value compares equal with Object.is. The comparison is one level deep, not recursive.',
               languages: ['javascript'],
-              starterCode: {
-                javascript: `// The default comparison used by React.memo.\nfunction shallowEqual(a, b) {\n  return false\n}\n`,
-              },
+              files: [
+                {
+                  path: 'memo.js',
+                  language: 'javascript',
+                  content: `// The default comparison used by React.memo.\nexport function shallowEqual(a, b) {\n  return false\n}\n`,
+                },
+              ],
               tests: [
                 {
                   id: 'ex-react-l21-t1',
@@ -220,9 +309,13 @@ export const reactPerformanceSections: Section[] = [
                 'Then check every key of a against the same key of b.',
                 'Use Object.is for each value: Object.keys(a).every((key) => Object.is(a[key], b[key])).',
               ],
-              solution: {
-                javascript: `function shallowEqual(a, b) {\n  if (a === b) return true\n  if (!a || !b) return false\n\n  const aKeys = Object.keys(a)\n  const bKeys = Object.keys(b)\n  if (aKeys.length !== bKeys.length) return false\n\n  return aKeys.every((key) => Object.is(a[key], b[key]))\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'memo.js',
+                  language: 'javascript',
+                  content: `export function shallowEqual(a, b) {\n  if (a === b) return true\n  if (!a || !b) return false\n\n  const aKeys = Object.keys(a)\n  const bKeys = Object.keys(b)\n  if (aKeys.length !== bKeys.length) return false\n\n  return aKeys.every((key) => Object.is(a[key], b[key]))\n}\n`,
+                },
+              ],
               testNotes:
                 'The shared-reference and equal-looking-object checks together pin down that the comparison is by identity and one level deep.',
             },
@@ -241,6 +334,49 @@ export const reactPerformanceSections: Section[] = [
         ],
         xp: 30,
         content: [
+          {
+            type: 'demo',
+            id: 'react-l22-d1',
+            title: 'Count the renders',
+            body: 'The blunt instrument that finds the hot component: store a counter outside the component and print it on every render.',
+            files: [
+              {
+                path: 'App.jsx',
+                language: 'jsx',
+                content: `import { useState } from 'react'
+
+let appRenders = 0
+let listRenders = 0
+const items = ['a', 'b', 'c']
+
+function List({ items }) {
+  listRenders = listRenders + 1
+  return (
+    <div>
+      List renders: {listRenders} ({items.length} items)
+    </div>
+  )
+}
+
+export default function App() {
+  appRenders = appRenders + 1
+  const [n, setN] = useState(0)
+  return (
+    <div style={{ fontFamily: 'system-ui' }}>
+      <button onClick={() => setN(n + 1)}>Bump: {n}</button>
+      <div style={{ marginTop: 8 }}>
+        App renders: <strong>{appRenders}</strong>
+      </div>
+      <List items={items} />
+    </div>
+  )
+}
+`,
+              },
+            ],
+            previewProps: {},
+            height: 190,
+          },
           {
             type: 'text',
             id: 'react-l22-intro',
@@ -299,9 +435,13 @@ export const reactPerformanceSections: Section[] = [
               instructions:
                 'Write busiest(log) returning the component name that appears most often in the log, or null when the log is empty. When two names tie, return the one that appears first.',
               languages: ['javascript'],
-              starterCode: {
-                javascript: `// Find the component with the most renders.\nfunction busiest(log) {\n  return null\n}\n`,
-              },
+              files: [
+                {
+                  path: 'renderLog.js',
+                  language: 'javascript',
+                  content: `// Find the component with the most renders.\nexport function busiest(log) {\n  return null\n}\n`,
+                },
+              ],
               tests: [
                 { id: 'ex-react-l22-t1', label: 'the most frequent name wins', body: "return busiest(['A', 'B', 'A']) === 'A'" },
                 {
@@ -322,9 +462,13 @@ export const reactPerformanceSections: Section[] = [
                 'Track the best name and count so far as you go.',
                 'Only replace the best when the new count is strictly greater, so earlier names win ties.',
               ],
-              solution: {
-                javascript: `function busiest(log) {\n  const counts = {}\n  let best = null\n  let bestCount = 0\n\n  for (const name of log) {\n    counts[name] = (counts[name] ?? 0) + 1\n    if (counts[name] > bestCount) {\n      best = name\n      bestCount = counts[name]\n    }\n  }\n\n  return best\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'renderLog.js',
+                  language: 'javascript',
+                  content: `export function busiest(log) {\n  const counts = {}\n  let best = null\n  let bestCount = 0\n\n  for (const name of log) {\n    counts[name] = (counts[name] ?? 0) + 1\n    if (counts[name] > bestCount) {\n      best = name\n      bestCount = counts[name]\n    }\n  }\n\n  return best\n}\n`,
+                },
+              ],
               testNotes:
                 'The tie check distinguishes a strict greater-than from a greater-or-equal comparison, which is the difference between first-seen and last-seen.',
             },
@@ -343,6 +487,53 @@ export const reactPerformanceSections: Section[] = [
         ],
         xp: 40,
         content: [
+          {
+            type: 'demo',
+            id: 'react-l47-d1',
+            title: 'A class for rules, a value for data',
+            body: 'The card gets its class by joining the truthy names. The bar takes its width from state, through the style prop.',
+            files: [
+              {
+                path: 'App.jsx',
+                language: 'jsx',
+                content: `import { useState } from 'react'
+
+export default function App() {
+  const [active, setActive] = useState(false)
+  const [value, setValue] = useState(40)
+  const cls = ['card', active && 'card--active'].filter(Boolean).join(' ')
+
+  return (
+    <div style={{ fontFamily: 'system-ui' }}>
+      <div
+        style={{
+          border: '1px solid #d8dee6',
+          borderRadius: 6,
+          padding: 8,
+          background: active ? '#eef2ff' : '#fff',
+        }}
+      >
+        <strong>Card</strong>
+        <div style={{ color: '#5b6470' }}>className: {cls}</div>
+      </div>
+      <button onClick={() => setActive(!active)} style={{ marginTop: 8 }}>
+        Toggle active
+      </button>
+      <div
+        style={{ width: value + '%', height: 8, background: '#2563eb', marginTop: 8 }}
+      />
+      <button onClick={() => setValue(value === 40 ? 80 : 40)} style={{ marginTop: 8 }}>
+        Widen bar
+      </button>
+    </div>
+  )
+}
+`,
+              },
+            ],
+            previewProps: {},
+            height: 240,
+          },
           {
             type: 'text',
             id: 'react-l47-intro',
@@ -401,9 +592,13 @@ export const reactPerformanceSections: Section[] = [
               instructions:
                 'Write cx(...parts) returning the truthy parts joined by a single space. Falsy parts — false, null, undefined, or an empty string — are skipped, and no part produces a leading or trailing space.',
               languages: ['javascript'],
-              starterCode: {
-                javascript: `// Join the truthy class names with a single space.\nfunction cx(...parts) {\n  return ''\n}\n`,
-              },
+              files: [
+                {
+                  path: 'classNames.js',
+                  language: 'javascript',
+                  content: `// Join the truthy class names with a single space.\nexport function cx(...parts) {\n  return ''\n}\n`,
+                },
+              ],
               tests: [
                 { id: 'ex-react-l47-t1', label: 'joins two names', body: "return cx('a', 'b') === 'a b'" },
                 {
@@ -428,9 +623,13 @@ export const reactPerformanceSections: Section[] = [
                 'Boolean filtering removes false, null, undefined and the empty string in one step.',
                 'return parts.filter(Boolean).join(" ").',
               ],
-              solution: {
-                javascript: `function cx(...parts) {\n  return parts.filter(Boolean).join(' ')\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'classNames.js',
+                  language: 'javascript',
+                  content: `export function cx(...parts) {\n  return parts.filter(Boolean).join(' ')\n}\n`,
+                },
+              ],
               testNotes:
                 'The single-name and all-falsy checks catch implementations that add a leading or trailing space.',
             },
@@ -449,6 +648,51 @@ export const reactPerformanceSections: Section[] = [
         ],
         xp: 35,
         content: [
+          {
+            type: 'demo',
+            id: 'react-l48-d1',
+            title: 'Classes come from the import',
+            body: 'A CSS module exports a mapping, so the class name in the DOM is unique to the file. The markup only references keys.',
+            files: [
+              {
+                path: 'App.jsx',
+                language: 'jsx',
+                content: `import { useState } from 'react'
+
+const styles = {
+  card: 'Card_module__card_3x9f',
+  active: 'Card_module__active_7b2a',
+}
+
+export default function App() {
+  const [on, setOn] = useState(false)
+  const cls = [styles.card, on && styles.active].filter(Boolean).join(' ')
+
+  return (
+    <div style={{ fontFamily: 'system-ui' }}>
+      <div
+        style={{
+          border: '1px solid #d8dee6',
+          borderRadius: 6,
+          padding: 8,
+          background: on ? '#eef2ff' : '#fff',
+        }}
+      >
+        <strong>Scoped card</strong>
+        <div style={{ color: '#5b6470' }}>className: {cls}</div>
+      </div>
+      <button onClick={() => setOn(!on)} style={{ marginTop: 8 }}>
+        Toggle
+      </button>
+    </div>
+  )
+}
+`,
+              },
+            ],
+            previewProps: {},
+            height: 210,
+          },
           {
             type: 'text',
             id: 'react-l48-intro',
@@ -470,7 +714,7 @@ export const reactPerformanceSections: Section[] = [
             id: 'react-l48-code',
             language: 'jsx',
             title: 'a scoped stylesheet',
-            code: `// Card.module.css\n// .card { border-radius: 8px; }\n// .title { font-size: 1.25rem; }\n\nimport styles from './Card.module.css'\n\nfunction Card({ title }) {\n  return (\n    <div className={styles.card}>\n      <h2 className={styles.title}>{title}</h2>\n    </div>\n  )\n}\n\n// The build rewrites .card to something like Card_module__card_3x9f,\n// so it can never clash with another component's .card.`,
+            code: `// Card.module.css\n// .card { border-radius: 8px; }\n// .title { font-size: 1.25rem; }\n\nimport styles from './Card.module.css'\n\nexport default function Card({ title }) {\n  return (\n    <div className={styles.card}>\n      <h2 className={styles.title}>{title}</h2>\n    </div>\n  )\n}\n\n// The build rewrites .card to something like Card_module__card_3x9f,\n// so it can never clash with another component's .card.`,
           },
           {
             type: 'list',
@@ -507,9 +751,13 @@ export const reactPerformanceSections: Section[] = [
               instructions:
                 "Write scopedName(file, className) returning a unique name built from the file and the class. Take the file name without its folder, drop the final extension, then join it to the class with an underscore. Example: ('Card.module.css', 'card') gives 'Card.module_card'.",
               languages: ['javascript'],
-              starterCode: {
-                javascript: `// 'Card.module.css' + 'card' -> 'Card.module_card'\nfunction scopedName(file, className) {\n  return className\n}\n`,
-              },
+              files: [
+                {
+                  path: 'cssModules.js',
+                  language: 'javascript',
+                  content: `// 'Card.module.css' + 'card' -> 'Card.module_card'\nexport function scopedName(file, className) {\n  return className\n}\n`,
+                },
+              ],
               tests: [
                 {
                   id: 'ex-react-l48-t1',
@@ -537,9 +785,13 @@ export const reactPerformanceSections: Section[] = [
                 'Drop the final extension by cutting at the last dot.',
                 'Remember to guard the no-dot case, then join with an underscore.',
               ],
-              solution: {
-                javascript: `function scopedName(file, className) {\n  const base = file.split('/').pop()\n  const dot = base.lastIndexOf('.')\n  const name = dot === -1 ? base : base.slice(0, dot)\n  return name + '_' + className\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'cssModules.js',
+                  language: 'javascript',
+                  content: `export function scopedName(file, className) {\n  const base = file.split('/').pop()\n  const dot = base.lastIndexOf('.')\n  const name = dot === -1 ? base : base.slice(0, dot)\n  return name + '_' + className\n}\n`,
+                },
+              ],
               testNotes:
                 'The uniqueness checks are what matter here: the point of CSS Modules is that two files can use the same class name safely.',
             },
@@ -559,6 +811,48 @@ export const reactPerformanceSections: Section[] = [
         ],
         xp: 35,
         content: [
+          {
+            type: 'demo',
+            id: 'react-l49-d1',
+            title: 'Props drive the style',
+            body: 'In this approach a style is a value, so a prop can pick the colours directly. Switch the variant and the style object changes.',
+            files: [
+              {
+                path: 'App.jsx',
+                language: 'jsx',
+                content: `import { useState } from 'react'
+
+export default function App() {
+  const [primary, setPrimary] = useState(true)
+  const background = primary ? '#2563eb' : '#e5e7eb'
+  const color = primary ? '#ffffff' : '#1f2937'
+
+  return (
+    <div style={{ fontFamily: 'system-ui' }}>
+      <button
+        style={{
+          background,
+          color,
+          border: 'none',
+          borderRadius: 6,
+          padding: '8px 14px',
+        }}
+      >
+        {primary ? 'Primary' : 'Default'}
+      </button>
+      <button onClick={() => setPrimary(!primary)} style={{ marginLeft: 8 }}>
+        Switch variant
+      </button>
+      <div style={{ marginTop: 8, color: '#5b6470' }}>background: {background}</div>
+    </div>
+  )
+}
+`,
+              },
+            ],
+            previewProps: {},
+            height: 180,
+          },
           {
             type: 'text',
             id: 'react-l49-intro',
@@ -617,9 +911,13 @@ export const reactPerformanceSections: Section[] = [
               instructions:
                 "Write toCss(styles) returning the declarations of a style object. Convert each camelCase key to kebab-case, follow it with ': ' and the value, and join the declarations with '; '. Example: toCss({ color: 'red', fontSize: '12px' }) gives 'color: red; font-size: 12px'.",
               languages: ['javascript'],
-              starterCode: {
-                javascript: `// Serialise a style object to CSS declarations.\nfunction toCss(styles) {\n  return ''\n}\n`,
-              },
+              files: [
+                {
+                  path: 'styleObject.js',
+                  language: 'javascript',
+                  content: `// Serialise a style object to CSS declarations.\nexport function toCss(styles) {\n  return ''\n}\n`,
+                },
+              ],
               tests: [
                 { id: 'ex-react-l49-t1', label: 'a single declaration', body: "return toCss({ color: 'red' }) === 'color: red'" },
                 {
@@ -639,9 +937,13 @@ export const reactPerformanceSections: Section[] = [
                 'Convert camelCase by inserting a dash before each capital letter, then lower-casing.',
                 'Join the declarations with "; " — not with a trailing semicolon.',
               ],
-              solution: {
-                javascript: `function toCss(styles) {\n  return Object.keys(styles)\n    .map((key) => key.replace(/([A-Z])/g, '-$1').toLowerCase() + ': ' + styles[key])\n    .join('; ')\n}\n`,
-              },
+              solutionFiles: [
+                {
+                  path: 'styleObject.js',
+                  language: 'javascript',
+                  content: `export function toCss(styles) {\n  return Object.keys(styles)\n    .map((key) => key.replace(/([A-Z])/g, '-$1').toLowerCase() + ': ' + styles[key])\n    .join('; ')\n}\n`,
+                },
+              ],
               testNotes:
                 'The multi-declaration check pins down the join separator, and the camelCase checks confirm the conversion runs.',
             },

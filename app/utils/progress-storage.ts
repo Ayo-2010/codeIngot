@@ -1,4 +1,4 @@
-import type { Difficulty, EditorLanguage } from '~/types/content'
+import type { Difficulty } from '~/types/content'
 
 export interface CourseProgress {
   courseSlug: string
@@ -163,8 +163,14 @@ export class LocalProgressStorage implements ProgressStorage {
 
 /* --------------------------- project drafts ------------------------------ */
 
-/** A learner's in-progress files for one project. */
-export type ProjectDraft = Partial<Record<EditorLanguage, string>>
+/**
+ * A learner's in-progress files for one project.
+ *
+ * Keyed the way the project's editor is: by language for the `starterFiles`
+ * shorthand, or by file path for a project written as real files. Both are
+ * just string contents, so one store serves either shape.
+ */
+export type ProjectDraft = Record<string, string>
 
 const DRAFTS_KEY = 'app-learning-drafts'
 

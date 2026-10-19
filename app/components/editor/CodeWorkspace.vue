@@ -51,12 +51,12 @@
         <EditorCodeEditor
           ref="editorRef"
           :model-value="files"
-          :active="activeLanguage"
+          :active="activeTabId"
           :tabs="tabs"
           :status="null"
           show-reset
           class="min-h-0 flex-1"
-          @update:active="activeLanguage = $event"
+          @update:active="onActiveTab"
           @update:model-value="onEdit"
           @reset="onReset"
           @run="onRun"
@@ -91,7 +91,15 @@
         </div>
 
         <div v-show="activePanel === 'preview'" class="min-h-0 flex-1">
-          <EditorSandboxPreview ref="previewRef" :files="files" :auto-run="!heavyRuntime" @result="onResult" />
+          <EditorSandboxPreview
+            ref="previewRef"
+            :files="sandboxFiles"
+            :modules="isMultiFile"
+            :entry="exercise?.entry"
+            :preview-props="exercise?.previewProps"
+            :auto-run="!heavyRuntime"
+            @result="onResult"
+          />
         </div>
 
         <div
@@ -169,7 +177,7 @@
           {{ revealedHints > index ? `Hint ${index + 1}` : `Reveal hint ${index + 1}` }}
         </button>
         <button
-          v-if="exercise?.solution"
+          v-if="hasSolution"
           type="button"
           class="rounded-md border border-ink-600 px-2 py-1 text-xs text-muted transition hover:border-warn/50 hover:text-warn"
           @click="showSolution = !showSolution"
@@ -187,7 +195,7 @@
         </li>
       </ol>
       <pre
-        v-if="showSolution && exercise?.solution"
+        v-if="showSolution && hasSolution"
         class="mt-2 overflow-auto rounded-lg border border-ink-600 bg-ink-950 p-3 font-mono text-[11.5px] leading-5 text-mist-200"
       ><code>{{ solutionText }}</code></pre>
     </footer>
@@ -195,12 +203,20 @@
 </template>
 
 <script setup lang="ts">
-import type { CodingExercise, EditorLanguage } from '~/types/content'
+import type { CodingExercise, EditorLanguage, ExerciseFile } from '~/types/content'
+import { LANGUAGE_LABEL, LANGUAGE_ORDER, normaliseFiles } from '~/utils/exercise-files'
 import type { SandboxLog, SandboxRunResult, SandboxTestResult } from '~/utils/sandbox'
 
 const props = withDefaults(
   defineProps<{
     files: Partial<Record<EditorLanguage, string>>
+    /**
+     * Real files, when the exercise is a multi-file project. Given these, the
+     * language-keyed `files` above is ignored: every file is addressed by its
+     * path, which is what lets `App.jsx` import `./components/List.jsx` the way a
+     * real project does.
+     */
+    fileSet?: ExerciseFile[]
     starterCode?: Partial<Record<EditorLanguage, string>>
     exercise?: CodingExercise
     activeLanguage?: EditorLanguage
@@ -211,6 +227,8 @@ const props = withDefaults(
 
 const emit = defineEmits<{
   'update:files': [value: Partial<Record<EditorLanguage, string>>]
+  /** The file-list counterpart, so an edit comes back in the shape it arrived. */
+  'update:fileSet': [value: ExerciseFile[]]
   'update:activeLanguage': [value: EditorLanguage]
   passed: [result: SandboxRunResult]
   'check-result': [result: SandboxRunResult]
@@ -220,8 +238,13 @@ const emit = defineEmits<{
 const editorRef = ref<{ focus: () => void } | null>(null)
 const previewRef = ref<{ run: (tests?: unknown[]) => Promise<SandboxRunResult> } | null>(null)
 
-const localFiles = ref<Partial<Record<EditorLanguage, string>>>({ ...props.files })
-const active = ref<EditorLanguage>(props.activeLanguage)
+/** True when the exercise is a real file set rather than one file per language. */
+const isMultiFile = computed(() => Boolean(props.fileSet && props.fileSet.length > 0))
+
+/** Contents by tab id: a language in the shorthand, a path in a file set. */
+const localFiles = ref<Record<string, string>>(starterContents())
+/** The open tab id, which is the same kind of value as the keys above. */
+const activeTabId = ref<string>(initialTabId())
 const activePanel = ref<'preview' | 'console' | 'tests'>(defaultPanel())
 const logs = ref<SandboxLog[]>([])
 const runtimeError = ref<string | null>(null)
@@ -231,21 +254,49 @@ const checking = ref(false)
 const revealedHints = ref(0)
 const showSolution = ref(false)
 
+/** What the editor opens with. */
+function starterContents(): Record<string, string> {
+  if (props.fileSet) {
+    return Object.fromEntries(props.fileSet.map((file) => [file.path, file.content]))
+  }
+  return { ...props.files }
+}
+
+function initialTabId(): string {
+  if (props.fileSet && props.fileSet.length > 0) return props.fileSet[0]!.path
+  return props.activeLanguage
+}
+
 const files = computed({
   get: () => localFiles.value,
-  set: (value) => {
+  set: (value: Record<string, string>) => {
     localFiles.value = value
-    emit('update:files', value)
+    emitFiles()
   },
 })
 
-const activeLanguage = computed({
-  get: () => active.value,
-  set: (value) => {
-    active.value = value
-    emit('update:activeLanguage', value)
-  },
-})
+/**
+ * Hand the edits back in the shape they arrived in, so a caller that thinks in
+ * languages never sees a file list and vice versa.
+ */
+function emitFiles() {
+  if (isMultiFile.value) {
+    emit(
+      'update:fileSet',
+      (props.fileSet ?? []).map((file) => ({
+        ...file,
+        content: localFiles.value[file.path] ?? file.content,
+      })),
+    )
+    return
+  }
+  emit('update:files', localFiles.value as Partial<Record<EditorLanguage, string>>)
+}
+
+function onActiveTab(id: string) {
+  activeTabId.value = id
+  if (!isMultiFile.value) emit('update:activeLanguage', id as EditorLanguage)
+}
 
 /**
  * The parent can replace the files — a new exercise, a project
@@ -254,22 +305,18 @@ const activeLanguage = computed({
  * editor, or a parent re-render would wipe what was typed.
  */
 watch(
-  () => props.files,
-  (value) => {
-    if (sameFiles(value, localFiles.value)) return
-    localFiles.value = { ...value }
+  () => (isMultiFile.value ? props.fileSet : props.files),
+  () => {
+    const next = starterContents()
+    if (sameFiles(next, localFiles.value)) return
+    localFiles.value = next
   },
 )
 
-function sameFiles(
-  a: Partial<Record<EditorLanguage, string>>,
-  b: Partial<Record<EditorLanguage, string>>,
-): boolean {
+function sameFiles(a: Record<string, string>, b: Record<string, string>): boolean {
   const keys = new Set([...Object.keys(a), ...Object.keys(b)])
   for (const key of keys) {
-    if ((a as Record<string, string | undefined>)[key] !== (b as Record<string, string | undefined>)[key]) {
-      return false
-    }
+    if (a[key] !== b[key]) return false
   }
   return true
 }
@@ -277,7 +324,7 @@ function sameFiles(
 watch(
   () => props.activeLanguage,
   (value) => {
-    active.value = value
+    if (!isMultiFile.value) activeTabId.value = value
   },
 )
 
@@ -290,21 +337,26 @@ watch(
   },
 )
 
-const LANGUAGE_LABEL: Record<EditorLanguage, string> = {
-  html: 'HTML',
-  css: 'CSS',
-  javascript: 'JS',
-  typescript: 'TS',
-  jsx: 'JSX',
-  tsx: 'TSX',
-}
-
-const LANGUAGE_ORDER: EditorLanguage[] = ['html', 'css', 'javascript', 'typescript', 'jsx', 'tsx']
-
 const tabs = computed(() => {
-  const wanted = props.exercise?.languages ?? fileLanguages()
-  return wanted.map((language) => ({ id: language, label: LANGUAGE_LABEL[language] }))
+  if (props.fileSet && props.fileSet.length > 0) {
+    return props.fileSet.map((file) => ({
+      id: file.path,
+      label: file.label ?? file.path,
+      language: file.language,
+    }))
+  }
+  return sourceLanguages().map((language) => ({
+    id: language,
+    label: LANGUAGE_LABEL[language],
+    language,
+  }))
 })
+
+/** The languages the exercise is written in, however it chose to declare them. */
+function sourceLanguages(): EditorLanguage[] {
+  const declared = props.exercise?.languages
+  return declared && declared.length > 0 ? declared : fileLanguages()
+}
 
 /** With no exercise to declare its languages, the files on screen are the tabs. */
 function fileLanguages(): EditorLanguage[] {
@@ -321,15 +373,13 @@ function fileLanguages(): EditorLanguage[] {
  * runs are opt-in (Run/Check) rather than fired on every keystroke, so the
  * editor stays responsive while the learner types.
  */
-const heavyRuntime = computed(() => {
-  const languages = props.exercise?.languages ?? []
-  if (languages.includes('jsx') || languages.includes('tsx')) return true
-  return Boolean(localFiles.value.jsx || localFiles.value.tsx)
-})
+const heavyRuntime = computed(() =>
+  tabs.value.some((tab) => tab.language === 'jsx' || tab.language === 'tsx'),
+)
 
 /** With no page to render, the console is the useful first panel. */
 function defaultPanel(): 'preview' | 'console' {
-  const languages = props.exercise?.languages ?? fileLanguages()
+  const languages = sourceLanguages()
   if (languages.includes('html') || languages.includes('jsx') || languages.includes('tsx')) return 'preview'
   return 'console'
 }
@@ -361,11 +411,30 @@ const statusTone = computed(() => {
   return 'text-muted'
 })
 
+const hasSolution = computed(() =>
+  Boolean(props.exercise?.solutionFiles?.length || props.exercise?.solution),
+)
+
 const solutionText = computed(() => {
+  const fileSet = props.exercise?.solutionFiles
+  if (fileSet && fileSet.length > 0) {
+    return fileSet.map((file) => `/* ${file.path} */\n${file.content}`).join('\n\n')
+  }
   const solution = props.exercise?.solution ?? {}
   return Object.entries(solution)
     .map(([language, code]) => `/* ${language} */\n${code}`)
     .join('\n\n')
+})
+
+/** The files the sandbox runs, with the learner's edits folded in. */
+const sandboxFiles = computed<ExerciseFile[]>(() => {
+  if (props.fileSet && props.fileSet.length > 0) {
+    return props.fileSet.map((file) => ({
+      ...file,
+      content: localFiles.value[file.path] ?? file.content,
+    }))
+  }
+  return normaliseFiles(localFiles.value as Partial<Record<EditorLanguage, string>>)
 })
 
 function logTone(level: SandboxLog['level']) {
@@ -375,7 +444,8 @@ function logTone(level: SandboxLog['level']) {
   return 'text-mist-200'
 }
 
-function onEdit(value: Partial<Record<EditorLanguage, string>>) {
+/** One record shape reaches the editor whatever is being edited; this is the id. */
+function onEdit(value: Record<string, string>) {
   files.value = value
 }
 
@@ -408,8 +478,10 @@ async function onCheck() {
 }
 
 function onReset() {
-  const starter = props.starterCode ?? {}
-  files.value = { ...starter }
+  localFiles.value = isMultiFile.value
+    ? Object.fromEntries((props.fileSet ?? []).map((file) => [file.path, file.content]))
+    : { ...(props.starterCode ?? {}) }
+  emitFiles()
   testResults.value = []
   revealedHints.value = 0
   showSolution.value = false

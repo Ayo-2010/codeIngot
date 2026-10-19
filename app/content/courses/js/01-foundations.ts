@@ -26,6 +26,12 @@ export const jsFoundationsSections: Section[] = [
             body: 'Everything on the web is three layers stacked on top of each other, and only the top one reacts. The card below already has markup and a style. What it does not have is behaviour — nothing happens when you press the button. That missing piece is the whole of JavaScript, and it is a small layer: one file of plain text that the browser reads and runs while the page is open.',
           },
           {
+            type: 'tip',
+            id: 'j-l1-dt',
+            title: 'How to open the developer tools',
+            body: 'Press **F12**, or **Ctrl + Shift + I** on Windows and Linux / **Cmd + Option + I** on Mac, or right-click the page and choose **Inspect**. The **Console** panel shows `console.log` output, warnings and errors, and you can type an expression there and press Enter to run it. The **Elements** panel, beside it, shows the live DOM the browser built.',
+          },
+          {
             type: 'demo',
             id: 'j-l1-d1',
             title: 'One button, one listener, zero attributes in the markup',

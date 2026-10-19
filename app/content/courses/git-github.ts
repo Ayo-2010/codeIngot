@@ -19,6 +19,34 @@ export const gitGitHubSections: Section[] = [
         xp: 45,
         content: [
           {
+            type: 'demo',
+            id: 'g-l1-d1',
+            title: 'A terminal that only knows Git',
+            body: 'This is a simulation, not a real repository. Press a command to see what Git prints back. The two `git config` lines read the identity that every commit will carry.',
+            html: `<div class="term">
+  <button data-cmd="git --version">git --version</button>
+  <button data-cmd="git config --global user.name">git config --global user.name</button>
+  <button data-cmd="git config --global user.email">git config --global user.email</button>
+</div>
+<pre id="out">Press a command to see what Git prints back.</pre>`,
+            css: `body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 14px; }
+.term { display: flex; gap: 8px; flex-wrap: wrap; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #0b0d10; color: #b9f6ca; border-radius: 6px; font-size: 12.5px; white-space: pre-wrap; }`,
+            javascript: `const out = document.querySelector('#out')
+const outputs = {
+  'git --version': 'git version 2.45.2',
+  'git config --global user.name': 'Ada Lovelace',
+  'git config --global user.email': 'ada@example.com',
+}
+document.querySelectorAll('[data-cmd]').forEach(function (button) {
+  button.addEventListener('click', function () {
+    out.textContent = button.dataset.cmd + '\\n' + (outputs[button.dataset.cmd] || 'No output.')
+  })
+})`,
+            height: 200,
+          },
+          {
             type: 'text',
             id: 'g-l1-b1',
             body: 'Version control is a system that records every change to a file or set of files so you can recall specific versions later. Without it, you are left with filenames like final-v2-really-final.docx and email attachments with no clear history. With it, every change has an author, a timestamp, and a message. You can compare any two versions, revert a broken change in seconds, and collaborate with a team without overwriting each other\'s work.',
@@ -103,6 +131,38 @@ git config --global user.email "ada@example.com"`,
         ],
         xp: 45,
         content: [
+          {
+            type: 'demo',
+            id: 'g-l2-d1',
+            title: 'From empty folder to first commit',
+            body: 'This is a simulation. `git init` creates the repository, `git add` moves a change into the staging area, `git commit` stores the snapshot, and `git log --oneline` reads the history back.',
+            html: `<div class="term">
+  <button data-cmd="git init">git init</button>
+  <button data-cmd="git status">git status</button>
+  <button data-cmd="git add README.md">git add README.md</button>
+  <button data-cmd="git commit -m 'Initial commit'">git commit</button>
+  <button data-cmd="git log --oneline">git log --oneline</button>
+</div>
+<pre id="out">Press a command to see what Git prints back.</pre>`,
+            css: `body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 14px; }
+.term { display: flex; gap: 8px; flex-wrap: wrap; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #0b0d10; color: #b9f6ca; border-radius: 6px; font-size: 12.5px; white-space: pre-wrap; }`,
+            javascript: `const out = document.querySelector('#out')
+const outputs = {
+  'git init': 'Initialized empty Git repository in /home/ada/project/.git/',
+  'git status': 'On branch main\\nUntracked files:\\n  README.md\\n\\nnothing added to commit but untracked files present',
+  'git add README.md': '(no output - README.md is now in the staging area)',
+  "git commit -m 'Initial commit'": '[main a1b2c3d] Initial commit\\n 1 file changed, 1 insertion(+)',
+  'git log --oneline': 'a1b2c3d (HEAD -> main) Initial commit',
+}
+document.querySelectorAll('[data-cmd]').forEach(function (button) {
+  button.addEventListener('click', function () {
+    out.textContent = button.dataset.cmd + '\\n' + (outputs[button.dataset.cmd] || 'No output.')
+  })
+})`,
+            height: 210,
+          },
           {
             type: 'text',
             id: 'g-l2-b1',
@@ -270,6 +330,34 @@ git log --oneline --graph --all`,
         xp: 45,
         content: [
           {
+            type: 'demo',
+            id: 'g-l3-d1',
+            title: 'Clone and inspect the remote',
+            body: 'This is a simulation. Cloning downloads the whole history and records the remote under the name `origin`; `git remote -v` prints exactly where that points.',
+            html: `<div class="term">
+  <button data-cmd="git clone https://github.com/user/repo.git">git clone</button>
+  <button data-cmd="git remote -v">git remote -v</button>
+  <button data-cmd="git remote show origin">git remote show origin</button>
+</div>
+<pre id="out">Press a command to see what Git prints back.</pre>`,
+            css: `body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 14px; }
+.term { display: flex; gap: 8px; flex-wrap: wrap; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #0b0d10; color: #b9f6ca; border-radius: 6px; font-size: 12.5px; white-space: pre-wrap; }`,
+            javascript: `const out = document.querySelector('#out')
+const outputs = {
+  'git clone https://github.com/user/repo.git': 'Cloning into repo...\\nremote: Enumerating objects: 42, done.\\nReceiving objects: 100% (42/42), done.',
+  'git remote -v': 'origin  https://github.com/user/repo.git (fetch)\\norigin  https://github.com/user/repo.git (push)',
+  'git remote show origin': '* remote origin\\n  Fetch URL: https://github.com/user/repo.git\\n  Push  URL: https://github.com/user/repo.git\\n  HEAD branch: main',
+}
+document.querySelectorAll('[data-cmd]').forEach(function (button) {
+  button.addEventListener('click', function () {
+    out.textContent = button.dataset.cmd + '\\n' + (outputs[button.dataset.cmd] || 'No output.')
+  })
+})`,
+            height: 210,
+          },
+          {
             type: 'text',
             id: 'g-l3-b1',
             body: 'git clone downloads an existing repository to your machine. It copies the entire history, so you have every commit locally. The remote is named origin by convention. You can have multiple remotes, but most projects have one: origin. Use git remote -v to list remotes and git remote show origin to see details.',
@@ -351,6 +439,36 @@ git remote -v`,
         ],
         xp: 50,
         content: [
+          {
+            type: 'demo',
+            id: 'g-l4-d1',
+            title: 'The daily loop, one command at a time',
+            body: 'This is a simulation. `git add` stages a file, `git commit -m` records the snapshot with a conventional message, and `git push origin main` sends it to the remote.',
+            html: `<div class="term">
+  <button data-cmd="git add app.js">git add app.js</button>
+  <button data-cmd="git commit -m 'feat: add user login validation'">git commit</button>
+  <button data-cmd="git push origin main">git push origin main</button>
+  <button data-cmd="git status">git status</button>
+</div>
+<pre id="out">Press a command to see what Git prints back.</pre>`,
+            css: `body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 14px; }
+.term { display: flex; gap: 8px; flex-wrap: wrap; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #0b0d10; color: #b9f6ca; border-radius: 6px; font-size: 12.5px; white-space: pre-wrap; }`,
+            javascript: `const out = document.querySelector('#out')
+const outputs = {
+  'git add app.js': '(no output - app.js is staged and ready for the next commit)',
+  "git commit -m 'feat: add user login validation'": '[main 3f2a1b9] feat: add user login validation\\n 1 file changed, 12 insertions(+)',
+  'git push origin main': 'Enumerating objects: 5, done.\\nTo https://github.com/user/repo.git\\n   8c1d2e3..3f2a1b9  main -> main',
+  'git status': 'On branch main\\nYour branch is up to date with origin/main.\\n\\nnothing to commit, working tree clean',
+}
+document.querySelectorAll('[data-cmd]').forEach(function (button) {
+  button.addEventListener('click', function () {
+    out.textContent = button.dataset.cmd + '\\n' + (outputs[button.dataset.cmd] || 'No output.')
+  })
+})`,
+            height: 210,
+          },
           {
             type: 'text',
             id: 'g-l4-b1',
@@ -519,6 +637,36 @@ git push origin main`,
         xp: 45,
         content: [
           {
+            type: 'demo',
+            id: 'g-l5-d1',
+            title: 'Branches are just pointers',
+            body: 'This is a simulation. A branch is a pointer to a commit, so creating one is instant and switching it moves the pointer and updates the working tree.',
+            html: `<div class="term">
+  <button data-cmd="git branch">git branch</button>
+  <button data-cmd="git switch -c feature/login">git switch -c</button>
+  <button data-cmd="git switch main">git switch main</button>
+  <button data-cmd="git status">git status</button>
+</div>
+<pre id="out">Press a command to see what Git prints back.</pre>`,
+            css: `body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 14px; }
+.term { display: flex; gap: 8px; flex-wrap: wrap; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #0b0d10; color: #b9f6ca; border-radius: 6px; font-size: 12.5px; white-space: pre-wrap; }`,
+            javascript: `const out = document.querySelector('#out')
+const outputs = {
+  'git branch': '* main',
+  'git switch -c feature/login': 'Switched to a new branch feature/login',
+  'git switch main': 'Switched to branch main',
+  'git status': 'On branch feature/login\\nnothing to commit, working tree clean',
+}
+document.querySelectorAll('[data-cmd]').forEach(function (button) {
+  button.addEventListener('click', function () {
+    out.textContent = button.dataset.cmd + '\\n' + (outputs[button.dataset.cmd] || 'No output.')
+  })
+})`,
+            height: 200,
+          },
+          {
             type: 'text',
             id: 'g-l5-b1',
             body: 'A branch in Git is a lightweight movable pointer to a commit. Creating a branch is instant: Git creates a new pointer, it does not copy files. Switching branches updates the working tree to match the commit the branch points to. This is why branching is so cheap in Git compared to other version control systems. You can create a branch for every feature, every bug fix, and every experiment.',
@@ -611,6 +759,36 @@ git switch -c feature-login`,
         ],
         xp: 45,
         content: [
+          {
+            type: 'demo',
+            id: 'g-l6-d1',
+            title: 'One feature branch, start to finish',
+            body: 'This is a simulation. The branch is created from an up-to-date `main`, pushed with `-u` so later pushes are just `git push`, and the pull request is the GitHub layer that stands between the branch and `main`.',
+            html: `<div class="term">
+  <button data-cmd="git switch main">git switch main</button>
+  <button data-cmd="git pull">git pull</button>
+  <button data-cmd="git switch -c feature/button-colour">git switch -c</button>
+  <button data-cmd="git push -u origin feature/button-colour">git push -u</button>
+</div>
+<pre id="out">Press a command to see what Git prints back.</pre>`,
+            css: `body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 14px; }
+.term { display: flex; gap: 8px; flex-wrap: wrap; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #0b0d10; color: #b9f6ca; border-radius: 6px; font-size: 12.5px; white-space: pre-wrap; }`,
+            javascript: `const out = document.querySelector('#out')
+const outputs = {
+  'git switch main': 'Switched to branch main\\nYour branch is up to date with origin/main.',
+  'git pull': 'Already up to date.',
+  'git switch -c feature/button-colour': 'Switched to a new branch feature/button-colour',
+  'git push -u origin feature/button-colour': 'To https://github.com/user/repo.git\\n * [new branch]      feature/button-colour -> feature/button-colour\\nbranch feature/button-colour set up to track origin/feature/button-colour.',
+}
+document.querySelectorAll('[data-cmd]').forEach(function (button) {
+  button.addEventListener('click', function () {
+    out.textContent = button.dataset.cmd + '\\n' + (outputs[button.dataset.cmd] || 'No output.')
+  })
+})`,
+            height: 200,
+          },
           {
             type: 'text',
             id: 'g-l6-b1',
@@ -789,6 +967,34 @@ git push -u origin feature/button-colour`,
         xp: 50,
         content: [
           {
+            type: 'demo',
+            id: 'g-l7-d1',
+            title: 'A merge that hits a conflict',
+            body: 'This is a simulation. When the same line changed in both branches Git stops, writes conflict markers into the file, and waits for you to edit, stage and commit.',
+            html: `<div class="term">
+  <button data-cmd="git merge feature-login">git merge feature-login</button>
+  <button data-cmd="git add app.js">git add app.js</button>
+  <button data-cmd="git commit -m 'merge: resolve conflict in app.js'">git commit</button>
+</div>
+<pre id="out">Press a command to see what Git prints back.</pre>`,
+            css: `body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 14px; }
+.term { display: flex; gap: 8px; flex-wrap: wrap; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #0b0d10; color: #b9f6ca; border-radius: 6px; font-size: 12.5px; white-space: pre-wrap; }`,
+            javascript: `const out = document.querySelector('#out')
+const outputs = {
+  'git merge feature-login': 'Auto-merging app.js\\nCONFLICT (content): Merge conflict in app.js\\nAutomatic merge failed; fix conflicts and then commit the result.',
+  'git add app.js': '(no output - the resolved file is staged and the markers are gone)',
+  "git commit -m 'merge: resolve conflict in app.js'": '[main 9e4f1a2] merge: resolve conflict in app.js',
+}
+document.querySelectorAll('[data-cmd]').forEach(function (button) {
+  button.addEventListener('click', function () {
+    out.textContent = button.dataset.cmd + '\\n' + (outputs[button.dataset.cmd] || 'No output.')
+  })
+})`,
+            height: 200,
+          },
+          {
             type: 'text',
             id: 'g-l7-b1',
             body: 'Merging combines two branches. Git creates a merge commit that has two parents, preserving both histories. When the same file is changed in both branches, Git cannot decide which version to keep and marks a conflict. You edit the file to remove the conflict markers, stage the resolved file, and complete the merge with git commit.',
@@ -880,6 +1086,34 @@ git commit -m "merge: resolve conflict in app.js"`,
         ],
         xp: 45,
         content: [
+          {
+            type: 'demo',
+            id: 'g-l8-d1',
+            title: 'Rebase replays, it does not merge',
+            body: 'This is a simulation. Rebasing moves your commits on top of another branch and rewrites their hashes, so it is safe only on a branch nobody else has pulled.',
+            html: `<div class="term">
+  <button data-cmd="git switch feature-login">git switch feature-login</button>
+  <button data-cmd="git rebase main">git rebase main</button>
+  <button data-cmd="git rebase -i HEAD~3">git rebase -i HEAD~3</button>
+</div>
+<pre id="out">Press a command to see what Git prints back.</pre>`,
+            css: `body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 14px; }
+.term { display: flex; gap: 8px; flex-wrap: wrap; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #0b0d10; color: #b9f6ca; border-radius: 6px; font-size: 12.5px; white-space: pre-wrap; }`,
+            javascript: `const out = document.querySelector('#out')
+const outputs = {
+  'git switch feature-login': 'Switched to branch feature-login',
+  'git rebase main': 'Successfully rebased and updated refs/heads/feature-login.',
+  'git rebase -i HEAD~3': 'pick 3f2a1b9 Add colour variable\\npick 7c8d9e0 Wire the toggle\\npick 1a2b3c4 Update the snapshot\\n\\n(opens your editor so you can reorder, squash or drop)',
+}
+document.querySelectorAll('[data-cmd]').forEach(function (button) {
+  button.addEventListener('click', function () {
+    out.textContent = button.dataset.cmd + '\\n' + (outputs[button.dataset.cmd] || 'No output.')
+  })
+})`,
+            height: 210,
+          },
           {
             type: 'text',
             id: 'g-l8-b1',
@@ -1044,6 +1278,34 @@ git rebase -i HEAD~3`,
         xp: 45,
         content: [
           {
+            type: 'demo',
+            id: 'g-l9-d1',
+            title: 'Fetch first, merge on purpose',
+            body: 'This is a simulation. `git fetch` downloads without touching your working tree, so you can inspect `origin/main` and then decide how to bring the changes in.',
+            html: `<div class="term">
+  <button data-cmd="git fetch origin">git fetch origin</button>
+  <button data-cmd="git log origin/main --oneline">git log origin/main</button>
+  <button data-cmd="git pull">git pull</button>
+</div>
+<pre id="out">Press a command to see what Git prints back.</pre>`,
+            css: `body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 14px; }
+.term { display: flex; gap: 8px; flex-wrap: wrap; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #0b0d10; color: #b9f6ca; border-radius: 6px; font-size: 12.5px; white-space: pre-wrap; }`,
+            javascript: `const out = document.querySelector('#out')
+const outputs = {
+  'git fetch origin': 'From https://github.com/user/repo\\n   8c1d2e3..3f2a1b9  main       -> origin/main',
+  'git log origin/main --oneline': '3f2a1b9 feat: add dark mode toggle\\n8c1d2e3 fix: handle empty state',
+  'git pull': 'Updating 8c1d2e3..3f2a1b9\\nFast-forward\\n app.js | 4 ++++\\n 1 file changed, 4 insertions(+)',
+}
+document.querySelectorAll('[data-cmd]').forEach(function (button) {
+  button.addEventListener('click', function () {
+    out.textContent = button.dataset.cmd + '\\n' + (outputs[button.dataset.cmd] || 'No output.')
+  })
+})`,
+            height: 200,
+          },
+          {
             type: 'text',
             id: 'g-l9-b1',
             body: 'git fetch downloads changes from the remote without changing your working tree. git pull downloads and merges in one step. Pull is convenient, but if you have local changes that conflict with the incoming branch, the merge can fail or produce a messy commit. Fetch first, inspect the changes with git log, then merge or rebase deliberately.',
@@ -1120,6 +1382,36 @@ git log main..origin/main --oneline`,
         ],
         xp: 50,
         content: [
+          {
+            type: 'demo',
+            id: 'g-l10-d1',
+            title: 'Opening and merging a pull request',
+            body: 'This is a simulation. The branch is pushed, the pull request is opened against `main`, checks are watched, and the merge strategy collapses the branch into one commit.',
+            html: `<div class="term">
+  <button data-cmd="git push -u origin feature/dark-mode">git push -u</button>
+  <button data-cmd="gh pr create --base main --title 'feat: add a dark mode toggle'">gh pr create</button>
+  <button data-cmd="gh pr checks">gh pr checks</button>
+  <button data-cmd="gh pr merge --squash">gh pr merge --squash</button>
+</div>
+<pre id="out">Press a command to see what Git prints back.</pre>`,
+            css: `body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 14px; }
+.term { display: flex; gap: 8px; flex-wrap: wrap; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #0b0d10; color: #b9f6ca; border-radius: 6px; font-size: 12.5px; white-space: pre-wrap; }`,
+            javascript: `const out = document.querySelector('#out')
+const outputs = {
+  'git push -u origin feature/dark-mode': 'To https://github.com/user/repo.git\\n * [new branch]      feature/dark-mode -> feature/dark-mode',
+  "gh pr create --base main --title 'feat: add a dark mode toggle'": 'https://github.com/user/repo/pull/42',
+  'gh pr checks': 'All checks were successful\\n  build  pass  1m20s\\n  test   pass  0m48s',
+  'gh pr merge --squash': 'Squashed and merged pull request #42',
+}
+document.querySelectorAll('[data-cmd]').forEach(function (button) {
+  button.addEventListener('click', function () {
+    out.textContent = button.dataset.cmd + '\\n' + (outputs[button.dataset.cmd] || 'No output.')
+  })
+})`,
+            height: 210,
+          },
           {
             type: 'text',
             id: 'g-l10-b1',
@@ -1292,6 +1584,36 @@ gh pr merge --squash`,
         xp: 45,
         content: [
           {
+            type: 'demo',
+            id: 'g-l11-d1',
+            title: 'Restore brings the file back',
+            body: 'This is a simulation. `git restore` copies the committed version back over the working copy; `--staged` instead lifts the file out of the index and leaves the change on disk.',
+            html: `<div class="term">
+  <button data-cmd="git restore app.js">git restore app.js</button>
+  <button data-cmd="git restore .">git restore .</button>
+  <button data-cmd="git restore --staged app.js">git restore --staged</button>
+  <button data-cmd="git status">git status</button>
+</div>
+<pre id="out">Press a command to see what Git prints back.</pre>`,
+            css: `body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 14px; }
+.term { display: flex; gap: 8px; flex-wrap: wrap; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #0b0d10; color: #b9f6ca; border-radius: 6px; font-size: 12.5px; white-space: pre-wrap; }`,
+            javascript: `const out = document.querySelector('#out')
+const outputs = {
+  'git restore app.js': '(no output - app.js is back to the last committed version)',
+  'git restore .': '(no output - the whole working tree is back to the last commit)',
+  'git restore --staged app.js': '(no output - app.js is unstaged, the change on disk stays)',
+  'git status': 'On branch main\\nChanges not staged for commit:\\n  modified:   app.js',
+}
+document.querySelectorAll('[data-cmd]').forEach(function (button) {
+  button.addEventListener('click', function () {
+    out.textContent = button.dataset.cmd + '\\n' + (outputs[button.dataset.cmd] || 'No output.')
+  })
+})`,
+            height: 200,
+          },
+          {
             type: 'text',
             id: 'g-l11-b1',
             body: 'git restore is the safe way to undo uncommitted changes. It resets the working tree to match the last commit. You can restore a single file or the entire working tree. Unlike git reset, it does not touch the staging area unless you pass --staged, and it does not delete commits. It is the right tool for the "oops, I broke something before committing" moment.',
@@ -1373,6 +1695,34 @@ git restore --staged app.js`,
         ],
         xp: 45,
         content: [
+          {
+            type: 'demo',
+            id: 'g-l12-d1',
+            title: 'Revert adds, reset erases',
+            body: 'This is a simulation. `git revert` adds a new commit that undoes an earlier one and is safe on shared branches; `git reset` moves the branch pointer and rewrites history.',
+            html: `<div class="term">
+  <button data-cmd="git revert HEAD">git revert HEAD</button>
+  <button data-cmd="git reset --soft HEAD~1">git reset --soft</button>
+  <button data-cmd="git reset --hard HEAD~1">git reset --hard</button>
+</div>
+<pre id="out">Press a command to see what Git prints back.</pre>`,
+            css: `body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 14px; }
+.term { display: flex; gap: 8px; flex-wrap: wrap; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #0b0d10; color: #b9f6ca; border-radius: 6px; font-size: 12.5px; white-space: pre-wrap; }`,
+            javascript: `const out = document.querySelector('#out')
+const outputs = {
+  'git revert HEAD': '[main 5b7c8d9] Revert "feat: add login validation"\\n 1 file changed, 12 deletions(-)',
+  'git reset --soft HEAD~1': '(no output - the commit is gone and its changes are staged)',
+  'git reset --hard HEAD~1': 'HEAD is now at 8c1d2e3 fix: handle empty state',
+}
+document.querySelectorAll('[data-cmd]').forEach(function (button) {
+  button.addEventListener('click', function () {
+    out.textContent = button.dataset.cmd + '\\n' + (outputs[button.dataset.cmd] || 'No output.')
+  })
+})`,
+            height: 200,
+          },
           {
             type: 'text',
             id: 'g-l12-b1',
@@ -1525,6 +1875,36 @@ git reset --hard HEAD~1`,
         xp: 40,
         content: [
           {
+            type: 'demo',
+            id: 'g-l13-d1',
+            title: 'A stash is a stack',
+            body: 'This is a simulation. `git stash` shelves uncommitted changes. `stash@{0}` is always the newest, and `pop` is `apply` followed by `drop`.',
+            html: `<div class="term">
+  <button data-cmd="git stash">git stash</button>
+  <button data-cmd="git stash list">git stash list</button>
+  <button data-cmd="git stash pop">git stash pop</button>
+  <button data-cmd="git stash apply stash@{1}">git stash apply</button>
+</div>
+<pre id="out">Press a command to see what Git prints back.</pre>`,
+            css: `body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 14px; }
+.term { display: flex; gap: 8px; flex-wrap: wrap; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #0b0d10; color: #b9f6ca; border-radius: 6px; font-size: 12.5px; white-space: pre-wrap; }`,
+            javascript: `const out = document.querySelector('#out')
+const outputs = {
+  'git stash': 'Saved working directory and index state WIP on main: 8c1d2e3 fix: handle empty state',
+  'git stash list': 'stash@{0}: WIP on main: 8c1d2e3 fix: handle empty state\\nstash@{1}: WIP on main: 6a0f9b2 feat: add header',
+  'git stash pop': 'On branch main\\nChanges not staged for commit:\\n  modified:   app.js\\nDropped refs/stash@{0} (0a1b2c3d)',
+  'git stash apply stash@{1}': 'On branch main\\nChanges not staged for commit:\\n  modified:   app.js\\n(the stash is left in the list)',
+}
+document.querySelectorAll('[data-cmd]').forEach(function (button) {
+  button.addEventListener('click', function () {
+    out.textContent = button.dataset.cmd + '\\n' + (outputs[button.dataset.cmd] || 'No output.')
+  })
+})`,
+            height: 210,
+          },
+          {
             type: 'text',
             id: 'g-l13-b1',
             body: 'git stash saves uncommitted changes and reverts the working tree to a clean state. It is useful when you need to switch branches but are not ready to commit. Stashes are stored in a stack. Use git stash pop to apply and remove the top stash, or git stash apply to apply it without removing. You can have multiple stashes and list them with git stash list.',
@@ -1612,6 +1992,36 @@ git stash drop stash@{0}`,
         ],
         xp: 40,
         content: [
+          {
+            type: 'demo',
+            id: 'g-l14-d1',
+            title: 'The reflog finds what reset lost',
+            body: 'This is a simulation. Every move of HEAD is recorded, so a commit removed by reset can be found in `git reflog` and restored with `git reset --hard`.',
+            html: `<div class="term">
+  <button data-cmd="git reflog">git reflog</button>
+  <button data-cmd="git show HEAD@{2}">git show HEAD@{2}</button>
+  <button data-cmd="git reset --hard HEAD@{2}">git reset --hard</button>
+  <button data-cmd="git clean -nd">git clean -nd</button>
+</div>
+<pre id="out">Press a command to see what Git prints back.</pre>`,
+            css: `body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 14px; }
+.term { display: flex; gap: 8px; flex-wrap: wrap; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #0b0d10; color: #b9f6ca; border-radius: 6px; font-size: 12.5px; white-space: pre-wrap; }`,
+            javascript: `const out = document.querySelector('#out')
+const outputs = {
+  'git reflog': '8c1d2e3 HEAD@{0}: reset: moving to HEAD~1\\n3f2a1b9 HEAD@{1}: commit: feat: add header\\n6a0f9b2 HEAD@{2}: commit: fix: handle empty state',
+  'git show HEAD@{2}': 'commit 6a0f9b2a1c\\nAuthor: Ada Lovelace\\nDate: today\\n\\n    fix: handle empty state',
+  'git reset --hard HEAD@{2}': 'HEAD is now at 6a0f9b2 fix: handle empty state',
+  'git clean -nd': 'Would remove notes.txt\\nWould remove dist/',
+}
+document.querySelectorAll('[data-cmd]').forEach(function (button) {
+  button.addEventListener('click', function () {
+    out.textContent = button.dataset.cmd + '\\n' + (outputs[button.dataset.cmd] || 'No output.')
+  })
+})`,
+            height: 210,
+          },
           {
             type: 'text',
             id: 'g-l14-b1',
@@ -1762,6 +2172,34 @@ git show HEAD@{2}`,
         xp: 45,
         content: [
           {
+            type: 'demo',
+            id: 'g-l15-d1',
+            title: 'Messages that read like a changelog',
+            body: 'This is a simulation. A conventional subject names the type and scope so history stays machine-readable, and `git commit --amend` rewrites the last commit before it is pushed.',
+            html: `<div class="term">
+  <button data-cmd="git commit -m 'feat(auth): add login form'">git commit</button>
+  <button data-cmd="git commit --amend">git commit --amend</button>
+  <button data-cmd="git log --oneline">git log --oneline</button>
+</div>
+<pre id="out">Press a command to see what Git prints back.</pre>`,
+            css: `body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 14px; }
+.term { display: flex; gap: 8px; flex-wrap: wrap; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #0b0d10; color: #b9f6ca; border-radius: 6px; font-size: 12.5px; white-space: pre-wrap; }`,
+            javascript: `const out = document.querySelector('#out')
+const outputs = {
+  "git commit -m 'feat(auth): add login form'": '[main 2c4d6e8] feat(auth): add login form\\n 3 files changed, 48 insertions(+)',
+  'git commit --amend': '[main 7f8a9b0] feat(auth): add login form with validation',
+  'git log --oneline': '7f8a9b0 feat(auth): add login form with validation\\n8c1d2e3 fix(layout): correct padding on mobile nav',
+}
+document.querySelectorAll('[data-cmd]').forEach(function (button) {
+  button.addEventListener('click', function () {
+    out.textContent = button.dataset.cmd + '\\n' + (outputs[button.dataset.cmd] || 'No output.')
+  })
+})`,
+            height: 200,
+          },
+          {
             type: 'text',
             id: 'g-l15-b1',
             body: 'A good commit is atomic: it does one thing and does it completely. It contains all the code, tests, and documentation for that single change. The message explains what and why. Bad commits mix refactoring with features, have messages like "update", or leave the repository in a broken state. Good commits make git bisect useful, code review fast, and reverts safe.',
@@ -1841,6 +2279,34 @@ Footer: reference issue number or breaking change.`,
         ],
         xp: 40,
         content: [
+          {
+            type: 'demo',
+            id: 'g-l16-d1',
+            title: 'What .gitignore quietly removes',
+            body: 'This is a simulation. Patterns in `.gitignore` keep untracked files out of `git status`, and `git check-ignore -v` shows exactly which line matched.',
+            html: `<div class="term">
+  <button data-cmd="git status">git status</button>
+  <button data-cmd="git check-ignore -v node_modules">git check-ignore -v</button>
+  <button data-cmd="git commit -m 'chore: add .gitignore'">git commit</button>
+</div>
+<pre id="out">Press a command to see what Git prints back.</pre>`,
+            css: `body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 14px; }
+.term { display: flex; gap: 8px; flex-wrap: wrap; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #0b0d10; color: #b9f6ca; border-radius: 6px; font-size: 12.5px; white-space: pre-wrap; }`,
+            javascript: `const out = document.querySelector('#out')
+const outputs = {
+  'git status': 'On branch main\\nUntracked files:\\n  .gitignore\\n\\nnothing added to commit but untracked files present',
+  'git check-ignore -v node_modules': '.gitignore:2:node_modules/  node_modules',
+  "git commit -m 'chore: add .gitignore'": '[main 4d5e6f7] chore: add .gitignore\\n 1 file changed, 8 insertions(+)',
+}
+document.querySelectorAll('[data-cmd]').forEach(function (button) {
+  button.addEventListener('click', function () {
+    out.textContent = button.dataset.cmd + '\\n' + (outputs[button.dataset.cmd] || 'No output.')
+  })
+})`,
+            height: 200,
+          },
           {
             type: 'text',
             id: 'g-l16-b1',

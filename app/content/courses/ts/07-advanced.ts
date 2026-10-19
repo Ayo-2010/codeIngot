@@ -19,6 +19,43 @@ export const tsAdvancedSections: Section[] = [
         xp: 45,
         content: [
           {
+            type: 'demo',
+            id: 'ts-l20-d1',
+            title: 'Switch on the tag',
+            body: 'The discriminant is read at runtime like any other property. Types are erased before this runs, so the switch below is ordinary JavaScript — but it is exactly the shape that lets the compiler narrow each branch.',
+            html: `<button id="circle">Circle of radius 2</button>
+<button id="rect">Rectangle 3 by 4</button>
+<pre id="out">Press a shape.</pre>`,
+            css: `body { font-family: system-ui, sans-serif; font-size: 14px; }
+button { font: inherit; padding: 6px 12px; margin-right: 6px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #f4f6f8; border-radius: 6px; font-size: 12.5px; }`,
+            javascript: `const out = document.querySelector('#out')
+const shapes = [
+  { kind: 'circle', radius: 2 },
+  { kind: 'rect', width: 3, height: 4 },
+]
+
+function area(shape) {
+  switch (shape.kind) {
+    case 'circle':
+      return Math.PI * shape.radius ** 2
+    case 'rect':
+      return shape.width * shape.height
+    default:
+      throw new Error('Unhandled shape')
+  }
+}
+
+document.querySelector('#circle').addEventListener('click', function () {
+  out.textContent = 'circle area: ' + area(shapes[0]).toFixed(2)
+})
+
+document.querySelector('#rect').addEventListener('click', function () {
+  out.textContent = 'rect area: ' + area(shapes[1]).toFixed(2)
+})`,
+            height: 170,
+          },
+          {
             type: 'text',
             id: 'ts-l20-intro',
             body: '**Discriminated unions and exhaustive matching.** A discriminated union gives every member a shared property whose value is a distinct literal — `kind: ’circle’` versus `kind: ’rect’`. Checking that one property narrows the whole value, so inside the `circle` branch the compiler knows `radius` exists.',
@@ -171,6 +208,30 @@ function area(shape: Shape): number {
         xp: 40,
         content: [
           {
+            type: 'demo',
+            id: 'ts-l21-d1',
+            title: 'Building a handler name from an event name',
+            body: 'A template literal type like `on` plus `Capitalize` describes a name such as onClick, but it does not build it. The live version is a small function that concatenates the prefix and upper-cases the first letter.',
+            html: `<label>event <input id="event" value="click"></label>
+<button id="go">Name the handler</button>
+<pre id="out">Press the button.</pre>`,
+            css: `body { font-family: system-ui, sans-serif; font-size: 14px; }
+button, input { font: inherit; padding: 6px 12px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; }
+button { cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #f4f6f8; border-radius: 6px; font-size: 12.5px; }`,
+            javascript: `const out = document.querySelector('#out')
+
+function handlerName(event) {
+  return 'on' + event.charAt(0).toUpperCase() + event.slice(1)
+}
+
+document.querySelector('#go').addEventListener('click', function () {
+  const event = document.querySelector('#event').value
+  out.textContent = 'event "' + event + '" becomes "' + handlerName(event) + '"'
+})`,
+            height: 170,
+          },
+          {
             type: 'text',
             id: 'ts-l21-intro',
             body: '**Template literal types and key remapping.** A template literal type builds a new string type out of pieces, using the same backtick syntax as a template string: `on${Capitalize<’click’>}` is the single type `’onClick’`. When the pieces are unions, the result is every combination.',
@@ -294,6 +355,34 @@ function handlerName(event: string): string {
         ],
         xp: 40,
         content: [
+          {
+            type: 'demo',
+            id: 'ts-l22-d1',
+            title: 'Capture and apply, with values',
+            body: 'infer captures a piece of a type — an element, or a return value — and hands it back. There is nothing to capture at runtime, so the live echo is apply: call a function with an array spread into separate arguments.',
+            html: `<button id="add">Apply add to 2 and 3</button>
+<button id="shout">Apply uppercase to hi</button>
+<pre id="out">Press a button.</pre>`,
+            css: `body { font-family: system-ui, sans-serif; font-size: 14px; }
+button { font: inherit; padding: 6px 12px; margin-right: 6px; border: 1px solid #d5dae0; border-radius: 6px; background: #fff; cursor: pointer; }
+pre { margin: 12px 0 0; padding: 10px; background: #f4f6f8; border-radius: 6px; font-size: 12.5px; }`,
+            javascript: `const out = document.querySelector('#out')
+
+function apply(fn, args) {
+  return fn(...args)
+}
+
+document.querySelector('#add').addEventListener('click', function () {
+  const sum = apply(function (a, b) { return a + b }, [2, 3])
+  out.textContent = 'apply(add, [2, 3]) = ' + sum
+})
+
+document.querySelector('#shout').addEventListener('click', function () {
+  const loud = apply(function (text) { return text.toUpperCase() }, ['hi'])
+  out.textContent = 'apply(up, [hi]) = ' + loud
+})`,
+            height: 170,
+          },
           {
             type: 'text',
             id: 'ts-l22-intro',

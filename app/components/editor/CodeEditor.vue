@@ -82,7 +82,7 @@
           autocorrect="off"
           wrap="off"
           class="absolute inset-0 h-full w-full resize-none overflow-auto whitespace-pre bg-transparent px-3 py-3 font-mono text-[12.5px] leading-6 text-transparent caret-brand outline-none selection:bg-brand/25"
-          :aria-label="`${active.toUpperCase()} code editor`"
+          :aria-label="`${activeTab?.label ?? active} code editor`"
           @input="onInput"
           @scroll="onScroll"
           @keydown="onKeydown"
@@ -112,17 +112,22 @@ import type { EditorLanguage } from '~/types/content'
 import { TOKEN_CLASS, highlight, type TokenKind } from '~/utils/highlight'
 
 const props = defineProps<{
-  modelValue: Partial<Record<EditorLanguage, string>>
-  active: EditorLanguage
-  tabs: { id: EditorLanguage; label: string }[]
+  /**
+   * File contents keyed by tab id. A shorthand exercise keys them by language
+   * and a multi-file exercise by path, and which one is in use is the tab's own
+   * business — the editor only ever needs the id.
+   */
+  modelValue: Record<string, string>
+  active: string
+  tabs: { id: string; label: string; language: EditorLanguage }[]
   error?: string | null
   status?: string | null
   showReset?: boolean
 }>()
 
 const emit = defineEmits<{
-  'update:modelValue': [value: Partial<Record<EditorLanguage, string>>]
-  'update:active': [value: EditorLanguage]
+  'update:modelValue': [value: Record<string, string>]
+  'update:active': [value: string]
   reset: []
   run: []
 }>()
@@ -131,8 +136,11 @@ const textareaEl = ref<HTMLTextAreaElement | null>(null)
 const highlightEl = ref<HTMLElement | null>(null)
 const scrollTop = ref(0)
 
+/** The open tab, which is what tells the highlighter how to read the source. */
+const activeTab = computed(() => props.tabs.find((tab) => tab.id === props.active))
+const language = computed<EditorLanguage>(() => activeTab.value?.language ?? 'javascript')
 const code = computed(() => props.modelValue[props.active] ?? '')
-const tokens = computed(() => highlight(code.value, props.active))
+const tokens = computed(() => highlight(code.value, language.value))
 const lineCount = computed(() => Math.max(1, code.value.split('\n').length))
 
 function tokenClass(kind: TokenKind) {
@@ -215,7 +223,10 @@ async function copy() {
 }
 
 function focus() {
-  textareaEl.value?.focus()
+  // `preventScroll` keeps the focus from dragging the page: the lesson body
+  // scrolls in an inner container, and focusing a textarea near the end of a
+  // lesson would otherwise scroll that container straight to the bottom.
+  textareaEl.value?.focus({ preventScroll: true })
 }
 
 defineExpose({ focus })
