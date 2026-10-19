@@ -35,25 +35,51 @@
           >
             {{ item.label }}
           </NuxtLink>
-          <div v-else class="relative group">
+          <div
+            v-else
+            class="relative"
+            @mouseenter="openMenu = item.label"
+            @mouseleave="openMenu = null"
+            @focusout="onMenuFocusOut($event, item.label)"
+          >
             <button
               type="button"
               class="nav-link flex items-center gap-1.5 whitespace-nowrap"
-              aria-haspopup="true"
-              aria-expanded="false"
+              :aria-expanded="openMenu === item.label"
+              :aria-controls="menuId(item.label)"
+              @click="toggleMenu(item.label)"
+              @keydown.escape.prevent="escapeMenus()"
             >
               {{ item.label }}
-              <svg viewBox="0 0 24 24" class="h-3.5 w-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2">
+              <svg
+                viewBox="0 0 24 24"
+                class="h-3.5 w-3.5 shrink-0 transition-transform"
+                :class="openMenu === item.label ? 'rotate-180' : ''"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
                 <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </button>
-            <div class="absolute top-full left-0 mt-2 max-h-[70vh] min-w-[200px] overflow-y-auto rounded-xl border border-ink-600 bg-ink-900 py-1.5 shadow-xl opacity-0 invisible translate-y-1 transition-all duration-150 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 z-50">
+            <div
+              :id="menuId(item.label)"
+              data-header-menu
+              class="absolute top-full left-0 z-50 mt-2 max-h-[70vh] min-w-[200px] overflow-y-auto rounded-xl border border-ink-600 bg-ink-900 py-1.5 shadow-xl transition-all duration-150"
+              :class="
+                openMenu === item.label
+                  ? 'visible translate-y-0 opacity-100'
+                  : 'invisible translate-y-1 opacity-0'
+              "
+              @keydown.escape.prevent="escapeMenus()"
+            >
               <NuxtLink
                 v-for="child in item.children"
                 :key="child.to"
                 :to="child.to"
-                class="block px-3 py-2 text-sm text-muted hover:bg-ink-800 hover:text-mist-50 transition-colors whitespace-nowrap"
-                @click="mobileOpen = false"
+                class="block px-3 py-2 text-sm text-muted transition-colors hover:bg-ink-800 hover:text-mist-50"
+                @click="closeMenus()"
               >
                 {{ child.label }}
               </NuxtLink>
@@ -216,6 +242,49 @@ import ThemeToggle from './ThemeToggle.vue'
 const accountOpen = ref(false)
 const mobileOpen = ref(false)
 const { openPalette } = useCommandPalette()
+
+/**
+ * The header's disclosure menus. Hover opens them for pointer users; click and
+ * focus open them for keyboard users, and `aria-expanded` always reports what is
+ * actually visible. The previous version was hover-only, so the links could not
+ * be reached by keyboard and the attribute was permanently false.
+ */
+const openMenu = ref<string | null>(null)
+
+function menuId(label: string) {
+  return `header-menu-${label.toLowerCase()}`
+}
+
+function toggleMenu(label: string) {
+  openMenu.value = openMenu.value === label ? null : label
+}
+
+function closeMenus() {
+  openMenu.value = null
+}
+
+/** Escape closes the menu and returns focus to the button that opened it. */
+function escapeMenus() {
+  const active = document.activeElement as HTMLElement | null
+  const panel = active?.closest<HTMLElement>('[data-header-menu]')
+  const button = panel?.previousElementSibling as HTMLElement | null
+  // Focus the trigger before hiding the panel, so focus is never left on a
+  // hidden element.
+  button?.focus()
+  closeMenus()
+}
+
+/** Keep a menu open while focus stays inside it, close it when focus leaves. */
+function onMenuFocusOut(event: FocusEvent, label: string) {
+  const next = event.relatedTarget as Node | null
+  const current = event.currentTarget as HTMLElement | null
+  if (next && current?.contains(next)) return
+  if (openMenu.value === label) openMenu.value = null
+}
+
+// Following a menu link means the menu has done its job.
+const route = useRoute()
+watch(() => route.fullPath, closeMenus)
 
 const initials = computed(() => {
   const source = accountName.value.trim()

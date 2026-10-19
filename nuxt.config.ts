@@ -30,6 +30,16 @@ export default defineNuxtConfig({
   },
   vite: {
     plugins: [tailwindcss()],
+    /**
+     * Sucrase is imported lazily, the first time a JSX/TS demo runs. Left to
+     * Vite's discovery, that first import is what makes the dev server discover
+     * a "new" dependency, re-optimize, and answer the in-flight request with a
+     * 504 (Outdated Optimize Dep) - which silently leaves the first demo in a
+     * session unrendered. Pre-bundling it keeps the optimizer stable from boot.
+     */
+    optimizeDeps: {
+      include: ['sucrase'],
+    },
   },
   app: {
     head: {

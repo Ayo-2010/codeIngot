@@ -8,7 +8,7 @@
       <p class="mt-1.5 font-mono text-[11px] text-dim">{{ percent }}% · {{ completedCount }}/{{ total }} lessons</p>
     </div>
 
-    <ol ref="listEl" class="min-h-0 flex-1 overflow-y-auto py-2">
+    <ol ref="listEl" data-testid="course-sidebar-list" class="min-h-0 flex-1 overflow-y-auto py-2">
       <li v-for="(section, sectionIndex) in course.sections" :key="section.id">
         <p class="px-4 pb-1 pt-3 font-mono text-[11px] uppercase tracking-wider text-dim">
           {{ String(sectionIndex + 1).padStart(2, '0') }} · {{ section.title }}

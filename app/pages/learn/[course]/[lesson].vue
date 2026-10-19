@@ -61,7 +61,7 @@
         </div>
       </div>
 
-      <div ref="scrollContainer" class="flex min-h-0 flex-1 overflow-y-auto">
+      <div ref="scrollContainer" data-testid="lesson-scroll" class="flex min-h-0 flex-1 overflow-y-auto">
         <article class="min-w-0 flex-1 px-4 py-8 sm:px-8">
           <div class="mx-auto max-w-3xl">
             <header>
