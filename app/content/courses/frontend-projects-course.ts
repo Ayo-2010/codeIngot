@@ -32,7 +32,8 @@ export const frontendProjectsCourse: Course = {
   ],
   icon: '◆',
   sections: [
-    ...withChapter('Foundations and skills', frontendProjectsSections),
+    ...withChapter('Foundations', frontendProjectsSections.slice(0, 1)),
+    ...withChapter('Build skills', frontendProjectsSections.slice(1)),
     ...withChapter('Capstone builds', [
       ...frontendProjectsProfileSections,
       ...frontendProjectsLandingSections,

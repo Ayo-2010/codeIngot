@@ -54,14 +54,15 @@ test('the projects course presents its five capstone builds', async ({ page }) =
     '/projects/quiz-application',
   )
 
-  // Three chapters: foundations and skills, five capstone builds, and shipping.
+  // Four chapters: foundations, build skills, five capstone builds, and shipping.
   const chapters = page.locator('main section[aria-labelledby]')
-  await expect(chapters).toHaveCount(4)
-  await expect(chapters.nth(1).getByRole('heading', { level: 2 })).toHaveText('Foundations and skills')
-  await expect(chapters.nth(2).getByRole('heading', { level: 2 })).toHaveText('Capstone builds')
-  await expect(chapters.nth(3).getByRole('heading', { level: 2 })).toHaveText('Ship it')
+  await expect(chapters).toHaveCount(5)
+  await expect(chapters.nth(1).getByRole('heading', { level: 2 })).toHaveText('Foundations')
+  await expect(chapters.nth(2).getByRole('heading', { level: 2 })).toHaveText('Build skills')
+  await expect(chapters.nth(3).getByRole('heading', { level: 2 })).toHaveText('Capstone builds')
+  await expect(chapters.nth(4).getByRole('heading', { level: 2 })).toHaveText('Ship it')
 
-  // 18 lessons, grouped into 3 chapters, and every section still owns its quiz.
+  // 18 lessons, grouped into 4 chapters, and every section still owns its quiz.
   await expect(page.locator('main ol > li')).toHaveCount(18)
   await expect(page.getByText(/\d+ questions · pass at \d+%/)).toHaveCount(9)
 })

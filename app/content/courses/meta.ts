@@ -26254,7 +26254,7 @@ export const courseMeta: CourseMeta[] = [
             }
           ]
         },
-        "chapter": "Foundations and skills"
+        "chapter": "Foundations"
       },
       {
         "id": "fp-s2",
@@ -26353,7 +26353,7 @@ export const courseMeta: CourseMeta[] = [
             }
           ]
         },
-        "chapter": "Foundations and skills"
+        "chapter": "Build skills"
       },
       {
         "id": "fp-s3",
@@ -26451,7 +26451,7 @@ export const courseMeta: CourseMeta[] = [
             }
           ]
         },
-        "chapter": "Foundations and skills"
+        "chapter": "Build skills"
       },
       {
         "id": "fp-s4",

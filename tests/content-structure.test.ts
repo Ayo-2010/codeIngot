@@ -38,7 +38,7 @@ const expectedChapters = new Map([
   [htmlFundamentals.slug, 10],
   [cssFundamentals.slug, 12],
   [javascriptFundamentals.slug, 11],
-  [frontendProjectsCourse.slug, 3],
+  [frontendProjectsCourse.slug, 4],
 ])
 
 describe('course grouping', () => {
