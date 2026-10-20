@@ -49,6 +49,7 @@ function toMeta(course: Course): CourseMeta {
         exerciseCount: lesson.content.filter((block) => block.type === 'exercise').length,
       })),
       quiz: section.quiz,
+      chapter: section.chapter,
     })),
   }
 }

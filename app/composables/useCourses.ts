@@ -44,6 +44,22 @@ export interface FlatLesson extends CourseLessonMeta {
   href: string
 }
 
+/**
+ * A contiguous run of sections presented as one chapter.
+ *
+ * The three original courses were authored as one section per lesson; grouping
+ * them at the point of display keeps every section (and its quiz) intact while
+ * giving the catalogue and sidebar a readable outline.
+ */
+export interface CourseChapter {
+  id: string
+  title: string
+  sections: CourseSectionMeta[]
+  lessons: number
+  /** The section description, when the chapter is exactly one section. */
+  description?: string
+}
+
 const allCourses: CourseMeta[] = courseMeta
 const allPaths: LearningPath[] = [frontendDeveloper]
 const allProjects: Project[] = projects
@@ -217,6 +233,35 @@ export function getLesson(courseSlug: string, lessonId: string) {
   const lesson = lessonIndex.get(lessonId)
   if (!lesson || lesson.courseSlug !== courseSlug) return undefined
   return lesson
+}
+
+/**
+ * Groups a course's sections into chapters.
+ *
+ * A chapter is a contiguous run of sections sharing a `chapter` tag. Courses
+ * authored with real multi-lesson sections carry no tag, so each section
+ * becomes its own chapter and their pages look exactly as they did before.
+ */
+export function courseChapters(course: CourseMeta): CourseChapter[] {
+  const chapters: CourseChapter[] = []
+  for (const section of course.sections) {
+    const last = chapters[chapters.length - 1]
+    if (section.chapter && last && last.title === section.chapter) {
+      last.sections.push(section)
+      last.lessons += section.lessons.length
+      // Two sections in one chapter no longer share a single description.
+      last.description = undefined
+      continue
+    }
+    chapters.push({
+      id: `chapter-${section.id}`,
+      title: section.chapter ?? section.title,
+      sections: [section],
+      lessons: section.lessons.length,
+      description: section.description,
+    })
+  }
+  return chapters
 }
 
 /** Finds a quiz by its own id, across every course. */

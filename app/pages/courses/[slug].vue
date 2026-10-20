@@ -45,64 +45,88 @@
     <div class="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[minmax(0,1fr)_300px]">
       <div class="min-w-0">
         <section
-          v-for="(section, sectionIndex) in course.sections"
-          :key="section.id"
+          v-for="(chapter, chapterIndex) in chapters"
+          :key="chapter.id"
           class="mb-10 last:mb-0"
-          :aria-labelledby="`${section.id}-title`"
+          :aria-labelledby="`${chapter.id}-title`"
         >
-          <div class="flex items-baseline gap-3">
-            <span class="font-mono text-xs text-brand">{{ String(sectionIndex + 1).padStart(2, '0') }}</span>
-            <h2 :id="`${section.id}-title`" class="text-xl font-semibold tracking-tight text-mist-50">
-              {{ section.title }}
+          <div class="flex flex-wrap items-baseline gap-3">
+            <span class="font-mono text-xs text-brand">{{ String(chapterIndex + 1).padStart(2, '0') }}</span>
+            <h2 :id="`${chapter.id}-title`" class="text-xl font-semibold tracking-tight text-mist-50">
+              {{ chapter.title }}
             </h2>
+            <span class="ml-auto font-mono text-[11px] text-dim">
+              {{ chapterDone(chapter) }}/{{ chapter.lessons }} lessons
+            </span>
           </div>
-          <p class="mt-1 pl-8 text-sm text-muted">{{ section.description }}</p>
+          <p v-if="chapter.description" class="mt-1 pl-8 text-sm text-muted">{{ chapter.description }}</p>
 
-          <ol class="mt-4 space-y-1.5">
-            <li v-for="(lesson, index) in section.lessons" :key="lesson.id">
+          <div class="mt-4 space-y-1.5">
+            <div v-for="section in chapter.sections" :key="section.id">
+              <ol class="space-y-1.5">
+                <li v-for="lesson in section.lessons" :key="lesson.id">
+                  <div class="flex items-stretch gap-2">
+                    <NuxtLink
+                      :to="`/learn/${course.slug}/${lesson.id}`"
+                      class="flex min-w-0 flex-1 items-center gap-3 rounded-xl border border-ink-600 bg-ink-900 px-4 py-3 transition hover:border-brand/40"
+                    >
+                      <span
+                        class="grid h-6 w-6 shrink-0 place-items-center rounded-full border text-[11px]"
+                        :class="
+                          done(lesson.id)
+                            ? 'border-ok/40 bg-ok/10 text-ok'
+                            : 'border-ink-600 text-dim'
+                        "
+                        aria-hidden="true"
+                      >
+                        {{ done(lesson.id) ? '✓' : lessonNumber(chapter, lesson.id) }}
+                      </span>
+                      <span class="min-w-0 flex-1">
+                        <span class="block truncate text-sm text-mist-50">{{ lesson.title }}</span>
+                        <span class="block truncate text-xs text-dim">{{ lesson.description }}</span>
+                      </span>
+                      <span class="flex shrink-0 items-center gap-3 font-mono text-[11px] text-dim">
+                        <span v-if="hasExercise(lesson.id)" class="text-brand" title="Ends in a challenge">✎</span>
+                        {{ lesson.duration }} min
+                      </span>
+                    </NuxtLink>
+
+                    <!--
+                      A one-lesson section owns a single quiz, so its quiz rides
+                      on the lesson row instead of adding 60 extra quiz cards.
+                    -->
+                    <NuxtLink
+                      v-if="section.quiz && section.lessons.length === 1"
+                      :to="`/learn/${course.slug}/quiz/${section.quiz.id}`"
+                      class="flex shrink-0 items-center gap-1.5 rounded-xl border border-ink-600 bg-ink-900 px-3 text-xs transition hover:border-brand/40 hover:text-brand"
+                      :class="quizDone(section.quiz) ? 'text-ok' : 'text-dim'"
+                      :aria-label="`Take the ${section.quiz.title} quiz`"
+                    >
+                      <span aria-hidden="true">★</span>
+                      <span class="hidden sm:inline">Quiz</span>
+                    </NuxtLink>
+                  </div>
+                </li>
+              </ol>
+
               <NuxtLink
-                :to="`/learn/${course.slug}/${lesson.id}`"
-                class="flex items-center gap-3 rounded-xl border border-ink-600 bg-ink-900 px-4 py-3 transition hover:border-brand/40"
+                v-if="section.quiz && section.lessons.length > 1"
+                :to="`/learn/${course.slug}/quiz/${section.quiz.id}`"
+                class="mt-3 flex items-center gap-3 rounded-xl border border-ink-600 bg-ink-850 px-4 py-3 transition hover:border-brand/40"
               >
-                <span
-                  class="grid h-6 w-6 shrink-0 place-items-center rounded-full border text-[11px]"
-                  :class="
-                    done(lesson.id)
-                      ? 'border-ok/40 bg-ok/10 text-ok'
-                      : 'border-ink-600 text-dim'
-                  "
-                  aria-hidden="true"
-                >
-                  {{ done(lesson.id) ? '✓' : index + 1 }}
-                </span>
-                <span class="min-w-0 flex-1">
-                  <span class="block truncate text-sm text-mist-50">{{ lesson.title }}</span>
-                  <span class="block truncate text-xs text-dim">{{ lesson.description }}</span>
-                </span>
-                <span class="flex shrink-0 items-center gap-3 font-mono text-[11px] text-dim">
-                  <span v-if="hasExercise(lesson.id)" class="text-brand" title="Ends in a challenge">✎</span>
-                  {{ lesson.duration }} min
+                <span class="text-brand" aria-hidden="true">★</span>
+                <div class="min-w-0 flex-1">
+                  <p class="text-sm text-mist-50">{{ section.quiz.title }}</p>
+                  <p class="text-xs text-dim">
+                    {{ section.quiz.questions.length }} questions · pass at {{ section.quiz.passingScore }}%
+                  </p>
+                </div>
+                <span class="font-mono text-xs" :class="quizDone(section.quiz) ? 'text-ok' : 'text-dim'">
+                  {{ quizScore(section.quiz) !== null ? `${quizScore(section.quiz)}%` : 'not taken' }}
                 </span>
               </NuxtLink>
-            </li>
-          </ol>
-
-          <NuxtLink
-            v-if="section.quiz"
-            :to="`/learn/${course.slug}/quiz/${section.quiz.id}`"
-            class="mt-3 flex items-center gap-3 rounded-xl border border-ink-600 bg-ink-850 px-4 py-3 transition hover:border-brand/40"
-          >
-            <span class="text-brand" aria-hidden="true">★</span>
-            <div class="min-w-0 flex-1">
-              <p class="text-sm text-mist-50">{{ section.quiz.title }}</p>
-              <p class="text-xs text-dim">
-                {{ section.quiz.questions.length }} questions · pass at {{ section.quiz.passingScore }}%
-              </p>
             </div>
-            <span class="font-mono text-xs" :class="quizDone(section.quiz) ? 'text-ok' : 'text-dim'">
-              {{ quizScore(section.quiz) !== null ? `${quizScore(section.quiz)}%` : 'not taken' }}
-            </span>
-          </NuxtLink>
+          </div>
         </section>
 
         <section v-if="isComplete" class="rounded-2xl border border-brand/30 bg-brand/5 p-6 text-center">
@@ -154,6 +178,7 @@
 </template>
 
 <script setup lang="ts">
+import type { CourseChapter } from '~/composables/useCourses'
 import type { Quiz } from '~/types/content'
 
 const route = useRoute()
@@ -167,6 +192,7 @@ if (!course.value) {
 }
 
 const stats = computed(() => courseStats(course.value!))
+const chapters = computed(() => (course.value ? courseChapters(course.value) : []))
 const percent = computed(() => (course.value ? courseProgressPercent(course.value) : 0))
 const completedLessons = computed(() =>
   course.value ? progress.value.completedLessons.filter((id) => lessonIdsOf(course.value!).has(id)).length : 0,
@@ -179,6 +205,25 @@ function lessonIdsOf(target: NonNullable<typeof course.value>) {
 
 function done(lessonId: string) {
   return progress.value.completedLessons.includes(lessonId)
+}
+
+function chapterDone(chapter: CourseChapter): number {
+  return chapter.sections.reduce(
+    (total, section) => total + section.lessons.filter((lesson) => done(lesson.id)).length,
+    0,
+  )
+}
+
+/** A lesson's 1-based position across its whole chapter. */
+function lessonNumber(chapter: CourseChapter, lessonId: string): number {
+  let position = 0
+  for (const section of chapter.sections) {
+    for (const lesson of section.lessons) {
+      position += 1
+      if (lesson.id === lessonId) return position
+    }
+  }
+  return position
 }
 
 function hasExercise(lessonId: string) {
@@ -204,6 +249,7 @@ const nextCourse = computed(() => {
 const glance = computed(() => {
   if (!course.value) return []
   const entries = [
+    { label: 'Chapters', value: chapters.value.length },
     { label: 'Lessons', value: stats.value.lessons },
     { label: 'Challenges', value: stats.value.challenges },
     { label: 'Quizzes', value: stats.value.quizzes },

@@ -1,5 +1,6 @@
 import type { Course } from '~/types/content'
 import { projectsForCourse } from '~/content/projects'
+import { withChapter } from './chapters'
 import { htmlIntroSections } from './html/01-intro'
 import { htmlElementsSections } from './html/02-elements-attributes'
 import { htmlColorSections } from './html/03-colors'
@@ -42,22 +43,26 @@ export const htmlFundamentals: Course = {
   ],
   icon: '<>',
   sections: [
-    ...htmlIntroSections,
-    ...htmlElementsSections,
-    ...htmlColorSections,
-    ...htmlCssSections,
-    ...htmlLinkSections,
-    ...htmlImageSections,
-    ...htmlTableSections,
-    ...htmlStructureSections,
-    ...htmlMetaSections,
-    ...htmlSemanticsSections,
-    ...htmlCharacterSections,
-    ...htmlFormSections,
-    ...htmlGraphicsSections,
-    ...htmlMediaSections,
-    ...htmlApiSections,
-    ...htmlClosingSections,
+    ...withChapter('Getting started', htmlIntroSections),
+    ...withChapter('Elements, attributes and text', htmlElementsSections),
+    ...withChapter('Colour', htmlColorSections),
+    ...withChapter('Stylesheets, links and images', [
+      ...htmlCssSections,
+      ...htmlLinkSections,
+      ...htmlImageSections,
+    ]),
+    ...withChapter('Tables and lists', htmlTableSections),
+    ...withChapter('Blocks, classes and the document head', [
+      ...htmlStructureSections,
+      ...htmlMetaSections,
+    ]),
+    ...withChapter('Semantics and characters', [...htmlSemanticsSections, ...htmlCharacterSections]),
+    ...withChapter('Forms', htmlFormSections),
+    ...withChapter('Graphics and media', [...htmlGraphicsSections, ...htmlMediaSections]),
+    ...withChapter('Browser APIs, accessibility and wrap-up', [
+      ...htmlApiSections,
+      ...htmlClosingSections,
+    ]),
   ],
   projects: projectsForCourse('html-fundamentals'),
 }

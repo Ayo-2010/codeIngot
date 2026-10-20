@@ -296,6 +296,16 @@ export interface Section {
   description: string
   lessons: Lesson[]
   quiz?: Quiz
+  /**
+   * The chapter this section belongs to, when the course groups its sections.
+   *
+   * The three original courses were authored as one section per lesson, which
+   * puts 66-81 headings in the sidebar. A chapter is a presentation grouping
+   * only: it never changes lesson order, ids, quizzes or progress, so tagging a
+   * section is safe where merging sections would not be (each section owns its
+   * quiz). Courses without chapters fall back to one chapter per section.
+   */
+  chapter?: string
 }
 
 export interface Project {
@@ -398,6 +408,8 @@ export interface CourseSectionMeta {
   lessons: CourseLessonMeta[]
   /** Quizzes are small, so they travel with the metadata. */
   quiz?: Quiz
+  /** Presentation grouping; see `Section.chapter`. */
+  chapter?: string
 }
 
 export interface CourseMeta {

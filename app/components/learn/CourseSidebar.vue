@@ -9,51 +9,70 @@
     </div>
 
     <ol ref="listEl" data-testid="course-sidebar-list" class="min-h-0 flex-1 overflow-y-auto py-2">
-      <li v-for="(section, sectionIndex) in course.sections" :key="section.id">
+      <li v-for="(chapter, chapterIndex) in chapters" :key="chapter.id">
         <p class="px-4 pb-1 pt-3 font-mono text-[11px] uppercase tracking-wider text-dim">
-          {{ String(sectionIndex + 1).padStart(2, '0') }} · {{ section.title }}
+          {{ String(chapterIndex + 1).padStart(2, '0') }} · {{ chapter.title }}
         </p>
         <ul>
-          <li v-for="(lesson, index) in section.lessons" :key="lesson.id">
-            <NuxtLink
-              :to="`/learn/${course.slug}/${lesson.id}`"
-              class="flex items-start gap-2.5 border-l-2 px-4 py-2 text-sm transition"
-              :class="
-                lesson.id === currentLessonId
-                  ? 'border-brand bg-brand/8 text-mist-50'
-                  : 'border-transparent text-muted hover:bg-ink-800 hover:text-mist-50'
-              "
-              :aria-current="lesson.id === currentLessonId ? 'page' : undefined"
-            >
-              <span
-                class="mt-0.5 grid h-4 w-4 shrink-0 place-items-center rounded-full border text-[9px]"
-                :class="done(lesson.id) ? 'border-ok/40 bg-ok/10 text-ok' : 'border-ink-500 text-dim'"
-                aria-hidden="true"
+          <template v-for="section in chapter.sections" :key="section.id">
+            <li v-for="(lesson, index) in section.lessons" :key="lesson.id">
+              <div class="flex items-stretch">
+                <NuxtLink
+                  :to="`/learn/${course.slug}/${lesson.id}`"
+                  class="flex min-w-0 flex-1 items-start gap-2.5 border-l-2 px-4 py-2 text-sm transition"
+                  :class="
+                    lesson.id === currentLessonId
+                      ? 'border-brand bg-brand/8 text-mist-50'
+                      : 'border-transparent text-muted hover:bg-ink-800 hover:text-mist-50'
+                  "
+                  :aria-current="lesson.id === currentLessonId ? 'page' : undefined"
+                >
+                  <span
+                    class="mt-0.5 grid h-4 w-4 shrink-0 place-items-center rounded-full border text-[9px]"
+                    :class="done(lesson.id) ? 'border-ok/40 bg-ok/10 text-ok' : 'border-ink-500 text-dim'"
+                    aria-hidden="true"
+                  >
+                    {{ done(lesson.id) ? '✓' : index + 1 }}
+                  </span>
+                  <span class="min-w-0 flex-1">
+                    <span class="block">{{ lesson.title }}</span>
+                  </span>
+                </NuxtLink>
+                <!--
+                  A one-lesson section's quiz belongs to that lesson, so it is a
+                  star on the row instead of a 66-line list of quizzes.
+                -->
+                <NuxtLink
+                  v-if="section.quiz && section.lessons.length === 1"
+                  :to="`/learn/${course.slug}/quiz/${section.quiz.id}`"
+                  class="flex shrink-0 items-center border-l-2 border-transparent pr-3 text-xs transition"
+                  :class="section.quiz.id === currentQuizId ? 'text-brand' : 'text-dim hover:text-brand'"
+                  :aria-label="`Take the ${section.quiz.title} quiz`"
+                  :title="`${section.quiz.title} quiz`"
+                >
+                  <span aria-hidden="true">★</span>
+                </NuxtLink>
+              </div>
+            </li>
+            <li v-if="section.quiz && section.lessons.length > 1" :key="`${section.id}-quiz`">
+              <NuxtLink
+                :to="`/learn/${course.slug}/quiz/${section.quiz.id}`"
+                class="flex items-center gap-2.5 border-l-2 px-4 py-2 text-sm text-muted transition hover:text-mist-50"
+                :class="section.quiz.id === currentQuizId ? 'text-mist-50 bg-brand/10 border-brand' : 'border-transparent'"
               >
-                {{ done(lesson.id) ? '✓' : index + 1 }}
-              </span>
-              <span class="min-w-0 flex-1">
-                <span class="block">{{ lesson.title }}</span>
-              </span>
-            </NuxtLink>
-          </li>
+                <span class="text-brand" aria-hidden="true">★</span>
+                {{ section.quiz.title }}
+              </NuxtLink>
+            </li>
+          </template>
         </ul>
-        <NuxtLink
-          v-if="section.quiz"
-          :to="`/learn/${course.slug}/quiz/${section.quiz.id}`"
-          class="flex items-center gap-2.5 px-4 py-2 text-sm text-muted transition hover:text-mist-50"
-          :class="section.quiz.id === currentQuizId ? 'text-mist-50 bg-brand/10 border-l-2 border-brand' : ''"
-        >
-          <span class="text-brand" aria-hidden="true">★</span>
-          {{ section.quiz.title }}
-        </NuxtLink>
       </li>
     </ol>
   </nav>
 </template>
 
 <script setup lang="ts">
-import type { CourseMeta, CourseSectionMeta } from '~/types/content'
+import type { CourseMeta } from '~/types/content'
 
 const props = defineProps<{
   course: CourseMeta
@@ -62,6 +81,8 @@ const props = defineProps<{
 }>()
 
 const { progress, courseProgressPercent } = useLearningProgress()
+
+const chapters = computed(() => courseChapters(props.course))
 
 const listEl = ref<HTMLElement | null>(null)
 
@@ -107,10 +128,5 @@ const percent = computed(() => courseProgressPercent(props.course))
 
 function done(lessonId: string) {
   return progress.value.completedLessons.includes(lessonId)
-}
-
-function sectionLink(section: CourseSectionMeta): string {
-  const last = section.lessons[section.lessons.length - 1]
-  return `/learn/${props.course.slug}/${last?.id ?? ''}`
 }
 </script>

@@ -10,6 +10,12 @@ import { chromium } from '@playwright/test'
  */
 const WARM_ROUTES = [
   '/',
+  '/courses',
+  '/courses/html-fundamentals',
+  '/learn/html-fundamentals/html-l1',
+  '/learn/html-fundamentals/quiz/quiz-html-s1',
+  '/progress',
+  '/reference/html',
   '/learn/javascript-fundamentals/js-l1',
   '/learn/javascript-fundamentals/js-l65',
   '/learn/react/react-l1',
@@ -22,15 +28,25 @@ export default async function globalSetup() {
   const browser = await chromium.launch({ channel: 'chrome' })
   const page = await browser.newPage()
   for (const path of WARM_ROUTES) {
-    await page.goto(`http://127.0.0.1:3000${path}`, {
-      waitUntil: 'domcontentloaded',
-      timeout: 120_000,
-    })
-    // Wait for hydration (the client has run) and then let the first demo
-    // compile, which is the slowest work any of these routes does.
-    await page.waitForFunction(() => document.documentElement.dataset.hydrated === 'true', null, {
-      timeout: 120_000,
-    })
+    // Vite may invalidate the client entry while it optimises dependencies on
+    // the first visits, leaving a page that never hydrates. Reloading once the
+    // optimiser has settled is what a learner's refresh would do.
+    for (let attempt = 0; ; attempt += 1) {
+      await page.goto(`http://127.0.0.1:3000${path}`, {
+        waitUntil: 'domcontentloaded',
+        timeout: 120_000,
+      })
+      try {
+        await page.waitForFunction(() => document.documentElement.dataset.hydrated === 'true', null, {
+          timeout: 60_000,
+        })
+        break
+      } catch (error) {
+        if (attempt >= 2) throw error
+      }
+    }
+    // Let the first demo compile, which is the slowest work any of these
+    // routes does.
     await page.waitForTimeout(1000)
   }
   await browser.close()

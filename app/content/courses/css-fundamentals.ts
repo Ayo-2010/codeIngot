@@ -1,5 +1,6 @@
 import type { Course, Section } from '~/types/content'
 import { projectsForCourse } from '~/content/projects'
+import { withChapter } from './chapters'
 import { cssIntroSections } from './css/01-intro'
 import { cssColorsSections } from './css/02-colors'
 import { cssBorderMarginSections } from './css/borders-margins'
@@ -56,30 +57,36 @@ export const cssFundamentals: Course = {
   ],
   icon: '{ }',
   sections: [
-    ...cssIntroSections,
-    ...cssColorsSections,
-    ...cssBorderMarginSections,
-    ...cssBoxSections,
-    ...cssOutlineSections,
-    textSection,
-    ...cssFontSections,
-    ...cssListLinkSections,
-    ...cssTableDisplaySections,
-    ...cssDisplayPositionSections,
-    ...cssFloatAlignSections,
-    ...cssSelectorStateSections,
-    ...cssWidgetSectionsA,
-    ...cssWidgetSectionsB,
-    ...cssCascadeSections,
-    ...cssAdvancedBoxSections,
-    ...cssGradientShadowSections,
-    ...cssTransformMotionSections,
-    ...cssImageSections,
-    ...cssUiPartSections,
-    ...cssVariableMediaSections,
-    ...cssFlexboxSections,
-    ...cssResponsiveSections,
-    ...cssGridSections,
+    ...withChapter('Getting started', cssIntroSections),
+    ...withChapter('Colour and backgrounds', cssColorsSections),
+    ...withChapter('The box model', [...cssBorderMarginSections, ...cssBoxSections]),
+    ...withChapter('Text and outlines', [...cssOutlineSections, textSection]),
+    ...withChapter('Typography, lists and links', [...cssFontSections, ...cssListLinkSections]),
+    ...withChapter('Tables, display and flow', [
+      ...cssTableDisplaySections,
+      ...cssDisplayPositionSections,
+      ...cssFloatAlignSections,
+    ]),
+    ...withChapter('Selectors and component patterns', [
+      ...cssSelectorStateSections,
+      ...cssWidgetSectionsA,
+      ...cssWidgetSectionsB,
+    ]),
+    ...withChapter('The cascade and advanced boxes', [
+      ...cssCascadeSections,
+      ...cssAdvancedBoxSections,
+    ]),
+    ...withChapter('Effects and motion', [
+      ...cssGradientShadowSections,
+      ...cssTransformMotionSections,
+    ]),
+    ...withChapter('Images and UI details', [...cssImageSections, ...cssUiPartSections]),
+    ...withChapter('Variables and media queries', cssVariableMediaSections),
+    ...withChapter('Modern layout: flexbox, responsive and grid', [
+      ...cssFlexboxSections,
+      ...cssResponsiveSections,
+      ...cssGridSections,
+    ]),
   ],
   projects: projectsForCourse('css-fundamentals'),
 }

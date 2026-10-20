@@ -122,7 +122,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Attributes come before forms, and forms come before the accessibility rules written about them. Each section leans on the vocabulary the previous one introduced."
             }
           ]
-        }
+        },
+        "chapter": "Getting started"
       },
       {
         "id": "html-s2",
@@ -219,7 +220,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Compatibility with genuinely broken 1990s markup is the whole reason the parser is so forgiving. The cost is that a missing tag can quietly relocate your content."
             }
           ]
-        }
+        },
+        "chapter": "Getting started"
       },
       {
         "id": "html-s3",
@@ -302,7 +304,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Word processors are built to produce documents for other word processors. They insert their own styling and can silently reformat quotes, indentation and the doctype."
             }
           ]
-        }
+        },
+        "chapter": "Getting started"
       },
       {
         "id": "html-s4",
@@ -398,7 +401,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "A div with no meaning is structural noise. It makes the document harder to parse and tells nobody anything. Layout belongs in the stylesheet."
             }
           ]
-        }
+        },
+        "chapter": "Getting started"
       },
       {
         "id": "html-s5",
@@ -495,7 +499,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "A div is exactly right for a grouping you cannot name. It becomes wrong only when it is standing in for a region that does have a meaning."
             }
           ]
-        }
+        },
+        "chapter": "Elements, attributes and text"
       },
       {
         "id": "html-s6",
@@ -590,7 +595,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "A tooltip is invisible on touch devices and invisible to keyboard users until hovered. Form controls need a real <label>."
             }
           ]
-        }
+        },
+        "chapter": "Elements, attributes and text"
       },
       {
         "id": "html-s7",
@@ -674,7 +680,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Heading lists and rotor navigation are built entirely on levels. That is a primary way of moving through a long document without reading it linearly."
             }
           ]
-        }
+        },
+        "chapter": "Elements, attributes and text"
       },
       {
         "id": "html-s8",
@@ -757,7 +764,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Split on meaning, not on width. A paragraph broken at a fixed column length reads badly on a phone, where the same text would fit on one screen."
             }
           ]
-        }
+        },
+        "chapter": "Elements, attributes and text"
       },
       {
         "id": "html-s9",
@@ -853,7 +861,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Size and colour are presentation, so they belong in a stylesheet. A span with a class keeps the document clean and the styling changeable."
             }
           ]
-        }
+        },
+        "chapter": "Elements, attributes and text"
       },
       {
         "id": "html-s10",
@@ -936,7 +945,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The browser renders quotation marks for <q> and will localise them to the document language, so hand-typed marks are always a duplicate."
             }
           ]
-        }
+        },
+        "chapter": "Elements, attributes and text"
       },
       {
         "id": "html-s11",
@@ -1021,7 +1031,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The block ships in every response for no benefit. Git remembers it perfectly well, so deleting it loses nothing."
             }
           ]
-        }
+        },
+        "chapter": "Elements, attributes and text"
       },
       {
         "id": "html-s12",
@@ -1106,7 +1117,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Contrast is a property of the pair, not of either colour alone. Pick the background and text together, then choose an accent that works against both."
             }
           ]
-        }
+        },
+        "chapter": "Colour"
       },
       {
         "id": "html-s13",
@@ -1191,7 +1203,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Contrast is a property of the pair. Translucent text can be perfectly legible on a flat background and unreadable over an image, on the same page."
             }
           ]
-        }
+        },
+        "chapter": "Colour"
       },
       {
         "id": "html-s14",
@@ -1274,7 +1287,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The hash is part of the notation. Without it the value is not a colour and the whole declaration is discarded."
             }
           ]
-        }
+        },
+        "chapter": "Colour"
       },
       {
         "id": "html-s15",
@@ -1361,7 +1375,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "HSL is not perceptually even: yellow at 50% looks much lighter than blue at 50%. Trust a contrast checker, not the numbers."
             }
           ]
-        }
+        },
+        "chapter": "Colour"
       },
       {
         "id": "html-s16",
@@ -1522,7 +1537,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The leading slash anchors the path at the origin root. Without it the path is relative to the folder of the current file, which changes as pages move."
             }
           ]
-        }
+        },
+        "chapter": "Stylesheets, links and images"
       },
       {
         "id": "html-s17",
@@ -1605,7 +1621,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The second adds rel=\"noopener\", which stops the new page reaching back through window.opener."
             }
           ]
-        }
+        },
+        "chapter": "Stylesheets, links and images"
       },
       {
         "id": "html-s18",
@@ -1690,7 +1707,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Browsers allow a narrow set of properties in :visited — colour among them — and ignore the rest to prevent history leaks."
             }
           ]
-        }
+        },
+        "chapter": "Stylesheets, links and images"
       },
       {
         "id": "html-s19",
@@ -1774,7 +1792,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "A missing target fails silently, which is why checking that every fragment resolves is a worthwhile test."
             }
           ]
-        }
+        },
+        "chapter": "Stylesheets, links and images"
       },
       {
         "id": "html-s20",
@@ -1858,7 +1877,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The reader has already said \"image\". Repeating that in the alt text just adds noise before the useful part."
             }
           ]
-        }
+        },
+        "chapter": "Stylesheets, links and images"
       },
       {
         "id": "html-s21",
@@ -1942,7 +1962,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Real links are focusable, styleable, responsive and announced with useful text. CSS can place them anywhere."
             }
           ]
-        }
+        },
+        "chapter": "Stylesheets, links and images"
       },
       {
         "id": "html-s22",
@@ -2025,7 +2046,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Background images are not printed by default and can fail. The colour is the fallback the text is actually readable against."
             }
           ]
-        }
+        },
+        "chapter": "Stylesheets, links and images"
       },
       {
         "id": "html-s23",
@@ -2107,7 +2129,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "One img, one alt. If the variants differ in content, the description needs a caption or the markup is misleading one group of users."
             }
           ]
-        }
+        },
+        "chapter": "Stylesheets, links and images"
       },
       {
         "id": "html-s24",
@@ -2191,7 +2214,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Keyboard and screen reader navigation follow the DOM. Reorder the markup, not just the styles."
             }
           ]
-        }
+        },
+        "chapter": "Tables and lists"
       },
       {
         "id": "html-s25",
@@ -2275,7 +2299,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "A sublist is part of the item it belongs to, so it goes inside that li. Placing it as a sibling loses the nesting."
             }
           ]
-        }
+        },
+        "chapter": "Tables and lists"
       },
       {
         "id": "html-s26",
@@ -2358,7 +2383,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "It has never been implemented anywhere. li::marker is the way to colour a bullet."
             }
           ]
-        }
+        },
+        "chapter": "Tables and lists"
       },
       {
         "id": "html-s27",
@@ -2441,7 +2467,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "value sets the number for that li, which is useful when a list is split into columns."
             }
           ]
-        }
+        },
+        "chapter": "Tables and lists"
       },
       {
         "id": "html-s28",
@@ -2523,7 +2550,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "decimal-leading-zero pads the number to two digits."
             }
           ]
-        }
+        },
+        "chapter": "Tables and lists"
       },
       {
         "id": "html-s29",
@@ -2607,7 +2635,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "They lost their semantic associations. The block and inline defaults remain, as CSS behaviour rather than definition."
             }
           ]
-        }
+        },
+        "chapter": "Blocks, classes and the document head"
       },
       {
         "id": "html-s30",
@@ -2692,7 +2721,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "A name describing purpose and structure stays correct when the colour or the layout changes."
             }
           ]
-        }
+        },
+        "chapter": "Blocks, classes and the document head"
       },
       {
         "id": "html-s31",
@@ -2776,7 +2806,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Fragment targets and label associations are what ids are for. Script handles are better as data attributes."
             }
           ]
-        }
+        },
+        "chapter": "Blocks, classes and the document head"
       },
       {
         "id": "html-s32",
@@ -2859,7 +2890,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Those are the standard clickjacking defences, and they are the reason an iframe is not a general-purpose embed."
             }
           ]
-        }
+        },
+        "chapter": "Blocks, classes and the document head"
       },
       {
         "id": "html-s33",
@@ -2942,7 +2974,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Deferral is about download timing. An inline script has no fetch step, so the attribute has no effect."
             }
           ]
-        }
+        },
+        "chapter": "Blocks, classes and the document head"
       },
       {
         "id": "html-s34",
@@ -3026,7 +3059,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "A leading slash anchors resolution at the site root, so it behaves the same from any folder depth."
             }
           ]
-        }
+        },
+        "chapter": "Blocks, classes and the document head"
       },
       {
         "id": "html-s35",
@@ -3109,7 +3143,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The viewport configures the browser layout. The others describe the document for something outside it."
             }
           ]
-        }
+        },
+        "chapter": "Blocks, classes and the document head"
       },
       {
         "id": "html-s36",
@@ -3192,7 +3227,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "An article could be syndicated on its own. A section is a labelled division of the page it lives in."
             }
           ]
-        }
+        },
+        "chapter": "Blocks, classes and the document head"
       },
       {
         "id": "html-s37",
@@ -3276,7 +3312,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "A layout that reflows at every width leaves media queries to express genuine arrangement changes rather than every adjustment."
             }
           ]
-        }
+        },
+        "chapter": "Blocks, classes and the document head"
       },
       {
         "id": "html-s38",
@@ -3359,7 +3396,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "A literal <div> in a pre is an element. Writing &lt;div&gt; makes the browser show the characters."
             }
           ]
-        }
+        },
+        "chapter": "Semantics and characters"
       },
       {
         "id": "html-s39",
@@ -3442,7 +3480,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "A selector named for a region is often the CSS reconstructing semantics the markup should have carried."
             }
           ]
-        }
+        },
+        "chapter": "Semantics and characters"
       },
       {
         "id": "html-s40",
@@ -3526,7 +3565,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "A tool removes the whole class of discussion and leaves review time for decisions that need judgement."
             }
           ]
-        }
+        },
+        "chapter": "Semantics and characters"
       },
       {
         "id": "html-s41",
@@ -3610,7 +3650,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The parser acts on the brackets. Escaping them with &lt; and &gt; makes them characters instead."
             }
           ]
-        }
+        },
+        "chapter": "Semantics and characters"
       },
       {
         "id": "html-s42",
@@ -3694,7 +3735,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "With a UTF-8 charset the character is simpler and more readable. Entities are for the reserved characters and the invisible ones."
             }
           ]
-        }
+        },
+        "chapter": "Semantics and characters"
       },
       {
         "id": "html-s43",
@@ -3777,7 +3819,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "An SVG inherits currentColor, scales, and survives every rendering mode. An emoji depends on a font being installed."
             }
           ]
-        }
+        },
+        "chapter": "Semantics and characters"
       },
       {
         "id": "html-s44",
@@ -3861,7 +3904,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The header takes precedence in practice, and it is where servers more often get it wrong."
             }
           ]
-        }
+        },
+        "chapter": "Semantics and characters"
       },
       {
         "id": "html-s45",
@@ -3944,7 +3988,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "enctype=\"multipart/form-data\" is required for file inputs. The server parses it differently."
             }
           ]
-        }
+        },
+        "chapter": "Semantics and characters"
       },
       {
         "id": "html-s46",
@@ -4028,7 +4073,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Both are harmless tidiness in HTML5. The rest is a constraint HTML5 explicitly does not need."
             }
           ]
-        }
+        },
+        "chapter": "Semantics and characters"
       },
       {
         "id": "html-s47",
@@ -4112,7 +4158,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Disabled controls are excluded from the submitted data, which is the opposite of readonly."
             }
           ]
-        }
+        },
+        "chapter": "Forms"
       },
       {
         "id": "html-s48",
@@ -4195,7 +4242,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "It defaults to get, which is why an explicit method is worth writing."
             }
           ]
-        }
+        },
+        "chapter": "Forms"
       },
       {
         "id": "html-s49",
@@ -4278,7 +4326,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "output is for a result the page computed, not for anything the user typed."
             }
           ]
-        }
+        },
+        "chapter": "Forms"
       },
       {
         "id": "html-s50",
@@ -4361,7 +4410,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "range is the slider, bounded by min and max and stepped by step."
             }
           ]
-        }
+        },
+        "chapter": "Forms"
       },
       {
         "id": "html-s51",
@@ -4444,7 +4494,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Client-side validation is a convenience for the user. The server is the only place a constraint is actually enforced."
             }
           ]
-        }
+        },
+        "chapter": "Forms"
       },
       {
         "id": "html-s52",
@@ -4527,7 +4578,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Preview versus publish, or save versus save-and-close, are genuinely different actions and belong in one form."
             }
           ]
-        }
+        },
+        "chapter": "Forms"
       },
       {
         "id": "html-s53",
@@ -4611,7 +4663,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "SVG keeps every shape as an element. Canvas has no object model, no CSS and no accessibility."
             }
           ]
-        }
+        },
+        "chapter": "Graphics and media"
       },
       {
         "id": "html-s54",
@@ -4695,7 +4748,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "An SVG file is a separate resource, so it caches. The other three are all things only inline SVG can do."
             }
           ]
-        }
+        },
+        "chapter": "Graphics and media"
       },
       {
         "id": "html-s55",
@@ -4778,7 +4832,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The browser walks the sources in order and takes the first type it says it can display."
             }
           ]
-        }
+        },
+        "chapter": "Graphics and media"
       },
       {
         "id": "html-s56",
@@ -4861,7 +4916,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "That is enough for a progress bar and not enough for a scrubbing preview, which needs its own calculation."
             }
           ]
-        }
+        },
+        "chapter": "Graphics and media"
       },
       {
         "id": "html-s57",
@@ -4945,7 +5001,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "details and summary work without JavaScript, are keyboard accessible, and are announced as a disclosure."
             }
           ]
-        }
+        },
+        "chapter": "Graphics and media"
       },
       {
         "id": "html-s58",
@@ -5028,7 +5085,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "That level of privilege is why they were removed for security history, and why a prompt to install one is a malware route."
             }
           ]
-        }
+        },
+        "chapter": "Graphics and media"
       },
       {
         "id": "html-s59",
@@ -5111,7 +5169,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "A poster image loads in a few kilobytes and no third-party code, at the cost of one click."
             }
           ]
-        }
+        },
+        "chapter": "Graphics and media"
       },
       {
         "id": "html-s60",
@@ -5195,7 +5254,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "A prompt on load is refused and can be a consent violation. Ask when the user asks for the thing."
             }
           ]
-        }
+        },
+        "chapter": "Browser APIs, accessibility and wrap-up"
       },
       {
         "id": "html-s61",
@@ -5279,7 +5339,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "drop may not fire — the drag can be cancelled or released outside any target — so dragend on the source is the safe place."
             }
           ]
-        }
+        },
+        "chapter": "Browser APIs, accessibility and wrap-up"
       },
       {
         "id": "html-s62",
@@ -5363,7 +5424,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The tab that wrote the value is not notified, which is why the same-tab UI has to be updated directly."
             }
           ]
-        }
+        },
+        "chapter": "Browser APIs, accessibility and wrap-up"
       },
       {
         "id": "html-s63",
@@ -5447,7 +5509,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Each worker is a whole JavaScript environment. Starting one for thirty milliseconds of work costs more than it saves."
             }
           ]
-        }
+        },
+        "chapter": "Browser APIs, accessibility and wrap-up"
       },
       {
         "id": "html-s64",
@@ -5531,7 +5594,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The first three are one-way and suit SSE. A conversation with both sides speaking needs a WebSocket."
             }
           ]
-        }
+        },
+        "chapter": "Browser APIs, accessibility and wrap-up"
       },
       {
         "id": "html-s65",
@@ -5615,7 +5679,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "It is the first focusable element on the page, and it targets the main landmark so repeated navigation is bypassed."
             }
           ]
-        }
+        },
+        "chapter": "Browser APIs, accessibility and wrap-up"
       },
       {
         "id": "html-s66",
@@ -5699,7 +5764,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "A framework still emits the same elements. The semantics here are what everything else is built on."
             }
           ]
-        }
+        },
+        "chapter": "Browser APIs, accessibility and wrap-up"
       }
     ]
   },
@@ -5817,7 +5883,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The box model comes first because almost every later concept — margins, flexbox gaps, grid tracks — is defined in terms of it."
             }
           ]
-        }
+        },
+        "chapter": "Getting started"
       },
       {
         "id": "css-s2",
@@ -5905,7 +5972,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Both rules match the `p`. The `p` rule is more specific, so it wins even though the `body` rule would have inherited down to it."
             }
           ]
-        }
+        },
+        "chapter": "Getting started"
       },
       {
         "id": "css-s3",
@@ -5990,7 +6058,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "It reads `color blue` as a property named `color blue` with no value, which is invalid, so the declaration is dropped and only `padding` survives."
             }
           ]
-        }
+        },
+        "chapter": "Getting started"
       },
       {
         "id": "css-s4",
@@ -6076,7 +6145,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`box-sizing: border-box` makes a declared width include padding and border, which removes a whole class of sizing bugs."
             }
           ]
-        }
+        },
+        "chapter": "Getting started"
       },
       {
         "id": "css-s5",
@@ -6159,7 +6229,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Inline styles have the highest specificity of all, so they are effectively impossible to override from a stylesheet, and they repeat on every element."
             }
           ]
-        }
+        },
+        "chapter": "Getting started"
       },
       {
         "id": "css-s6",
@@ -6244,7 +6315,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Commenting out is a fine temporary move. Leaving commented-out code in a commit is dead code — version control already holds the history."
             }
           ]
-        }
+        },
+        "chapter": "Getting started"
       },
       {
         "id": "css-s7",
@@ -6372,7 +6444,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "HSL exposes the axes a designer already thinks in. A tint, a shade and a dark-mode variant can all be computed from a single hue, instead of being hand-picked one by one."
             }
           ]
-        }
+        },
+        "chapter": "Colour and backgrounds"
       },
       {
         "id": "css-s8",
@@ -6516,7 +6589,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The background cannot be painted once and cached, so scrolling repaints it each frame. A fixed gradient over a small area is usually fine; a fixed photograph over a large area is not."
             }
           ]
-        }
+        },
+        "chapter": "Colour and backgrounds"
       },
       {
         "id": "css-s9",
@@ -6666,7 +6740,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "A radius of 50% reaches half the box on every side. Larger radii are scaled down automatically, which is what makes `50%` reliably produce a circle."
             }
           ]
-        }
+        },
+        "chapter": "The box model"
       },
       {
         "id": "css-s10",
@@ -6766,7 +6841,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The collapsed value is the larger margin — never the sum. Horizontal margins, floats, absolute positioning, and flex or grid items do not collapse at all."
             }
           ]
-        }
+        },
+        "chapter": "The box model"
       },
       {
         "id": "css-s11",
@@ -6849,7 +6925,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "That is the difference from margin: padding is painted with the element's background, margin is not."
             }
           ]
-        }
+        },
+        "chapter": "The box model"
       },
       {
         "id": "css-s12",
@@ -6932,7 +7009,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Percentages on width resolve against the containing block, not against the element itself."
             }
           ]
-        }
+        },
+        "chapter": "The box model"
       },
       {
         "id": "css-s13",
@@ -7015,7 +7093,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The four layers in order: content, padding, border, margin. Width and height size the innermost one."
             }
           ]
-        }
+        },
+        "chapter": "The box model"
       },
       {
         "id": "css-s14",
@@ -7158,7 +7237,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Removing a focus outline is only acceptable if a `:focus-visible` rule puts a visible ring back. `outline: none` and `outline: 0` are equivalent, and both delete the only focus cue the browser was providing."
             }
           ]
-        }
+        },
+        "chapter": "Text and outlines"
       },
       {
         "id": "css-s15",
@@ -7307,7 +7387,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`text-shadow` is derived from text geometry and can only follow the glyphs. A filter applies to the entire rendered element, so it also follows avatars, badges and transparent images."
             }
           ]
-        }
+        },
+        "chapter": "Text and outlines"
       },
       {
         "id": "css-s16",
@@ -7494,7 +7575,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`1.5rem` is 24px at a 16px root, and the value after the slash sets line height. Every slot in the shorthand is optional except size and family."
             }
           ]
-        }
+        },
+        "chapter": "Typography, lists and links"
       },
       {
         "id": "css-s17",
@@ -7578,7 +7660,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "An inline `<svg>` element with its own `viewBox` and path markup needs no external request, which is why it renders instantly and never flashes."
             }
           ]
-        }
+        },
+        "chapter": "Typography, lists and links"
       },
       {
         "id": "css-s18",
@@ -7664,7 +7747,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The underline works regardless of colour perception. Removing it means providing another affordance — a thicker underline, a background, or a border."
             }
           ]
-        }
+        },
+        "chapter": "Typography, lists and links"
       },
       {
         "id": "css-s19",
@@ -7751,7 +7835,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Using a `<ul>` as a layout device is fine — the semantics were never the point. Removing bullets from a real content or navigation list is the risky case."
             }
           ]
-        }
+        },
+        "chapter": "Typography, lists and links"
       },
       {
         "id": "css-s20",
@@ -7891,7 +7976,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "A `width: 100%` table has no minimum, so its columns collapse into unreadable slivers rather than staying legible. Scrolling a capped wrapper and giving the table a `min-width` floor keeps the data readable and keeps the page itself from scrolling sideways."
             }
           ]
-        }
+        },
+        "chapter": "Tables, display and flow"
       },
       {
         "id": "css-s21",
@@ -7977,7 +8063,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Margins between flex items do not collapse. Each item keeps its own `margin-bottom`, so the space between the first and second item is 20px, exactly as written. In a normal block flow the same two margins would collapse to the larger of the two."
             }
           ]
-        }
+        },
+        "chapter": "Tables, display and flow"
       },
       {
         "id": "css-s22",
@@ -8062,7 +8149,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The two limits are not a negotiation. The used width is fitted into the range they define, and when the minimum sits above the maximum the minimum wins, so the element renders at 400px. The combination is legal - it just does not do anything except guarantee 400px."
             }
           ]
-        }
+        },
+        "chapter": "Tables, display and flow"
       },
       {
         "id": "css-s23",
@@ -8147,7 +8235,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Sticky is positioned against its nearest scrolling ancestor, and any overflow other than `visible` creates one, even if it never actually scrolls. If such a wrapper sits between the header and the document scroller, the header pins to that wrapper instead and appears not to work."
             }
           ]
-        }
+        },
+        "chapter": "Tables, display and flow"
       },
       {
         "id": "css-s24",
@@ -8232,7 +8321,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The URL is one unbreakable token, so it has a minimum width larger than its column. Letting it wrap at arbitrary points fixes the cause. `overflow: hidden` would hide part of the URL, which is a data loss problem, not a layout fix."
             }
           ]
-        }
+        },
+        "chapter": "Tables, display and flow"
       },
       {
         "id": "css-s25",
@@ -8344,7 +8434,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Clearing the float restores the height. Flex and grid containers size themselves to their content, so they avoid the problem entirely."
             }
           ]
-        }
+        },
+        "chapter": "Tables, display and flow"
       },
       {
         "id": "css-s26",
@@ -8429,7 +8520,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "A flex container ignores whitespace between its children entirely, and it also gives you alignment and wrapping control."
             }
           ]
-        }
+        },
+        "chapter": "Tables, display and flow"
       },
       {
         "id": "css-s27",
@@ -8513,7 +8605,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "It aligns against a baseline or the cell box, so it needs inline-level, table-cell, flex or grid context to have any effect."
             }
           ]
-        }
+        },
+        "chapter": "Tables, display and flow"
       },
       {
         "id": "css-s28",
@@ -8598,7 +8691,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Matching runs right to left, so a descendant selector considers every `p` in the document and checks each ancestor chain."
             }
           ]
-        }
+        },
+        "chapter": "Selectors and component patterns"
       },
       {
         "id": "css-s29",
@@ -8683,7 +8777,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "A checkbox has no visible content of its own, so the usual technique is to style the label that sits immediately after it."
             }
           ]
-        }
+        },
+        "chapter": "Selectors and component patterns"
       },
       {
         "id": "css-s30",
@@ -8769,7 +8864,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "It is a box at the start or end of the element, which is why it inherits the element's font and colour and why it is announced."
             }
           ]
-        }
+        },
+        "chapter": "Selectors and component patterns"
       },
       {
         "id": "css-s31",
@@ -8854,7 +8950,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Opacity composites rendered pixels, so both colours move toward each other. Check the faded result against the contrast requirement, not the original palette."
             }
           ]
-        }
+        },
+        "chapter": "Selectors and component patterns"
       },
       {
         "id": "css-s32",
@@ -8964,7 +9061,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`gap` applies only between items, so the first and last edges stay flush with the container."
             }
           ]
-        }
+        },
+        "chapter": "Selectors and component patterns"
       },
       {
         "id": "css-s33",
@@ -9050,7 +9148,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`z-index` sets stacking order for positioned elements. `overflow` would do the opposite — it can clip the submenu."
             }
           ]
-        }
+        },
+        "chapter": "Selectors and component patterns"
       },
       {
         "id": "css-s34",
@@ -9134,7 +9233,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`object-fit` controls how a replaced element fills its content box. It has no effect on ordinary elements such as a `<div>`."
             }
           ]
-        }
+        },
+        "chapter": "Selectors and component patterns"
       },
       {
         "id": "css-s35",
@@ -9217,7 +9317,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "A data URI lives in the stylesheet itself, so there is nothing to fetch. The positioning technique is identical to one using a real sprite file."
             }
           ]
-        }
+        },
+        "chapter": "Selectors and component patterns"
       },
       {
         "id": "css-s36",
@@ -9302,7 +9403,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`data-*` names live in a namespace reserved for authors, so they never collide with a future browser feature."
             }
           ]
-        }
+        },
+        "chapter": "Selectors and component patterns"
       },
       {
         "id": "css-s37",
@@ -9387,7 +9489,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`<label for=\"...\">` is both a click target and the accessible name of the control, which a placeholder never reliably is."
             }
           ]
-        }
+        },
+        "chapter": "Selectors and component patterns"
       },
       {
         "id": "css-s38",
@@ -9471,7 +9574,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Counters with the same name nest as instances. Each sublist resets it, producing the fresh inner level that `counters()` then prints."
             }
           ]
-        }
+        },
+        "chapter": "Selectors and component patterns"
       },
       {
         "id": "css-s39",
@@ -9560,7 +9664,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Because the regions are named, one declaration controls the whole shape. The media query changes the template and every child follows."
             }
           ]
-        }
+        },
+        "chapter": "The cascade and advanced boxes"
       },
       {
         "id": "css-s40",
@@ -9649,7 +9754,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Viewport units are relative to the screen, which is what \"fill the viewport height\" means. `em` would only follow a font size."
             }
           ]
-        }
+        },
+        "chapter": "The cascade and advanced boxes"
       },
       {
         "id": "css-s41",
@@ -9738,7 +9844,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`:is()` contributes the highest specificity among its arguments, so the `#main` in the list sets column a to 1."
             }
           ]
-        }
+        },
+        "chapter": "The cascade and advanced boxes"
       },
       {
         "id": "css-s42",
@@ -9827,7 +9934,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "A utility class exists precisely to override whatever matches, so `!important` is part of its contract. The other three are selector problems being papered over."
             }
           ]
-        }
+        },
+        "chapter": "The cascade and advanced boxes"
       },
       {
         "id": "css-s43",
@@ -9913,7 +10021,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`overflow: hidden` establishes the clip region that the parent's radius then applies to."
             }
           ]
-        }
+        },
+        "chapter": "The cascade and advanced boxes"
       },
       {
         "id": "css-s44",
@@ -9998,7 +10107,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Outset draws the border further from the padding edge. It is a painting offset, not a layout one."
             }
           ]
-        }
+        },
+        "chapter": "The cascade and advanced boxes"
       },
       {
         "id": "css-s45",
@@ -10085,7 +10195,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Layer order runs the opposite way to how the declaration reads: the first comma-separated value is painted on top of the second. So a scrim belongs last. This is the single most common layer-order bug, and it is why the first question in this set asks about it at all."
             }
           ]
-        }
+        },
+        "chapter": "The cascade and advanced boxes"
       },
       {
         "id": "css-s46",
@@ -10170,7 +10281,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Averaging raw sRGB channels does not match perceived lightness, which is why `srgb` mixes go muddy through the middle."
             }
           ]
-        }
+        },
+        "chapter": "The cascade and advanced boxes"
       },
       {
         "id": "css-s47",
@@ -10254,7 +10366,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Change `color` once and everything painted with the keyword follows — including SVG strokes and pseudo-elements."
             }
           ]
-        }
+        },
+        "chapter": "The cascade and advanced boxes"
       },
       {
         "id": "css-s48",
@@ -10357,7 +10470,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Stops must be written in ascending order. With 80% before 20% the declaration fails to parse and is dropped, which looks exactly like the gradient not working. Always order stops from smallest position to largest."
             }
           ]
-        }
+        },
+        "chapter": "Effects and motion"
       },
       {
         "id": "css-s49",
@@ -10459,7 +10573,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`inset` is a keyword and belongs at the start of the value, before any lengths. Written after the lengths the whole declaration is invalid, so the button renders with no shadow at all. An inset shadow can absolutely have a blur radius."
             }
           ]
-        }
+        },
+        "chapter": "Effects and motion"
       },
       {
         "id": "css-s50",
@@ -10536,7 +10651,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`text-transform` is purely presentational. The DOM retains the original casing; copy/paste and find-in-page use the original text."
             }
           ]
-        }
+        },
+        "chapter": "Effects and motion"
       },
       {
         "id": "css-s51",
@@ -10620,7 +10736,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "An unquoted `Course Sans` is parsed as two family names, `Course` and `Sans`. The face then registers under the wrong name and nothing that references `Course Sans` will match. The same trap applies to any family name with a space."
             }
           ]
-        }
+        },
+        "chapter": "Effects and motion"
       },
       {
         "id": "css-s52",
@@ -10704,7 +10821,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "With `top: 0; right: 0` the box's top-right corner is already at the corner, so it needs to move right and up by half its own size: `translate(50%, -50%)` would send it outward and down. As written the badge hangs off the card and below the top edge."
             }
           ]
-        }
+        },
+        "chapter": "Effects and motion"
       },
       {
         "id": "css-s53",
@@ -10788,7 +10906,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "An ancestor whose `overflow` is anything other than `visible` forces the subtree to be flattened, which cancels the 3D effect no matter what the card declares. Move the clipping inside the card, or drop it and clip the faces individually."
             }
           ]
-        }
+        },
+        "chapter": "Effects and motion"
       },
       {
         "id": "css-s54",
@@ -10873,7 +10992,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Two things are wrong, but the first is the reason it snaps: `background` is a shorthand, and the transition is watching the shorthand rather than a specific longhand, which browsers handle inconsistently. Transition `background-color` and declare it on the base rule as well as in the hover state."
             }
           ]
-        }
+        },
+        "chapter": "Effects and motion"
       },
       {
         "id": "css-s55",
@@ -10957,7 +11077,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The default `fill-mode` is `none`, so once the 300ms is over the animation stops contributing styles and the element goes back to whatever its own rules say, with no transform applied. Adding `forwards` keeps it at the last keyframe."
             }
           ]
-        }
+        },
+        "chapter": "Effects and motion"
       },
       {
         "id": "css-s56",
@@ -11043,7 +11164,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Everything inside a button is part of its label for assistive technology, so the bubble gets announced as button text. It also sits inside the hit area. Make the bubble a sibling of the button inside a positioned wrapper."
             }
           ]
-        }
+        },
+        "chapter": "Effects and motion"
       },
       {
         "id": "css-s57",
@@ -11129,7 +11251,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "A radius only rounds the box it is applied to. The parent paints its own rectangle, so unless it shares the radius or clips its overflow, its background stays square behind the curved child."
             }
           ]
-        }
+        },
+        "chapter": "Images and UI details"
       },
       {
         "id": "css-s58",
@@ -11216,7 +11339,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The property has only ever shipped under the `-webkit-` prefix, so the unprefixed name is an unknown property and is discarded. Write `-webkit-box-reflect: above 6px`."
             }
           ]
-        }
+        },
+        "chapter": "Images and UI details"
       },
       {
         "id": "css-s59",
@@ -11302,7 +11426,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The parent being a fixed height is not enough; the replaced element needs its own definite height. Add `height: 100%` or `height: 180px` to the `img` and the crop appears."
             }
           ]
-        }
+        },
+        "chapter": "Images and UI details"
       },
       {
         "id": "css-s60",
@@ -11389,7 +11514,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`object-position` applies to the replaced element, so it has to be on the `img` or `video`. Put it on the container and it describes the container's own replaced content, of which there is none."
             }
           ]
-        }
+        },
+        "chapter": "Images and UI details"
       },
       {
         "id": "css-s61",
@@ -11473,7 +11599,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "A `<button>` is `inline-block` by default, so `width: 100%` needs `display: block` to fill the line."
             }
           ]
-        }
+        },
+        "chapter": "Images and UI details"
       },
       {
         "id": "css-s62",
@@ -11557,7 +11684,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`<nav aria-label=\"Pagination\">` names the landmark. Without it the reader just announces \"navigation\" with no context."
             }
           ]
-        }
+        },
+        "chapter": "Images and UI details"
       },
       {
         "id": "css-s63",
@@ -11641,7 +11769,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`column-rule` is the shorthand; `column-rule-width`, `-style` and `-color` are the long hands."
             }
           ]
-        }
+        },
+        "chapter": "Images and UI details"
       },
       {
         "id": "css-s64",
@@ -11725,7 +11854,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`user-select: none` makes text unselectable. Use it on button labels and chrome, not on content the reader may need to copy."
             }
           ]
-        }
+        },
+        "chapter": "Images and UI details"
       },
       {
         "id": "css-s65",
@@ -11854,7 +11984,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Custom properties hold untyped strings, so `setProperty('--size', 10)` does nothing. Write `'10px'` with the unit inside the string."
             }
           ]
-        }
+        },
+        "chapter": "Variables and media queries"
       },
       {
         "id": "css-s66",
@@ -11938,7 +12069,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`::before` and `::after` generate boxes of their own, so the reset normally includes them explicitly."
             }
           ]
-        }
+        },
+        "chapter": "Variables and media queries"
       },
       {
         "id": "css-s67",
@@ -12022,7 +12154,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Below the breakpoint only the base rule applies, so the row is a single column. Media query rules are additive, not replacements."
             }
           ]
-        }
+        },
+        "chapter": "Variables and media queries"
       },
       {
         "id": "css-s68",
@@ -12106,7 +12239,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "A query introduces a hard-coded width that must be revisited whenever the content changes. Wrapping has no such coupling."
             }
           ]
-        }
+        },
+        "chapter": "Variables and media queries"
       },
       {
         "id": "css-s69",
@@ -12235,7 +12369,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Every distribution and alignment property in flexbox is inert unless the element is actually a flex container. Without `display: flex` the children are ordinary blocks and `justify-content` has nothing to distribute. This is the number one reason a flexbox rule appears to be ignored."
             }
           ]
-        }
+        },
+        "chapter": "Modern layout: flexbox, responsive and grid"
       },
       {
         "id": "css-s70",
@@ -12320,7 +12455,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "A single fluid design must work at 320px and at 2560px at the same time, so it is permanently compromised at one end. Responsive designs can have several designs, each comfortable in its own range, which is better for the reader and barely more work for the author."
             }
           ]
-        }
+        },
+        "chapter": "Modern layout: flexbox, responsive and grid"
       },
       {
         "id": "css-s71",
@@ -12405,7 +12541,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`viewport-fit=cover` lets the background and content extend under the notch and rounded corners. Everything you do not want hidden there has to be padded away from the edges with the `safe-area-inset-*` environment values."
             }
           ]
-        }
+        },
+        "chapter": "Modern layout: flexbox, responsive and grid"
       },
       {
         "id": "css-s72",
@@ -12489,7 +12626,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Track sizing is a live calculation. As the container narrows, tracks that cannot hold their `minmax()` minimum drop out, and `auto-fit` collapses the empties - so the layout reflows continuously with no breakpoints written anywhere. `1fr` means an equal share of the leftover space, nothing to do with font size."
             }
           ]
-        }
+        },
+        "chapter": "Modern layout: flexbox, responsive and grid"
       },
       {
         "id": "css-s73",
@@ -12574,7 +12712,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "768px is a hardware guess that says nothing about the design, and it is wrong for a 700px desktop window, a split-screen tablet and a foldable alike. Name the breakpoint after the behaviour - \"navigation becomes a single row\" - because that is still true after the devices change."
             }
           ]
-        }
+        },
+        "chapter": "Modern layout: flexbox, responsive and grid"
       },
       {
         "id": "css-s74",
@@ -12660,7 +12799,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "With `width` and `height` attributes the browser knows the aspect ratio before the file arrives, so it reserves the right height and nothing moves. `loading=\"lazy\"` helps initial load performance but does nothing about the shift for images already in view."
             }
           ]
-        }
+        },
+        "chapter": "Modern layout: flexbox, responsive and grid"
       },
       {
         "id": "css-s75",
@@ -12745,7 +12885,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`object-fit` only does anything once the element has a box that differs from the source ratio. With `width: 100%` and no height the image already matches its content, so `cover` silently does nothing. Give the image an `aspect-ratio` or height, then `object-fit: cover` fills the box and crops the overflow."
             }
           ]
-        }
+        },
+        "chapter": "Modern layout: flexbox, responsive and grid"
       },
       {
         "id": "css-s76",
@@ -12832,7 +12973,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Frameworks work perfectly well from a plain stylesheet - Bootstrap and Foundation are built that way. The other three are genuine costs: defaults you must accept or override, a class of markup that is harder to review, and bundle weight for components you never render."
             }
           ]
-        }
+        },
+        "chapter": "Modern layout: flexbox, responsive and grid"
       },
       {
         "id": "css-s77",
@@ -12920,7 +13062,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Tap target size is a design decision, not a sizing one - nothing about `clamp()` or `min()` makes a small target larger. WCAG 2.2 asks for at least 24 by 24 CSS pixels, and 44 by 44 is the comfortable target, including the gaps between adjacent controls."
             }
           ]
-        }
+        },
+        "chapter": "Modern layout: flexbox, responsive and grid"
       },
       {
         "id": "css-s78",
@@ -13004,7 +13147,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "It is a single-axis problem: share the row. Grid is for when rows and columns both need controlling."
             }
           ]
-        }
+        },
+        "chapter": "Modern layout: flexbox, responsive and grid"
       },
       {
         "id": "css-s79",
@@ -13088,7 +13232,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`row`, the default, fills across then down; `column` fills down then across. Adding `dense` backfills earlier holes."
             }
           ]
-        }
+        },
+        "chapter": "Modern layout: flexbox, responsive and grid"
       },
       {
         "id": "css-s80",
@@ -13172,7 +13317,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Item-level alignment always beats the container-level default for that item, regardless of specificity or source order between the two rules."
             }
           ]
-        }
+        },
+        "chapter": "Modern layout: flexbox, responsive and grid"
       }
     ]
   },
@@ -13308,7 +13454,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "A double slash comments out the rest of the line, which is why it is the everyday choice and the fastest way to park a line while you bisect a bug. A block comment uses `/*` and `*/` and can span lines."
             }
           ]
-        }
+        },
+        "chapter": "Getting started"
       },
       {
         "id": "js-s2",
@@ -13395,7 +13542,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The fourth job is fetching data from a server. Reloading is the opposite of the point: it discards every variable and every listener, taking you back to the state the server sent. That is why modern pages change the DOM instead of reloading it."
             }
           ]
-        }
+        },
+        "chapter": "Getting started"
       },
       {
         "id": "js-s3",
@@ -13482,7 +13630,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The inline script has no attributes, so it runs the moment the parser reaches it — at which point the heading below it does not exist. The deferred script runs after parsing, when it would find the element. This is the exact ordering problem `defer` exists to remove."
             }
           ]
-        }
+        },
+        "chapter": "Getting started"
       },
       {
         "id": "js-s4",
@@ -13569,7 +13718,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Reading `element.textContent` gives you exactly what the page now holds, which is the only way to catch a typo in the selector — the writing line and the reading line take different paths through the page."
             }
           ]
-        }
+        },
+        "chapter": "Getting started"
       },
       {
         "id": "js-s5",
@@ -13668,7 +13818,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "A double slash comments out the rest of the line, which makes it the everyday choice and the fastest way to park a line while you bisect a bug. A block comment starts with /* and ends with */ and can span lines."
             }
           ]
-        }
+        },
+        "chapter": "Getting started"
       },
       {
         "id": "js-s6",
@@ -13768,7 +13919,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Two numbers multiply to a number, so the log shows 931 with no quotes. Quotation marks in the output are how you tell a string from a number at a glance — which matters more than it sounds once values start arriving from a form."
             }
           ]
-        }
+        },
+        "chapter": "Getting started"
       },
       {
         "id": "js-s7",
@@ -13867,7 +14019,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Assignment is an expression that produces the assigned value, so this sets `total` to 10 and tests a truthy number. It never fails loudly. Use `total === 10` for the comparison and keep the assignment on its own line."
             }
           ]
-        }
+        },
+        "chapter": "Values, types and operators"
       },
       {
         "id": "js-s8",
@@ -13966,7 +14119,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "A field value is the string \"6\", and a string on either side of `+` turns the whole expression into concatenation. Write `Number(qty) + 4` so the arithmetic happens in numbers, then let the `+` in the sentence do the joining."
             }
           ]
-        }
+        },
+        "chapter": "Values, types and operators"
       },
       {
         "id": "js-s9",
@@ -14052,7 +14206,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Handing `area` to `addEventListener` is correct — the browser calls it with the event object, which then becomes `w`. The mistake is expecting it to receive the dimensions. Wrap it in an arrow that supplies the arguments: `addEventListener(\"click\", () => area(3, 4))`."
             }
           ]
-        }
+        },
+        "chapter": "Values, types and operators"
       },
       {
         "id": "js-s10",
@@ -14153,7 +14308,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The destructured `count` is a bare function reference with no object attached, so `this` inside it is not the cart and `this.items` fails. Keep the call on the object, or bind it explicitly."
             }
           ]
-        }
+        },
+        "chapter": "Values, types and operators"
       },
       {
         "id": "js-s11",
@@ -14240,7 +14396,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Each call registers its own function, and both fire on the same click, so the count jumps by two. That is how `addEventListener` differs from `onclick =`, which replaces. Pass one named handler, or remove the old one before adding the new."
             }
           ]
-        }
+        },
+        "chapter": "Values, types and operators"
       },
       {
         "id": "js-s12",
@@ -14343,7 +14500,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The syntax is fine; the danger is that the value is inserted as markup rather than as text. Build an element and assign to `textContent` instead — text set that way is displayed as characters and can never become a tag."
             }
           ]
-        }
+        },
+        "chapter": "Values, types and operators"
       },
       {
         "id": "js-s13",
@@ -14433,7 +14591,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The sum is 0.30000000000000004, so the branch never runs and no error is reported. Compare rounded values (`Math.round(cents * 100) === 30`), compare a tolerance (`Math.abs(cents - 0.3) < 0.001`), or store money as whole pence so the question never arises."
             }
           ]
-        }
+        },
+        "chapter": "Values, types and operators"
       },
       {
         "id": "js-s14",
@@ -14533,7 +14692,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`filter` keeps the items its callback accepts and drops the rest. `map` transforms items one for one, so it always returns the same length, and `reduce` folds the array down to a single value. When the output has to be an array and its length may shrink, that is `filter`."
             }
           ]
-        }
+        },
+        "chapter": "Arrays, dates and numbers"
       },
       {
         "id": "js-s15",
@@ -14620,7 +14780,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Subtracting the two values produces a negative number when a is smaller, zero when they are equal, and a positive number when a is larger — exactly the contract sort expects. Swapping to `b - a` gives the descending order instead."
             }
           ]
-        }
+        },
+        "chapter": "Arrays, dates and numbers"
       },
       {
         "id": "js-s16",
@@ -14707,7 +14868,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`Date.now()` gives the epoch milliseconds directly, which is cheaper than building a Date and reading getTime(). It is also how you time a piece of code: read it before and after, and subtract."
             }
           ]
-        }
+        },
+        "chapter": "Arrays, dates and numbers"
       },
       {
         "id": "js-s17",
@@ -14794,7 +14956,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`getTimezoneOffset()` returns local time minus UTC in minutes, so UTC+1 gives -60. The sign is the part people get wrong: the answer is how far *behind* UTC you are, not your offset from it."
             }
           ]
-        }
+        },
+        "chapter": "Arrays, dates and numbers"
       },
       {
         "id": "js-s18",
@@ -14881,7 +15044,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`Math.abs(-4.7)` is 4.7. It is the function you want whenever a value may be either direction — a difference, a delta, an offset — because squaring or negating it by hand is where sign errors creep in."
             }
           ]
-        }
+        },
+        "chapter": "Arrays, dates and numbers"
       },
       {
         "id": "js-s19",
@@ -14968,7 +15132,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The multiplier is the number of possible items, which is the full length. Subtracting one drops the final element, so it never appears no matter how many times the page is reloaded. The version with `tips.length` gives every item the same chance."
             }
           ]
-        }
+        },
+        "chapter": "Arrays, dates and numbers"
       },
       {
         "id": "js-s20",
@@ -15054,7 +15219,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Truthiness is the rule, and it has a short list of falsy values: false, 0, 0n, the empty string, null, undefined and NaN. Everything else passes a condition, including empty arrays, empty objects and the string \"0\" — which is why a check on a form field should say what it means rather than rely on the default."
             }
           ]
-        }
+        },
+        "chapter": "Arrays, dates and numbers"
       },
       {
         "id": "js-s21",
@@ -15140,7 +15306,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Short-circuiting only protects the code on the **right** of `&&`. `items.length` is evaluated first, so an absent `items` throws there. Write the risky check first: `if (items && items.length > 0 && items[0].name)`."
             }
           ]
-        }
+        },
+        "chapter": "Control flow and errors"
       },
       {
         "id": "js-s22",
@@ -15237,7 +15404,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`break` leaves the `switch` immediately. Without it JavaScript keeps falling into the following blocks, which is sometimes what you want - stacking `case 3:` and `case 4:` above one block is exactly that - but usually it is a missing keyword rather than a design."
             }
           ]
-        }
+        },
+        "chapter": "Control flow and errors"
       },
       {
         "id": "js-s23",
@@ -15321,7 +15489,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`continue` jumps to the next iteration, leaving the rest of the current body unexecuted. `break` is the one that leaves the loop entirely. Both can also be used inside a `switch`, where `break` is what stops a `case` falling into the next."
             }
           ]
-        }
+        },
+        "chapter": "Control flow and errors"
       },
       {
         "id": "js-s24",
@@ -15408,7 +15577,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`items.entries()` yields `[index, value]` pairs, so `for (const [i, item] of items.entries())` gives you both names at once. It replaces the manual counter that otherwise creeps into a `for…of` loop."
             }
           ]
-        }
+        },
+        "chapter": "Control flow and errors"
       },
       {
         "id": "js-s25",
@@ -15495,7 +15665,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`n.toString(2)` gives the bits as a string, and `parseInt(text, 2)` turns them back. Every bitwise operator is easier to check once you can see the binary, because each one then reads as \"keep this column\" or \"flip this column\"."
             }
           ]
-        }
+        },
+        "chapter": "Control flow and errors"
       },
       {
         "id": "js-s26",
@@ -15586,7 +15757,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`str.match(pattern)` gives the first match, its index, and any groups after it. Without `g` that is what you get; with `g` you get a flat array of matches and no groups. `matchAll` walks every match while keeping the groups."
             }
           ]
-        }
+        },
+        "chapter": "Control flow and errors"
       },
       {
         "id": "js-s27",
@@ -15673,7 +15845,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`error.message` is the text you wrote when you threw, and it is what a browser prints on the first line of the stack. `error.name` is the class, and `error instanceof TypeError` tells a caller which kind of mistake it was."
             }
           ]
-        }
+        },
+        "chapter": "Control flow and errors"
       },
       {
         "id": "js-s28",
@@ -15760,7 +15933,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The assignment has no `let`, `const` or `var` in front of it, so it creates a global. Both returned functions close over that same global, so calling `a()` also moves `b()` — the exact opposite of the sealed counter the factory is there to provide. Declare `let count = 0` inside `makeCounter`."
             }
           ]
-        }
+        },
+        "chapter": "Scope, this and classes"
       },
       {
         "id": "js-s29",
@@ -15846,7 +16020,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "This is hoisting doing its job. `getConfig` is a function declaration, so it is fully defined before the first statement runs, and calling it above the definition is safe. The same code with `const getConfig = () => ...` would throw, which is the difference worth remembering when you convert declarations into arrows."
             }
           ]
-        }
+        },
+        "chapter": "Scope, this and classes"
       },
       {
         "id": "js-s30",
@@ -15931,7 +16106,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "It has to come first, or JavaScript treats it as an ordinary string expression and nothing happens — which is the quietest strict mode failure there is, because nothing looks wrong. A comment above it is fine; a line of code above it is not."
             }
           ]
-        }
+        },
+        "chapter": "Scope, this and classes"
       },
       {
         "id": "js-s31",
@@ -16017,7 +16193,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Explicit binding is `call`, `apply` and `bind`. It is the escape hatch for the case where the call site cannot be changed, which is exactly what happens when a method is passed somewhere as a callback: `list.forEach(obj.render.bind(obj))`."
             }
           ]
-        }
+        },
+        "chapter": "Scope, this and classes"
       },
       {
         "id": "js-s32",
@@ -16103,7 +16280,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Classes give instances a prototype chain and arrows give them nothing. This is one of several reasons an arrow is the wrong shape for an object method — it also has no `this` of its own, so it would keep referring to the object it was defined beside."
             }
           ]
-        }
+        },
+        "chapter": "Scope, this and classes"
       },
       {
         "id": "js-s33",
@@ -16189,7 +16367,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`static empty()` lives on the class, so you call `Cart.empty()` and never `cart.empty()`. It is the right home for a factory or a helper that does not need instance state — and the wrong home for anything that reads `this`."
             }
           ]
-        }
+        },
+        "chapter": "Scope, this and classes"
       },
       {
         "id": "js-s34",
@@ -16275,7 +16454,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`JSON.stringify(value, replacer, indent)` takes the indent as its third argument. The second one is the replacer: an array of keys to keep, or a function called for each key — which is how you build a payload without leaking a password hash or an internal id."
             }
           ]
-        }
+        },
+        "chapter": "Scope, this and classes"
       },
       {
         "id": "js-s35",
@@ -16363,7 +16543,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`==` converts the string to a number first, so `'0'` and `0` are equal. `===` compares type first and says no. This is why a value read from an input or a URL — both strings — will pass a `== 0` check and fail a `=== 0` one, and why the loose comparison is the mistake worth naming."
             }
           ]
-        }
+        },
+        "chapter": "Scope, this and classes"
       },
       {
         "id": "js-s36",
@@ -16475,7 +16656,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The loop runs one time too many, so the last pass reads `rows[2]`, which is `undefined`, and adding undefined gives NaN — which prints as NaN rather than throwing, so the loop looks like it worked. Use `i < rows.length`, or better `for (const row of rows)`."
             }
           ]
-        }
+        },
+        "chapter": "Scope, this and classes"
       },
       {
         "id": "js-s37",
@@ -16562,7 +16744,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Reading and writing a property of a `const` object is fine — only assigning to the name `config` itself is blocked. Bracket and dot notation are interchangeable here, and the one-property literal needs no comma after it."
             }
           ]
-        }
+        },
+        "chapter": "Objects, prototypes and closures"
       },
       {
         "id": "js-s38",
@@ -16649,7 +16832,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`console.table` is the quickest way to compare a few records. `console.log` is fine for one object, and `JSON.stringify` is the one to reach for when the value is going into HTML or over the network."
             }
           ]
-        }
+        },
+        "chapter": "Objects, prototypes and closures"
       },
       {
         "id": "js-s39",
@@ -16738,7 +16922,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The underscore is a convention, not a keyword — nothing enforces it, it just tells the next reader which name is not theirs to touch. A Symbol would enforce it properly, at the cost of uglier code."
             }
           ]
-        }
+        },
+        "chapter": "Objects, prototypes and closures"
       },
       {
         "id": "js-s40",
@@ -16825,7 +17010,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`dune instanceof Book` walks the prototype chain, so it is true for the object and for anything built from it by a related constructor. Comparing `book.constructor === Book` answers a similar question but is easier to break with a hand-written prototype chain."
             }
           ]
-        }
+        },
+        "chapter": "Objects, prototypes and closures"
       },
       {
         "id": "js-s41",
@@ -16912,7 +17098,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`Object.create(proto)` builds an object linked to `proto`, so it inherits from it but owns nothing — `Object.keys` on the result is empty. Passing `null` ends the chain, which is how you get an object with no inherited methods at all."
             }
           ]
-        }
+        },
+        "chapter": "Objects, prototypes and closures"
       },
       {
         "id": "js-s42",
@@ -17002,7 +17189,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "A Map is iterable directly, so `for (const [key, value] of map)` works with no conversion call. Spreading with `[...map]` gives the `[key, value]` pairs as arrays, exactly the shape `Object.entries` produces for an object."
             }
           ]
-        }
+        },
+        "chapter": "Objects, prototypes and closures"
       },
       {
         "id": "js-s43",
@@ -17089,7 +17277,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Hoisting applies to every declaration, but only function declarations carry their value up with the name. `let` and `const` are hoisted as names only, and touching one before its line is the ReferenceError the term also covers."
             }
           ]
-        }
+        },
+        "chapter": "Objects, prototypes and closures"
       },
       {
         "id": "js-s44",
@@ -17178,7 +17367,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The three dots work in both directions with opposite jobs. The rest parameter gathers the arguments into an array, and the spread in the call hands the array to the function one value at a time."
             }
           ]
-        }
+        },
+        "chapter": "Objects, prototypes and closures"
       },
       {
         "id": "js-s45",
@@ -17275,7 +17465,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The object is not passed to `setInterval`, only the function. When the timer fires, there is nothing to the left of the call, so `this` is undefined. Write `setInterval(app.tick.bind(app), 1000)` or `setInterval(() => app.tick(), 1000)`."
             }
           ]
-        }
+        },
+        "chapter": "Objects, prototypes and closures"
       },
       {
         "id": "js-s46",
@@ -17359,7 +17550,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Returning the array itself hands out the one binding the module was trying to keep private. Any caller could then run `all().length = 0` and wipe the state. Return a copy instead, with `items.slice()`."
             }
           ]
-        }
+        },
+        "chapter": "Objects, prototypes and closures"
       },
       {
         "id": "js-s47",
@@ -17443,7 +17635,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The parent constructor must run first. Move `super(name)` to the top of the child constructor, then set your own fields."
             }
           ]
-        }
+        },
+        "chapter": "Objects, prototypes and closures"
       },
       {
         "id": "js-s48",
@@ -17527,7 +17720,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Static methods can return ordinary values, including object literals, and `Object.assign` in a constructor is idiomatic. If the intent was a static that builds a configured instance, it should return `new Config(...)` rather than leaving callers to assemble the object themselves."
             }
           ]
-        }
+        },
+        "chapter": "Objects, prototypes and closures"
       },
       {
         "id": "js-s49",
@@ -17614,7 +17808,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Pass the bare function reference — `setTimeout(fn, 500)` — and the browser calls it when the delay expires. Adding parentheses turns the passing into a call, which is the mistake the rule exists to prevent."
             }
           ]
-        }
+        },
+        "chapter": "Async and the DOM"
       },
       {
         "id": "js-s50",
@@ -17701,7 +17896,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`Promise.all` needs every result to be meaningful, so it rejects on the first failure and discards the successes. `Promise.allSettled` always waits for the lot and reports each outcome with a `status` of `fulfilled` or `rejected`, which is the one you want when partial results still have value."
             }
           ]
-        }
+        },
+        "chapter": "Async and the DOM"
       },
       {
         "id": "js-s51",
@@ -17788,7 +17984,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`Promise.allSettled` reports outcomes instead of collapsing them into a single success or failure, which makes it right for several independent widgets where one failure should not blank the page. `Promise.all` needs every result and rejects on the first failure."
             }
           ]
-        }
+        },
+        "chapter": "Async and the DOM"
       },
       {
         "id": "js-s52",
@@ -17875,7 +18072,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`finally` runs on both paths and does not swallow the value or the error, so cleanup belongs there. `catch` alone would leave the button disabled whenever the request failed — which is the case where the user most needs to try again."
             }
           ]
-        }
+        },
+        "chapter": "Async and the DOM"
       },
       {
         "id": "js-s53",
@@ -17962,7 +18160,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`textContent` treats every character as text, so a `<` stays a `<` and nothing executes. `innerHTML` parses the string as markup, which is what turns a pasted `<img onerror=...>` into a script running on your page."
             }
           ]
-        }
+        },
+        "chapter": "Async and the DOM"
       },
       {
         "id": "js-s54",
@@ -18047,7 +18246,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`document.createTextNode(\"text\")` makes a text node. It is rarely needed directly because `textContent` and `append` with a string handle it for you, but it exists for cases where you need fine-grained control."
             }
           ]
-        }
+        },
+        "chapter": "Async and the DOM"
       },
       {
         "id": "js-s55",
@@ -18132,7 +18332,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`list.replaceChildren(...nodes)` clears the container and inserts the given nodes in one atomic step. It is the modern replacement for `innerHTML = \"\"` followed by multiple appends."
             }
           ]
-        }
+        },
+        "chapter": "Async and the DOM"
       },
       {
         "id": "js-s56",
@@ -18217,7 +18418,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "element.classList is a DOMTokenList with add, remove, toggle, and contains methods. It is the standard way to manipulate classes without string concatenation."
             }
           ]
-        }
+        },
+        "chapter": "Async and the DOM"
       },
       {
         "id": "js-s57",
@@ -18302,7 +18504,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Call event.preventDefault() inside the submit handler. It cancels the default navigation while letting your code run."
             }
           ]
-        }
+        },
+        "chapter": "Async and the DOM"
       },
       {
         "id": "js-s58",
@@ -18388,7 +18591,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "element.style.setProperty(\"--name\", \"value\") sets a custom property. It is the only way to set a variable with a dash in its name from JavaScript."
             }
           ]
-        }
+        },
+        "chapter": "Async and the DOM"
       },
       {
         "id": "js-s59",
@@ -18473,7 +18677,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "anim.finish() completes the animation immediately and resolves the finished Promise. cancel() stops it and reverts unless fill: forwards is set."
             }
           ]
-        }
+        },
+        "chapter": "Async and the DOM"
       },
       {
         "id": "js-s60",
@@ -18573,7 +18778,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The first pass is fine; the second pass doubles every handler. Either attach once outside any re-render, or put a single listener on the list and read `event.target` — delegation has no way to double up."
             }
           ]
-        }
+        },
+        "chapter": "DOM events and the window"
       },
       {
         "id": "js-s61",
@@ -18660,7 +18866,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`firstChild` is the first node of any kind, and in indented markup that is a text node holding a newline and some spaces. `firstElementChild` skips text nodes and gives you the `li` you meant."
             }
           ]
-        }
+        },
+        "chapter": "DOM events and the window"
       },
       {
         "id": "js-s62",
@@ -18748,7 +18955,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The mutating methods return nothing on purpose, so nothing waits for a return value. Assigning one back to the variable throws the element away — the item is on the page, but you no longer have a reference to it."
             }
           ]
-        }
+        },
+        "chapter": "DOM events and the window"
       },
       {
         "id": "js-s63",
@@ -18835,7 +19043,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "With a live collection the condition genuinely reaches zero — on a list that has more items than can be removed in time, or a collection that re-queries. The version people actually hit is the reverse: a `querySelectorAll` list is a stale copy, so items added during the loop survive. Copy with `Array.from` first and both problems disappear."
             }
           ]
-        }
+        },
+        "chapter": "DOM events and the window"
       },
       {
         "id": "js-s64",
@@ -18922,7 +19131,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "`innerWidth` counts the scrollbar, and `width` on a content-box element adds padding and border on top. For a full-width panel use `width: 100%` and let the box model do the work; use `clientWidth` when you genuinely need a measured number."
             }
           ]
-        }
+        },
+        "chapter": "DOM events and the window"
       },
       {
         "id": "js-s65",
@@ -19009,7 +19219,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Navigation is not wrong, but the page that stays in the history depends on it: assigning `href` adds an entry, and the user does get Back. The real cost of doing it from a handler is that there is no link to middle-click or open in a new tab — so use a real `<a href>` whenever the destination is a URL you could have linked to."
             }
           ]
-        }
+        },
+        "chapter": "DOM events and the window"
       },
       {
         "id": "js-s66",
@@ -19094,7 +19305,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The entry is still there and the URL still changes. Only your own listener can move the content, which is the whole reason popstate exists."
             }
           ]
-        }
+        },
+        "chapter": "Browser APIs and storage"
       },
       {
         "id": "js-s67",
@@ -19179,7 +19391,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The string format is not a contract. Test the feature instead: matchMedia(\"(pointer: coarse)\") for a touch device, or the presence of the API or CSS you are about to use."
             }
           ]
-        }
+        },
+        "chapter": "Browser APIs and storage"
       },
       {
         "id": "js-s68",
@@ -19264,7 +19477,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "That is tabnabbing. The fix is a third argument of \"noopener\", and the same rel=\"noopener\" on any link in your own markup that uses target=\"_blank\"."
             }
           ]
-        }
+        },
+        "chapter": "Browser APIs and storage"
       },
       {
         "id": "js-s69",
@@ -19349,7 +19563,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The browser clamps nested timers to roughly 4ms and throttles them further, so you get a busy loop that is not in step with any frame and keeps running in a hidden tab. Use requestAnimationFrame for motion."
             }
           ]
-        }
+        },
+        "chapter": "Browser APIs and storage"
       },
       {
         "id": "js-s70",
@@ -19434,7 +19649,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "A cookie set this way is readable by every script on the page and is attached to every matching request. A session identifier belongs in a server-set httpOnly cookie instead."
             }
           ]
-        }
+        },
+        "chapter": "Browser APIs and storage"
       },
       {
         "id": "js-s71",
@@ -19520,7 +19736,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Without preventDefault the browser performs its own navigation, and the page unloads before the fetch can be read. FormData sets its own multipart content type, so that header is the browser’s job."
             }
           ]
-        }
+        },
+        "chapter": "Browser APIs and storage"
       },
       {
         "id": "js-s72",
@@ -19605,7 +19822,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Storage is not a database: writes block the main thread, the origin has roughly 5 MB, and the excess raises a QuotaExceededError. Keep one key with a bounded value rather than a key per row."
             }
           ]
-        }
+        },
+        "chapter": "Browser APIs and storage"
       },
       {
         "id": "js-s73",
@@ -19689,7 +19907,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The message arrives with data 7, the worker doubles it and posts 14 back, and the main thread logs it. The result is asynchronous: the console line appears after postMessage returns, never before it, which is why nothing in main.js needs to wait for a worker to be ready."
             }
           ]
-        }
+        },
+        "chapter": "Fetch, AJAX and workers"
       },
       {
         "id": "js-s74",
@@ -19776,7 +19995,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The 404 resolves rather than rejecting, so the catch never runs and the code goes on to parse an HTML error page as JSON. The rejection happens inside response.json(), which produces a SyntaxError about unexpected tokens - an accurate message about the wrong thing. Checking response.ok first would have turned this into a clear \"HTTP 404\"."
             }
           ]
-        }
+        },
+        "chapter": "Fetch, AJAX and workers"
       },
       {
         "id": "js-s75",
@@ -19862,7 +20082,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "A refusal is delivered to the error callback, and there is none here, so the user declining produces complete silence - which is exactly the symptom described. The page being served over plain http, so geolocation is undefined, is the other candidate worth checking; it usually throws rather than failing silently."
             }
           ]
-        }
+        },
+        "chapter": "Fetch, AJAX and workers"
       },
       {
         "id": "js-s76",
@@ -19987,7 +20208,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "open names the request and moves the object to OPENED, so readyState is 1, and nothing has gone over the wire yet, so sent is false. Calling open with a method and a URL is enough; the third argument is only for asynchronous behaviour and defaults to true."
             }
           ]
-        }
+        },
+        "chapter": "Fetch, AJAX and workers"
       },
       {
         "id": "js-s77",
@@ -20085,7 +20307,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Nothing orders the responses, so a slow request started two keystrokes ago can land after the newest one and overwrite it. Number the requests and drop any answer that is not the latest, or abort the previous request. The string-building on the last line is a second problem: it re-parses the whole list on every item and would execute markup that came from the server."
             }
           ]
-        }
+        },
+        "chapter": "Fetch, AJAX and workers"
       },
       {
         "id": "js-s78",
@@ -20186,7 +20409,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "JSON has no trailing commas anywhere, and a parser stops at the comma it cannot use. This is the most common copy-paste failure, because JavaScript object literals accept the very same thing and nothing warns you until the parse."
             }
           ]
-        }
+        },
+        "chapter": "JSON, modules and the final project"
       },
       {
         "id": "js-s79",
@@ -20300,7 +20524,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The text inside the script tag is characters, so you have to parse it before reading properties: `JSON.parse(island.textContent).tags`. Skipping the parse gives a TypeError about reading a property of undefined."
             }
           ]
-        }
+        },
+        "chapter": "JSON, modules and the final project"
       },
       {
         "id": "js-s80",
@@ -20384,7 +20609,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "A default import without braces expects a default export, and utils.js only has a named one. `import { greet } from \"./utils.js\"` is the fix, and the failure is loud rather than silent, which is exactly why named exports are the safer default."
             }
           ]
-        }
+        },
+        "chapter": "JSON, modules and the final project"
       },
       {
         "id": "js-s81",
@@ -20471,7 +20697,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "The first line inside render must be `list.replaceChildren()`. Without it the loop adds the whole array to whatever is already there, and the visible list grows every time while the data stays correct — the drift that rebuilding from scratch exists to prevent."
             }
           ]
-        }
+        },
+        "chapter": "JSON, modules and the final project"
       }
     ]
   },

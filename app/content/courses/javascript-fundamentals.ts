@@ -1,5 +1,6 @@
 import type { Course } from '~/types/content'
 import { projectsForCourse } from '~/content/projects'
+import { withChapter } from './chapters'
 import { jsFoundationsSections } from './js/01-foundations'
 import { jsCoreLanguageSections } from './js/02-core-language'
 import { jsArraysDatesSections } from './js/03-arrays-dates'
@@ -51,19 +52,20 @@ export const javascriptFundamentals: Course = {
   ],
   icon: 'JS',
   sections: [
-    ...jsFoundationsSections,
-    ...jsCoreLanguageSections,
-    ...jsArraysDatesSections,
-    ...jsFlowErrorsSections,
-    ...jsMechanicsSections,
-    ...jsObjectsPrototypesSections,
-    ...jsFunctionsClassesSections,
-    ...jsAsyncDomIntroSections,
-    ...jsDomWritesSections,
-    ...jsDomEventsWindowSections,
-    ...jsBomApisSections,
-    ...jsFetchAjaxSections,
-    ...jsJsonProjectSections,
+    ...withChapter('Getting started', jsFoundationsSections),
+    ...withChapter('Values, types and operators', jsCoreLanguageSections),
+    ...withChapter('Arrays, dates and numbers', jsArraysDatesSections),
+    ...withChapter('Control flow and errors', jsFlowErrorsSections),
+    ...withChapter('Scope, this and classes', jsMechanicsSections),
+    ...withChapter('Objects, prototypes and closures', [
+      ...jsObjectsPrototypesSections,
+      ...jsFunctionsClassesSections,
+    ]),
+    ...withChapter('Async and the DOM', [...jsAsyncDomIntroSections, ...jsDomWritesSections]),
+    ...withChapter('DOM events and the window', jsDomEventsWindowSections),
+    ...withChapter('Browser APIs and storage', jsBomApisSections),
+    ...withChapter('Fetch, AJAX and workers', jsFetchAjaxSections),
+    ...withChapter('JSON, modules and the final project', jsJsonProjectSections),
   ],
   projects: projectsForCourse('javascript-fundamentals'),
 }
