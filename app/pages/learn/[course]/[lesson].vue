@@ -15,8 +15,12 @@
       id="course-drawer"
       class="fixed inset-x-0 bottom-0 top-16 z-40 lg:hidden"
     >
-      <div class="absolute inset-0 bg-ink-950/80" @click="drawerOpen = false" />
+      <div class="absolute inset-0 bg-ink-950/80" @click="closeDrawer()" />
       <div
+        ref="drawerEl"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Course navigation"
         class="absolute bottom-0 left-0 top-14 w-[86vw] max-w-sm overflow-hidden border-r border-ink-600 bg-ink-900"
       >
         <LearnCourseSidebar
@@ -36,7 +40,7 @@
           open-label="Open course navigation"
           close-label="Close course navigation"
           class="lg:hidden"
-          @toggle="drawerOpen = !drawerOpen"
+          @toggle="drawerOpen ? closeDrawer() : openDrawer()"
         />
         <p class="truncate font-mono text-[11px] uppercase tracking-wider text-dim">
           {{ course.shortTitle }} · {{ lesson.sectionTitle }}
@@ -176,6 +180,79 @@ const { isLessonComplete, isExerciseComplete, completeLesson, visitLesson } = us
 useHead({ title: computed(() => lesson.value?.title ?? 'Lesson') })
 
 const drawerOpen = ref(false)
+const drawerEl = ref<HTMLElement | null>(null)
+
+/**
+ * The drawer covers the lesson at narrow widths, so it behaves like a modal:
+ * focus moves in on open, Tab stays inside, Escape closes it, and focus returns
+ * to the button that opened it. Route changes also close it, but must not steal
+ * focus from the lesson that just loaded.
+ */
+let restoreFocusOnClose = true
+
+function drawerFocusables(): HTMLElement[] {
+  const selector =
+    'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+  return Array.from(drawerEl.value?.querySelectorAll<HTMLElement>(selector) ?? [])
+}
+
+function drawerTrigger(): HTMLElement | null {
+  return document.querySelector<HTMLElement>('button[aria-controls="course-drawer"]')
+}
+
+function openDrawer() {
+  restoreFocusOnClose = true
+  drawerOpen.value = true
+}
+
+function closeDrawer(restoreFocus = true) {
+  restoreFocusOnClose = restoreFocus
+  drawerOpen.value = false
+}
+
+watch(drawerOpen, async (open) => {
+  if (!import.meta.client) return
+  await nextTick()
+  if (open) {
+    drawerFocusables()[0]?.focus()
+    return
+  }
+  if (restoreFocusOnClose) drawerTrigger()?.focus()
+  restoreFocusOnClose = true
+})
+
+function onDrawerKeydown(event: KeyboardEvent) {
+  if (!drawerOpen.value) return
+
+  if (event.key === 'Escape') {
+    event.preventDefault()
+    closeDrawer()
+    return
+  }
+  if (event.key !== 'Tab') return
+
+  const items = drawerFocusables()
+  if (!items.length) return
+  const first = items[0]!
+  const last = items[items.length - 1]!
+  const current = document.activeElement
+  const inside = current instanceof Node && drawerEl.value?.contains(current)
+
+  if (!inside) {
+    event.preventDefault()
+    const target = event.shiftKey ? last : first
+    target.focus()
+  } else if (event.shiftKey && current === first) {
+    event.preventDefault()
+    last.focus()
+  } else if (!event.shiftKey && current === last) {
+    event.preventDefault()
+    first.focus()
+  }
+}
+
+onMounted(() => document.addEventListener('keydown', onDrawerKeydown))
+onBeforeUnmount(() => document.removeEventListener('keydown', onDrawerKeydown))
 
 const scrollContainer = ref<HTMLElement | null>(null)
 
@@ -266,7 +343,7 @@ watch(
   ([current, hash]) => {
     if (!current) return
     visitLesson(current.id)
-    drawerOpen.value = false
+    if (drawerOpen.value) closeDrawer(false)
     pendingHash.value = hash ? decodeURIComponent(hash.replace(/^#/, '')) : ''
     void applyScroll()
   },

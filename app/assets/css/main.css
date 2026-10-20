@@ -12,7 +12,7 @@
   --color-mist-50: #f4f7fa;
   --color-mist-200: #c3ccd7;
   --color-muted: #8b96a5;
-  --color-dim: #6a7482;
+  --color-dim: #818c9b;
 
   --color-brand: #29e2bd;
   --color-brand-soft: #7ff2d9;
@@ -51,17 +51,17 @@
 
     --color-mist-50: #0b0d10;
     --color-mist-200: #333c47;
-    --color-muted: #5a6370;
-    --color-dim: #6a7482;
+    --color-muted: #545d6a;
+    --color-dim: #4b535e;
 
-    --color-brand: #12a184;
+    --color-brand: #066852;
     --color-brand-soft: #29e2bd;
-    --color-brand-deep: #0a7a60;
+    --color-brand-deep: #044a3b;
 
-    --color-ok: #2aa86c;
-    --color-warn: #c48f2a;
-    --color-bad: #c43a44;
-    --color-info: #3a7de0;
+    --color-ok: #1d7a4d;
+    --color-warn: #8a5f00;
+    --color-bad: #a8232d;
+    --color-info: #1d5fbf;
 
     /* Light mode specific overrides */
     --color-prose-text: #1e293b;
@@ -79,7 +79,7 @@
     --color-token-comment: #64748b;
     --color-token-keyword: #7c3aed;
     --color-token-number: #c2410c;
-    --color-token-function: #0284c7;
+    --color-token-function: #0369a1;
     --color-token-property: #0369a1;
     --color-token-operator: #475569;
     --color-token-punctuation: #64748b;
@@ -109,13 +109,13 @@
     --color-token-tag: #7ff2d9;
     --color-token-attr: #62a8ff;
     --color-token-string: #f5b544;
-    --color-token-comment: #5c6774;
+    --color-token-comment: #7d8896;
     --color-token-keyword: #c792ea;
     --color-token-number: #f78c6c;
     --color-token-function: #82aaff;
     --color-token-property: #89ddff;
     --color-token-operator: #8b96a5;
-    --color-token-punctuation: #6a7482;
+    --color-token-punctuation: #8b96a5;
     --color-token-selector: #c3e88d;
     --color-token-value: #e4e7ea;
     --color-token-atrule: #f78c6c;
