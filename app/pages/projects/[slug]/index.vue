@@ -6,6 +6,15 @@
       <span class="text-muted">{{ project.title }}</span>
     </nav>
 
+    <NuxtLink
+      v-if="isCapstone"
+      to="/courses/frontend-projects"
+      class="mt-3 inline-flex items-center gap-1.5 rounded-lg border border-brand/25 bg-brand/5 px-3 py-1.5 text-xs font-medium text-brand transition hover:border-brand/50"
+    >
+      Part of the Frontend Projects capstone track
+      <span aria-hidden="true">&rarr;</span>
+    </NuxtLink>
+
     <header class="mt-4 flex flex-wrap items-start justify-between gap-6">
       <div class="max-w-2xl">
         <div class="flex flex-wrap items-center gap-2">
@@ -252,6 +261,10 @@ import { downloadZip } from '~/utils/zip'
 
 const route = useRoute()
 const project = computed(() => getProject(String(route.params.slug)))
+const capstoneCourse = getCourse('frontend-projects')
+const isCapstone = computed(
+  () => capstoneCourse?.projects.includes(project.value?.slug ?? '') ?? false,
+)
 const { isProjectComplete, completeProject } = useLearningProgress()
 
 useHead({ title: computed(() => project.value?.title ?? 'Project') })

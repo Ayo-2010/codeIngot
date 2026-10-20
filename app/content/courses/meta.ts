@@ -26130,7 +26130,7 @@ export const courseMeta: CourseMeta[] = [
     "slug": "frontend-projects",
     "title": "Frontend Projects",
     "shortTitle": "Projects",
-    "description": "Take a page from brief to built: plan the structure, write mobile-first responsive CSS, and make every control work for keyboard and screen-reader users. Every lesson ends in a checkpoint you can test.",
+    "description": "Five guided builds from brief to shipped URL: plan the structure, write mobile-first CSS, add deliberate JavaScript, and finish with a README and a live link. Every build has its own workspace and checklist.",
     "technology": "html",
     "category": "projects",
     "type": "course",
@@ -26149,7 +26149,13 @@ export const courseMeta: CourseMeta[] = [
       "deployment"
     ],
     "icon": "◆",
-    "projects": [],
+    "projects": [
+      "personal-profile-page",
+      "responsive-landing-page",
+      "interactive-calculator",
+      "todo-application",
+      "quiz-application"
+    ],
     "sections": [
       {
         "id": "fp-s1",
@@ -26247,7 +26253,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Use semantic elements: <header> for the top banner, <nav> for navigation. This conveys meaning to assistive technology."
             }
           ]
-        }
+        },
+        "chapter": "Foundations and skills"
       },
       {
         "id": "fp-s2",
@@ -26345,7 +26352,8 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "Using both min-width and max-width at the same breakpoint creates ambiguity at exactly 768px. Stick to one direction (usually min-width/mobile-first)."
             }
           ]
-        }
+        },
+        "chapter": "Foundations and skills"
       },
       {
         "id": "fp-s3",
@@ -26442,7 +26450,605 @@ export const courseMeta: CourseMeta[] = [
               "explanation": "A div is not focusable by default and does not respond to Enter. Use a <button> element which is natively keyboard-accessible."
             }
           ]
-        }
+        },
+        "chapter": "Foundations and skills"
+      },
+      {
+        "id": "fp-s4",
+        "title": "Capstone: Personal Profile Page",
+        "description": "A structure-first build: landmarks, a heading outline, a portrait and a contact form, all complete before the first stylesheet.",
+        "lessons": [
+          {
+            "id": "fp-l7",
+            "title": "Plan the profile page",
+            "description": "Reading the brief, inventorying the page, and writing the heading outline before any markup.",
+            "duration": 6,
+            "objectives": [
+              "Turn a project brief into a list of sections and components",
+              "Write a heading outline with one h1 and no skipped levels",
+              "Choose the landmark elements the page needs before styling it"
+            ],
+            "xp": 40,
+            "exerciseCount": 0
+          },
+          {
+            "id": "fp-l8",
+            "title": "Build and submit the profile page",
+            "description": "Filling the outline with real content, checking the images and form, and running the project checklist.",
+            "duration": 8,
+            "objectives": [
+              "Write the document skeleton and the profile block from the outline",
+              "Label every form control and give every image useful alt text",
+              "Run the automated checks and the manual review before submitting"
+            ],
+            "xp": 50,
+            "exerciseCount": 0
+          }
+        ],
+        "quiz": {
+          "id": "quiz-fp-s4",
+          "title": "Profile page check",
+          "passingScore": 60,
+          "questions": [
+            {
+              "id": "quiz-fp-s4-q1",
+              "type": "multiple-choice",
+              "prompt": "Which element should contain the page's unique primary content?",
+              "options": [
+                "<section>",
+                "<main>",
+                "<article>",
+                "<div>"
+              ],
+              "answer": 1,
+              "explanation": "main is the landmark for the primary content of the page. A page has one main region, and it is the fastest way for assistive technology to skip the repeated header and navigation."
+            },
+            {
+              "id": "quiz-fp-s4-q2",
+              "type": "true-false",
+              "prompt": "Every image must have a non-empty alt attribute.",
+              "answer": false,
+              "explanation": "A decorative image should use alt=\"\" so it is skipped. A meaningful image needs descriptive alt text; omitting the attribute entirely is the mistake."
+            },
+            {
+              "id": "quiz-fp-s4-q3",
+              "type": "multiple-choice",
+              "prompt": "Why give a profile image explicit width and height attributes?",
+              "options": [
+                "To make the file smaller",
+                "To reserve space and avoid layout shift while it loads",
+                "To improve the colour accuracy",
+                "To add a border automatically"
+              ],
+              "answer": 1,
+              "explanation": "The browser can reserve the correct box before the image arrives, so the text does not jump when it loads."
+            },
+            {
+              "id": "quiz-fp-s4-q4",
+              "type": "blank",
+              "prompt": "The HTML element used for the page's primary content is ___.",
+              "answers": [
+                "main",
+                "<main>"
+              ],
+              "explanation": "main is the landmark that holds the content unique to this page."
+            },
+            {
+              "id": "quiz-fp-s4-q5",
+              "type": "identify-error",
+              "prompt": "What is wrong with this heading outline?",
+              "code": "<h1>Alex Rivera</h1>\n<h3>About</h3>\n<h3>Skills</h3>\n<h3>Contact</h3>",
+              "options": [
+                "There is more than one heading",
+                "The section headings skip h2",
+                "Headings must be inside a div",
+                "h1 should come last"
+              ],
+              "answer": 1,
+              "explanation": "The outline jumps from h1 to h3. The three peer sections should use h2, so the document has no missing level."
+            }
+          ]
+        },
+        "chapter": "Capstone builds"
+      },
+      {
+        "id": "fp-s5",
+        "title": "Capstone: Responsive Landing Page",
+        "description": "A product page that starts narrow, adds a grid and exactly one breakpoint, and keeps its focus states and motion in check.",
+        "lessons": [
+          {
+            "id": "fp-l9",
+            "title": "Plan the landing page",
+            "description": "Turning a product brief into sections, a mobile-first rule, and one breakpoint that earns its place.",
+            "duration": 6,
+            "objectives": [
+              "Break a landing page into sections and reusable components",
+              "Write the single-column layout before any media query",
+              "Decide what the 720px breakpoint actually changes"
+            ],
+            "xp": 40,
+            "exerciseCount": 0
+          },
+          {
+            "id": "fp-l10",
+            "title": "Build and submit the landing page",
+            "description": "Writing the narrow layout, adding the grid and breakpoint, and proving nothing overflows.",
+            "duration": 8,
+            "objectives": [
+              "Build a single-column layout that needs no media query",
+              "Add a grid and one 720px breakpoint without breaking the narrow view",
+              "Check overflow, focus states and reduced motion before submitting"
+            ],
+            "xp": 50,
+            "exerciseCount": 0
+          }
+        ],
+        "quiz": {
+          "id": "quiz-fp-s5",
+          "title": "Responsive landing page check",
+          "passingScore": 60,
+          "questions": [
+            {
+              "id": "quiz-fp-s5-q1",
+              "type": "multiple-choice",
+              "prompt": "What does mobile-first mean in practice?",
+              "options": [
+                "The base styles describe the narrow layout, and wider layouts are added with min-width queries",
+                "The page is designed at 1440px and then shrunk with max-width queries",
+                "The page hides content on phones",
+                "JavaScript chooses the layout after the page loads"
+              ],
+              "answer": 0,
+              "explanation": "The unqualified rules are the narrow layout. Add a min-width breakpoint only when the content needs more room."
+            },
+            {
+              "id": "quiz-fp-s5-q2",
+              "type": "true-false",
+              "prompt": "A responsive page needs a breakpoint for every popular phone size.",
+              "answer": false,
+              "explanation": "Breakpoints belong where the content breaks, not where a particular device happens to sit. One well-chosen breakpoint is often enough."
+            },
+            {
+              "id": "quiz-fp-s5-q3",
+              "type": "multiple-choice",
+              "prompt": "Why wrap the content in a max-width container?",
+              "options": [
+                "To stop images from loading",
+                "To keep line length readable on very wide screens",
+                "To replace CSS grid",
+                "To make the page scroll horizontally"
+              ],
+              "answer": 1,
+              "explanation": "A maximum width keeps text lines from becoming too long to read comfortably while still allowing the layout to shrink on small screens."
+            },
+            {
+              "id": "quiz-fp-s5-q4",
+              "type": "blank",
+              "prompt": "The CSS at-rule used to apply styles at a viewport width is ___.",
+              "answers": [
+                "@media",
+                "media"
+              ],
+              "explanation": "@media wraps rules that only apply when the condition, such as min-width, matches."
+            },
+            {
+              "id": "quiz-fp-s5-q5",
+              "type": "identify-error",
+              "prompt": "Why does this hero overflow on a phone?",
+              "code": ".hero {\n  height: 600px;\n  padding: 4rem 2rem;\n}\n.hero img {\n  width: 1200px;\n}",
+              "options": [
+                "Grid is missing",
+                "The fixed height and 1200px image cannot shrink to the viewport",
+                "The padding uses rem instead of px",
+                "The hero needs a media query inside the image"
+              ],
+              "answer": 1,
+              "explanation": "A fixed image width wider than the viewport causes horizontal overflow, and a fixed height cannot accommodate wrapped content. Use max-width: 100% and let the height follow the content."
+            }
+          ]
+        },
+        "chapter": "Capstone builds"
+      },
+      {
+        "id": "fp-s6",
+        "title": "Capstone: Interactive Calculator",
+        "description": "A keypad, a display and three pieces of state. The arithmetic is easy; routing every press and handling the edge cases is the build.",
+        "lessons": [
+          {
+            "id": "fp-l11",
+            "title": "Plan the calculator",
+            "description": "Choosing the state, designing one action for the whole keypad, and listing the edge cases before writing code.",
+            "duration": 6,
+            "objectives": [
+              "Identify the three pieces of state a calculator needs",
+              "Route every key through one click handler using data attributes",
+              "Write down the operator, decimal and clear edge cases as behaviour"
+            ],
+            "xp": 40,
+            "exerciseCount": 0
+          },
+          {
+            "id": "fp-l12",
+            "title": "Build and submit the calculator",
+            "description": "Writing one keypad handler, one compute function, and the guards that make repeated operators and decimals behave.",
+            "duration": 8,
+            "objectives": [
+              "Handle every keypad press through one delegated click listener",
+              "Compute with an explicit function rather than eval",
+              "Guard division by zero, repeated operators and repeated decimals"
+            ],
+            "xp": 50,
+            "exerciseCount": 0
+          }
+        ],
+        "quiz": {
+          "id": "quiz-fp-s6",
+          "title": "Calculator check",
+          "passingScore": 60,
+          "questions": [
+            {
+              "id": "quiz-fp-s6-q1",
+              "type": "multiple-choice",
+              "prompt": "Where should the calculator keep the number being typed?",
+              "options": [
+                "Only in the display text, read back on every press",
+                "In a JavaScript variable, with the display rendered from it",
+                "In a cookie",
+                "In a CSS custom property"
+              ],
+              "answer": 1,
+              "explanation": "The variables are the source of truth. Reading the display back breaks as soon as it contains an operator, a trailing decimal or an error message."
+            },
+            {
+              "id": "quiz-fp-s6-q2",
+              "type": "multiple-choice",
+              "prompt": "Why give every key a data-action attribute?",
+              "options": [
+                "So CSS can style the keypad",
+                "So one delegated click handler can route every press",
+                "So the browser computes the result automatically",
+                "So the keypad works without JavaScript"
+              ],
+              "answer": 1,
+              "explanation": "The handler reads the action and value from the clicked button, so the whole keypad needs one listener instead of one per key."
+            },
+            {
+              "id": "quiz-fp-s6-q3",
+              "type": "multiple-choice",
+              "prompt": "What should pressing 5, +, ×, 4, = produce?",
+              "options": [
+                "Two operators in a row",
+                "20, because × replaces +",
+                "0, because the first operator wins",
+                "A syntax error"
+              ],
+              "answer": 1,
+              "explanation": "A second operator pressed while waiting for the next number replaces the pending operator. The calculation becomes 5 × 4."
+            },
+            {
+              "id": "quiz-fp-s6-q4",
+              "type": "true-false",
+              "prompt": "A decimal point can appear more than once in the same number.",
+              "answer": false,
+              "explanation": "The decimal handler should ignore the press when current already contains a dot, so typing 1.2.3 stays a valid number."
+            },
+            {
+              "id": "quiz-fp-s6-q5",
+              "type": "identify-error",
+              "prompt": "Why is this a poor way to evaluate the expression?",
+              "code": "const result = eval(display.textContent);",
+              "options": [
+                "eval is slower than a button",
+                "It executes arbitrary text and cannot handle repeated operators safely",
+                "display.textContent is always a number",
+                "It needs a semicolon"
+              ],
+              "answer": 1,
+              "explanation": "eval runs whatever string is on screen and turns malformed input into a syntax error. A compute function with explicit branches is safer and easier to test."
+            }
+          ]
+        },
+        "chapter": "Capstone builds"
+      },
+      {
+        "id": "fp-s7",
+        "title": "Capstone: Todo Application",
+        "description": "A task list that survives a reload: one array of state, one render function, three filters and a storage layer that fails safely.",
+        "lessons": [
+          {
+            "id": "fp-l13",
+            "title": "Plan the todo app",
+            "description": "Designing the task shape, choosing a storage key, and deciding what the render function is allowed to do.",
+            "duration": 6,
+            "objectives": [
+              "Model a task as data with a stable id and a done flag",
+              "Choose one storage key and one update path for every mutation",
+              "Derive the visible list and remaining count from state"
+            ],
+            "xp": 40,
+            "exerciseCount": 0
+          },
+          {
+            "id": "fp-l14",
+            "title": "Build and submit the todo app",
+            "description": "Saving safely, rendering from state, wiring filters and proving a reload restores the list.",
+            "duration": 8,
+            "objectives": [
+              "Load and save a task array without letting corrupt storage break the app",
+              "Render list rows from state with elements created in JavaScript",
+              "Wire add, toggle, delete and filter through one update path"
+            ],
+            "xp": 50,
+            "exerciseCount": 0
+          }
+        ],
+        "quiz": {
+          "id": "quiz-fp-s7",
+          "title": "Todo application check",
+          "passingScore": 60,
+          "questions": [
+            {
+              "id": "quiz-fp-s7-q1",
+              "type": "multiple-choice",
+              "prompt": "What is the source of truth for the todo list?",
+              "options": [
+                "The rendered list items",
+                "The task array in JavaScript",
+                "The localStorage key alone",
+                "The filter buttons"
+              ],
+              "answer": 1,
+              "explanation": "The array is the state. The list, count and empty state are all rendered from it after every change."
+            },
+            {
+              "id": "quiz-fp-s7-q2",
+              "type": "multiple-choice",
+              "prompt": "Why give each task a stable id instead of using its array index?",
+              "options": [
+                "Indexes are not numbers",
+                "Filtering and reordering change the index, so a row can act on the wrong task",
+                "localStorage cannot store arrays",
+                "Ids make the text longer"
+              ],
+              "answer": 1,
+              "explanation": "The index describes a position, not a task. A stable id keeps toggle and delete pointed at the same task through every filter change."
+            },
+            {
+              "id": "quiz-fp-s7-q3",
+              "type": "true-false",
+              "prompt": "If the stored JSON is corrupt, the app should throw so the problem is visible.",
+              "answer": false,
+              "explanation": "A corrupt value should fall back to an empty list. The app remains usable, and the person does not lose the page because of one bad key."
+            },
+            {
+              "id": "quiz-fp-s7-q4",
+              "type": "blank",
+              "prompt": "The attribute that marks the current filter button as pressed is ___.",
+              "answers": [
+                "aria-pressed",
+                "aria pressed"
+              ],
+              "explanation": "aria-pressed exposes a toggle button's state to assistive technology, so the current filter is announced rather than only coloured."
+            },
+            {
+              "id": "quiz-fp-s7-q5",
+              "type": "identify-error",
+              "prompt": "What is the main problem with this render code?",
+              "code": "list.innerHTML += `<li>${task.title}</li>`;",
+              "options": [
+                "It is too slow to type",
+                "The title is inserted as HTML, and every render destroys the existing rows and focus",
+                "It needs a semicolon",
+                "localStorage does not allow lists"
+              ],
+              "answer": 1,
+              "explanation": "User text must not become markup, and replacing the whole list on every change loses focus and state. Create elements and set textContent instead."
+            }
+          ]
+        },
+        "chapter": "Capstone builds"
+      },
+      {
+        "id": "fp-s8",
+        "title": "Capstone: Quiz Application",
+        "description": "Questions live in data, answers lock after one choice, and the result screen explains every answer instead of only scoring it.",
+        "lessons": [
+          {
+            "id": "fp-l15",
+            "title": "Plan the quiz app",
+            "description": "Writing the question data first, then designing the index, the answer log and the results review.",
+            "duration": 6,
+            "objectives": [
+              "Model questions as data with one answer index and one explanation",
+              "Track the current question, the answers and the locked state",
+              "Plan the results screen as a review of every question, not just a score"
+            ],
+            "xp": 40,
+            "exerciseCount": 0
+          },
+          {
+            "id": "fp-l16",
+            "title": "Build and submit the quiz app",
+            "description": "Rendering one question at a time, locking answers, and making restart clear every trace of the last attempt.",
+            "duration": 8,
+            "objectives": [
+              "Render options from the question data with one click handler per option",
+              "Lock a question after it is answered and show the explanation",
+              "Build the results review and a restart that resets state and DOM together"
+            ],
+            "xp": 50,
+            "exerciseCount": 0
+          }
+        ],
+        "quiz": {
+          "id": "quiz-fp-s8",
+          "title": "Quiz application check",
+          "passingScore": 60,
+          "questions": [
+            {
+              "id": "quiz-fp-s8-q1",
+              "type": "multiple-choice",
+              "prompt": "Why keep the questions in a JavaScript array instead of writing each one into the HTML?",
+              "options": [
+                "Arrays load faster than HTML",
+                "One render function can show any question, and the score can read the same data",
+                "HTML cannot contain questions",
+                "It makes the answer key secret"
+              ],
+              "answer": 1,
+              "explanation": "The array is the single source of truth. The question screen, progress, score and review all derive from it."
+            },
+            {
+              "id": "quiz-fp-s8-q2",
+              "type": "true-false",
+              "prompt": "Options should stay clickable after a question has been answered.",
+              "answer": false,
+              "explanation": "The options should be disabled after the first answer, so one question cannot be answered twice and the recorded score cannot change."
+            },
+            {
+              "id": "quiz-fp-s8-q3",
+              "type": "multiple-choice",
+              "prompt": "With 4 correct answers out of 5 questions, what percentage should be shown?",
+              "options": [
+                "40%",
+                "75%",
+                "80%",
+                "90%"
+              ],
+              "answer": 2,
+              "explanation": "4 / 5 = 0.8, which is 80% when multiplied by 100 and rounded."
+            },
+            {
+              "id": "quiz-fp-s8-q4",
+              "type": "multiple-choice",
+              "prompt": "What belongs on the results screen besides the score?",
+              "options": [
+                "Only the score",
+                "A per-question review with the explanation",
+                "The source code of the quiz",
+                "A second copy of every option"
+              ],
+              "answer": 1,
+              "explanation": "The review is what makes the result useful. Each question should show whether it was right and explain the answer."
+            },
+            {
+              "id": "quiz-fp-s8-q5",
+              "type": "identify-error",
+              "prompt": "Why is this restart incomplete?",
+              "code": "function restart() {\n  index = 0;\n  resultsEl.hidden = true;\n  questionArea.hidden = false;\n  renderQuestion();\n}",
+              "options": [
+                "It forgets to reset answers and locked",
+                "It renders the first question twice",
+                "It should reload the page",
+                "It needs a new question array"
+              ],
+              "answer": 0,
+              "explanation": "The previous answers are still in the array, so the next attempt starts with the old score. Reset answers and locked as well."
+            }
+          ]
+        },
+        "chapter": "Capstone builds"
+      },
+      {
+        "id": "fp-s9",
+        "title": "Ship and present",
+        "description": "Put a static build on a real URL, write the README that explains it, and present the work without overclaiming.",
+        "lessons": [
+          {
+            "id": "fp-l17",
+            "title": "Deploy a static build",
+            "description": "Preparing a project folder, fixing paths and secrets, and checking the deployed URL like a visitor.",
+            "duration": 8,
+            "objectives": [
+              "Prepare a static project folder for hosting",
+              "Use relative asset paths that survive a subpath",
+              "Verify the deployed site in a private window and on a phone"
+            ],
+            "xp": 50,
+            "exerciseCount": 0
+          },
+          {
+            "id": "fp-l18",
+            "title": "Write the README and present the work",
+            "description": "A README that explains how to run the project, and a two-minute story about the decisions behind it.",
+            "duration": 6,
+            "objectives": [
+              "Write a README with a live link, a screenshot and run instructions",
+              "Turn a build into a portfolio entry about decisions, not features",
+              "Present a project in two minutes without overclaiming"
+            ],
+            "xp": 40,
+            "exerciseCount": 0
+          }
+        ],
+        "quiz": {
+          "id": "quiz-fp-s9",
+          "title": "Ship and present check",
+          "passingScore": 60,
+          "questions": [
+            {
+              "id": "quiz-fp-s9-q1",
+              "type": "multiple-choice",
+              "prompt": "A project is hosted at /my-project/. Which stylesheet link works there?",
+              "options": [
+                "<link rel=\"stylesheet\" href=\"/style.css\">",
+                "<link rel=\"stylesheet\" href=\"style.css\">",
+                "<link rel=\"stylesheet\" href=\"file:///style.css\">",
+                "<link rel=\"stylesheet\" href=\"localhost/style.css\">"
+              ],
+              "answer": 1,
+              "explanation": "A relative path resolves from the page's own folder, so it works at the root and under a subpath. A leading slash resolves from the domain root."
+            },
+            {
+              "id": "quiz-fp-s9-q2",
+              "type": "true-false",
+              "prompt": "An API key placed in a front-end JavaScript file is hidden from visitors.",
+              "answer": false,
+              "explanation": "Every file the browser runs is public. A private key needs a backend or serverless function; a static host cannot keep it secret."
+            },
+            {
+              "id": "quiz-fp-s9-q3",
+              "type": "multiple-choice",
+              "prompt": "What should a project README include first?",
+              "options": [
+                "A list of every CSS property used",
+                "What the project is, a live link and how to run it",
+                "The entire source code",
+                "A promise of features that are not built"
+              ],
+              "answer": 1,
+              "explanation": "The README answers the first questions a visitor has: what is this, where can I see it, and how do I run it."
+            },
+            {
+              "id": "quiz-fp-s9-q4",
+              "type": "multiple-choice",
+              "prompt": "Which portfolio entry is strongest?",
+              "options": [
+                "Built a todo app with HTML, CSS and JavaScript.",
+                "Used localStorage and CSS grid.",
+                "The list had to survive a reload without a backend, so every change writes one JSON array and renders from it.",
+                "A beautiful modern responsive website."
+              ],
+              "answer": 2,
+              "explanation": "It names the constraint, the decision and the tradeoff. That is the part an interviewer cannot infer from the source alone."
+            },
+            {
+              "id": "quiz-fp-s9-q5",
+              "type": "identify-error",
+              "prompt": "What is wrong with committing this file?",
+              "code": "// config.js\nconst API_KEY = \"sk-live-123456789\";\nexport { API_KEY };",
+              "options": [
+                "The variable name is too short",
+                "The secret is public in the deployed JavaScript and must be removed and rotated",
+                "It should use var instead of const",
+                "It needs a semicolon"
+              ],
+              "answer": 1,
+              "explanation": "Static files are downloaded by every visitor. Remove the key from the repository, rotate it, and call the API through a server or serverless function that can keep a secret."
+            }
+          ]
+        },
+        "chapter": "Ship it"
       }
     ]
   }

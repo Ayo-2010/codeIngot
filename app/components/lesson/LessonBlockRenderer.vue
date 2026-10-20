@@ -161,6 +161,8 @@
         />
       </figure>
 
+      <LessonProjectCallout v-else-if="block.type === 'project'" :block="block" />
+
       <section
         v-else-if="block.type === 'exercise'"
         :id="block.id"

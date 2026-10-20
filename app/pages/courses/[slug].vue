@@ -45,6 +45,55 @@
     <div class="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[minmax(0,1fr)_300px]">
       <div class="min-w-0">
         <section
+          v-if="capstoneProjects.length"
+          class="mb-10 rounded-2xl border border-brand/25 bg-brand/5 p-5 sm:p-6"
+          aria-labelledby="capstones-heading"
+        >
+          <div class="flex flex-wrap items-end justify-between gap-3">
+            <div class="max-w-2xl">
+              <p class="font-mono text-[11px] uppercase tracking-widest text-brand">Capstone builds</p>
+              <h2 id="capstones-heading" class="mt-1 text-lg font-semibold tracking-tight text-mist-50">
+                Five projects, brief to shipped
+              </h2>
+              <p class="mt-1.5 text-sm leading-relaxed text-muted">
+                Each build has its own workspace: a brief, a design reference, starter files and a
+                checklist that grades the code you write. The lessons walk you through the plan and
+                the review; the workspace is where the project lives.
+              </p>
+            </div>
+            <NuxtLink
+              to="/projects"
+              class="shrink-0 rounded-lg border border-ink-600 px-3 py-1.5 text-xs font-medium text-mist-50 transition hover:border-brand/50 hover:bg-ink-800"
+            >
+              Browse all projects
+            </NuxtLink>
+          </div>
+
+          <ul class="mt-4 grid gap-2 sm:grid-cols-2">
+            <li v-for="(project, index) in capstoneProjects" :key="project.id">
+              <NuxtLink
+                :to="`/projects/${project.slug}`"
+                class="flex h-full items-start gap-3 rounded-xl border border-ink-600 bg-ink-900 px-3.5 py-3 transition hover:border-brand/40"
+              >
+                <span
+                  class="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full border border-brand/30 font-mono text-[11px] text-brand"
+                  aria-hidden="true"
+                >
+                  {{ index + 1 }}
+                </span>
+                <span class="min-w-0 flex-1">
+                  <span class="block text-sm font-medium text-mist-50">{{ project.title }}</span>
+                  <span class="mt-0.5 block text-xs text-dim">
+                    {{ project.difficulty }} · ~{{ project.estimatedMinutes }} min · {{ project.xp }} XP
+                  </span>
+                </span>
+                <span class="mt-0.5 shrink-0 text-brand" aria-hidden="true">&rarr;</span>
+              </NuxtLink>
+            </li>
+          </ul>
+        </section>
+
+        <section
           v-for="(chapter, chapterIndex) in chapters"
           :key="chapter.id"
           class="mb-10 last:mb-0"
@@ -179,7 +228,7 @@
 
 <script setup lang="ts">
 import type { CourseChapter } from '~/composables/useCourses'
-import type { Quiz } from '~/types/content'
+import type { Project, Quiz } from '~/types/content'
 
 const route = useRoute()
 const course = computed(() => getCourse(String(route.params.slug)))
@@ -193,6 +242,13 @@ if (!course.value) {
 
 const stats = computed(() => courseStats(course.value!))
 const chapters = computed(() => (course.value ? courseChapters(course.value) : []))
+const capstoneProjects = computed<Project[]>(() =>
+  course.value?.category === 'projects'
+    ? course.value.projects
+        .map((slug) => getProject(slug))
+        .filter((project): project is Project => project !== undefined)
+    : [],
+)
 const percent = computed(() => (course.value ? courseProgressPercent(course.value) : 0))
 const completedLessons = computed(() =>
   course.value ? progress.value.completedLessons.filter((id) => lessonIdsOf(course.value!).has(id)).length : 0,

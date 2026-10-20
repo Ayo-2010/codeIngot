@@ -85,7 +85,7 @@ export const frontendDeveloper: LearningPath = {
       id: 'path-frontend-s9',
       order: 9,
       title: 'Frontend Projects',
-      summary: 'Build real applications',
+      summary: 'Five capstone builds, from brief to shipped URL',
       courseSlug: 'frontend-projects',
       technologies: ['html', 'css', 'javascript'],
     },

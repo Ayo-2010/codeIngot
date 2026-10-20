@@ -1,6 +1,13 @@
 import type { Course } from '~/types/content'
 import { projectsForCourse } from '~/content/projects'
+import { withChapter } from './chapters'
 import { frontendProjectsSections } from './frontend-projects/01-intro'
+import { frontendProjectsProfileSections } from './frontend-projects/02-capstone-profile'
+import { frontendProjectsLandingSections } from './frontend-projects/03-capstone-landing'
+import { frontendProjectsCalculatorSections } from './frontend-projects/04-capstone-calculator'
+import { frontendProjectsTodoSections } from './frontend-projects/05-capstone-todo'
+import { frontendProjectsQuizSections } from './frontend-projects/06-capstone-quiz'
+import { frontendProjectsShipSections } from './frontend-projects/07-ship'
 
 export const frontendProjectsCourse: Course = {
   id: 'course-frontend-projects',
@@ -8,7 +15,7 @@ export const frontendProjectsCourse: Course = {
   title: 'Frontend Projects',
   shortTitle: 'Projects',
   description:
-    'Take a page from brief to built: plan the structure, write mobile-first responsive CSS, and make every control work for keyboard and screen-reader users. Every lesson ends in a checkpoint you can test.',
+    'Five guided builds from brief to shipped URL: plan the structure, write mobile-first CSS, add deliberate JavaScript, and finish with a README and a live link. Every build has its own workspace and checklist.',
   technology: 'html',
   category: 'projects',
   type: 'course',
@@ -24,6 +31,16 @@ export const frontendProjectsCourse: Course = {
     'deployment',
   ],
   icon: '◆',
-  sections: [...frontendProjectsSections],
+  sections: [
+    ...withChapter('Foundations and skills', frontendProjectsSections),
+    ...withChapter('Capstone builds', [
+      ...frontendProjectsProfileSections,
+      ...frontendProjectsLandingSections,
+      ...frontendProjectsCalculatorSections,
+      ...frontendProjectsTodoSections,
+      ...frontendProjectsQuizSections,
+    ]),
+    ...withChapter('Ship it', frontendProjectsShipSections),
+  ],
   projects: projectsForCourse('frontend-projects'),
 }

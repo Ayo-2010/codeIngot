@@ -14,6 +14,8 @@ const WARM_ROUTES = [
   '/courses/html-fundamentals',
   '/learn/html-fundamentals/html-l1',
   '/learn/html-fundamentals/quiz/quiz-html-s1',
+  '/courses/frontend-projects',
+  '/learn/frontend-projects/fp-l7',
   '/progress',
   '/reference/html',
   '/learn/javascript-fundamentals/js-l1',

@@ -106,6 +106,23 @@ export interface QuizBlock {
   quiz: Quiz
 }
 
+/**
+ * A hand-off from a lesson to a project workspace.
+ *
+ * The project itself lives in `app/content/projects`, so the block carries a
+ * slug rather than a copy. That keeps the lesson readable and means the brief,
+ * checklist and starter files have one source of truth.
+ */
+export interface ProjectBlock {
+  type: 'project'
+  id: string
+  projectSlug: string
+  /** Replaces the project's own title when the lesson frames it differently. */
+  title?: string
+  /** Replaces the project tagline with lesson-specific instructions. */
+  body?: string
+}
+
 /** A live result shown on its own, with no code beside it. Used to open a lesson. */
 export interface DemoBlock {
   type: 'demo'
@@ -147,6 +164,7 @@ export type LessonBlock =
   | DemoBlock
   | ExerciseBlock
   | QuizBlock
+  | ProjectBlock
 
 /* --------------------------------- exercise -------------------------------- */
 

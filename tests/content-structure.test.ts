@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { courseChapters } from '~/composables/useCourses'
+import { allProjectsList, courseChapters } from '~/composables/useCourses'
 import { courseMeta } from '~/content/courses/meta'
 import { cssFundamentals } from '~/content/courses/css-fundamentals'
 import { domBrowserApisCourse } from '~/content/courses/dom-browser-apis-course'
@@ -28,17 +28,22 @@ const courses: Course[] = [
  * The three original courses were authored as one section per lesson. Their
  * sections are tagged into chapters at display time; the other six already have
  * multi-lesson sections and need no tag.
+ *
+ * Frontend Projects now opts in as well: its five capstone builds are grouped
+ * separately from the foundations and the shipping lessons.
  */
 const legacyCourses = [htmlFundamentals, cssFundamentals, javascriptFundamentals]
+const taggedCourses = [...legacyCourses, frontendProjectsCourse]
 const expectedChapters = new Map([
   [htmlFundamentals.slug, 10],
   [cssFundamentals.slug, 12],
   [javascriptFundamentals.slug, 11],
+  [frontendProjectsCourse.slug, 3],
 ])
 
 describe('course grouping', () => {
-  it('tags every section of the original courses with a chapter', () => {
-    for (const course of legacyCourses) {
+  it('tags every section of the tagged courses with a chapter', () => {
+    for (const course of taggedCourses) {
       for (const section of course.sections) {
         expect(section.chapter, `${course.slug}/${section.id}`).toBeTruthy()
       }
@@ -46,7 +51,7 @@ describe('course grouping', () => {
   })
 
   it('keeps each chapter a single contiguous run of sections', () => {
-    for (const course of legacyCourses) {
+    for (const course of taggedCourses) {
       const seen = new Set<string>()
       let previous: string | undefined
       for (const section of course.sections) {
@@ -69,13 +74,13 @@ describe('course grouping', () => {
     }
   })
 
-  it('groups the original courses into the planned number of chapters', () => {
-    for (const course of legacyCourses) {
+  it('groups the tagged courses into the planned number of chapters', () => {
+    for (const course of taggedCourses) {
       expect(courseChapters(courseToMeta(course)).length, course.slug).toBe(expectedChapters.get(course.slug))
     }
   })
 
-  it('keeps chapters between 4 and 16 lessons', () => {
+  it('keeps the original chapters between 4 and 16 lessons', () => {
     for (const course of legacyCourses) {
       for (const chapter of courseChapters(courseToMeta(course))) {
         expect(chapter.lessons, `${course.slug}/${chapter.title}`).toBeGreaterThanOrEqual(4)
@@ -85,10 +90,65 @@ describe('course grouping', () => {
   })
 
   it('falls back to one chapter per section for courses without tags', () => {
-    for (const course of courses.filter((item) => !legacyCourses.includes(item))) {
+    for (const course of courses.filter((item) => !item.sections.some((section) => section.chapter))) {
       const chapters = courseChapters(courseToMeta(course))
       expect(chapters.length, course.slug).toBe(course.sections.length)
       expect(chapters.map((chapter) => chapter.title)).toEqual(course.sections.map((section) => section.title))
+    }
+  })
+})
+
+describe('frontend project capstones', () => {
+  const capstoneSections = frontendProjectsCourse.sections.filter((section) =>
+    section.title.startsWith('Capstone:'),
+  )
+
+  it('attaches the five original projects to the course', () => {
+    expect(frontendProjectsCourse.projects.map((project) => project.slug)).toEqual([
+      'personal-profile-page',
+      'responsive-landing-page',
+      'interactive-calculator',
+      'todo-application',
+      'quiz-application',
+    ])
+  })
+
+  it('gives every capstone section a project hand-off in both lessons', () => {
+    expect(capstoneSections).toHaveLength(5)
+
+    const handOffs: string[] = []
+    for (const section of capstoneSections) {
+      expect(section.lessons, section.id).toHaveLength(2)
+
+      for (const lesson of section.lessons) {
+        const slugs = lesson.content.flatMap((block) =>
+          block.type === 'project' ? [block.projectSlug] : [],
+        )
+        expect(slugs, `${section.id}/${lesson.id}`).toHaveLength(1)
+        expect(
+          frontendProjectsCourse.projects.some((project) => project.slug === slugs[0]),
+          `${section.id}/${lesson.id} → ${slugs[0]}`,
+        ).toBe(true)
+        handOffs.push(...slugs)
+      }
+    }
+
+    expect(handOffs).toHaveLength(10)
+    expect(new Set(handOffs).size).toBe(5)
+  })
+
+  it('never hands off to a project that does not exist', () => {
+    const known = new Set(allProjectsList().map((project) => project.slug))
+
+    for (const course of courses) {
+      for (const section of course.sections) {
+        for (const lesson of section.lessons) {
+          for (const block of lesson.content) {
+            if (block.type !== 'project') continue
+            expect(known.has(block.projectSlug), `${lesson.id}/${block.id}`).toBe(true)
+          }
+        }
+      }
     }
   })
 })
