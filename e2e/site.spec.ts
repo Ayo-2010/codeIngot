@@ -1,9 +1,17 @@
 import { test, expect, type Page } from '@playwright/test'
 
-/** Server-rendered controls do nothing until hydration attaches their handlers. */
+/**
+ * Server-rendered controls do nothing until hydration attaches their handlers.
+ * The header hydrates inside the layout's suspense boundary, after `app:mounted`,
+ * so wait for its own marker rather than the app-wide one.
+ */
 async function gotoHydrated(page: Page, path: string) {
   await page.goto(path, { waitUntil: 'domcontentloaded' })
-  await page.waitForFunction(() => document.documentElement.dataset.hydrated === 'true')
+  await page.waitForFunction(
+    () =>
+      document.documentElement.dataset.hydrated === 'true' &&
+      document.documentElement.dataset.headerReady === 'true',
+  )
 }
 
 test('the header Courses menu lists every course', async ({ page }) => {

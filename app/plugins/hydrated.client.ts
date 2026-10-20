@@ -1,13 +1,18 @@
 /**
- * Marks the document once the app has hydrated and its event handlers are live.
+ * Marks the document once the app is hydrated *and* the browser has finished the
+ * hydration task.
  *
- * The browser tests wait for this before they interact: clicking or hovering a
- * server-rendered control before hydration is attached does nothing, which reads
- * as a broken feature rather than a fast test. It is also the honest signal for
- * "hydration has finished, anything it was going to do has happened".
+ * The browser tests wait for this before they interact. `app:mounted` alone is
+ * too early: a control can be in the DOM, look interactive, and still have no
+ * listener attached, so a click does nothing and reads as a broken feature. One
+ * frame after the hook, the hydration task has completed and listeners are live.
  */
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.hook('app:mounted', () => {
-    document.documentElement.dataset.hydrated = 'true'
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        document.documentElement.dataset.hydrated = 'true'
+      })
+    })
   })
 })

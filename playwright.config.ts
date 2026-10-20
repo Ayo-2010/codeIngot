@@ -12,6 +12,8 @@ import { defineConfig } from '@playwright/test'
  * Playwright-downloaded Chromium, so nothing extra has to be installed.
  */
 export default defineConfig({
+  // Dev-mode compilation can be slow on a cold route; give each test room.
+  timeout: 90_000,
   testDir: './e2e',
   globalSetup: './e2e/global-setup.ts',
   fullyParallel: true,
@@ -28,6 +30,8 @@ export default defineConfig({
     viewport: { width: 1440, height: 900 },
     trace: 'on-first-retry',
   },
+  // A dev server under load can take several seconds to answer a click.
+  expect: { timeout: 10_000 },
   webServer: {
     command: 'npm run dev -- --port 3000 --host 127.0.0.1',
     url: 'http://127.0.0.1:3000',

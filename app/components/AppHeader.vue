@@ -247,6 +247,15 @@ const mobileOpen = ref(false)
 const { openPalette } = useCommandPalette()
 
 /**
+ * The header lives inside the layout's suspense boundary, so it hydrates after
+ * `app:mounted`. Browser tests wait for this marker before clicking: a control
+ * that looks interactive but has no listener simply swallows the click.
+ */
+onMounted(() => {
+  document.documentElement.dataset.headerReady = 'true'
+})
+
+/**
  * The header's disclosure menus. Hover opens them for pointer users; click and
  * focus open them for keyboard users, and `aria-expanded` always reports what is
  * actually visible. The previous version was hover-only, so the links could not
