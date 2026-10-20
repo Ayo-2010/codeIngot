@@ -55,6 +55,25 @@ test('the header Courses menu works from the keyboard', async ({ page }) => {
   await expect(allCourses).toBeHidden()
 })
 
+test('the mobile header menu opens and labels its groups', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 })
+  await gotoHydrated(page, '/')
+
+  // The label flips to "Close navigation" once open, so target the control by
+  // what it controls rather than by its current name.
+  const toggle = page.locator('button[aria-controls="mobile-nav"]')
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false')
+  await toggle.click()
+
+  await expect(toggle).toHaveAttribute('aria-expanded', 'true')
+  await expect(toggle).toHaveAccessibleName('Close navigation')
+  const mobileNav = page.getByRole('navigation', { name: 'Mobile' })
+  await expect(mobileNav).toBeVisible()
+  // Each group is named, so "All courses" is not an orphan link.
+  await expect(mobileNav.getByText('Courses', { exact: true })).toBeVisible()
+  await expect(mobileNav.getByRole('link', { name: 'All courses' })).toBeVisible()
+})
+
 test('the sidebar links to the current lesson and reveals it', async ({ page }) => {
   await gotoHydrated(page, '/learn/javascript-fundamentals/js-l65')
 

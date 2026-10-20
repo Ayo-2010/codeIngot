@@ -32,7 +32,7 @@ export default defineConfig({
     command: 'npm run dev -- --port 3000 --host 127.0.0.1',
     url: 'http://127.0.0.1:3000',
     reuseExistingServer: !process.env.CI,
-    timeout: 180_000,
+    timeout: 300_000,
     stdout: 'ignore',
     stderr: 'pipe',
   },

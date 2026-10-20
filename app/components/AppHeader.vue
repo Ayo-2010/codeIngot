@@ -188,7 +188,10 @@
       >
         {{ item.label }}
       </NuxtLink>
-      <div v-else class="space-y-1 pl-2 border-l border-ink-600/50">
+      <div v-else class="space-y-1 border-l border-ink-600/50 pl-2">
+        <p class="px-3 pt-1 font-mono text-[11px] uppercase tracking-wider text-dim">
+          {{ item.label }}
+        </p>
         <NuxtLink
           v-for="child in item.children"
           :key="child.to"
@@ -281,10 +284,6 @@ function onMenuFocusOut(event: FocusEvent, label: string) {
   if (next && current?.contains(next)) return
   if (openMenu.value === label) openMenu.value = null
 }
-
-// Following a menu link means the menu has done its job.
-const route = useRoute()
-watch(() => route.fullPath, closeMenus)
 
 const initials = computed(() => {
   const source = accountName.value.trim()
