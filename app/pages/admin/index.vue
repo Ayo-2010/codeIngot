@@ -121,7 +121,11 @@ import { firebaseAvailable } from '~/utils/firebase-services'
 import { listAllDevices, getAllUserCount, type AdminDeviceRow } from '~/utils/firebase-store'
 import { collection, query, where, getDocs } from 'firebase/firestore'
 
-useHead({ title: 'Admin' })
+usePageSeo({
+  title: 'Admin',
+  description: 'Private device and account administration.',
+  noindex: true,
+})
 
 const { user, isSignedIn } = useAuth()
 const dialogOpen = ref(false)

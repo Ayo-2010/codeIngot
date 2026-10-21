@@ -11,7 +11,9 @@
     "typecheck": "nuxt typecheck",
     "test": "vitest run",
     "test:e2e": "playwright test",
-    "generate:course-meta": "esbuild scripts/generate-course-meta.ts --bundle --platform=node --format=esm --alias:~=./app --outfile=.tmp/generate-course-meta.mjs --log-level=warning && node .tmp/generate-course-meta.mjs"
+    "check:bundle": "node scripts/check-bundle-budget.mjs",
+    "generate:course-meta": "esbuild scripts/generate-course-meta.ts --bundle --platform=node --format=esm --alias:~=./app --outfile=.tmp/generate-course-meta.mjs --log-level=warning && node .tmp/generate-course-meta.mjs",
+    "generate:section-loaders": "node scripts/generate-section-loaders.mjs"
   },
   "dependencies": {
     "@nuxtjs/color-mode": "^3.5.2",

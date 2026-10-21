@@ -216,7 +216,7 @@ export function useLearningProgress() {
     return true
   }
 
-  function quizPassed(quiz: Quiz): boolean {
+  function quizPassed(quiz: Pick<Quiz, 'id' | 'passingScore'>): boolean {
     const score = progress.value.quizScores[quiz.id]
     return score !== undefined && score >= quiz.passingScore
   }

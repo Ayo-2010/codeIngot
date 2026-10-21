@@ -72,7 +72,11 @@
 
 <script setup lang="ts">
 definePageMeta({ layout: 'reference' })
-useHead({ title: 'JavaScript reference' })
+usePageSeo({
+  title: 'JavaScript reference',
+  description:
+    'JavaScript built-ins, methods and browser APIs, organised by topic with examples and edge cases.',
+})
 
 const [topics, navGroups] = await Promise.all([
   javascriptReferenceTopics(),

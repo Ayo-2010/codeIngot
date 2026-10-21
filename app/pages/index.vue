@@ -153,8 +153,20 @@
 <script setup lang="ts">
 const { courses, paths } = useCourses()
 
-useHead({
+const siteUrl = String(useRuntimeConfig().public.siteUrl).replace(/\/+$/, '')
+
+usePageSeo({
   title: 'Learn to code by coding',
+  description:
+    'Learn HTML, CSS, JavaScript and the browser by writing code in guided lessons, challenge tests and five complete capstone projects.',
+  jsonLd: {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'codeIngot',
+    url: siteUrl,
+    description:
+      'Interactive lessons, browser challenges and capstone projects for learning frontend development.',
+  },
 })
 
 const stats = computed(() => {

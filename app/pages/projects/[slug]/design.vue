@@ -62,12 +62,25 @@
 
 <script setup lang="ts">
 import { designDocument } from '~/utils/project-design'
+import { loadProject } from '~/content/projects/load'
 
 const route = useRoute()
 const slug = computed(() => String(route.params.slug))
-const project = computed(() => getProject(slug.value))
+const { data: project } = await useAsyncData(`project-design:${slug.value}`, () =>
+  loadProject(slug.value),
+)
 
-useHead({ title: computed(() => (project.value ? `${project.value.title} · Design reference` : 'Design reference')) })
+usePageSeo({
+  title: computed(() =>
+    project.value ? `${project.value.title} · Design reference` : 'Design reference',
+  ),
+  description: computed(
+    () =>
+      project.value?.summary ??
+      'A browser-framed design reference for a guided frontend project.',
+  ),
+  type: 'article',
+})
 
 // Fixed pixel widths rather than responsive ones: the point of the presets is to
 // show the reference at an exact breakpoint, and `max-w-full` keeps it inside a

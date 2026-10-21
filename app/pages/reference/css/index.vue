@@ -46,7 +46,11 @@
 
 <script setup lang="ts">
 definePageMeta({ layout: 'reference' })
-useHead({ title: 'CSS reference' })
+usePageSeo({
+  title: 'CSS reference',
+  description:
+    'CSS properties, selectors, functions and units with syntax, examples, default values and browser support.',
+})
 
 const [
   properties,

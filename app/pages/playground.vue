@@ -56,7 +56,11 @@
 <script setup lang="ts">
 import type { EditorLanguage } from '~/types/content'
 
-useHead({ title: 'Playground' })
+usePageSeo({
+  title: 'Playground',
+  description:
+    'Write HTML, CSS and JavaScript in a live browser playground and see the result immediately, with no setup.',
+})
 
 const starterHtml = `<main>
   <h1>Playground</h1>

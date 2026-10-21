@@ -18,6 +18,13 @@
  */
 const colorMode = useColorMode()
 
+const route = useRoute()
+const siteUrl = String(useRuntimeConfig().public.siteUrl).replace(/\/+$/, '')
+const canonical = computed(() => {
+  const path = route.path === '/' ? '' : route.path.replace(/\/+$/, '')
+  return `${siteUrl}${path}`
+})
+
 useHead({
   meta: [
     {
@@ -25,5 +32,15 @@ useHead({
       content: computed(() => (colorMode.value === 'dark' ? '#0b0d10' : '#f4f7fa')),
     },
   ],
+  link: [{ rel: 'canonical', href: canonical, key: 'canonical' }],
+})
+
+// Every page, including the reference pages that only set a title, gets a
+// shareable URL and the site-level Open Graph defaults.
+useSeoMeta({
+  ogUrl: canonical,
+  ogSiteName: 'codeIngot',
+  ogLocale: 'en_US',
+  twitterCard: 'summary',
 })
 </script>

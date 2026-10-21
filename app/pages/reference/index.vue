@@ -29,7 +29,11 @@
 </template>
 
 <script setup lang="ts">
-useHead({ title: 'Reference' })
+usePageSeo({
+  title: 'Reference',
+  description:
+    'Searchable reference pages for HTML elements, CSS properties and JavaScript built-ins, with examples and browser notes.',
+})
 
 // Each card counts what its own reference actually contains, rather than the
 // size of the shared entry list, which is only a starting point.

@@ -187,7 +187,11 @@
 <script setup lang="ts">
 import { levelInfo } from '~/utils/achievements'
 
-useHead({ title: 'Dashboard' })
+usePageSeo({
+  title: 'Dashboard',
+  description: 'Your private learning overview, streak and next lesson.',
+  noindex: true,
+})
 
 const { progress, totals, streak, streakWeek, dailyGoalRatio, continueTarget, continuePath, pathProgressPercent, pathCoursesCompleted, setDailyGoal, achievements, isChallengeComplete } =
   useLearningProgress()

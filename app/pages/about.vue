@@ -48,5 +48,9 @@
 </template>
 
 <script setup lang="ts">
-useHead({ title: 'About' })
+usePageSeo({
+  title: 'About',
+  description:
+    'Why codeIngot teaches frontend development through short lessons, real code and projects that run in the browser.',
+})
 </script>

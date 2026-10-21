@@ -94,7 +94,14 @@ const route = useRoute()
 const challenge = computed(() => getChallenge(String(route.params.slug)))
 const { isChallengeComplete, completeExercise } = useLearningProgress()
 
-useHead({ title: computed(() => challenge.value?.title ?? 'Challenge') })
+usePageSeo({
+  title: computed(() => challenge.value?.title ?? 'Challenge'),
+  description: computed(
+    () =>
+      challenge.value?.summary ??
+      'A browser-checked frontend challenge with a starter file and automated tests.',
+  ),
+})
 
 const files = ref<Partial<Record<EditorLanguage, string>>>({})
 watch(

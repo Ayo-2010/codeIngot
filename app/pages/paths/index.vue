@@ -45,5 +45,9 @@
 <script setup lang="ts">
 const { paths } = useCourses()
 
-useHead({ title: 'Learning paths' })
+usePageSeo({
+  title: 'Learning paths',
+  description:
+    'Follow a sequenced path from your first HTML page to a shipped frontend project, with every course in the order it makes sense to learn.',
+})
 </script>

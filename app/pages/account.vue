@@ -154,7 +154,11 @@ One row per browser that has signed in. Each row is stored in Firestore under yo
 <script setup lang="ts">
 import { listDeviceRecords, type DeviceRecord } from '~/utils/firebase-store'
 
-useHead({ title: 'Account' })
+usePageSeo({
+  title: 'Account',
+  description: 'Manage your codeIngot account, sync and device history.',
+  noindex: true,
+})
 
 const { user, isSignedIn, displayName: accountName, providerLabel, syncState, signOut } = useAuth()
 const { storageName, totals } = useLearningProgress()

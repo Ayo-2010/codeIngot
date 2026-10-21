@@ -167,7 +167,7 @@
                 <div class="min-w-0 flex-1">
                   <p class="text-sm text-mist-50">{{ section.quiz.title }}</p>
                   <p class="text-xs text-dim">
-                    {{ section.quiz.questions.length }} questions · pass at {{ section.quiz.passingScore }}%
+                    {{ section.quiz.questionCount }} questions · pass at {{ section.quiz.passingScore }}%
                   </p>
                 </div>
                 <span class="font-mono text-xs" :class="quizDone(section.quiz) ? 'text-ok' : 'text-dim'">
@@ -228,13 +228,40 @@
 
 <script setup lang="ts">
 import type { CourseChapter } from '~/composables/useCourses'
-import type { Project, Quiz } from '~/types/content'
+import type { ProjectSummary, QuizSummary } from '~/types/content'
 
 const route = useRoute()
 const course = computed(() => getCourse(String(route.params.slug)))
 const { progress, courseProgressPercent, isCourseComplete, quizPassed } = useLearningProgress()
 
-useHead({ title: computed(() => course.value?.title ?? 'Course not found') })
+const siteUrl = String(useRuntimeConfig().public.siteUrl).replace(/\/+$/, '')
+
+usePageSeo({
+  title: computed(() => course.value?.title ?? 'Course not found'),
+  description: computed(
+    () =>
+      course.value?.description ??
+      'A guided frontend course with lessons, exercises and a section quiz.',
+  ),
+  jsonLd: computed(() => {
+    const value = course.value
+    if (!value) return undefined
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'Course',
+      name: value.title,
+      description: value.description,
+      url: `${siteUrl}/courses/${value.slug}`,
+      provider: {
+        '@type': 'Organization',
+        name: 'codeIngot',
+        url: siteUrl,
+      },
+      educationalLevel: value.difficulty,
+      inLanguage: 'en',
+    }
+  }),
+})
 
 if (!course.value) {
   throw createError({ statusCode: 404, statusMessage: 'Course not found', fatal: true })
@@ -242,11 +269,11 @@ if (!course.value) {
 
 const stats = computed(() => courseStats(course.value!))
 const chapters = computed(() => (course.value ? courseChapters(course.value) : []))
-const capstoneProjects = computed<Project[]>(() =>
+const capstoneProjects = computed<ProjectSummary[]>(() =>
   course.value?.category === 'projects'
     ? course.value.projects
-        .map((slug) => getProject(slug))
-        .filter((project): project is Project => project !== undefined)
+        .map((slug) => getProjectSummary(slug))
+        .filter((project): project is ProjectSummary => project !== undefined)
     : [],
 )
 const percent = computed(() => (course.value ? courseProgressPercent(course.value) : 0))
@@ -319,11 +346,11 @@ const glance = computed(() => {
   return entries
 })
 
-function quizScore(quiz: Quiz): number | null {
+function quizScore(quiz: QuizSummary): number | null {
   return progress.value.quizScores[quiz.id] ?? null
 }
 
-function quizDone(quiz: Quiz) {
+function quizDone(quiz: QuizSummary) {
   return quizPassed(quiz)
 }
 </script>

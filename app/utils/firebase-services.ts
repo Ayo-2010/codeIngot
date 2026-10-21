@@ -15,6 +15,8 @@ export interface FirebaseServices {
  * Firebase, which is exactly how it behaves for an anonymous learner.
  */
 let services: FirebaseServices | null = null
+let loader: (() => Promise<FirebaseServices | null>) | null = null
+let pending: Promise<FirebaseServices | null> | null = null
 
 export function setFirebaseServices(next: FirebaseServices | null): void {
   services = next
@@ -22,6 +24,28 @@ export function setFirebaseServices(next: FirebaseServices | null): void {
 
 export function getFirebaseServices(): FirebaseServices | null {
   return services
+}
+
+/**
+ * The plugin registers the importer; the SDK itself is only fetched the first
+ * time something asks for it. Every caller shares the same in-flight promise,
+ * so a sign-in click and an idle warm-up cannot initialize Firebase twice.
+ */
+export function setFirebaseLoader(next: (() => Promise<FirebaseServices | null>) | null): void {
+  loader = next
+}
+
+export function loadFirebaseServices(): Promise<FirebaseServices | null> {
+  if (services) return Promise.resolve(services)
+  if (!loader) return Promise.resolve(null)
+  if (!pending) {
+    pending = loader()
+      .catch(() => null)
+      .finally(() => {
+        pending = null
+      })
+  }
+  return pending
 }
 
 export function firebaseAvailable(): boolean {

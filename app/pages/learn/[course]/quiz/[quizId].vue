@@ -97,20 +97,35 @@ const courseSlug = computed(() => String(route.params.course))
 const quizId = computed(() => String(route.params.quizId))
 
 const course = computed(() => getCourse(courseSlug.value))
-const quiz = computed(() => getQuizById(courseSlug.value, quizId.value))
+const section = computed(() => getQuizSection(courseSlug.value, quizId.value))
+const quizSummary = computed(() => section.value?.quiz)
+
+/** Question bodies are not in the catalogue metadata; fetch the owning course. */
+const { data: quiz } = await useAsyncData(
+  () => `quiz-${courseSlug.value}-${quizId.value}`,
+  () => loadQuiz(courseSlug.value, quizId.value),
+)
 
 const { recordQuiz } = useLearningProgress()
 
-useHead({ title: computed(() => quiz.value?.title ?? 'Quiz') })
+usePageSeo({
+  title: computed(() => quiz.value?.title ?? quizSummary.value?.title ?? 'Quiz'),
+  description: computed(
+    () =>
+      course.value
+        ? `Check your understanding of ${course.value.title} with a short section quiz.`
+        : 'A short section quiz that checks what you just learned.',
+  ),
+})
 
 const drawerOpen = ref(false)
 
 const currentLessonId = computed(() => '')
 
 const lastLessonId = computed(() => {
-  const sec = getQuizSection(courseSlug.value, quizId.value)
-  if (!sec) return ''
-  return sec.lessons[sec.lessons.length - 1]?.id ?? ''
+  const current = section.value
+  if (!current) return ''
+  return current.lessons[current.lessons.length - 1]?.id ?? ''
 })
 
 const prevLesson = computed(() => {

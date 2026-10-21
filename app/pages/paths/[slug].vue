@@ -114,7 +114,14 @@ const route = useRoute()
 const path = computed(() => getPath(String(route.params.slug)))
 const { courseStatus, pathProgressPercent, pathCoursesCompleted } = useLearningProgress()
 
-useHead({ title: computed(() => path.value?.title ?? 'Path not found') })
+usePageSeo({
+  title: computed(() => path.value?.title ?? 'Path not found'),
+  description: computed(
+    () =>
+      path.value?.description ??
+      'A sequenced collection of courses that takes you from the fundamentals to a shipped project.',
+  ),
+})
 
 const percent = computed(() => (path.value ? pathProgressPercent(path.value) : 0))
 const completed = computed(() => (path.value ? pathCoursesCompleted(path.value) : 0))

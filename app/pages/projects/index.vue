@@ -36,7 +36,14 @@
 </template>
 
 <script setup lang="ts">
-const allProjects = allProjectsList()
+import { loadAllProjects } from '~/content/projects/load'
 
-useHead({ title: 'Projects' })
+const { data: projects } = await useAsyncData('project-catalog', loadAllProjects)
+const allProjects = computed(() => projects.value ?? [])
+
+usePageSeo({
+  title: 'Projects',
+  description:
+    'Build real interfaces from a brief and a design reference, then check your work against automated and manual requirements.',
+})
 </script>

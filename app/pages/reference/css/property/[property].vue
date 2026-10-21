@@ -164,5 +164,14 @@ async function copy(code: string) {
   await navigator.clipboard.writeText(code)
 }
 
-useHead({ title: computed(() => page.value?.property ?? 'Property not found') })
+usePageSeo({
+  title: computed(() => page.value?.property ?? 'Property not found'),
+  description: computed(
+    () =>
+      page.value?.usage ??
+      meta.value?.description ??
+      'A CSS property reference with syntax, an example and browser support.',
+  ),
+  type: 'article',
+})
 </script>

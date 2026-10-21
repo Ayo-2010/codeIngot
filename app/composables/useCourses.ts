@@ -1,5 +1,4 @@
 import type {
-  Course,
   CourseLessonMeta,
   CourseMeta,
   CourseSectionMeta,
@@ -22,18 +21,20 @@ import type {
   JsMember,
   LearningPath,
   Lesson,
-  Project,
+  ProjectSummary,
   Quiz,
+  QuizSummary,
 } from '~/types/content'
 import { courseMeta } from '~/content/courses/meta'
+import { loadSection } from '~/content/courses/section-loaders'
 import { frontendDeveloper } from '~/content/paths/frontend-developer'
 import { challenges } from '~/content/challenges/index'
-import { projects } from '~/content/projects/index'
+import { projectSummaries } from '~/content/projects/meta'
 
 /**
- * A lesson as the catalogue sees it: everything except the lesson
- * body. The body travels with the course module, which `loadCourse`
- * imports on demand, so no page pays for lessons it never opens.
+ * A lesson as the catalogue sees it: everything except the lesson body. The
+ * body travels with its section module, which `loadLesson` imports on demand,
+ * so no page pays for lessons it never opens.
  */
 export interface FlatLesson extends CourseLessonMeta {
   courseSlug: string
@@ -62,7 +63,7 @@ export interface CourseChapter {
 
 const allCourses: CourseMeta[] = courseMeta
 const allPaths: LearningPath[] = [frontendDeveloper]
-const allProjects: Project[] = projects
+const allProjects: ProjectSummary[] = projectSummaries
 
 /** Every course, precomputed lookup maps. Content-only, so it is module scope. */
 const courseBySlug = new Map(allCourses.map((course) => [course.slug, course]))
@@ -93,36 +94,6 @@ for (const course of allCourses) {
   }
   courseLessonTotals[course.slug] = index
 }
-
-/**
- * Course bodies load on demand. The specifiers are static so the
- * bundler splits each course into its own chunk; only the module
- * for the course being read is ever downloaded.
- */
-const courseLoaders: Record<string, () => Promise<Course>> = {
-  'html-fundamentals': () =>
-    import('~/content/courses/html-fundamentals').then((module) => module.htmlFundamentals),
-  'css-fundamentals': () =>
-    import('~/content/courses/css-fundamentals').then((module) => module.cssFundamentals),
-  'javascript-fundamentals': () =>
-    import('~/content/courses/javascript-fundamentals').then(
-      (module) => module.javascriptFundamentals,
-    ),
-  'dom-browser-apis': () =>
-    import('~/content/courses/dom-browser-apis-course').then((module) => module.domBrowserApisCourse),
-  'responsive-web-design': () =>
-    import('~/content/courses/responsive-web-design-course').then((module) => module.responsiveWebDesignCourse),
-  'git-github': () =>
-    import('~/content/courses/git-github-course').then((module) => module.gitGitHubCourse),
-  'typescript': () =>
-    import('~/content/courses/typescript-fundamentals').then((module) => module.typescriptFundamentals),
-  'react': () =>
-    import('~/content/courses/react').then((module) => module.reactCourse),
-  'frontend-projects': () =>
-    import('~/content/courses/frontend-projects-course').then((module) => module.frontendProjectsCourse),
-}
-
-const loadedCourses = new Map<string, Course>()
 
 // Lazy loaders for reference corpora — each language loads on first use.
 const htmlRefPromise = import('~/content/reference/html').then((m) => ({
@@ -194,27 +165,16 @@ const javascriptPromise = import('~/content/reference/javascript').then((m) => (
 }))
 const javascriptNavPromise = import('~/content/reference/javascript-nav').then((m) => m.javascriptNavGroups)
 
-/** Loads a full course body, caching it for the rest of the session. */
-export async function loadCourse(slug: string): Promise<Course | undefined> {
-  const cached = loadedCourses.get(slug)
-  if (cached) return cached
-  const loader = courseLoaders[slug]
-  if (!loader) return undefined
-  const course = await loader()
-  loadedCourses.set(slug, course)
-  return course
-}
-
-/** A lesson body with its content, once the course module is loaded. */
+/**
+ * A lesson body with its content. The catalogue already knows which section
+ * owns the lesson, so only that section module is imported, never the whole
+ * course.
+ */
 export async function loadLesson(courseSlug: string, lessonId: string): Promise<Lesson | undefined> {
-  const course = await loadCourse(courseSlug)
-  if (!course) return undefined
-  for (const section of course.sections) {
-    for (const lesson of section.lessons) {
-      if (lesson.id === lessonId) return lesson
-    }
-  }
-  return undefined
+  const current = lessonIndex.get(lessonId)
+  if (!current || current.courseSlug !== courseSlug) return undefined
+  const section = await loadSection(current.sectionId)
+  return section?.lessons.find((lesson) => lesson.id === lessonId)
 }
 
 export function useCourses() {
@@ -264,8 +224,8 @@ export function courseChapters(course: CourseMeta): CourseChapter[] {
   return chapters
 }
 
-/** Finds a quiz by its own id, across every course. */
-export function findQuiz(quizId: string): Quiz | undefined {
+/** Finds a quiz summary by its own id, across every course. */
+export function findQuiz(quizId: string): QuizSummary | undefined {
   for (const course of allCourses) {
     for (const section of course.sections) {
       if (section.quiz?.id === quizId) return section.quiz
@@ -274,13 +234,12 @@ export function findQuiz(quizId: string): Quiz | undefined {
   return undefined
 }
 
-export function getQuizById(courseSlug: string, quizId: string) {
-  const course = courseBySlug.get(courseSlug)
-  if (!course) return undefined
-  for (const section of course.sections) {
-    if (section.quiz?.id === quizId) return section.quiz
-  }
-  return undefined
+/** Loads the questions for one quiz from the section that owns it. */
+export async function loadQuiz(courseSlug: string, quizId: string): Promise<Quiz | undefined> {
+  const summary = getQuizSection(courseSlug, quizId)
+  if (!summary) return undefined
+  const section = await loadSection(summary.id)
+  return section?.quiz
 }
 
 export function getQuizSection(courseSlug: string, quizId: string) {
@@ -346,7 +305,7 @@ export function getChallenge(slug: string) {
   return challenges.find((challenge) => challenge.slug === slug)
 }
 
-export function getProject(slug: string) {
+export function getProjectSummary(slug: string) {
   return allProjects.find((project) => project.slug === slug)
 }
 
@@ -354,7 +313,7 @@ export function allChallenges() {
   return challenges
 }
 
-export function allProjectsList() {
+export function allProjectsList(): ProjectSummary[] {
   return allProjects
 }
 

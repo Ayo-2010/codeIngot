@@ -46,7 +46,11 @@
 </template>
 
 <script setup lang="ts">
-useHead({ title: 'Achievements' })
+usePageSeo({
+  title: 'Achievements',
+  description: 'Achievements unlocked by your lessons, quizzes and projects.',
+  noindex: true,
+})
 
 const { achievements } = useLearningProgress()
 

@@ -258,16 +258,47 @@ import type { SandboxRunResult } from '~/utils/sandbox'
 import { SCRIPT_LANGUAGES } from '~/utils/transpile'
 import { LocalDraftStorage, type ProjectDraft } from '~/utils/progress-storage'
 import { downloadZip } from '~/utils/zip'
+import { loadProject } from '~/content/projects/load'
 
 const route = useRoute()
-const project = computed(() => getProject(String(route.params.slug)))
+const slug = computed(() => String(route.params.slug))
+const { data: project } = await useAsyncData(`project:${slug.value}`, () =>
+  loadProject(slug.value),
+)
+if (!project.value) {
+  throw createError({ statusCode: 404, statusMessage: 'Project not found' })
+}
 const capstoneCourse = getCourse('frontend-projects')
 const isCapstone = computed(
   () => capstoneCourse?.projects.includes(project.value?.slug ?? '') ?? false,
 )
 const { isProjectComplete, completeProject } = useLearningProgress()
 
-useHead({ title: computed(() => project.value?.title ?? 'Project') })
+const siteUrl = String(useRuntimeConfig().public.siteUrl).replace(/\/+$/, '')
+
+usePageSeo({
+  title: computed(() => project.value?.title ?? 'Project'),
+  description: computed(
+    () =>
+      project.value?.summary ??
+      'A guided frontend project with a brief, design reference, starter files and a submission checklist.',
+  ),
+  type: 'article',
+  jsonLd: computed(() => {
+    const value = project.value
+    if (!value) return undefined
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'CreativeWork',
+      name: value.title,
+      description: value.summary,
+      url: `${siteUrl}/projects/${value.slug}`,
+      learningResourceType: 'Project',
+      educationalLevel: value.difficulty,
+      inLanguage: 'en',
+    }
+  }),
+})
 
 const files = ref<Partial<Record<EditorLanguage, string>>>({})
 /**

@@ -64,5 +64,9 @@
 </template>
 
 <script setup lang="ts">
-useHead({ title: 'Privacy' })
+usePageSeo({
+  title: 'Privacy',
+  description:
+    'How codeIngot stores progress locally, when an account syncs it, and what analytics the site uses.',
+})
 </script>

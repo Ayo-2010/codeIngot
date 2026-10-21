@@ -61,67 +61,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s1",
           "title": "Getting started check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s1-q1",
-              "type": "multiple-choice",
-              "prompt": "What is HTML responsible for?",
-              "options": [
-                "How a page looks and where things sit",
-                "What happens when someone clicks a button",
-                "The structure and meaning of the content",
-                "The requests a page makes to a server"
-              ],
-              "answer": 2,
-              "explanation": "HTML is structure. Presentation belongs to CSS and behaviour belongs to JavaScript, and keeping the three apart is what makes each of them replaceable on its own."
-            },
-            {
-              "id": "quiz-html-s1-q2",
-              "type": "true-false",
-              "prompt": "In the two cards at the top of this lesson, a browser would render the unlabelled version and the marked-up version almost identically.",
-              "answer": true,
-              "explanation": "Visually they are nearly the same. The difference is in what the markup tells you, a search engine, and a screen reader about what those pieces are."
-            },
-            {
-              "id": "quiz-html-s1-q3",
-              "type": "multiple-choice",
-              "prompt": "Which of these is NOT part of this course?",
-              "options": [
-                "Forms and form accessibility",
-                "Semantic elements",
-                "Browser APIs such as web storage",
-                "Building a backend server in Node"
-              ],
-              "answer": 3,
-              "explanation": "The course stops at the platform the browser gives you. Server-side work is a different subject with a different set of tools."
-            },
-            {
-              "id": "quiz-html-s1-q4",
-              "type": "blank",
-              "prompt": "What is the first block of every lesson in this course?",
-              "answers": [
-                "a live example",
-                "live example",
-                "demo",
-                "a live rendered example",
-                "live rendered example"
-              ],
-              "explanation": "Every lesson opens with a rendered example so you know what you are aiming at before you read any markup."
-            },
-            {
-              "id": "quiz-html-s1-q5",
-              "type": "multiple-choice",
-              "prompt": "Why does the order of the course matter?",
-              "options": [
-                "Because the later sections are more valuable",
-                "Because each section is only understandable once you have the one before it",
-                "Because the exercises build on each other",
-                "Because HTML cannot be learned out of order"
-              ],
-              "answer": 1,
-              "explanation": "Attributes come before forms, and forms come before the accessibility rules written about them. Each section leans on the vocabulary the previous one introduced."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Getting started"
       },
@@ -161,65 +101,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s2",
           "title": "HTML Introduction quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s2-q1",
-              "type": "multiple-choice",
-              "prompt": "What are the two children of the root <html> element?",
-              "options": [
-                "<header> and <footer>",
-                "<head> and <body>",
-                "<nav> and <main>",
-                "<title> and <meta>"
-              ],
-              "answer": 1,
-              "explanation": "The root element has exactly two children: <head> for metadata about the page, and <body> for the content a visitor sees."
-            },
-            {
-              "id": "quiz-html-s2-q2",
-              "type": "true-false",
-              "prompt": "The doctype declaration needs a matching closing tag.",
-              "answer": false,
-              "explanation": "It is a single declaration on the first line, not an element. It has no closing tag and no attributes."
-            },
-            {
-              "id": "quiz-html-s2-q3",
-              "type": "identify-error",
-              "prompt": "What is wrong with this markup?",
-              "code": "<!DOCTYPE html>\n<html>\n<body>\n<p>Hello</p>\n</html>",
-              "options": [
-                "Nothing is wrong",
-                "The <body> element is never closed",
-                "The <html> element is missing a lang attribute and a <head>",
-                "The paragraph should be a heading"
-              ],
-              "answer": 2,
-              "explanation": "A complete document declares its language on the root and has a <head> with at least a title. The <body> here is closed correctly."
-            },
-            {
-              "id": "quiz-html-s2-q4",
-              "type": "blank",
-              "prompt": "Which attribute on the root element tells the browser what language the text is written in?",
-              "answers": [
-                "lang",
-                "language"
-              ],
-              "explanation": "`lang=\"en\"` on <html> drives screen reader voices, browser hyphenation and search relevance."
-            },
-            {
-              "id": "quiz-html-s2-q5",
-              "type": "multiple-choice",
-              "prompt": "Why does the browser repair malformed markup instead of refusing to render it?",
-              "options": [
-                "To make error messages easier to read",
-                "Because pages from the 1990s were badly broken and had to keep working",
-                "To make the page load faster",
-                "Because HTML is not a real specification"
-              ],
-              "answer": 1,
-              "explanation": "Compatibility with genuinely broken 1990s markup is the whole reason the parser is so forgiving. The cost is that a missing tag can quietly relocate your content."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Getting started"
       },
@@ -246,64 +128,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s3",
           "title": "HTML Editors quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s3-q1",
-              "type": "multiple-choice",
-              "prompt": "Which editor feature is the most valuable for writing HTML?",
-              "options": [
-                "A colour theme",
-                "Error checking that runs as you type and on save",
-                "Automatic tag closing",
-                "Built-in file previews"
-              ],
-              "answer": 1,
-              "explanation": "Structural mistakes are invisible in raw text. An error checker that flags an unclosed or mis-nested element is the feature that actually prevents bugs."
-            },
-            {
-              "id": "quiz-html-s3-q2",
-              "type": "true-false",
-              "prompt": "Because an editor can close tags for you, you never need to look at the rendered result.",
-              "answer": false,
-              "explanation": "Auto-closing can produce valid markup that is structured in a way you never intended. Rendering is the only way to know."
-            },
-            {
-              "id": "quiz-html-s3-q3",
-              "type": "multiple-choice",
-              "prompt": "What does the Emmet abbreviation nav>ul>li*4 expand to?",
-              "options": [
-                "A list with four items inside a list inside a nav",
-                "Four separate nav elements",
-                "A nav with four paragraphs",
-                "A nav with four classes named ul, li"
-              ],
-              "answer": 0,
-              "explanation": "The > operator nests elements and the *N operator repeats the last one. Together they expand into a nested skeleton instantly."
-            },
-            {
-              "id": "quiz-html-s3-q4",
-              "type": "blank",
-              "prompt": "Which element should you use for a block of navigation links, rather than a div with a class?",
-              "answers": [
-                "nav",
-                "<nav>"
-              ],
-              "explanation": "`<nav>` is a landmark. It tells assistive technology and browsers that this region is navigation, which is information a class name cannot carry."
-            },
-            {
-              "id": "quiz-html-s3-q5",
-              "type": "multiple-choice",
-              "prompt": "Why is a word processor a bad choice for writing HTML?",
-              "options": [
-                "It cannot save files with an .html extension",
-                "It adds its own markup, styles and invisible characters and reformats your code",
-                "It is too slow to type in",
-                "It does not support the HTML5 doctype"
-              ],
-              "answer": 1,
-              "explanation": "Word processors are built to produce documents for other word processors. They insert their own styling and can silently reformat quotes, indentation and the doctype."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Getting started"
       },
@@ -343,64 +168,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s4",
           "title": "HTML Basic quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s4-q1",
-              "type": "multiple-choice",
-              "prompt": "What does an h1 element mean?",
-              "options": [
-                "The largest text on the page",
-                "The top level of the document outline",
-                "The page title shown in the browser tab",
-                "A heading that must appear once per section"
-              ],
-              "answer": 1,
-              "explanation": "Heading levels describe a hierarchy, not a font size. The tab title is a separate thing, set with <title> in the head."
-            },
-            {
-              "id": "quiz-html-s4-q2",
-              "type": "true-false",
-              "prompt": "It is fine to jump from an h2 straight to an h4 when the h3 would look too big.",
-              "answer": false,
-              "explanation": "Levels are never chosen for size. A skipped level breaks the outline for screen reader users, who navigate by heading level."
-            },
-            {
-              "id": "quiz-html-s4-q3",
-              "type": "multiple-choice",
-              "prompt": "Which element should wrap a date that the browser should understand as a date?",
-              "options": [
-                "<span>",
-                "<p>",
-                "<time>",
-                "<small>"
-              ],
-              "answer": 2,
-              "explanation": "<time datetime=\"2026-03-01\">1 March</time> carries a machine-readable value while showing human-readable text."
-            },
-            {
-              "id": "quiz-html-s4-q4",
-              "type": "blank",
-              "prompt": "How many <main> elements should a page have?",
-              "answers": [
-                "one",
-                "1"
-              ],
-              "explanation": "Exactly one. It marks the unique content of the page, and a second one would make the landmark ambiguous."
-            },
-            {
-              "id": "quiz-html-s4-q5",
-              "type": "multiple-choice",
-              "prompt": "Why is a wrapper div used purely to line two things up side by side a problem?",
-              "options": [
-                "Divs cannot contain other elements",
-                "Browsers render them with a default margin",
-                "It carries no meaning and belongs in CSS instead",
-                "It breaks the heading outline"
-              ],
-              "answer": 2,
-              "explanation": "A div with no meaning is structural noise. It makes the document harder to parse and tells nobody anything. Layout belongs in the stylesheet."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Getting started"
       },
@@ -440,65 +208,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s5",
           "title": "HTML Elements quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s5-q1",
-              "type": "multiple-choice",
-              "prompt": "Which of these is NOT a void element?",
-              "options": [
-                "<br>",
-                "<img>",
-                "<textarea>",
-                "<hr>"
-              ],
-              "answer": 2,
-              "explanation": "<textarea> holds content, so it needs a closing tag. Writing <textarea /> makes it swallow the rest of the document."
-            },
-            {
-              "id": "quiz-html-s5-q2",
-              "type": "true-false",
-              "prompt": "Writing </img> is a harmless way of closing an image element.",
-              "answer": false,
-              "explanation": "Void elements have no closing tag. The parser turns a stray </img> into a real element, which then wraps whatever follows it."
-            },
-            {
-              "id": "quiz-html-s5-q3",
-              "type": "multiple-choice",
-              "prompt": "Which element names a self-contained piece of content that would still make sense syndicated on its own?",
-              "options": [
-                "<div>",
-                "<section>",
-                "<article>",
-                "<span>"
-              ],
-              "answer": 2,
-              "explanation": "<article> is specifically for content that stands alone. <section> is a topic within a page and <div> says nothing at all."
-            },
-            {
-              "id": "quiz-html-s5-q4",
-              "type": "blank",
-              "prompt": "Wrapping content in a <section> creates a new outline level, so which heading element is correct for the title of a section that sits under the page h1?",
-              "answers": [
-                "h2",
-                "<h2>",
-                "h2 heading"
-              ],
-              "explanation": "Because the section is nested under the page heading, its title is one level deeper. The number follows the tree, not the tag name."
-            },
-            {
-              "id": "quiz-html-s5-q5",
-              "type": "multiple-choice",
-              "prompt": "When is a plain div the right choice?",
-              "options": [
-                "Never, always prefer a sectioning element",
-                "When the grouping is purely visual and you have no meaningful name for it",
-                "When the element contains text",
-                "When the element needs a class for styling"
-              ],
-              "answer": 1,
-              "explanation": "A div is exactly right for a grouping you cannot name. It becomes wrong only when it is standing in for a region that does have a meaning."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Elements, attributes and text"
       },
@@ -538,63 +248,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s6",
           "title": "HTML Attributes quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s6-q1",
-              "type": "multiple-choice",
-              "prompt": "What happens with class=link link--primary written without quotes?",
-              "options": [
-                "The class becomes \"link link--primary\" as intended",
-                "The class becomes \"link\" and link--primary is treated as a separate attribute",
-                "The attribute is dropped entirely",
-                "It is a syntax error and nothing renders"
-              ],
-              "answer": 1,
-              "explanation": "An unquoted value ends at the first space. Everything after that is parsed as another attribute name, which is how broken class lists happen."
-            },
-            {
-              "id": "quiz-html-s6-q2",
-              "type": "true-false",
-              "prompt": "Writing disabled=\"false\" on a button enables it.",
-              "answer": false,
-              "explanation": "Boolean attributes are controlled by presence. The attribute is present, so the control is disabled no matter what the value says."
-            },
-            {
-              "id": "quiz-html-s6-q3",
-              "type": "multiple-choice",
-              "prompt": "How do you read a data-user-id attribute from JavaScript?",
-              "options": [
-                "element.getAttribute(\"userId\")",
-                "element.dataset.userId",
-                "element.data[\"user-id\"]",
-                "element.attributes.userId"
-              ],
-              "answer": 1,
-              "explanation": "Data attributes are exposed on the dataset object with the name after data- converted to camelCase."
-            },
-            {
-              "id": "quiz-html-s6-q4",
-              "type": "blank",
-              "prompt": "Which boolean attribute hides an element completely, overriding any CSS you write?",
-              "answers": [
-                "hidden"
-              ],
-              "explanation": "`hidden` is in the UA stylesheet as `display: none`, and it wins over author styles in the same way any other user-agent rule does."
-            },
-            {
-              "id": "quiz-html-s6-q5",
-              "type": "multiple-choice",
-              "prompt": "Why is a title attribute a poor substitute for a label?",
-              "options": [
-                "It is not supported in modern browsers",
-                "It only appears on mouse hover, so touch and keyboard users never see it",
-                "It cannot contain spaces",
-                "It overrides the accessible name in every screen reader"
-              ],
-              "answer": 1,
-              "explanation": "A tooltip is invisible on touch devices and invisible to keyboard users until hovered. Form controls need a real <label>."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Elements, attributes and text"
       },
@@ -621,65 +275,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s7",
           "title": "HTML Headings quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s7-q1",
-              "type": "multiple-choice",
-              "prompt": "What does the number in an h3 element mean?",
-              "options": [
-                "The font size to use",
-                "The depth of this heading in the document outline",
-                "The order the heading appears on the page",
-                "The importance of the heading for search engines"
-              ],
-              "answer": 1,
-              "explanation": "The number is a nesting depth. Size is a styling decision and belongs in CSS."
-            },
-            {
-              "id": "quiz-html-s7-q2",
-              "type": "true-false",
-              "prompt": "Going from an h4 back up to an h2 is a structural error.",
-              "answer": false,
-              "explanation": "Going back up is unrestricted, because you have finished that subsection. Only skipping a level on the way down breaks the outline."
-            },
-            {
-              "id": "quiz-html-s7-q3",
-              "type": "multiple-choice",
-              "prompt": "You need a seventh level of heading. What should you do?",
-              "options": [
-                "Use h1 again",
-                "Use h6 and make the text smaller",
-                "Flatten the structure so h6 is deep enough",
-                "Use a div with a bold style"
-              ],
-              "answer": 2,
-              "explanation": "Six levels is the whole range. If you genuinely need a seventh, the document is nested too deeply and the fix is structural."
-            },
-            {
-              "id": "quiz-html-s7-q4",
-              "type": "blank",
-              "prompt": "How many h1 elements should a page have?",
-              "answers": [
-                "one",
-                "1",
-                "exactly one"
-              ],
-              "explanation": "One h1 that names the page. More than one means the page has no single title."
-            },
-            {
-              "id": "quiz-html-s7-q5",
-              "type": "multiple-choice",
-              "prompt": "Why does a broken heading outline matter beyond appearance?",
-              "options": [
-                "Search engines penalise it",
-                "Screen reader users navigate pages by heading level, so a broken outline removes their fastest way around",
-                "Browsers refuse to render the page",
-                "It makes the page load slower"
-              ],
-              "answer": 1,
-              "explanation": "Heading lists and rotor navigation are built entirely on levels. That is a primary way of moving through a long document without reading it linearly."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Elements, attributes and text"
       },
@@ -706,64 +302,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s8",
           "title": "HTML Paragraphs quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s8-q1",
-              "type": "multiple-choice",
-              "prompt": "What does a blank line in your HTML source do?",
-              "options": [
-                "It creates a visible gap in the page",
-                "Nothing, because the browser collapses runs of whitespace to a single space",
-                "It closes the current paragraph",
-                "It adds vertical margin"
-              ],
-              "answer": 1,
-              "explanation": "Whitespace in the source is collapsed. Only elements create separation, which is why paragraphs need <p> tags rather than blank lines."
-            },
-            {
-              "id": "quiz-html-s8-q2",
-              "type": "true-false",
-              "prompt": "A ul element written inside a p element will be nested inside the paragraph in the DOM.",
-              "answer": false,
-              "explanation": "The parser closes the paragraph when it hits a block element. The list becomes a sibling, silently, and your source no longer matches the DOM."
-            },
-            {
-              "id": "quiz-html-s8-q3",
-              "type": "multiple-choice",
-              "prompt": "Which element should hold a label attached to a form control?",
-              "options": [
-                "<p>",
-                "<span>",
-                "<label>",
-                "<small>"
-              ],
-              "answer": 2,
-              "explanation": "<label> is not prose. It associates text with a control so clicking it focuses the field and screen readers announce the relationship."
-            },
-            {
-              "id": "quiz-html-s8-q4",
-              "type": "blank",
-              "prompt": "Which element marks up a quotation from another source, and carries the source in a cite attribute?",
-              "answers": [
-                "blockquote",
-                "<blockquote>"
-              ],
-              "explanation": "<blockquote> marks the quotation itself. The optional cite attribute on it points at the source."
-            },
-            {
-              "id": "quiz-html-s8-q5",
-              "type": "multiple-choice",
-              "prompt": "When should you split a paragraph?",
-              "options": [
-                "When it reaches a fixed line length",
-                "When the idea changes",
-                "Whenever a sentence gets longer than the others",
-                "At the end of every sentence"
-              ],
-              "answer": 1,
-              "explanation": "Split on meaning, not on width. A paragraph broken at a fixed column length reads badly on a phone, where the same text would fit on one screen."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Elements, attributes and text"
       },
@@ -803,64 +342,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s9",
           "title": "HTML Formatting quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s9-q1",
-              "type": "multiple-choice",
-              "prompt": "Which element should mark up text that carries importance or urgency?",
-              "options": [
-                "<b>",
-                "<strong>",
-                "<em>",
-                "<span>"
-              ],
-              "answer": 1,
-              "explanation": "<strong> carries meaning. <b> only says \"draw this in a bold face\", which is a styling request."
-            },
-            {
-              "id": "quiz-html-s9-q2",
-              "type": "true-false",
-              "prompt": "strong and em render identically by default in every browser.",
-              "answer": false,
-              "explanation": "<strong> is bold and <em> is italic by default, though you can restyle either. They are distinguishable both visually and to assistive technology."
-            },
-            {
-              "id": "quiz-html-s9-q3",
-              "type": "multiple-choice",
-              "prompt": "Which element marks text that was deleted in a revision?",
-              "options": [
-                "<del>",
-                "<ins>",
-                "<s>",
-                "<mark>"
-              ],
-              "answer": 0,
-              "explanation": "<del> and <ins> work as a pair for showing what changed, and both render with the conventional strikethrough and underline."
-            },
-            {
-              "id": "quiz-html-s9-q4",
-              "type": "blank",
-              "prompt": "Which element is the one formatting choice that cannot be reproduced in CSS, because you cannot select arbitrary text yourself?",
-              "answers": [
-                "mark",
-                "<mark>"
-              ],
-              "explanation": "User selection uses a system colour no stylesheet can override. <mark> is the only way to highlight text as relevant to the current context."
-            },
-            {
-              "id": "quiz-html-s9-q5",
-              "type": "multiple-choice",
-              "prompt": "What should you use when text only needs to be large and coloured?",
-              "options": [
-                "<big> and <font>",
-                "A <span> with a class, styled in CSS",
-                "<strong>",
-                "A heading element"
-              ],
-              "answer": 1,
-              "explanation": "Size and colour are presentation, so they belong in a stylesheet. A span with a class keeps the document clean and the styling changeable."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Elements, attributes and text"
       },
@@ -887,64 +369,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s10",
           "title": "HTML Quotation Elements quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s10-q1",
-              "type": "multiple-choice",
-              "prompt": "Which element is for a short quotation inside a sentence?",
-              "options": [
-                "<blockquote>",
-                "<q>",
-                "<cite>",
-                "<pre>"
-              ],
-              "answer": 1,
-              "explanation": "<q> is inline and marks a phrase somebody else said. The browser adds the quotation marks."
-            },
-            {
-              "id": "quiz-html-s10-q2",
-              "type": "true-false",
-              "prompt": "The cite attribute on a blockquote is visible in the rendered page.",
-              "answer": false,
-              "explanation": "It is in the DOM but nothing renders it. If you want readers to see the source, add a visible link as well."
-            },
-            {
-              "id": "quiz-html-s10-q3",
-              "type": "multiple-choice",
-              "prompt": "Which element marks the title of a work, such as a book or a film?",
-              "options": [
-                "<cite>",
-                "<blockquote>",
-                "<em>",
-                "<dfn>"
-              ],
-              "answer": 0,
-              "explanation": "<cite> is specifically for the title of a creative or documentary work. <dfn> is for defining a technical term."
-            },
-            {
-              "id": "quiz-html-s10-q4",
-              "type": "blank",
-              "prompt": "Which element preserves the exact spacing in a block of text?",
-              "answers": [
-                "pre",
-                "<pre>"
-              ],
-              "explanation": "<pre> turns off whitespace collapsing, which is what makes code and ASCII diagrams render correctly."
-            },
-            {
-              "id": "quiz-html-s10-q5",
-              "type": "multiple-choice",
-              "prompt": "What is wrong with writing quotation marks by hand around a q element?",
-              "options": [
-                "Nothing, it is the recommended style",
-                "The browser adds its own marks, so you end up with two sets",
-                "It stops the text being searchable",
-                "It converts the element into a blockquote"
-              ],
-              "answer": 1,
-              "explanation": "The browser renders quotation marks for <q> and will localise them to the document language, so hand-typed marks are always a duplicate."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Elements, attributes and text"
       },
@@ -971,66 +396,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s11",
           "title": "HTML Comments quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s11-q1",
-              "type": "multiple-choice",
-              "prompt": "What does a comment do to the rendered page?",
-              "options": [
-                "It is rendered in small grey text",
-                "Nothing — the browser skips it entirely",
-                "It is rendered only on small screens",
-                "It collapses the elements around it"
-              ],
-              "answer": 1,
-              "explanation": "Comments never render. They remain in the file and in view-source, which is why they cannot be used to hide anything."
-            },
-            {
-              "id": "quiz-html-s11-q2",
-              "type": "true-false",
-              "prompt": "An API key in an HTML comment is safe because users cannot see it.",
-              "answer": false,
-              "explanation": "Comments are in the page source for anyone to read. A commented-out secret is a published secret."
-            },
-            {
-              "id": "quiz-html-s11-q3",
-              "type": "multiple-choice",
-              "prompt": "What happens if you wrap a block that already contains a comment in another comment?",
-              "options": [
-                "The nested comment works normally",
-                "The first closing marker ends the comment early, so the rest becomes live markup",
-                "The browser throws an error",
-                "The inner comment is stripped automatically"
-              ],
-              "answer": 1,
-              "explanation": "Comments cannot nest. The first --> encountered closes the comment, and everything after it is parsed as markup."
-            },
-            {
-              "id": "quiz-html-s11-q4",
-              "type": "blank",
-              "prompt": "What are the two markers that delimit an HTML comment?",
-              "answers": [
-                "<!-- and -->",
-                "<!-- -->",
-                "<!--",
-                "-->"
-              ],
-              "explanation": "The comment opens with `<!--` and closes with `-->`, and the closing marker is the first one that appears in the file."
-            },
-            {
-              "id": "quiz-html-s11-q5",
-              "type": "multiple-choice",
-              "prompt": "Why is a large commented-out block of markup a problem?",
-              "options": [
-                "It slows down HTML parsing significantly",
-                "It is dead weight in the file, and version control already remembers it",
-                "It breaks the heading outline",
-                "It prevents the page from being cached"
-              ],
-              "answer": 1,
-              "explanation": "The block ships in every response for no benefit. Git remembers it perfectly well, so deleting it loses nothing."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Elements, attributes and text"
       },
@@ -1057,66 +423,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s12",
           "title": "HTML Colors quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s12-q1",
-              "type": "multiple-choice",
-              "prompt": "Where should a colour be set in a modern project?",
-              "options": [
-                "In a style attribute on the element",
-                "In the stylesheet, targeted by a class or selector",
-                "In a font element with a color attribute",
-                "In an inline style block in the body"
-              ],
-              "answer": 1,
-              "explanation": "Colour is presentation, so it belongs in CSS. A stylesheet lets you change every instance at once, which an inline style cannot."
-            },
-            {
-              "id": "quiz-html-s12-q2",
-              "type": "true-false",
-              "prompt": "The font element and its color attribute are still part of the HTML specification.",
-              "answer": false,
-              "explanation": "They were deprecated and have since been removed. A parser may still handle them for backwards compatibility, but you should not write them."
-            },
-            {
-              "id": "quiz-html-s12-q3",
-              "type": "multiple-choice",
-              "prompt": "Which of these is one of the original sixteen HTML colour names?",
-              "options": [
-                "charcoal",
-                "teal",
-                "crimson",
-                "turquoise"
-              ],
-              "answer": 1,
-              "explanation": "The sixteen are black, silver, gray, white, maroon, red, purple, fuchsia, green, lime, olive, yellow, navy, blue, teal and aqua."
-            },
-            {
-              "id": "quiz-html-s12-q4",
-              "type": "blank",
-              "prompt": "How many colour keywords did HTML originally define so that a page was readable with no stylesheet?",
-              "answers": [
-                "16",
-                "sixteen",
-                "16 named colours",
-                "sixteen named colours"
-              ],
-              "explanation": "Sixteen was chosen as the smallest set that could produce a readable page in both light and dark without any CSS at all."
-            },
-            {
-              "id": "quiz-html-s12-q5",
-              "type": "multiple-choice",
-              "prompt": "What is the risk of choosing an accent colour first and setting the text colour afterwards?",
-              "options": [
-                "The accent may be a colour keyword CSS does not recognise",
-                "The text may end up with too little contrast against its background",
-                "The colour will not render on older browsers",
-                "The stylesheet will be ignored"
-              ],
-              "answer": 1,
-              "explanation": "Contrast is a property of the pair, not of either colour alone. Pick the background and text together, then choose an accent that works against both."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Colour"
       },
@@ -1143,66 +450,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s13",
           "title": "HTML Colors RGB quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s13-q1",
-              "type": "multiple-choice",
-              "prompt": "In rgb(0, 128, 128), what does the 0 in the first position mean?",
-              "options": [
-                "The colour is fully transparent",
-                "The red channel is off",
-                "The colour is black",
-                "The value is invalid"
-              ],
-              "answer": 1,
-              "explanation": "The three numbers are red, green and blue in that order, each from 0 to 255. A zero means that channel contributes nothing."
-            },
-            {
-              "id": "quiz-html-s13-q2",
-              "type": "true-false",
-              "prompt": "RGB is a subtractive system, the way paint mixes.",
-              "answer": false,
-              "explanation": "RGB is additive: it models light, so adding channels makes things brighter. Paint is subtractive, which is why mixing paints gets darker and light gets brighter."
-            },
-            {
-              "id": "quiz-html-s13-q3",
-              "type": "multiple-choice",
-              "prompt": "Which is the modern way to write a colour with 50% alpha?",
-              "options": [
-                "rgb(40, 90, 140, 0.5)",
-                "rgb(40 90 140 / 50%)",
-                "rgba(40, 90, 140, 0.5)",
-                "rgb(40 90 140 0.5)"
-              ],
-              "answer": 1,
-              "explanation": "The modern form separates the alpha with a slash and accepts a percentage. The rgba() function exists only for backwards compatibility."
-            },
-            {
-              "id": "quiz-html-s13-q4",
-              "type": "blank",
-              "prompt": "What is white in RGB notation?",
-              "answers": [
-                "rgb(255, 255, 255)",
-                "rgb(255 255 255)",
-                "255,255,255",
-                "255 255 255"
-              ],
-              "explanation": "All three channels at full intensity. Black is all three at zero."
-            },
-            {
-              "id": "quiz-html-s13-q5",
-              "type": "multiple-choice",
-              "prompt": "Why is applying alpha to text usually a mistake?",
-              "options": [
-                "Browsers do not support alpha on the color property",
-                "It reduces contrast against whatever is behind the text, so readability depends on the background",
-                "It makes the text unselectable",
-                "It breaks the cascade"
-              ],
-              "answer": 1,
-              "explanation": "Contrast is a property of the pair. Translucent text can be perfectly legible on a flat background and unreadable over an image, on the same page."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Colour"
       },
@@ -1229,64 +477,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s14",
           "title": "HTML Colors HEX quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s14-q1",
-              "type": "multiple-choice",
-              "prompt": "What does #1E8 expand to in the shorthand form?",
-              "options": [
-                "#1EE888",
-                "#11EE88",
-                "#1E1188",
-                "#111EEE"
-              ],
-              "answer": 1,
-              "explanation": "Each shorthand digit is doubled: 1 becomes 11, E becomes EE, and 8 becomes 88."
-            },
-            {
-              "id": "quiz-html-s14-q2",
-              "type": "true-false",
-              "prompt": "Any six-digit hex colour can be shortened to three digits.",
-              "answer": false,
-              "explanation": "Only when both digits of every pair are identical. #1E88E5 cannot be shortened because 1E and 88 are not doubles."
-            },
-            {
-              "id": "quiz-html-s14-q3",
-              "type": "multiple-choice",
-              "prompt": "What is the eight-digit hex form used for?",
-              "options": [
-                "Defining an eight-colour palette",
-                "Adding an alpha channel",
-                "Specifying a colour space",
-                "Naming a CSS custom property"
-              ],
-              "answer": 1,
-              "explanation": "The last two digits of #RRGGBBAA are alpha, where FF is fully opaque and 80 is roughly half."
-            },
-            {
-              "id": "quiz-html-s14-q4",
-              "type": "blank",
-              "prompt": "What is the hex value for teal, which is rgb(0, 128, 128)?",
-              "answers": [
-                "#008080",
-                "008080"
-              ],
-              "explanation": "Zero is 00, and 128 in hexadecimal is 80."
-            },
-            {
-              "id": "quiz-html-s14-q5",
-              "type": "multiple-choice",
-              "prompt": "What happens to a declaration written as 008080 with no hash?",
-              "options": [
-                "The browser guesses the colour",
-                "The declaration is invalid and dropped",
-                "It is treated as an unknown property",
-                "It defaults to black"
-              ],
-              "answer": 1,
-              "explanation": "The hash is part of the notation. Without it the value is not a colour and the whole declaration is discarded."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Colour"
       },
@@ -1313,68 +504,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s15",
           "title": "HTML Colors HSL quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s15-q1",
-              "type": "multiple-choice",
-              "prompt": "In hsl(174, 60%, 50%), what does 50% refer to?",
-              "options": [
-                "The hue",
-                "The saturation",
-                "The lightness",
-                "The opacity"
-              ],
-              "answer": 2,
-              "explanation": "Hue is 174, saturation is 60%, and the final percentage is lightness. 50% lightness is the fully saturated version of that hue."
-            },
-            {
-              "id": "quiz-html-s15-q2",
-              "type": "true-false",
-              "prompt": "A colour with 0% saturation is a grey.",
-              "answer": true,
-              "explanation": "With no saturation there is no hue to show, so the colour is a neutral grey of whatever lightness is set."
-            },
-            {
-              "id": "quiz-html-s15-q3",
-              "type": "multiple-choice",
-              "prompt": "What is the main practical advantage of designing in HSL rather than RGB?",
-              "options": [
-                "It renders faster in the browser",
-                "One component can be varied without disturbing the other two, so ramps are one number per step",
-                "It produces a wider range of colours",
-                "It is supported by more browsers"
-              ],
-              "answer": 1,
-              "explanation": "Hue, saturation and lightness are independent, which is what makes a tints-and-shades ramp a single adjustable value."
-            },
-            {
-              "id": "quiz-html-s15-q4",
-              "type": "blank",
-              "prompt": "What hue, in degrees, is pure red?",
-              "answers": [
-                "0",
-                "0deg",
-                "360",
-                "360deg",
-                "0 degrees",
-                "360 degrees"
-              ],
-              "explanation": "The wheel starts at red and closes on itself, so 0deg and 360deg are the same colour."
-            },
-            {
-              "id": "quiz-html-s15-q5",
-              "type": "multiple-choice",
-              "prompt": "Why should you still check contrast when building a palette in HSL?",
-              "options": [
-                "HSL is not supported in older browsers",
-                "Equal steps in lightness do not look equally different to the eye",
-                "HSL changes hue when lightness changes",
-                "Contrast cannot be expressed in HSL"
-              ],
-              "answer": 1,
-              "explanation": "HSL is not perceptually even: yellow at 50% looks much lighter than blue at 50%. Trust a contrast checker, not the numbers."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Colour"
       },
@@ -1479,64 +609,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s16",
           "title": "HTML CSS quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s16-q1",
-              "type": "multiple-choice",
-              "prompt": "What does the word cascading describe?",
-              "options": [
-                "That stylesheets load in a particular order",
-                "That a style on a parent applies to its children, and that the cascade decides which competing rule wins",
-                "That CSS files are downloaded in parallel",
-                "That inline styles are applied last"
-              ],
-              "answer": 1,
-              "explanation": "Two mechanisms: inheritance passes values down the tree, and the cascade resolves conflicts between rules. Together they are what cascading means."
-            },
-            {
-              "id": "quiz-html-s16-q2",
-              "type": "true-false",
-              "prompt": "The margin property defines the space between the text and the border.",
-              "answer": false,
-              "explanation": "That is padding. Margin is the space outside the border, between this box and the next one."
-            },
-            {
-              "id": "quiz-html-s16-q3",
-              "type": "multiple-choice",
-              "prompt": "Why should a font-family value always end with a generic family such as sans-serif?",
-              "options": [
-                "Generic families load faster",
-                "Because the named fonts may not be installed, and the generic family is the guaranteed fallback",
-                "Because browsers ignore everything after the first font name",
-                "Because generic families are the only accessible option"
-              ],
-              "answer": 1,
-              "explanation": "The browser can only use fonts installed on the machine. Without a generic family at the end, a missing font leaves the browser to guess."
-            },
-            {
-              "id": "quiz-html-s16-q4",
-              "type": "blank",
-              "prompt": "Which element in the head refers to an external stylesheet?",
-              "answers": [
-                "link",
-                "<link>"
-              ],
-              "explanation": "`<link rel=\"stylesheet\" href=\"...\">` points at an external file. The `<style>` element holds internal rules."
-            },
-            {
-              "id": "quiz-html-s16-q5",
-              "type": "multiple-choice",
-              "prompt": "What is the difference between /css/styles.css and css/styles.css?",
-              "options": [
-                "They are identical",
-                "The first is root-relative and resolves from the site root; the second is document-relative and resolves from the current folder",
-                "The first is cached and the second is not",
-                "The first is for CSS and the second is for JavaScript"
-              ],
-              "answer": 1,
-              "explanation": "The leading slash anchors the path at the origin root. Without it the path is relative to the folder of the current file, which changes as pages move."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Stylesheets, links and images"
       },
@@ -1563,64 +636,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s17",
           "title": "HTML Links quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s17-q1",
-              "type": "multiple-choice",
-              "prompt": "What does the href=\"/about/team.html\" path resolve against?",
-              "options": [
-                "The folder holding the current page",
-                "The root of the current origin",
-                "The domain of the previous page visited",
-                "Nothing — root-relative paths need a base tag"
-              ],
-              "answer": 1,
-              "explanation": "A leading slash anchors the path at the root of the origin, so it resolves the same way from any depth."
-            },
-            {
-              "id": "quiz-html-s17-q2",
-              "type": "true-false",
-              "prompt": "A link with target=\"_blank\" should carry rel=\"noopener\".",
-              "answer": true,
-              "explanation": "Without it the opened page gets a handle on your window through window.opener, which is a real security risk."
-            },
-            {
-              "id": "quiz-html-s17-q3",
-              "type": "multiple-choice",
-              "prompt": "Why is \"Click here\" a bad link text?",
-              "options": [
-                "It is too long for most screens",
-                "It says nothing about the destination when read out of context",
-                "Search engines penalise the word here",
-                "It cannot be translated"
-              ],
-              "answer": 1,
-              "explanation": "Screen readers announce the link text alone. The text has to describe the destination on its own."
-            },
-            {
-              "id": "quiz-html-s17-q4",
-              "type": "blank",
-              "prompt": "Which attribute turns a link into a file download?",
-              "answers": [
-                "download"
-              ],
-              "explanation": "The download attribute asks the browser to save the file instead of navigating to it."
-            },
-            {
-              "id": "quiz-html-s17-q5",
-              "type": "identify-error",
-              "prompt": "Which link is written correctly?",
-              "code": "<a href=\"https://example.com\" target=\"_blank\">Example</a>\n<a href=\"https://example.com\" target=\"_blank\" rel=\"noopener\">Example</a>",
-              "options": [
-                "The first one, because it is shorter",
-                "The second one, because it protects the opening page",
-                "Both are identical",
-                "Neither, because target is not valid on links"
-              ],
-              "answer": 1,
-              "explanation": "The second adds rel=\"noopener\", which stops the new page reaching back through window.opener."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Stylesheets, links and images"
       },
@@ -1647,66 +663,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s18",
           "title": "HTML Link Colors quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s18-q1",
-              "type": "multiple-choice",
-              "prompt": "Why can :visited not be used to change a link font size?",
-              "options": [
-                "Because font-size is not a colour property",
-                "Because reading the result back would leak which links the user has visited",
-                "Because browsers do not support the selector",
-                "Because font-size does not inherit"
-              ],
-              "answer": 1,
-              "explanation": "Visiting history is private. If a page could set a size and read it back, it could probe the user history one bit at a time."
-            },
-            {
-              "id": "quiz-html-s18-q2",
-              "type": "true-false",
-              "prompt": "Relying on colour alone to mark a link is an accessibility problem.",
-              "answer": true,
-              "explanation": "Colour vision deficiency and low-contrast screens both break the distinction. The underline is what carries the meaning."
-            },
-            {
-              "id": "quiz-html-s18-q3",
-              "type": "multiple-choice",
-              "prompt": "Which selector matches a link the user has already followed?",
-              "options": [
-                ":link",
-                ":visited",
-                ":hover",
-                ":target"
-              ],
-              "answer": 1,
-              "explanation": ":visited matches a followed link in the current browser profile."
-            },
-            {
-              "id": "quiz-html-s18-q4",
-              "type": "blank",
-              "prompt": "Which pseudo-class applies while a keyboard user has focus on an element?",
-              "answers": [
-                ":focus-visible",
-                "focus-visible",
-                ":focus",
-                "focus"
-              ],
-              "explanation": ":focus-visible shows the ring only for keyboard interaction, which is what you almost always want."
-            },
-            {
-              "id": "quiz-html-s18-q5",
-              "type": "multiple-choice",
-              "prompt": "Which of these may be styled inside a :visited rule?",
-              "options": [
-                "background-image and font-size",
-                "display and position",
-                "Colour, and the other permitted properties",
-                "Nothing at all is permitted"
-              ],
-              "answer": 2,
-              "explanation": "Browsers allow a narrow set of properties in :visited — colour among them — and ignore the rest to prevent history leaks."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Stylesheets, links and images"
       },
@@ -1733,65 +690,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s19",
           "title": "HTML Bookmarks quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s19-q1",
-              "type": "multiple-choice",
-              "prompt": "What creates a bookmark target in modern HTML?",
-              "options": [
-                "The name attribute on an anchor",
-                "The id attribute on any element",
-                "The target attribute on a link",
-                "The fragment attribute on the body"
-              ],
-              "answer": 1,
-              "explanation": "Any element with an id can be a fragment target. The old name attribute on anchors is obsolete."
-            },
-            {
-              "id": "quiz-html-s19-q2",
-              "type": "true-false",
-              "prompt": "Two elements on a page can share the same id.",
-              "answer": false,
-              "explanation": "The id is the fragment identifier. Duplicates make the target ambiguous and break label and header associations."
-            },
-            {
-              "id": "quiz-html-s19-q3",
-              "type": "multiple-choice",
-              "prompt": "What problem does scroll-margin-top solve?",
-              "options": [
-                "A fragment target scrolled underneath a fixed header and made invisible",
-                "Links appearing before the page styles load",
-                "Headings jumping too slowly",
-                "The browser back button not working"
-              ],
-              "answer": 0,
-              "explanation": "It reserves the space the fixed header occupies, so the target lands below it rather than under it."
-            },
-            {
-              "id": "quiz-html-s19-q4",
-              "type": "blank",
-              "prompt": "What character starts a fragment identifier in a URL?",
-              "answers": [
-                "#",
-                "hash",
-                "number sign"
-              ],
-              "explanation": "A fragment is written as a hash followed by the element id."
-            },
-            {
-              "id": "quiz-html-s19-q5",
-              "type": "multiple-choice",
-              "prompt": "What happens when a fragment link points at an id that does not exist?",
-              "options": [
-                "The browser shows an error page",
-                "Nothing visible happens; the page stays where it is",
-                "The page scrolls to the top",
-                "The link is removed from the document"
-              ],
-              "answer": 1,
-              "explanation": "A missing target fails silently, which is why checking that every fragment resolves is a worthwhile test."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Stylesheets, links and images"
       },
@@ -1818,65 +717,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s20",
           "title": "HTML Images quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s20-q1",
-              "type": "multiple-choice",
-              "prompt": "What does the alt attribute contain?",
-              "options": [
-                "A caption displayed under the image",
-                "A replacement for the image, read in its place when it cannot be seen",
-                "A tooltip shown on hover",
-                "The file name for SEO"
-              ],
-              "answer": 1,
-              "explanation": "Alt is a replacement, not a caption. Long descriptions belong in a figcaption next to the image."
-            },
-            {
-              "id": "quiz-html-s20-q2",
-              "type": "multiple-choice",
-              "prompt": "How do you mark an image as decorative?",
-              "options": [
-                "Omit the alt attribute",
-                "Set alt to the word decorative",
-                "Set alt to an empty string",
-                "Set the role attribute to presentation"
-              ],
-              "answer": 2,
-              "explanation": "alt=\"\" tells the screen reader to skip the image. An omitted attribute is treated as a missing description, not as a decision."
-            },
-            {
-              "id": "quiz-html-s20-q3",
-              "type": "true-false",
-              "prompt": "Declaring width and height on an image prevents layout shift while it loads.",
-              "answer": true,
-              "explanation": "The browser reserves the space up front instead of discovering it after the download."
-            },
-            {
-              "id": "quiz-html-s20-q4",
-              "type": "blank",
-              "prompt": "Which attribute makes the browser download the image only when it is near the viewport?",
-              "answers": [
-                "loading",
-                "loading=\"lazy\"",
-                "lazy"
-              ],
-              "explanation": "loading=\"lazy\" defers off-screen images until they approach the viewport."
-            },
-            {
-              "id": "quiz-html-s20-q5",
-              "type": "multiple-choice",
-              "prompt": "Why should alt text avoid starting with \"image of\"?",
-              "options": [
-                "Because it makes the attribute too long",
-                "Because the screen reader already announced the element type",
-                "Because search engines reject it",
-                "Because it breaks the alt in older browsers"
-              ],
-              "answer": 1,
-              "explanation": "The reader has already said \"image\". Repeating that in the alt text just adds noise before the useful part."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Stylesheets, links and images"
       },
@@ -1903,65 +744,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s21",
           "title": "HTML Image Map quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s21-q1",
-              "type": "multiple-choice",
-              "prompt": "How does an image know which map to use?",
-              "options": [
-                "The map element has an id and the image uses usemap",
-                "The image has a map attribute",
-                "The map element has a src attribute",
-                "They must be adjacent siblings"
-              ],
-              "answer": 0,
-              "explanation": "The image carries usemap=\"#name\" and the map element carries name=\"name\". They do not have to be adjacent."
-            },
-            {
-              "id": "quiz-html-s21-q2",
-              "type": "multiple-choice",
-              "prompt": "How many numbers does a circle area need?",
-              "options": [
-                "Two",
-                "Three",
-                "Four",
-                "As many as it has points"
-              ],
-              "answer": 1,
-              "explanation": "A circle takes centre x, centre y and radius — three numbers."
-            },
-            {
-              "id": "quiz-html-s21-q3",
-              "type": "true-false",
-              "prompt": "A screen reader user can tell which part of an image each area covers.",
-              "answer": false,
-              "explanation": "They hear the image once and then a list of separate links with no indication of where each sits."
-            },
-            {
-              "id": "quiz-html-s21-q4",
-              "type": "blank",
-              "prompt": "Which shape value covers everything not claimed by another area?",
-              "answers": [
-                "default",
-                "shape=\"default\"",
-                "default shape"
-              ],
-              "explanation": "The default shape takes no coords and acts as the fallback for the rest of the image."
-            },
-            {
-              "id": "quiz-html-s21-q5",
-              "type": "multiple-choice",
-              "prompt": "What is the usual recommendation for a set of links arranged on a page?",
-              "options": [
-                "Use an image map so the layout matches the design",
-                "Use real links, laid out with CSS",
-                "Use absolute positioning on the anchors",
-                "Use an area element per link without a map"
-              ],
-              "answer": 1,
-              "explanation": "Real links are focusable, styleable, responsive and announced with useful text. CSS can place them anywhere."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Stylesheets, links and images"
       },
@@ -1988,64 +771,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s22",
           "title": "HTML Background Images quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s22-q1",
-              "type": "multiple-choice",
-              "prompt": "What is the status of the HTML background attribute?",
-              "options": [
-                "Current and preferred",
-                "Obsolete — the CSS background properties replaced it",
-                "Valid only on the body element",
-                "Valid only for images"
-              ],
-              "answer": 1,
-              "explanation": "It still parses and renders, but it is obsolete. Everything it did is available in CSS, and more."
-            },
-            {
-              "id": "quiz-html-s22-q2",
-              "type": "true-false",
-              "prompt": "A background image is described to screen reader users automatically.",
-              "answer": false,
-              "explanation": "A background is not an element, so it has no alt text and cannot be announced. Meaningful images must be img elements."
-            },
-            {
-              "id": "quiz-html-s22-q3",
-              "type": "multiple-choice",
-              "prompt": "What does background-size: cover do?",
-              "options": [
-                "Scales the image to fit inside the box, leaving gaps",
-                "Scales the image to fill the box, cropping if needed and keeping the ratio",
-                "Repeats the image until the box is filled",
-                "Sets the image to its natural size"
-              ],
-              "answer": 1,
-              "explanation": "cover fills the box and crops the overflow; contain fits the whole image inside and leaves gaps."
-            },
-            {
-              "id": "quiz-html-s22-q4",
-              "type": "blank",
-              "prompt": "Which background property controls whether an image repeats?",
-              "answers": [
-                "background-repeat",
-                "repeat"
-              ],
-              "explanation": "background-repeat takes repeat, no-repeat, repeat-x or repeat-y."
-            },
-            {
-              "id": "quiz-html-s22-q5",
-              "type": "multiple-choice",
-              "prompt": "Why set a background colour as well as a background image?",
-              "options": [
-                "Because images do not load in some browsers",
-                "So the content stays readable if the image fails to load or is not printed",
-                "Because CSS requires it",
-                "To make the image load faster"
-              ],
-              "answer": 1,
-              "explanation": "Background images are not printed by default and can fail. The colour is the fallback the text is actually readable against."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Stylesheets, links and images"
       },
@@ -2072,63 +798,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s23",
           "title": "The Picture Element quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s23-q1",
-              "type": "multiple-choice",
-              "prompt": "How many img elements must a picture contain?",
-              "options": [
-                "None",
-                "Exactly one, as the fallback",
-                "One per source",
-                "As many as needed"
-              ],
-              "answer": 1,
-              "explanation": "The img is the fallback for browsers that do not support picture, and it carries the alt text for the whole set."
-            },
-            {
-              "id": "quiz-html-s23-q2",
-              "type": "multiple-choice",
-              "prompt": "Which of these is art direction rather than resolution switching?",
-              "options": [
-                "Serving a 400w image on a small screen and a 1600w image on a large one",
-                "Serving a portrait crop on a phone and a landscape crop on a desktop",
-                "Serving an AVIF where supported and a JPEG otherwise",
-                "Adding a width descriptor to srcset"
-              ],
-              "answer": 1,
-              "explanation": "Art direction changes the image itself. The others change only the encoding or the resolution of the same picture."
-            },
-            {
-              "id": "quiz-html-s23-q3",
-              "type": "true-false",
-              "prompt": "A picture element needs a sizes attribute on its img for resolution switching.",
-              "answer": false,
-              "explanation": "For resolution switching, a plain img with srcset and sizes is simpler and is the recommended approach."
-            },
-            {
-              "id": "quiz-html-s23-q4",
-              "type": "blank",
-              "prompt": "Which attribute on a source element carries a MIME type condition?",
-              "answers": [
-                "type"
-              ],
-              "explanation": "The first source whose type the browser can display is used."
-            },
-            {
-              "id": "quiz-html-s23-q5",
-              "type": "multiple-choice",
-              "prompt": "What problem appears when different sources show meaningfully different content?",
-              "options": [
-                "The image fails to load",
-                "The single alt text on the img can only describe one of them accurately",
-                "The browser downloads every source",
-                "The width descriptor becomes invalid"
-              ],
-              "answer": 1,
-              "explanation": "One img, one alt. If the variants differ in content, the description needs a caption or the markup is misleading one group of users."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Stylesheets, links and images"
       },
@@ -2155,65 +825,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s24",
           "title": "HTML Tables quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s24-q1",
-              "type": "multiple-choice",
-              "prompt": "What is the difference between th and td?",
-              "options": [
-                "They are identical, th is just styled bold",
-                "th is a header cell describing a column or row, td is a data value",
-                "th is deprecated in favour of td",
-                "th can only be used in thead"
-              ],
-              "answer": 1,
-              "explanation": "The difference is semantic. th labels, td holds a value, and a screen reader uses the th to announce what each value means."
-            },
-            {
-              "id": "quiz-html-s24-q2",
-              "type": "true-false",
-              "prompt": "Using a table for page layout is a good idea because tables are for layout.",
-              "answer": false,
-              "explanation": "Tables are for tabular data. A layout table makes the reading order a guess and should be replaced with grid or flex."
-            },
-            {
-              "id": "quiz-html-s24-q3",
-              "type": "multiple-choice",
-              "prompt": "What does scope=\"colgroup\" mean?",
-              "options": [
-                "The header applies to one column",
-                "The header applies to one row",
-                "The header applies to a group of columns",
-                "The header is a caption for the table"
-              ],
-              "answer": 2,
-              "explanation": "colgroup and rowgroup let a header cover several columns or rows at once."
-            },
-            {
-              "id": "quiz-html-s24-q4",
-              "type": "blank",
-              "prompt": "Which attribute makes a cell span more than one column?",
-              "answers": [
-                "colspan",
-                "colspan=\"2\"",
-                "col span"
-              ],
-              "explanation": "colspan sets how many columns the cell covers, rowspan how many rows."
-            },
-            {
-              "id": "quiz-html-s24-q5",
-              "type": "multiple-choice",
-              "prompt": "Why should the visual order of a table match the DOM order?",
-              "options": [
-                "Because CSS cannot reorder table cells",
-                "Because a table styled out of DOM order is navigable by eye but confusing by keyboard",
-                "Because screen readers ignore CSS entirely",
-                "Because browsers sort rows automatically"
-              ],
-              "answer": 1,
-              "explanation": "Keyboard and screen reader navigation follow the DOM. Reorder the markup, not just the styles."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Tables and lists"
       },
@@ -2240,65 +852,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s25",
           "title": "HTML Lists quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s25-q1",
-              "type": "multiple-choice",
-              "prompt": "Which element pairs a term with its description?",
-              "options": [
-                "ul",
-                "ol",
-                "dl",
-                "menu"
-              ],
-              "answer": 2,
-              "explanation": "A description list uses dt for the term and dd for the description."
-            },
-            {
-              "id": "quiz-html-s25-q2",
-              "type": "true-false",
-              "prompt": "A set of instructions should be marked up as an unordered list with a custom marker.",
-              "answer": false,
-              "explanation": "The order carries the meaning, so it is an ol. Change the appearance with CSS list-style, not the element."
-            },
-            {
-              "id": "quiz-html-s25-q3",
-              "type": "multiple-choice",
-              "prompt": "Why is a navigation menu built as a list better than a div per link?",
-              "options": [
-                "It renders faster",
-                "It tells assistive technology how many items there are and that they belong together",
-                "Lists are required by the HTML spec for menus",
-                "It makes the links focusable"
-              ],
-              "answer": 1,
-              "explanation": "A list conveys count, grouping and boundaries, all of which a screen reader uses when moving through the menu."
-            },
-            {
-              "id": "quiz-html-s25-q4",
-              "type": "blank",
-              "prompt": "Which attribute marks the current page in a navigation list?",
-              "answers": [
-                "aria-current",
-                "aria-current=\"page\"",
-                "aria-current=page"
-              ],
-              "explanation": "aria-current=\"page\" goes on the link element for the page you are on."
-            },
-            {
-              "id": "quiz-html-s25-q5",
-              "type": "multiple-choice",
-              "prompt": "Where does a nested sublist go?",
-              "options": [
-                "As a sibling of the parent li",
-                "Inside the parent li, after its text",
-                "Inside the ul, after all the items",
-                "In a separate ul after the parent list"
-              ],
-              "answer": 1,
-              "explanation": "A sublist is part of the item it belongs to, so it goes inside that li. Placing it as a sibling loses the nesting."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Tables and lists"
       },
@@ -2325,64 +879,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s26",
           "title": "HTML Unordered Lists quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s26-q1",
-              "type": "multiple-choice",
-              "prompt": "What is the default list-style-type of a ul?",
-              "options": [
-                "decimal",
-                "disc",
-                "circle",
-                "none"
-              ],
-              "answer": 1,
-              "explanation": "A filled disc is the default marker for an unordered list."
-            },
-            {
-              "id": "quiz-html-s26-q2",
-              "type": "multiple-choice",
-              "prompt": "Which selector colours a list bullet?",
-              "options": [
-                "li::marker",
-                "li::before",
-                "ul span",
-                "li:first-child"
-              ],
-              "answer": 0,
-              "explanation": "::marker is the pseudo-element for the marker. It accepts colour, font and content, and nothing else."
-            },
-            {
-              "id": "quiz-html-s26-q3",
-              "type": "true-false",
-              "prompt": "Setting list-style: none on a menu means the screen reader no longer announces it as a list.",
-              "answer": false,
-              "explanation": "The list semantics come from the ul and li elements, not the marker. The count and grouping are still announced."
-            },
-            {
-              "id": "quiz-html-s26-q4",
-              "type": "blank",
-              "prompt": "Which property sets the position of the marker, inside or outside the content box?",
-              "answers": [
-                "list-style-position",
-                "list-style"
-              ],
-              "explanation": "list-style-position takes inside or outside, and outside is the default."
-            },
-            {
-              "id": "quiz-html-s26-q5",
-              "type": "multiple-choice",
-              "prompt": "Does the list-style-color property work in browsers?",
-              "options": [
-                "Yes, it is widely supported",
-                "No, it was never implemented; use ::marker instead",
-                "Only in Firefox",
-                "Only in WebKit browsers"
-              ],
-              "answer": 1,
-              "explanation": "It has never been implemented anywhere. li::marker is the way to colour a bullet."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Tables and lists"
       },
@@ -2409,64 +906,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s27",
           "title": "HTML Ordered Lists quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s27-q1",
-              "type": "multiple-choice",
-              "prompt": "Which attribute makes an ordered list count down?",
-              "options": [
-                "descending",
-                "reverse",
-                "reversed",
-                "dir=\"rtl\""
-              ],
-              "answer": 2,
-              "explanation": "reversed is a boolean attribute on the ol element."
-            },
-            {
-              "id": "quiz-html-s27-q2",
-              "type": "true-false",
-              "prompt": "A list of steps with the numbers hidden is still an ordered list semantically.",
-              "answer": true,
-              "explanation": "The semantics come from the ol and li elements. CSS list-style: none changes the appearance only."
-            },
-            {
-              "id": "quiz-html-s27-q3",
-              "type": "multiple-choice",
-              "prompt": "How do you change the marker to a, b, c?",
-              "options": [
-                "style=\"list-type: alpha\"",
-                "type=\"a\" on the ol, or list-style-type: lower-alpha in CSS",
-                "marker=\"alpha\" on the li",
-                "format=\"alpha\" on the list"
-              ],
-              "answer": 1,
-              "explanation": "The type attribute takes a, A, i or I. The CSS equivalent is list-style-type, and the CSS route is preferred."
-            },
-            {
-              "id": "quiz-html-s27-q4",
-              "type": "blank",
-              "prompt": "Which attribute sets the number an ordered list begins counting from?",
-              "answers": [
-                "start",
-                "start=\"5\""
-              ],
-              "explanation": "It goes on the ol element, and it affects the whole list."
-            },
-            {
-              "id": "quiz-html-s27-q5",
-              "type": "multiple-choice",
-              "prompt": "Which attribute overrides the number for a single list item?",
-              "options": [
-                "number",
-                "value",
-                "index",
-                "ordinal"
-              ],
-              "answer": 1,
-              "explanation": "value sets the number for that li, which is useful when a list is split into columns."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Tables and lists"
       },
@@ -2493,63 +933,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s28",
           "title": "HTML Other Lists quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s28-q1",
-              "type": "multiple-choice",
-              "prompt": "What is the menu element used for today?",
-              "options": [
-                "Building a navigation menu bar with keyboard behaviour",
-                "Very little — its type attribute was removed and a ul is the usual choice",
-                "Rendering a context menu",
-                "Declaring a list of commands"
-              ],
-              "answer": 1,
-              "explanation": "The menu element has no menu semantics. A ul inside a nav, laid out with CSS, is the correct structure."
-            },
-            {
-              "id": "quiz-html-s28-q2",
-              "type": "true-false",
-              "prompt": "The dir=\"rtl\" attribute moves list markers to the right side.",
-              "answer": true,
-              "explanation": "Markers follow the writing direction. The padding has to be adjusted to match, or the list indents on the wrong side."
-            },
-            {
-              "id": "quiz-html-s28-q3",
-              "type": "multiple-choice",
-              "prompt": "Why is a space needed after the escape sequence in list-style-type?",
-              "options": [
-                "For readability",
-                "So the following characters are not read as part of the code point",
-                "Because the browser requires it",
-                "To add a gap before the text"
-              ],
-              "answer": 1,
-              "explanation": "Without a terminator the next characters are consumed into the code point, and the marker renders as nothing."
-            },
-            {
-              "id": "quiz-html-s28-q4",
-              "type": "blank",
-              "prompt": "Which list-style-type value removes the marker entirely?",
-              "answers": [
-                "none"
-              ],
-              "explanation": "The list remains a list; only the marker disappears."
-            },
-            {
-              "id": "quiz-html-s28-q5",
-              "type": "multiple-choice",
-              "prompt": "Which value shows 01, 02, 03 as markers?",
-              "options": [
-                "decimal-zero",
-                "decimal-leading-zero",
-                "leading-zero-decimal",
-                "decimal"
-              ],
-              "answer": 1,
-              "explanation": "decimal-leading-zero pads the number to two digits."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Tables and lists"
       },
@@ -2576,65 +960,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s29",
           "title": "HTML Block and Inline quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s29-q1",
-              "type": "multiple-choice",
-              "prompt": "What is the default display of a p element?",
-              "options": [
-                "inline",
-                "block",
-                "inline-block",
-                "flex"
-              ],
-              "answer": 1,
-              "explanation": "A paragraph is block level: full width, and it forces a break before and after."
-            },
-            {
-              "id": "quiz-html-s29-q2",
-              "type": "multiple-choice",
-              "prompt": "Why does width have no effect on a plain span?",
-              "options": [
-                "Spans cannot be styled",
-                "An inline box is split across lines, so there is no single box for width to apply to",
-                "Spans are always zero-width",
-                "The width property only works on block elements in the HTML spec"
-              ],
-              "answer": 1,
-              "explanation": "Inline boxes are fragmented per line. Replaced inline elements such as images are the exception, because they form one atomic box."
-            },
-            {
-              "id": "quiz-html-s29-q3",
-              "type": "true-false",
-              "prompt": "display: inline-block lets an element sit inline and still accept a width.",
-              "answer": true,
-              "explanation": "It is inline in its parent flow and establishes a block formatting context internally."
-            },
-            {
-              "id": "quiz-html-s29-q4",
-              "type": "blank",
-              "prompt": "Which value makes an element a block that lays out its children in a row?",
-              "answers": [
-                "flex",
-                "display: flex",
-                "inline-flex"
-              ],
-              "explanation": "display: flex is a block-level flex container; inline-flex is its inline equivalent."
-            },
-            {
-              "id": "quiz-html-s29-q5",
-              "type": "multiple-choice",
-              "prompt": "What did HTML5 change about div and span?",
-              "options": [
-                "They were removed",
-                "They were given generic roles, so they no longer carry meaning",
-                "They became inline by default",
-                "They were renamed"
-              ],
-              "answer": 1,
-              "explanation": "They lost their semantic associations. The block and inline defaults remain, as CSS behaviour rather than definition."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Blocks, classes and the document head"
       },
@@ -2661,66 +987,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s30",
           "title": "HTML Classes quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s30-q1",
-              "type": "multiple-choice",
-              "prompt": "How do you write a class in HTML?",
-              "options": [
-                "class=\"card\"",
-                "class=card",
-                "className=\"card\"",
-                ".card=\"card\""
-              ],
-              "answer": 0,
-              "explanation": "The attribute is class, the value is quoted, and the dot only appears in the CSS selector."
-            },
-            {
-              "id": "quiz-html-s30-q2",
-              "type": "true-false",
-              "prompt": "An element can carry more than one class at a time.",
-              "answer": true,
-              "explanation": "Several class names go in one attribute, separated by spaces."
-            },
-            {
-              "id": "quiz-html-s30-q3",
-              "type": "multiple-choice",
-              "prompt": "Which selector beats a tag selector?",
-              "options": [
-                "p",
-                ".lead",
-                "p.lead is equal to .lead",
-                "*"
-              ],
-              "answer": 1,
-              "explanation": "Specificity counts ids, then classes and attributes and pseudo-classes, then tags. A class outranks a tag."
-            },
-            {
-              "id": "quiz-html-s30-q4",
-              "type": "blank",
-              "prompt": "Which two characters cannot be the first character of a class name?",
-              "answers": [
-                "a digit",
-                "digits",
-                "0-9",
-                "a number"
-              ],
-              "explanation": "A class name cannot start with a digit, and a hyphen cannot be followed by a digit either."
-            },
-            {
-              "id": "quiz-html-s30-q5",
-              "type": "multiple-choice",
-              "prompt": "Which class name is most likely to survive a restyle?",
-              "options": [
-                ".blue-box",
-                ".b1",
-                ".card__title",
-                ".left-column"
-              ],
-              "answer": 2,
-              "explanation": "A name describing purpose and structure stays correct when the colour or the layout changes."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Blocks, classes and the document head"
       },
@@ -2747,65 +1014,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s31",
           "title": "HTML Id quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s31-q1",
-              "type": "multiple-choice",
-              "prompt": "What does the for attribute on a label do?",
-              "options": [
-                "Sets the label text",
-                "Associates the label with the control whose id matches",
-                "Makes the field required",
-                "Forces the label to wrap the field"
-              ],
-              "answer": 1,
-              "explanation": "Matching for against a control id is what makes the label name it."
-            },
-            {
-              "id": "quiz-html-s31-q2",
-              "type": "true-false",
-              "prompt": "Two elements on a page may share an id if they look identical.",
-              "answer": false,
-              "explanation": "Ids must be unique. Everything that uses one assumes there is a single target."
-            },
-            {
-              "id": "quiz-html-s31-q3",
-              "type": "multiple-choice",
-              "prompt": "Which selector wins against twelve class rules?",
-              "options": [
-                "#main",
-                "body",
-                "*",
-                ".layout"
-              ],
-              "answer": 0,
-              "explanation": "An id outranks any number of class, attribute and pseudo-class selectors."
-            },
-            {
-              "id": "quiz-html-s31-q4",
-              "type": "blank",
-              "prompt": "Which attribute links a label to its input?",
-              "answers": [
-                "for",
-                "htmlFor",
-                "for="
-              ],
-              "explanation": "The label carries for, and its value matches the control id."
-            },
-            {
-              "id": "quiz-html-s31-q5",
-              "type": "multiple-choice",
-              "prompt": "Which is a good reason to use an id?",
-              "options": [
-                "As a script handle for grabbing an element",
-                "As a fragment target and a label association",
-                "As the only way to style an element",
-                "To give the element a higher z-index"
-              ],
-              "answer": 1,
-              "explanation": "Fragment targets and label associations are what ids are for. Script handles are better as data attributes."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Blocks, classes and the document head"
       },
@@ -2832,64 +1041,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s32",
           "title": "HTML Iframes quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s32-q1",
-              "type": "multiple-choice",
-              "prompt": "What does sandbox with no value do?",
-              "options": [
-                "Allows everything",
-                "Grants no permissions at all to the framed document",
-                "Disables the iframe entirely",
-                "Is the same as omitting the attribute"
-              ],
-              "answer": 1,
-              "explanation": "A bare sandbox is the most restrictive form. Permissions are added one token at a time."
-            },
-            {
-              "id": "quiz-html-s32-q2",
-              "type": "true-false",
-              "prompt": "Combining allow-scripts and allow-same-origin is a security risk.",
-              "answer": true,
-              "explanation": "The framed page can then remove its own sandbox attribute and reload unrestricted."
-            },
-            {
-              "id": "quiz-html-s32-q3",
-              "type": "multiple-choice",
-              "prompt": "Why does an iframe need a title attribute?",
-              "options": [
-                "To show a tooltip on hover",
-                "Because it is the accessible name, and without it the frame is announced as just \"frame\"",
-                "To set the frame height",
-                "It is required for lazy loading to work"
-              ],
-              "answer": 1,
-              "explanation": "The title is how a screen reader user knows what the embedded document is."
-            },
-            {
-              "id": "quiz-html-s32-q4",
-              "type": "blank",
-              "prompt": "Which attribute carries a whole document inline instead of a file path?",
-              "answers": [
-                "srcdoc",
-                "srcdoc="
-              ],
-              "explanation": "srcdoc takes a complete document as the attribute value."
-            },
-            {
-              "id": "quiz-html-s32-q5",
-              "type": "multiple-choice",
-              "prompt": "A site refuses to be framed. What is it sending?",
-              "options": [
-                "A sandbox attribute",
-                "X-Frame-Options or a frame-ancestors CSP directive",
-                "A crossorigin attribute",
-                "A rel=\"external\" link"
-              ],
-              "answer": 1,
-              "explanation": "Those are the standard clickjacking defences, and they are the reason an iframe is not a general-purpose embed."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Blocks, classes and the document head"
       },
@@ -2916,64 +1068,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s33",
           "title": "HTML JavaScript quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s33-q1",
-              "type": "multiple-choice",
-              "prompt": "What does a script in the head with no attributes do to parsing?",
-              "options": [
-                "Nothing, parsing continues in parallel",
-                "It blocks the parser until the script has been fetched and run",
-                "It runs after the page has loaded",
-                "It runs before the head is closed"
-              ],
-              "answer": 1,
-              "explanation": "A plain script is parser-blocking, which is the reason defer exists."
-            },
-            {
-              "id": "quiz-html-s33-q2",
-              "type": "true-false",
-              "prompt": "defer scripts execute in the order they appear in the document.",
-              "answer": true,
-              "explanation": "Deferred scripts download in parallel but execute in document order, after parsing has finished."
-            },
-            {
-              "id": "quiz-html-s33-q3",
-              "type": "multiple-choice",
-              "prompt": "Which attribute is right for an independent third-party tag that does not care when it runs?",
-              "options": [
-                "defer",
-                "async",
-                "blocking",
-                "type=\"module\""
-              ],
-              "answer": 1,
-              "explanation": "async executes as soon as the file arrives, with no ordering guarantee — which is fine for a self-contained tag."
-            },
-            {
-              "id": "quiz-html-s33-q4",
-              "type": "blank",
-              "prompt": "Which element holds content shown when scripting is unavailable?",
-              "answers": [
-                "noscript",
-                "<noscript>"
-              ],
-              "explanation": "The browser renders its contents only when scripting is off."
-            },
-            {
-              "id": "quiz-html-s33-q5",
-              "type": "multiple-choice",
-              "prompt": "What does defer do on an inline script with no src?",
-              "options": [
-                "Defers it until after parsing",
-                "Nothing — there is nothing to download, so it runs where it appears",
-                "Throws an error",
-                "Converts it to a module"
-              ],
-              "answer": 1,
-              "explanation": "Deferral is about download timing. An inline script has no fetch step, so the attribute has no effect."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Blocks, classes and the document head"
       },
@@ -3000,65 +1095,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s34",
           "title": "HTML File Paths quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s34-q1",
-              "type": "multiple-choice",
-              "prompt": "What does ../styles/site.css resolve against?",
-              "options": [
-                "The site root",
-                "The folder one level above the current page, then into styles",
-                "The domain root",
-                "Nothing, it is malformed"
-              ],
-              "answer": 1,
-              "explanation": "Each ../ steps up one directory from the folder holding the current page."
-            },
-            {
-              "id": "quiz-html-s34-q2",
-              "type": "true-false",
-              "prompt": "A path that works when a file is opened locally will always work on a server.",
-              "answer": false,
-              "explanation": "A file URL has a drive letter and an http URL has a host. Relative paths resolve differently in each."
-            },
-            {
-              "id": "quiz-html-s34-q3",
-              "type": "multiple-choice",
-              "prompt": "Why might a path 404 on a Linux server after working on a Mac?",
-              "options": [
-                "Linux is slower",
-                "The server is case-sensitive and the path case does not match the file",
-                "Linux does not serve images",
-                "The browser is different"
-              ],
-              "answer": 1,
-              "explanation": "macOS and Windows filesystems are case-insensitive by default; Linux is not."
-            },
-            {
-              "id": "quiz-html-s34-q4",
-              "type": "blank",
-              "prompt": "Which element changes the base that relative paths resolve against?",
-              "answers": [
-                "base",
-                "<base>",
-                "base element"
-              ],
-              "explanation": "A base href makes every relative path on the page resolve against that URL."
-            },
-            {
-              "id": "quiz-html-s34-q5",
-              "type": "multiple-choice",
-              "prompt": "Which form of path is most stable across a multi-page site?",
-              "options": [
-                "document-relative, such as style.css",
-                "root-relative, such as /css/site.css",
-                "parent-relative, such as ../css/site.css",
-                "a filesystem path"
-              ],
-              "answer": 1,
-              "explanation": "A leading slash anchors resolution at the site root, so it behaves the same from any folder depth."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Blocks, classes and the document head"
       },
@@ -3085,64 +1122,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s35",
           "title": "HTML Head quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s35-q1",
-              "type": "multiple-choice",
-              "prompt": "Where does the page title text belong?",
-              "options": [
-                "In an h1 in the body",
-                "In a title element in the head",
-                "In a meta name=\"title\" element",
-                "Anywhere, it makes no difference"
-              ],
-              "answer": 1,
-              "explanation": "The title element goes in the head and names the document. The h1 names the content on the page, which is a different thing."
-            },
-            {
-              "id": "quiz-html-s35-q2",
-              "type": "true-false",
-              "prompt": "The meta description is a ranking factor for search engines.",
-              "answer": false,
-              "explanation": "It is used as the snippet in results and by social cards, but it does not affect ranking."
-            },
-            {
-              "id": "quiz-html-s35-q3",
-              "type": "multiple-choice",
-              "prompt": "What happens on mobile without a viewport meta?",
-              "options": [
-                "The page is unstyled",
-                "The browser assumes a desktop-width page and scales it down",
-                "The page loads at double size",
-                "Nothing changes"
-              ],
-              "answer": 1,
-              "explanation": "Without width=device-width the layout viewport is assumed to be about 980px wide, so everything appears zoomed out."
-            },
-            {
-              "id": "quiz-html-s35-q4",
-              "type": "blank",
-              "prompt": "Which attribute must appear on the first meta element in the head?",
-              "answers": [
-                "charset",
-                "charset=\"utf-8\""
-              ],
-              "explanation": "The browser has to know the encoding before it has read much of the document."
-            },
-            {
-              "id": "quiz-html-s35-q5",
-              "type": "multiple-choice",
-              "prompt": "Which of these is document setting rather than metadata?",
-              "options": [
-                "meta name=\"description\"",
-                "meta name=\"viewport\"",
-                "meta name=\"author\"",
-                "meta name=\"keywords\""
-              ],
-              "answer": 1,
-              "explanation": "The viewport configures the browser layout. The others describe the document for something outside it."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Blocks, classes and the document head"
       },
@@ -3169,64 +1149,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s36",
           "title": "HTML Layout quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s36-q1",
-              "type": "multiple-choice",
-              "prompt": "How many main elements may a document contain?",
-              "options": [
-                "As many as you like",
-                "Exactly one",
-                "One per section",
-                "None, it is deprecated"
-              ],
-              "answer": 1,
-              "explanation": "There must be exactly one main, and it holds the primary content, excluding the header, nav, aside and footer."
-            },
-            {
-              "id": "quiz-html-s36-q2",
-              "type": "true-false",
-              "prompt": "A table is a reasonable way to build a two-column page layout.",
-              "answer": false,
-              "explanation": "Grid or flex do the same job with cleaner markup. A table announces cell positions and makes the reading order a guess."
-            },
-            {
-              "id": "quiz-html-s36-q3",
-              "type": "multiple-choice",
-              "prompt": "What does minmax(0, 1fr) solve?",
-              "options": [
-                "A track that refuses to shrink below its content and pushes the layout wider than the page",
-                "Missing grid gaps",
-                "Unsupported browsers",
-                "Alignment of items"
-              ],
-              "answer": 0,
-              "explanation": "The default minimum is auto, which will not shrink. Setting it to zero lets the track shrink as needed."
-            },
-            {
-              "id": "quiz-html-s36-q4",
-              "type": "blank",
-              "prompt": "Which element contains the primary content of a document?",
-              "answers": [
-                "main",
-                "<main>"
-              ],
-              "explanation": "main holds the primary content, and there is exactly one per document."
-            },
-            {
-              "id": "quiz-html-s36-q5",
-              "type": "multiple-choice",
-              "prompt": "What is the difference between section and article?",
-              "options": [
-                "They are interchangeable",
-                "article is for theming, section is for grouping",
-                "article is self-contained content that makes sense on its own; section is a thematic grouping of a page",
-                "section is self-contained, article is a grouping"
-              ],
-              "answer": 2,
-              "explanation": "An article could be syndicated on its own. A section is a labelled division of the page it lives in."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Blocks, classes and the document head"
       },
@@ -3253,65 +1176,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s37",
           "title": "HTML Responsive quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s37-q1",
-              "type": "multiple-choice",
-              "prompt": "What does the viewport meta tag do?",
-              "options": [
-                "Makes the page fill the screen height",
-                "Tells the browser how wide the device is, so it does not assume a desktop-width page",
-                "Hides the browser chrome",
-                "Enables dark mode"
-              ],
-              "answer": 1,
-              "explanation": "Without it mobile browsers assume about 980px and scale the page down, so everything looks zoomed out."
-            },
-            {
-              "id": "quiz-html-s37-q2",
-              "type": "true-false",
-              "prompt": "Setting user-scalable=no on the viewport meta is good practice.",
-              "answer": false,
-              "explanation": "It blocks pinch-zoom, which breaks the page for anyone who needs to magnify it. It is a WCAG failure."
-            },
-            {
-              "id": "quiz-html-s37-q3",
-              "type": "multiple-choice",
-              "prompt": "Which unit is relative to the root font size?",
-              "options": [
-                "em",
-                "rem",
-                "%",
-                "ex"
-              ],
-              "answer": 1,
-              "explanation": "rem is relative to the root element font size, which makes it the right default for type."
-            },
-            {
-              "id": "quiz-html-s37-q4",
-              "type": "blank",
-              "prompt": "Which grid value creates as many columns as will fit?",
-              "answers": [
-                "auto-fit",
-                "repeat(auto-fit, minmax(220px, 1fr))",
-                "auto-fit"
-              ],
-              "explanation": "auto-fit collapses empty tracks, so the columns stretch to fill the row as the count changes."
-            },
-            {
-              "id": "quiz-html-s37-q5",
-              "type": "multiple-choice",
-              "prompt": "Why build a fluid layout before adding breakpoints?",
-              "options": [
-                "Media queries are being deprecated",
-                "It needs far fewer breakpoints and degrades better at widths you did not design for",
-                "Fluid layouts load faster",
-                "Breakpoints only work with grid"
-              ],
-              "answer": 1,
-              "explanation": "A layout that reflows at every width leaves media queries to express genuine arrangement changes rather than every adjustment."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Blocks, classes and the document head"
       },
@@ -3338,64 +1203,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s38",
           "title": "HTML Computercode quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s38-q1",
-              "type": "multiple-choice",
-              "prompt": "Which element marks text the user types, such as a key?",
-              "options": [
-                "code",
-                "kbd",
-                "samp",
-                "var"
-              ],
-              "answer": 1,
-              "explanation": "kbd is for keyboard input, which a screen reader announces distinctly."
-            },
-            {
-              "id": "quiz-html-s38-q2",
-              "type": "multiple-choice",
-              "prompt": "What is the difference between code and samp?",
-              "options": [
-                "They are identical",
-                "code is the source you wrote, samp is the output the program produced",
-                "code is inline and samp is a block",
-                "samp is deprecated"
-              ],
-              "answer": 1,
-              "explanation": "One is the program text, the other is what it printed."
-            },
-            {
-              "id": "quiz-html-s38-q3",
-              "type": "true-false",
-              "prompt": "A code block should be written as pre containing a code element.",
-              "answer": true,
-              "explanation": "pre preserves the whitespace and code tells assistive technology the content is source code."
-            },
-            {
-              "id": "quiz-html-s38-q4",
-              "type": "blank",
-              "prompt": "Which element preserves whitespace and line breaks?",
-              "answers": [
-                "pre",
-                "<pre>"
-              ],
-              "explanation": "That is the sole purpose of the pre element."
-            },
-            {
-              "id": "quiz-html-s38-q5",
-              "type": "multiple-choice",
-              "prompt": "Why must angle brackets inside a code block be escaped?",
-              "options": [
-                "For readability",
-                "Otherwise the browser parses them as real elements instead of text",
-                "Because pre cannot contain them",
-                "To satisfy the validator"
-              ],
-              "answer": 1,
-              "explanation": "A literal <div> in a pre is an element. Writing &lt;div&gt; makes the browser show the characters."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Semantics and characters"
       },
@@ -3422,64 +1230,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s39",
           "title": "HTML Semantics quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s39-q1",
-              "type": "multiple-choice",
-              "prompt": "What does a real button element give you that a styled div does not?",
-              "options": [
-                "A different appearance",
-                "Focusability, Enter and Space activation, and a click event",
-                "Automatic styling",
-                "Nothing, a div is equivalent"
-              ],
-              "answer": 1,
-              "explanation": "The keyboard and focus behaviour is part of the element, not something you rebuild with attributes."
-            },
-            {
-              "id": "quiz-html-s39-q2",
-              "type": "true-false",
-              "prompt": "Heading levels should be chosen by how important the text looks.",
-              "answer": false,
-              "explanation": "They describe depth in the content structure. Choose the level by nesting and style by class."
-            },
-            {
-              "id": "quiz-html-s39-q3",
-              "type": "multiple-choice",
-              "prompt": "What is the first rule of ARIA?",
-              "options": [
-                "Always add a role to every element",
-                "Do not use ARIA when a native element will do",
-                "ARIA roles must be on the body",
-                "ARIA is required for accessibility"
-              ],
-              "answer": 1,
-              "explanation": "A role on a div adds the announcement but not the behaviour. Use the native element first."
-            },
-            {
-              "id": "quiz-html-s39-q4",
-              "type": "blank",
-              "prompt": "Which element marks a block of major navigation links?",
-              "answers": [
-                "nav",
-                "<nav>"
-              ],
-              "explanation": "nav is a landmark, announced by screen readers as a navigation region."
-            },
-            {
-              "id": "quiz-html-s39-q5",
-              "type": "multiple-choice",
-              "prompt": "A stylesheet has a rule for .header. What does that suggest?",
-              "options": [
-                "The CSS is wrong",
-                "The markup may be missing a header element and using a div instead",
-                "header cannot be styled",
-                "Nothing, class selectors are fine"
-              ],
-              "answer": 1,
-              "explanation": "A selector named for a region is often the CSS reconstructing semantics the markup should have carried."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Semantics and characters"
       },
@@ -3506,65 +1257,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s40",
           "title": "HTML Style Guide quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s40-q1",
-              "type": "multiple-choice",
-              "prompt": "Why should tag names be lower case?",
-              "options": [
-                "It saves bytes",
-                "It is required for CSS to work",
-                "HTML is case-insensitive but XML is not, and mixed case breaks in a case-sensitive context",
-                "Browsers do not accept upper case"
-              ],
-              "answer": 2,
-              "explanation": "Upper case still renders, but it is wrong in XML and confusing when the markup moves into a stricter pipeline."
-            },
-            {
-              "id": "quiz-html-s40-q2",
-              "type": "true-false",
-              "prompt": "An attribute value can be left unquoted when it contains no spaces.",
-              "answer": false,
-              "explanation": "It can parse, but the convention is to always quote. An empty attribute still needs quotes: class=\"\"."
-            },
-            {
-              "id": "quiz-html-s40-q3",
-              "type": "multiple-choice",
-              "prompt": "Which is a void element with no closing tag?",
-              "options": [
-                "div",
-                "span",
-                "img",
-                "p"
-              ],
-              "answer": 2,
-              "explanation": "img, br, hr, input, meta and link are void; they have no content and no end tag."
-            },
-            {
-              "id": "quiz-html-s40-q4",
-              "type": "blank",
-              "prompt": "How is a boolean attribute such as disabled correctly written?",
-              "answers": [
-                "disabled",
-                "disabled",
-                "<input disabled>"
-              ],
-              "explanation": "Boolean attributes are present or absent. Writing disabled=\"false\" still disables it."
-            },
-            {
-              "id": "quiz-html-s40-q5",
-              "type": "multiple-choice",
-              "prompt": "What is the best way to enforce indentation style?",
-              "options": [
-                "A code review checklist",
-                "A formatter run on save",
-                "A comment at the top of the file",
-                "Nothing, it is a matter of taste"
-              ],
-              "answer": 1,
-              "explanation": "A tool removes the whole class of discussion and leaves review time for decisions that need judgement."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Semantics and characters"
       },
@@ -3591,65 +1284,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s41",
           "title": "HTML Entities quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s41-q1",
-              "type": "multiple-choice",
-              "prompt": "How many characters are reserved in HTML syntax?",
-              "options": [
-                "Two",
-                "Three",
-                "Four",
-                "Six"
-              ],
-              "answer": 2,
-              "explanation": "The ampersand, the less-than sign, the greater-than sign and the quotation mark."
-            },
-            {
-              "id": "quiz-html-s41-q2",
-              "type": "blank",
-              "prompt": "What is the entity for the less-than sign?",
-              "answers": [
-                "&lt;",
-                "lt",
-                "&lt;"
-              ],
-              "explanation": "&lt; is the named reference. &#60; and &#x3C; are the numeric forms."
-            },
-            {
-              "id": "quiz-html-s41-q3",
-              "type": "true-false",
-              "prompt": "A bare ampersand in a paragraph is harmless.",
-              "answer": false,
-              "explanation": "It usually recovers silently, but if what follows looks like an entity name it is consumed. AT&T is fine; &copy; in a name is not."
-            },
-            {
-              "id": "quiz-html-s41-q4",
-              "type": "multiple-choice",
-              "prompt": "When should you use a numeric rather than a named reference?",
-              "options": [
-                "For speed",
-                "For characters that have no name",
-                "Never",
-                "In attributes only"
-              ],
-              "answer": 1,
-              "explanation": "Named references are more readable. Numeric covers everything else, including most emoji."
-            },
-            {
-              "id": "quiz-html-s41-q5",
-              "type": "multiple-choice",
-              "prompt": "What happens if you write &lt;div&gt; in a paragraph without escaping?",
-              "options": [
-                "It displays as the text <div>",
-                "The parser creates a real div element",
-                "It is a syntax error",
-                "The div is commented out"
-              ],
-              "answer": 1,
-              "explanation": "The parser acts on the brackets. Escaping them with &lt; and &gt; makes them characters instead."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Semantics and characters"
       },
@@ -3676,65 +1311,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s42",
           "title": "HTML Symbols quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s42-q1",
-              "type": "multiple-choice",
-              "prompt": "What problem does a non-breaking space solve?",
-              "options": [
-                "It makes text bold",
-                "It prevents a line break between two things that must stay together",
-                "It adds a paragraph break",
-                "It indents the line"
-              ],
-              "answer": 1,
-              "explanation": "A number and its unit, or a name and its following word, should never be split across two lines."
-            },
-            {
-              "id": "quiz-html-s42-q2",
-              "type": "true-false",
-              "prompt": "An em dash should be written with a space on either side.",
-              "answer": false,
-              "explanation": "An em dash is closed up: waited—and then. A spaced dash is an en dash used wrong."
-            },
-            {
-              "id": "quiz-html-s42-q3",
-              "type": "multiple-choice",
-              "prompt": "Why is an inline SVG better than a dingbat character for an icon?",
-              "options": [
-                "It is smaller in bytes",
-                "It inherits currentColor, scales cleanly, and can be hidden from assistive technology",
-                "SVGs are always accessible",
-                "Characters cannot be coloured"
-              ],
-              "answer": 1,
-              "explanation": "A character renders differently per platform font and may be announced as an unpronounceable name."
-            },
-            {
-              "id": "quiz-html-s42-q4",
-              "type": "blank",
-              "prompt": "What is the entity for a multiplication sign?",
-              "answers": [
-                "&times;",
-                "times",
-                "×"
-              ],
-              "explanation": "&times; is the named reference. The character itself is also fine in UTF-8."
-            },
-            {
-              "id": "quiz-html-s42-q5",
-              "type": "multiple-choice",
-              "prompt": "When is writing the character directly better than an entity?",
-              "options": [
-                "Never, entities are always required",
-                "In a UTF-8 page, for any character that is not one of the four reserved ones",
-                "Only inside attributes",
-                "Only for characters above U+2000"
-              ],
-              "answer": 1,
-              "explanation": "With a UTF-8 charset the character is simpler and more readable. Entities are for the reserved characters and the invisible ones."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Semantics and characters"
       },
@@ -3761,64 +1338,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s43",
           "title": "HTML Emojis quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s43-q1",
-              "type": "multiple-choice",
-              "prompt": "What does the variation selector U+FE0F do?",
-              "options": [
-                "Changes the colour of the emoji",
-                "Requests emoji presentation rather than text presentation",
-                "Makes the emoji smaller",
-                "Combines two emoji into one"
-              ],
-              "answer": 1,
-              "explanation": "Many symbols default to a monochrome text form. U+FE0F asks for the colour pictograph instead."
-            },
-            {
-              "id": "quiz-html-s43-q2",
-              "type": "true-false",
-              "prompt": "A status shown only as a coloured emoji is reliably understandable.",
-              "answer": false,
-              "explanation": "Screen readers announce one character and skip another, and the colours vanish in high contrast mode. State the status in words."
-            },
-            {
-              "id": "quiz-html-s43-q3",
-              "type": "multiple-choice",
-              "prompt": "How do you give an emoji an accessible name?",
-              "options": [
-                "alt text on a span",
-                "role=\"img\" with aria-label on the element",
-                "A title attribute",
-                "Wrapping it in a figure"
-              ],
-              "answer": 1,
-              "explanation": "role=\"img\" makes it a single image-like node, and aria-label gives that node a name to announce."
-            },
-            {
-              "id": "quiz-html-s43-q4",
-              "type": "blank",
-              "prompt": "Which attribute removes a decorative emoji from the accessibility tree?",
-              "answers": [
-                "aria-hidden",
-                "aria-hidden=\"true\""
-              ],
-              "explanation": "aria-hidden=\"true\" hides the element and its contents from assistive technology."
-            },
-            {
-              "id": "quiz-html-s43-q5",
-              "type": "multiple-choice",
-              "prompt": "Why are emoji a poor choice for functional icons?",
-              "options": [
-                "They are large files",
-                "They render differently per platform, disappear in high contrast and print, and need a colour font",
-                "They cannot be coloured",
-                "Browsers block them"
-              ],
-              "answer": 1,
-              "explanation": "An SVG inherits currentColor, scales, and survives every rendering mode. An emoji depends on a font being installed."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Semantics and characters"
       },
@@ -3845,65 +1365,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s44",
           "title": "HTML Charset quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s44-q1",
-              "type": "multiple-choice",
-              "prompt": "Where must the charset meta appear?",
-              "options": [
-                "Anywhere in the head",
-                "As the first element in the head, within the first 1024 bytes",
-                "In the body",
-                "After the closing html tag"
-              ],
-              "answer": 1,
-              "explanation": "The browser sniffs for an encoding before parsing and gives up after 1024 bytes, so a late declaration is ignored."
-            },
-            {
-              "id": "quiz-html-s44-q2",
-              "type": "true-false",
-              "prompt": "A charset declaration chooses the font used to render text.",
-              "answer": false,
-              "explanation": "The charset maps bytes to characters. The font is chosen separately with font-family."
-            },
-            {
-              "id": "quiz-html-s44-q3",
-              "type": "multiple-choice",
-              "prompt": "What is the only sensible charset for a new web page?",
-              "options": [
-                "ISO-8859-1",
-                "windows-1252",
-                "UTF-8",
-                "UTF-16"
-              ],
-              "answer": 2,
-              "explanation": "UTF-8 covers every script, and it is the encoding the web has standardised on."
-            },
-            {
-              "id": "quiz-html-s44-q4",
-              "type": "blank",
-              "prompt": "What are the garbled characters from a mis-read encoding called?",
-              "answers": [
-                "mojibake",
-                "garbled text",
-                "mismatched encoding"
-              ],
-              "explanation": "Mojibake is text decoded with the wrong encoding."
-            },
-            {
-              "id": "quiz-html-s44-q5",
-              "type": "multiple-choice",
-              "prompt": "Besides the meta element, where else can a charset be declared?",
-              "options": [
-                "In the CSS",
-                "In the HTTP Content-Type response header",
-                "In a JavaScript variable",
-                "In the lang attribute"
-              ],
-              "answer": 1,
-              "explanation": "The header takes precedence in practice, and it is where servers more often get it wrong."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Semantics and characters"
       },
@@ -3930,64 +1392,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s45",
           "title": "HTML URL Encoding quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s45-q1",
-              "type": "multiple-choice",
-              "prompt": "Which function should encode a single value going into a query string?",
-              "options": [
-                "encodeURI",
-                "encodeURIComponent",
-                "escape",
-                "encode"
-              ],
-              "answer": 1,
-              "explanation": "encodeURIComponent encodes everything including the separators, so a value cannot break out of its parameter."
-            },
-            {
-              "id": "quiz-html-s45-q2",
-              "type": "multiple-choice",
-              "prompt": "What does encodeURI leave unencoded that encodeURIComponent encodes?",
-              "options": [
-                "Letters and digits",
-                "Reserved separators such as / ? & = and :",
-                "Spaces",
-                "Nothing — they are identical"
-              ],
-              "answer": 1,
-              "explanation": "encodeURI is for a complete URL, so it must preserve the structure of the URL."
-            },
-            {
-              "id": "quiz-html-s45-q3",
-              "type": "true-false",
-              "prompt": "A query string value containing a raw ampersand can be safely concatenated.",
-              "answer": false,
-              "explanation": "The ampersand ends the parameter and starts a new one, so the server reads the wrong value."
-            },
-            {
-              "id": "quiz-html-s45-q4",
-              "type": "blank",
-              "prompt": "What is the percent encoding of a space in a query string?",
-              "answers": [
-                "%20",
-                "+"
-              ],
-              "explanation": "In a path or a fragment it is %20. In a urlencoded form body it becomes +."
-            },
-            {
-              "id": "quiz-html-s45-q5",
-              "type": "multiple-choice",
-              "prompt": "Which form encoding is used when submitting a file?",
-              "options": [
-                "application/x-www-form-urlencoded",
-                "multipart/form-data",
-                "text/plain",
-                "application/json"
-              ],
-              "answer": 1,
-              "explanation": "enctype=\"multipart/form-data\" is required for file inputs. The server parses it differently."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Semantics and characters"
       },
@@ -4014,65 +1419,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s46",
           "title": "HTML versus XHTML quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s46-q1",
-              "type": "multiple-choice",
-              "prompt": "What is the main syntactic difference between HTML5 and XHTML?",
-              "options": [
-                "XHTML uses lowercase tags",
-                "XHTML requires every element closed and every attribute valued",
-                "HTML5 allows attributes without values",
-                "XHTML does not allow self-closing syntax"
-              ],
-              "answer": 1,
-              "explanation": "Self-closing void elements and boolean attributes written with a value were both mandatory in XHTML."
-            },
-            {
-              "id": "quiz-html-s46-q2",
-              "type": "true-false",
-              "prompt": "A single unescaped ampersand can stop an XHTML page rendering entirely.",
-              "answer": true,
-              "explanation": "XML parsing is fatal on malformed input, unlike the HTML parser, which recovers and continues."
-            },
-            {
-              "id": "quiz-html-s46-q3",
-              "type": "multiple-choice",
-              "prompt": "Why did XHTML fail to replace HTML?",
-              "options": [
-                "It was slower",
-                "Most pages were never valid, and serving XHTML as text/html gave none of the strictness",
-                "Browsers did not support XML",
-                "It could not handle images"
-              ],
-              "answer": 1,
-              "explanation": "The web could not be made valid, and the two ways of serving it were both worse than plain HTML."
-            },
-            {
-              "id": "quiz-html-s46-q4",
-              "type": "blank",
-              "prompt": "How is a self-closing br written in XHTML?",
-              "answers": [
-                "<br />",
-                "<br/>",
-                "br />"
-              ],
-              "explanation": "With a trailing slash. HTML5 accepts the same syntax as a style choice."
-            },
-            {
-              "id": "quiz-html-s46-q5",
-              "type": "multiple-choice",
-              "prompt": "Which of these is still worth copying from XHTML into HTML5?",
-              "options": [
-                "Serving pages as application/xhtml+xml",
-                "Quoting every attribute value and closing void elements with a slash",
-                "Treating a malformed tag as a fatal error",
-                "Writing all tag names in lower case with no exceptions"
-              ],
-              "answer": 1,
-              "explanation": "Both are harmless tidiness in HTML5. The rest is a constraint HTML5 explicitly does not need."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Semantics and characters"
       },
@@ -4099,65 +1446,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s47",
           "title": "HTML Forms quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s47-q1",
-              "type": "multiple-choice",
-              "prompt": "What happens to a form control with no name attribute?",
-              "options": [
-                "It is submitted with an empty value",
-                "It is not submitted at all",
-                "The browser generates a name for it",
-                "It causes a validation error"
-              ],
-              "answer": 1,
-              "explanation": "The name is the key the server receives, so an unnamed control sends nothing."
-            },
-            {
-              "id": "quiz-html-s47-q2",
-              "type": "true-false",
-              "prompt": "Using method=\"get\" for a password field is safe because GET requests are validated.",
-              "answer": false,
-              "explanation": "GET puts the data in the URL, which ends up in the address bar, the history and the server log."
-            },
-            {
-              "id": "quiz-html-s47-q3",
-              "type": "multiple-choice",
-              "prompt": "Which enctype is required for a file upload?",
-              "options": [
-                "application/x-www-form-urlencoded",
-                "multipart/form-data",
-                "text/plain",
-                "application/json"
-              ],
-              "answer": 1,
-              "explanation": "enctype=\"multipart/form-data\" is what lets the request carry file content at all."
-            },
-            {
-              "id": "quiz-html-s47-q4",
-              "type": "blank",
-              "prompt": "What is the default type of a button inside a form?",
-              "answers": [
-                "submit",
-                "submit",
-                "type=\"submit\""
-              ],
-              "explanation": "Which is why a Cancel button needs type=\"button\" written on it explicitly."
-            },
-            {
-              "id": "quiz-html-s47-q5",
-              "type": "multiple-choice",
-              "prompt": "What does a disabled control do on submission?",
-              "options": [
-                "It is submitted with its value",
-                "It is submitted as an empty value",
-                "It is not submitted",
-                "It causes the form to be rejected"
-              ],
-              "answer": 2,
-              "explanation": "Disabled controls are excluded from the submitted data, which is the opposite of readonly."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Forms"
       },
@@ -4184,64 +1473,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s48",
           "title": "HTML Form Attributes quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s48-q1",
-              "type": "multiple-choice",
-              "prompt": "What does novalidate do on a form?",
-              "options": [
-                "It disables the form",
-                "It skips the native constraint validation, so you can render errors yourself",
-                "It prevents the form from being submitted",
-                "It hides the submit button"
-              ],
-              "answer": 1,
-              "explanation": "Use it when you present errors next to the fields, with your own messages and your own styling."
-            },
-            {
-              "id": "quiz-html-s48-q2",
-              "type": "true-false",
-              "prompt": "accept-charset is worth setting to something other than utf-8 on a modern site.",
-              "answer": false,
-              "explanation": "Every current browser supports UTF-8 and only UTF-8, so any other value is decoration."
-            },
-            {
-              "id": "quiz-html-s48-q3",
-              "type": "multiple-choice",
-              "prompt": "Why is a form that works without JavaScript worth having?",
-              "options": [
-                "It loads faster",
-                "It still works when a script fails, is blocked, or is not run at all",
-                "Browsers require it",
-                "It makes the markup shorter"
-              ],
-              "answer": 1,
-              "explanation": "The form is the contract and the script is an enhancement. Progressive enhancement is the difference."
-            },
-            {
-              "id": "quiz-html-s48-q4",
-              "type": "blank",
-              "prompt": "Which form attribute declares the encoding a submission may use?",
-              "answers": [
-                "accept-charset",
-                "acceptCharset"
-              ],
-              "explanation": "accept-charset is the only form attribute that is hyphenated rather than camel-cased."
-            },
-            {
-              "id": "quiz-html-s48-q5",
-              "type": "multiple-choice",
-              "prompt": "What is the default value of the method attribute?",
-              "options": [
-                "post",
-                "get",
-                "dialog",
-                "send"
-              ],
-              "answer": 1,
-              "explanation": "It defaults to get, which is why an explicit method is worth writing."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Forms"
       },
@@ -4268,64 +1500,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s49",
           "title": "HTML Form Elements quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s49-q1",
-              "type": "multiple-choice",
-              "prompt": "What does the fieldset element do?",
-              "options": [
-                "Adds a border around a form",
-                "Groups related controls and names the group with a legend",
-                "Validates the controls it contains",
-                "Submits the form"
-              ],
-              "answer": 1,
-              "explanation": "The grouping is announced before each control, so a screen reader user knows what each field belongs to."
-            },
-            {
-              "id": "quiz-html-s49-q2",
-              "type": "true-false",
-              "prompt": "The default value of a textarea is set with a value attribute.",
-              "answer": false,
-              "explanation": "A textarea takes its default value as its child content, which is why stray whitespace inside the tags becomes part of the value."
-            },
-            {
-              "id": "quiz-html-s49-q3",
-              "type": "multiple-choice",
-              "prompt": "When is a select a better choice than a text input?",
-              "options": [
-                "When the set of valid values is known and is not very large",
-                "When the user needs to type free text",
-                "When the field must be searchable",
-                "Never — a text input is always simpler"
-              ],
-              "answer": 0,
-              "explanation": "A closed set of a handful of options is exactly what a select is for. Beyond about seven, a searchable input with a datalist is better."
-            },
-            {
-              "id": "quiz-html-s49-q4",
-              "type": "blank",
-              "prompt": "Which element provides suggestions for an input without requiring a choice?",
-              "answers": [
-                "datalist",
-                "<datalist>"
-              ],
-              "explanation": "The input references it with a list attribute containing the datalist id."
-            },
-            {
-              "id": "quiz-html-s49-q5",
-              "type": "multiple-choice",
-              "prompt": "What is the output element for?",
-              "options": [
-                "Sending data to the server",
-                "Reporting a computed result, associated with its inputs via for",
-                "Displaying an error message",
-                "Grouping controls"
-              ],
-              "answer": 1,
-              "explanation": "output is for a result the page computed, not for anything the user typed."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Forms"
       },
@@ -4352,64 +1527,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s50",
           "title": "HTML Input Types quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s50-q1",
-              "type": "multiple-choice",
-              "prompt": "What value does a color input always submit?",
-              "options": [
-                "A colour name",
-                "A hex value such as #1d4ed8",
-                "An rgb() value",
-                "Whatever text the user typed"
-              ],
-              "answer": 1,
-              "explanation": "The color type normalises to a lower-case six-digit hex value."
-            },
-            {
-              "id": "quiz-html-s50-q2",
-              "type": "true-false",
-              "prompt": "type=\"number\" is a good choice for a quantity field where users may type commas.",
-              "answer": false,
-              "explanation": "A number input discards anything it cannot parse, so \"1,200\" becomes an empty field with no explanation."
-            },
-            {
-              "id": "quiz-html-s50-q3",
-              "type": "multiple-choice",
-              "prompt": "What does the inputmode attribute control?",
-              "options": [
-                "Validation",
-                "Which keyboard appears on a touch device",
-                "The value format",
-                "The autocomplete behaviour"
-              ],
-              "answer": 1,
-              "explanation": "inputmode is the keyboard hint; type is the validation and semantics. They solve different problems."
-            },
-            {
-              "id": "quiz-html-s50-q4",
-              "type": "blank",
-              "prompt": "Which input type is submitted but never displayed?",
-              "answers": [
-                "hidden",
-                "type=\"hidden\""
-              ],
-              "explanation": "A hidden input is part of the submitted data and invisible on the page."
-            },
-            {
-              "id": "quiz-html-s50-q5",
-              "type": "multiple-choice",
-              "prompt": "Which input type gives you a slider?",
-              "options": [
-                "number",
-                "range",
-                "search",
-                "progress"
-              ],
-              "answer": 1,
-              "explanation": "range is the slider, bounded by min and max and stepped by step."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Forms"
       },
@@ -4436,64 +1554,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s51",
           "title": "HTML Input Attributes quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s51-q1",
-              "type": "multiple-choice",
-              "prompt": "What is the difference between readonly and disabled?",
-              "options": [
-                "They are identical",
-                "readonly submits and stays focusable; disabled is not submitted and is skipped by the keyboard",
-                "disabled submits, readonly does not",
-                "readonly is for text inputs, disabled is for selects"
-              ],
-              "answer": 1,
-              "explanation": "A readonly field is part of the data and reachable by keyboard. A disabled field is not in the submission at all."
-            },
-            {
-              "id": "quiz-html-s51-q2",
-              "type": "true-false",
-              "prompt": "A placeholder attribute is a substitute for a label.",
-              "answer": false,
-              "explanation": "It disappears as soon as the user types, and screen reader support is inconsistent. Keep a real label."
-            },
-            {
-              "id": "quiz-html-s51-q3",
-              "type": "multiple-choice",
-              "prompt": "Which autocomplete token belongs on a sign-in password field?",
-              "options": [
-                "new-password",
-                "current-password",
-                "password",
-                "off"
-              ],
-              "answer": 1,
-              "explanation": "current-password tells the manager this is an existing password, so it fills rather than offers to generate one."
-            },
-            {
-              "id": "quiz-html-s51-q4",
-              "type": "blank",
-              "prompt": "Which attribute constrains a value against a regular expression?",
-              "answers": [
-                "pattern",
-                "pattern="
-              ],
-              "explanation": "The pattern is anchored at both ends automatically, so ^ and $ are not needed."
-            },
-            {
-              "id": "quiz-html-s51-q5",
-              "type": "multiple-choice",
-              "prompt": "Why must constraints be enforced on the server as well?",
-              "options": [
-                "The browser is not always present",
-                "maxlength and pattern are trivially bypassed by a script, a paste or the developer tools",
-                "It makes the code shorter",
-                "Servers are faster"
-              ],
-              "answer": 1,
-              "explanation": "Client-side validation is a convenience for the user. The server is the only place a constraint is actually enforced."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Forms"
       },
@@ -4520,64 +1581,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s52",
           "title": "HTML Input Form Attributes quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s52-q1",
-              "type": "multiple-choice",
-              "prompt": "What does the form attribute on an input do?",
-              "options": [
-                "Sets the encoding of the submission",
-                "Associates the control with a form by its id, even from outside the form element",
-                "Marks the control as required",
-                "Gives the control a name"
-              ],
-              "answer": 1,
-              "explanation": "It takes the form id with no hash, and the association works in both directions."
-            },
-            {
-              "id": "quiz-html-s52-q2",
-              "type": "multiple-choice",
-              "prompt": "How do you make one button submit a form to a different URL?",
-              "options": [
-                "Set the action attribute on the button",
-                "Set formaction on the button",
-                "Use a second form",
-                "Use target=\"_blank\""
-              ],
-              "answer": 1,
-              "explanation": "formaction overrides the form action for that button only, which is how one form gets two destinations."
-            },
-            {
-              "id": "quiz-html-s52-q3",
-              "type": "true-false",
-              "prompt": "The form attribute can associate a label with a control that is outside the form.",
-              "answer": true,
-              "explanation": "label, output, fieldset, legend and object all accept it, which is what makes remote association work."
-            },
-            {
-              "id": "quiz-html-s52-q4",
-              "type": "blank",
-              "prompt": "Which attribute skips constraint validation for a single button?",
-              "answers": [
-                "formnovalidate",
-                "formnovalidate"
-              ],
-              "explanation": "The form-level equivalent is novalidate, and it applies to the whole form."
-            },
-            {
-              "id": "quiz-html-s52-q5",
-              "type": "multiple-choice",
-              "prompt": "Which is the best reason to have two submit buttons?",
-              "options": [
-                "To have two forms on one page",
-                "Because the actions differ, so one set of fields can go to two destinations",
-                "To make the form look better",
-                "To disable validation on one path"
-              ],
-              "answer": 1,
-              "explanation": "Preview versus publish, or save versus save-and-close, are genuinely different actions and belong in one form."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Forms"
       },
@@ -4604,65 +1608,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s53",
           "title": "HTML Canvas quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s53-q1",
-              "type": "multiple-choice",
-              "prompt": "What happens when you set the width or height attribute of a canvas?",
-              "options": [
-                "Nothing",
-                "The canvas is resized and everything drawn on it is cleared",
-                "Only the visible part is cleared",
-                "The context is recreated"
-              ],
-              "answer": 1,
-              "explanation": "Resizing replaces the drawing buffer, so any transform you had set is also gone."
-            },
-            {
-              "id": "quiz-html-s53-q2",
-              "type": "true-false",
-              "prompt": "Content inside the canvas tags is read by a screen reader as a description of the drawing.",
-              "answer": false,
-              "explanation": "It is a fallback for browsers that cannot render canvas. A text alternative has to be provided separately."
-            },
-            {
-              "id": "quiz-html-s53-q3",
-              "type": "multiple-choice",
-              "prompt": "Why scale the drawing buffer by the device pixel ratio?",
-              "options": [
-                "To make the canvas larger on the page",
-                "So the drawing uses as many physical pixels as the screen has, and is not blurry",
-                "To reduce memory use",
-                "To make animations smoother"
-              ],
-              "answer": 1,
-              "explanation": "A buffer sized in CSS pixels is stretched across more physical pixels on a retina display, which is what produces the blur."
-            },
-            {
-              "id": "quiz-html-s53-q4",
-              "type": "blank",
-              "prompt": "Which pair of methods saves and restores the canvas drawing state?",
-              "answers": [
-                "save and restore",
-                "ctx.save() and ctx.restore()",
-                "save/restore"
-              ],
-              "explanation": "They push and pop fillStyle, lineWidth, font, transform and the clipping region together."
-            },
-            {
-              "id": "quiz-html-s53-q5",
-              "type": "multiple-choice",
-              "prompt": "When is SVG a better choice than canvas?",
-              "options": [
-                "For thousands of moving sprites",
-                "For a chart or icon that should scale, be styled by CSS, and be inspectable",
-                "For anything drawn per frame",
-                "Never — canvas is always more modern"
-              ],
-              "answer": 1,
-              "explanation": "SVG keeps every shape as an element. Canvas has no object model, no CSS and no accessibility."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Graphics and media"
       },
@@ -4689,65 +1635,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s54",
           "title": "HTML SVG quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s54-q1",
-              "type": "multiple-choice",
-              "prompt": "What does the viewBox attribute do?",
-              "options": [
-                "Sets the size the SVG renders at",
-                "Declares the internal coordinate system, which is what makes the drawing scale",
-                "Sets the background colour",
-                "Defines an animation"
-              ],
-              "answer": 1,
-              "explanation": "viewBox maps the internal coordinates onto whatever size the element ends up, which is what makes an SVG resolution independent."
-            },
-            {
-              "id": "quiz-html-s54-q2",
-              "type": "true-false",
-              "prompt": "Filling a shape with currentColor makes it inherit the CSS color of its parent.",
-              "answer": true,
-              "explanation": "That is the standard way to build an icon that works on a light and a dark background without a second file."
-            },
-            {
-              "id": "quiz-html-s54-q3",
-              "type": "multiple-choice",
-              "prompt": "How do you hide a decorative inline SVG from assistive technology?",
-              "options": [
-                "Give it an empty aria-label",
-                "aria-hidden=\"true\" and focusable=\"false\"",
-                "Set display: none",
-                "Remove its role"
-              ],
-              "answer": 1,
-              "explanation": "aria-hidden removes it from the accessibility tree, and focusable=\"false\" stops older engines making it focusable."
-            },
-            {
-              "id": "quiz-html-s54-q4",
-              "type": "blank",
-              "prompt": "Which element draws an arbitrary shape from path data?",
-              "answers": [
-                "path",
-                "<path>",
-                "the path element"
-              ],
-              "explanation": "path is the general-purpose shape; the others are shortcuts for common geometry."
-            },
-            {
-              "id": "quiz-html-s54-q5",
-              "type": "multiple-choice",
-              "prompt": "Which is an advantage of an SVG file over inline SVG?",
-              "options": [
-                "It can be styled by the page CSS",
-                "It can be cached and reused without repeating the markup",
-                "It inherits currentColor",
-                "It can be animated with CSS"
-              ],
-              "answer": 1,
-              "explanation": "An SVG file is a separate resource, so it caches. The other three are all things only inline SVG can do."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Graphics and media"
       },
@@ -4774,64 +1662,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s55",
           "title": "HTML Media quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s55-q1",
-              "type": "multiple-choice",
-              "prompt": "What happens to a video element without the controls attribute?",
-              "options": [
-                "It plays automatically",
-                "It has no interface, which makes it unusable and sometimes unplayable",
-                "It plays muted",
-                "It loads the poster instead"
-              ],
-              "answer": 1,
-              "explanation": "The controls attribute provides the entire player interface. Without it the user has no way to act."
-            },
-            {
-              "id": "quiz-html-s55-q2",
-              "type": "true-false",
-              "prompt": "A browser will autoplay a video with sound.",
-              "answer": false,
-              "explanation": "Autoplay is only permitted for muted video without an audio track, and only if the user has not disabled it."
-            },
-            {
-              "id": "quiz-html-s55-q3",
-              "type": "multiple-choice",
-              "prompt": "Which formats play without a plugin?",
-              "options": [
-                "Only MP4",
-                "MP4 and WebM for video; MP3, WAV and Ogg for audio",
-                "AVI and MOV only",
-                "Any format, the browser downloads a codec"
-              ],
-              "answer": 1,
-              "explanation": "These are the formats browsers ship decoders for. Anything else needs a plugin or transcoding."
-            },
-            {
-              "id": "quiz-html-s55-q4",
-              "type": "blank",
-              "prompt": "Which attribute shows a still frame before playback starts?",
-              "answers": [
-                "poster",
-                "poster="
-              ],
-              "explanation": "The poster is replaced by the first frame as soon as playback begins."
-            },
-            {
-              "id": "quiz-html-s55-q5",
-              "type": "multiple-choice",
-              "prompt": "Why offer more than one source?",
-              "options": [
-                "To increase the file size",
-                "So the browser can pick a format it can decode",
-                "Because one source is invalid",
-                "To enable autoplay"
-              ],
-              "answer": 1,
-              "explanation": "The browser walks the sources in order and takes the first type it says it can display."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Graphics and media"
       },
@@ -4858,64 +1689,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s56",
           "title": "HTML Video quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s56-q1",
-              "type": "multiple-choice",
-              "prompt": "When does the duration property become known?",
-              "options": [
-                "Immediately, as soon as the element exists",
-                "After the loadedmetadata event fires",
-                "After the ended event",
-                "After the canplay event"
-              ],
-              "answer": 1,
-              "explanation": "Before loadedmetadata the duration is NaN, which is why seeking code has to wait for that event."
-            },
-            {
-              "id": "quiz-html-s56-q2",
-              "type": "true-false",
-              "prompt": "A custom player gives the user everything the native control does.",
-              "answer": false,
-              "explanation": "The native control has keyboard shortcuts, Picture-in-Picture, AirPlay, captions and a screen reader mode. Rebuilding all of it is a large project."
-            },
-            {
-              "id": "quiz-html-s56-q3",
-              "type": "multiple-choice",
-              "prompt": "What file format do caption tracks use?",
-              "options": [
-                "SRT",
-                "WebVTT, with a .vtt extension",
-                "VTT",
-                "XML only"
-              ],
-              "answer": 1,
-              "explanation": "WebVTT is the format browsers parse. An SRT file has to be converted."
-            },
-            {
-              "id": "quiz-html-s56-q4",
-              "type": "blank",
-              "prompt": "Which property is written to move the playhead?",
-              "answers": [
-                "currentTime",
-                "video.currentTime"
-              ],
-              "explanation": "Setting currentTime seeks. Reading it gives the current position in seconds."
-            },
-            {
-              "id": "quiz-html-s56-q5",
-              "type": "multiple-choice",
-              "prompt": "How often does the timeupdate event fire?",
-              "options": [
-                "On every frame",
-                "Roughly four times a second",
-                "Once at the start",
-                "Only when playback ends"
-              ],
-              "answer": 1,
-              "explanation": "That is enough for a progress bar and not enough for a scrubbing preview, which needs its own calculation."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Graphics and media"
       },
@@ -4942,65 +1716,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s57",
           "title": "HTML Audio quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s57-q1",
-              "type": "multiple-choice",
-              "prompt": "Which audio format is most efficient at a given quality?",
-              "options": [
-                "MP3",
-                "Opus",
-                "WAV",
-                "AIFF"
-              ],
-              "answer": 1,
-              "explanation": "Opus is roughly twice as efficient as MP3 at the same quality, and is supported by every current browser."
-            },
-            {
-              "id": "quiz-html-s57-q2",
-              "type": "true-false",
-              "prompt": "An audio player with no transcript is a complete alternative to the written version.",
-              "answer": false,
-              "explanation": "It excludes Deaf and hard-of-hearing users, and anyone who cannot turn sound on. The transcript is the accessible version."
-            },
-            {
-              "id": "quiz-html-s57-q3",
-              "type": "multiple-choice",
-              "prompt": "What does preload=\"none\" do?",
-              "options": [
-                "Prevents the file being downloaded until the user presses play",
-                "Prevents the file being played",
-                "Hides the controls",
-                "Compresses the file"
-              ],
-              "answer": 0,
-              "explanation": "It saves the bandwidth and the surprise cost of a page that downloads audio nobody plays."
-            },
-            {
-              "id": "quiz-html-s57-q4",
-              "type": "blank",
-              "prompt": "What happens if the promise returned by play() rejects?",
-              "answers": [
-                "Autoplay was blocked",
-                "autoplay is blocked",
-                "playback was blocked"
-              ],
-              "explanation": "A browser refuses to start audio without a user gesture, and the rejection is how you find out."
-            },
-            {
-              "id": "quiz-html-s57-q5",
-              "type": "multiple-choice",
-              "prompt": "Which element is right for a long transcript beside a player?",
-              "options": [
-                "A div with an onclick handler",
-                "A details element with a summary",
-                "A hidden paragraph",
-                "The alt attribute of the audio element"
-              ],
-              "answer": 1,
-              "explanation": "details and summary work without JavaScript, are keyboard accessible, and are announced as a disclosure."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Graphics and media"
       },
@@ -5027,64 +1743,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s58",
           "title": "HTML Plug-ins quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s58-q1",
-              "type": "multiple-choice",
-              "prompt": "What is the object element used for today?",
-              "options": [
-                "Running Flash content",
-                "Embedding an external resource, rarely the right answer since the browser does most of it natively",
-                "Playing audio",
-                "Drawing graphics"
-              ],
-              "answer": 1,
-              "explanation": "Video, audio, PDF, SVG and canvas all have native elements, so almost nothing needs a plug-in embed."
-            },
-            {
-              "id": "quiz-html-s58-q2",
-              "type": "true-false",
-              "prompt": "Embedding a PDF in an object is usually better than linking to it.",
-              "answer": false,
-              "explanation": "An embed takes away the viewer the user has chosen and guesses a size. A link respects their setup and works on a phone."
-            },
-            {
-              "id": "quiz-html-s58-q3",
-              "type": "multiple-choice",
-              "prompt": "Which element can hold fallback content?",
-              "options": [
-                "embed",
-                "object",
-                "Both",
-                "Neither"
-              ],
-              "answer": 2,
-              "explanation": "Both hold fallback content, though the fallback is a required child of object and cannot be a child of embed."
-            },
-            {
-              "id": "quiz-html-s58-q4",
-              "type": "blank",
-              "prompt": "Which element was removed from HTML entirely?",
-              "answers": [
-                "applet",
-                "<applet>"
-              ],
-              "explanation": "applet was for Java, which no browser runs any more."
-            },
-            {
-              "id": "quiz-html-s58-q5",
-              "type": "multiple-choice",
-              "prompt": "Why are plug-ins a security concern?",
-              "options": [
-                "They are slow",
-                "They run with the permissions of the machine rather than the page",
-                "They cannot be styled",
-                "They require a licence"
-              ],
-              "answer": 1,
-              "explanation": "That level of privilege is why they were removed for security history, and why a prompt to install one is a malware route."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Graphics and media"
       },
@@ -5111,64 +1770,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s59",
           "title": "HTML YouTube quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s59-q1",
-              "type": "multiple-choice",
-              "prompt": "Which hostname defers YouTube cookies until the video is played?",
-              "options": [
-                "youtube.com",
-                "youtube-nocookie.com",
-                "youtu.be",
-                "googlevideo.com"
-              ],
-              "answer": 1,
-              "explanation": "The nocookie host does not set cookies on load, which is a meaningful privacy improvement on a page you do not own."
-            },
-            {
-              "id": "quiz-html-s59-q2",
-              "type": "true-false",
-              "prompt": "A YouTube embed needs a title attribute to be usable with a screen reader.",
-              "answer": true,
-              "explanation": "Without one the frame is announced as just \"frame\", and the user has no idea what is in it."
-            },
-            {
-              "id": "quiz-html-s59-q3",
-              "type": "multiple-choice",
-              "prompt": "What does the start parameter do?",
-              "options": [
-                "Starts playback automatically",
-                "Begins the video at a given number of seconds",
-                "Sets the player width",
-                "Enables captions"
-              ],
-              "answer": 1,
-              "explanation": "start=90 opens the player at the ninety second mark."
-            },
-            {
-              "id": "quiz-html-s59-q4",
-              "type": "blank",
-              "prompt": "Which iframe attribute stops the embed loading until it is near the viewport?",
-              "answers": [
-                "loading",
-                "loading=\"lazy\""
-              ],
-              "explanation": "loading=\"lazy\" defers the third-party code as well as the image."
-            },
-            {
-              "id": "quiz-html-s59-q5",
-              "type": "multiple-choice",
-              "prompt": "What is the lightest way to link to a video that illustrates a paragraph?",
-              "options": [
-                "An iframe embed",
-                "A poster image linking to the video",
-                "An embed element",
-                "A video element pointing at YouTube"
-              ],
-              "answer": 1,
-              "explanation": "A poster image loads in a few kilobytes and no third-party code, at the cost of one click."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Graphics and media"
       },
@@ -5195,65 +1797,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s60",
           "title": "HTML Geolocation quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s60-q1",
-              "type": "multiple-choice",
-              "prompt": "What does the accuracy value describe?",
-              "options": [
-                "How wrong the reading is",
-                "A radius in metres within which the true position probably lies",
-                "The number of satellites used",
-                "A percentage from 0 to 100"
-              ],
-              "answer": 1,
-              "explanation": "A value of 2000 means the position is within 2 km, not that it is wrong by 2 km."
-            },
-            {
-              "id": "quiz-html-s60-q2",
-              "type": "true-false",
-              "prompt": "The Geolocation API works over plain HTTP.",
-              "answer": false,
-              "explanation": "It requires a secure context. Over plain HTTP the API is absent rather than blocked."
-            },
-            {
-              "id": "quiz-html-s60-q3",
-              "type": "multiple-choice",
-              "prompt": "Which error code means the user refused?",
-              "options": [
-                "1",
-                "2",
-                "3",
-                "0"
-              ],
-              "answer": 0,
-              "explanation": "1 is PERMISSION_DENIED, 2 is POSITION_UNAVAILABLE and 3 is TIMEOUT."
-            },
-            {
-              "id": "quiz-html-s60-q4",
-              "type": "blank",
-              "prompt": "Which option forces a fresh fix rather than accepting a cached one?",
-              "answers": [
-                "maximumAge: 0",
-                "maximumAge",
-                "maximumAge: 0"
-              ],
-              "explanation": "A large maximumAge accepts an old fix, which is faster and cheaper but less accurate."
-            },
-            {
-              "id": "quiz-html-s60-q5",
-              "type": "multiple-choice",
-              "prompt": "When should a page request a position?",
-              "options": [
-                "On page load, so it is ready",
-                "At the moment the user asks for the feature that needs it",
-                "After a fixed delay",
-                "Whenever the connection improves"
-              ],
-              "answer": 1,
-              "explanation": "A prompt on load is refused and can be a consent violation. Ask when the user asks for the thing."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Browser APIs, accessibility and wrap-up"
       },
@@ -5280,65 +1824,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s61",
           "title": "HTML Drag and Drop quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s61-q1",
-              "type": "multiple-choice",
-              "prompt": "Why must a dragover handler call preventDefault()?",
-              "options": [
-                "To stop the page scrolling",
-                "Without it the browser refuses the drop and no drop event fires",
-                "To make the cursor change",
-                "To stop the drag leaving the window"
-              ],
-              "answer": 1,
-              "explanation": "It is the required opt-in, and forgetting it is the most common drag-and-drop bug."
-            },
-            {
-              "id": "quiz-html-s61-q2",
-              "type": "true-false",
-              "prompt": "HTML5 drag and drop is fully keyboard accessible on its own.",
-              "answer": false,
-              "explanation": "The native gesture has no keyboard equivalent, so every drag interaction needs a button-based path alongside it."
-            },
-            {
-              "id": "quiz-html-s61-q3",
-              "type": "multiple-choice",
-              "prompt": "What attribute makes an element draggable?",
-              "options": [
-                "draggable",
-                "drag",
-                "moveable",
-                "droppable"
-              ],
-              "answer": 0,
-              "explanation": "draggable=\"true\" on any element; the value \"auto\" is the default and does not enable it."
-            },
-            {
-              "id": "quiz-html-s61-q4",
-              "type": "blank",
-              "prompt": "Which object carries the payload between the source and the target?",
-              "answers": [
-                "dataTransfer",
-                "event.dataTransfer",
-                "DataTransfer"
-              ],
-              "explanation": "setData on dragstart, getData on drop."
-            },
-            {
-              "id": "quiz-html-s61-q5",
-              "type": "multiple-choice",
-              "prompt": "Which event is the reliable place to clean up after a drag?",
-              "options": [
-                "drop",
-                "dragend",
-                "dragleave",
-                "dragover"
-              ],
-              "answer": 1,
-              "explanation": "drop may not fire — the drag can be cancelled or released outside any target — so dragend on the source is the safe place."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Browser APIs, accessibility and wrap-up"
       },
@@ -5365,65 +1851,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s62",
           "title": "HTML Web Storage quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s62-q1",
-              "type": "multiple-choice",
-              "prompt": "How does sessionStorage differ from localStorage?",
-              "options": [
-                "It is larger",
-                "It is scoped to one tab and is gone when that tab closes",
-                "It is read-only",
-                "It is encrypted"
-              ],
-              "answer": 1,
-              "explanation": "localStorage persists per origin; sessionStorage lives for one tab session."
-            },
-            {
-              "id": "quiz-html-s62-q2",
-              "type": "true-false",
-              "prompt": "A long-lived authentication token belongs in localStorage.",
-              "answer": false,
-              "explanation": "Every script on the origin can read it. A long-lived credential belongs in an HttpOnly cookie, which JavaScript cannot read."
-            },
-            {
-              "id": "quiz-html-s62-q3",
-              "type": "multiple-choice",
-              "prompt": "What does getItem return for a key that is not set?",
-              "options": [
-                "undefined",
-                "null",
-                "\"\"",
-                "false"
-              ],
-              "answer": 1,
-              "explanation": "null, which is different from an empty string and is worth checking explicitly."
-            },
-            {
-              "id": "quiz-html-s62-q4",
-              "type": "blank",
-              "prompt": "What does a full quota cause?",
-              "answers": [
-                "a QuotaExceededError to be thrown",
-                "QuotaExceededError",
-                "a thrown error"
-              ],
-              "explanation": "setItem throws rather than returning a status, so writes have to be wrapped in a try/catch."
-            },
-            {
-              "id": "quiz-html-s62-q5",
-              "type": "multiple-choice",
-              "prompt": "Where does the storage event fire?",
-              "options": [
-                "In the tab that made the change",
-                "In other tabs on the same origin",
-                "On the server",
-                "In every browser"
-              ],
-              "answer": 1,
-              "explanation": "The tab that wrote the value is not notified, which is why the same-tab UI has to be updated directly."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Browser APIs, accessibility and wrap-up"
       },
@@ -5450,65 +1878,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s63",
           "title": "HTML Web Workers quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s63-q1",
-              "type": "multiple-choice",
-              "prompt": "What cannot be posted to a worker?",
-              "options": [
-                "A plain object",
-                "A DOM node",
-                "A typed array",
-                "A Date"
-              ],
-              "answer": 1,
-              "explanation": "There is no DOM in a worker, so a node cannot be cloned across the boundary. Use an id and look it up on the other side."
-            },
-            {
-              "id": "quiz-html-s63-q2",
-              "type": "true-false",
-              "prompt": "An object posted to a worker is shared, so mutating it affects both sides.",
-              "answer": false,
-              "explanation": "It is copied with the structured clone algorithm. Later changes on either side are independent."
-            },
-            {
-              "id": "quiz-html-s63-q3",
-              "type": "multiple-choice",
-              "prompt": "How do you stop a running worker?",
-              "options": [
-                "postMessage with a stop flag",
-                "worker.terminate()",
-                "worker.close()",
-                "You cannot"
-              ],
-              "answer": 1,
-              "explanation": "terminate is the only control from the outside. A stop flag only works if the worker happens to be checking for it."
-            },
-            {
-              "id": "quiz-html-s63-q4",
-              "type": "blank",
-              "prompt": "Which buffer type can be transferred to a worker with no copying?",
-              "answers": [
-                "ArrayBuffer",
-                "an ArrayBuffer",
-                "Transferable"
-              ],
-              "explanation": "Passing an ArrayBuffer in the transfer list detaches it in the sending thread, so the data moves rather than being duplicated."
-            },
-            {
-              "id": "quiz-html-s63-q5",
-              "type": "multiple-choice",
-              "prompt": "When is a worker worth the overhead?",
-              "options": [
-                "For any computation at all",
-                "When the main thread would otherwise be blocked and the page unresponsive",
-                "For every network request",
-                "For work under a few milliseconds"
-              ],
-              "answer": 1,
-              "explanation": "Each worker is a whole JavaScript environment. Starting one for thirty milliseconds of work costs more than it saves."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Browser APIs, accessibility and wrap-up"
       },
@@ -5535,65 +1905,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s64",
           "title": "HTML Server Sent Events quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s64-q1",
-              "type": "multiple-choice",
-              "prompt": "What is the main advantage of SSE over a WebSocket?",
-              "options": [
-                "It is bidirectional",
-                "It is plain HTTP, so it survives proxies, and the browser reconnects by itself",
-                "It carries binary data",
-                "It needs no server"
-              ],
-              "answer": 1,
-              "explanation": "The automatic reconnection and the absence of a protocol upgrade are what make SSE the easier choice for a one-way feed."
-            },
-            {
-              "id": "quiz-html-s64-q2",
-              "type": "true-false",
-              "prompt": "SSE can send data from the browser to the server over the same connection.",
-              "answer": false,
-              "explanation": "The stream is one-way. Anything the browser sends is an ordinary HTTP request."
-            },
-            {
-              "id": "quiz-html-s64-q3",
-              "type": "multiple-choice",
-              "prompt": "What stops the browser reconnecting an EventSource?",
-              "options": [
-                "Setting readyState to 2",
-                "Calling source.close()",
-                "Sending a stop message",
-                "Reloading the page"
-              ],
-              "answer": 1,
-              "explanation": "close is the only control from the page. A stop message only works if the server happens to honour it."
-            },
-            {
-              "id": "quiz-html-s64-q4",
-              "type": "blank",
-              "prompt": "What field in the event stream sets the reconnection interval?",
-              "answers": [
-                "retry",
-                "retry:",
-                "the retry field"
-              ],
-              "explanation": "A large retry value effectively disables reconnection and hands the decision to the page."
-            },
-            {
-              "id": "quiz-html-s64-q5",
-              "type": "multiple-choice",
-              "prompt": "Which case is better served by a WebSocket?",
-              "options": [
-                "A build finishing and reporting progress",
-                "A dashboard receiving updates",
-                "A log tail the client only reads",
-                "Two participants in a chat sending messages both ways"
-              ],
-              "answer": 3,
-              "explanation": "The first three are one-way and suit SSE. A conversation with both sides speaking needs a WebSocket."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Browser APIs, accessibility and wrap-up"
       },
@@ -5620,65 +1932,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s65",
           "title": "HTML Accessibility quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s65-q1",
-              "type": "multiple-choice",
-              "prompt": "Why is a real button better than a div with role=\"button\"?",
-              "options": [
-                "It looks better",
-                "It comes with focus, keyboard activation, disabled state and the correct announcement",
-                "role=\"button\" is invalid",
-                "It is smaller"
-              ],
-              "answer": 1,
-              "explanation": "The role adds the announcement. Everything else — focus, Enter and Space, disabled — is part of the element."
-            },
-            {
-              "id": "quiz-html-s65-q2",
-              "type": "true-false",
-              "prompt": "It is fine to write outline: none as long as the element still shows a cursor change.",
-              "answer": false,
-              "explanation": "A cursor change is invisible to a keyboard user. The focus indicator has to be visible or replaced with something equally visible."
-            },
-            {
-              "id": "quiz-html-s65-q3",
-              "type": "multiple-choice",
-              "prompt": "Which is the correct way to mark a required field?",
-              "options": [
-                "An asterisk next to the label",
-                "The required attribute, plus saying so in text",
-                "A red border",
-                "Nothing, users will find out"
-              ],
-              "answer": 1,
-              "explanation": "An asterisk and a colour are both visual conventions that carry no information for a screen reader or in high contrast mode."
-            },
-            {
-              "id": "quiz-html-s65-q4",
-              "type": "blank",
-              "prompt": "What is the minimum contrast ratio for body text?",
-              "answers": [
-                "4.5:1",
-                "4.5",
-                "4.5:1 against its background"
-              ],
-              "explanation": "Large text at 24px or 18.66px bold may use 3:1."
-            },
-            {
-              "id": "quiz-html-s65-q5",
-              "type": "multiple-choice",
-              "prompt": "What does a skip link do?",
-              "options": [
-                "Skips an image",
-                "Lets a keyboard user jump past repeated navigation to the main content",
-                "Skips the page footer",
-                "Disables navigation"
-              ],
-              "answer": 1,
-              "explanation": "It is the first focusable element on the page, and it targets the main landmark so repeated navigation is bypassed."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Browser APIs, accessibility and wrap-up"
       },
@@ -5705,65 +1959,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-html-s66",
           "title": "HTML Summary quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-html-s66-q1",
-              "type": "multiple-choice",
-              "prompt": "What is the central idea of choosing semantic HTML?",
-              "options": [
-                "Semantic elements render faster",
-                "The element name describes what the content is, which solves accessibility, styling and indexing problems at once",
-                "It produces less markup",
-                "It is required by the validator"
-              ],
-              "answer": 1,
-              "explanation": "One decision pays for itself three times over: assistive technology, CSS hooks, and search engines."
-            },
-            {
-              "id": "quiz-html-s66-q2",
-              "type": "true-false",
-              "prompt": "A page should have exactly one h1.",
-              "answer": true,
-              "explanation": "One h1 names the page. Everything below it is a heading level describing depth, not size."
-            },
-            {
-              "id": "quiz-html-s66-q3",
-              "type": "multiple-choice",
-              "prompt": "How many main elements may a document contain?",
-              "options": [
-                "One",
-                "One per page section",
-                "As many as you like",
-                "None"
-              ],
-              "answer": 0,
-              "explanation": "Exactly one, and it holds the primary content."
-            },
-            {
-              "id": "quiz-html-s66-q4",
-              "type": "blank",
-              "prompt": "Which attribute marks an image as deliberately decorative?",
-              "answers": [
-                "alt=\"\"",
-                "alt",
-                "alt=\"\""
-              ],
-              "explanation": "An empty alt tells the screen reader to skip it. Omitting alt is a missing description, not a decision."
-            },
-            {
-              "id": "quiz-html-s66-q5",
-              "type": "multiple-choice",
-              "prompt": "Which of these is the next step after this course?",
-              "options": [
-                "Learn a framework and stop writing HTML",
-                "CSS, then JavaScript, and keep the semantics underneath",
-                "Skip to backend development",
-                "Stop writing markup entirely"
-              ],
-              "answer": 1,
-              "explanation": "A framework still emits the same elements. The semantics here are what everything else is built on."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Browser APIs, accessibility and wrap-up"
       }
@@ -5826,63 +2022,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s1",
           "title": "Getting started check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s1-q1",
-              "type": "multiple-choice",
-              "prompt": "What does CSS change about a page?",
-              "options": [
-                "The meaning of the content and the tags used",
-                "Only how things look and where they sit",
-                "What happens when someone clicks a button",
-                "The file size of the HTML"
-              ],
-              "answer": 1,
-              "explanation": "CSS is presentation only. Structure lives in HTML and behaviour lives in JavaScript, which is what keeps the three of them independently replaceable."
-            },
-            {
-              "id": "quiz-css-s1-q2",
-              "type": "true-false",
-              "prompt": "In the two cards shown at the top of this lesson, the HTML markup was different.",
-              "answer": false,
-              "explanation": "The markup was identical. Only the CSS differed, which is the point the example was making."
-            },
-            {
-              "id": "quiz-css-s1-q3",
-              "type": "multiple-choice",
-              "prompt": "What is the first thing you see in every lesson of this course?",
-              "options": [
-                "A block of code to read",
-                "A quiz question",
-                "A live rendered example",
-                "A list of objectives"
-              ],
-              "answer": 2,
-              "explanation": "Every lesson opens with a live example so you know what you are aiming at before you read any syntax."
-            },
-            {
-              "id": "quiz-css-s1-q4",
-              "type": "blank",
-              "prompt": "Complete the sentence: the order matters because media queries make no sense before you know ________.",
-              "answers": [
-                "flexbox"
-              ],
-              "explanation": "Responsive design is built on top of a layout system. Without flexbox or grid there is nothing for a media query to rearrange."
-            },
-            {
-              "id": "quiz-css-s1-q5",
-              "type": "multiple-choice",
-              "prompt": "Which section of the course should you understand first?",
-              "options": [
-                "Animations",
-                "The box model",
-                "Grid",
-                "Specificity"
-              ],
-              "answer": 1,
-              "explanation": "The box model comes first because almost every later concept — margins, flexbox gaps, grid tracks — is defined in terms of it."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Getting started"
       },
@@ -5910,68 +2050,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s2",
           "title": "CSS Introduction quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s2-q1",
-              "type": "multiple-choice",
-              "prompt": "Which of these is CSS responsible for?",
-              "options": [
-                "Deciding a paragraph is a paragraph",
-                "Deciding what happens on click",
-                "Deciding how that paragraph is coloured and spaced",
-                "Fetching the data the paragraph shows"
-              ],
-              "answer": 2,
-              "explanation": "Structure is HTML, behaviour is JavaScript, and presentation is CSS. Each can be replaced without touching the others."
-            },
-            {
-              "id": "quiz-css-s2-q2",
-              "type": "multiple-choice",
-              "prompt": "At which step does the browser work out which rules apply to an element?",
-              "options": [
-                "Parse",
-                "Match",
-                "Paint",
-                "Composite"
-              ],
-              "answer": 1,
-              "explanation": "Matching happens after parsing and before layout. The cascade collects matching rules, then the winning values are computed."
-            },
-            {
-              "id": "quiz-css-s2-q3",
-              "type": "true-false",
-              "prompt": "A later CSS rule always beats an earlier one.",
-              "answer": false,
-              "explanation": "Source order only breaks ties. A more specific earlier rule wins over a less specific later one, no matter which comes second in the file."
-            },
-            {
-              "id": "quiz-css-s2-q4",
-              "type": "multiple-choice",
-              "prompt": "Why is inline styling a poor choice in a real project?",
-              "options": [
-                "Browsers ignore it",
-                "It cannot be cached, reused or themed, and it beats every other rule",
-                "It only works on paragraphs",
-                "It makes the page load slower than any stylesheet"
-              ],
-              "answer": 1,
-              "explanation": "Inline styles have the highest specificity, so they are very hard to override, and they cannot be shared or cached across pages."
-            },
-            {
-              "id": "quiz-css-s2-q5",
-              "type": "code-output",
-              "prompt": "What colour is the paragraph?",
-              "code": "body { color: grey; }\np { color: teal; }",
-              "options": [
-                "Grey",
-                "Teal",
-                "Black",
-                "The browser default"
-              ],
-              "answer": 1,
-              "explanation": "Both rules match the `p`. The `p` rule is more specific, so it wins even though the `body` rule would have inherited down to it."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Getting started"
       },
@@ -5999,65 +2078,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s3",
           "title": "CSS Syntax quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s3-q1",
-              "type": "multiple-choice",
-              "prompt": "In `p { color: teal; }`, what is `color`?",
-              "options": [
-                "The selector",
-                "The property",
-                "The value",
-                "The at-rule"
-              ],
-              "answer": 1,
-              "explanation": "`p` is the selector, `color` is the property, and `teal` is the value. A declaration is the property and value together."
-            },
-            {
-              "id": "quiz-css-s3-q2",
-              "type": "code-output",
-              "prompt": "What colour is the paragraph?",
-              "code": "p {\n  color: red\n  font-weight: 700;\n}",
-              "options": [
-                "Red and bold, as written",
-                "Red only, with the font-weight ignored",
-                "The browser default colour",
-                "Nothing renders at all"
-              ],
-              "answer": 2,
-              "explanation": "The missing semicolon makes the whole declaration invalid, so the browser discards it and the rule has nothing left to apply. The paragraph falls back to the default colour."
-            },
-            {
-              "id": "quiz-css-s3-q3",
-              "type": "true-false",
-              "prompt": "Margins are inherited by default.",
-              "answer": false,
-              "explanation": "`margin` does not inherit. Properties like `color` and `font-family` do, which is why you set them once on a parent."
-            },
-            {
-              "id": "quiz-css-s3-q4",
-              "type": "blank",
-              "prompt": "Which HTML element links an external stylesheet to a page? Give the element name only.",
-              "answers": [
-                "link"
-              ],
-              "explanation": "The `link` element with `rel=\"stylesheet\"` in the `head` is the standard way to attach an external stylesheet."
-            },
-            {
-              "id": "quiz-css-s3-q5",
-              "type": "identify-error",
-              "prompt": "Why does this rule do nothing at all?",
-              "code": ".card {\n  color blue;\n  padding: 1rem;\n}",
-              "options": [
-                "`.card` is not a valid selector",
-                "The colon after `color` is missing",
-                "`padding` cannot be set on this element",
-                "The property should be `text-color`"
-              ],
-              "answer": 1,
-              "explanation": "It reads `color blue` as a property named `color blue` with no value, which is invalid, so the declaration is dropped and only `padding` survives."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Getting started"
       },
@@ -6085,66 +2106,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s4",
           "title": "CSS Selectors quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s4-q1",
-              "type": "multiple-choice",
-              "prompt": "Which selector targets every element carrying `class=\"card\"`?",
-              "options": [
-                "`card`",
-                "`.card`",
-                "`#card`",
-                "`*card`"
-              ],
-              "answer": 1,
-              "explanation": "A dot introduces a class selector. `#` is for an id and a bare name is an element selector."
-            },
-            {
-              "id": "quiz-css-s4-q2",
-              "type": "multiple-choice",
-              "prompt": "Why are id selectors discouraged in stylesheets?",
-              "options": [
-                "Browsers do not support them",
-                "They cannot be combined with classes",
-                "Their high specificity makes them very hard to override later",
-                "They only work in inline styles"
-              ],
-              "answer": 2,
-              "explanation": "An id outranks any number of classes, so once an id rule exists, overriding it usually needs an even more specific selector or `!important`."
-            },
-            {
-              "id": "quiz-css-s4-q3",
-              "type": "code-output",
-              "prompt": "What colour is the paragraph?",
-              "code": "#x { color: blue; }\np { color: red; }",
-              "options": [
-                "Blue",
-                "Red",
-                "The browser default",
-                "Both apply, blue wins the paint order"
-              ],
-              "answer": 0,
-              "explanation": "The id selector is more specific, so it wins. The `p` rule written later is ignored entirely for this element."
-            },
-            {
-              "id": "quiz-css-s4-q4",
-              "type": "true-false",
-              "prompt": "An element can carry more than one class.",
-              "answer": true,
-              "explanation": "Classes are a list, not a slot. `class=\"card card--featured\"` is valid and both selectors match."
-            },
-            {
-              "id": "quiz-css-s4-q5",
-              "type": "blank",
-              "prompt": "Which universal-selector declaration is most commonly set on `*` at the top of a reset? Give the property name only.",
-              "answers": [
-                "box-sizing",
-                "box-sizing: border-box",
-                "boxsizing"
-              ],
-              "explanation": "`box-sizing: border-box` makes a declared width include padding and border, which removes a whole class of sizing bugs."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Getting started"
       },
@@ -6172,63 +2134,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s5",
           "title": "CSS How To quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s5-q1",
-              "type": "multiple-choice",
-              "prompt": "Which attachment method should you use by default in a multi-page project?",
-              "options": [
-                "A `style` attribute on each element",
-                "An external stylesheet linked from the head",
-                "A `style` block repeated in every page",
-                "Inline styles generated by JavaScript"
-              ],
-              "answer": 1,
-              "explanation": "An external file is cached across pages, kept in one place, and reviewable. The other options duplicate rules and are hard to override."
-            },
-            {
-              "id": "quiz-css-s5-q2",
-              "type": "multiple-choice",
-              "prompt": "From `pages/about.html`, which `href` reaches `styles/site.css` in the site root?",
-              "options": [
-                "`href=\"styles/site.css\"`",
-                "`href=\"pages/styles/site.css\"`",
-                "`href=\"/styles/site.css\"`",
-                "`href=\"./../styles.css\"`"
-              ],
-              "answer": 2,
-              "explanation": "A leading slash resolves from the site root regardless of the current page depth. The first option would look inside `pages/`."
-            },
-            {
-              "id": "quiz-css-s5-q3",
-              "type": "true-false",
-              "prompt": "A browser will paint a page before it finishes loading an external stylesheet.",
-              "answer": false,
-              "explanation": "Rendering is blocked on the stylesheet. That is why putting the `link` in the head avoids a flash of unstyled content."
-            },
-            {
-              "id": "quiz-css-s5-q4",
-              "type": "blank",
-              "prompt": "What attribute value on `link` marks the file as a stylesheet? Give the value only.",
-              "answers": [
-                "stylesheet"
-              ],
-              "explanation": "`rel=\"stylesheet\"` is required. Without it the browser fetches the file and does nothing with it."
-            },
-            {
-              "id": "quiz-css-s5-q5",
-              "type": "multiple-choice",
-              "prompt": "What is the main practical problem with inline styles?",
-              "options": [
-                "They are ignored by modern browsers",
-                "They cannot be used on custom elements",
-                "They cannot be reused or cached and they outrank every stylesheet rule",
-                "They only work in print stylesheets"
-              ],
-              "answer": 2,
-              "explanation": "Inline styles have the highest specificity of all, so they are effectively impossible to override from a stylesheet, and they repeat on every element."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Getting started"
       },
@@ -6256,65 +2162,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s6",
           "title": "CSS Comments quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s6-q1",
-              "type": "blank",
-              "prompt": "What is the opening token of a CSS comment? Give the two characters only.",
-              "answers": [
-                "/*",
-                "/ *"
-              ],
-              "explanation": "CSS has only the `/* ... */` form. There is no `//` line comment in a stylesheet."
-            },
-            {
-              "id": "quiz-css-s6-q2",
-              "type": "true-false",
-              "prompt": "Comments are sent to the browser and ignored at render time.",
-              "answer": false,
-              "explanation": "The parser discards comments before it builds the rule tree, so they cost nothing at runtime and never reach the browser."
-            },
-            {
-              "id": "quiz-css-s6-q3",
-              "type": "multiple-choice",
-              "prompt": "Which comment is worth writing?",
-              "options": [
-                "`/* set the color */` above `color: teal;`",
-                "`/* matches the 4xl spacing step, do not change */` above `margin-top: 56px;`",
-                "`/* this is the stylesheet for the card */` at the top of the file",
-                "A comment above every single declaration"
-              ],
-              "answer": 1,
-              "explanation": "A good comment records intent or a constraint that the code cannot express. The rest restate what is already visible."
-            },
-            {
-              "id": "quiz-css-s6-q4",
-              "type": "identify-error",
-              "prompt": "What is wrong with this?",
-              "code": ".card {\n  // make it stand out\n  border: 2px solid teal;\n}",
-              "options": [
-                "Comments cannot go inside a rule",
-                "CSS has no `//` line comment, so the parser reads it as a selector and breaks the rule",
-                "The comment needs to be a `<!-- -->` block",
-                "Nothing, this is valid"
-              ],
-              "answer": 1,
-              "explanation": "`//` is not a comment in CSS. It is parsed as a selector, which swallows the following declaration and invalidates the rule."
-            },
-            {
-              "id": "quiz-css-s6-q5",
-              "type": "multiple-choice",
-              "prompt": "You want to try a change without losing the old rule. What should you do?",
-              "options": [
-                "Comment the old rule out and commit it",
-                "Comment it out while experimenting, then delete it before committing",
-                "Keep both rules permanently",
-                "Copy the file as a backup and leave the original in place"
-              ],
-              "answer": 1,
-              "explanation": "Commenting out is a fine temporary move. Leaving commented-out code in a commit is dead code — version control already holds the history."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Getting started"
       },
@@ -6384,66 +2232,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s7",
           "title": "CSS Colors quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s7-q1",
-              "type": "multiple-choice",
-              "prompt": "What is `#0a0` the same colour as?",
-              "options": [
-                "`#000a00`",
-                "`#00aa00`",
-                "`#0a0a0a`",
-                "`rgb(0, 170, 0)` is a different colour"
-              ],
-              "answer": 1,
-              "explanation": "The three-digit form doubles each digit, so `#0a0` expands to `#00aa00`. It is also `rgb(0, 170, 0)`, so the last option describes the same colour."
-            },
-            {
-              "id": "quiz-css-s7-q2",
-              "type": "code-output",
-              "prompt": "What does `rgba(0, 128, 128, 0.5)` paint over an orange box?",
-              "code": ".panel {\n  background-color: rgba(0, 128, 128, 0.5);\n}",
-              "options": [
-                "A paler teal, half blended toward white",
-                "A translucent teal, with the orange showing through",
-                "A fully transparent box with an orange tint",
-                "Teal at 50% brightness"
-              ],
-              "answer": 1,
-              "explanation": "Alpha changes opacity, not brightness or hue. The result is the teal blended per pixel with whatever was already painted underneath."
-            },
-            {
-              "id": "quiz-css-s7-q3",
-              "type": "true-false",
-              "prompt": "Alpha in `rgba()` changes the brightness of the colour.",
-              "answer": false,
-              "explanation": "Alpha only controls opacity. To change brightness in HSL you move the lightness, and in hex you change the channel values."
-            },
-            {
-              "id": "quiz-css-s7-q4",
-              "type": "blank",
-              "prompt": "In `hsl(210, 80%, 30%)`, which value is the percentage that controls how vivid the colour is? Give the property name, saturation or lightness.",
-              "answers": [
-                "saturation",
-                "the saturation",
-                "sat"
-              ],
-              "explanation": "Saturation controls vividness and lightness controls brightness. The first value in each is the hue angle."
-            },
-            {
-              "id": "quiz-css-s7-q5",
-              "type": "multiple-choice",
-              "prompt": "Why is HSL usually the better notation inside a design system?",
-              "options": [
-                "It is shorter to type than hex",
-                "It converts to hex without loss, so it is faster to paint",
-                "A whole palette can be derived from one hue by moving lightness and saturation",
-                "It is the only notation that supports transparency"
-              ],
-              "answer": 2,
-              "explanation": "HSL exposes the axes a designer already thinks in. A tint, a shade and a dark-mode variant can all be computed from a single hue, instead of being hand-picked one by one."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Colour and backgrounds"
       },
@@ -6527,68 +2316,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s8",
           "title": "CSS Backgrounds quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s8-q1",
-              "type": "multiple-choice",
-              "prompt": "Which parts of an element does `background-color` paint?",
-              "options": [
-                "The margin and the padding",
-                "The content, the padding and under the border",
-                "The content area only",
-                "The whole viewport behind the element"
-              ],
-              "answer": 1,
-              "explanation": "A background fills the padding box and paints under the border, stopping at the border edge. It never paints into the margin."
-            },
-            {
-              "id": "quiz-css-s8-q2",
-              "type": "multiple-choice",
-              "prompt": "What does `background-repeat: space` do that `round` does not?",
-              "options": [
-                "It clips the tile at the edge",
-                "It keeps the tiles at their original size and spreads the leftover into the gaps",
-                "It scales the image down to fit a whole number of tiles",
-                "It stops tiling entirely"
-              ],
-              "answer": 1,
-              "explanation": "`space` never resizes anything — it distributes the leftover space between tiles. `round` is the one that scales the image so whole tiles fit."
-            },
-            {
-              "id": "quiz-css-s8-q3",
-              "type": "identify-error",
-              "prompt": "This declaration sets no background at all. Why?",
-              "code": ".card {\n  background: #29e2bd url(\"tile.svg\") no-repeat center 40px 40px;\n}",
-              "options": [
-                "A colour is not allowed in a `background` shorthand",
-                "The size has to be separated from the position with a slash",
-                "`no-repeat` must come after the position",
-                "A `url()` cannot be combined with a colour"
-              ],
-              "answer": 1,
-              "explanation": "Position and size form one unit, written `position / size`. Without the slash the parser cannot tell which value is which, so it discards the whole declaration with no error."
-            },
-            {
-              "id": "quiz-css-s8-q4",
-              "type": "true-false",
-              "prompt": "Setting `background: teal` on an element also clears any background image already set on it.",
-              "answer": true,
-              "explanation": "A shorthand only sets the properties it names, and any background property it covers that you leave out goes back to its initial value. Omitting the image clears it, and omitting the colour clears the colour."
-            },
-            {
-              "id": "quiz-css-s8-q5",
-              "type": "multiple-choice",
-              "prompt": "Why is `background-attachment: fixed` a performance risk?",
-              "options": [
-                "It is not supported in any mobile browser",
-                "The background must be realigned to the viewport on every scroll frame, forcing a repaint of that area",
-                "It disables hardware acceleration on the whole page",
-                "It requires the image to be re-downloaded while scrolling"
-              ],
-              "answer": 1,
-              "explanation": "The background cannot be painted once and cached, so scrolling repaints it each frame. A fixed gradient over a small area is usually fine; a fixed photograph over a large area is not."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Colour and backgrounds"
       },
@@ -6680,66 +2408,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s9",
           "title": "CSS Borders quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s9-q1",
-              "type": "multiple-choice",
-              "prompt": "You set `border-width: 4px` and `border-color: red` but no border appears. Why?",
-              "options": [
-                "border-color does not accept hex or named colours",
-                "border-width must be in rem, not px",
-                "border-style is still `none`, so nothing is drawn",
-                "The border is painted behind the background"
-              ],
-              "answer": 2,
-              "explanation": "`border-style` decides whether a border exists at all. Its initial value is `none`, and a `none` border ignores width and colour entirely."
-            },
-            {
-              "id": "quiz-css-s9-q2",
-              "type": "true-false",
-              "prompt": "Adding a 10px border to an element declared as `width: 200px` leaves its outer size at 200px.",
-              "answer": false,
-              "explanation": "The border is drawn inside the declared width, so the outer size becomes 220px and the content area shrinks by 20px."
-            },
-            {
-              "id": "quiz-css-s9-q3",
-              "type": "multiple-choice",
-              "prompt": "What does `border-color: currentColor` use?",
-              "options": [
-                "The browser default link colour",
-                "The computed value of the `color` property on that element",
-                "Nothing — the border stays invisible",
-                "The background colour of the element"
-              ],
-              "answer": 1,
-              "explanation": "`currentColor` resolves to the computed `color` of the same element, which is also why a styled border with no colour already appears in the text colour."
-            },
-            {
-              "id": "quiz-css-s9-q4",
-              "type": "identify-error",
-              "prompt": "Which declaration is invalid and therefore discarded entirely?",
-              "code": ".box {\n  border: 2px 3px solid red;\n}",
-              "options": [
-                "Nothing — it is valid and uses the current text colour",
-                "The shorthand — two widths cannot be resolved, so the whole declaration is dropped",
-                "The shorthand cannot start with a length",
-                "The declaration is missing a trailing semicolon inside the block"
-              ],
-              "answer": 1,
-              "explanation": "A shorthand whose values do not resolve is dropped whole, with no error shown — the usual cause is two values of the same type."
-            },
-            {
-              "id": "quiz-css-s9-q5",
-              "type": "blank",
-              "prompt": "Which `border-radius` value makes a square box render as a perfect circle?",
-              "answers": [
-                "50%",
-                "border-radius: 50%",
-                "50 percent"
-              ],
-              "explanation": "A radius of 50% reaches half the box on every side. Larger radii are scaled down automatically, which is what makes `50%` reliably produce a circle."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "The box model"
       },
@@ -6779,68 +2448,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s10",
           "title": "CSS Margins quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s10-q1",
-              "type": "multiple-choice",
-              "prompt": "Two blocks touch vertically. The first has `margin-bottom: 40px` and the second `margin-top: 30px`. What gap do you see?",
-              "options": [
-                "70px",
-                "40px",
-                "30px",
-                "10px"
-              ],
-              "answer": 1,
-              "explanation": "Adjacent vertical margins collapse to the larger of the two, so the gap is 40px — they never sum."
-            },
-            {
-              "id": "quiz-css-s10-q2",
-              "type": "true-false",
-              "prompt": "A margin can carry its own background colour and border.",
-              "answer": false,
-              "explanation": "Margins are always transparent empty space outside the border. Colour and borders belong to the element box itself."
-            },
-            {
-              "id": "quiz-css-s10-q3",
-              "type": "multiple-choice",
-              "prompt": "A child top margin is dragging its parent down. What prevents that collapse?",
-              "options": [
-                "Padding, a border, or non-empty inline content above the child",
-                "A width, a height, or a background colour on the parent",
-                "A doctype, a viewport meta tag, or a reset stylesheet",
-                "Nothing — it cannot be prevented"
-              ],
-              "answer": 0,
-              "explanation": "A parent top margin collapses with its first child only when there is no border, no padding and no inline content above the child. `display: flow-root` also contains it."
-            },
-            {
-              "id": "quiz-css-s10-q4",
-              "type": "code-output",
-              "prompt": "Where does this 200px block sit inside its 600px container?",
-              "code": ".card {\n  width: 200px;\n  margin: 0 auto;\n}",
-              "options": [
-                "Left aligned, with 200px of space on the right",
-                "Centred, with 200px on each side",
-                "Stretched to fill the 600px container",
-                "Right aligned"
-              ],
-              "answer": 1,
-              "explanation": "The container has 400px of leftover space and `auto` splits it evenly, giving 200px on each side."
-            },
-            {
-              "id": "quiz-css-s10-q5",
-              "type": "blank",
-              "prompt": "Complete the sentence: margins collapse vertically, so the gap between two touching blocks is the ______ of the two margins.",
-              "answers": [
-                "max",
-                "largest",
-                "maximum",
-                "greater",
-                "biggest"
-              ],
-              "explanation": "The collapsed value is the larger margin — never the sum. Horizontal margins, floats, absolute positioning, and flex or grid items do not collapse at all."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "The box model"
       },
@@ -6867,64 +2475,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s11",
           "title": "CSS Padding quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s11-q1",
-              "type": "multiple-choice",
-              "prompt": "Where does padding draw relative to the border?",
-              "options": [
-                "Outside the border, as transparent space",
-                "Inside the border, between content and border",
-                "Under the text only",
-                "On top of the border, covering it"
-              ],
-              "answer": 1,
-              "explanation": "Padding lives inside the border, filling the gap between the content and the border edge. Margin lives outside the border."
-            },
-            {
-              "id": "quiz-css-s11-q2",
-              "type": "true-false",
-              "prompt": "Padding takes the element's background colour with it.",
-              "answer": true,
-              "explanation": "The background paints across the content and padding areas. Margin stays transparent and shows whatever sits behind the element."
-            },
-            {
-              "id": "quiz-css-s11-q3",
-              "type": "code-output",
-              "prompt": "With `padding: 1rem 2rem;`, which sides get 2rem?",
-              "code": "div { padding: 1rem 2rem; }",
-              "options": [
-                "top and bottom",
-                "left and right",
-                "all four",
-                "top and left"
-              ],
-              "answer": 1,
-              "explanation": "Two values mean vertical then horizontal, so top and bottom are 1rem while left and right are 2rem."
-            },
-            {
-              "id": "quiz-css-s11-q4",
-              "type": "multiple-choice",
-              "prompt": "What happens to a box's total rendered size when you add padding?",
-              "options": [
-                "It shrinks",
-                "It stays exactly the same",
-                "It grows",
-                "It changes colour"
-              ],
-              "answer": 2,
-              "explanation": "Padding pushes the border outward, so the box occupies more space on the page even though the content size is unchanged."
-            },
-            {
-              "id": "quiz-css-s11-q5",
-              "type": "blank",
-              "prompt": "Padding is INSIDE the border and takes the element's ________ colour.",
-              "answers": [
-                "background"
-              ],
-              "explanation": "That is the difference from margin: padding is painted with the element's background, margin is not."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "The box model"
       },
@@ -6951,64 +2502,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s12",
           "title": "CSS Height/Width quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s12-q1",
-              "type": "multiple-choice",
-              "prompt": "Which property puts a ceiling on a width?",
-              "options": [
-                "min-width",
-                "max-width",
-                "width",
-                "width-limit"
-              ],
-              "answer": 1,
-              "explanation": "`max-width` is a ceiling: it lets the box grow up to a point, then refuses to grow further. `min-width` is a floor."
-            },
-            {
-              "id": "quiz-css-s12-q2",
-              "type": "true-false",
-              "prompt": "By default, `width` sets the size of the content box only.",
-              "answer": true,
-              "explanation": "Under the default `content-box`, `width` is the content width. Padding and border are added on top of it."
-            },
-            {
-              "id": "quiz-css-s12-q3",
-              "type": "code-output",
-              "prompt": "What is the common purpose of this rule on an image?",
-              "code": ".img { max-width: 100%; }",
-              "options": [
-                "It crops the image",
-                "It makes the image 100% wide always",
-                "It stops the image overflowing a narrow screen",
-                "It hides the image"
-              ],
-              "answer": 2,
-              "explanation": "`max-width: 100%` lets the image shrink to fit a container that is narrower than the image, stopping it from overflowing."
-            },
-            {
-              "id": "quiz-css-s12-q4",
-              "type": "multiple-choice",
-              "prompt": "Why is setting a fixed `height` on a paragraph usually a mistake?",
-              "options": [
-                "It sets the font size",
-                "Text can overflow or get clipped when it wraps",
-                "It prevents scrolling",
-                "It hides the element"
-              ],
-              "answer": 1,
-              "explanation": "A fixed height is a fixed box. When the text wraps to a new line it either spills over or gets clipped by overflow."
-            },
-            {
-              "id": "quiz-css-s12-q5",
-              "type": "blank",
-              "prompt": "A width declared as a percentage is always resolved against the element's ________, which for width is the containing block's content width.",
-              "answers": [
-                "containing block"
-              ],
-              "explanation": "Percentages on width resolve against the containing block, not against the element itself."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "The box model"
       },
@@ -7035,64 +2529,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s13",
           "title": "CSS Box Model quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s13-q1",
-              "type": "multiple-choice",
-              "prompt": "Which layer is sized directly by `width` and `height`?",
-              "options": [
-                "Padding",
-                "Border",
-                "Content",
-                "Margin"
-              ],
-              "answer": 2,
-              "explanation": "Width and height set the content box. The padding, border and margin are added around it — unless box-sizing changes the rules."
-            },
-            {
-              "id": "quiz-css-s13-q2",
-              "type": "true-false",
-              "prompt": "A `border-box` element with `width: 200px`, `padding: 20px` and `border: 5px` is exactly 200px wide in total.",
-              "answer": true,
-              "explanation": "Under `border-box`, the width includes padding and border, so the rendered width stays at 200px."
-            },
-            {
-              "id": "quiz-css-s13-q3",
-              "type": "code-output",
-              "prompt": "What does this reset change for every element?",
-              "code": "* { box-sizing: border-box; }",
-              "options": [
-                "It removes all margins",
-                "It makes width include padding and border",
-                "It sets height to auto",
-                "It hides overflow"
-              ],
-              "answer": 1,
-              "explanation": "`box-sizing: border-box` makes the declared width include padding and border, so a 200px box stays 200px wide."
-            },
-            {
-              "id": "quiz-css-s13-q4",
-              "type": "multiple-choice",
-              "prompt": "Where is the element's `background-color` visible?",
-              "options": [
-                "Only in the content area",
-                "In the content and padding areas",
-                "In the margin area",
-                "Nowhere; background never shows"
-              ],
-              "answer": 1,
-              "explanation": "The background paints across the content and padding areas. Margin stays transparent and shows whatever sits behind the element."
-            },
-            {
-              "id": "quiz-css-s13-q5",
-              "type": "blank",
-              "prompt": "Reading a box from the inside out, the order is content, ________, border, margin.",
-              "answers": [
-                "padding"
-              ],
-              "explanation": "The four layers in order: content, padding, border, margin. Width and height size the innermost one."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "The box model"
       },
@@ -7176,67 +2613,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s14",
           "title": "CSS Outline quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s14-q1",
-              "type": "multiple-choice",
-              "prompt": "Where is an outline drawn?",
-              "options": [
-                "Inside the padding, between the content and the border",
-                "Outside the border edge",
-                "In the margin, replacing the margin",
-                "As a shadow one pixel outside the border"
-              ],
-              "answer": 1,
-              "explanation": "An outline is painted outside the border edge, further from the content than the border itself, and it is never part of the box model."
-            },
-            {
-              "id": "quiz-css-s14-q2",
-              "type": "true-false",
-              "prompt": "Adding a wide outline to an element makes its neighbours move.",
-              "answer": false,
-              "explanation": "Outlines take up no space in the layout. Nothing reflows, no sibling shifts, and the parent height is unchanged, which is exactly why outlines are safe for focus rings."
-            },
-            {
-              "id": "quiz-css-s14-q3",
-              "type": "code-output",
-              "prompt": "What does this produce?",
-              "code": ".card {\n  border: 1px solid #111;\n  outline: 3px solid #29e2bd;\n  outline-offset: 5px;\n}",
-              "options": [
-                "A 3px teal border with a 5px inset gap",
-                "A 5px teal border with a 3px outline",
-                "A 3px teal outline 5px away from the border",
-                "Nothing visible, because an outline and a border cannot be used together"
-              ],
-              "answer": 2,
-              "explanation": "The `outline` shorthand takes width, style and colour, and `outline-offset` pushes the whole outline 5px further out, leaving a gap between it and the border."
-            },
-            {
-              "id": "quiz-css-s14-q4",
-              "type": "blank",
-              "prompt": "What property sets the gap between an element's border and its outline? Give the property name.",
-              "answers": [
-                "outline-offset",
-                "outlineoffset",
-                "outline offset"
-              ],
-              "explanation": "`outline-offset` takes a length. Positive values push the outline outward, negative values pull it inward over the element."
-            },
-            {
-              "id": "quiz-css-s14-q5",
-              "type": "identify-error",
-              "prompt": "A stylesheet contains `button:focus { outline: none; }` and nothing else. What is wrong with it?",
-              "code": "button:focus {\n  outline: none;\n}",
-              "options": [
-                "`outline: none` is not a valid value",
-                "Nothing, because the default ring can be safely removed",
-                "The focus ring is gone and nothing replaces it, so keyboard users cannot see where they are",
-                "It should have been written `outline: 0` to be valid"
-              ],
-              "answer": 2,
-              "explanation": "Removing a focus outline is only acceptable if a `:focus-visible` rule puts a visible ring back. `outline: none` and `outline: 0` are equivalent, and both delete the only focus cue the browser was providing."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Text and outlines"
       },
@@ -7328,65 +2705,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s15",
           "title": "CSS Text quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s15-q1",
-              "type": "multiple-choice",
-              "prompt": "Why does `text-align: center` appear to do nothing on a full-width paragraph?",
-              "options": [
-                "`text-align` only works on inline elements",
-                "The paragraph already fills its container, so there is no leftover space to centre within",
-                "Centring requires `display: flex`",
-                "The browser ignores it below 400px"
-              ],
-              "answer": 1,
-              "explanation": "A block element is as wide as its container by default, so every line already reaches both edges. You need a `width` or `max-width` on the block first — centre the block with margin, then align the text inside it."
-            },
-            {
-              "id": "quiz-css-s15-q2",
-              "type": "true-false",
-              "prompt": "`text-transform: uppercase` changes the actual characters stored in the DOM.",
-              "answer": false,
-              "explanation": "It is visual only. The DOM keeps the original string, which is why screen readers, search and anything copying the text get the original casing."
-            },
-            {
-              "id": "quiz-css-s15-q3",
-              "type": "code-output",
-              "prompt": "What does this rule produce?",
-              "code": ".notice {\n  text-decoration-line: underline;\n  text-decoration-thickness: 4px;\n  text-underline-offset: 3px;\n}",
-              "options": [
-                "A 4px underline sitting 3px below the text",
-                "A 3px underline sitting 4px below the text",
-                "A 4px underline offset 3px in from the text",
-                "Nothing — a decoration needs a style keyword"
-              ],
-              "answer": 0,
-              "explanation": "`text-decoration-thickness` is the line thickness and `text-underline-offset` is the gap between the line and the text: 4px and 3px respectively."
-            },
-            {
-              "id": "quiz-css-s15-q4",
-              "type": "blank",
-              "prompt": "Complete the sentence: `line-height` should usually be written without a unit so it stays proportional when the ________ changes.",
-              "answers": [
-                "font size",
-                "font-size"
-              ],
-              "explanation": "A unitless value is a multiplier of the element's own font size, so `1.6` stays a 1.6-to-1 ratio no matter how large or small the text becomes."
-            },
-            {
-              "id": "quiz-css-s15-q5",
-              "type": "multiple-choice",
-              "prompt": "When is `filter: drop-shadow()` the better choice over `text-shadow`?",
-              "options": [
-                "When the text needs a soft blur",
-                "When the shadow must follow the shape of the whole element rather than the glyphs",
-                "When the shadow should sit inside the border box",
-                "When you want to stack several shadows"
-              ],
-              "answer": 1,
-              "explanation": "`text-shadow` is derived from text geometry and can only follow the glyphs. A filter applies to the entire rendered element, so it also follows avatars, badges and transparent images."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Text and outlines"
       },
@@ -7512,69 +2831,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s16",
           "title": "CSS Fonts quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s16-q1",
-              "type": "multiple-choice",
-              "prompt": "What is the last entry in a well-formed `font-family` stack?",
-              "options": [
-                "The most fashionable family available",
-                "A generic family like `serif` or `sans-serif`",
-                "The family the designer preferred",
-                "Nothing — the stack may end anywhere"
-              ],
-              "answer": 1,
-              "explanation": "A generic family is the one entry that cannot fail, because every browser ships one. It guarantees readable text no matter what is missing."
-            },
-            {
-              "id": "quiz-css-s16-q2",
-              "type": "identify-error",
-              "prompt": "Why does this rule not produce the font you intended?",
-              "code": ".brand {\n  font-family: Trebuchet MS, sans-serif;\n}",
-              "options": [
-                "`font-family` cannot be set on a class",
-                "The family name with a space must be quoted",
-                "`sans-serif` is not a valid family",
-                "The comma is not allowed"
-              ],
-              "answer": 1,
-              "explanation": "Without quotes the browser reads `Trebuchet` and `MS` as two separate families. Write `\"Trebuchet MS\", sans-serif`."
-            },
-            {
-              "id": "quiz-css-s16-q3",
-              "type": "multiple-choice",
-              "prompt": "Which unit is safest for body text, and why?",
-              "options": [
-                "`px`, because it is precise",
-                "`pt`, because it is the print standard",
-                "`rem`, because it follows the reader's font-size preference and never compounds",
-                "`vw`, because it fits the screen"
-              ],
-              "answer": 2,
-              "explanation": "`rem` scales with the root font size so browser zoom preferences are honoured, and measuring from the root means nested sizes do not multiply."
-            },
-            {
-              "id": "quiz-css-s16-q4",
-              "type": "true-false",
-              "prompt": "A `font` shorthand only sets the properties you write into it.",
-              "answer": false,
-              "explanation": "It resets every font longhand to its initial value, including `font-size-adjust`, `font-weight` and `font-style`, whether or not you mention them."
-            },
-            {
-              "id": "quiz-css-s16-q5",
-              "type": "code-output",
-              "prompt": "What does this set?",
-              "code": ".lede {\n  font: italic 700 1.5rem/1.3 Georgia, serif;\n}",
-              "options": [
-                "Italic, bold, 24px, 1.3 line height, Georgia or a serif fallback",
-                "Italic, bold, 24px, Georgia only — line height is not part of `font`",
-                "Only italic and the family; the rest is ignored",
-                "Nothing — `font` requires every slot to be filled"
-              ],
-              "answer": 0,
-              "explanation": "`1.5rem` is 24px at a 16px root, and the value after the slash sets line height. Every slot in the shorthand is optional except size and family."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Typography, lists and links"
       },
@@ -7602,64 +2859,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s17",
           "title": "CSS Icons quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s17-q1",
-              "type": "multiple-choice",
-              "prompt": "Which attribute makes an SVG scalable with CSS `width` and `height`?",
-              "options": [
-                "`class`",
-                "`viewBox`",
-                "`fill`",
-                "`href`"
-              ],
-              "answer": 1,
-              "explanation": "`viewBox` declares the coordinate system the artwork was drawn in, so the browser can map it onto any size you set. Without it, CSS sizing clips the icon instead of scaling it."
-            },
-            {
-              "id": "quiz-css-s17-q2",
-              "type": "multiple-choice",
-              "prompt": "What does `stroke: currentColor` do?",
-              "options": [
-                "Paints the icon a fixed brand colour",
-                "Makes the stroke take the computed value of the `color` property",
-                "Fills the shape with the text colour",
-                "Renders the icon in the browser default colour"
-              ],
-              "answer": 1,
-              "explanation": "`currentColor` resolves to the element's own computed `color`, so the icon follows the surrounding text and any hover or disabled state with no extra rules."
-            },
-            {
-              "id": "quiz-css-s17-q3",
-              "type": "true-false",
-              "prompt": "An icon font is read aloud by screen readers as the letter it contains.",
-              "answer": false,
-              "explanation": "The raw glyph is announced as noise, and many icon fonts ship private-use characters with no pronunciation at all. Always pair the font with `aria-hidden=\"true\"` and a real text label."
-            },
-            {
-              "id": "quiz-css-s17-q4",
-              "type": "identify-error",
-              "prompt": "Why does this icon stay the default colour when the link turns red on hover?",
-              "code": "a {\n  color: red;\n}\n\na .icon {\n  stroke: #29e2bd;\n  width: 20px;\n  height: 20px;\n}",
-              "options": [
-                "`stroke` cannot be set on an SVG",
-                "The colour is hard-coded in CSS, so it cannot follow `color`",
-                "`width` and `height` are wrong",
-                "The rule needs `!important`"
-              ],
-              "answer": 1,
-              "explanation": "A literal `#29e2bd` is fixed. Writing `stroke: currentColor` instead makes the stroke resolve from `color`, so it follows the link automatically."
-            },
-            {
-              "id": "quiz-css-s17-q5",
-              "type": "blank",
-              "prompt": "Which SVG element contains one icon shape inside the document itself?",
-              "answers": [
-                "svg"
-              ],
-              "explanation": "An inline `<svg>` element with its own `viewBox` and path markup needs no external request, which is why it renders instantly and never flashes."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Typography, lists and links"
       },
@@ -7687,66 +2887,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s18",
           "title": "CSS Links quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s18-q1",
-              "type": "multiple-choice",
-              "prompt": "Why must the `:visited` rule come after `:link` and `:hover`?",
-              "options": [
-                "Because `:visited` only works on anchors with an `href`",
-                "Because they have equal specificity and the later rule wins",
-                "Because `:visited` has higher specificity than everything",
-                "Because browsers ignore `:visited` in the middle of a stylesheet"
-              ],
-              "answer": 1,
-              "explanation": "`a:link`, `a:visited` and `a:hover` all have the same specificity (0,1,1), so the last one in source order applies. Put `:visited` first and it never matches anything."
-            },
-            {
-              "id": "quiz-css-s18-q2",
-              "type": "true-false",
-              "prompt": "You can safely set `a { outline: none; }` as long as the link still changes colour on hover.",
-              "answer": false,
-              "explanation": "A hover style helps mouse users only. A keyboard user needs a focus indicator, and removing the outline without replacing it makes the page unusable by keyboard."
-            },
-            {
-              "id": "quiz-css-s18-q3",
-              "type": "code-output",
-              "prompt": "What does this produce?",
-              "code": "a:focus-visible { outline: 2px dashed #111; }",
-              "options": [
-                "A focus ring on every link, even after a mouse click",
-                "A focus ring only when the browser decides focus should be visible",
-                "A dashed border around every link at all times",
-                "Nothing — `:focus-visible` needs `:hover` first"
-              ],
-              "answer": 1,
-              "explanation": "`:focus-visible` matches only when the user is navigating by keyboard or another non-pointer means, which is exactly why it is the right choice over `:focus`."
-            },
-            {
-              "id": "quiz-css-s18-q4",
-              "type": "multiple-choice",
-              "prompt": "A browser ignores your `:visited` rule. What is the most likely reason?",
-              "options": [
-                "`:visited` is not a real pseudo-class",
-                "You wrote it after `a:link` so it is fine — check the selector instead",
-                "You changed `color` to a value the browser will not allow on visited links",
-                "The rule needs `!important`"
-              ],
-              "answer": 2,
-              "explanation": "For privacy, browsers only permit a limited set of `:visited` colour changes. A colour the user never saw on an unvisited link is silently discarded."
-            },
-            {
-              "id": "quiz-css-s18-q5",
-              "type": "blank",
-              "prompt": "Complete the sentence: colour alone must never be the only signal that a link is a link, which is why the ________ is the browser default.",
-              "answers": [
-                "underline",
-                "underlining",
-                "text underline"
-              ],
-              "explanation": "The underline works regardless of colour perception. Removing it means providing another affordance — a thicker underline, a background, or a border."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Typography, lists and links"
       },
@@ -7774,67 +2915,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s19",
           "title": "CSS Lists quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s19-q1",
-              "type": "multiple-choice",
-              "prompt": "What does `list-style-position: outside` do to wrapped text?",
-              "options": [
-                "The marker hangs in the margin, so wrapped lines align with the item content",
-                "The marker moves inside, so wrapped lines start under the bullet",
-                "The wrapped text is hidden",
-                "The marker repeats on every line"
-              ],
-              "answer": 0,
-              "explanation": "`outside` is the default. The marker is placed outside the principal box, which is why a long item wraps to a clean edge aligned with the text."
-            },
-            {
-              "id": "quiz-css-s19-q2",
-              "type": "true-false",
-              "prompt": "Setting `list-style: none` on a navigation list is always fine, because the links are still focusable.",
-              "answer": false,
-              "explanation": "Some screen readers stop announcing list structure once `list-style: none` is applied. Keep the semantics by adding `role=\"list\"`, or by wrapping the links in a `<nav>` with an accessible name."
-            },
-            {
-              "id": "quiz-css-s19-q3",
-              "type": "code-output",
-              "prompt": "What marker does this produce?",
-              "code": "ul { list-style: square url(missing.png) inside; }",
-              "options": [
-                "A green square image",
-                "A square bullet, positioned inside",
-                "No marker at all",
-                "A numbered list inside the items"
-              ],
-              "answer": 1,
-              "explanation": "`list-style` takes type, image and position. When the image fails to load, the marker falls back to `none` for the image part only, so the `square` type still applies."
-            },
-            {
-              "id": "quiz-css-s19-q4",
-              "type": "identify-error",
-              "prompt": "This rule is meant to push the bullet further left. What is wrong with it?",
-              "code": "li::marker { position: absolute; left: -20px; }",
-              "options": [
-                "The pseudo-element is misspelled",
-                "Layout properties such as position and left do not apply to a marker box",
-                "The selector must be `li > ::marker`",
-                "Marker styling must go in a media query"
-              ],
-              "answer": 1,
-              "explanation": "`::marker` accepts only colour, font, content and text properties. Layout properties are ignored, which is why a bullet cannot be positioned with CSS."
-            },
-            {
-              "id": "quiz-css-s19-q5",
-              "type": "blank",
-              "prompt": "Complete the sentence: `list-style-type: none` is legitimate when the list is used purely for ________ and the bullets carried no meaning.",
-              "answers": [
-                "layout",
-                "layout purposes",
-                "layout only"
-              ],
-              "explanation": "Using a `<ul>` as a layout device is fine — the semantics were never the point. Removing bullets from a real content or navigation list is the risky case."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Typography, lists and links"
       },
@@ -7918,64 +2999,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s20",
           "title": "CSS Tables quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s20-q1",
-              "type": "multiple-choice",
-              "prompt": "Why does a shared border between two adjacent cells look twice as wide under `border-collapse: separate`?",
-              "options": [
-                "Because `separate` adds `border-spacing` to the border itself",
-                "Because each cell keeps its own border and neither one is shared",
-                "Because the browser doubles every border in separate mode",
-                "Because `border-width` is interpreted as a total across both cells"
-              ],
-              "answer": 1,
-              "explanation": "In `separate` mode each cell draws its own border to its own edge, so the two borders sit side by side. In `collapse` mode they merge into one shared border drawn half by each cell, which is why a `1px` border looks like `1px`."
-            },
-            {
-              "id": "quiz-css-s20-q2",
-              "type": "true-false",
-              "prompt": "Setting `border-spacing` on a table with `border-collapse: collapse` changes the gap between its cells.",
-              "answer": false,
-              "explanation": "`border-spacing` only applies in `separate` mode. In `collapse` mode the gap between cells is produced by the cells' own padding and by the shared borders."
-            },
-            {
-              "id": "quiz-css-s20-q3",
-              "type": "multiple-choice",
-              "prompt": "Your zebra striping rule `tr:nth-child(even) { background: #eee; }` produces nothing. What is the most likely cause?",
-              "options": [
-                "`:nth-child` only works on elements that are direct children of `body`",
-                "The `tr` elements have no background because a `td` rule sets its own background",
-                "`background` is not allowed on table rows in any browser",
-                "The selector needs `tbody` as a prefix to match"
-              ],
-              "answer": 1,
-              "explanation": "A cell with its own background paints on top of its row, hiding the stripe entirely. Stripe the cells instead (`tr:nth-child(even) td`), or clear the cell background to `transparent`."
-            },
-            {
-              "id": "quiz-css-s20-q4",
-              "type": "blank",
-              "prompt": "Which single property on the table decides whether adjacent borders merge into one line or stay separate?",
-              "answers": [
-                "border-collapse",
-                "border-collapse: collapse"
-              ],
-              "explanation": "`border-collapse: collapse` (the default) merges shared edges into one border. `separate` keeps each cell's border to itself, so shared edges appear twice as wide, and `border-spacing` then applies."
-            },
-            {
-              "id": "quiz-css-s20-q5",
-              "type": "multiple-choice",
-              "prompt": "A wide table breaks the layout on a phone. Which fix is the safest general answer?",
-              "options": [
-                "Add `width: 100%` to the table so it always fits",
-                "Set `font-size: 8px` on the table so more columns fit",
-                "Wrap it in a container with `max-width: 100%` and `overflow-x: auto`, and give the table a `min-width`",
-                "Add `display: block` to every `td` unconditionally at all widths"
-              ],
-              "answer": 2,
-              "explanation": "A `width: 100%` table has no minimum, so its columns collapse into unreadable slivers rather than staying legible. Scrolling a capped wrapper and giving the table a `min-width` floor keeps the data readable and keeps the page itself from scrolling sideways."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Tables, display and flow"
       },
@@ -8003,66 +3027,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s21",
           "title": "CSS Display quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s21-q1",
-              "type": "multiple-choice",
-              "prompt": "You set `width: 300px` and `padding: 20px` on a `<span>` and neither has any effect. What is the most likely cause?",
-              "options": [
-                "The span is missing a `position` value",
-                "The span is `display: inline`, so it has no block box for width or vertical padding to apply to",
-                "`width` only works on elements inside a flex container",
-                "The padding is being overridden by a `box-sizing` rule"
-              ],
-              "answer": 1,
-              "explanation": "An inline box has no separate block box, so `width` and `height` cannot apply, and top/bottom padding renders but does not affect layout. `display: inline-block` gives the span a real box and makes every box model property work."
-            },
-            {
-              "id": "quiz-css-s21-q2",
-              "type": "true-false",
-              "prompt": "A `display: none` element is still announced by screen readers, because it stays in the HTML.",
-              "answer": false,
-              "explanation": "`display: none` removes the element from the accessibility tree as well as the layout. It cannot be focused either. It stays in the DOM for scripts and CSS to find, but nothing a user can perceive reaches it."
-            },
-            {
-              "id": "quiz-css-s21-q3",
-              "type": "blank",
-              "prompt": "Which `display` value makes a parent lay its direct children out in a row, and blockifies those children in the process?",
-              "answers": [
-                "flex",
-                "display: flex"
-              ],
-              "explanation": "`display: flex` establishes a flex formatting context. Its direct children become flex items, which are laid out as block boxes, so `float` on them is ignored and their margins stop collapsing with anything."
-            },
-            {
-              "id": "quiz-css-s21-q4",
-              "type": "identify-error",
-              "prompt": "Why does this row develop an unexplained few-pixel gap between the two boxes?",
-              "code": ".row {\n  display: block;\n}\n.card {\n  display: inline-block;\n  width: 200px;\n}\n\n<div class=\"row\">\n  <div class=\"card\">One</div>\n  <div class=\"card\">Two</div>\n</div>",
-              "options": [
-                "Because `display: block` on the parent forces each child onto its own line",
-                "Because the newline and indentation between the two `div` elements count as a whitespace text node, which renders as a space in an inline formatting context",
-                "Because `width: 200px` on an inline-block is invalid and is being discarded",
-                "Because the parent has no `font-size` and inherits a fallback that adds spacing"
-              ],
-              "answer": 1,
-              "explanation": "Inside a block container, inline-level children flow as one inline run, and any whitespace text node between them collapses to a single space that is rendered. That is the gap. `display: flex` on the parent with `gap` removes the problem entirely, because flex items are not part of an inline run and whitespace between them is ignored."
-            },
-            {
-              "id": "quiz-css-s21-q5",
-              "type": "code-output",
-              "prompt": "What happens to the vertical spacing between the two items below?",
-              "code": ".list {\n  display: flex;\n  flex-direction: column;\n}\n.item {\n  margin-bottom: 20px;\n}",
-              "options": [
-                "The two margins collapse and the gap is 20px",
-                "The gap is 20px, because flex items never collapse their margins",
-                "The gap is 40px, because both margins are added",
-                "The items overlap, because margins do not apply to flex items"
-              ],
-              "answer": 1,
-              "explanation": "Margins between flex items do not collapse. Each item keeps its own `margin-bottom`, so the space between the first and second item is 20px, exactly as written. In a normal block flow the same two margins would collapse to the larger of the two."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Tables, display and flow"
       },
@@ -8090,65 +3055,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s22",
           "title": "CSS Max-width quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s22-q1",
-              "type": "multiple-choice",
-              "prompt": "What is the practical difference between `width: 300px` and `max-width: 300px` on a block element?",
-              "options": [
-                "There is none; both produce 300px when the parent is wider",
-                "`width` fixes the box at 300px and can overflow a narrower parent, while `max-width` only forbids going above 300px and still shrinks to fit",
-                "`max-width` is ignored by browsers that support `box-sizing: border-box`",
-                "`width` includes padding, `max-width` does not"
-              ],
-              "answer": 1,
-              "explanation": "`width` asks for an exact size. `max-width` only caps the size, so the element uses the smaller of the width and the cap and then still shrinks if the parent is narrower. That is why a `max-width` can never be the cause of an overflow."
-            },
-            {
-              "id": "quiz-css-s22-q2",
-              "type": "true-false",
-              "prompt": "An element with `min-width: 400px` and `max-width: 200px` renders at 200px, because the cap is applied last.",
-              "answer": false,
-              "explanation": "The `min-width` floor is enforced on the result, so when the two conflict the floor wins and the element renders at 400px. The limits are arithmetic bounds on the used width, not a priority list where the cap always wins."
-            },
-            {
-              "id": "quiz-css-s22-q3",
-              "type": "blank",
-              "prompt": "Which intrinsic sizing keyword resolves to the width the content would take if nothing wrapped at all?",
-              "answers": [
-                "max-content",
-                "max-content()"
-              ],
-              "explanation": "`max-content` is the full unwrapped length of the content. `min-content` is the width of the longest unbreakable word, and `fit-content()` sits between them, capped by whatever length you pass it."
-            },
-            {
-              "id": "quiz-css-s22-q4",
-              "type": "identify-error",
-              "prompt": "This \"responsive\" panel overflows its parent on a narrow screen. What is the mistake?",
-              "code": ".panel {\n  width: 100%;\n  padding: 1.5rem;\n}\n",
-              "options": [
-                "`width: 100%` should be `max-width: 100%`",
-                "The default `box-sizing: content-box` means the 1.5rem padding is added on top of the 100% width",
-                "`width` cannot be used on a block element",
-                "`padding` must come before `width` in the declaration block"
-              ],
-              "answer": 1,
-              "explanation": "With `box-sizing: content-box`, `width: 100%` sizes the content box, so 1.5rem of padding on each side is added outside that and the panel ends up 3rem wider than its parent. Either use `box-sizing: border-box` or swap `width: 100%` for `max-width: 100%`."
-            },
-            {
-              "id": "quiz-css-s22-q5",
-              "type": "multiple-choice",
-              "prompt": "A container has `max-width: 300px` and `min-width: 400px`. How wide does it actually render?",
-              "options": [
-                "300px, because max-width is the outer limit",
-                "400px, because the min-width floor overrides the cap",
-                "300px on narrow screens and 400px on wide ones",
-                "The declaration is invalid and the element falls back to auto width"
-              ],
-              "answer": 1,
-              "explanation": "The two limits are not a negotiation. The used width is fitted into the range they define, and when the minimum sits above the maximum the minimum wins, so the element renders at 400px. The combination is legal - it just does not do anything except guarantee 400px."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Tables, display and flow"
       },
@@ -8176,65 +3083,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s23",
           "title": "CSS Position quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s23-q1",
-              "type": "multiple-choice",
-              "prompt": "What is the difference in layout effect between `position: relative` and `position: absolute` on the same element?",
-              "options": [
-                "None; both move the element by the same amount",
-                "Relative stays in the flow and keeps its space, absolute leaves the flow and its space is reclaimed",
-                "Relative can only be moved horizontally, absolute can be moved on both axes",
-                "Absolute removes the element from the document, relative keeps it in the DOM only"
-              ],
-              "answer": 1,
-              "explanation": "A relative element reserves its original slot and is only displaced visually, so siblings do not move. An absolute element is out of flow, so nothing reserves its space and following siblings close up behind it. Both stay in the DOM - that is not what separates them."
-            },
-            {
-              "id": "quiz-css-s23-q2",
-              "type": "true-false",
-              "prompt": "An absolutely positioned element with no positioned ancestor is positioned against the viewport.",
-              "answer": false,
-              "explanation": "With no positioned ancestor it falls back to the initial containing block, which is the viewport-sized block at the top of the document, not the visible viewport. That is why such an element scrolls away with the page, while a `fixed` element does not."
-            },
-            {
-              "id": "quiz-css-s23-q3",
-              "type": "blank",
-              "prompt": "Which `position` value is positioned against the nearest scrolling ancestor and is bounded by its own parent?",
-              "answers": [
-                "sticky",
-                "position: sticky"
-              ],
-              "explanation": "`sticky` stays in the flow until its offset would be crossed, then pins inside its scroll container. Because it is bounded by its parent, it can never escape its own section, which is the main reason to prefer it over `fixed` for in-page headers."
-            },
-            {
-              "id": "quiz-css-s23-q4",
-              "type": "identify-error",
-              "prompt": "This header was meant to stay pinned at the top of the window while the page scrolls. Why does it not work?",
-              "code": ".card {\n  transition: transform 200ms;\n}\n.fixed-header {\n  position: fixed;\n  top: 0;\n}\n\n<div class=\"card\">\n  <div class=\"fixed-header\">Menu</div>\n  <p>Page content</p>\n</div>",
-              "options": [
-                "`top: 0` is not a valid offset for a fixed element",
-                "`position: fixed` cannot be combined with a parent that has padding",
-                "The `transform` on the ancestor makes it the containing block for the fixed element, so it scrolls with the page",
-                "Fixed elements need `z-index` to stay visible"
-              ],
-              "answer": 2,
-              "explanation": "A non-`none` `transform` on an ancestor establishes a containing block for `position: fixed` descendants. The header is then positioned and scrolled relative to that card instead of the viewport. `filter`, `perspective`, `backdrop-filter` and `will-change: transform` have the same effect."
-            },
-            {
-              "id": "quiz-css-s23-q5",
-              "type": "multiple-choice",
-              "prompt": "Your `position: sticky; top: 0` table header does not stick. What should you check first?",
-              "options": [
-                "Whether the sticky element has a `z-index`",
-                "Whether an ancestor between it and the page has `overflow` set to anything other than visible, which makes that ancestor the scroll container",
-                "Whether the sticky element is `display: inline`",
-                "Whether the page has a `<meta name=\"viewport\">` tag"
-              ],
-              "answer": 1,
-              "explanation": "Sticky is positioned against its nearest scrolling ancestor, and any overflow other than `visible` creates one, even if it never actually scrolls. If such a wrapper sits between the header and the document scroller, the header pins to that wrapper instead and appears not to work."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Tables, display and flow"
       },
@@ -8262,65 +3111,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s24",
           "title": "CSS Overflow quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s24-q1",
-              "type": "multiple-choice",
-              "prompt": "What is the practical difference between `overflow: auto` and `overflow: scroll`?",
-              "options": [
-                "None; both clip the content identically",
-                "Both create a scroll container, but `scroll` always reserves the scrollbar track while `auto` only shows it when there is something to scroll to",
-                "`auto` also clips the overflowing content, `scroll` lets it spill",
-                "`scroll` only works on the vertical axis, `auto` on both"
-              ],
-              "answer": 1,
-              "explanation": "Both make the box a scroll container. The difference is purely the scrollbar track: `auto` shows it on demand, `scroll` reserves it permanently. Use `scroll` when the content grows and shrinks and you do not want the layout to jump."
-            },
-            {
-              "id": "quiz-css-s24-q2",
-              "type": "true-false",
-              "prompt": "Content that is clipped by `overflow: hidden` can still be reached by tabbing to it and letting the browser scroll it into view.",
-              "answer": false,
-              "explanation": "A clipping container is not scrollable, so there is nowhere for the browser to scroll to. Anything clipped is unreachable: not focusable, not scrollable into view, not selectable, and not in the accessibility tree. That is the accessibility cost of `hidden`, and it is why truncating text needs a `title` or an expand control."
-            },
-            {
-              "id": "quiz-css-s24-q3",
-              "type": "blank",
-              "prompt": "Which property adds the three-dot truncation to text that is clipped on a single line?",
-              "answers": [
-                "text-overflow",
-                "text-overflow: ellipsis"
-              ],
-              "explanation": "`text-overflow: ellipsis` draws the ellipsis, but it only works alongside a constrained width, `white-space: nowrap` and `overflow: hidden`. On its own it does nothing, which is the most common reason it appears not to work."
-            },
-            {
-              "id": "quiz-css-s24-q4",
-              "type": "identify-error",
-              "prompt": "The developer expected a horizontal scrollbar. Why is there not one?",
-              "code": ".wrap {\n  width: 300px;\n  overflow-x: hidden;\n  overflow-y: visible;\n}",
-              "options": [
-                "`overflow-y: visible` is not a valid value",
-                "`overflow-x` must be declared before `overflow-y` in the block",
-                "Because once one axis is a scroll container, the `visible` axis is computed to `auto`, but `hidden` on x still clips instead of scrolling",
-                "Because `width` must be set with `max-width` for scrolling to work"
-              ],
-              "answer": 2,
-              "explanation": "The two axes are not fully independent: when one is set to a value other than `visible`, the other is computed to `auto` if it was left at `visible`, so the box remains a usable scroll container. Here `overflow-x: hidden` is the load-bearing value and it clips rather than scrolls, so no scrollbar appears. Use `overflow-x: auto` to get one."
-            },
-            {
-              "id": "quiz-css-s24-q5",
-              "type": "multiple-choice",
-              "prompt": "A long unbroken URL is forcing your whole page to scroll sideways. What is the least invasive fix?",
-              "options": [
-                "Add `overflow: hidden` to the container, so the URL is clipped",
-                "Add `overflow-wrap: break-word` (or `word-break: break-word`) so the URL can wrap",
-                "Reduce the page font size until the URL fits",
-                "Add `overflow: scroll` to `body` so the sideways scroll is at least intentional"
-              ],
-              "answer": 1,
-              "explanation": "The URL is one unbreakable token, so it has a minimum width larger than its column. Letting it wrap at arbitrary points fixes the cause. `overflow: hidden` would hide part of the URL, which is a data loss problem, not a layout fix."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Tables, display and flow"
       },
@@ -8376,64 +3167,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s25",
           "title": "CSS Float quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s25-q1",
-              "type": "multiple-choice",
-              "prompt": "What does `float` do to an element?",
-              "options": [
-                "Gives it a higher z-index than its siblings",
-                "Removes it from the normal flow and pushes it to one side",
-                "Makes it scroll horizontally when it overflows",
-                "Converts it into a table cell"
-              ],
-              "answer": 1,
-              "explanation": "A float is taken out of normal flow and placed at an edge of its container, so other content flows around it."
-            },
-            {
-              "id": "quiz-css-s25-q2",
-              "type": "true-false",
-              "prompt": "A floated element adds its height to the height of its parent.",
-              "answer": false,
-              "explanation": "It does not. That is why a parent containing only floated children collapses to zero height until something clears."
-            },
-            {
-              "id": "quiz-css-s25-q3",
-              "type": "code-output",
-              "prompt": "What does this set?",
-              "code": ".p { float: left; width: 100px; }",
-              "options": [
-                "The paragraph is centred",
-                "The paragraph floats left and following text wraps down its right side",
-                "The paragraph becomes a 100px wide block",
-                "Nothing, floats only work on images"
-              ],
-              "answer": 1,
-              "explanation": "The width applies and the element is floated left, so following text wraps beside it."
-            },
-            {
-              "id": "quiz-css-s25-q4",
-              "type": "blank",
-              "prompt": "Complete the clearfix: set `.parent::after` to `content: \"\"`, `display: block` and `clear: ________`.",
-              "answers": [
-                "both"
-              ],
-              "explanation": "`clear: both` moves the generated element below floats on both sides, which gives the parent its height back."
-            },
-            {
-              "id": "quiz-css-s25-q5",
-              "type": "multiple-choice",
-              "prompt": "A parent box has collapsed to zero height around a floated child. What fixes it?",
-              "options": [
-                "Adding `overflow: hidden` to the parent",
-                "Setting `position: relative` on the float",
-                "Clearing the float, or making the parent a flex or grid container",
-                "Adding a fixed height in pixels to the parent"
-              ],
-              "answer": 2,
-              "explanation": "Clearing the float restores the height. Flex and grid containers size themselves to their content, so they avoid the problem entirely."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Tables, display and flow"
       },
@@ -8461,65 +3195,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s26",
           "title": "CSS Inline-block quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s26-q1",
-              "type": "multiple-choice",
-              "prompt": "Which behaviours does `inline-block` combine?",
-              "options": [
-                "It floats left by default, like `float: left`",
-                "It flows inline like `inline`, and accepts width and height like `block`",
-                "It becomes invisible to screen readers",
-                "It positions absolutely inside its parent"
-              ],
-              "answer": 1,
-              "explanation": "It keeps the inline flow behaviour while honouring the box dimensions a block-level box can take."
-            },
-            {
-              "id": "quiz-css-s26-q2",
-              "type": "true-false",
-              "prompt": "Setting `width` and `height` on an element with `display: inline` changes its size.",
-              "answer": false,
-              "explanation": "Inline boxes ignore both properties. Switching to `inline-block` makes them apply."
-            },
-            {
-              "id": "quiz-css-s26-q3",
-              "type": "code-output",
-              "prompt": "Three inline-block boxes written on separate lines. What do you see?",
-              "code": "<span class=\"x\">A</span>\n<span class=\"x\">B</span>\n<span class=\"x\">C</span>",
-              "options": [
-                "Three boxes stacked vertically",
-                "Three boxes side by side with a small whitespace gap between each",
-                "One box containing the other two",
-                "The boxes overlapping"
-              ],
-              "answer": 1,
-              "explanation": "The newlines between the tags collapse into a real space between the inline-block boxes."
-            },
-            {
-              "id": "quiz-css-s26-q4",
-              "type": "blank",
-              "prompt": "Fill in the gap: `vertical-align` works on `inline` and `inline-block` elements and on table cells, but never on a ________ block.",
-              "answers": [
-                "normal",
-                "block-level"
-              ],
-              "explanation": "A normal block-level element has no baseline to align against, so `vertical-align` does nothing to it."
-            },
-            {
-              "id": "quiz-css-s26-q5",
-              "type": "multiple-choice",
-              "prompt": "You want a row of boxes with no whitespace gap between them. Best modern fix?",
-              "options": [
-                "Add `letter-spacing: -4px` to the boxes",
-                "Put the tags on one line with no space between them",
-                "Make the parent `display: flex`",
-                "Set `white-space: normal` on the parent"
-              ],
-              "answer": 2,
-              "explanation": "A flex container ignores whitespace between its children entirely, and it also gives you alignment and wrapping control."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Tables, display and flow"
       },
@@ -8547,64 +3223,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s27",
           "title": "CSS Align quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s27-q1",
-              "type": "multiple-choice",
-              "prompt": "How do you horizontally centre a text paragraph inside its container?",
-              "options": [
-                "`margin: 0 auto` on the paragraph",
-                "`text-align: center` on the paragraph or its parent",
-                "`vertical-align: middle` on the paragraph",
-                "`float: center` on the paragraph"
-              ],
-              "answer": 1,
-              "explanation": "`text-align` handles inline content including text. `margin: 0 auto` centres the block box itself, not the text inside it."
-            },
-            {
-              "id": "quiz-css-s27-q2",
-              "type": "true-false",
-              "prompt": "`vertical-align: middle` will vertically centre an ordinary block-level `div` that has no text around it.",
-              "answer": false,
-              "explanation": "`vertical-align` only aligns against a baseline, which exists for inline-level and table-cell content. On a plain block it does nothing."
-            },
-            {
-              "id": "quiz-css-s27-q3",
-              "type": "code-output",
-              "prompt": "What does this do?",
-              "code": ".box {\n  width: 300px;\n  margin: 0 auto;\n}",
-              "options": [
-                "Centres the box vertically in its parent",
-                "Centres the box horizontally by dividing the leftover space equally",
-                "Centres the text inside the box",
-                "Makes the box absolutely positioned and centred"
-              ],
-              "answer": 1,
-              "explanation": "Auto left and right margins split the remaining horizontal space evenly. Vertical auto margins resolve to zero."
-            },
-            {
-              "id": "quiz-css-s27-q4",
-              "type": "blank",
-              "prompt": "Name the flexbox property that centres an item along the main axis: `________`.",
-              "answers": [
-                "justify-content"
-              ],
-              "explanation": "`justify-content` works along the main axis and `align-items` along the cross axis. On a row container that is horizontal and vertical respectively."
-            },
-            {
-              "id": "quiz-css-s27-q5",
-              "type": "multiple-choice",
-              "prompt": "Which of these does `vertical-align` apply to?",
-              "options": [
-                "Any element with a `height` set",
-                "Only absolutely positioned elements",
-                "Inline-level elements, table cells, and flex or grid items",
-                "Block-level elements with a fixed height"
-              ],
-              "answer": 2,
-              "explanation": "It aligns against a baseline or the cell box, so it needs inline-level, table-cell, flex or grid context to have any effect."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Tables, display and flow"
       },
@@ -8632,65 +3251,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s28",
           "title": "CSS Combinators quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s28-q1",
-              "type": "multiple-choice",
-              "prompt": "Which selector matches only the direct children of `.panel`?",
-              "options": [
-                "`.panel p`",
-                "`.panel > p`",
-                "`.panel + p`",
-                "`.panel ~ p`"
-              ],
-              "answer": 1,
-              "explanation": "The child combinator `>` stops after one level, so anything nested deeper inside another element does not match."
-            },
-            {
-              "id": "quiz-css-s28-q2",
-              "type": "true-false",
-              "prompt": "The general sibling combinator `~` can match an element that appears before its sibling.",
-              "answer": false,
-              "explanation": "Both `+` and `~` only look forwards from the earlier sibling. CSS has no backwards sibling selector."
-            },
-            {
-              "id": "quiz-css-s28-q3",
-              "type": "code-output",
-              "prompt": "What does this rule do?",
-              "code": ".card:has(.badge) { border-color: red; }",
-              "options": [
-                "Every `.card` gets a red border",
-                "Every `.badge` gets a red border",
-                "Only `.card` elements containing a `.badge` get a red border",
-                "Nothing, `:has()` is not real CSS"
-              ],
-              "answer": 2,
-              "explanation": "`:has()` matches an element based on its descendants, which is the one thing no other combinator can do."
-            },
-            {
-              "id": "quiz-css-s28-q4",
-              "type": "blank",
-              "prompt": "Complete the selector so only the element immediately after `.title` matches: `.title ________ p`",
-              "answers": [
-                "+",
-                "adjacent sibling"
-              ],
-              "explanation": "The adjacent sibling combinator `+` selects the very next element of the matching type."
-            },
-            {
-              "id": "quiz-css-s28-q5",
-              "type": "multiple-choice",
-              "prompt": "Why is `.panel p` slower to match than `.panel > p`?",
-              "options": [
-                "The space character has to be fetched over the network",
-                "Descendant selectors are deprecated",
-                "The browser tests every matching element on the page and then walks up its ancestors",
-                "Child selectors are cached and descendant selectors are not"
-              ],
-              "answer": 2,
-              "explanation": "Matching runs right to left, so a descendant selector considers every `p` in the document and checks each ancestor chain."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Selectors and component patterns"
       },
@@ -8718,65 +3279,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s29",
           "title": "CSS Pseudo-class quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s29-q1",
-              "type": "multiple-choice",
-              "prompt": "Which pseudo-class should draw a focus ring for keyboard users?",
-              "options": [
-                "`:hover`",
-                "`:active`",
-                "`:focus-visible`",
-                "`:first-child`"
-              ],
-              "answer": 2,
-              "explanation": "`:focus-visible` only matches when the browser judges the focus should be visible, which is keyboard and assistive-technology input rather than a mouse click."
-            },
-            {
-              "id": "quiz-css-s29-q2",
-              "type": "true-false",
-              "prompt": "`:nth-child(2n)` selects every second child, starting with the second one.",
-              "answer": true,
-              "explanation": "`2n` counts from 2: 2, 4, 6. Use `2n+1` or `odd` to start from the first child instead."
-            },
-            {
-              "id": "quiz-css-s29-q3",
-              "type": "code-output",
-              "prompt": "What does this rule do?",
-              "code": "button:disabled { opacity: 0.4; cursor: not-allowed; }",
-              "options": [
-                "Fades the button and shows a not-allowed cursor, but the button still submits",
-                "Nothing, `:disabled` only affects cursor styling",
-                "Fades the button, shows a not-allowed cursor, and the browser also stops it responding",
-                "Hides the button"
-              ],
-              "answer": 2,
-              "explanation": "The disabled state is enforced by the browser, not just drawn by CSS. The styling is a second, visual signal on top of behaviour that already works."
-            },
-            {
-              "id": "quiz-css-s29-q4",
-              "type": "blank",
-              "prompt": "Which pseudo-class is used to declare custom properties that every rule on the page can read?",
-              "answers": [
-                ":root",
-                "root"
-              ],
-              "explanation": "`:root` matches the `html` element, the natural home for a design token like `--accent`."
-            },
-            {
-              "id": "quiz-css-s29-q5",
-              "type": "multiple-choice",
-              "prompt": "What does `input:checked + span` rely on?",
-              "options": [
-                "The parent combinator",
-                "The adjacent sibling combinator, because the span comes right after the input",
-                "The `:not()` pseudo-class",
-                "Class specificity"
-              ],
-              "answer": 1,
-              "explanation": "A checkbox has no visible content of its own, so the usual technique is to style the label that sits immediately after it."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Selectors and component patterns"
       },
@@ -8804,66 +3307,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s30",
           "title": "CSS Pseudo-element quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s30-q1",
-              "type": "multiple-choice",
-              "prompt": "Which pseudo-element styles the bullet or number in front of a list item?",
-              "options": [
-                "`::before`",
-                "`::marker`",
-                "`::placeholder`",
-                "`::part`"
-              ],
-              "answer": 1,
-              "explanation": "`::marker` targets the list marker itself. You can change its colour, font and content, but not lay it out as a box."
-            },
-            {
-              "id": "quiz-css-s30-q2",
-              "type": "true-false",
-              "prompt": "Content generated with `::before` is announced by screen readers.",
-              "answer": true,
-              "explanation": "Generated content sits inside the element and is part of the accessibility tree. A purely decorative pseudo-element should use `content: \"\"`."
-            },
-            {
-              "id": "quiz-css-s30-q3",
-              "type": "code-output",
-              "prompt": "What happens with this rule?",
-              "code": ".p::before { color: red; }",
-              "options": [
-                "An empty red box appears before the paragraph",
-                "Nothing renders, because `content` is missing",
-                "The paragraph turns red",
-                "The browser adds the text \"red\" before the paragraph"
-              ],
-              "answer": 1,
-              "explanation": "`content` is not optional on `::before` and `::after`. Without it the pseudo-element is never generated, whatever else you style."
-            },
-            {
-              "id": "quiz-css-s30-q4",
-              "type": "blank",
-              "prompt": "Which pseudo-element styles the grey hint text inside an empty input field?",
-              "answers": [
-                "::placeholder",
-                ":placeholder",
-                "placeholder"
-              ],
-              "explanation": "`::placeholder` matches the placeholder text of an input or textarea, letting you colour it so it recedes behind real content."
-            },
-            {
-              "id": "quiz-css-s30-q5",
-              "type": "multiple-choice",
-              "prompt": "Where does generated content sit in the document?",
-              "options": [
-                "Outside the element, as a sibling of it",
-                "Inside the element, as its first or last child box",
-                "In the document head, where the stylesheet lives",
-                "Wherever the stylesheet declares it"
-              ],
-              "answer": 1,
-              "explanation": "It is a box at the start or end of the element, which is why it inherits the element's font and colour and why it is announced."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Selectors and component patterns"
       },
@@ -8891,65 +3335,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s31",
           "title": "CSS Opacity quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s31-q1",
-              "type": "multiple-choice",
-              "prompt": "What does `opacity: 0.5` on a container do to the text inside it?",
-              "options": [
-                "Nothing, opacity only affects backgrounds",
-                "Fades the text to half strength along with everything else",
-                "Makes the text fully invisible",
-                "Keeps the text at full strength and fades only the border"
-              ],
-              "answer": 1,
-              "explanation": "The container and its children are composited together first and then faded as one image, so the foreground colour dims too."
-            },
-            {
-              "id": "quiz-css-s31-q2",
-              "type": "true-false",
-              "prompt": "Setting `opacity` on an element creates a new stacking context for its descendants.",
-              "answer": true,
-              "explanation": "Any `opacity` below 1 promotes the element out of the normal stacking order, so a child with a large `z-index` can no longer sit above the parent's siblings."
-            },
-            {
-              "id": "quiz-css-s31-q3",
-              "type": "code-output",
-              "prompt": "Which rule fades only the background and leaves the text crisp?",
-              "code": "a { opacity: 0.4 }\nb { background: rgba(0, 0, 0, 0.4) }",
-              "options": [
-                "Both do, because 0.4 means the same thing either way",
-                "Rule a, because opacity always targets the background",
-                "Rule b, because a translucent colour paints under the children",
-                "Neither, backgrounds cannot be made transparent"
-              ],
-              "answer": 2,
-              "explanation": "A translucent background colour is painted as the background layer only. Children are painted afterwards at their normal strength."
-            },
-            {
-              "id": "quiz-css-s31-q4",
-              "type": "blank",
-              "prompt": "Complete the value so the element is fully opaque: `opacity: ____`",
-              "answers": [
-                "1",
-                "1.0"
-              ],
-              "explanation": "`opacity` runs from 0 to 1. Anything above 1 is clamped, and 1 means no fade at all."
-            },
-            {
-              "id": "quiz-css-s31-q5",
-              "type": "multiple-choice",
-              "prompt": "Why is fading body text with `opacity` risky?",
-              "options": [
-                "Opacity is not supported on text",
-                "The text becomes invisible to screen readers",
-                "The foreground colour dims with the background and can drop below a usable contrast ratio",
-                "It makes the text unselectable"
-              ],
-              "answer": 2,
-              "explanation": "Opacity composites rendered pixels, so both colours move toward each other. Check the faded result against the contrast requirement, not the original palette."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Selectors and component patterns"
       },
@@ -9002,65 +3388,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s32",
           "title": "CSS Navigation Bar quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s32-q1",
-              "type": "multiple-choice",
-              "prompt": "What is lost when a navigation list is replaced with bare links inside a `<nav>`?",
-              "options": [
-                "Nothing important, the links still work",
-                "The visual spacing between items",
-                "The item count and list semantics for assistive technology",
-                "The page title"
-              ],
-              "answer": 2,
-              "explanation": "The list is how a screen reader knows how many navigation items exist. Without it the user hears a stream of links with no count and no boundaries."
-            },
-            {
-              "id": "quiz-css-s32-q2",
-              "type": "true-false",
-              "prompt": "Setting `list-style: none` on a `<ul>` is safe in every browser because it is only a visual change.",
-              "answer": false,
-              "explanation": "In Safari it also removes the list semantics. Add `role=\"list\"` to the `<ul>` alongside `list-style: none`."
-            },
-            {
-              "id": "quiz-css-s32-q3",
-              "type": "code-output",
-              "prompt": "What does this rule set?",
-              "code": ".nav ul { display: flex; flex-direction: column; }",
-              "options": [
-                "A vertical navigation list",
-                "A horizontal navigation list",
-                "The list disappears",
-                "The items are absolutely positioned"
-              ],
-              "answer": 0,
-              "explanation": "A flex container with `flex-direction: column` stacks its children top to bottom, which is the vertical navbar layout."
-            },
-            {
-              "id": "quiz-css-s32-q4",
-              "type": "blank",
-              "prompt": "Complete the sentence: equal-width flex items need `flex: 1` on the list item so that the flex basis is ______.",
-              "answers": [
-                "0",
-                "zero"
-              ],
-              "explanation": "`flex: 1` expands to `flex-grow: 1; flex-shrink: 1; flex-basis: 0`, and a zero basis makes all cells identical instead of content-sized."
-            },
-            {
-              "id": "quiz-css-s32-q5",
-              "type": "multiple-choice",
-              "prompt": "Which property adds space between flex items without leaking outside the container?",
-              "options": [
-                "margin-right on every item",
-                "gap",
-                "padding on the container",
-                "text-indent"
-              ],
-              "answer": 1,
-              "explanation": "`gap` applies only between items, so the first and last edges stay flush with the container."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Selectors and component patterns"
       },
@@ -9087,67 +3415,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s33",
           "title": "CSS Dropdowns quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s33-q1",
-              "type": "multiple-choice",
-              "prompt": "Why is a `:hover`-only dropdown unusable on a phone?",
-              "options": [
-                "Phones do not support `:hover`",
-                "There is no persistent hover state, so nothing opens reliably",
-                "`:hover` is too slow on mobile networks",
-                "It works, but the colours are wrong"
-              ],
-              "answer": 1,
-              "explanation": "Touch devices fire hover events only as a side effect of tapping. The first tap usually registers as a click and navigates, so the submenu never appears."
-            },
-            {
-              "id": "quiz-css-s33-q2",
-              "type": "true-false",
-              "prompt": "`:focus-within` keeps a submenu open while a link inside it has keyboard focus.",
-              "answer": true,
-              "explanation": "`:focus-within` matches an element when it or any descendant holds focus, so tabbing into the submenu keeps the panel on screen."
-            },
-            {
-              "id": "quiz-css-s33-q3",
-              "type": "code-output",
-              "prompt": "What does this set?",
-              "code": ".sub { display: none; }\n.has-menu:hover .sub { display: block; }",
-              "options": [
-                "The submenu is always visible",
-                "It appears while the parent item is hovered and is hidden otherwise",
-                "The submenu disappears on hover",
-                "The submenu becomes a flex row"
-              ],
-              "answer": 1,
-              "explanation": "The first rule hides it by default; the second reverses that while the pointer is over the parent item."
-            },
-            {
-              "id": "quiz-css-s33-q4",
-              "type": "blank",
-              "prompt": "Complete the sentence: an absolutely positioned submenu needs `position: relative` on its ________ so it anchors to that item instead of the page.",
-              "answers": [
-                "parent",
-                "parent item",
-                "parent li",
-                "containing block"
-              ],
-              "explanation": "An absolutely positioned element is placed against its nearest positioned ancestor. Without one it falls back to the page."
-            },
-            {
-              "id": "quiz-css-s33-q5",
-              "type": "multiple-choice",
-              "prompt": "Which property keeps an open submenu painted above the content that follows it?",
-              "options": [
-                "float",
-                "z-index",
-                "order",
-                "overflow"
-              ],
-              "answer": 1,
-              "explanation": "`z-index` sets stacking order for positioned elements. `overflow` would do the opposite — it can clip the submenu."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Selectors and component patterns"
       },
@@ -9174,65 +3442,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s34",
           "title": "CSS Image Gallery quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s34-q1",
-              "type": "multiple-choice",
-              "prompt": "What does `object-fit: cover` do?",
-              "options": [
-                "Stretches the image to fill the box, distorting it",
-                "Fills the box and crops whatever overflows",
-                "Fits the whole image inside the box, leaving gaps",
-                "Blurs the image to hide the edges"
-              ],
-              "answer": 1,
-              "explanation": "`cover` scales the image until it fills the box in both directions, then crops the overflow. Proportions are preserved."
-            },
-            {
-              "id": "quiz-css-s34-q2",
-              "type": "true-false",
-              "prompt": "Setting `width` and `height` on an `<img>` always gives the box size you asked for without distorting the image.",
-              "answer": false,
-              "explanation": "An `<img>` is a replaced element with its own proportions. Setting both dimensions distorts it unless you also set `object-fit`."
-            },
-            {
-              "id": "quiz-css-s34-q3",
-              "type": "code-output",
-              "prompt": "What does this set?",
-              "code": ".gallery { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }",
-              "options": [
-                "Exactly three equal columns",
-                "As many columns as fit, each at least 140px and sharing the rest evenly",
-                "One column that is 140px wide",
-                "A fixed four-column grid"
-              ],
-              "answer": 1,
-              "explanation": "`auto-fit` collapses empty tracks and `1fr` splits the leftover space, so the grid reflows as the width changes — no media query needed."
-            },
-            {
-              "id": "quiz-css-s34-q4",
-              "type": "blank",
-              "prompt": "Complete the sentence: to give a tile a fixed shape with nothing inside it, use the property ________.",
-              "answers": [
-                "aspect-ratio",
-                "aspect ratio"
-              ],
-              "explanation": "`aspect-ratio: 4 / 3` gives the box a height from its width, replacing the old `padding-top` percentage spacer."
-            },
-            {
-              "id": "quiz-css-s34-q5",
-              "type": "multiple-choice",
-              "prompt": "Which elements does `object-fit` apply to?",
-              "options": [
-                "Any element with children",
-                "Every element that has a background",
-                "Replaced elements such as `<img>`, `<video>` and `<canvas>`",
-                "Only `<img>` elements"
-              ],
-              "answer": 2,
-              "explanation": "`object-fit` controls how a replaced element fills its content box. It has no effect on ordinary elements such as a `<div>`."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Selectors and component patterns"
       },
@@ -9259,64 +3469,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s35",
           "title": "CSS Image Sprites quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s35-q1",
-              "type": "multiple-choice",
-              "prompt": "What is an image sprite?",
-              "options": [
-                "A decorative background added behind text",
-                "One image containing many icons, with a window onto it for each use",
-                "A CSS animation that cycles through frames",
-                "A sprite sheet format for 3D game engines"
-              ],
-              "answer": 1,
-              "explanation": "A sprite packs many small graphics into a single file. Each element shows one cell by setting its own box size and sliding the image with `background-position`."
-            },
-            {
-              "id": "quiz-css-s35-q2",
-              "type": "true-false",
-              "prompt": "Sprites are still the fastest way to load many small icons on any modern site.",
-              "answer": false,
-              "explanation": "Browsers cache and pipeline requests well. Sprites trade flexibility for a request count that matters less now, and they invite positioning errors."
-            },
-            {
-              "id": "quiz-css-s35-q3",
-              "type": "code-output",
-              "prompt": "A sprite has 24px cells. What does this show?",
-              "code": ".i { width: 24px; height: 24px; background-position: -48px 0; }",
-              "options": [
-                "The first cell in the row",
-                "The third cell in the row",
-                "The second row, first column",
-                "Nothing, negative offsets are invalid"
-              ],
-              "answer": 1,
-              "explanation": "The offsets give the top-left of the visible window in sprite coordinates: x = -48 is 48px into the row, which is the third 24px cell."
-            },
-            {
-              "id": "quiz-css-s35-q4",
-              "type": "blank",
-              "prompt": "Complete the sentence: to stop the sprite tiling when the element is larger than one cell, set `background-repeat: ________`.",
-              "answers": [
-                "no-repeat"
-              ],
-              "explanation": "`no-repeat` draws the image once at its positioned spot instead of repeating it across the element."
-            },
-            {
-              "id": "quiz-css-s35-q5",
-              "type": "multiple-choice",
-              "prompt": "Why is an inline SVG data URI a good sprite source for a self-contained demo?",
-              "options": [
-                "Data URIs are compressed by the browser",
-                "It needs no network request and no extra file, so the technique is shown offline",
-                "Data URIs load faster than any file",
-                "It makes `background-position` move the icons for you"
-              ],
-              "answer": 1,
-              "explanation": "A data URI lives in the stylesheet itself, so there is nothing to fetch. The positioning technique is identical to one using a real sprite file."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Selectors and component patterns"
       },
@@ -9344,65 +3497,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s36",
           "title": "CSS Attr Selectors quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s36-q1",
-              "type": "multiple-choice",
-              "prompt": "Which selector matches any link whose href ends with \".pdf\"?",
-              "options": [
-                "a[href^=\".pdf\"]",
-                "a[href$=\".pdf\"]",
-                "a[href*=\".pdf\"]",
-                "a[href~=\".pdf\"]"
-              ],
-              "answer": 1,
-              "explanation": "`$=` anchors the match at the end of the value, which is exactly what an extension test needs."
-            },
-            {
-              "id": "quiz-css-s36-q2",
-              "type": "true-false",
-              "prompt": "[attr=\"value\"] matches regardless of letter case in ordinary HTML.",
-              "answer": false,
-              "explanation": "Most attribute values are case-sensitive in HTML. Add the `i` flag — `[attr=\"value\" i]` — to ignore case."
-            },
-            {
-              "id": "quiz-css-s36-q3",
-              "type": "code-output",
-              "prompt": "What does this rule do?",
-              "code": "input[placeholder^=\"email\"] { border-color: #1f6feb; }",
-              "options": [
-                "Borders every input blue",
-                "Borders the input whose placeholder contains the word \"email\"",
-                "Borders the input whose placeholder starts with \"email\"",
-                "Nothing, placeholder cannot be styled"
-              ],
-              "answer": 2,
-              "explanation": "`^=` tests the beginning of the value, so `placeholder=\"your email here\"` would not match."
-            },
-            {
-              "id": "quiz-css-s36-q4",
-              "type": "blank",
-              "prompt": "Which operator matches one whole word inside a whitespace-separated list, such as \"btn\" inside class=\"btn btn-large\"?",
-              "answers": [
-                "~=",
-                "~"
-              ],
-              "explanation": "`[class~=\"btn\"]` splits the value on whitespace and compares whole words, so it matches \"btn\" but not \"btn-large\"."
-            },
-            {
-              "id": "quiz-css-s36-q5",
-              "type": "multiple-choice",
-              "prompt": "Why put a custom data-status attribute on a field instead of an extra class?",
-              "options": [
-                "Data attributes load faster than classes",
-                "The attribute name cannot clash with anything the browser defines",
-                "Classes cannot be used on form controls",
-                "It makes the field read-only"
-              ],
-              "answer": 1,
-              "explanation": "`data-*` names live in a namespace reserved for authors, so they never collide with a future browser feature."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Selectors and component patterns"
       },
@@ -9430,65 +3525,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s37",
           "title": "CSS Forms quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s37-q1",
-              "type": "multiple-choice",
-              "prompt": "What does appearance: none do on a select?",
-              "options": [
-                "Removes the select from the tab order",
-                "Removes the browser-drawn widget so you must draw your own indicator",
-                "Makes the select invisible",
-                "Prevents the form being submitted"
-              ],
-              "answer": 1,
-              "explanation": "It hands rendering back to you, including the arrow that showed the current value — which you then have to replace."
-            },
-            {
-              "id": "quiz-css-s37-q2",
-              "type": "true-false",
-              "prompt": "outline: none on a focused input is a harmless styling choice.",
-              "answer": false,
-              "explanation": "It deletes the only signal a keyboard user gets about where they are. Replace it with your own outline rather than removing it."
-            },
-            {
-              "id": "quiz-css-s37-q3",
-              "type": "code-output",
-              "prompt": "Which rule keeps a 3px focus ring from shifting the layout?",
-              "code": "input:focus-visible { outline: 3px solid #29e2bd; }",
-              "options": [
-                "input:focus-visible { border: 3px solid #29e2bd; }",
-                "input:focus-visible { outline: 3px solid #29e2bd; }",
-                "input:focus-visible { box-shadow: none; }",
-                "input:focus-visible { outline: 3px solid #29e2bd; border: 0; }"
-              ],
-              "answer": 1,
-              "explanation": "An outline draws outside the box and takes no layout space, so nothing moves. A border on focus does move things."
-            },
-            {
-              "id": "quiz-css-s37-q4",
-              "type": "blank",
-              "prompt": "Which property stops form controls rendering at the browser default font size and inheriting the page font instead?",
-              "answers": [
-                "font: inherit",
-                "inherit"
-              ],
-              "explanation": "Controls do not inherit typography by default. `font: inherit`, or explicit size and family properties, fixes it."
-            },
-            {
-              "id": "quiz-css-s37-q5",
-              "type": "multiple-choice",
-              "prompt": "Why should every control have a real label?",
-              "options": [
-                "Labels are required for the form to validate",
-                "It makes the placeholder persist",
-                "Clicking the label focuses the field, and screen readers announce the pair together",
-                "It stops the browser zooming on focus"
-              ],
-              "answer": 2,
-              "explanation": "`<label for=\"...\">` is both a click target and the accessible name of the control, which a placeholder never reliably is."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Selectors and component patterns"
       },
@@ -9516,64 +3553,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s38",
           "title": "CSS Counters quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s38-q1",
-              "type": "multiple-choice",
-              "prompt": "Which property advances a counter by one?",
-              "options": [
-                "counter-reset",
-                "counter-increment",
-                "counter-set",
-                "counter()"
-              ],
-              "answer": 1,
-              "explanation": "`counter-increment` adds to the counter each time the element renders; `counter-reset` starts it."
-            },
-            {
-              "id": "quiz-css-s38-q2",
-              "type": "true-false",
-              "prompt": "counter() prints every level of an active counter, joined by a separator.",
-              "answer": false,
-              "explanation": "That is `counters()`. `counter()` prints only the innermost value of the counter."
-            },
-            {
-              "id": "quiz-css-s38-q3",
-              "type": "code-output",
-              "prompt": "What number does this produce for the nested item?",
-              "code": "ol { counter-reset: n; }\nli { counter-increment: n; }\nli::before { content: counters(n, \".\") \" \"; }",
-              "options": [
-                "1",
-                "0",
-                "1.1",
-                "Nothing, content needs a URL"
-              ],
-              "answer": 2,
-              "explanation": "The sublist resets `n`, opening a second instance. `counters()` joins both, giving 1.1 for the sub-item."
-            },
-            {
-              "id": "quiz-css-s38-q4",
-              "type": "blank",
-              "prompt": "Which counter style prints a value as an upper-case Roman numeral, as in content: counter(sec, ________);",
-              "answers": [
-                "upper-roman"
-              ],
-              "explanation": "The second argument names the counter style: `decimal`, `lower-roman`, `upper-roman`, `lower-alpha`, `upper-alpha`."
-            },
-            {
-              "id": "quiz-css-s38-q5",
-              "type": "multiple-choice",
-              "prompt": "Why reset the same counter name on every nested list?",
-              "options": [
-                "It is required for list styling to work",
-                "Each reset opens a new instance, so every sublist starts from 1",
-                "It makes the counter faster to compute",
-                "It prevents list markers from rendering"
-              ],
-              "answer": 1,
-              "explanation": "Counters with the same name nest as instances. Each sublist resets it, producing the fresh inner level that `counters()` then prints."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Selectors and component patterns"
       },
@@ -9601,69 +3581,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s39",
           "title": "CSS Website Layout quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s39-q1",
-              "type": "multiple-choice",
-              "prompt": "Where must `grid-template-areas` be declared?",
-              "options": [
-                "On each child element",
-                "On the grid container",
-                "On the body element only",
-                "Anywhere, the browser sorts it out"
-              ],
-              "answer": 1,
-              "explanation": "The template defines the container grid. The children then place themselves into it with `grid-area`."
-            },
-            {
-              "id": "quiz-css-s39-q2",
-              "type": "code-output",
-              "prompt": "What shape does this template produce?",
-              "code": ".p {\n  display: grid;\n  grid-template-areas:\n    \"head head\"\n    \"side main\"\n    \"foot foot\";\n}",
-              "options": [
-                "Three stacked full-width rows",
-                "Header across the top, side and main side by side, footer across the bottom",
-                "A two-column grid with no header",
-                "Nothing — the areas are not rectangular"
-              ],
-              "answer": 1,
-              "explanation": "Each quoted string is a row. `head` occupies both cells of row one, `side` and `main` split row two, `foot` spans row three."
-            },
-            {
-              "id": "quiz-css-s39-q3",
-              "type": "true-false",
-              "prompt": "A named grid area is allowed to form an L-shape.",
-              "answer": false,
-              "explanation": "Every area must be a rectangle. An L-shape invalidates the whole `grid-template-areas` declaration and the grid falls back to no areas at all."
-            },
-            {
-              "id": "quiz-css-s39-q4",
-              "type": "identify-error",
-              "prompt": "Why does this shell not lay out as intended?",
-              "code": ".p {\n  display: grid;\n  grid-template-areas: \"head head\" \"side main\";\n}\n.h { grid-area: head; }\n.m { grid-area: main; }",
-              "options": [
-                "`grid-area` values must be quoted",
-                "The named areas are never assigned, so the children are auto-placed",
-                "A grid needs at least three rows",
-                "`display: grid` cannot be combined with `grid-area`"
-              ],
-              "answer": 1,
-              "explanation": "The template names regions but nothing maps them. Without matching `grid-area` values on the children, the browser auto-places them in source order."
-            },
-            {
-              "id": "quiz-css-s39-q5",
-              "type": "multiple-choice",
-              "prompt": "A shell is fine on a desktop and cramped on a phone. What is the cleanest fix?",
-              "options": [
-                "Add more media queries targeting individual children",
-                "Rewrite the layout with floats",
-                "Change the named `grid-template-areas` shape in a media query",
-                "Add `overflow: hidden` to the container"
-              ],
-              "answer": 2,
-              "explanation": "Because the regions are named, one declaration controls the whole shape. The media query changes the template and every child follows."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "The cascade and advanced boxes"
       },
@@ -9691,69 +3609,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s40",
           "title": "CSS Units quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s40-q1",
-              "type": "multiple-choice",
-              "prompt": "What is `1em` relative to?",
-              "options": [
-                "The root font size",
-                "The font size of the element the property is on",
-                "The width of the viewport",
-                "A fixed physical millimetre"
-              ],
-              "answer": 1,
-              "explanation": "`em` resolves against the computed font size of the element itself, which is why nested `em` values compound."
-            },
-            {
-              "id": "quiz-css-s40-q2",
-              "type": "true-false",
-              "prompt": "A `px` value is a fixed physical measurement, so browser zoom cannot affect it.",
-              "answer": false,
-              "explanation": "A CSS pixel is a reference unit. Zoom scales how many pixels fill the screen and `px` scales with it — which is the behaviour accessibility relies on."
-            },
-            {
-              "id": "quiz-css-s40-q3",
-              "type": "code-output",
-              "prompt": "How wide is the box? The parent has `font-size: 20px`.",
-              "code": ".p { font-size: 20px; }\n.b { width: 4em; }",
-              "options": [
-                "20px",
-                "64px",
-                "80px",
-                "4px"
-              ],
-              "answer": 2,
-              "explanation": "`em` resolves against the font size the child inherits, so `4em` is `4 × 20px = 80px`."
-            },
-            {
-              "id": "quiz-css-s40-q4",
-              "type": "identify-error",
-              "prompt": "What is wrong with sizing a line of body text in `px`?",
-              "code": "body {\n  font-size: 14px;\n  line-height: 1.5;\n}",
-              "options": [
-                "Nothing at all — `px` is always correct for text",
-                "A fixed `px` font size ignores the user own browser zoom and text-size preference",
-                "`line-height` is not valid with `px` font sizes",
-                "`px` cannot be used on the `body` element"
-              ],
-              "answer": 1,
-              "explanation": "A `px` text size does scale with zoom, but it ignores the user default font size and text-only zoom settings. `rem` honours all three."
-            },
-            {
-              "id": "quiz-css-s40-q5",
-              "type": "multiple-choice",
-              "prompt": "Which unit is best for a full-bleed hero section that should fill the screen height?",
-              "options": [
-                "`pt`",
-                "`em`",
-                "`vh`",
-                "`cm`"
-              ],
-              "answer": 2,
-              "explanation": "Viewport units are relative to the screen, which is what \"fill the viewport height\" means. `em` would only follow a font size."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "The cascade and advanced boxes"
       },
@@ -9781,69 +3637,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s41",
           "title": "CSS Specificity quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s41-q1",
-              "type": "multiple-choice",
-              "prompt": "What is the specificity of `.card p.target`?",
-              "options": [
-                "0-0-3",
-                "0-2-1",
-                "0-3-0",
-                "2-1-0"
-              ],
-              "answer": 1,
-              "explanation": "Two classes (`.card`, `.target`) go in column b, one element (`p`) in column c, and no IDs, so it is 0-2-1."
-            },
-            {
-              "id": "quiz-css-s41-q2",
-              "type": "true-false",
-              "prompt": "Two rules with identical specificity set `color` on the same element. The one written later wins.",
-              "answer": true,
-              "explanation": "Source order is the final tiebreak, applied only when the a-b-c numbers are exactly equal."
-            },
-            {
-              "id": "quiz-css-s41-q3",
-              "type": "code-output",
-              "prompt": "Which colour wins?",
-              "code": "#main p { color: red; }\n.layout .card p:hover { color: blue; }",
-              "options": [
-                "Blue — the longer selector always wins",
-                "Red — one ID outranks any number of classes",
-                "Blue — `:hover` counts as an ID",
-                "Red — because it is written first"
-              ],
-              "answer": 1,
-              "explanation": "The ID column is compared first. `1-0-1` beats `0-3-1` no matter how many classes the other selector has."
-            },
-            {
-              "id": "quiz-css-s41-q4",
-              "type": "identify-error",
-              "prompt": "Why is this base rule not easy to override?",
-              "code": "#app #main .widget .row .cell { color: #c0392b; }",
-              "options": [
-                "The selector is too long to parse",
-                "Two IDs put it beyond what any utility class can out-specify",
-                "Class selectors cannot be chained",
-                "The rule needs `!important` to apply"
-              ],
-              "answer": 1,
-              "explanation": "Two IDs set column a to 2. Beating that with normal rules means more IDs, which is a dead end — it should have been scoped with `:where()`."
-            },
-            {
-              "id": "quiz-css-s41-q5",
-              "type": "multiple-choice",
-              "prompt": "What does `:is(#main, .card)` score?",
-              "options": [
-                "0-1-0 — it counts the least specific argument",
-                "1-0-0 — it takes the specificity of its most specific argument",
-                "0-0-0 — all its arguments are ignored",
-                "1-1-0 — every argument is added together"
-              ],
-              "answer": 1,
-              "explanation": "`:is()` contributes the highest specificity among its arguments, so the `#main` in the list sets column a to 1."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "The cascade and advanced boxes"
       },
@@ -9871,69 +3665,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s42",
           "title": "CSS !important quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s42-q1",
-              "type": "multiple-choice",
-              "prompt": "What does `!important` do to a declaration?",
-              "options": [
-                "Makes it load faster",
-                "Moves it into a tier checked before all normal declarations",
-                "Prevents it from being cached",
-                "Makes it apply to every element"
-              ],
-              "answer": 1,
-              "explanation": "Important declarations are resolved in their own pass, before any normal author declaration is considered."
-            },
-            {
-              "id": "quiz-css-s42-q2",
-              "type": "true-false",
-              "prompt": "An `!important` class selector can beat a normal ID selector written after it.",
-              "answer": true,
-              "explanation": "The important tier is checked first, so specificity inside it only decides between important declarations, not against normal ones."
-            },
-            {
-              "id": "quiz-css-s42-q3",
-              "type": "code-output",
-              "prompt": "What colour is the text?",
-              "code": ".a {\n  color: teal !important;\n}\n#b {\n  color: crimson;\n}\n.a {\n  color: green;\n}",
-              "options": [
-                "Green — the last `.a` rule wins",
-                "Crimson — the ID selector wins",
-                "Teal — the important declaration is in the winning tier",
-                "Crimson — later source order wins"
-              ],
-              "answer": 2,
-              "explanation": "The second `.a` is normal, so it loses to `#b` on specificity. The first `.a` is important, so it beats both normal declarations."
-            },
-            {
-              "id": "quiz-css-s42-q4",
-              "type": "identify-error",
-              "prompt": "Why did this stylesheet end up needing five chained classes?",
-              "code": ".card .card .title .label .text { color: #c0392b; }",
-              "options": [
-                "Class selectors need chaining to apply",
-                "A specificity fight was escalated instead of resolved by scoping the base rule properly",
-                "Colour is not a valid property without `!important`",
-                "Nothing is wrong with it"
-              ],
-              "answer": 1,
-              "explanation": "Chaining classes escalates specificity to win a conflict a `:where()` wrapper or a better-scoped base rule would have settled cleanly and readably."
-            },
-            {
-              "id": "quiz-css-s42-q5",
-              "type": "multiple-choice",
-              "prompt": "Which is a legitimate use of `!important`?",
-              "options": [
-                "Making a card title bold in a component stylesheet",
-                "A `.hidden` utility that must work from anywhere",
-                "A colour override on a class you wrote five minutes ago",
-                "Fixing a layout you have not understood yet"
-              ],
-              "answer": 1,
-              "explanation": "A utility class exists precisely to override whatever matches, so `!important` is part of its contract. The other three are selector problems being papered over."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "The cascade and advanced boxes"
       },
@@ -9961,66 +3693,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s43",
           "title": "CSS Rounded Corners quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s43-q1",
-              "type": "multiple-choice",
-              "prompt": "In `border-radius: 20px / 40px`, what is 40px?",
-              "options": [
-                "The horizontal radius",
-                "The vertical radius of the ellipse",
-                "The corner size in both directions",
-                "The border width"
-              ],
-              "answer": 1,
-              "explanation": "Everything before the slash is the horizontal radius and everything after it is the vertical radius."
-            },
-            {
-              "id": "quiz-css-s43-q2",
-              "type": "true-false",
-              "prompt": "A child element automatically inherits the rounded corners of its parent.",
-              "answer": false,
-              "explanation": "`border-radius` clips only the element it is set on. Children are clipped only by the parent's `overflow: hidden`."
-            },
-            {
-              "id": "quiz-css-s43-q3",
-              "type": "code-output",
-              "prompt": "What shape does this produce on a 100px square box?",
-              "code": ".box { border-radius: 50%; }",
-              "options": [
-                "A square with slightly soft corners",
-                "A circle",
-                "A pill shape",
-                "Nothing, percentages are not valid radii"
-              ],
-              "answer": 1,
-              "explanation": "A percentage radius resolves against the box width, so 50% of 100px is 50px on both axes — exactly half, which is a full circle."
-            },
-            {
-              "id": "quiz-css-s43-q4",
-              "type": "blank",
-              "prompt": "Complete the sentence: when two radii on a corner add up to more than the box measures, the browser ________ them proportionally.",
-              "answers": [
-                "scales",
-                "scaling",
-                "scale"
-              ],
-              "explanation": "The overlap rule scales the radii down by a shared factor so the corner still fits inside the box."
-            },
-            {
-              "id": "quiz-css-s43-q5",
-              "type": "multiple-choice",
-              "prompt": "Which rule makes a rounded parent clip its children?",
-              "options": [
-                "border-style: hidden",
-                "overflow: hidden",
-                "clip-radius: true",
-                "box-clip: border-box"
-              ],
-              "answer": 1,
-              "explanation": "`overflow: hidden` establishes the clip region that the parent's radius then applies to."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "The cascade and advanced boxes"
       },
@@ -10048,65 +3721,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s44",
           "title": "CSS Border Images quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s44-q1",
-              "type": "multiple-choice",
-              "prompt": "How many regions does `border-image-slice` cut a source image into?",
-              "options": [
-                "4",
-                "6",
-                "8",
-                "9"
-              ],
-              "answer": 3,
-              "explanation": "Nine: four corners, four edges and a centre. The centre is only used when the middle slice is stretched."
-            },
-            {
-              "id": "quiz-css-s44-q2",
-              "type": "true-false",
-              "prompt": "`border-image` needs a real image file to work.",
-              "answer": false,
-              "explanation": "Any paintable image counts, including `linear-gradient` and `repeating-linear-gradient`."
-            },
-            {
-              "id": "quiz-css-s44-q3",
-              "type": "code-output",
-              "prompt": "What is missing from this rule?",
-              "code": ".box {\n  border-image-slice: 16;\n  border-image-repeat: round;\n}",
-              "options": [
-                "Nothing, it is valid",
-                "The slice needs a unit",
-                "A `border-image-source`",
-                "`round` is not a valid value"
-              ],
-              "answer": 2,
-              "explanation": "Without a source there is nothing to slice. You also normally set a `border-width` so there is space to draw in."
-            },
-            {
-              "id": "quiz-css-s44-q4",
-              "type": "blank",
-              "prompt": "Complete the sentence: `border-image-repeat: round` keeps whole tiles and adjusts them to ________ the available space.",
-              "answers": [
-                "fit",
-                "fill"
-              ],
-              "explanation": "`round` divides the edge into a whole number of tiles, adjusting their size slightly so nothing is clipped."
-            },
-            {
-              "id": "quiz-css-s44-q5",
-              "type": "multiple-choice",
-              "prompt": "What does `border-image-outset` do?",
-              "options": [
-                "Moves the border outward without affecting layout",
-                "Makes the border thicker",
-                "Adds space inside the border",
-                "Repeats the image more often"
-              ],
-              "answer": 0,
-              "explanation": "Outset draws the border further from the padding edge. It is a painting offset, not a layout one."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "The cascade and advanced boxes"
       },
@@ -10134,67 +3749,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s45",
           "title": "CSS Backgrounds quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s45-q1",
-              "type": "multiple-choice",
-              "prompt": "With three background layers, which one paints on top?",
-              "options": [
-                "The last one in the list",
-                "The first one in the list",
-                "Whichever has the largest background-size",
-                "The order does not matter"
-              ],
-              "answer": 1,
-              "explanation": "Layers paint in list order with the first on top — the opposite of how you read the CSS aloud."
-            },
-            {
-              "id": "quiz-css-s45-q2",
-              "type": "true-false",
-              "prompt": "The slash in `center / cover` separates position from size.",
-              "answer": true,
-              "explanation": "Everything before the slash positions the image, everything after it scales it."
-            },
-            {
-              "id": "quiz-css-s45-q3",
-              "type": "code-output",
-              "prompt": "How many layers does this declare?",
-              "code": ".box {\n  background-image: linear-gradient(red, blue), linear-gradient(green, yellow);\n}",
-              "options": [
-                "1",
-                "2",
-                "3",
-                "4"
-              ],
-              "answer": 1,
-              "explanation": "One layer per comma-separated value, so there are two."
-            },
-            {
-              "id": "quiz-css-s45-q4",
-              "type": "blank",
-              "prompt": "Complete the sentence: with three layers but only one value in `background-position`, the other two layers fall back to ________.",
-              "answers": [
-                "0% 0%",
-                "0 0",
-                "top left"
-              ],
-              "explanation": "Value lists are never distributed across layers. Anything omitted resets to the initial value."
-            },
-            {
-              "id": "quiz-css-s45-q5",
-              "type": "identify-error",
-              "prompt": "The photo is meant to sit behind a dark scrim so white text stays readable, but the scrim hides the photo completely. What is wrong?",
-              "code": ".card {\n  background-image: linear-gradient(rgb(0 0 0 / 0.6), rgb(0 0 0 / 0.6)), url('/hero.jpg');\n  background-size: cover;\n}",
-              "options": [
-                "Nothing, the gradient is already behind the image",
-                "The first layer paints on top, so the gradient has to be listed after the url()",
-                "`background-image` cannot combine gradients and urls",
-                "The url() has to be written in a separate declaration"
-              ],
-              "answer": 1,
-              "explanation": "Layer order runs the opposite way to how the declaration reads: the first comma-separated value is painted on top of the second. So a scrim belongs last. This is the single most common layer-order bug, and it is why the first question in this set asks about it at all."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "The cascade and advanced boxes"
       },
@@ -10222,65 +3777,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s46",
           "title": "CSS Colors quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s46-q1",
-              "type": "multiple-choice",
-              "prompt": "In `color-mix(in oklab, teal, black 30%)`, how much black is in the result?",
-              "options": [
-                "30%",
-                "70%",
-                "50%",
-                "15%"
-              ],
-              "answer": 0,
-              "explanation": "The percentage always describes the second colour, whichever order they are listed in."
-            },
-            {
-              "id": "quiz-css-s46-q2",
-              "type": "true-false",
-              "prompt": "`light-dark()` responds to the theme even if nothing declares `color-scheme`.",
-              "answer": false,
-              "explanation": "It falls back to the light value. You need `color-scheme: light dark` for it to actually respond."
-            },
-            {
-              "id": "quiz-css-s46-q3",
-              "type": "code-output",
-              "prompt": "What does this produce?",
-              "code": ".a { color-scheme: light dark; }\n.b { color: light-dark(#111, #eee); }",
-              "options": [
-                "Always #111",
-                "Always #eee",
-                "#111 in a light scheme, #eee in a dark one",
-                "An invalid value, discarded"
-              ],
-              "answer": 2,
-              "explanation": "`light-dark()` takes the first value for light and the second for dark, based on the computed `color-scheme`."
-            },
-            {
-              "id": "quiz-css-s46-q4",
-              "type": "blank",
-              "prompt": "Complete the sentence: relative colour syntax, like `rgb(from ... r g b)`, is best described as ________-edge today.",
-              "answers": [
-                "cutting",
-                "bleeding"
-              ],
-              "explanation": "It is shipping, but support is narrower than `color-mix()` and `light-dark()`, so keep a static fallback declaration."
-            },
-            {
-              "id": "quiz-css-s46-q5",
-              "type": "multiple-choice",
-              "prompt": "Why is `oklab` a better mix space than `srgb`?",
-              "options": [
-                "It is faster to compute",
-                "It mixes in a perceptually even space, so a 50% mix looks like a 50% mix",
-                "It supports more colour formats",
-                "It is the only one available"
-              ],
-              "answer": 1,
-              "explanation": "Averaging raw sRGB channels does not match perceived lightness, which is why `srgb` mixes go muddy through the middle."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "The cascade and advanced boxes"
       },
@@ -10308,64 +3805,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s47",
           "title": "CSS Color Keywords quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s47-q1",
-              "type": "multiple-choice",
-              "prompt": "What does `currentColor` resolve to?",
-              "options": [
-                "The colour of the nearest parent element",
-                "The element's own computed `color` value",
-                "Black",
-                "The value of `border-color`"
-              ],
-              "answer": 1,
-              "explanation": "It resolves to whatever `color` has computed to on that element, which for a pseudo-element is the originating element's value."
-            },
-            {
-              "id": "quiz-css-s47-q2",
-              "type": "true-false",
-              "prompt": "`transparent` is the same as not setting a background at all.",
-              "answer": false,
-              "explanation": "`transparent` is `rgba(0, 0, 0, 0)` — a real colour with zero alpha, with a computed value that affects transitions."
-            },
-            {
-              "id": "quiz-css-s47-q3",
-              "type": "code-output",
-              "prompt": "A button fades from `transparent` to `white`. What does it pass through?",
-              "code": ".btn { background: transparent; }\n.btn:hover { background: white; }",
-              "options": [
-                "White",
-                "Black, then grey",
-                "Nothing, it just appears",
-                "A teal tint"
-              ],
-              "answer": 1,
-              "explanation": "The browser interpolates from transparent black, so the RGB channels climb from 0 through grey to white."
-            },
-            {
-              "id": "quiz-css-s47-q4",
-              "type": "blank",
-              "prompt": "Complete the sentence: the system colour keyword for the default button surface is ________.",
-              "answers": [
-                "ButtonFace"
-              ],
-              "explanation": "`ButtonFace` and `ButtonText` follow the operating system theme, which is what makes a custom button look native."
-            },
-            {
-              "id": "quiz-css-s47-q5",
-              "type": "multiple-choice",
-              "prompt": "Why use `currentColor` for a border instead of repeating the hex code?",
-              "options": [
-                "It renders faster",
-                "One value drives the text, the border and any pseudo-elements together",
-                "Hex codes are invalid in `border-color`",
-                "It removes the need for a `border-style`"
-              ],
-              "answer": 1,
-              "explanation": "Change `color` once and everything painted with the keyword follows — including SVG strokes and pseudo-elements."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "The cascade and advanced boxes"
       },
@@ -10410,66 +3850,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s48",
           "title": "CSS Gradients quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s48-q1",
-              "type": "multiple-choice",
-              "prompt": "Which value produces a hard edge with no blending at all between two colours?",
-              "options": [
-                "`linear-gradient(to right, #29e2bd, #1f6feb)`",
-                "`linear-gradient(to right, #29e2bd 50%, #1f6feb 50%)`",
-                "`linear-gradient(to right, #29e2bd 0%, #1f6feb 100%)`",
-                "`linear-gradient(to right, transparent, #1f6feb)`"
-              ],
-              "answer": 1,
-              "explanation": "A hard edge comes from giving both stops the same position. With both at 50% the transition has zero width, so the change happens on a single line. Stops at different positions always leave room for the blend between them."
-            },
-            {
-              "id": "quiz-css-s48-q2",
-              "type": "true-false",
-              "prompt": "Setting `background-color: linear-gradient(to right, red, blue);` gives you a working gradient.",
-              "answer": false,
-              "explanation": "A gradient is an image value, so it belongs in `background-image`. `background-color` only accepts a colour, so that declaration is invalid and is discarded outright."
-            },
-            {
-              "id": "quiz-css-s48-q3",
-              "type": "multiple-choice",
-              "prompt": "A `radial-gradient(circle, ...)` on a wide 400px by 120px box leaves plain background on the left and right edges. What is the fix?",
-              "options": [
-                "Add a second radial gradient covering the sides",
-                "Use `ellipse` instead of `circle`, or size the circle with `farthest-side`",
-                "Move the gradient centre to the middle with `at 50% 50%` - the centre is already there",
-                "Swap the two colour stops"
-              ],
-              "answer": 1,
-              "explanation": "A circle has equal radii on both axes, so on a wide box it stops at the nearest vertical edge. `ellipse` stretches to fill the box, and `circle farthest-side` stretches only along the longer axis. The centre position and the stop order have nothing to do with the leftover edges."
-            },
-            {
-              "id": "quiz-css-s48-q4",
-              "type": "blank",
-              "prompt": "Which keyword places the centre of a radial gradient at a specific point, and what is the full syntax for putting it at the centre of the element?",
-              "answers": [
-                "at",
-                "at center",
-                "radial-gradient(circle at center, red, blue)"
-              ],
-              "explanation": "The `at` keyword introduces the position, which is written before the colour stops and after any shape or size. It uses the same syntax as `background-position`: `radial-gradient(circle at 20% 10%, red, blue)` moves the centre a fifth of the way across and a tenth of the way down."
-            },
-            {
-              "id": "quiz-css-s48-q5",
-              "type": "identify-error",
-              "prompt": "This gradient renders nothing at all. Why?",
-              "code": ".card {\n  background-image: linear-gradient(to right, #29e2bd 80%, #1f6feb 20%);\n}",
-              "options": [
-                "`background-image` cannot hold a gradient function",
-                "The colour stops are out of order, so the whole declaration is invalid",
-                "A gradient needs at least three stops to render",
-                "The direction keyword must come last, after the stops"
-              ],
-              "answer": 1,
-              "explanation": "Stops must be written in ascending order. With 80% before 20% the declaration fails to parse and is dropped, which looks exactly like the gradient not working. Always order stops from smallest position to largest."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Effects and motion"
       },
@@ -10513,66 +3894,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s49",
           "title": "CSS Shadows quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s49-q1",
-              "type": "multiple-choice",
-              "prompt": "Which shadow declaration produces a hard-edged shadow with no softness at all?",
-              "options": [
-                "`box-shadow: 4px 4px 8px #000`",
-                "`box-shadow: 4px 4px #000`",
-                "`box-shadow: 4px 4px 0 8px #000`",
-                "`box-shadow: inset 4px 4px #000`"
-              ],
-              "answer": 1,
-              "explanation": "The blur radius is optional, so omitting it leaves the shadow as a crisp silhouette offset from the box. Writing `0` for the blur gives the same result. Option one has an 8px blur and is soft; option three puts 8px in the spread slot, so it grows the shadow instead of blurring it."
-            },
-            {
-              "id": "quiz-css-s49-q2",
-              "type": "true-false",
-              "prompt": "In a comma-separated list of box-shadows, the last shadow listed paints on top of the earlier ones.",
-              "answer": false,
-              "explanation": "It is the other way round: the first shadow in the list paints on top. That matches the background layer convention only by accident, so put your tight contact shadow first and the wide ambient shadow after it."
-            },
-            {
-              "id": "quiz-css-s49-q3",
-              "type": "multiple-choice",
-              "prompt": "You need a shadow behind a triangle made with `clip-path`. `box-shadow` draws a square. What should you use instead?",
-              "options": [
-                "A `box-shadow` with a larger blur radius",
-                "`filter: drop-shadow(4px 4px 2px #000)`",
-                "A second element behind the shape with a background",
-                "`text-shadow` on the shape"
-              ],
-              "answer": 1,
-              "explanation": "`box-shadow` is derived from the border box, so it can only ever be rectangular. `filter: drop-shadow()` works from the rendered pixels and therefore follows the clipped triangle exactly. The trade-off is that a filter creates a stacking context and a containing block."
-            },
-            {
-              "id": "quiz-css-s49-q4",
-              "type": "blank",
-              "prompt": "In `box-shadow: 2px 0 8px -4px rgba(0,0,0,.4)`, what is the `-4px` value called?",
-              "answers": [
-                "spread",
-                "spread radius",
-                "spread-radius"
-              ],
-              "explanation": "The order is x-offset, y-offset, blur radius, spread radius, then colour. The blur softens the shadow, while the spread grows or shrinks its shape before the blur is applied, and a negative spread pulls it in so it hugs the element."
-            },
-            {
-              "id": "quiz-css-s49-q5",
-              "type": "identify-error",
-              "prompt": "This is meant to give the button a shadow pressed into its top edge. What is wrong?",
-              "code": ".btn {\n  box-shadow: 4px 4px 8px inset #000;\n}",
-              "options": [
-                "The colour must be written before the lengths",
-                "`inset` must come before the offsets, not after them",
-                "Spread is not allowed on a box shadow",
-                "An inset shadow cannot have a blur radius"
-              ],
-              "answer": 1,
-              "explanation": "`inset` is a keyword and belongs at the start of the value, before any lengths. Written after the lengths the whole declaration is invalid, so the button renders with no shadow at all. An inset shadow can absolutely have a blur radius."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Effects and motion"
       },
@@ -10600,57 +3922,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s50",
           "title": "CSS Text Effects quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s50-q1",
-              "type": "multiple-choice",
-              "prompt": "Which `text-transform` value uppercases the first letter of every word, including articles and prepositions?",
-              "options": [
-                "uppercase",
-                "lowercase",
-                "capitalize",
-                "none"
-              ],
-              "answer": 2,
-              "explanation": "`capitalize` applies to every word boundary. It cannot distinguish \"the\" from \"Title\" — true title case requires JavaScript."
-            },
-            {
-              "id": "quiz-css-s50-q2",
-              "type": "true-false",
-              "prompt": "Negative `letter-spacing` pulls characters closer together.",
-              "answer": true,
-              "explanation": "A negative length value reduces the default spacing. Use sparingly — too negative makes text illegible."
-            },
-            {
-              "id": "quiz-css-s50-q3",
-              "type": "multiple-choice",
-              "prompt": "What three declarations are required together for `text-overflow: ellipsis` to work?",
-              "options": [
-                "`white-space: nowrap`, `overflow: hidden`, `text-overflow: ellipsis`",
-                "`width: 100%`, `overflow: auto`, `text-overflow: ellipsis`",
-                "`display: block`, `overflow: hidden`, `text-overflow: clip`",
-                "`white-space: pre`, `overflow: visible`, `text-overflow: ellipsis`"
-              ],
-              "answer": 0,
-              "explanation": "The text must not wrap (`nowrap`), the overflow must be clipped (`hidden`), and then the ellipsis is inserted at the clip point. All three are mandatory."
-            },
-            {
-              "id": "quiz-css-s50-q4",
-              "type": "blank",
-              "prompt": "Which property indents only the first formatted line of a block container?",
-              "answers": [
-                "text-indent"
-              ],
-              "explanation": "`text-indent` affects the first line only. Subsequent lines are unaffected. Use a length or percentage of the containing block width."
-            },
-            {
-              "id": "quiz-css-s50-q5",
-              "type": "true-false",
-              "prompt": "`text-transform: uppercase` changes the actual text content in the DOM, so copy/paste yields uppercase text.",
-              "answer": false,
-              "explanation": "`text-transform` is purely presentational. The DOM retains the original casing; copy/paste and find-in-page use the original text."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Effects and motion"
       },
@@ -10678,64 +3950,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s51",
           "title": "CSS Web Fonts quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s51-q1",
-              "type": "multiple-choice",
-              "prompt": "You add a correct `@font-face` rule but the page still renders in the fallback. What is the most likely cause?",
-              "options": [
-                "The file is in the wrong format",
-                "Nothing ever uses the `font-family` you declared on the face",
-                "`font-display` has to be set to `block`",
-                "`@font-face` only works inside a media query"
-              ],
-              "answer": 1,
-              "explanation": "A face is only a registration. Nothing is downloaded until an element is rendered with that family name. The rule parsed fine, which is why there is no error anywhere."
-            },
-            {
-              "id": "quiz-css-s51-q2",
-              "type": "true-false",
-              "prompt": "Naming a font family that was never declared causes an error or falls back to a default font for the whole page.",
-              "answer": false,
-              "explanation": "An unknown family is silently skipped and the browser moves to the next name in the stack. That is exactly why the stack exists, and why a typo in one family name degrades quietly instead of breaking the page."
-            },
-            {
-              "id": "quiz-css-s51-q3",
-              "type": "blank",
-              "prompt": "Which value of `font-display` means the browser will use the fallback for the whole page if the font is not ready almost immediately, and will never swap to it later?",
-              "answers": [
-                "optional"
-              ],
-              "explanation": "`optional` gives the font a very brief window and otherwise commits to the fallback for that page view. It is the choice when layout stability matters more than the exact typeface."
-            },
-            {
-              "id": "quiz-css-s51-q4",
-              "type": "multiple-choice",
-              "prompt": "Why does `swap` sometimes make the whole page jump when the web font arrives?",
-              "options": [
-                "The browser reflows because the fallback and the web font have different metrics",
-                "`swap` forces a reload once the font is cached",
-                "The font file is decoded twice",
-                "Only the first paragraph ever uses the custom font"
-              ],
-              "answer": 0,
-              "explanation": "Line boxes are sized by the font in use at render time. When a wider or narrower face replaces the fallback, the height and wrapping of every line change, so everything below shifts. Matching the fallback metrics with `size-adjust` and the `ascent`/`descent` overrides removes most of the jump."
-            },
-            {
-              "id": "quiz-css-s51-q5",
-              "type": "identify-error",
-              "prompt": "What is the mistake in this declaration?",
-              "code": "@font-face {\n  font-family: Course Sans;\n  src: url(\"/fonts/course-sans.woff2\");\n  font-weight: 400;\n}",
-              "options": [
-                "`font-weight` cannot be set on a face",
-                "A multi-word `font-family` must be quoted, otherwise it is read as several separate family names",
-                "`src` needs a `format()` function",
-                "The file path has to be absolute from the site root without a leading slash"
-              ],
-              "answer": 1,
-              "explanation": "An unquoted `Course Sans` is parsed as two family names, `Course` and `Sans`. The face then registers under the wrong name and nothing that references `Course Sans` will match. The same trap applies to any family name with a space."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Effects and motion"
       },
@@ -10763,64 +3978,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s52",
           "title": "CSS 2D Transforms quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s52-q1",
-              "type": "multiple-choice",
-              "prompt": "An element is `position: absolute` with `top: 0; left: 0` and you add `transform: translate(-50%, -50%)`. What does that centre it on?",
-              "options": [
-                "The centre of its own containing block",
-                "The centre of the viewport",
-                "Its own top-left corner",
-                "The centre of its nearest positioned ancestor's padding box"
-              ],
-              "answer": 0,
-              "explanation": "Percentages in `translate` resolve against the element's own size, so this pulls it up and left by half its width and height from its own top-left, which lands it in the middle of wherever it was placed. Pair it with `left: 50%; top: 50%` to centre on the containing block."
-            },
-            {
-              "id": "quiz-css-s52-q2",
-              "type": "true-false",
-              "prompt": "Rotating an element with a transform makes the space it occupies in the layout grow to match its new shape.",
-              "answer": false,
-              "explanation": "Layout keeps the original, untransformed box. That is why a rotated card can overlap its neighbours and why a transform cannot be used to make room. Anything that needs to affect layout must use a real layout property."
-            },
-            {
-              "id": "quiz-css-s52-q3",
-              "type": "blank",
-              "prompt": "Which property decides the point a transform rotates and scales around?",
-              "answers": [
-                "transform-origin"
-              ],
-              "explanation": "`transform-origin` sets the pivot and defaults to the centre of the box. Setting it to a corner turns the same `rotate()` into a hinge or a door-swing, which is the whole trick behind many accordion and expander animations."
-            },
-            {
-              "id": "quiz-css-s52-q4",
-              "type": "multiple-choice",
-              "prompt": "Which is the correct way to make an element a little wider without disturbing what is inside it?",
-              "options": [
-                "`transform: scaleX(1.2)`, because scaling an axis does not move it",
-                "`transform: scaleX(1.2)`, because scaling happens from the transform origin",
-                "`width: 120%`, because transforms cannot change width",
-                "`skewX(1.2)`, which is the horizontal scale function"
-              ],
-              "answer": 1,
-              "explanation": "Scale happens around the origin, so `scaleX` widens the box symmetrically about that point and the content inside is stretched along with it. If you need the content to stay undistorted while only the frame changes, you need a real layout property such as `width`, not a transform."
-            },
-            {
-              "id": "quiz-css-s52-q5",
-              "type": "identify-error",
-              "prompt": "This is meant to centre a badge on the top-right corner of a card. What is wrong?",
-              "code": ".badge {\n  position: absolute;\n  top: 0;\n  right: 0;\n  transform: translate(50%, -50%);\n}",
-              "options": [
-                "Percentages in `translate` are not allowed",
-                "The sign is inverted, so it moves away from the corner it should sit on",
-                "`right: 0` cannot be combined with `top`",
-                "A transform needs a `transform-origin` to be applied"
-              ],
-              "answer": 1,
-              "explanation": "With `top: 0; right: 0` the box's top-right corner is already at the corner, so it needs to move right and up by half its own size: `translate(50%, -50%)` would send it outward and down. As written the badge hangs off the card and below the top edge."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Effects and motion"
       },
@@ -10848,64 +4006,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s53",
           "title": "CSS 3D Transforms quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s53-q1",
-              "type": "multiple-choice",
-              "prompt": "A child is rotated on the Y axis but appears completely flat, with no sense of depth. Which declaration is most likely missing from the parent?",
-              "options": [
-                "`perspective`",
-                "`transform-style: preserve-3d`",
-                "`backface-visibility: hidden`",
-                "`perspective-origin: center`"
-              ],
-              "answer": 1,
-              "explanation": "`perspective` only affects the element it is set on. Without `transform-style: preserve-3d` on the parent, its children are flattened onto the parent's plane before painting, so their own 3D position is thrown away."
-            },
-            {
-              "id": "quiz-css-s53-q2",
-              "type": "true-false",
-              "prompt": "An element with `perspective: 500px` and no transform of its own still looks different from one with no perspective at all.",
-              "answer": false,
-              "explanation": "Perspective only changes how a 3D transformation is projected. With no transform there is nothing to project, so the box is drawn as an ordinary rectangle either way."
-            },
-            {
-              "id": "quiz-css-s53-q3",
-              "type": "blank",
-              "prompt": "Which property hides an element once it has been rotated so that it faces away from the viewer?",
-              "answers": [
-                "backface-visibility"
-              ],
-              "explanation": "`backface-visibility: hidden` skips painting the element when its back is toward the viewer. Without it, a card flipped with `rotateY(180deg)` shows a mirrored copy of its own front instead of nothing."
-            },
-            {
-              "id": "quiz-css-s53-q4",
-              "type": "multiple-choice",
-              "prompt": "How does `rotateY()` move an element compared with `rotateX()`?",
-              "options": [
-                "`rotateY` tips it forward and back; `rotateX` swings it left and right",
-                "`rotateY` swings it left and right; `rotateX` tips it forward and back",
-                "They are identical, differing only in axis order",
-                "`rotateY` moves it along the Z axis; `rotateX` moves it along the Y axis"
-              ],
-              "answer": 1,
-              "explanation": "Rotation happens around an axis, named for the axis that stays still. `rotateY` leaves the vertical axis fixed and swings the element left and right like a door; `rotateX` leaves the horizontal axis fixed and tips it toward or away from you."
-            },
-            {
-              "id": "quiz-css-s53-q5",
-              "type": "identify-error",
-              "prompt": "This card flip has no visible effect. What is the mistake?",
-              "code": ".stage {\n  overflow: hidden;\n}\n\n.card {\n  transform: rotateY(180deg);\n}\n\n.face {\n  backface-visibility: hidden;\n}",
-              "options": [
-                "`backface-visibility` has to be set on the card, not on the faces",
-                "`overflow: hidden` on the ancestor flattens the 3D subtree, so the depth never renders",
-                "A rotation needs `transform-style: flat` to be visible",
-                "The rotation angle must be a `px` value"
-              ],
-              "answer": 1,
-              "explanation": "An ancestor whose `overflow` is anything other than `visible` forces the subtree to be flattened, which cancels the 3D effect no matter what the card declares. Move the clipping inside the card, or drop it and clip the faces individually."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Effects and motion"
       },
@@ -10933,65 +4034,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s54",
           "title": "CSS Transitions quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s54-q1",
-              "type": "multiple-choice",
-              "prompt": "A button has `transition: color 0.3s ease` on its base rule and changes colour on `:hover`. When the pointer arrives, the colour changes instantly. What is wrong?",
-              "options": [
-                "Nothing, that is how transitions work",
-                "A transition must also be declared inside the `:hover` rule",
-                "`transition` was misspelled",
-                "The element needs `display: inline-block` to animate"
-              ],
-              "answer": 0,
-              "explanation": "This is correct behaviour. A transition interpolates between two *computed* values, and it cannot animate from \"no colour\" to a colour. Declare the base colour explicitly, as the reset already does here, and only the `:hover` value differs."
-            },
-            {
-              "id": "quiz-css-s54-q2",
-              "type": "true-false",
-              "prompt": "`display` can be transitioned smoothly from `flex` to `block` with a 0.3 second duration.",
-              "answer": false,
-              "explanation": "`display` is a keyword rather than a computable number, so there is nothing to interpolate. The browser swaps it at the end of the duration instead of fading. Use opacity or the `@starting-style` and `transition-behavior: allow-discrete` pairing when you need a real fade on a discrete property."
-            },
-            {
-              "id": "quiz-css-s54-q3",
-              "type": "blank",
-              "prompt": "Which timing function is the better default for interface feedback, because the change starts immediately and then settles?",
-              "answers": [
-                "ease-out",
-                "easeout"
-              ],
-              "explanation": "`ease-out` front-loads the movement, so the interface feels like it responded at once and then comes to rest. The default `ease` is symmetrical and feels slightly sluggish at the start."
-            },
-            {
-              "id": "quiz-css-s54-q4",
-              "type": "multiple-choice",
-              "prompt": "What is the practical problem with `transition: all 0.3s`?",
-              "options": [
-                "It is a syntax error and is ignored",
-                "It also animates properties you did not intend, including ones that force layout on every frame",
-                "It only works on transform and opacity",
-                "It disables transitions on child elements"
-              ],
-              "answer": 1,
-              "explanation": "`all` covers every animatable property, so a later change to `width`, `height` or `margin` gets animated too, forcing a reflow per frame. Naming the properties you mean is faster and predictable."
-            },
-            {
-              "id": "quiz-css-s54-q5",
-              "type": "identify-error",
-              "prompt": "The colour is meant to ease in over 300ms, but it snaps. What is the error?",
-              "code": ".badge {\n  background: #1d2531;\n}\n\n.badge:hover {\n  background: #29e2bd;\n  transition: background 300ms ease;\n}",
-              "options": [
-                "`background` is not animatable, so use `background-color`",
-                "The duration should be written in seconds",
-                "The transition has to be declared before the hover rule",
-                "Hover does not trigger transitions on backgrounds"
-              ],
-              "answer": 0,
-              "explanation": "Two things are wrong, but the first is the reason it snaps: `background` is a shorthand, and the transition is watching the shorthand rather than a specific longhand, which browsers handle inconsistently. Transition `background-color` and declare it on the base rule as well as in the hover state."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Effects and motion"
       },
@@ -11019,64 +4062,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s55",
           "title": "CSS Animations quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s55-q1",
-              "type": "multiple-choice",
-              "prompt": "An element has `animation-name: pulse` on an element with `animation-duration` never set. What happens?",
-              "options": [
-                "The animation runs once and stops",
-                "Nothing visible happens, because the duration defaults to 0s",
-                "The browser picks a reasonable default duration",
-                "The animation runs infinitely"
-              ],
-              "answer": 1,
-              "explanation": "`animation-duration` defaults to `0s`, so there is no time to interpolate over and the animation completes on the first frame. This is the most common reason a keyframe animation appears not to work."
-            },
-            {
-              "id": "quiz-css-s55-q2",
-              "type": "true-false",
-              "prompt": "`animation-fill-mode: forwards` keeps the element at the last keyframe after the animation has finished.",
-              "answer": true,
-              "explanation": "`forwards` applies the final keyframe's styles once the active period ends, so the element holds its end state. Use `none` (the default) if you want it to snap back to its own styles when the animation ends."
-            },
-            {
-              "id": "quiz-css-s55-q3",
-              "type": "blank",
-              "prompt": "Which `animation-direction` value makes a looping animation play backwards on every second pass, so it does not snap back?",
-              "answers": [
-                "alternate"
-              ],
-              "explanation": "`alternate` reverses direction each iteration, so a pulse eases out and eases back rather than jumping to the start. `reverse` runs every iteration backwards, and `normal` snaps between the two ends."
-            },
-            {
-              "id": "quiz-css-s55-q4",
-              "type": "multiple-choice",
-              "prompt": "Which is the correct rule for an infinite decorative loop?",
-              "options": [
-                "Leave it as it is; the browser skips motion for users who asked for reduced motion",
-                "Wrap the animation in `@media (prefers-reduced-motion: reduce)` and set `animation: none`",
-                "Set `animation-duration: 1ms` instead",
-                "Add `pointer-events: none`"
-              ],
-              "answer": 1,
-              "explanation": "Reduced motion is an operating system setting, and CSS exposes it as a media feature. Authoring the animation once and cancelling it inside the query keeps the decision in one place and means every animation in the codebase gets the same treatment."
-            },
-            {
-              "id": "quiz-css-s55-q5",
-              "type": "identify-error",
-              "prompt": "This toast is supposed to slide in once and stay. It vanishes instead. Why?",
-              "code": "@keyframes slide-in {\n  from { transform: translateX(-100%); }\n  to   { transform: translateX(0); }\n}\n\n.toast {\n  animation: slide-in 300ms ease-out;\n}",
-              "options": [
-                "`translateX` cannot be used in a keyframe",
-                "Without `animation-fill-mode: forwards` the element returns to its own styles once the animation ends, which drops the transform",
-                "The duration is too short",
-                "Keyframes must be defined after the element that uses them"
-              ],
-              "answer": 1,
-              "explanation": "The default `fill-mode` is `none`, so once the 300ms is over the animation stops contributing styles and the element goes back to whatever its own rules say, with no transform applied. Adding `forwards` keeps it at the last keyframe."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Effects and motion"
       },
@@ -11104,66 +4090,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s56",
           "title": "CSS Tooltips quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s56-q1",
-              "type": "multiple-choice",
-              "prompt": "A tooltip appears in the wrong place, far from its button. The bubble is `position: absolute` and the wrapper has no positioning. What is missing?",
-              "options": [
-                "A `z-index` on the bubble",
-                "`position: relative` on the wrapper, so the bubble resolves against it",
-                "A width on the bubble",
-                "`overflow: visible` on the body"
-              ],
-              "answer": 1,
-              "explanation": "An absolutely positioned element resolves against its nearest *positioned* ancestor. Without one it walks up to the initial containing block, which is why the bubble lands somewhere unrelated to its trigger."
-            },
-            {
-              "id": "quiz-css-s56-q2",
-              "type": "true-false",
-              "prompt": "A tooltip hidden with only `opacity: 0` is still reachable by keyboard, because it is invisible.",
-              "answer": false,
-              "explanation": "Opacity hides pixels, not elements. The element stays in the accessibility tree and still takes focus if it is focusable, so a screen reader can land on something the sighted user cannot see. Use `visibility: hidden` to remove it properly."
-            },
-            {
-              "id": "quiz-css-s56-q3",
-              "type": "blank",
-              "prompt": "Which pseudo-class matches an element whenever anything inside it has focus, which is what a tooltip wrapper needs?",
-              "answers": [
-                ":focus-within",
-                "focus-within",
-                ":focuswithin"
-              ],
-              "explanation": "`:focus-within` matches the container rather than the focused element itself, so a wrapper holding a button picks it up as soon as the button is focused. `:focus-visible` matches only the focused element, which is useful for styling the trigger but not for the wrapper."
-            },
-            {
-              "id": "quiz-css-s56-q4",
-              "type": "multiple-choice",
-              "prompt": "What does the native `title` attribute do that a CSS tooltip cannot easily do?",
-              "options": [
-                "It can be styled with CSS",
-                "It can contain a link",
-                "Nothing much: the browser supplies the bubble for free, but it cannot be styled and does not appear on touch",
-                "It appears instantly on hover"
-              ],
-              "answer": 2,
-              "explanation": "`title` is the cheapest option and is a reasonable supplement, but it has a deliberate delay, cannot be styled, and is absent on touch devices. It is a fallback, not a design system."
-            },
-            {
-              "id": "quiz-css-s56-q5",
-              "type": "identify-error",
-              "prompt": "Screen readers announce \"Save, Saved to this device\" as one label, and tapping the button sometimes does nothing. Why?",
-              "code": "<button type=\"button\" class=\"trigger\">\n  Save\n  <span class=\"hint\">Saved to this device</span>\n</button>",
-              "options": [
-                "The hint needs a higher z-index",
-                "The hint is nested inside the button, so it joins the button's accessible name and swallows taps on it",
-                "`type=\"button\"` prevents tooltips working",
-                "The hint must come before the label text"
-              ],
-              "answer": 1,
-              "explanation": "Everything inside a button is part of its label for assistive technology, so the bubble gets announced as button text. It also sits inside the hit area. Make the bubble a sibling of the button inside a positioned wrapper."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Effects and motion"
       },
@@ -11191,66 +4118,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s57",
           "title": "CSS Style Images quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s57-q1",
-              "type": "multiple-choice",
-              "prompt": "What is the difference between `border-radius: 50%` and `border-radius: 9999px` on a 200px by 60px box?",
-              "options": [
-                "They are identical, because 9999px is clamped to the box size",
-                "`50%` resolves per axis and gives an ellipse on the long axis, while `9999px` is clamped to half the shorter side and gives a pill",
-                "`9999px` is invalid and is ignored",
-                "`50%` applies only to the corners and `9999px` applies to the whole box"
-              ],
-              "answer": 1,
-              "explanation": "A percentage radius resolves against each axis separately, so the corners are elliptical on a non-square box. An absolute length is clamped to half the shorter side, which is what produces the stadium shape people actually mean by \"pill\"."
-            },
-            {
-              "id": "quiz-css-s57-q2",
-              "type": "true-false",
-              "prompt": "`opacity: 0.5` and `filter: grayscale(0.5)` are two ways of writing the same thing.",
-              "answer": false,
-              "explanation": "Opacity makes the element see-through, blending with whatever is behind it. A grayscale filter only drains colour from the element's own pixels and stays fully opaque."
-            },
-            {
-              "id": "quiz-css-s57-q3",
-              "type": "blank",
-              "prompt": "Which filter function follows the shape of the content rather than drawing a rectangle, so it works on an icon or a letter?",
-              "answers": [
-                "drop-shadow",
-                "dropshadow",
-                "drop-shadow()"
-              ],
-              "explanation": "`drop-shadow()` operates on the alpha channel, so the shadow traces the outline of the glyph or icon. `box-shadow` only ever draws a rectangle, which is why icons so often end up with a rectangular smudge behind them."
-            },
-            {
-              "id": "quiz-css-s57-q4",
-              "type": "multiple-choice",
-              "prompt": "A tile is grey until hovered, then snaps to full colour. What is missing?",
-              "options": [
-                "A `border-radius` on the tile",
-                "A transition on the filter, declared on the base rule",
-                "A higher z-index on the hover state",
-                "`filter: none` in the base rule instead of `:hover`"
-              ],
-              "answer": 1,
-              "explanation": "Without a transition the two states change instantly, which reads as a flicker rather than an effect. Put `transition: filter 0.3s` on the base rule so the change is animated in both directions."
-            },
-            {
-              "id": "quiz-css-s57-q5",
-              "type": "identify-error",
-              "prompt": "The pill-shaped button has square corners on its parent background. What is wrong?",
-              "code": ".pill {\n  border-radius: 9999px;\n}\n\n.card {\n  background: #29e2bd;\n  padding: 0.5rem;\n}",
-              "options": [
-                "The parent needs the same radius, or an `overflow: hidden`, for its background to follow the curve",
-                "`border-radius` does not work on background colours",
-                "The radius has to be written as a percentage",
-                "`padding` prevents the background from rounding"
-              ],
-              "answer": 0,
-              "explanation": "A radius only rounds the box it is applied to. The parent paints its own rectangle, so unless it shares the radius or clips its overflow, its background stays square behind the curved child."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Images and UI details"
       },
@@ -11278,67 +4146,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s58",
           "title": "CSS Image Reflection quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s58-q1",
-              "type": "multiple-choice",
-              "prompt": "A reflection appears but ends on a hard visible edge. What is missing from the declaration?",
-              "options": [
-                "A mask gradient on the reflection",
-                "A larger `border-radius`",
-                "A `z-index` value",
-                "`overflow: hidden` on the parent"
-              ],
-              "answer": 0,
-              "explanation": "The mirror is a full duplicate by default, so it stops abruptly where it is clipped. A gradient mask from `transparent` to a partly opaque colour is what makes it read as a reflection rather than as a second copy."
-            },
-            {
-              "id": "quiz-css-s58-q2",
-              "type": "true-false",
-              "prompt": "`-webkit-box-reflect` is a fully standardised property supported without a prefix in every current browser.",
-              "answer": false,
-              "explanation": "It is not in any specification. Every current engine happens to support it behind the prefix, which makes it usable in practice, but a linter will flag the unknown property and a future engine is under no obligation to keep it."
-            },
-            {
-              "id": "quiz-css-s58-q3",
-              "type": "blank",
-              "prompt": "In `-webkit-box-reflect: below 8px ...`, what does the `8px` control?",
-              "answers": [
-                "the gap",
-                "gap",
-                "the distance between the element and its reflection",
-                "the offset"
-              ],
-              "explanation": "The length is the space between the element and the mirror. It is part of the reflect effect rather than a margin, so it does not shift the element or affect the space it occupies in layout."
-            },
-            {
-              "id": "quiz-css-s58-q4",
-              "type": "multiple-choice",
-              "prompt": "You build the fallback with a duplicated element and `transform: scaleY(-1)`. What must you also do?",
-              "options": [
-                "Give the copy `position: fixed`",
-                "Hide the duplicate from assistive technology, because it is announced twice",
-                "Set `filter: blur(1px)` on the original",
-                "Remove the original element from the DOM"
-              ],
-              "answer": 1,
-              "explanation": "A decorative mirror carries no information, so it should be `aria-hidden=\"true\"` (and ideally `alt=\"\"` if it is an image). Otherwise a screen reader reads the same content twice."
-            },
-            {
-              "id": "quiz-css-s58-q5",
-              "type": "identify-error",
-              "prompt": "This is meant to put the reflection above the logo. What is wrong?",
-              "code": ".logo {\n  box-reflect: above 6px;\n}",
-              "options": [
-                "The property name is missing its `-webkit-` prefix, so the whole declaration is dropped",
-                "`above` is not a valid direction",
-                "The gap must be written as a percentage",
-                "A reflection needs `position: relative`"
-              ],
-              "answer": 0,
-              "explanation": "The property has only ever shipped under the `-webkit-` prefix, so the unprefixed name is an unknown property and is discarded. Write `-webkit-box-reflect: above 6px`."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Images and UI details"
       },
@@ -11366,66 +4174,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s59",
           "title": "CSS object-fit quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s59-q1",
-              "type": "multiple-choice",
-              "prompt": "An `img` has `object-fit: cover` set but the picture is still stretched. What is the most likely reason?",
-              "options": [
-                "`object-fit` only applies to `background-image`",
-                "The image has no definite width or height, so it lays out at its intrinsic size and there is no mismatch to resolve",
-                "The file has to be a JPEG",
-                "The parent needs `position: relative`"
-              ],
-              "answer": 1,
-              "explanation": "With no size of its own the image occupies exactly its intrinsic box, so the fit mode has nothing to do. `object-fit` becomes visible the moment you give the element explicit `width` and `height`."
-            },
-            {
-              "id": "quiz-css-s59-q2",
-              "type": "true-false",
-              "prompt": "`object-fit: contain` guarantees that nothing is cropped, and `object-fit: cover` guarantees that no empty space is left.",
-              "answer": true,
-              "explanation": "That is exactly the tradeoff. `contain` shrinks until the whole image fits, leaving letterbox space. `cover` grows until the box is full, cutting off the overflow."
-            },
-            {
-              "id": "quiz-css-s59-q3",
-              "type": "blank",
-              "prompt": "Which value of `object-fit` guarantees the content is never scaled up, only down to fit?",
-              "answers": [
-                "scale-down",
-                "scale down",
-                "scaledown"
-              ],
-              "explanation": "`scale-down` acts as `none` while the content is smaller than the box and as `contain` once it is larger, so it will never magnify a low-resolution image past its own pixels."
-            },
-            {
-              "id": "quiz-css-s59-q4",
-              "type": "multiple-choice",
-              "prompt": "A hero image has been squashed by a grid cell that is shorter than the picture. Which combination fixes it?",
-              "options": [
-                "Set an explicit `height` on the image and add `object-fit: cover`",
-                "Add `border-radius` to the image",
-                "Set `overflow: visible` on the grid item",
-                "Use `object-position: top`"
-              ],
-              "answer": 0,
-              "explanation": "The fix is a definite box plus a fit mode. `cover` then fills that box and crops the overflow instead of squashing the whole picture into it."
-            },
-            {
-              "id": "quiz-css-s59-q5",
-              "type": "identify-error",
-              "prompt": "The crop is not happening. What is the mistake?",
-              "code": ".card {\n  height: 180px;\n  overflow: hidden;\n}\n\n.card img {\n  width: 100%;\n  object-fit: cover;\n}",
-              "options": [
-                "`height: auto` is missing from the image",
-                "Only `width` is set, so the image still lays out at its intrinsic height and `cover` has no mismatch to resolve",
-                "`overflow: hidden` on the parent cancels out `object-fit`",
-                "`object-fit` must be set on the parent, not the image"
-              ],
-              "answer": 1,
-              "explanation": "The parent being a fixed height is not enough; the replaced element needs its own definite height. Add `height: 100%` or `height: 180px` to the `img` and the crop appears."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Images and UI details"
       },
@@ -11453,67 +4202,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s60",
           "title": "CSS object-position quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s60-q1",
-              "type": "multiple-choice",
-              "prompt": "Which set of keywords is valid for `object-position`?",
-              "options": [
-                "`top`, `right`, `bottom`, `left`, plus `center`",
-                "`start`, `end`, `top`, `bottom`",
-                "Any CSS keyword, since it shares the grammar with `background-position`",
-                "Only `top-left`, `top-right`, `bottom-left`, `bottom-right`"
-              ],
-              "answer": 0,
-              "explanation": "The four edge keywords plus `center` are the whole set. There is no `top-left`: that position is written as two keywords, `top left`, and the order does not matter."
-            },
-            {
-              "id": "quiz-css-s60-q2",
-              "type": "true-false",
-              "prompt": "A centred `object-fit: cover` crop is a safe default for portrait photographs, because the subject is usually in the middle.",
-              "answer": false,
-              "explanation": "A centred crop cuts heads off, because the interesting part of a portrait is near the top of the frame rather than in its middle. `object-position: top` survives far more crop ratios."
-            },
-            {
-              "id": "quiz-css-s60-q3",
-              "type": "blank",
-              "prompt": "What does `object-position: 50% 50%` mean, and what is it equivalent to?",
-              "answers": [
-                "center",
-                "centre",
-                "the centre",
-                "centered"
-              ],
-              "explanation": "Fifty percent on both axes is the centred position, and it is the initial value. Note that percentages here resolve against the overflow rather than against the image itself."
-            },
-            {
-              "id": "quiz-css-s60-q4",
-              "type": "multiple-choice",
-              "prompt": "Why is a percentage anchor usually better than a fixed pixel offset?",
-              "options": [
-                "Percentages are the only valid syntax for the vertical axis",
-                "The anchor stays on the same relative part of the subject at any crop size, so it survives being shown at several different aspect ratios",
-                "Pixels do not work on replaced elements",
-                "Percentages ignore object-fit"
-              ],
-              "answer": 1,
-              "explanation": "A percentage is relative to the overflow, so `20% 20%` tracks the same point of the subject whether the card is 80 or 800 pixels wide. A fixed length drifts as the crop changes and stops lining up."
-            },
-            {
-              "id": "quiz-css-s60-q5",
-              "type": "identify-error",
-              "prompt": "The crop position is ignored. What is wrong?",
-              "code": ".thumb {\n  width: 120px;\n  height: 120px;\n  object-position: 50% 0%;\n}",
-              "options": [
-                "The value is invalid, because percentages cannot be mixed with object-fit",
-                "The property is on the wrapper rather than on the `img` itself",
-                "`object-position` requires `position: absolute`",
-                "The anchor should be a length, not a percentage"
-              ],
-              "answer": 1,
-              "explanation": "`object-position` applies to the replaced element, so it has to be on the `img` or `video`. Put it on the container and it describes the container's own replaced content, of which there is none."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Images and UI details"
       },
@@ -11541,64 +4230,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s61",
           "title": "CSS Buttons quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s61-q1",
-              "type": "multiple-choice",
-              "prompt": "Why does a styled link need `display: inline-block`?",
-              "options": [
-                "To give it a wider click area",
-                "Because an inline box ignores vertical padding, so padding would not apply",
-                "To make it accept `cursor: pointer`",
-                "To remove the underline automatically"
-              ],
-              "answer": 1,
-              "explanation": "Vertical padding on a non-replaced inline element has no effect on layout. `inline-block` makes the box real so padding moves it."
-            },
-            {
-              "id": "quiz-css-s61-q2",
-              "type": "true-false",
-              "prompt": "Setting `outline: none` on `:focus` is safe as long as you style `:hover`.",
-              "answer": false,
-              "explanation": "Hover styling is invisible to keyboard users. Remove the outline only if you add a visible `:focus-visible` replacement."
-            },
-            {
-              "id": "quiz-css-s61-q3",
-              "type": "code-output",
-              "prompt": "What does this rule do?",
-              "code": ".btn { cursor: pointer; transition: background 0.15s ease; }",
-              "options": [
-                "Makes the button unclickable for 0.15s",
-                "Shows a pointer cursor and animates background colour changes over 150ms",
-                "Animates the button size over 150ms",
-                "Adds a 0.15s delay before the button responds"
-              ],
-              "answer": 1,
-              "explanation": "`transition` only names the property, the duration and the easing. It does not animate size or add input delay."
-            },
-            {
-              "id": "quiz-css-s61-q4",
-              "type": "blank",
-              "prompt": "Which pseudo-class styles the moment a button is held down?",
-              "answers": [
-                ":active"
-              ],
-              "explanation": "`:active` is the pressed state, usually paired with a small `transform` so the button appears to move."
-            },
-            {
-              "id": "quiz-css-s61-q5",
-              "type": "multiple-choice",
-              "prompt": "How do you make a button span the full width of its container?",
-              "options": [
-                "Set `width: auto` on it",
-                "Add `display: block; width: 100%;`",
-                "Add `flex: 1` to the parent",
-                "Add `margin: 0 auto` to it"
-              ],
-              "answer": 1,
-              "explanation": "A `<button>` is `inline-block` by default, so `width: 100%` needs `display: block` to fill the line."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Images and UI details"
       },
@@ -11626,64 +4258,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s62",
           "title": "CSS Pagination quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s62-q1",
-              "type": "multiple-choice",
-              "prompt": "How do you round only the first and last items of a pagination bar?",
-              "options": [
-                "Apply a large `border-radius` to every `.page`",
-                "Use `li:first-child .page` and `li:last-child .page`",
-                "Use `:first-of-type` on the `<ul>`",
-                "Set `overflow: hidden` on the list"
-              ],
-              "answer": 1,
-              "explanation": "Targeting the first and last list items and then their links keeps the rounding on the outer ends only."
-            },
-            {
-              "id": "quiz-css-s62-q2",
-              "type": "true-false",
-              "prompt": "`.active` is a CSS pseudo-class built into the language for marking the current page.",
-              "answer": false,
-              "explanation": "`.active` is a class name you invent in your markup. The only CSS pseudo-class of that name is `:active`, which means \"being pressed\"."
-            },
-            {
-              "id": "quiz-css-s62-q3",
-              "type": "multiple-choice",
-              "prompt": "Why does the current page link need `aria-current=\"page\"`?",
-              "options": [
-                "So CSS can style it with an attribute selector",
-                "So the link is excluded from the tab order",
-                "So assistive technology can announce which page you are on",
-                "So the browser scrolls to the top"
-              ],
-              "answer": 2,
-              "explanation": "Styling it is a side effect of the selector, not the point. The attribute exists so a screen reader announces \"current page\" out loud."
-            },
-            {
-              "id": "quiz-css-s62-q4",
-              "type": "code-output",
-              "prompt": "What is wrong with this markup?",
-              "code": "<ul class=\"pager\"><li><a href=\"#\">1</a><li><a href=\"#\" class=\"active\">2</a></ul>",
-              "options": [
-                "Nothing, it is valid",
-                "The `<li>` tags are never closed, so the list is malformed",
-                "A `<ul>` cannot contain `<li>` elements",
-                "The `.active` class has no matching CSS rule"
-              ],
-              "answer": 1,
-              "explanation": "`<li>` is not a void element — each one needs a closing tag. The bars in this lesson close every `<li>`."
-            },
-            {
-              "id": "quiz-css-s62-q5",
-              "type": "blank",
-              "prompt": "Which attribute labels the navigation landmark so a screen reader knows what the bar controls?",
-              "answers": [
-                "aria-label"
-              ],
-              "explanation": "`<nav aria-label=\"Pagination\">` names the landmark. Without it the reader just announces \"navigation\" with no context."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Images and UI details"
       },
@@ -11711,64 +4286,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s63",
           "title": "CSS Multiple Columns quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s63-q1",
-              "type": "multiple-choice",
-              "prompt": "What does `column-width: 16rem` do?",
-              "options": [
-                "Forces exactly one column 16rem wide",
-                "Asks for as many columns as fit, each at least 16rem wide",
-                "Sets each column to exactly 16rem regardless of space",
-                "Sets the gap between columns to 16rem"
-              ],
-              "answer": 1,
-              "explanation": "It is a minimum, not a fixed value. The browser adds columns while each one can stay at least 16rem wide."
-            },
-            {
-              "id": "quiz-css-s63-q2",
-              "type": "true-false",
-              "prompt": "Setting both `column-count` and `column-width` makes the count win outright.",
-              "answer": false,
-              "explanation": "`column-count` acts as a maximum. `column-width` can still reduce the count below it, which is why the two combine safely."
-            },
-            {
-              "id": "quiz-css-s63-q3",
-              "type": "code-output",
-              "prompt": "What does this rule stop from happening?",
-              "code": ".card { break-inside: avoid; }",
-              "options": [
-                "The card from being split across two columns",
-                "The card from ever being displayed",
-                "The card from having a background colour",
-                "The card from breaking out across all columns"
-              ],
-              "answer": 0,
-              "explanation": "`break-inside: avoid` tells the layout engine to move the whole box to the next column rather than divide it."
-            },
-            {
-              "id": "quiz-css-s63-q4",
-              "type": "multiple-choice",
-              "prompt": "How do you make a heading run across the full width above the columns?",
-              "options": [
-                "Set `column-span: all` on the heading",
-                "Set `column-count: 1` on the heading",
-                "Move the heading outside the multicol container",
-                "Set `position: absolute` on the heading"
-              ],
-              "answer": 0,
-              "explanation": "`column-span: all` lifts a descendant out of the column flow so it spans every column."
-            },
-            {
-              "id": "quiz-css-s63-q5",
-              "type": "blank",
-              "prompt": "Which property draws the hairline divider between columns? It takes width, style and colour.",
-              "answers": [
-                "column-rule"
-              ],
-              "explanation": "`column-rule` is the shorthand; `column-rule-width`, `-style` and `-color` are the long hands."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Images and UI details"
       },
@@ -11796,64 +4314,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s64",
           "title": "CSS User Interface quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s64-q1",
-              "type": "multiple-choice",
-              "prompt": "Which property recolours a checkbox without rebuilding it?",
-              "options": [
-                "`appearance: none`",
-                "`accent-color`",
-                "`caret-color`",
-                "`user-select`"
-              ],
-              "answer": 1,
-              "explanation": "`accent-color` re-tints checkboxes, radios, ranges and progress bars while the platform keeps every behaviour and state."
-            },
-            {
-              "id": "quiz-css-s64-q2",
-              "type": "true-false",
-              "prompt": "`cursor: pointer` makes an element actually perform an action when clicked.",
-              "answer": false,
-              "explanation": "`cursor` is purely a visual hint about what a click might do. The behaviour comes from the element type and the code behind it."
-            },
-            {
-              "id": "quiz-css-s64-q3",
-              "type": "code-output",
-              "prompt": "What does this rule do?",
-              "code": "textarea { resize: vertical; caret-color: #1f6feb; }",
-              "options": [
-                "Makes the textarea blue",
-                "Lets the textarea be dragged taller but not wider, and colours the text caret blue",
-                "Makes the textarea 1rem tall",
-                "Prevents the caret from blinking"
-              ],
-              "answer": 1,
-              "explanation": "`resize` limits the drag handle to one axis; `caret-color` sets the colour of the insertion caret inside the field."
-            },
-            {
-              "id": "quiz-css-s64-q4",
-              "type": "multiple-choice",
-              "prompt": "What is the main cost of `appearance: none`?",
-              "options": [
-                "The element disappears from the page",
-                "It stops working in older browsers only",
-                "You lose platform affordances and must rebuild focus, hover and checked states yourself",
-                "It changes the element type"
-              ],
-              "answer": 2,
-              "explanation": "Removing appearance removes the pressed depth, focus ring and disabled styling. Whatever you draw instead has to cover all of it."
-            },
-            {
-              "id": "quiz-css-s64-q5",
-              "type": "blank",
-              "prompt": "Which property stops a visitor from selecting the text of an element?",
-              "answers": [
-                "user-select"
-              ],
-              "explanation": "`user-select: none` makes text unselectable. Use it on button labels and chrome, not on content the reader may need to copy."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Images and UI details"
       },
@@ -11922,68 +4383,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s65",
           "title": "CSS Variables quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s65-q1",
-              "type": "multiple-choice",
-              "prompt": "How is a custom property declared?",
-              "options": [
-                "$brand: red;",
-                "--brand: red;",
-                "@brand: red;",
-                "var(--brand): red;"
-              ],
-              "answer": 1,
-              "explanation": "Custom properties are ordinary CSS properties whose names start with two dashes, and they are read back with `var()`."
-            },
-            {
-              "id": "quiz-css-s65-q2",
-              "type": "true-false",
-              "prompt": "If `var(--accent)` is used with no fallback and the variable is undefined, the declaration is discarded and the property falls back to its inherited or initial value.",
-              "answer": true,
-              "explanation": "The declaration is invalid at computed-value time. It does not fall back to the previous declaration in the same rule."
-            },
-            {
-              "id": "quiz-css-s65-q3",
-              "type": "code-output",
-              "prompt": "What colour is the text?",
-              "code": ":root {\n  --ink: #123456;\n}\n.card {\n  color: var(--ink);\n  background: var(--missing, #eeeeee);\n}",
-              "options": [
-                "Black, and a transparent background",
-                "#123456 text on a #eeeeee background",
-                "Inherited text colour on a #eeeeee background",
-                "Nothing — the rule is invalid because --missing is undefined"
-              ],
-              "answer": 1,
-              "explanation": "The fallback argument supplies `#eeeeee` for the undefined variable, so both declarations are valid."
-            },
-            {
-              "id": "quiz-css-s65-q4",
-              "type": "blank",
-              "prompt": "Complete the sentence: redefining a variable on an element re-themes that element and its ________.",
-              "answers": [
-                "descendants",
-                "subtree",
-                "children",
-                "whole subtree"
-              ],
-              "explanation": "Custom properties inherit, so a redefinition applies to the entire subtree beneath it."
-            },
-            {
-              "id": "quiz-css-s65-q5",
-              "type": "identify-error",
-              "prompt": "Why does this theme switch not work?",
-              "code": "el.style.setProperty('--size', 10)",
-              "options": [
-                "setProperty is not a real DOM method",
-                "The property name must be camelCase",
-                "The value must be a string, so a bare number is rejected",
-                "Custom properties cannot be set from JavaScript"
-              ],
-              "answer": 2,
-              "explanation": "Custom properties hold untyped strings, so `setProperty('--size', 10)` does nothing. Write `'10px'` with the unit inside the string."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Variables and media queries"
       },
@@ -12011,64 +4411,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s66",
           "title": "CSS Box Sizing quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s66-q1",
-              "type": "multiple-choice",
-              "prompt": "What is the default value of `box-sizing`?",
-              "options": [
-                "`border-box`",
-                "`content-box`",
-                "`padding-box`",
-                "`margin-box`"
-              ],
-              "answer": 1,
-              "explanation": "`content-box` is the default, which is why `width` measures only the content and padding and border are added on top."
-            },
-            {
-              "id": "quiz-css-s66-q2",
-              "type": "code-output",
-              "prompt": "How wide is the box, really?",
-              "code": ".box {\n  width: 200px;\n  padding: 20px;\n  border: 5px solid black;\n  box-sizing: content-box;\n}",
-              "options": [
-                "200px",
-                "240px",
-                "250px",
-                "190px"
-              ],
-              "answer": 2,
-              "explanation": "Content-box makes `width` the content only, so the outer width is 200 + 20 + 20 + 5 + 5 = 250px."
-            },
-            {
-              "id": "quiz-css-s66-q3",
-              "type": "true-false",
-              "prompt": "Adding padding to an element can make it wider than the width you declared.",
-              "answer": true,
-              "explanation": "Only under `content-box`. That is precisely the surprise the `border-box` reset exists to remove."
-            },
-            {
-              "id": "quiz-css-s66-q4",
-              "type": "blank",
-              "prompt": "Which single declaration, applied to the universal selector, makes declared widths include padding and border? Give the value only.",
-              "answers": [
-                "border-box"
-              ],
-              "explanation": "`* { box-sizing: border-box; }` is the reset nearly every project starts with."
-            },
-            {
-              "id": "quiz-css-s66-q5",
-              "type": "multiple-choice",
-              "prompt": "Why is `*` alone not quite enough in the reset?",
-              "options": [
-                "Because `*` has no specificity",
-                "Because generated content with `::before` and `::after` is a box too and needs it as well",
-                "Because `*` only matches elements, not pseudo-classes",
-                "Because `box-sizing` does not inherit"
-              ],
-              "answer": 1,
-              "explanation": "`::before` and `::after` generate boxes of their own, so the reset normally includes them explicitly."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Variables and media queries"
       },
@@ -12096,64 +4439,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s67",
           "title": "CSS Media Queries quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s67-q1",
-              "type": "multiple-choice",
-              "prompt": "What does `@media (min-width: 48rem)` mean?",
-              "options": [
-                "Apply only on screens narrower than 48rem",
-                "Apply when the viewport is at least 48rem wide",
-                "Apply only in portrait orientation",
-                "Apply on devices with a physical width of 48rem"
-              ],
-              "answer": 1,
-              "explanation": "`min-width` is inclusive of the value itself. It applies at 48rem and above, which is what makes it the mobile-first choice."
-            },
-            {
-              "id": "quiz-css-s67-q2",
-              "type": "true-false",
-              "prompt": "Two stacked `max-width` queries can both match at the same viewport width.",
-              "answer": true,
-              "explanation": "A viewport that is both 400px and 600px wide satisfies both conditions, so both blocks apply and you must resolve the conflict yourself."
-            },
-            {
-              "id": "quiz-css-s67-q3",
-              "type": "blank",
-              "prompt": "Which media feature lets you respond to a user who has asked for less motion? Give the feature name only.",
-              "answers": [
-                "prefers-reduced-motion"
-              ],
-              "explanation": "`@media (prefers-reduced-motion: reduce)` is the standard way to respect that request and disable animation."
-            },
-            {
-              "id": "quiz-css-s67-q4",
-              "type": "multiple-choice",
-              "prompt": "What is the best reason to add a breakpoint?",
-              "options": [
-                "A popular device is exactly that wide",
-                "The layout visibly breaks at that width",
-                "A framework requires it",
-                "It has been in the design file since 2010"
-              ],
-              "answer": 1,
-              "explanation": "Breakpoints should come from where your content stops working. Device widths are arbitrary and your content will change."
-            },
-            {
-              "id": "quiz-css-s67-q5",
-              "type": "code-output",
-              "prompt": "How many columns does the row have on a narrow screen?",
-              "code": ".row { display: grid; grid-template-columns: 1fr; }\n@media (min-width: 900px) {\n  .row { grid-template-columns: repeat(3, 1fr); }\n}",
-              "options": [
-                "3",
-                "1",
-                "4",
-                "0"
-              ],
-              "answer": 1,
-              "explanation": "Below the breakpoint only the base rule applies, so the row is a single column. Media query rules are additive, not replacements."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Variables and media queries"
       },
@@ -12181,64 +4467,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s68",
           "title": "CSS MQ Examples quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s68-q1",
-              "type": "multiple-choice",
-              "prompt": "Which of these reflows a grid with no media query at all?",
-              "options": [
-                "`grid-template-columns: repeat(3, 1fr)`",
-                "`grid-template-columns: repeat(auto-fit, minmax(140px, 1fr))`",
-                "`grid-template-columns: 100% 100%`",
-                "`display: inline-grid`"
-              ],
-              "answer": 1,
-              "explanation": "`auto-fit` with `minmax()` creates as many tracks as fit and collapses the rest, so the grid adapts continuously."
-            },
-            {
-              "id": "quiz-css-s68-q2",
-              "type": "code-output",
-              "prompt": "How wide is the heading at a viewport of 400px?",
-              "code": "h1 { font-size: clamp(2rem, 1rem + 4vw, 4rem); }",
-              "options": [
-                "2rem",
-                "2.64rem",
-                "4rem",
-                "4vw"
-              ],
-              "answer": 1,
-              "explanation": "The preferred value is 1rem + 4vw = 16px + 16px = 32px, which is 2rem. It sits between the bounds so it is used as is."
-            },
-            {
-              "id": "quiz-css-s68-q3",
-              "type": "true-false",
-              "prompt": "`clamp()` can only be used for font sizes.",
-              "answer": false,
-              "explanation": "It works on any length: `width`, `padding`, `gap` and `border-radius` all accept it. Fluid spacing is often more useful than fluid type."
-            },
-            {
-              "id": "quiz-css-s68-q4",
-              "type": "blank",
-              "prompt": "Which grid function creates as many columns as will fit, collapsing the leftovers? Give the function name only.",
-              "answers": [
-                "auto-fit"
-              ],
-              "explanation": "`auto-fit` collapses empty tracks so the remaining items stretch. `auto-fill` leaves the empty tracks in place instead."
-            },
-            {
-              "id": "quiz-css-s68-q5",
-              "type": "multiple-choice",
-              "prompt": "What is the strongest argument for preferring `flex-wrap` over a media query?",
-              "options": [
-                "It produces fewer bytes",
-                "Browsers render it faster",
-                "It needs no width in the stylesheet, so there is no breakpoint to maintain or get wrong",
-                "It works without JavaScript"
-              ],
-              "answer": 2,
-              "explanation": "A query introduces a hard-coded width that must be revisited whenever the content changes. Wrapping has no such coupling."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Variables and media queries"
       },
@@ -12310,65 +4539,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s69",
           "title": "CSS Flexbox quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s69-q1",
-              "type": "multiple-choice",
-              "prompt": "Which elements become flex items when you set `display: flex` on a parent?",
-              "options": [
-                "The parent's direct children only",
-                "Every descendant of the parent, at every depth",
-                "Only the children that are block-level elements",
-                "Any child that has a width set on it"
-              ],
-              "answer": 0,
-              "explanation": "Flex items are the direct children of the flex container. A grandchild lives inside a flex item and is laid out by its own parent's `display`, not by the outer flex context. This is why nesting a new `display: flex` deep inside a flex item starts a completely independent layout."
-            },
-            {
-              "id": "quiz-css-s69-q2",
-              "type": "true-false",
-              "prompt": "With `flex-direction: column`, the main axis runs from top to bottom.",
-              "answer": true,
-              "explanation": "Yes. `column` puts the main axis vertically and the cross axis horizontally, which means `justify-content` moves items up and down and `align-items` moves them left and right. Flip to `column-reverse` and the main axis runs bottom to top, so the same properties push items the other way."
-            },
-            {
-              "id": "quiz-css-s69-q3",
-              "type": "blank",
-              "prompt": "Which property makes the main axis run horizontally from right to left instead of left to right?",
-              "answers": [
-                "flex-direction: row-reverse",
-                "row-reverse"
-              ],
-              "explanation": "`flex-direction: row-reverse` reverses the start and end of the main axis without changing the DOM order of the items. `justify-content` still distributes along the main axis, but `flex-start` now means the right edge - which is a frequent source of confusion."
-            },
-            {
-              "id": "quiz-css-s69-q4",
-              "type": "multiple-choice",
-              "prompt": "Why is flexbox described as a one-dimensional layout model?",
-              "options": [
-                "Because it only works in one browser dimension such as width",
-                "Because it arranges items along one axis at a time, and stacks them along the other axis separately",
-                "Because it can only ever produce a single row or a single column",
-                "Because it cannot be nested inside another flexbox"
-              ],
-              "answer": 1,
-              "explanation": "Flexbox places items along the main axis first and then deals with the cross axis. It never tries to fill a two-dimensional area with tracked rows and columns, which is what CSS Grid is for. That single-axis focus is exactly why flexbox layouts are so predictable."
-            },
-            {
-              "id": "quiz-css-s69-q5",
-              "type": "identify-error",
-              "prompt": "This is meant to put a row of items on the left and a push-right button on the far right, but nothing changes. Why?",
-              "code": ".toolbar {\n  justify-content: space-between;\n}",
-              "options": [
-                "`space-between` only works on flex items, not on the container",
-                "The container is missing `display: flex`, so there is no flex context for `justify-content` to act on",
-                "`justify-content` was removed from the spec and is now `justify-items`",
-                "The children need `flex: 1` before `justify-content` has any effect"
-              ],
-              "answer": 1,
-              "explanation": "Every distribution and alignment property in flexbox is inert unless the element is actually a flex container. Without `display: flex` the children are ordinary blocks and `justify-content` has nothing to distribute. This is the number one reason a flexbox rule appears to be ignored."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Modern layout: flexbox, responsive and grid"
       },
@@ -12396,65 +4567,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s70",
           "title": "RWD Intro quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s70-q1",
-              "type": "multiple-choice",
-              "prompt": "What is the difference between a fluid layout and a responsive one?",
-              "options": [
-                "Fluid uses percentages, responsive uses pixels",
-                "Fluid stretches smoothly at every width; responsive additionally changes structure at defined widths",
-                "Fluid supports touch input, responsive supports a mouse",
-                "Fluid loads faster, responsive loads slower"
-              ],
-              "answer": 1,
-              "explanation": "Fluid describes stretching: one design, sized in percentages, which has to work at every width and therefore is always designed for the worst case. Responsive means the structure itself changes - columns become rows, sidebars move - so each size range gets a layout that is actually comfortable."
-            },
-            {
-              "id": "quiz-css-s70-q2",
-              "type": "true-false",
-              "prompt": "A layout should have a breakpoint at 768px because that is the width of a common tablet.",
-              "answer": false,
-              "explanation": "A breakpoint is a measurement of your content, not a device. You should add one at the width where your own layout breaks - a column too narrow to read, a line of text too short - and device lists go stale immediately and miss split-screen windows, browser sidebars and foldables."
-            },
-            {
-              "id": "quiz-css-s70-q3",
-              "type": "blank",
-              "prompt": "Name the three historical approaches to sizing a layout, from the oldest to the newest.",
-              "answers": [
-                "fixed, fluid, responsive",
-                "fixed, fluid, responsive design"
-              ],
-              "explanation": "Fixed used only pixels and had one design. Fluid replaced widths with percentages so the layout stretched. Responsive added structural change at defined widths on top of a fluid base, which is why it won: it can have many designs instead of one compromise."
-            },
-            {
-              "id": "quiz-css-s70-q4",
-              "type": "identify-error",
-              "prompt": "Which part of this approach is the problem?",
-              "code": ".card {\n  width: 60%;\n  min-width: 420px;\n}",
-              "options": [
-                "The percentage width should be `max-width` instead",
-                "The `min-width` floor makes the layout stop reflowing below 420px",
-                "`width` and `min-width` cannot be combined on one element",
-                "The value should be expressed in rem rather than px"
-              ],
-              "answer": 1,
-              "explanation": "The card is fluid in the strict sense - its width is a percentage - but the `min-width` gives it a floor below which it cannot shrink, and the text spills out. Fluid stretching only works if nothing is pinned."
-            },
-            {
-              "id": "quiz-css-s70-q5",
-              "type": "multiple-choice",
-              "prompt": "Why did responsive design displace fluid design?",
-              "options": [
-                "Fluid layouts were slower to render on mobile",
-                "Fluid layouts required JavaScript to resize",
-                "A fluid layout has one design that must survive every width, so it is always designed for the narrowest case",
-                "Fluid layouts could not be combined with web fonts"
-              ],
-              "answer": 2,
-              "explanation": "A single fluid design must work at 320px and at 2560px at the same time, so it is permanently compromised at one end. Responsive designs can have several designs, each comfortable in its own range, which is better for the reader and barely more work for the author."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Modern layout: flexbox, responsive and grid"
       },
@@ -12482,65 +4595,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s71",
           "title": "RWD Viewport quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s71-q1",
-              "type": "multiple-choice",
-              "prompt": "What happens on a phone when a page has no viewport meta tag?",
-              "options": [
-                "The page renders at the device width in CSS pixels",
-                "The browser uses a virtual viewport of roughly 980px and scales the rendered page down to fit the screen",
-                "The browser renders the page in a desktop layout mode with a scrollbar",
-                "The page falls back to a server-side mobile site"
-              ],
-              "answer": 1,
-              "explanation": "Without `width=device-width`, mobile browsers assume a wide legacy screen of about 980px and then scale everything down to fit the physical screen. The result is a desktop design rendered as a small unreadable page - which is exactly why a correct CSS layout still fails on a phone without this tag."
-            },
-            {
-              "id": "quiz-css-s71-q2",
-              "type": "true-false",
-              "prompt": "Adding `user-scalable=no` to the viewport tag is an acceptable way to stop a page zooming when a user taps a plain div.",
-              "answer": false,
-              "explanation": "It blocks pinch zoom, which is the primary magnification tool for low-vision readers, and it fails WCAG 1.4.4. The real fix is semantic: make the control a `<button>` or an `<a>`, and the browser stops treating the tap as a zoom gesture."
-            },
-            {
-              "id": "quiz-css-s71-q3",
-              "type": "blank",
-              "prompt": "Which single attribute makes the layout viewport equal to the physical screen width in CSS pixels?",
-              "answers": [
-                "width=device-width",
-                "device-width"
-              ],
-              "explanation": "`width=device-width` in the tag's `content` sets the layout viewport to the device width. Paired with `initial-scale=1` it gives one CSS pixel per device pixel, so media queries see the real screen width."
-            },
-            {
-              "id": "quiz-css-s71-q4",
-              "type": "identify-error",
-              "prompt": "Which part of this viewport tag is wrong?",
-              "code": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1\">",
-              "options": [
-                "`width=device-width` should be `width=screen-width`",
-                "`initial-scale=1` should be `initial-scale=100`",
-                "`user-scalable=no` and `maximum-scale=1` disable pinch zoom, which fails WCAG 1.4.4",
-                "The `name` should be `viewport` in capitals"
-              ],
-              "answer": 2,
-              "explanation": "The first two settings are correct and standard. The last two block the user from magnifying the page, which is an accessibility failure - WCAG 1.4.4 requires text to be scalable to 200% without loss of content or function."
-            },
-            {
-              "id": "quiz-css-s71-q5",
-              "type": "multiple-choice",
-              "prompt": "What does `viewport-fit=cover` do, and what does it oblige you to handle?",
-              "options": [
-                "It forces the page into landscape; you then need a landscape media query",
-                "It extends the layout into the notch and rounded corners, so you must pad with `env(safe-area-inset-*)`",
-                "It fixes the viewport at 375px; you then need `initial-scale`",
-                "It disables the browser UI; you then need `user-scalable=no`"
-              ],
-              "answer": 1,
-              "explanation": "`viewport-fit=cover` lets the background and content extend under the notch and rounded corners. Everything you do not want hidden there has to be padded away from the edges with the `safe-area-inset-*` environment values."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Modern layout: flexbox, responsive and grid"
       },
@@ -12568,64 +4623,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s72",
           "title": "RWD Grid View quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s72-q1",
-              "type": "multiple-choice",
-              "prompt": "A grid has four items and `repeat(auto-fit, minmax(9rem, 1fr))` resolves to five tracks. What happens to the fifth track?",
-              "options": [
-                "It is kept at zero width and the four items stay at their computed size",
-                "It is collapsed, and the four items each grow to an equal share of the full row",
-                "The fourth item wraps onto a second row",
-                "The grid drops from five tracks back to four"
-              ],
-              "answer": 1,
-              "explanation": "That is exactly what `auto-fit` does: tracks that end up with no item in them are collapsed to zero, and the remaining tracks - each defined as `minmax(9rem, 1fr)` - grow to take the freed space. Using `auto-fill` instead would keep the empty track and leave a visible gap."
-            },
-            {
-              "id": "quiz-css-s72-q2",
-              "type": "true-false",
-              "prompt": "In `minmax(18rem, 1fr)`, the `18rem` sets the narrowest a track may become before the grid drops a column.",
-              "answer": true,
-              "explanation": "`minmax()` sets a floor and a ceiling for each track. Once the container is too narrow to give every track its `18rem` floor, the grid resolves to one fewer track. That floor is the real breakpoint - the width at which your layout changes shape - and you should choose it from what the content needs."
-            },
-            {
-              "id": "quiz-css-s72-q3",
-              "type": "blank",
-              "prompt": "Which keyword in `repeat(?, minmax(18rem, 1fr))` makes the grid collapse tracks that contain no items?",
-              "answers": [
-                "auto-fit"
-              ],
-              "explanation": "`auto-fit` collapses empty tracks so the remaining ones fill the row. `auto-fill` keeps the empty tracks, which preserves the track rhythm but leaves a gap at the end of a partially filled row."
-            },
-            {
-              "id": "quiz-css-s72-q4",
-              "type": "identify-error",
-              "prompt": "Why does this grid look wrong?",
-              "code": ".cards {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));\n}\n.cards li:last-child {\n  grid-column: 1 / -1;\n}",
-              "options": [
-                "`grid-column` cannot be used on a list item",
-                "The last item is forced full width and destroys the responsive behaviour it was meant to complete",
-                "`minmax()` needs a `px` minimum rather than a `rem` one",
-                "`auto-fit` requires the container to have an explicit width"
-              ],
-              "answer": 1,
-              "explanation": "Forcing the final child to span `1 / -1` makes it the full container width at every viewport size, which is precisely the horizontal-stretch problem responsive layout exists to prevent. `auto-fit` already handles this - and the override wins over it, because it is a later, more specific rule."
-            },
-            {
-              "id": "quiz-css-s72-q5",
-              "type": "multiple-choice",
-              "prompt": "Why can a CSS Grid card layout be fully responsive with no media queries?",
-              "options": [
-                "Grid ignores the container width and always uses fixed track sizes",
-                "The browser recomputes the number of `auto-fit` tracks every time the container resizes, using the `minmax()` floor as the breakpoint",
-                "Media queries are applied automatically inside grid track lists",
-                "`1fr` makes each track scale proportionally to the font size"
-              ],
-              "answer": 1,
-              "explanation": "Track sizing is a live calculation. As the container narrows, tracks that cannot hold their `minmax()` minimum drop out, and `auto-fit` collapses the empties - so the layout reflows continuously with no breakpoints written anywhere. `1fr` means an equal share of the leftover space, nothing to do with font size."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Modern layout: flexbox, responsive and grid"
       },
@@ -12654,64 +4652,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s73",
           "title": "RWD Media Queries quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s73-q1",
-              "type": "multiple-choice",
-              "prompt": "What is the difference between a media type and a media feature?",
-              "options": [
-                "Types are obsolete; features are the modern replacement",
-                "The type describes the kind of output (screen, print); the feature describes a property of it (width, orientation)",
-                "Features only work inside `not` queries",
-                "A query can have either one or several types, never features"
-              ],
-              "answer": 1,
-              "explanation": "The media type answers \"what kind of output\": `screen`, `print`, `speech`. The media feature answers \"what about it\": `width`, `min-width`, `orientation`, `prefers-color-scheme`. `screen` is the default type, which is why `@media (min-width: 48rem)` is shorthand for the `screen and ...` form."
-            },
-            {
-              "id": "quiz-css-s73-q2",
-              "type": "true-false",
-              "prompt": "Writing media queries with `min-width` instead of `max-width` makes the stylesheet mobile first, which is generally the better default.",
-              "answer": true,
-              "explanation": "With `min-width` the base rules describe the narrow layout and each query adds to it. Nothing has to be reversed or undone, no query contradicts another, and a size in between the breakpoints can still be designed cleanly rather than only patched."
-            },
-            {
-              "id": "quiz-css-s73-q3",
-              "type": "blank",
-              "prompt": "Which single property contains both `screen` and the width test in the rule `@media screen and (min-width: 48rem)`?",
-              "answers": [
-                "and"
-              ],
-              "explanation": "`and` joins two conditions that must both hold. A comma would be a logical OR (the rule would apply on wide screens *or* on paper), and `not` negates the entire query rather than joining anything."
-            },
-            {
-              "id": "quiz-css-s73-q4",
-              "type": "multiple-choice",
-              "prompt": "Which query matches only between 640px and 1024px, and is written most clearly?",
-              "options": [
-                "@media (max-width: 640px) and (min-width: 1024px)",
-                "@media (40rem <= width < 64rem)",
-                "@media (width >= 40rem) and (width < 64rem)",
-                "@media not (width >= 64rem) and (width >= 40rem)"
-              ],
-              "answer": 1,
-              "explanation": "The modern range syntax expresses an interval in one readable comparison. The first option can never be true because no width is simultaneously at most 640px and at least 1024px. The range syntax is supported across all current browsers and removes the need to stack two queries."
-            },
-            {
-              "id": "quiz-css-s73-q5",
-              "type": "identify-error",
-              "prompt": "Why does this comment mislead the next developer?",
-              "code": "/* tablet layout */\n@media (max-width: 768px) {\n  .nav { display: flex; }\n}",
-              "options": [
-                "Media queries cannot use `max-width`",
-                "The query is named after a device rather than after what the layout does, and device widths go stale immediately",
-                "`display: flex` is not supported inside a media query",
-                "The comment should be above the rule, not inside it"
-              ],
-              "answer": 1,
-              "explanation": "768px is a hardware guess that says nothing about the design, and it is wrong for a 700px desktop window, a split-screen tablet and a foldable alike. Name the breakpoint after the behaviour - \"navigation becomes a single row\" - because that is still true after the devices change."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Modern layout: flexbox, responsive and grid"
       },
@@ -12740,65 +4681,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s74",
           "title": "RWD Images quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s74-q1",
-              "type": "multiple-choice",
-              "prompt": "Why does `height: auto` have to accompany `max-width: 100%` on an image?",
-              "options": [
-                "Because `height: auto` is what makes the image scale at all",
-                "Because without it the browser honours the height attribute and the scaled image is squashed",
-                "Because `max-width` is ignored on replaced elements without it",
-                "Because it removes the need for the width and height attributes"
-              ],
-              "answer": 1,
-              "explanation": "The browser reads the `height` attribute as a real height, so capping the width alone gives you a 260x173 box with 16:9 content stretched into it. `height: auto` makes the height derive from the width, which is what preserves the ratio."
-            },
-            {
-              "id": "quiz-css-s74-q2",
-              "type": "true-false",
-              "prompt": "Setting `sizes` correctly is optional, because the browser falls back to assuming the image fills the whole viewport.",
-              "answer": false,
-              "explanation": "The browser does fall back to 100vw, and that is exactly the problem: an image that renders 260px wide is treated as needing a full-width candidate, so phones download the large file. `sizes` is a media query list describing the real rendered width, and it is what makes `srcset` worthwhile."
-            },
-            {
-              "id": "quiz-css-s74-q3",
-              "type": "blank",
-              "prompt": "Which HTML element lets you serve a different crop of the same photograph on narrow screens?",
-              "answers": [
-                "picture",
-                "<picture>"
-              ],
-              "explanation": "`picture` wraps a set of `source` elements chosen by `media` or `type`, plus a mandatory `img` fallback that carries `alt`, `width` and `height`. It is the tool for art direction - different compositions per screen - whereas `srcset` on its own only switches resolution."
-            },
-            {
-              "id": "quiz-css-s74-q4",
-              "type": "identify-error",
-              "prompt": "What is wrong with this markup?",
-              "code": "<picture>\n  <source srcset=\"hero.avif\" type=\"image/avif\">\n  <img src=\"hero.jpg\" width=\"1600\" height=\"900\">\n</picture>",
-              "options": [
-                "Nothing: this is a correct AVIF fallback chain",
-                "The type attribute must come before srcset",
-                "The img needs loading=\"lazy\" to be valid",
-                "picture cannot contain a source without a media attribute"
-              ],
-              "answer": 0,
-              "explanation": "This is correct. The browser takes the first `source` whose `type` it supports, so an AVIF-capable browser gets the smaller file and everything else falls through to the `img`. Note what is missing though: the `alt` attribute, which is required."
-            },
-            {
-              "id": "quiz-css-s74-q5",
-              "type": "multiple-choice",
-              "prompt": "Your page jumps as images load, shifting the text down. Which change fixes that most directly?",
-              "options": [
-                "Add `loading=\"lazy\"` to every image",
-                "Add width and height attributes so the browser can reserve the box",
-                "Set `width: 100%` on all images",
-                "Convert the images to SVG"
-              ],
-              "answer": 1,
-              "explanation": "With `width` and `height` attributes the browser knows the aspect ratio before the file arrives, so it reserves the right height and nothing moves. `loading=\"lazy\"` helps initial load performance but does nothing about the shift for images already in view."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Modern layout: flexbox, responsive and grid"
       },
@@ -12826,65 +4709,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s75",
           "title": "RWD Videos quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s75-q1",
-              "type": "multiple-choice",
-              "prompt": "Why does the padding-top trick work for a 16:9 embed?",
-              "options": [
-                "Percentage padding resolves against the containing block width, and 56.25% of the width is 9/16 of it",
-                "Padding forces the browser to read the video file and measure it first",
-                "An iframe has no intrinsic size, so the browser guesses one",
-                "Padding-top overrides the width attribute on the iframe"
-              ],
-              "answer": 0,
-              "explanation": "Percentage padding is always resolved against the containing block *width*. A wrapper 640px wide gets 360px of top padding from `56.25%`, which is exactly the height a 640x360 video needs. Setting the wrapper height to 0 leaves that padding as the only contribution."
-            },
-            {
-              "id": "quiz-css-s75-q2",
-              "type": "true-false",
-              "prompt": "An iframe has an intrinsic aspect ratio, so it needs no wrapper element at all if you set `width: 100%`.",
-              "answer": false,
-              "explanation": "An iframe has no intrinsic ratio - it does not know what aspect it should be - so `width: 100%` gives you a 300px-tall letterbox of arbitrary height. That is why it needs a sized wrapper. Replaced elements such as `<img>` and `<video>` *do* know their ratio, which is why `max-width: 100%; height: auto` is enough for those."
-            },
-            {
-              "id": "quiz-css-s75-q3",
-              "type": "blank",
-              "prompt": "What percentage `padding-top` gives a wrapper a 16:9 shape?",
-              "answers": [
-                "56.25%",
-                "56.25"
-              ],
-              "explanation": "9/16 = 0.5625. Write the division in a comment next to the number - 4:3 is 75%, 1:1 is 100% - because nobody remembers these without checking."
-            },
-            {
-              "id": "quiz-css-s75-q4",
-              "type": "identify-error",
-              "prompt": "What is wrong with this wrapper?",
-              "code": ".ratio {\n  position: relative;\n  padding-top: 56.25%;\n}\n.ratio iframe {\n  width: 100%;\n  height: 320px;\n  border: 0;\n}",
-              "options": [
-                "The padding percentage is wrong for 16:9",
-                "The wrapper is missing height: 0, and the iframe is not absolutely positioned, so it stacks after the padding and doubles the height",
-                "A percentage padding-top is only valid on positioned elements",
-                "The iframe needs `aspect-ratio` rather than a fixed height"
-              ],
-              "answer": 1,
-              "explanation": "The hack needs both halves: `height: 0` so only the padding contributes to the wrapper height, and `position: absolute; inset: 0` on the child so it fills that padding instead of adding its own height underneath it. Modern CSS does all of this with `aspect-ratio: 16 / 9` on the wrapper plus `height: 100%` on the child."
-            },
-            {
-              "id": "quiz-css-s75-q5",
-              "type": "multiple-choice",
-              "prompt": "Your card grid has fixed-ratio boxes and the images inside look squashed. What fixes it?",
-              "options": [
-                "Add `object-fit: contain` to the images",
-                "Set an explicit size or aspect-ratio on the image as well as `object-fit: cover`",
-                "Add `width: auto` to the images",
-                "Remove the width and height attributes from the img"
-              ],
-              "answer": 1,
-              "explanation": "`object-fit` only does anything once the element has a box that differs from the source ratio. With `width: 100%` and no height the image already matches its content, so `cover` silently does nothing. Give the image an `aspect-ratio` or height, then `object-fit: cover` fills the box and crops the overflow."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Modern layout: flexbox, responsive and grid"
       },
@@ -12912,67 +4737,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s76",
           "title": "RWD Frameworks quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s76-q1",
-              "type": "multiple-choice",
-              "prompt": "What are the three things a CSS framework actually provides?",
-              "options": [
-                "A grid, a breakpoint set, and a set of defaults",
-                "A preprocessor, a bundler and a component compiler",
-                "Accessibility testing, browser support and a CDN",
-                "A design file export, a token sync and a documentation site"
-              ],
-              "answer": 0,
-              "explanation": "Every CSS framework is those three parts. Today the grid is the weakest of them, because `repeat(auto-fit, minmax(16rem, 1fr))` does the same job in one line with no library. The breakpoint set is worth having for consistency, and the defaults are where the real value and the real weight both live."
-            },
-            {
-              "id": "quiz-css-s76-q2",
-              "type": "true-false",
-              "prompt": "Tailwind is best described as a grid framework with a twelve-column grid and breakpoints at 576px, 768px and 992px.",
-              "answer": false,
-              "explanation": "That is Bootstrap's breakpoint scale. Tailwind has no grid component of its own; its responsive story is breakpoint-prefixed utility classes at 640, 768, 1024, 1280 and 1536px. Its real contribution to responsive work is a constrained *scale* of values, so nobody invents a new spacing step per component."
-            },
-            {
-              "id": "quiz-css-s76-q3",
-              "type": "blank",
-              "prompt": "Name the one part of a CSS framework that has genuinely become less valuable since CSS Grid shipped.",
-              "answers": [
-                "the grid",
-                "grid",
-                "the grid component",
-                "grid system"
-              ],
-              "explanation": "A twelve-column grid with breakpoint helpers used to be the reason to install anything at all. `repeat(auto-fit, minmax(18rem, 1fr))` covers most of it with one declaration and no library, which is why every modern framework has quietly dropped or de-emphasised its own grid."
-            },
-            {
-              "id": "quiz-css-s76-q4",
-              "type": "multiple-choice",
-              "prompt": "Which is the strongest argument for owning a small token set instead of adopting a framework?",
-              "options": [
-                "It renders faster, because there is less CSS to parse",
-                "Nothing has to be upgraded or overridden, and the markup stays readable HTML",
-                "Frameworks do not work on narrow screens",
-                "Custom properties are the only way to use media queries"
-              ],
-              "answer": 1,
-              "explanation": "A framework ships decisions made for you, and every one you disagree with becomes CSS you have to fight, plus a class of markup that is not really HTML. A token layer you own has no upgrade path and no specificity wars. The speed argument is weak - both ship far more CSS than a small site needs."
-            },
-            {
-              "id": "quiz-css-s76-q5",
-              "type": "identify-error",
-              "prompt": "Which of these is not a reason to avoid a framework on a long-lived project?",
-              "code": ".card {\n  padding: 1.5rem;\n  border-radius: 0.5rem;\n  background: #fff;\n}\n/* the framework also styles .card */",
-              "options": [
-                "Every default is a decision made for you, so disagreeing with one means fighting it",
-                "Utility classes make the markup harder to read and review than a named rule",
-                "Frameworks cannot be used without a build step",
-                "The whole component set ships whether or not you use it"
-              ],
-              "answer": 2,
-              "explanation": "Frameworks work perfectly well from a plain stylesheet - Bootstrap and Foundation are built that way. The other three are genuine costs: defaults you must accept or override, a class of markup that is harder to review, and bundle weight for components you never render."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Modern layout: flexbox, responsive and grid"
       },
@@ -13001,67 +4766,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s77",
           "title": "RWD Templates quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s77-q1",
-              "type": "multiple-choice",
-              "prompt": "What does `width: min(100% - 2rem, 72rem)` give you on a container?",
-              "options": [
-                "A fixed 72rem width on large screens that stops being fluid above that",
-                "The smaller of the parent width minus the gutter, and 72rem - so it never overflows its parent and never grows unbounded",
-                "A width that follows the viewport exactly, ignoring the parent",
-                "An automatic fallback to 72rem if 100% is unsupported"
-              ],
-              "answer": 1,
-              "explanation": "`min()` takes the smaller of its arguments, so the container is always `100% - 2rem` wide or less, and never more than 72rem. Add `margin-inline: auto` and it centres itself. That is a complete responsive container in one declaration."
-            },
-            {
-              "id": "quiz-css-s77-q2",
-              "type": "true-false",
-              "prompt": "Because a modern layout can use `clamp()`, `min()` and `auto-fit` grids, media queries are no longer needed for responsive design.",
-              "answer": false,
-              "explanation": "They are needed whenever the *structure* has to change - a navigation becoming a menu, a table becoming cards, a form going from two columns to one. They are simply no longer needed for sizing, spacing and column count, which is where most of the old boilerplate went."
-            },
-            {
-              "id": "quiz-css-s77-q3",
-              "type": "blank",
-              "prompt": "In `minmax(min(9rem, 100%), 1fr)`, what does the inner `min()` protect against?",
-              "answers": [
-                "a floor wider than a narrow screen",
-                "track floor wider than the container",
-                "overflow",
-                "a min-width that is too large on narrow screens"
-              ],
-              "explanation": "A plain `9rem` floor is 144px, which is fine on a desktop and too wide on a 320px screen once the gutters are subtracted - the grid overflows. Wrapping the floor in `min(9rem, 100%)` means the track is never asked to be wider than its container, so the pattern is safe at every width."
-            },
-            {
-              "id": "quiz-css-s77-q4",
-              "type": "identify-error",
-              "prompt": "Which one of these is not part of the mobile first build order?",
-              "code": "1. viewport meta tag\n2. fluid foundations: min() container, clamp() type\n3. auto-fit grids and wrapping flex rows\n4. base rules for the 1280px desktop design\n5. structural breakpoints with min-width",
-              "options": [
-                "Step 1 - the viewport tag must come after the CSS",
-                "Step 2 - the container should use max-width, not min()",
-                "Step 4 - you write the narrow layout as the unqueried base, not the desktop one",
-                "Step 5 - breakpoints should use max-width in a mobile first build"
-              ],
-              "answer": 2,
-              "explanation": "Mobile first means the 320px layout is the unqueried base and each query adds as space appears, so nothing has to be reversed or undone. Step 4 has it backwards, which turns the build into a sequence of corrections rather than a series of additions."
-            },
-            {
-              "id": "quiz-css-s77-q5",
-              "type": "multiple-choice",
-              "prompt": "Which problem on the 320px checklist is not a fluid-sizing problem?",
-              "options": [
-                "The page scrolls sideways because of a fixed-width element",
-                "Body text runs to 900 characters per line on a wide monitor",
-                "A heading stays at the same pixel size on a phone and a 27-inch monitor",
-                "A tap target is 20 by 20 CSS pixels and hard to hit"
-              ],
-              "answer": 3,
-              "explanation": "Tap target size is a design decision, not a sizing one - nothing about `clamp()` or `min()` makes a small target larger. WCAG 2.2 asks for at least 24 by 24 CSS pixels, and 44 by 44 is the comfortable target, including the gaps between adjacent controls."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Modern layout: flexbox, responsive and grid"
       },
@@ -13089,64 +4794,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s78",
           "title": "Grid Intro quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s78-q1",
-              "type": "multiple-choice",
-              "prompt": "What makes grid a two-dimensional system?",
-              "options": [
-                "It always produces square cells",
-                "You control rows and columns at the same time",
-                "It only works in one direction at a time",
-                "It loads faster than flexbox"
-              ],
-              "answer": 1,
-              "explanation": "Rows and columns exist simultaneously, so items are placed into a table-like structure rather than distributed along a single axis."
-            },
-            {
-              "id": "quiz-css-s78-q2",
-              "type": "true-false",
-              "prompt": "A column you never declared in `grid-template-columns` will never be created.",
-              "answer": false,
-              "explanation": "The browser creates implicit tracks as needed. `grid-auto-columns` and `grid-auto-rows` control their size."
-            },
-            {
-              "id": "quiz-css-s78-q3",
-              "type": "code-output",
-              "prompt": "What layout does this produce?",
-              "code": ".wrap {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 10px;\n}",
-              "options": [
-                "One row of three boxes",
-                "Three rows of one box each",
-                "Three equal columns, with rows added as items overflow",
-                "A flex row of three items"
-              ],
-              "answer": 2,
-              "explanation": "`repeat(3, 1fr)` declares three explicit columns; extra items flow into new implicit rows with a 10px gap."
-            },
-            {
-              "id": "quiz-css-s78-q4",
-              "type": "blank",
-              "prompt": "Complete the sentence: use ______ to space grid tracks apart, instead of margins.",
-              "answers": [
-                "gap"
-              ],
-              "explanation": "`gap` applies between tracks only, never around the outside edges, so items stay flush with the container."
-            },
-            {
-              "id": "quiz-css-s78-q5",
-              "type": "multiple-choice",
-              "prompt": "A nav bar of five links that must share the row evenly. Which system fits best?",
-              "options": [
-                "Grid, because everything should use grid",
-                "Flexbox, because it distributes space along one axis",
-                "Neither — use floats",
-                "Grid with `grid-auto-flow: column`"
-              ],
-              "answer": 1,
-              "explanation": "It is a single-axis problem: share the row. Grid is for when rows and columns both need controlling."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Modern layout: flexbox, responsive and grid"
       },
@@ -13174,64 +4822,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s79",
           "title": "Grid Container quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s79-q1",
-              "type": "multiple-choice",
-              "prompt": "What does `1fr` represent?",
-              "options": [
-                "One pixel of available width",
-                "One share of the space left after fixed tracks and gaps",
-                "The height of one row",
-                "The font size of the grid"
-              ],
-              "answer": 1,
-              "explanation": "Fixed tracks are taken out first, then what remains is divided by the total number of `fr` units, which is why three `1fr` tracks are always equal."
-            },
-            {
-              "id": "quiz-css-s79-q2",
-              "type": "multiple-choice",
-              "prompt": "Four columns are defined and there is room for six. What does `auto-fit` do with the two empty tracks?",
-              "options": [
-                "Keeps them at full size so items stay small",
-                "Collapses them to zero width so the items stretch",
-                "Centres the items and leaves the gaps visible",
-                "Removes two items from the flow"
-              ],
-              "answer": 1,
-              "explanation": "`auto-fit` collapses the empty tracks and the items grow to fill the row. `auto-fill` is the opposite: it keeps the empty tracks, so the items stay at their `minmax()` minimum."
-            },
-            {
-              "id": "quiz-css-s79-q3",
-              "type": "true-false",
-              "prompt": "A `grid-template-areas` name that forms an L-shape is valid as long as the number of names matches.",
-              "answer": false,
-              "explanation": "Each named area must be a rectangle. An L-shaped name makes the whole declaration invalid and the browser drops it."
-            },
-            {
-              "id": "quiz-css-s79-q4",
-              "type": "code-output",
-              "prompt": "A grid has three columns. Where does this item sit?",
-              "code": ".item {\n  grid-column: 2 / 4;\n}",
-              "options": [
-                "Column 2 only",
-                "Columns 2 and 3",
-                "Columns 1 to 4",
-                "The last column"
-              ],
-              "answer": 1,
-              "explanation": "The start line is 2 and the end line 4 is exclusive, so the item covers columns 2 and 3."
-            },
-            {
-              "id": "quiz-css-s79-q5",
-              "type": "blank",
-              "prompt": "Complete the sentence: `grid-auto-flow: column` fills the grid down first and then ________.",
-              "answers": [
-                "across"
-              ],
-              "explanation": "`row`, the default, fills across then down; `column` fills down then across. Adding `dense` backfills earlier holes."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Modern layout: flexbox, responsive and grid"
       },
@@ -13259,64 +4850,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-css-s80",
           "title": "Grid Item quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-css-s80-q1",
-              "type": "code-output",
-              "prompt": "A grid has four columns. What does this set?",
-              "code": ".item {\n  grid-column: 2 / 4;\n}",
-              "options": [
-                "Column 2 only",
-                "Columns 2 and 3",
-                "Columns 2, 3 and 4",
-                "The last two columns"
-              ],
-              "answer": 1,
-              "explanation": "The end line is exclusive, so `2 / 4` starts on line 2 and stops before line 4, covering columns 2 and 3."
-            },
-            {
-              "id": "quiz-css-s80-q2",
-              "type": "multiple-choice",
-              "prompt": "Why is `grid-column: 1 / -1` a good rule for a full-width divider?",
-              "options": [
-                "Because `-1` means \"no limit\", so the item never wraps",
-                "Because `-1` is the final line, so the span adapts to any column count",
-                "Because negative columns are collapsed by the browser",
-                "Because it forces the grid to have exactly one column"
-              ],
-              "answer": 1,
-              "explanation": "Negative line numbers count back from the end of the grid, so the end line follows the explicit track count wherever it lands."
-            },
-            {
-              "id": "quiz-css-s80-q3",
-              "type": "true-false",
-              "prompt": "If two grid items are placed on the same lines, the browser reports an error.",
-              "answer": false,
-              "explanation": "They stack silently in the same cell. Overlap is valid and occasionally intentional, but it is also the most common symptom of a wrong line number."
-            },
-            {
-              "id": "quiz-css-s80-q4",
-              "type": "blank",
-              "prompt": "Complete the sentence: to make one item span two tracks wherever it lands, use `grid-column: ______`.",
-              "answers": [
-                "span 2"
-              ],
-              "explanation": "A span with no line numbers takes that many tracks from wherever the auto-placement cursor currently is."
-            },
-            {
-              "id": "quiz-css-s80-q5",
-              "type": "multiple-choice",
-              "prompt": "The container says `justify-items: start` but one item should hug the right edge of its cell. What wins?",
-              "options": [
-                "`justify-items: start`, because it is on the container",
-                "`justify-self: end` on that item, because item-level alignment overrides the container",
-                "Neither — you need a media query",
-                "Whichever rule is written later, regardless of selector"
-              ],
-              "answer": 1,
-              "explanation": "Item-level alignment always beats the container-level default for that item, regardless of specificity or source order between the two rules."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Modern layout: flexbox, responsive and grid"
       }
@@ -13393,67 +4927,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s1",
           "title": "Getting started check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s1-q1",
-              "type": "multiple-choice",
-              "prompt": "A button on a working-looking page does nothing when clicked. Where do you look first?",
-              "options": [
-                "The console, because a JavaScript error leaves the HTML and CSS untouched",
-                "The HTML file, because a broken script usually deletes its markup",
-                "The CSS, because scripts cannot attach to styled elements",
-                "Nothing — this is a known browser bug with buttons"
-              ],
-              "answer": 0,
-              "explanation": "A script that throws stops at the error; everything the browser has already drawn stays drawn. That is why the page can look perfect and do nothing. The console names the failing line, and the error message usually contains the exact identifier that went wrong."
-            },
-            {
-              "id": "quiz-js-s1-q2",
-              "type": "true-false",
-              "prompt": "A script in `<head>` and the same script at the end of `<body>` behave identically, because JavaScript runs wherever it is written.",
-              "answer": false,
-              "explanation": "A plain inline script runs the instant the parser reaches it. At the top of the `body` the elements below it do not exist yet, so a lookup finds nothing. `defer` and `type=\"module\"` both hold the script until the document has been parsed."
-            },
-            {
-              "id": "quiz-js-s1-q3",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "function shout() {\n  return 'hi'\n}\n\nconsole.log(shout)",
-              "options": [
-                "hi",
-                "undefined",
-                "\"function shout() { return 'hi' }\"",
-                "an empty string"
-              ],
-              "answer": 2,
-              "explanation": "`shout` on its own is the function value, not the result of calling it. Nothing is printed until the parentheses appear — that is the difference between defining something and running it."
-            },
-            {
-              "id": "quiz-js-s1-q4",
-              "type": "identify-error",
-              "prompt": "Which name cannot be used as a variable?",
-              "code": "const 2ndPlace = 'Bo'\nlet class = 'JavaScript'",
-              "options": [
-                "`2ndPlace`, because a name cannot begin with a digit",
-                "`class`, because it is a reserved word",
-                "Both, because names must be camelCase",
-                "Neither — both are valid names"
-              ],
-              "answer": 0,
-              "explanation": "A name may contain letters, digits, `$` and `_`, but it may not start with a digit — the parser cannot tell where the name ends. `class` is also illegal, since reserved words cannot be identifiers at all. Note the two errors are independent: fix both."
-            },
-            {
-              "id": "quiz-js-s1-q5",
-              "type": "blank",
-              "prompt": "Which two characters start a comment that runs to the end of the line?",
-              "answers": [
-                "//",
-                "slash slash",
-                "two slashes"
-              ],
-              "explanation": "A double slash comments out the rest of the line, which is why it is the everyday choice and the fastest way to park a line while you bisect a bug. A block comment uses `/*` and `*/` and can span lines."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Getting started"
       },
@@ -13480,68 +4954,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s2",
           "title": "Introduction check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s2-q1",
-              "type": "multiple-choice",
-              "prompt": "Which job can JavaScript not do on its own?",
-              "options": [
-                "Read a value out of the page",
-                "Change the text of an element",
-                "Read a row from the database directly",
-                "React to a click"
-              ],
-              "answer": 2,
-              "explanation": "The script runs on the visitor's machine, not on the server, so the database is simply not reachable from it. Reading or writing data means a request to a server, and the server decides what to return — which is also why an API key in a script is a key you must treat as public."
-            },
-            {
-              "id": "quiz-js-s2-q2",
-              "type": "true-false",
-              "prompt": "A page with ten event listeners attached but no event fired yet looks exactly like the same page with no JavaScript.",
-              "answer": true,
-              "explanation": "Listeners are just registrations. Nothing in the DOM changes until a handler runs, so the page renders identically. This is worth knowing when a page \"looks broken but nothing is wrong\" — the code is loaded, it simply has not been triggered."
-            },
-            {
-              "id": "quiz-js-s2-q3",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "const field = document.querySelector('#search')\nconsole.log(field ? 'found' : 'missing')",
-              "options": [
-                "found",
-                "missing",
-                "undefined",
-                "It throws a TypeError"
-              ],
-              "answer": 0,
-              "explanation": "`querySelector` returns `null` when nothing matches, and a missing element is falsy rather than an error — so the ternary takes the `found` branch only when the element is really there. An empty or absent id is why the rest of this course checks before it reads."
-            },
-            {
-              "id": "quiz-js-s2-q4",
-              "type": "blank",
-              "prompt": "Name the JavaScript job that has to wait for the network: the one that asks a server for data the original HTML did not contain.",
-              "answers": [
-                "fetch",
-                "Fetch",
-                "the fetch",
-                "fetching"
-              ],
-              "explanation": "Fetching is the only job that waits. Reading, changing and reacting all happen immediately against what is already in the page, which is why they are the ones you can debug by staring at the DOM."
-            },
-            {
-              "id": "quiz-js-s2-q5",
-              "type": "identify-error",
-              "prompt": "What is wrong with this list of the four jobs?",
-              "code": "const jobs = ['read', 'change', 'react', 'refresh']",
-              "options": [
-                "Nothing — refreshing the page is the fourth job",
-                "The fourth job is \"fetch\", not \"refresh\"; a reload throws away the page you were working on",
-                "\"read\" and \"change\" are the same job",
-                "The array must be an object to be iterated"
-              ],
-              "answer": 1,
-              "explanation": "The fourth job is fetching data from a server. Reloading is the opposite of the point: it discards every variable and every listener, taking you back to the state the server sent. That is why modern pages change the DOM instead of reloading it."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Getting started"
       },
@@ -13568,68 +4981,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s3",
           "title": "Where To check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s3-q1",
-              "type": "multiple-choice",
-              "prompt": "An external script with no attributes sits at the top of `<body>` and `document.querySelector(\"#total\")` returns null. Why?",
-              "options": [
-                "`querySelector` only works inside `<script>` tags at the end of the page",
-                "The script ran before the parser reached that element, so the element did not exist yet",
-                "External scripts cannot use the document object at all",
-                "The id is wrong — `#total` only matches ids on form fields"
-              ],
-              "answer": 1,
-              "explanation": "A plain script with no attributes blocks and runs the instant the parser reaches it. Anything further down the document has not been built at that moment, so the lookup correctly returns null. Add `defer`, move the tag to the bottom, or listen for `DOMContentLoaded`."
-            },
-            {
-              "id": "quiz-js-s3-q2",
-              "type": "true-false",
-              "prompt": "`<script type=\"module\" src=\"app.js\"></script>` in `<head>` will run before the page has been parsed, because module scripts are smaller.",
-              "answer": false,
-              "explanation": "Module scripts are deferred by default — that is part of what `type=\"module\"` means, not an accident of file size. They also get their own scope, strict mode, and the ability to import. If you add `defer` as well it changes nothing."
-            },
-            {
-              "id": "quiz-js-s3-q3",
-              "type": "blank",
-              "prompt": "Which attribute makes an external script wait until the document has been parsed before it runs?",
-              "answers": [
-                "defer",
-                "Defer",
-                "DEFER",
-                "the defer attribute"
-              ],
-              "explanation": "`defer` downloads the file in parallel with the HTML and runs it once parsing is done. That is both safer and faster than putting the tag at the bottom, where the browser cannot start the download until it reads that line."
-            },
-            {
-              "id": "quiz-js-s3-q4",
-              "type": "identify-error",
-              "prompt": "What goes wrong when this page loads?",
-              "code": "<script src=\"theme.js\"></script>\n<script src=\"cart.js\"></script>",
-              "options": [
-                "Nothing, two scripts are always fine",
-                "Both files declare `const app = {}` at the top level, so the second one fails with a redeclaration error",
-                "Scripts cannot be loaded from the same folder",
-                "The second script never runs because the first blocks it"
-              ],
-              "answer": 1,
-              "explanation": "Two classic scripts share one global scope, so the same `const` name declared twice is a SyntaxError and the second file never runs a single line. Split by job and use `type=\"module\"`, where each file has its own scope and the collision becomes impossible."
-            },
-            {
-              "id": "quiz-js-s3-q5",
-              "type": "code-output",
-              "prompt": "What does this print, and when?",
-              "code": "<script src=\"app.js\" defer></script>\n<h1 id=\"title\">Shop</h1>\n\n<script>\n  console.log(document.querySelector('#title') !== null)\n</script>",
-              "options": [
-                "true, after the document is parsed",
-                "false, because the inline script runs during parsing",
-                "false, because `defer` removes the element",
-                "true, before the heading is drawn"
-              ],
-              "answer": 1,
-              "explanation": "The inline script has no attributes, so it runs the moment the parser reaches it — at which point the heading below it does not exist. The deferred script runs after parsing, when it would find the element. This is the exact ordering problem `defer` exists to remove."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Getting started"
       },
@@ -13656,68 +5008,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s4",
           "title": "Output check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s4-q1",
-              "type": "multiple-choice",
-              "prompt": "A visitor's name came from a form and must be shown on the page. Which line is correct?",
-              "options": [
-                "`el.innerHTML = name`, because it always escapes the value safely",
-                "`el.textContent = name`, because the value is inserted as text and never parsed as markup",
-                "`document.write(name)`",
-                "`alert(name)`"
-              ],
-              "answer": 1,
-              "explanation": "`textContent` inserts characters; `innerHTML` parses its argument as markup, so a name containing a tag becomes part of the document. Any value you did not write yourself goes through `textContent`."
-            },
-            {
-              "id": "quiz-js-s4-q2",
-              "type": "true-false",
-              "prompt": "Assigning to `element.textContent` replaces every child element inside that element.",
-              "answer": true,
-              "explanation": "`textContent` is a setter for the text of the node, so writing to it throws away the existing children. That is convenient for a status line and destructive for a container you meant to fill — in that case add children instead of writing text."
-            },
-            {
-              "id": "quiz-js-s4-q3",
-              "type": "identify-error",
-              "prompt": "What happens on the second call to this line?",
-              "code": "document.write('loading...')\n// ... a second document.write call later in a click handler\ndocument.write('done')",
-              "options": [
-                "It appends \"done\" below \"loading...\"",
-                "It replaces the entire document with the text \"done\"",
-                "It logs \"done\" to the console",
-                "It throws a ReferenceError"
-              ],
-              "answer": 1,
-              "explanation": "After the page has loaded there is no parser position to write into, so `document.write` replaces the whole document. That is why the debugging reflex belongs on `console.log`, which can only ever add a line."
-            },
-            {
-              "id": "quiz-js-s4-q4",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "const total = 50\nconsole.log(total)\nconsole.log('total =', total)",
-              "options": [
-                "50, then total = 50",
-                "total = 50, twice",
-                "50, then \"total = 50\"",
-                "Nothing, because total is a number"
-              ],
-              "answer": 0,
-              "explanation": "A bare `console.log` prints the value with no label, so the first line is just `50`. The second call has two arguments, so the console shows the string and the number separated by a space. Labelling the value is what makes a long log readable."
-            },
-            {
-              "id": "quiz-js-s4-q5",
-              "type": "blank",
-              "prompt": "Which property reads the text back out of an element, so you can confirm a write actually landed?",
-              "answers": [
-                "textContent",
-                "innerText",
-                "textcontent",
-                ".textContent"
-              ],
-              "explanation": "Reading `element.textContent` gives you exactly what the page now holds, which is the only way to catch a typo in the selector — the writing line and the reading line take different paths through the page."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Getting started"
       },
@@ -13757,67 +5048,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s5",
           "title": "Syntax and comments check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s5-q1",
-              "type": "code-output",
-              "prompt": "What does this function return?",
-              "code": "function broken() {\n  return\n  5\n}",
-              "options": [
-                "5",
-                "undefined",
-                "\"5\"",
-                "It throws a SyntaxError"
-              ],
-              "answer": 1,
-              "explanation": "The line break ends the statement right after `return`, which is legal — it just returns nothing. Then `5` on its own line is an expression statement with no effect. Keep the value on the same line, or wrap it in parentheses, which holds the statement open across the break."
-            },
-            {
-              "id": "quiz-js-s5-q2",
-              "type": "identify-error",
-              "prompt": "Which line is the mistake?",
-              "code": "const price = 12.5\nlet label = 'Total: 12.5 EUR'\nconsole.log(label, price)",
-              "options": [
-                "`console.log` cannot print two values at once",
-                "The single-quoted string contains a colon, which must be escaped",
-                "Nothing — this is valid JavaScript",
-                "`price` must be declared with `var` to be logged"
-              ],
-              "answer": 2,
-              "explanation": "Colons and dots are ordinary characters inside a string; only the quote that opened the string ends it. `console.log` accepts any number of arguments, and `const` is fine. Read the string carefully to see where it actually closes."
-            },
-            {
-              "id": "quiz-js-s5-q3",
-              "type": "multiple-choice",
-              "prompt": "Which of these is a definition rather than a statement that runs?",
-              "options": [
-                "`console.log(total)`",
-                "`function greet() { console.log(\"hi\") }`",
-                "`total = total + 1`",
-                "`document.querySelector(\"#out\").textContent = total`"
-              ],
-              "answer": 1,
-              "explanation": "A `function` statement registers the name and the body without running the body. Every other option performs its work the moment the line is reached. The parentheses are what turn a definition into a call."
-            },
-            {
-              "id": "quiz-js-s5-q4",
-              "type": "true-false",
-              "prompt": "Modern JavaScript always inserts a semicolon where a line break would otherwise be ambiguous, so semicolons are optional everywhere.",
-              "answer": false,
-              "explanation": "Automatic insertion is a fallback, not a feature to lean on. It is exactly why a line break after `return` silently ends the statement: the parser supplies the semicolon you did not write. Write your own, and the whole class of ambiguity disappears."
-            },
-            {
-              "id": "quiz-js-s5-q5",
-              "type": "blank",
-              "prompt": "Which two characters start a comment that runs to the end of the line?",
-              "answers": [
-                "//",
-                "slash slash",
-                "two slashes"
-              ],
-              "explanation": "A double slash comments out the rest of the line, which makes it the everyday choice and the fastest way to park a line while you bisect a bug. A block comment starts with /* and ends with */ and can span lines."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Getting started"
       },
@@ -13857,68 +5088,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s6",
           "title": "Variables check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s6-q1",
-              "type": "multiple-choice",
-              "prompt": "Which of these is a legal variable name?",
-              "options": [
-                "`2nd-place`",
-                "`place2`",
-                "`my-thing`",
-                "`total` (as in `Total`)"
-              ],
-              "answer": 1,
-              "explanation": "A name may contain letters, digits, `$` and `_`, but it cannot begin with a digit or contain a hyphen — `my-thing` parses as subtraction. `place2` starts with a letter and keeps the digit after it, which is unambiguous."
-            },
-            {
-              "id": "quiz-js-s6-q2",
-              "type": "true-false",
-              "prompt": "`Total` and `total` refer to the same variable, because JavaScript ignores capitalisation in names.",
-              "answer": false,
-              "explanation": "Names are case sensitive, so those are two unrelated variables. Reading the wrong one gives you `total is not defined` — or worse, a plausible wrong number if both names happen to exist."
-            },
-            {
-              "id": "quiz-js-s6-q3",
-              "type": "blank",
-              "prompt": "Which keyword do you write before a variable so it belongs to the current block instead of the whole page?",
-              "answers": [
-                "const",
-                "let",
-                "var",
-                "Const"
-              ],
-              "explanation": "`const` and `let` both declare a block-scoped name. Assigning to a name you never declared creates an implicit global instead, which two unrelated scripts can silently fight over — that is the bug the keyword prevents."
-            },
-            {
-              "id": "quiz-js-s6-q4",
-              "type": "identify-error",
-              "prompt": "What is wrong with this line?",
-              "code": "const price = 12\nlet tax = price * 0.2\nlet total = price + tax",
-              "options": [
-                "Nothing — this is valid",
-                "`total` is a reserved word",
-                "Names must be written in snake_case in JavaScript",
-                "A variable cannot be declared from the value of another variable"
-              ],
-              "answer": 0,
-              "explanation": "A `const` or `let` can be initialised from any expression, including the value of another variable. `total` is not reserved. This is the normal way to build a value up in readable steps."
-            },
-            {
-              "id": "quiz-js-s6-q5",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "const grossPay = 38 * 24.5\nconsole.log(grossPay)",
-              "options": [
-                "931",
-                "\"931\"",
-                "931.0",
-                "undefined"
-              ],
-              "answer": 0,
-              "explanation": "Two numbers multiply to a number, so the log shows 931 with no quotes. Quotation marks in the output are how you tell a string from a number at a glance — which matters more than it sounds once values start arriving from a form."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Getting started"
       },
@@ -13958,67 +5128,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s7",
           "title": "Operators check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s7-q1",
-              "type": "multiple-choice",
-              "prompt": "Why is `2 + 3 * 4` equal to 14 and not 20?",
-              "options": [
-                "Multiplication has higher precedence, so it is applied first and the addition happens afterwards",
-                "JavaScript always evaluates the leftmost operator first",
-                "Addition is only applied to whole numbers",
-                "The expression is evaluated bottom-up as a rule"
-              ],
-              "answer": 0,
-              "explanation": "Precedence groups operators into levels and the tighter level runs first. `*` sits above `+`, so you get `2 + (3 * 4)` = 14. Parentheses are the only way to ask for the other order."
-            },
-            {
-              "id": "quiz-js-s7-q2",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "console.log(2 ** 3 ** 2)\nconsole.log(10 - 3 + 2)",
-              "options": [
-                "64 5",
-                "512 9",
-                "512 5",
-                "64 9"
-              ],
-              "answer": 1,
-              "explanation": "`**` is right-associative, so it means `2 ** (3 ** 2)` = 512. `+` and `-` share a level and run left to right, so `10 - 3 + 2` is `(10 - 3) + 2` = 9, not 5."
-            },
-            {
-              "id": "quiz-js-s7-q3",
-              "type": "true-false",
-              "prompt": "Subtraction has higher precedence than addition, so `10 - 3 + 2` is 5.",
-              "answer": false,
-              "explanation": "They sit at the same level of the precedence table. When two operators tie, the leftmost runs first, which gives 9. Only parentheses can change it."
-            },
-            {
-              "id": "quiz-js-s7-q4",
-              "type": "blank",
-              "prompt": "Which operator has the lowest precedence of all, so `a = b + 1` assigns the sum rather than assigning 1 first?",
-              "answers": [
-                "=",
-                "assignment",
-                "equals"
-              ],
-              "explanation": "Assignment is looser than every arithmetic, comparison and logical operator, so the whole right-hand side is evaluated first and then stored. That is also why `a = b = 5` works: assignments associate right to left."
-            },
-            {
-              "id": "quiz-js-s7-q5",
-              "type": "identify-error",
-              "prompt": "What is wrong with this code?",
-              "code": "let total = 0\nif (total = 10) {\n  console.log('over budget')\n}",
-              "options": [
-                "`=` assigns and then hands back 10, which is truthy, so the branch always runs — the test wants `===`",
-                "`total` must be declared with `var` before it can be compared",
-                "An `if` cannot contain an assignment at all",
-                "Nothing — this correctly tests whether total equals 10"
-              ],
-              "answer": 0,
-              "explanation": "Assignment is an expression that produces the assigned value, so this sets `total` to 10 and tests a truthy number. It never fails loudly. Use `total === 10` for the comparison and keep the assignment on its own line."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Values, types and operators"
       },
@@ -14059,66 +5169,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s8",
           "title": "Data types check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s8-q1",
-              "type": "multiple-choice",
-              "prompt": "What does `typeof null` return?",
-              "options": [
-                "\"object\"",
-                "\"null\"",
-                "\"undefined\"",
-                "\"nothing\""
-              ],
-              "answer": 0,
-              "explanation": "It returns \"object\" — a bug from the very first version of the language that had to be kept because old programs depended on it. Never use the type to test for null; compare the value with `value === null`."
-            },
-            {
-              "id": "quiz-js-s8-q2",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "console.log(typeof [])\nconsole.log(typeof NaN)\nconsole.log(typeof (() => 1))",
-              "options": [
-                "\"object\" \"object\" \"function\"",
-                "\"array\" \"number\" \"function\"",
-                "\"object\" \"number\" \"function\"",
-                "\"object\" \"NaN\" \"arrow\""
-              ],
-              "answer": 2,
-              "explanation": "Arrays are objects, which is why `typeof []` is \"object\". NaN really is a number — just not a valid one — so use `Number.isNaN` to detect it. A function reports \"function\" whether it was written with the keyword or as an arrow."
-            },
-            {
-              "id": "quiz-js-s8-q3",
-              "type": "true-false",
-              "prompt": "A number typed into an input field arrives in your code as a string.",
-              "answer": true,
-              "explanation": "Every field value is text, including digits. That is why `qty * 4` happens to work — `*` coerces — while `qty + 4` quietly joins the characters instead. Convert on purpose with `Number(value)` before you add."
-            },
-            {
-              "id": "quiz-js-s8-q4",
-              "type": "blank",
-              "prompt": "Which function converts text to a number, giving `NaN` when the whole string is not a number?",
-              "answers": [
-                "number",
-                "number()"
-              ],
-              "explanation": "`Number(\"12abc\")` is NaN, because it converts the whole thing or fails. `parseInt(\"12abc\", 10)` returns 12, quietly believing it succeeded — use it only when the number really is the start of a longer string."
-            },
-            {
-              "id": "quiz-js-s8-q5",
-              "type": "identify-error",
-              "prompt": "What is wrong with this code?",
-              "code": "const qty = document.querySelector('#qty').value\nconst total = qty + 4\ndocument.querySelector('#out').textContent = 'total: ' + total",
-              "options": [
-                "qty is a string, so + joins characters and the total reads 64 instead of 40 — convert with Number(qty)",
-                "textContent cannot be given a concatenated string",
-                "querySelector must be called with a class rather than an id",
-                "Nothing — this adds the quantity correctly"
-              ],
-              "answer": 0,
-              "explanation": "A field value is the string \"6\", and a string on either side of `+` turns the whole expression into concatenation. Write `Number(qty) + 4` so the arithmetic happens in numbers, then let the `+` in the sentence do the joining."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Values, types and operators"
       },
@@ -14145,67 +5196,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s9",
           "title": "Functions check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s9-q1",
-              "type": "multiple-choice",
-              "prompt": "What does a function return when it finishes without an explicit `return`?",
-              "options": [
-                "null",
-                "undefined",
-                "0",
-                "An empty string"
-              ],
-              "answer": 1,
-              "explanation": "Falling off the end gives `undefined`, which is different from returning `0` or `\"\"`. That is why a default parameter rescues a missing argument — `undefined` is exactly the value that triggers a default."
-            },
-            {
-              "id": "quiz-js-s9-q2",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "const double = function (n) {\n  return n * 2\n}\nconsole.log(typeof double, double(4))",
-              "options": [
-                "\"number\" 8",
-                "\"function\" 8",
-                "\"function\" undefined",
-                "\"number\" \"8\""
-              ],
-              "answer": 1,
-              "explanation": "A function expression is still a function value, so `typeof` reports \"function\" — and the parentheses in `double(4)` are what run it. Without them you would be logging the function itself."
-            },
-            {
-              "id": "quiz-js-s9-q3",
-              "type": "true-false",
-              "prompt": "A function declaration can be called from a line above the declaration itself.",
-              "answer": true,
-              "explanation": "Declarations are hoisted with their bodies attached, so the name exists from the top of the scope. A `const double = function...` in the same position would not: the name is reserved but empty until the assignment runs, which is the temporal dead zone."
-            },
-            {
-              "id": "quiz-js-s9-q4",
-              "type": "blank",
-              "prompt": "Which keyword introduces a named function that is available from the top of its scope?",
-              "answers": [
-                "function",
-                "function keyword",
-                "fn"
-              ],
-              "explanation": "`function add() {}` is a declaration, and declarations are hoisted. Anything assigned to a `const` — including a function expression and every arrow — is only usable after that line has run."
-            },
-            {
-              "id": "quiz-js-s9-q5",
-              "type": "identify-error",
-              "prompt": "What is wrong with this code?",
-              "code": "const area = (w, h) => {\n  return w * h\n}\ndocument.querySelector('#out').addEventListener('click', area)",
-              "options": [
-                "The handler is passed as a value rather than called, so clicking gives you the function instead of an area — wrap it: () => area(3, 4)",
-                "Arrow functions cannot be used as event handlers",
-                "addEventListener needs the handler to be an expression, not a declaration",
-                "Nothing — this computes an area on every click"
-              ],
-              "answer": 0,
-              "explanation": "Handing `area` to `addEventListener` is correct — the browser calls it with the event object, which then becomes `w`. The mistake is expecting it to receive the dimensions. Wrap it in an arrow that supplies the arguments: `addEventListener(\"click\", () => area(3, 4))`."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Values, types and operators"
       },
@@ -14245,69 +5236,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s10",
           "title": "Objects check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s10-q1",
-              "type": "multiple-choice",
-              "prompt": "Which line reads the \"theme-color\" property out of this object?",
-              "code": "const settings = { 'theme-color': 'dark' }\nconst key = 'theme-color'",
-              "options": [
-                "settings.key",
-                "settings['key']",
-                "settings[key]",
-                "None of them work, because the name contains a dash"
-              ],
-              "answer": 2,
-              "explanation": "`settings[key]` looks up whatever string the variable holds, so it finds the property. The other two ask for a property literally called \"key\", which does not exist — and the dash is a second reason dot access could never work here."
-            },
-            {
-              "id": "quiz-js-s10-q2",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "const base = { theme: 'dark' }\nconst copy = { ...base, theme: 'light' }\nconsole.log(base.theme, copy.theme)",
-              "options": [
-                "light light",
-                "dark light",
-                "dark dark",
-                "light dark"
-              ],
-              "answer": 1,
-              "explanation": "The spread builds a new object, so the later `theme` overrides only the copy. `base` still points at the original object with its original value — that is the whole reason to copy before changing."
-            },
-            {
-              "id": "quiz-js-s10-q3",
-              "type": "true-false",
-              "prompt": "`const { a } = obj` creates a copy of `obj` that is safe to change.",
-              "answer": false,
-              "explanation": "It creates two new variables holding the values that were inside. The object is not copied and nothing is isolated — if `a` is itself an object, both names now point at the same one."
-            },
-            {
-              "id": "quiz-js-s10-q4",
-              "type": "blank",
-              "prompt": "Which method gives you an array of an object's own key names?",
-              "answers": [
-                "object.keys",
-                "objectkeys",
-                "keys",
-                "object.keys()"
-              ],
-              "explanation": "`Object.keys(obj)` returns the names, `Object.values(obj)` the values, and `Object.entries(obj)` the pairs. `for…in` walks inherited keys too, which is why the Object methods are the better default."
-            },
-            {
-              "id": "quiz-js-s10-q5",
-              "type": "identify-error",
-              "prompt": "What is wrong with this code?",
-              "code": "const cart = {\n  items: ['Tea'],\n  count() {\n    return this.items.length\n  },\n}\nconst { count } = cart\nconsole.log(count())",
-              "options": [
-                "Pulling count off the object loses `this`, so the call throws — call it as cart.count()",
-                "Destructuring cannot read a method",
-                "count is a reserved word",
-                "Nothing — it returns 1"
-              ],
-              "answer": 0,
-              "explanation": "The destructured `count` is a bare function reference with no object attached, so `this` inside it is not the cart and `this.items` fails. Keep the call on the object, or bind it explicitly."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Values, types and operators"
       },
@@ -14335,67 +5264,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s11",
           "title": "Events check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s11-q1",
-              "type": "multiple-choice",
-              "prompt": "What does the browser pass to your handler function?",
-              "options": [
-                "One object describing the event, with things like type, target and key on it",
-                "Nothing — handlers are always called with no arguments",
-                "A string with the name of the event",
-                "The element the listener is attached to, and nothing else"
-              ],
-              "answer": 0,
-              "explanation": "Every handler is called with a single event object. It carries the name (`type`), the element the event started on (`target`), the element you listened on (`currentTarget`), plus event-specific details such as `key` or the field `value`."
-            },
-            {
-              "id": "quiz-js-s11-q2",
-              "type": "code-output",
-              "prompt": "A link has a click listener that calls `event.preventDefault()`. What happens when it is clicked?",
-              "code": "link.addEventListener('click', function (event) {\n  event.preventDefault()\n  console.log('handled')\n})",
-              "options": [
-                "It logs handled and the browser does not follow the link",
-                "It throws a ReferenceError, because event is not defined",
-                "It follows the link, and only the first click is prevented",
-                "The listener is removed and nothing runs"
-              ],
-              "answer": 0,
-              "explanation": "`preventDefault` cancels the browser default — here, the navigation — and the event continues to be dispatched normally. Without that line the page would navigate away and the log would never be seen."
-            },
-            {
-              "id": "quiz-js-s11-q3",
-              "type": "true-false",
-              "prompt": "An anonymous handler passed to addEventListener cannot be removed later with removeEventListener.",
-              "answer": true,
-              "explanation": "Removal compares by identity, and nothing holds a reference to an anonymous function, so no later call can match it. Give the handler a name and store it, or use the `{ once: true }` option when you only ever want one run."
-            },
-            {
-              "id": "quiz-js-s11-q4",
-              "type": "blank",
-              "prompt": "Which method on the event object stops the browser from following its default action, such as a form submitting?",
-              "answers": [
-                "preventdefault",
-                "event.preventdefault()",
-                "event.preventdefault"
-              ],
-              "explanation": "`event.preventDefault()` cancels the default behaviour and nothing else. `stopPropagation` is a different job: it stops the event travelling further up the tree, which matters when you are using delegation."
-            },
-            {
-              "id": "quiz-js-s11-q5",
-              "type": "identify-error",
-              "prompt": "What is wrong with this code?",
-              "code": "button.addEventListener('click', () => {\n  count += 1\n})\nbutton.addEventListener('click', () => {\n  count += 1\n})",
-              "options": [
-                "Two different anonymous functions are registered, so the handler runs twice per click — reuse one named function",
-                "A button can only have one listener, so this is a syntax error",
-                "The arrow function is missing a return value",
-                "Nothing — every listener on an element fires once per event"
-              ],
-              "answer": 0,
-              "explanation": "Each call registers its own function, and both fire on the same click, so the count jumps by two. That is how `addEventListener` differs from `onclick =`, which replaces. Pass one named handler, or remove the old one before adding the new."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Values, types and operators"
       },
@@ -14438,68 +5307,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s12",
           "title": "Strings check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s12-q1",
-              "type": "multiple-choice",
-              "prompt": "What happens when you run `const s = \"abc\"; s[0] = \"z\";`?",
-              "options": [
-                "The string becomes \"zbc\"",
-                "It throws a TypeError because strings are read-only",
-                "Nothing — strings are immutable, so the assignment is ignored",
-                "The string becomes \"abc\" and a new variable holds \"z\""
-              ],
-              "answer": 2,
-              "explanation": "Strings are immutable. Assigning to an index is ignored in sloppy code and an error in strict mode — either way it never edits the text. Every string method returns a new string instead."
-            },
-            {
-              "id": "quiz-js-s12-q2",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "const fruit = 'banana'\nconsole.log(fruit.slice(-3), fruit.slice(1, 3))",
-              "options": [
-                "\"ana\" \"ana\"",
-                "\"nan\" \"an\"",
-                "\"ban\" \"ba\"",
-                "\"banana\" \"ban\"",
-                "It throws"
-              ],
-              "answer": 0,
-              "explanation": "A negative index counts back from the end, so slice(-3) is the tail, \"ana\". The second argument is the position to stop before, so slice(1, 3) gives \"an\" plus \"a\" — \"ana\"."
-            },
-            {
-              "id": "quiz-js-s12-q3",
-              "type": "true-false",
-              "prompt": "Template literals can span several lines, and anything can go inside `${...}`.",
-              "answer": true,
-              "explanation": "A template literal holds real newlines, so a sentence can be typed as it reads. Inside `${...}` you can put a whole expression, not just a name — `${(price * 1.2).toFixed(2)}` is legal."
-            },
-            {
-              "id": "quiz-js-s12-q4",
-              "type": "blank",
-              "prompt": "Which method replaces **every** occurrence of a substring, rather than only the first?",
-              "answers": [
-                "replaceall",
-                "replace all",
-                "replaceAll"
-              ],
-              "explanation": "`replace` changes the first match and returns a new string; `replaceAll` changes all of them. `replace(\" \", \"-\")` on \"a-b-c\" leaves you with \"a+b-c\", which is the bug you meet the first time you try to normalise a sentence."
-            },
-            {
-              "id": "quiz-js-s12-q5",
-              "type": "identify-error",
-              "prompt": "What is wrong with this snippet?",
-              "code": "const name = getUserTypedName()\nlist.innerHTML = `<li>${name}</li>`",
-              "options": [
-                "The template literal syntax is invalid inside innerHTML",
-                "Anything a person typed is inserted as markup, so a name containing a tag changes the page",
-                "innerHTML cannot be used with a template literal at all",
-                "The dollar-brace should be a plus sign"
-              ],
-              "answer": 1,
-              "explanation": "The syntax is fine; the danger is that the value is inserted as markup rather than as text. Build an element and assign to `textContent` instead — text set that way is displayed as characters and can never become a tag."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Values, types and operators"
       },
@@ -14528,69 +5336,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s13",
           "title": "Numbers check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s13-q1",
-              "type": "multiple-choice",
-              "prompt": "Why does `0.1 + 0.2 === 0.3` evaluate to `false`?",
-              "options": [
-                "Because JavaScript compares decimals with a tolerance of zero",
-                "Because both sides are stored as binary approximations and the stored value of the sum is not identical to the stored value of 0.3",
-                "Because `===` refuses to compare two numbers that both have decimal points",
-                "Because `+` on decimals produces a string in JavaScript"
-              ],
-              "answer": 1,
-              "explanation": "One tenth has no exact binary representation, so it is stored as the nearest available approximation. Adding two approximations leaves a result that differs in the seventeenth decimal place. `===` is reporting this truthfully — the fix is to round to the precision you mean before comparing."
-            },
-            {
-              "id": "quiz-js-s13-q2",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "console.log(Math.floor(-4.2), Math.round(-4.2))",
-              "options": [
-                "-4 -4",
-                "-5 -4",
-                "-4 -5",
-                "-5 -5",
-                "NaN NaN"
-              ],
-              "answer": 1,
-              "explanation": "`floor` moves toward negative infinity, so -4.2 becomes -5. `round` moves toward the nearest whole number, and -4.2 is nearer to -4. If you wanted the fraction simply thrown away regardless of direction, that is `trunc(-4.2)`, which gives -4."
-            },
-            {
-              "id": "quiz-js-s13-q3",
-              "type": "true-false",
-              "prompt": "`(9.656).toFixed(2)` returns the number 9.66, so you can keep calculating with it.",
-              "answer": false,
-              "explanation": "It returns the string \"9.66\". You cannot have a number with a variable number of decimal places, so the result is text. Use `Math.round(x * 100) / 100` when you need a number you can keep working with."
-            },
-            {
-              "id": "quiz-js-s13-q4",
-              "type": "blank",
-              "prompt": "Which method tells you whether a value is `NaN`?",
-              "answers": [
-                "number.isnan",
-                "numberisnan",
-                "isnan",
-                "number.isnan()"
-              ],
-              "explanation": "`Number.isNaN(value)` is the honest test. `typeof NaN` says \"number\", and `NaN === NaN` is false, so no equality comparison can ever find it."
-            },
-            {
-              "id": "quiz-js-s13-q5",
-              "type": "identify-error",
-              "prompt": "What is wrong with this code?",
-              "code": "const cents = 0.1 + 0.2\nif (cents === 0.3) {\n  console.log('price matches')\n}",
-              "options": [
-                "`cents` is a bad name for a number",
-                "The comparison uses `===` on two computed decimals, so it is false even when the price is right",
-                "Decimal literals need a leading zero",
-                "Nothing — this is the recommended way to compare prices"
-              ],
-              "answer": 1,
-              "explanation": "The sum is 0.30000000000000004, so the branch never runs and no error is reported. Compare rounded values (`Math.round(cents * 100) === 30`), compare a tolerance (`Math.abs(cents - 0.3) < 0.001`), or store money as whole pence so the question never arises."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Values, types and operators"
       },
@@ -14630,68 +5376,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s14",
           "title": "Arrays check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s14-q1",
-              "type": "multiple-choice",
-              "prompt": "What does `const a = [1, 2, 3]; a.forEach((n) => n * 2)` return?",
-              "options": [
-                "A new array [2, 4, 6]",
-                "[2, 4, 6], and a is left unchanged",
-                "undefined — forEach runs the function for its side effects and discards the return values",
-                "undefined, and a becomes [2, 4, 6]"
-              ],
-              "answer": 2,
-              "explanation": "forEach returns undefined by design: it exists for side effects like writing to the page. `map` is the one that collects the return values into a new array. If you are about to use a forEach result, you wanted a map."
-            },
-            {
-              "id": "quiz-js-s14-q2",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "const cars = ['Saab', 'Volvo', 'BMW']\ncars.push('Audi')\nconsole.log(cars[cars.length - 1], cars[-1])",
-              "options": [
-                "Audi undefined",
-                "Audi Audi",
-                "undefined Audi",
-                "BMW undefined"
-              ],
-              "answer": 0,
-              "explanation": "The last item sits at `length - 1`, so after the push that is the Audi. `cars[-1]` is undefined because indexes count from zero and from the start — there is no index -1, and a negative property lookup is just a missing property rather than an error."
-            },
-            {
-              "id": "quiz-js-s14-q3",
-              "type": "true-false",
-              "prompt": "`forEach` returns a new array containing whatever the callback returned for each item.",
-              "answer": false,
-              "explanation": "It returns undefined and throws the callback results away. The method that collects those results into a new array is `map`. Writing a forEach and then using its value is the single most common reason people reach for map instead."
-            },
-            {
-              "id": "quiz-js-s14-q4",
-              "type": "identify-error",
-              "prompt": "What is wrong with this snippet?",
-              "code": "const names = ['Ada', 'Bo']\nconst initials = names.forEach(function (n) {\n  return n[0]\n})\nconsole.log(initials.length)",
-              "options": [
-                "n[0] cannot be used inside a callback",
-                "forEach returns undefined, so initials.length cannot be read",
-                "The callback needs to be an arrow function",
-                "Nothing — this collects the first letter of each name"
-              ],
-              "answer": 1,
-              "explanation": "forEach discards every return value and gives back undefined, so reading `.length` on the result fails. `names.map((n) => n[0])` is what collects the first letter of each name, and it returns [\"A\", \"B\"]."
-            },
-            {
-              "id": "quiz-js-s14-q5",
-              "type": "blank",
-              "prompt": "Which array method returns a new array holding only the items that pass the test, so the result may be shorter than the original?",
-              "answers": [
-                "filter",
-                ".filter",
-                "filter()",
-                "array.filter"
-              ],
-              "explanation": "`filter` keeps the items its callback accepts and drops the rest. `map` transforms items one for one, so it always returns the same length, and `reduce` folds the array down to a single value. When the output has to be an array and its length may shrink, that is `filter`."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Arrays, dates and numbers"
       },
@@ -14718,68 +5403,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s15",
           "title": "Array sort and iteration check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s15-q1",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "const points = [40, 100, 1, 25, 10]\nconsole.log(points.sort().join(','))",
-              "options": [
-                "1,10,25,40,100",
-                "1,10,100,25,40",
-                "1,10,25,100,40",
-                "1,25,10,40,100"
-              ],
-              "answer": 1,
-              "explanation": "Without a comparator, sort compares the values as strings. \"2\" comes before \"4\", so 25 lands before 40. Adding the comparator `(a, b) => a - b` gives 1, 10, 25, 40, 100."
-            },
-            {
-              "id": "quiz-js-s15-q2",
-              "type": "true-false",
-              "prompt": "`sort()` returns a new sorted array and leaves the original in its original order.",
-              "answer": false,
-              "explanation": "sort reorders the array it is called on, in place, and returns that same array. To keep the original intact, sort a copy: `[...points].sort((a, b) => a - b)`, or use `toSorted` where it is available."
-            },
-            {
-              "id": "quiz-js-s15-q3",
-              "type": "multiple-choice",
-              "prompt": "A comparator passed to `sort` must return what?",
-              "options": [
-                "true if a should come first, false otherwise",
-                "-1, 0 or 1",
-                "A negative number, zero, or a positive number",
-                "The two items, in the order you want them"
-              ],
-              "answer": 2,
-              "explanation": "The contract is only about sign: negative puts a first, positive puts b first, zero means equal as far as ordering goes. sort works out the sequence itself. `a - b` happens to give exactly that for numbers, which is why it is the form you see everywhere."
-            },
-            {
-              "id": "quiz-js-s15-q4",
-              "type": "identify-error",
-              "prompt": "What is wrong with this snippet?",
-              "code": "const scores = [38, 72, 45, 91]\nconst top = scores.sort(function (a, b) { return b.score - a.score })\nconsole.log(scores[0])",
-              "options": [
-                "The comparator is written backwards — it should be a - b",
-                "The items are numbers, so there is nothing to compare and a comparator cannot work",
-                "The comparator should compare a.length - b.length",
-                "Nothing is wrong — this sorts the numbers from highest to lowest"
-              ],
-              "answer": 1,
-              "explanation": "The comparator reads a `.score` property that plain numbers do not have, so `a.score - b.score` is NaN. NaN is not meaningfully negative, zero or positive, so the resulting order is undefined. Compare numbers with `a - b`; compare objects by the property you care about, `a.age - b.age`."
-            },
-            {
-              "id": "quiz-js-s15-q5",
-              "type": "blank",
-              "prompt": "Fill in the comparator that sorts numbers from lowest to highest.",
-              "code": "const n = [40, 1, 25]\nn.sort((a, b) => ___)",
-              "answers": [
-                "a - b",
-                "a-b",
-                "a  -  b"
-              ],
-              "explanation": "Subtracting the two values produces a negative number when a is smaller, zero when they are equal, and a positive number when a is larger — exactly the contract sort expects. Swapping to `b - a` gives the descending order instead."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Arrays, dates and numbers"
       },
@@ -14806,68 +5430,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s16",
           "title": "Dates check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s16-q1",
-              "type": "multiple-choice",
-              "prompt": "What does a Date object actually store?",
-              "options": [
-                "A year, a month, a day, an hour, a minute and a second, as six separate fields",
-                "A single number: the milliseconds elapsed since 1 January 1970, midnight UTC",
-                "A formatted string such as \"2026-03-09T14:05:00.000Z\"",
-                "A reference to the moment the object was created, so it updates like a clock"
-              ],
-              "answer": 1,
-              "explanation": "Everything you read off a Date — getFullYear, getMonth, getHours — is calculated from that one number. That is why two Dates can be subtracted directly, and why a Date is a fixed instant rather than a running clock: it does not tick, and the demo has to re-create it to keep moving."
-            },
-            {
-              "id": "quiz-js-s16-q2",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "const a = new Date(2026, 0, 15)\nconsole.log(a.getMonth())",
-              "options": [
-                "1",
-                "0",
-                "January",
-                "15"
-              ],
-              "answer": 1,
-              "explanation": "Months are 0-based when you construct and read them, so January is 0 and December is 11. Only `getFullYear` and `getDate` count the way you expect. The offset appears because months were once indexed from an array, and the array starts at zero."
-            },
-            {
-              "id": "quiz-js-s16-q3",
-              "type": "true-false",
-              "prompt": "`new Date('2026-01-15')` and `new Date('15/01/2026')` reliably mean the same instant on every machine.",
-              "answer": false,
-              "explanation": "The YYYY-MM-DD form is read as UTC midnight, while day-first forms are read as local midnight. In any timezone behind UTC those land on different days, and the day-first form is an engine detail rather than part of the specification. Build from numbers when the exact instant matters."
-            },
-            {
-              "id": "quiz-js-s16-q4",
-              "type": "identify-error",
-              "prompt": "What is wrong with this code?",
-              "code": "const sale = new Date('2026-02-30')\nconsole.log(sale.getMonth(), sale.getDate())",
-              "options": [
-                "getMonth cannot be called on a Date",
-                "The impossible date is silently rolled over, so this is 1 March, not 30 February",
-                "Dates must be created with the new keyword or they do not exist",
-                "The format is wrong — it must be written as 30/02/2026"
-              ],
-              "answer": 1,
-              "explanation": "A Date has no way to be the thirtieth of February, so the constructor normalises it to 1 March. No error, no warning, and a log line that looks like a perfectly ordinary date. If the input can be wrong, validate the day against the month before constructing the Date."
-            },
-            {
-              "id": "quiz-js-s16-q5",
-              "type": "blank",
-              "prompt": "Which method returns the number of milliseconds since 1 January 1970, with no Date object involved?",
-              "answers": [
-                "Date.now()",
-                "Date.now",
-                "date.now()",
-                "Date.now()()"
-              ],
-              "explanation": "`Date.now()` gives the epoch milliseconds directly, which is cheaper than building a Date and reading getTime(). It is also how you time a piece of code: read it before and after, and subtract."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Arrays, dates and numbers"
       },
@@ -14894,68 +5457,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s17",
           "title": "Date methods check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s17-q1",
-              "type": "multiple-choice",
-              "prompt": "What does `new Date(2026, 0, 15).getMonth()` return, and what is that month?",
-              "options": [
-                "0 — January",
-                "1 — January",
-                "0 — February",
-                "15 — March"
-              ],
-              "answer": 0,
-              "explanation": "Months are numbered 0 to 11, so 0 is January and 11 is December. The same convention applies to `setMonth`, so the number you read is the number you write — the +1 conversion only belongs in display code."
-            },
-            {
-              "id": "quiz-js-s17-q2",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "const d = new Date(2026, 2, 9, 14, 5)\nd.setMonth(12)\nconsole.log(d.getMonth(), d.getDate())",
-              "options": [
-                "12 9",
-                "0 9",
-                "1 9",
-                "11 9"
-              ],
-              "answer": 1,
-              "explanation": "Setters roll over rather than refuse: month 12 is January of the following year, and getMonth reports it as 0. The day of the month survives, because only the month was changed. This is the behaviour to remember before using setMonth to hold \"the last day of a month\"."
-            },
-            {
-              "id": "quiz-js-s17-q3",
-              "type": "true-false",
-              "prompt": "`getDate()` returns the day of the week, and `getDay()` returns the day of the month.",
-              "answer": false,
-              "explanation": "It is the other way round. `getDate` is the day of the month, `getDay` is the day of the week numbered 0 to 6 with Sunday first. Pairing getDay with a names array means that array has to start with Sunday, or every label is a day out."
-            },
-            {
-              "id": "quiz-js-s17-q4",
-              "type": "identify-error",
-              "prompt": "What is wrong with this code?",
-              "code": "function label(d) {\n  const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']\n  return days[d.getDay()]\n}",
-              "options": [
-                "getDay cannot be used inside a function",
-                "The names array starts at Monday but getDay counts Sunday as 0, so every label is a day out",
-                "days[d.getDay()] returns undefined because the index is a string",
-                "getDay only works on a Date created from a string"
-              ],
-              "answer": 1,
-              "explanation": "`getDay` is 0 for Sunday, so the array must be [\"Sun\", \"Mon\", …]. A one-day shift is the exact failure this causes, and it is easy to miss because every label is still a real weekday."
-            },
-            {
-              "id": "quiz-js-s17-q5",
-              "type": "blank",
-              "prompt": "Fill in the method that tells you how many minutes this machine's clock is behind UTC.",
-              "answers": [
-                "getTimezoneOffset",
-                ".getTimezoneOffset()",
-                "gettimezoneoffset",
-                "getTimezoneOffset()"
-              ],
-              "explanation": "`getTimezoneOffset()` returns local time minus UTC in minutes, so UTC+1 gives -60. The sign is the part people get wrong: the answer is how far *behind* UTC you are, not your offset from it."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Arrays, dates and numbers"
       },
@@ -14982,68 +5484,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s18",
           "title": "Math check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s18-q1",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "console.log(Math.floor(-4.2), Math.trunc(-4.2))",
-              "options": [
-                "-4 -4",
-                "-5 -4",
-                "-4 -5",
-                "-5 -5"
-              ],
-              "answer": 1,
-              "explanation": "`floor` moves toward negative infinity, so -4.2 becomes -5. `trunc` throws the fraction away and keeps the sign, giving -4. On positive numbers the two are identical, which is exactly why the difference goes unnoticed until a negative value appears."
-            },
-            {
-              "id": "quiz-js-s18-q2",
-              "type": "multiple-choice",
-              "prompt": "What does `Math.sqrt(-1)` give back?",
-              "options": [
-                "It throws a RangeError, because a negative number has no square root",
-                "NaN, with no error and no warning",
-                "0, because the square root of nothing is nothing",
-                "-1"
-              ],
-              "answer": 1,
-              "explanation": "Math answers out-of-domain questions with NaN rather than throwing, so the failure appears later as a display reading NaN or a total that is not a number. A negative argument is usually a sign error upstream, and Math.abs before the call is often the real fix."
-            },
-            {
-              "id": "quiz-js-s18-q3",
-              "type": "true-false",
-              "prompt": "`Math.max(someArray)` returns the largest number in the array.",
-              "answer": false,
-              "explanation": "Math.max only takes numbers, so an array argument gives NaN. The array has to be spread into the call: `Math.max(...someArray)`. And for a very long array the spread can exceed the argument limit, which is when a reduce is the safer tool."
-            },
-            {
-              "id": "quiz-js-s18-q4",
-              "type": "identify-error",
-              "prompt": "What is wrong with this code?",
-              "code": "const page = current / perPage\nconst lastPage = Math.floor(page + 1)",
-              "options": [
-                "Math.floor does not accept a second argument",
-                "Adding 1 before flooring inflates the result — a page count is already whole, so floor it on its own",
-                "page counts cannot be computed with division",
-                "Nothing — this is the correct way to count pages"
-              ],
-              "answer": 1,
-              "explanation": "If the division is exact, 10 becomes 11. The usual reason to reach for floor is the opposite situation: a ratio that must not round up. If you want to round a fraction up to the next whole page, that is Math.ceil(page) and nothing added."
-            },
-            {
-              "id": "quiz-js-s18-q5",
-              "type": "blank",
-              "prompt": "Which Math function gives the distance of a number from zero, so the sign disappears?",
-              "answers": [
-                "Math.abs",
-                "abs",
-                "Math.abs()",
-                "math.abs"
-              ],
-              "explanation": "`Math.abs(-4.7)` is 4.7. It is the function you want whenever a value may be either direction — a difference, a delta, an offset — because squaring or negating it by hand is where sign errors creep in."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Arrays, dates and numbers"
       },
@@ -15070,68 +5511,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s19",
           "title": "Random check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s19-q1",
-              "type": "code-output",
-              "prompt": "Which expression can never return 10?",
-              "code": "Math.floor(Math.random() * 10) + 1",
-              "options": [
-                "All of them can return 10",
-                "Math.floor(Math.random() * 10) — its highest value is 9",
-                "Math.ceil(Math.random() * 10) + 1 — its lowest value is 1",
-                "Math.floor(Math.random() * 11) + 1 — its highest value is 10"
-              ],
-              "answer": 1,
-              "explanation": "The multiplier is the number of possible values, not the highest one. `* 10` gives ten values, 0 to 9, so 10 is not among them. To reach 10 you need `* 11 + 1`, or `* 10 + 1` for 1 to 10 inclusive."
-            },
-            {
-              "id": "quiz-js-s19-q2",
-              "type": "true-false",
-              "prompt": "Math.random() can return 1, but never returns 0.",
-              "answer": false,
-              "explanation": "It is the other way round: 0 is possible and 1 is not, so the range is 0 <= n < 1. That is why a whole number from 0 to 9 is `Math.floor(Math.random() * 10)`, and why 0 to 100 inclusive needs `* 101`."
-            },
-            {
-              "id": "quiz-js-s19-q3",
-              "type": "blank",
-              "prompt": "To pick one item at random from an array called `options`, which length do you multiply by?",
-              "answers": [
-                "options.length",
-                "length",
-                "options.length()",
-                "the length of the array"
-              ],
-              "explanation": "The array length is the number of possible items, which is the same \"multiply by how many there are\" rule as any other range. The classic slip is multiplying by `length - 1`, which makes the last item impossible to pick."
-            },
-            {
-              "id": "quiz-js-s19-q4",
-              "type": "multiple-choice",
-              "prompt": "What is wrong with picking a random item by rerolling until the result is new?",
-              "options": [
-                "Nothing — it is the standard way to avoid duplicates",
-                "It is biased: later options become more likely than earlier ones",
-                "It is slower than indexing into the array",
-                "Math.random cannot be called more than once a second"
-              ],
-              "answer": 1,
-              "explanation": "Every reroll is another chance for the earlier items, so the last value in a set ends up more likely than the first. Pick from the array of remaining items instead. The same trap applies to rerolling until a \"good\" score: you have built a generator that only produces good scores."
-            },
-            {
-              "id": "quiz-js-s19-q5",
-              "type": "identify-error",
-              "prompt": "What is wrong with this code?",
-              "code": "function showBanner() {\n  const tip = tips[Math.floor(Math.random() * (tips.length - 1))]\n  render(tip)\n}",
-              "options": [
-                "Math.floor cannot be used inside a function",
-                "tips.length - 1 makes the last tip impossible to ever be chosen",
-                "Math.random has to be stored in a variable first",
-                "Nothing — this picks an item at random correctly"
-              ],
-              "answer": 1,
-              "explanation": "The multiplier is the number of possible items, which is the full length. Subtracting one drops the final element, so it never appears no matter how many times the page is reloaded. The version with `tips.length` gives every item the same chance."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Arrays, dates and numbers"
       },
@@ -15158,67 +5538,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s20",
           "title": "Booleans check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s20-q1",
-              "type": "multiple-choice",
-              "prompt": "Which of these is **not** falsy?",
-              "options": [
-                "0",
-                "''",
-                "[]",
-                "0n"
-              ],
-              "answer": 2,
-              "explanation": "The falsy six are false, 0, 0n, \"\", null, undefined and NaN. An empty array is an object, and every object is truthy — which is why `if (list)` and `if (list.length)` are not the same test."
-            },
-            {
-              "id": "quiz-js-s20-q2",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "const input = '0'\nif (input) {\n  console.log('submitted')\n}",
-              "options": [
-                "Nothing — 0 is falsy",
-                "submitted, because the string \"0\" is non-empty and therefore truthy",
-                "Nothing — strings are never truthy",
-                "It logs 0"
-              ],
-              "answer": 1,
-              "explanation": "A form field gives you a string, and a non-empty string is truthy whatever the characters are. The same applies to the word \"false\". This is why field checks state what they mean: `input.value !== ''` or `Number(input.value) > 0`."
-            },
-            {
-              "id": "quiz-js-s20-q3",
-              "type": "true-false",
-              "prompt": "`!!value` is a reliable way to turn any value into a boolean.",
-              "answer": true,
-              "explanation": "Two negations in a row cancel out, so the result is the boolean that value converts to — which is exactly what `Boolean(value)` does. It is the shorter form, and it is the one that reads as \"force this to a boolean\" once you know what a single `!` does."
-            },
-            {
-              "id": "quiz-js-s20-q4",
-              "type": "identify-error",
-              "prompt": "What is wrong with this code?",
-              "code": "const disabled = new Boolean(false)\nif (disabled) {\n  button.removeAttribute('disabled')\n}",
-              "options": [
-                "new Boolean is not a real constructor",
-                "The object wrapper is truthy even though it holds false, so the block always runs",
-                "removeAttribute needs a second argument",
-                "Nothing — this correctly checks for false"
-              ],
-              "answer": 1,
-              "explanation": "`new Boolean(false)` is an object, and every object is truthy, so the condition cannot be false. `true` and `false` are the values you want; `Boolean(x)` is the function that converts. An object wrapping a boolean is one of the few genuinely confusing cases in the language."
-            },
-            {
-              "id": "quiz-js-s20-q5",
-              "type": "blank",
-              "prompt": "What is the name of the conversion rule that decides whether a value counts as true in a condition?",
-              "answers": [
-                "truthiness",
-                "truthy",
-                "truthiness"
-              ],
-              "explanation": "Truthiness is the rule, and it has a short list of falsy values: false, 0, 0n, the empty string, null, undefined and NaN. Everything else passes a condition, including empty arrays, empty objects and the string \"0\" — which is why a check on a form field should say what it means rather than rely on the default."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Arrays, dates and numbers"
       },
@@ -15245,67 +5565,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s21",
           "title": "Comparisons check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s21-q1",
-              "type": "multiple-choice",
-              "prompt": "Why is `==` avoided in favour of `===`?",
-              "options": [
-                "`===` runs faster",
-                "`==` converts types before comparing, so `0 == \"0\"` and `\"\" == 0` are true",
-                "`==` only works on numbers",
-                "`==` cannot be used inside an `if`"
-              ],
-              "answer": 1,
-              "explanation": "Loose equality coerces one side to the other type using a set of rules that are hard to remember. Strict equality asks two simple questions - same type, same value - and that is the entire rule."
-            },
-            {
-              "id": "quiz-js-s21-q2",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "const n = 3\nconsole.log(n == '3', n === '3')",
-              "options": [
-                "true true",
-                "true false",
-                "false false",
-                "false true"
-              ],
-              "answer": 1,
-              "explanation": "Loose equality coerces the string to a number, so `==` gives true. Strict equality also compares types, and a number is not a string, so `===` gives false."
-            },
-            {
-              "id": "quiz-js-s21-q3",
-              "type": "true-false",
-              "prompt": "A count of `0` will survive `count || 10`.",
-              "answer": false,
-              "explanation": "`0` is falsy, so `||` treats it as missing and hands back the right-hand side. `count ?? 10` is the form that keeps a real zero, because `??` only falls back for `null` and `undefined`."
-            },
-            {
-              "id": "quiz-js-s21-q4",
-              "type": "blank",
-              "prompt": "Which operator gives the value only when it is `null` or `undefined`?",
-              "answers": [
-                "??",
-                "nullish coalescing",
-                "nullish coalescing operator"
-              ],
-              "explanation": "`??` is nullish coalescing: it returns the left side unless it is `null` or `undefined`, then returns the right. `||` fills in for every falsy value, which is why a real `0` or an empty string gets replaced."
-            },
-            {
-              "id": "quiz-js-s21-q5",
-              "type": "identify-error",
-              "prompt": "What is wrong with this code?",
-              "code": "const items = getItems()\nif (items.length > 0 && items[0].name) {\n  show(items)\n}",
-              "options": [
-                "Nothing - the guard looks fine",
-                "`&&` cannot be used with `>`",
-                "If `items` is undefined or null the left side throws before `&&` ever gets a chance to short-circuit",
-                "`items[0].name` must be compared with `===`"
-              ],
-              "answer": 2,
-              "explanation": "Short-circuiting only protects the code on the **right** of `&&`. `items.length` is evaluated first, so an absent `items` throws there. Write the risky check first: `if (items && items.length > 0 && items[0].name)`."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Control flow and errors"
       },
@@ -15345,65 +5605,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s22",
           "title": "Conditions check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s22-q1",
-              "type": "multiple-choice",
-              "prompt": "In a chain of `if / else if / else`, how many branches run for one execution?",
-              "options": [
-                "All of them, top to bottom",
-                "Only the first one that matches, plus its `else`",
-                "Exactly one",
-                "Every branch whose condition is truthy"
-              ],
-              "answer": 2,
-              "explanation": "Exactly one branch runs. JavaScript checks the conditions in order and stops at the first match, so a chain is not a set of independent tests. This is why the widest range has to be written first - a narrower test placed above it swallows every value it should have let through."
-            },
-            {
-              "id": "quiz-js-s22-q2",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "const n = 0\nconsole.log(n ? 'yes' : 'no')",
-              "options": [
-                "yes",
-                "no",
-                "0",
-                "undefined"
-              ],
-              "answer": 1,
-              "explanation": "`0` is falsy, so the condition fails and the ternary takes the second branch. This is the trap with a ternary: the left side is a truthiness test, not a comparison, so `count > 0` is the safer way to ask \"is there anything here?\" than `count` alone."
-            },
-            {
-              "id": "quiz-js-s22-q3",
-              "type": "true-false",
-              "prompt": "A `switch` compares its cases with `==`, so `switch (\"0\")` matches `case 0:`.",
-              "answer": false,
-              "explanation": "Cases are compared with `===`, which never coerces types, so the string `\"0\"` does not match the number `0`. Values coming from form inputs arrive as strings, which is why you convert with `Number()` before the `switch` rather than inside it."
-            },
-            {
-              "id": "quiz-js-s22-q4",
-              "type": "identify-error",
-              "prompt": "What is wrong with this code?",
-              "code": "function grade(score) {\n  if (score > 70) {\n    return 'Passed'\n  } else if (score > 90) {\n    return 'Distinction'\n  } else {\n    return 'Failed'\n  }\n}",
-              "options": [
-                "The two branches should be joined with `&&`",
-                "The branches are in the wrong order, so a score of 95 returns \"Passed\" instead of \"Distinction\"",
-                "`return` needs to come after the `else if`",
-                "Nothing is wrong - this handles every score"
-              ],
-              "answer": 1,
-              "explanation": "A chain stops at its first match. A score of 95 satisfies `score > 70`, so the function returns \"Passed\" and the `score > 90` branch is never reached - it is dead code. Range checks must be written widest first, which here means putting `score > 90` above `score > 70`."
-            },
-            {
-              "id": "quiz-js-s22-q5",
-              "type": "blank",
-              "prompt": "Which keyword ends a `case` block so the next one does not run?",
-              "answers": [
-                "break"
-              ],
-              "explanation": "`break` leaves the `switch` immediately. Without it JavaScript keeps falling into the following blocks, which is sometimes what you want - stacking `case 3:` and `case 4:` above one block is exactly that - but usually it is a missing keyword rather than a design."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Control flow and errors"
       },
@@ -15430,65 +5632,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s23",
           "title": "Loops check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s23-q1",
-              "type": "multiple-choice",
-              "prompt": "In `for (let i = 0; i < 5; i++)`, which part runs once before the loop body?",
-              "options": [
-                "`i < 5`",
-                "`i++`",
-                "`let i = 0`",
-                "All three, once each"
-              ],
-              "answer": 2,
-              "explanation": "The initialiser runs exactly once. The condition is checked before every turn, including the first, and the update runs after every turn. That is why `for (let i = 0; i > 5; i++)` never runs its body at all - the condition is already false when it is first checked."
-            },
-            {
-              "id": "quiz-js-s23-q2",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "for (let i = 0; i < 5; i++) {\n  if (i === 2) continue\n  if (i === 4) break\n  console.log(i)\n}",
-              "options": [
-                "0 1 2 3",
-                "0 1 3",
-                "0 1 3 4",
-                "0 1 2"
-              ],
-              "answer": 1,
-              "explanation": "`continue` skips the rest of the turn for i = 2, so 2 is never printed, but the loop carries on. `break` ends the loop entirely at i = 4, so 4 is never reached. The output is 0 1 3."
-            },
-            {
-              "id": "quiz-js-s23-q3",
-              "type": "true-false",
-              "prompt": "A `do...while` loop with a condition that is already false still runs its body once.",
-              "answer": true,
-              "explanation": "That is the difference from a plain `while`: the body runs first and the condition is asked afterwards. It is the right shape for work that must happen at least once before you know whether to keep going, and the wrong shape for anything else, because the extra pass is easy to forget."
-            },
-            {
-              "id": "quiz-js-s23-q4",
-              "type": "identify-error",
-              "prompt": "What is wrong with this code?",
-              "code": "let i = 0\nwhile (i > 0) {\n  console.log(i)\n  i = i + 1\n}",
-              "options": [
-                "`while` cannot be used with a number",
-                "The comparison is backwards - the body increments `i` but the loop only runs while `i` is greater than 0, so it never stops",
-                "`i` needs to be declared with `const`",
-                "Nothing is wrong"
-              ],
-              "answer": 1,
-              "explanation": "The body only ever increases `i`, but the condition asks for it to be above 0, which starts true and gets more true. The condition should be `while (i < 5)` or similar. Check every loop condition against what the body does to the counter - that single test catches most runaway loops."
-            },
-            {
-              "id": "quiz-js-s23-q5",
-              "type": "blank",
-              "prompt": "Which keyword skips the rest of the current turn of a loop and moves on to the next one?",
-              "answers": [
-                "continue"
-              ],
-              "explanation": "`continue` jumps to the next iteration, leaving the rest of the current body unexecuted. `break` is the one that leaves the loop entirely. Both can also be used inside a `switch`, where `break` is what stops a `case` falling into the next."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Control flow and errors"
       },
@@ -15515,68 +5659,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s24",
           "title": "Loop variants check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s24-q1",
-              "type": "multiple-choice",
-              "prompt": "What does `for (const key in person)` give you?",
-              "options": [
-                "Each value of the object, in order",
-                "Each key of the object, and you look the value up with `person[key]`",
-                "Each key and value as a pair",
-                "Each own method of the object"
-              ],
-              "answer": 1,
-              "explanation": "`for…in` yields names, never values. The name comes from the object's shape, so the value has to be fetched by key. For key and value pairs together, `Object.entries(person)` with destructuring is the form you want."
-            },
-            {
-              "id": "quiz-js-s24-q2",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "for (const [i, word] of ['a', 'b', 'c'].entries()) {\n  if (word === 'b') continue\n  console.log(i, word)\n}",
-              "options": [
-                "0 a 2 c",
-                "0 a 1 b 2 c",
-                "0 a 1 c",
-                "a b c"
-              ],
-              "answer": 0,
-              "explanation": "`entries()` pairs each index with its value, and `continue` skips the rest of the turn for \"b\" - so its index never prints either. Output is `0 a` then `2 c`."
-            },
-            {
-              "id": "quiz-js-s24-q3",
-              "type": "true-false",
-              "prompt": "`for…in` over an array is a safe substitute for `for…of`.",
-              "answer": false,
-              "explanation": "On an array, `for…in` gives you the string index keys `\"0\"`, `\"1\"`, `\"2\"` rather than the values, in an order the language does not promise, and it walks any extra property a library added. For arrays use `for…of`, `entries()` or an array method."
-            },
-            {
-              "id": "quiz-js-s24-q4",
-              "type": "identify-error",
-              "prompt": "What is wrong with this code?",
-              "code": "const items = ['a', 'b']\nfor (const i in items) {\n  console.log(items[i].toUpperCase())\n}",
-              "options": [
-                "`for…in` cannot be used with `const`",
-                "Nothing is wrong",
-                "`for…in` hands back index keys as strings, so `items[i]` still happens to work but the loop reads like a bug and any extra array property would be walked too",
-                "`toUpperCase` must be called with parentheses omitted"
-              ],
-              "answer": 2,
-              "explanation": "This particular code happens to work because `items[\"0\"]` resolves the same as `items[0]`. That is exactly why the mistake survives: nothing tells you it is wrong until a library attaches a property to the array and the loop walks it too. Reach for `for…of`."
-            },
-            {
-              "id": "quiz-js-s24-q5",
-              "type": "blank",
-              "prompt": "Which method gives you each index paired with its value, ready to destructure?",
-              "answers": [
-                "entries()",
-                "entries",
-                ".entries()",
-                "array.entries()"
-              ],
-              "explanation": "`items.entries()` yields `[index, value]` pairs, so `for (const [i, item] of items.entries())` gives you both names at once. It replaces the manual counter that otherwise creeps into a `for…of` loop."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Control flow and errors"
       },
@@ -15603,68 +5686,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s25",
           "title": "Bitwise operators check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s25-q1",
-              "type": "multiple-choice",
-              "prompt": "Why is `1000000000 | 1` a bad idea?",
-              "options": [
-                "`|` only works on strings",
-                "Bitwise operators convert their operands to 32-bit integers first, so the high digits are discarded and the result is 1",
-                "`|` cannot be used with a literal",
-                "It is a syntax error above 1000"
-              ],
-              "answer": 1,
-              "explanation": "Bitwise operators coerce to 32-bit signed integers before doing any work. `1000000000` does not fit in 32 bits, so what arrives is only its low digits. Use `+` for arithmetic on large numbers, or `BigInt` when you genuinely need more than 32 bits."
-            },
-            {
-              "id": "quiz-js-s25-q2",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "const flags = 0\nflags |= 2\nflags |= 4\nconsole.log(flags, (flags & 2) > 0)",
-              "options": [
-                "4 false",
-                "6 true",
-                "6 false",
-                "2 true"
-              ],
-              "answer": 1,
-              "explanation": "`|=` adds each flag without touching the bits already set, so 2 then 4 gives 6. `6 & 2` is 2, which is greater than 0, so the flag is on."
-            },
-            {
-              "id": "quiz-js-s25-q3",
-              "type": "true-false",
-              "prompt": "`n >> 2` sets `n` to the number 2.",
-              "answer": false,
-              "explanation": "The 2 is the distance every bit moves, not the result. `40 >> 2` is 10, because each step right divides by two. `n >> 0` is the no-op that makes this easy to check."
-            },
-            {
-              "id": "quiz-js-s25-q4",
-              "type": "identify-error",
-              "prompt": "What is wrong with this code?",
-              "code": "const READ = 1\nconst WRITE = 2\nlet flags = READ\nflags = flags + WRITE\nconsole.log(hasFlag(flags, WRITE))",
-              "options": [
-                "`flags` must be declared with `let` at the top, not reassigned",
-                "Adding instead of OR-ing is fine here, so nothing is wrong",
-                "Adding carries between flags, so the two numbers stop being independent flags and one bit read can be set by accident",
-                "`WRITE` has to be a number above 2"
-              ],
-              "answer": 2,
-              "explanation": "Flags are safe because each one is a separate bit and `|` only ever sets a bit. `+` is arithmetic: it carries, so 1 + 2 + 4 = 7 which happens to look fine, but 1 + 2 = 3 sets bits 1 and 2 at once and reading either flag reports both. Reach for `|=`."
-            },
-            {
-              "id": "quiz-js-s25-q5",
-              "type": "blank",
-              "prompt": "Which method turns a number into its binary digits as a string?",
-              "answers": [
-                "toString(2)",
-                "toString2",
-                ".toString(2)",
-                "toString with radix 2"
-              ],
-              "explanation": "`n.toString(2)` gives the bits as a string, and `parseInt(text, 2)` turns them back. Every bitwise operator is easier to check once you can see the binary, because each one then reads as \"keep this column\" or \"flip this column\"."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Control flow and errors"
       },
@@ -15693,70 +5715,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s26",
           "title": "Regular expressions check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s26-q1",
-              "type": "multiple-choice",
-              "prompt": "Why does `isHexColor(\"#zzz#fff\")` return false with a properly anchored pattern, but true without the anchors?",
-              "options": [
-                "Anchors make the pattern faster",
-                "`^` and `$` require the whole string to be the shape, so an unrelated match inside a longer string is not enough",
-                "Anchors add the `i` flag automatically",
-                "Without anchors the pattern throws"
-              ],
-              "answer": 1,
-              "explanation": "A pattern without `^` and `$` is a search: it succeeds on finding the shape anywhere. A pattern with them is a full-string check. Validation is a full-string question, so validation patterns need anchors."
-            },
-            {
-              "id": "quiz-js-s26-q2",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "const s = 'a  b   c'\nconsole.log(s.replace(/\\s+/, '-'))\nconsole.log(s.replace(/\\s+/g, '-'))",
-              "options": [
-                "a-b-c then a-b-c",
-                "a-b-c then a-b-c with all gaps",
-                "a  b-c  then a-b-c",
-                "a  b   c then a  b   c"
-              ],
-              "answer": 2,
-              "explanation": "Without `g`, `replace` changes the first match only, so the second gap survives. With `g` every run of whitespace is replaced, which is why \"clean this whole string\" almost always needs the global flag."
-            },
-            {
-              "id": "quiz-js-s26-q3",
-              "type": "true-false",
-              "prompt": "The `g` flag makes `test` check the whole string from start to finish each time.",
-              "answer": false,
-              "explanation": "Without `g`, `test` looks for the first match anywhere. With `g`, a pattern object remembers where it last stopped, so calling `test` twice on the *same* pattern object can give different answers. Put patterns in a named `const` without `g`, or build a fresh one, to avoid it."
-            },
-            {
-              "id": "quiz-js-s26-q4",
-              "type": "identify-error",
-              "prompt": "What is wrong with this validation?",
-              "code": "function isHex(value) {\n  return /#?[0-9a-f]{3,6}/i.test(value)\n}\n\nconsole.log(isHex('#fff'))    // true, by luck\nconsole.log(isHex('#fff and more text'))",
-              "options": [
-                "Nothing is wrong, so both lines print true",
-                "There are no anchors and the `#` is optional, so the second line matches anyway - a search rather than a shape check",
-                "The `i` flag cannot be combined with `{3,6}`",
-                "`test` needs a number, not a string"
-              ],
-              "answer": 1,
-              "explanation": "Without `^` and `$` the pattern is a search, so it finds three to six hex characters anywhere in the string and says yes. With the hash optional it also accepts bare `fff`. Validation wants `^#([0-9a-f]{3}|[0-9a-f]{6})$`, which is what the exercise builds."
-            },
-            {
-              "id": "quiz-js-s26-q5",
-              "type": "blank",
-              "prompt": "Which method returns the first match together with its captured groups?",
-              "answers": [
-                "match()",
-                "match",
-                ".match()",
-                "string.match()",
-                "exec()",
-                ".exec()"
-              ],
-              "explanation": "`str.match(pattern)` gives the first match, its index, and any groups after it. Without `g` that is what you get; with `g` you get a flat array of matches and no groups. `matchAll` walks every match while keeping the groups."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Control flow and errors"
       },
@@ -15784,67 +5743,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s27",
           "title": "Errors check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s27-q1",
-              "type": "multiple-choice",
-              "prompt": "Where do you start reading a stack trace?",
-              "options": [
-                "At the bottom, because that is where the program started",
-                "At the first line for what went wrong, then the first frame in a file you recognise for where",
-                "At the frame with the longest file path",
-                "Anywhere, since every frame says the same thing"
-              ],
-              "answer": 1,
-              "explanation": "The first line names the failure and the operation that caused it. The frames below are the call chain printed from the inside out, so the first frame in a file you know is your code, and reading further up tells you how the call reached you."
-            },
-            {
-              "id": "quiz-js-s27-q2",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "function getUser(id) {\n  return null\n}\n\nconst user = getUser('ada')\nconsole.log(user?.name)",
-              "options": [
-                "Ada",
-                "undefined",
-                "null",
-                "It throws"
-              ],
-              "answer": 1,
-              "explanation": "The optional chaining `?.` stops the property read as soon as the left side is `null` or `undefined`, and the whole expression evaluates to `undefined` rather than throwing. Add `?? 'Unknown'` when you want a usable value instead."
-            },
-            {
-              "id": "quiz-js-s27-q3",
-              "type": "true-false",
-              "prompt": "A `finally` block runs even when the `try` block already returned a value.",
-              "answer": true,
-              "explanation": "`finally` runs on every path out of a `try` - after a normal return, after the `catch` handled something, and after a re-throw. That is exactly why cleanup belongs there rather than at the end of the function, where an early return would skip it."
-            },
-            {
-              "id": "quiz-js-s27-q4",
-              "type": "identify-error",
-              "prompt": "What is wrong with this code?",
-              "code": "function loadSettings(text) {\n  try {\n    return JSON.parse(text)\n  } catch (error) {\n  }\n}",
-              "options": [
-                "Nothing is wrong - an empty catch is valid",
-                "A `catch` must return or re-throw, so this one swallows the failure and the caller cannot tell a real value from a failure",
-                "`JSON.parse` needs a second argument inside `try`",
-                "The `catch` parameter must be named `e`, not `error`"
-              ],
-              "answer": 1,
-              "explanation": "A `catch` block that does nothing logs nothing and returns nothing, so the caller gets `undefined` and invents its own theory about why. Either recover - log with enough context and return a fallback the caller can use - or re-throw so the caller decides. If the only thing that fits in the block is a comment, delete the `try`."
-            },
-            {
-              "id": "quiz-js-s27-q5",
-              "type": "blank",
-              "prompt": "Which property holds the human-readable text of a thrown Error?",
-              "answers": [
-                "message",
-                "error.message",
-                ".message"
-              ],
-              "explanation": "`error.message` is the text you wrote when you threw, and it is what a browser prints on the first line of the stack. `error.name` is the class, and `error instanceof TypeError` tells a caller which kind of mistake it was."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Control flow and errors"
       },
@@ -15871,68 +5770,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s28",
           "title": "Scope check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s28-q1",
-              "type": "multiple-choice",
-              "prompt": "Which declaration decides the value of `label` on the line that logs it?",
-              "code": "function report() {\n  const label = 'report'\n  if (true) {\n    const label = 'section'\n    console.log(label)\n  }\n}",
-              "options": [
-                "The `label` in the `if` block, because it is declared nearest the line",
-                "The `label` in the function body, because an inner block cannot shadow an outer one",
-                "Whichever was assigned last, regardless of nesting",
-                "Neither — `if` bodies do not create their own scope"
-              ],
-              "answer": 0,
-              "explanation": "Scope lookup walks outwards from the line and stops at the first declaration it finds. The block-scoped `label` sits nearest the `console.log`, so it wins — the outer one is shadowed for the rest of the block. That is also why the block one has to be a different name if you meant the outer value."
-            },
-            {
-              "id": "quiz-js-s28-q2",
-              "type": "true-false",
-              "prompt": "A closure gives a returned function a way to change a variable that the code calling it can also see and change.",
-              "answer": false,
-              "explanation": "It is the other way round. The remembered variables stay inside the factory: `makeCounter()` seals `count` away, and the returned function is the only thing with a reference to it. That privacy is the reason to reach for a closure rather than a global variable, which any code on the page can overwrite."
-            },
-            {
-              "id": "quiz-js-s28-q3",
-              "type": "blank",
-              "prompt": "The span from the top of a block down to the `let` or `const` declaration is called the temporal ____ ____.",
-              "answers": [
-                "dead zone",
-                "deadzone",
-                "temporal dead zone"
-              ],
-              "explanation": "The name is the temporal dead zone. The declaration is noted when the scope is read but has no value yet, so touching the name in that span throws a ReferenceError. Moving the declaration above its first use always fixes it."
-            },
-            {
-              "id": "quiz-js-s28-q4",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "const value = 'top'\n\nfunction show() {\n  console.log(value)\n  {\n    const value = 'inside'\n    console.log(value)\n  }\n  console.log(value)\n}\n\nshow()",
-              "options": [
-                "top, inside, top",
-                "inside, inside, top",
-                "top, top, top",
-                "inside, top, inside"
-              ],
-              "answer": 0,
-              "explanation": "The first `console.log` is before the block opens, so the only `value` in scope is the top one. Inside the braces the nearer declaration shadows it. After the braces close, the inner declaration is gone and the outer one is visible again — a block shadow is temporary."
-            },
-            {
-              "id": "quiz-js-s28-q5",
-              "type": "identify-error",
-              "prompt": "What is wrong with this code?",
-              "code": "function makeCounter() {\n  count = 0\n  return function () {\n    count += 1\n    return count\n  }\n}\n\nconst a = makeCounter()\nconst b = makeCounter()",
-              "options": [
-                "Nothing is wrong, two calls to makeCounter give two counters",
-                "count is never declared, so both counters share one implicit global and interfere with each other",
-                "count is block scoped, so it cannot be used inside the returned function",
-                "makeCounter must be called with the new keyword"
-              ],
-              "answer": 1,
-              "explanation": "The assignment has no `let`, `const` or `var` in front of it, so it creates a global. Both returned functions close over that same global, so calling `a()` also moves `b()` — the exact opposite of the sealed counter the factory is there to provide. Declare `let count = 0` inside `makeCounter`."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Scope, this and classes"
       },
@@ -15959,67 +5797,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s29",
           "title": "Hoisting check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s29-q1",
-              "type": "multiple-choice",
-              "prompt": "What does this print?",
-              "code": "console.log(typeof fn)\nconsole.log(typeof later)\nfunction fn() {}",
-              "options": [
-                "\"undefined\"",
-                "\"function\"",
-                "\"object\"",
-                "It throws"
-              ],
-              "answer": 2,
-              "explanation": "Function declarations are hoisted whole, so `fn` already holds a function value by the time the first `console.log` runs. `later` has not been reached, and a `typeof` on an undeclared name is one of the few operations that is safe to do — it returns \"undefined\" instead of throwing."
-            },
-            {
-              "id": "quiz-js-s29-q2",
-              "type": "true-false",
-              "prompt": "Reading a `const` declared further down the current block gives you `undefined` rather than an error.",
-              "answer": false,
-              "explanation": "It throws a ReferenceError. `var` gives you `undefined`; `let` and `const` are reserved during the pre-pass and reading one before its declaration line is a hard stop. That is the deliberate design choice — a wrong value you carry on with is harder to find than a line that refuses to run."
-            },
-            {
-              "id": "quiz-js-s29-q3",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "console.log(a)\nvar a = 1\nconsole.log(a)",
-              "options": [
-                "1 then 1",
-                "undefined then 1",
-                "1 then undefined",
-                "It throws"
-              ],
-              "answer": 1,
-              "explanation": "`var a = 1` is split by the pre-pass into a declaration, which is hoisted as an empty slot, and an assignment, which stays where it is. So the first log reads the empty slot and prints `undefined`, and the second reads the value once the assignment has run. This is the silent version of the bug that `let` turns into an error."
-            },
-            {
-              "id": "quiz-js-s29-q4",
-              "type": "blank",
-              "prompt": "A class declaration is not hoisted, so using one above its own declaration line behaves like a ____ ____ of a let, and throws.",
-              "answers": [
-                "reference error",
-                "referenceerror"
-              ],
-              "explanation": "Classes get the same treatment as `let` and `const`: the name is reserved in the pre-pass but has no value until the declaration runs. Put classes above the code that uses them, or import them from a module, which is evaluated first."
-            },
-            {
-              "id": "quiz-js-s29-q5",
-              "type": "identify-error",
-              "prompt": "What is wrong with this code?",
-              "code": "const config = getConfig()\nconsole.log(config)\n\nfunction getConfig() {\n  const settings = { theme: 'dark' }\n  return settings\n}",
-              "options": [
-                "Nothing is wrong, function declarations are hoisted",
-                "getConfig must be called with the new keyword",
-                "settings is not visible outside the function that declares it",
-                "const cannot be used at the top level of a script"
-              ],
-              "answer": 0,
-              "explanation": "This is hoisting doing its job. `getConfig` is a function declaration, so it is fully defined before the first statement runs, and calling it above the definition is safe. The same code with `const getConfig = () => ...` would throw, which is the difference worth remembering when you convert declarations into arrows."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Scope, this and classes"
       },
@@ -16046,66 +5824,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s30",
           "title": "Strict mode check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s30-q1",
-              "type": "multiple-choice",
-              "prompt": "What happens in strict mode when you run `total = 10` with no declaration anywhere?",
-              "options": [
-                "A global called total is created",
-                "It is a ReferenceError, because total was never declared",
-                "It is silently ignored",
-                "total becomes 0"
-              ],
-              "answer": 1,
-              "explanation": "Strict mode removed the implicit global. This is the rule worth the most in practice: a typo in a name now fails on the line you typed it instead of creating a global that quietly corrupts a different part of the page hours later."
-            },
-            {
-              "id": "quiz-js-s30-q2",
-              "type": "true-false",
-              "prompt": "A file loaded with `<script type=\"module\">` runs in strict mode whether or not you write the directive.",
-              "answer": true,
-              "explanation": "Modules are always strict, as is every class body, and so is eval called with the flag. The directive only matters for classic scripts and ordinary function bodies — which is why old code that relied on `this` being the global object breaks when it is moved into a module."
-            },
-            {
-              "id": "quiz-js-s30-q3",
-              "type": "identify-error",
-              "prompt": "This code used to work and stopped after the directive was added. Why?",
-              "code": "function renderAll() {\n  var items = getItems()\n  items.forEach(function (item) {\n    this.draw(item)\n  })\n}\n\nrenderAll()",
-              "options": [
-                "forEach cannot be used in strict mode",
-                "this inside the forEach callback is undefined, not the object that called renderAll",
-                "getItems is not defined in strict mode",
-                "Strict mode forbids var"
-              ],
-              "answer": 1,
-              "explanation": "The callback is called with no object to use as `this`, so it is `undefined`. In loose mode it would silently have been the global object, which is how this bug survived in the first place. The fix is to pass the object in — `items.forEach(renderAll.draw, renderAll)` or an arrow function that closes over it."
-            },
-            {
-              "id": "quiz-js-s30-q4",
-              "type": "code-output",
-              "prompt": "What does this print in strict mode?",
-              "code": "'use strict'\nfunction check() {\n  return this\n}\nconsole.log(check() === undefined)",
-              "options": [
-                "true",
-                "false",
-                "undefined",
-                "It throws a TypeError"
-              ],
-              "answer": 0,
-              "explanation": "A plain function call supplies no receiver, so strict mode sets `this` to `undefined` and the comparison is true. In loose mode `this` would have been the global object and it would have printed false. Reading a property off the undefined `this` is what produces the TypeError."
-            },
-            {
-              "id": "quiz-js-s30-q5",
-              "type": "blank",
-              "prompt": "The directive that turns strict mode on must be the ____ ____ statement in the file or function body.",
-              "answers": [
-                "first statement",
-                "first statement in"
-              ],
-              "explanation": "It has to come first, or JavaScript treats it as an ordinary string expression and nothing happens — which is the quietest strict mode failure there is, because nothing looks wrong. A comment above it is fine; a line of code above it is not."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Scope, this and classes"
       },
@@ -16132,67 +5851,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s31",
           "title": "The this keyword check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s31-q1",
-              "type": "multiple-choice",
-              "prompt": "What is `this` inside `describe` when this runs?",
-              "code": "const ticket = { label: 'refund', describe() { return this.label } }\nconst fn = ticket.describe\nfn()",
-              "options": [
-                "ticket",
-                "window",
-                "undefined",
-                "globalThis, in both loose and strict mode"
-              ],
-              "answer": 2,
-              "explanation": "The assignment `const fn = ticket.describe` stores the function, not the object, and `fn()` is a bare call with nothing to the left of the dot. There is no receiver, so strict mode supplies `undefined` — which is why reading `this.label` throws. Call it as `ticket.describe()` or bind it."
-            },
-            {
-              "id": "quiz-js-s31-q2",
-              "type": "true-false",
-              "prompt": "An arrow function defined inside a method can see the method’s `this`, and always keeps it.",
-              "answer": true,
-              "explanation": "An arrow has no `this` of its own, so the name resolves to the enclosing method’s binding. That is why arrows are the standard fix for a lost `this` in a callback — and why they are the wrong choice for an object method, where you want `this` to follow the object it was called on."
-            },
-            {
-              "id": "quiz-js-s31-q3",
-              "type": "code-output",
-              "prompt": "What does this print in strict mode?",
-              "code": "function speak() {\n  return typeof this\n}\nconst obj = { speak }\nobj.speak()\nconst bare = obj.speak\nbare()",
-              "options": [
-                "\"object\" then \"undefined\"",
-                "\"object\" then \"object\"",
-                "\"undefined\" twice",
-                "\"object\" then \"function\""
-              ],
-              "answer": 0,
-              "explanation": "`obj.speak()` has a receiver, so `this` is the object. `bare()` has none, so strict mode sets `this` to `undefined` and `typeof` reports it as \"undefined\". The same call in loose mode would have reported \"object\" because `this` would have been the global object."
-            },
-            {
-              "id": "quiz-js-s31-q4",
-              "type": "identify-error",
-              "prompt": "What is wrong with this code?",
-              "code": "const grid = {\n  cells: ['a', 'b'],\n  render(item) { return item.toUpperCase() },\n  draw() {\n    this.cells.forEach(this.render)\n  }\n}",
-              "options": [
-                "forEach cannot take a method reference",
-                "render is called without a receiver, so this is undefined inside it",
-                "render must be a function, not a shorthand method",
-                "cells needs to be a Set rather than an array"
-              ],
-              "answer": 1,
-              "explanation": "Passing the method reference hands over the function alone, so forEach calls it with no object and `this` is undefined. Inside render there is no `this` read, so the mistake shows up later the moment you add one. Fix it with `this.cells.forEach(cell => this.render(cell))`."
-            },
-            {
-              "id": "quiz-js-s31-q5",
-              "type": "blank",
-              "prompt": "A function that returns `this` and is called with an object handed to it directly — `fn.call(obj)` — is using ____ binding.",
-              "answers": [
-                "explicit",
-                "explicit binding"
-              ],
-              "explanation": "Explicit binding is `call`, `apply` and `bind`. It is the escape hatch for the case where the call site cannot be changed, which is exactly what happens when a method is passed somewhere as a callback: `list.forEach(obj.render.bind(obj))`."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Scope, this and classes"
       },
@@ -16219,67 +5878,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s32",
           "title": "Arrow functions check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s32-q1",
-              "type": "multiple-choice",
-              "prompt": "Which of these returns an object?",
-              "code": "const a = () => { id: 1 }\nconst b = () => ({ id: 1 })",
-              "options": [
-                "Only b",
-                "Only a",
-                "Both a and b",
-                "Neither a nor b"
-              ],
-              "answer": 0,
-              "explanation": "In `a`, the braces are read as a function body, so `{ id: 1 }` is a labelled statement and the arrow returns nothing. Wrapping the object in parentheses forces it to be read as an expression instead. This trips up everyone once."
-            },
-            {
-              "id": "quiz-js-s32-q2",
-              "type": "true-false",
-              "prompt": "An arrow function can be called with `new`.",
-              "answer": false,
-              "explanation": "Arrows have no constructor behaviour, so `new (() => {})` is a TypeError. They also have no `arguments`, which is why a rest parameter is the way to take a variable number of arguments in one."
-            },
-            {
-              "id": "quiz-js-s32-q3",
-              "type": "identify-error",
-              "prompt": "What is wrong with this code?",
-              "code": "const app = {\n  title: 'Inbox',\n  render() {\n    return [1, 2].map(n => this.title + n)\n  }\n}",
-              "options": [
-                "this is not available inside an arrow function, so this.title is undefined",
-                "map cannot be used with an arrow",
-                "The arrow needs parentheses around n",
-                "Nothing is wrong, arrows inherit this from the object"
-              ],
-              "answer": 3,
-              "explanation": "This is correct code, and it is the reason to reach for an arrow. The arrow has no `this` of its own, so the name resolves to the `render` method’s `this`, which is the app object — even though the callback itself is called with no receiver."
-            },
-            {
-              "id": "quiz-js-s32-q4",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "function outer() {\n  const name = 'outer'\n  const inner = () => name\n  return inner()\n}\nconsole.log(outer())",
-              "options": [
-                "outer",
-                "undefined",
-                "The function itself",
-                "It throws"
-              ],
-              "answer": 0,
-              "explanation": "The arrow resolves `name` from the scope it was written in, which is `outer`, and that scope is still alive while the call runs. This is the closure half of an arrow: no arguments, no `new`, but a live view of the enclosing scope."
-            },
-            {
-              "id": "quiz-js-s32-q5",
-              "type": "blank",
-              "prompt": "An arrow function cannot be used as a constructor because it has no ____.",
-              "answers": [
-                "prototype",
-                "own prototype"
-              ],
-              "explanation": "Classes give instances a prototype chain and arrows give them nothing. This is one of several reasons an arrow is the wrong shape for an object method — it also has no `this` of its own, so it would keep referring to the object it was defined beside."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Scope, this and classes"
       },
@@ -16306,67 +5905,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s33",
           "title": "Classes check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s33-q1",
-              "type": "multiple-choice",
-              "prompt": "Which of these is a reason a class is worth the extra machinery?",
-              "options": [
-                "Classes run faster than objects",
-                "It states what every instance will have and takes its arguments in one place",
-                "Classes can be JSON.stringified in full",
-                "A class creates only one instance"
-              ],
-              "answer": 1,
-              "explanation": "The value is in the contract: fields are declared once, the constructor takes the arguments in one place instead of trusting each caller, and private state stays private. Performance is not on the list — a class and an object literal of the same shape are the same thing at runtime."
-            },
-            {
-              "id": "quiz-js-s33-q2",
-              "type": "true-false",
-              "prompt": "A class declaration is hoisted, so a constructor can be called from code above it.",
-              "answer": false,
-              "explanation": "Classes get the same treatment as `let` and `const`: noted in the pre-pass, no value until the declaration runs. Using one above its own line throws, which is deliberate — you should not be reaching for a type you have not defined yet."
-            },
-            {
-              "id": "quiz-js-s33-q3",
-              "type": "identify-error",
-              "prompt": "What is wrong with this code?",
-              "code": "class TimedTask extends Task {\n  constructor(title, minutes) {\n    this.title = title\n    this.minutes = minutes\n  }\n}",
-              "options": [
-                "extends needs the keyword class on the parent too",
-                "super() has to run before this is touched",
-                "minutes should be a field, not an argument",
-                "Nothing is wrong"
-              ],
-              "answer": 1,
-              "explanation": "In a derived constructor there is no parent state to read until the parent constructor has run, so touching `this` first is a hard error. Call `super(title)` as the first line, then set your own fields."
-            },
-            {
-              "id": "quiz-js-s33-q4",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "class Point {\n  x = 0\n  constructor(x) { this.x = x }\n}\nconst p = new Point(0)\np.x += 5\nconsole.log(p.x)",
-              "options": [
-                "0",
-                "5",
-                "undefined",
-                "It throws"
-              ],
-              "answer": 1,
-              "explanation": "Class fields are set up before the constructor body runs, so the field initialiser sets `x` to 0 and the constructor argument then overwrites it with 0 as well. The later `+= 5` makes it 5. The order matters if you rely on a field default and also pass a value for it."
-            },
-            {
-              "id": "quiz-js-s33-q5",
-              "type": "blank",
-              "prompt": "A static method on a class is called on the ____ itself, not on an instance.",
-              "answers": [
-                "class",
-                "the class",
-                "constructor"
-              ],
-              "explanation": "`static empty()` lives on the class, so you call `Cart.empty()` and never `cart.empty()`. It is the right home for a factory or a helper that does not need instance state — and the wrong home for anything that reads `this`."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Scope, this and classes"
       },
@@ -16393,67 +5932,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s34",
           "title": "JSON check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s34-q1",
-              "type": "multiple-choice",
-              "prompt": "What does `JSON.stringify({ greet() {}, when: new Date(0), skip: undefined })` return?",
-              "options": [
-                "{ \"greet\": \"function\", \"when\": \"1970-01-01T00:00:00.000Z\" }",
-                "{ \"when\": \"1970-01-01T00:00:00.000Z\" }",
-                "{ \"when\": 0 }",
-                "{}"
-              ],
-              "answer": 1,
-              "explanation": "Functions and `undefined` values are dropped entirely, and a Date is written as its ISO string because JSON has no date type. So the greet key disappears, `skip` disappears, and `when` survives as text — which is why a date that round-trips through JSON comes back a string."
-            },
-            {
-              "id": "quiz-js-s34-q2",
-              "type": "true-false",
-              "prompt": "Once a JSON string has been parsed, the result is as trustworthy as an object you wrote yourself.",
-              "answer": false,
-              "explanation": "Parsing only turns text into values. The data usually came from somewhere you do not control, so check the shape before you read into it: is `employees` an array, does each entry have the fields you are about to use. One missing key is how a blank page happens."
-            },
-            {
-              "id": "quiz-js-s34-q3",
-              "type": "identify-error",
-              "prompt": "What is wrong with this code?",
-              "code": "const payload = { user: user, tags: tags, meta }\nconst saved = JSON.parse(JSON.stringify(payload))\nsaved.user.name = 'Ada'\nconsole.log(user.name)",
-              "options": [
-                "JSON.stringify cannot take an object with a nested one inside",
-                "A parsed copy is a full deep clone, so editing saved.user also edits user",
-                "JSON.parse returns a string, not an object",
-                "meta needs quotes around its key"
-              ],
-              "answer": 1,
-              "explanation": "The round trip is deep, so `saved.user` really is a different object — which means editing `saved` leaves `user` alone. The trap is the opposite belief: reaching for JSON round trips to clone, which works but throws away Dates, turns them into strings, and drops every function on the way."
-            },
-            {
-              "id": "quiz-js-s34-q4",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "const data = JSON.parse('{\"count\":3}')\nconsole.log(typeof data.count, data.count + 1)",
-              "options": [
-                "number 4",
-                "string 31",
-                "object NaN",
-                "It throws"
-              ],
-              "answer": 0,
-              "explanation": "JSON has number literals, so `count` is a real number once parsed and the addition gives 4. Quote the key in the JSON text if you want a string — `{\"count\":\"3\"}` would give you \"31\", which is the classic case where the type came from the wrong place."
-            },
-            {
-              "id": "quiz-js-s34-q5",
-              "type": "blank",
-              "prompt": "The two-space indentation you see when you log an object comes from the third argument to ____.",
-              "answers": [
-                "json.stringify",
-                "stringify",
-                "json.stringify()"
-              ],
-              "explanation": "`JSON.stringify(value, replacer, indent)` takes the indent as its third argument. The second one is the replacer: an array of keys to keep, or a function called for each key — which is how you build a payload without leaking a password hash or an internal id."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Scope, this and classes"
       },
@@ -16482,67 +5961,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s35",
           "title": "Debugging check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s35-q1",
-              "type": "multiple-choice",
-              "prompt": "Which console call is the one to reach for when you want to read a list of objects?",
-              "code": "const orders = [{ id: 1, total: 24 }, { id: 2, total: 61 }]",
-              "options": [
-                "console.log(orders), because the objects print out in full",
-                "console.table(orders), because it lines them up one row per item",
-                "console.error(orders), because errors are always more detailed",
-                "console.count(orders)"
-              ],
-              "answer": 1,
-              "explanation": "`console.log` on an array of objects collapses them onto one line, which is where a lot of debugging gives up. `console.table` gives one row per item and one column per key, `console.dir(x, { depth: null })` expands every level instead of cutting it off, and `console.count` only tells you how many times a line ran."
-            },
-            {
-              "id": "quiz-js-s35-q2",
-              "type": "true-false",
-              "prompt": "A `debugger` statement left in shipped source will pause the page for every visitor.",
-              "answer": false,
-              "explanation": "The statement only does anything when devtools are open and attached, so it costs a visitor nothing. Delete it before you ship anyway — not for their sake but for yours, because the next person to search for `debugger` has to check every hit is not live."
-            },
-            {
-              "id": "quiz-js-s35-q3",
-              "type": "identify-error",
-              "prompt": "Clicking the button fires the handler twice. What is the likely cause?",
-              "code": "function render(list) {\n  list.forEach((item) => {\n    const li = document.createElement('li')\n    li.textContent = item\n    document.querySelector('#out').appendChild(li)\n    li.addEventListener('click', onPick)\n  })\n}\n\nbutton.addEventListener('click', () => render(items))",
-              "options": [
-                "addEventListener cannot be called inside a loop",
-                "A listener is attached every time render runs, and they stack up",
-                "onPick is not a function",
-                "items is empty"
-              ],
-              "answer": 1,
-              "explanation": "Each run builds fresh elements, and each fresh element gets its own listener — that part is fine. The bug is that the same *parent* listener is registered on every render, so the parent accumulates handlers and everything runs once per render. `console.count(\"render\")` shows it in one line. Attach the parent listener once, outside the function that rebuilds the DOM."
-            },
-            {
-              "id": "quiz-js-s35-q4",
-              "type": "blank",
-              "prompt": "A watch expression in devtools can hold any ____ , re-evaluated as you step, without editing your code.",
-              "answers": [
-                "expression",
-                "javascript expression"
-              ],
-              "explanation": "That is the advantage over a log line: you can try `cart.length`, `order.total * 1.2` or `items.filter(isOpen).length` without touching the source and without a reload for each attempt."
-            },
-            {
-              "id": "quiz-js-s35-q5",
-              "type": "code-output",
-              "prompt": "Why does this comparison behave differently from `count === 0`?",
-              "code": "const row = { count: '0' }\nconsole.log(row.count == 0, row.count === 0)",
-              "options": [
-                "They print false false",
-                "They print true true",
-                "They print true false",
-                "They print false true"
-              ],
-              "answer": 2,
-              "explanation": "`==` converts the string to a number first, so `'0'` and `0` are equal. `===` compares type first and says no. This is why a value read from an input or a URL — both strings — will pass a `== 0` check and fail a `=== 0` one, and why the loose comparison is the mistake worth naming."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Scope, this and classes"
       },
@@ -16595,67 +6014,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s36",
           "title": "Style guide check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s36-q1",
-              "type": "multiple-choice",
-              "prompt": "Which name makes the bug impossible rather than merely unlikely?",
-              "options": [
-                "t",
-                "temp",
-                "timeoutMs",
-                "data2"
-              ],
-              "answer": 2,
-              "explanation": "A name that carries the unit removes the whole class of mistake where a milliseconds value is passed where seconds were expected. The single-letter and numbered versions are not shorter to type — they are shorter to write and much longer to read."
-            },
-            {
-              "id": "quiz-js-s36-q2",
-              "type": "true-false",
-              "prompt": "A `for...of` loop can be off by one index in the way a counted `for` loop can.",
-              "answer": false,
-              "explanation": "There is no index to get wrong: the loop walks the values themselves, so there is no `length` bound to get wrong and nothing to read past the end. Off-by-one comes from hand-managing an index, and `for...of` is the way to stop managing one."
-            },
-            {
-              "id": "quiz-js-s36-q3",
-              "type": "identify-error",
-              "prompt": "Why is the reported total wrong?",
-              "code": "function totalOf(list) {\n  list.sort((a, b) => a.price - b.price)\n  return list.reduce((sum, item) => sum + item.price, 0)\n}\n\nconst shown = [...products]\nconst reported = totalOf(shown)",
-              "options": [
-                "sort cannot be called on a spread array",
-                "sort changes the array in place, so the copy the page is showing gets reordered too",
-                "reduce needs a starting value of 0 as a string",
-                "The arrow function inside sort has the wrong this"
-              ],
-              "answer": 1,
-              "explanation": "`sort` sorts in place. `shown` was copied specifically so the display would be untouched, and sorting inside the function undoes that — the page silently reorders itself and the user has no idea why. Copy again inside the function: `[...list].sort(...)`."
-            },
-            {
-              "id": "quiz-js-s36-q4",
-              "type": "blank",
-              "prompt": "Reading a layout property such as offsetHeight right after writing a style forces the browser to ____ immediately.",
-              "answers": [
-                "recalculate",
-                "recalculate layout",
-                "lay out"
-              ],
-              "explanation": "That is layout thrashing: write, read, write, read, and the browser recalculates the layout between every pair. Read every measurement you need first, then make every change, and it happens once."
-            },
-            {
-              "id": "quiz-js-s36-q5",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "const rows = [{ total: 10 }, { total: 20 }]\nlet total = 0\nfor (let i = 0; i <= rows.length; i++) {\n  total += rows[i].total\n}\nconsole.log(total)",
-              "options": [
-                "30",
-                "NaN",
-                "undefined",
-                "It throws"
-              ],
-              "answer": 1,
-              "explanation": "The loop runs one time too many, so the last pass reads `rows[2]`, which is `undefined`, and adding undefined gives NaN — which prints as NaN rather than throwing, so the loop looks like it worked. Use `i < rows.length`, or better `for (const row of rows)`."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Scope, this and classes"
       },
@@ -16682,68 +6041,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s37",
           "title": "Object definitions check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s37-q1",
-              "type": "multiple-choice",
-              "prompt": "What do you get when you read a property that does not exist on an object?",
-              "options": [
-                "null",
-                "undefined",
-                "0",
-                "A TypeError is thrown"
-              ],
-              "answer": 1,
-              "explanation": "Reading a missing property gives `undefined`, and nothing is thrown. The error appears one step later if you use that value, which is why the failure message points at the code that assumed the property was there rather than at the line that reads it."
-            },
-            {
-              "id": "quiz-js-s37-q2",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "const book = { title: 'Dune', pages: 412 }\nconsole.log(book.author)",
-              "options": [
-                "'Dune'",
-                "undefined",
-                "null",
-                "It throws a ReferenceError"
-              ],
-              "answer": 1,
-              "explanation": "`author` was never written, so reading it gives `undefined`. Had the code gone on to call `book.author.toUpperCase()`, that line would be the one that throws — the read itself is harmless."
-            },
-            {
-              "id": "quiz-js-s37-q3",
-              "type": "true-false",
-              "prompt": "A `const` object cannot have its properties changed after it is created.",
-              "answer": false,
-              "explanation": "`const` freezes the binding, not the container. `settings.theme = \"light\"` is fine; `settings = {}` is the line that throws."
-            },
-            {
-              "id": "quiz-js-s37-q4",
-              "type": "blank",
-              "prompt": "Which method returns an array of an object property names?",
-              "answers": [
-                "object.keys",
-                "objectkeys",
-                "object keys",
-                "keys"
-              ],
-              "explanation": "`Object.keys` gives the names, `Object.values` gives the values and `Object.entries` gives name-value pairs. Keys come back in insertion order, so an object with numeric-looking keys will not keep them in the order you wrote them."
-            },
-            {
-              "id": "quiz-js-s37-q5",
-              "type": "identify-error",
-              "prompt": "What is wrong with this?",
-              "code": "const config = { retries: 3 }\nconfig.retries = config.retries + 1\nconsole.log(config['retries'])",
-              "options": [
-                "Nothing — this logs 4",
-                "The bracket notation is invalid on an object",
-                "A trailing comma is missing between the properties",
-                "config cannot be reassigned because it is declared with const"
-              ],
-              "answer": 0,
-              "explanation": "Reading and writing a property of a `const` object is fine — only assigning to the name `config` itself is blocked. Bracket and dot notation are interchangeable here, and the one-property literal needs no comma after it."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Objects, prototypes and closures"
       },
@@ -16770,68 +6068,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s38",
           "title": "Object methods check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s38-q1",
-              "type": "multiple-choice",
-              "prompt": "Inside a method called as `cart.add(2)`, what does `this` refer to?",
-              "options": [
-                "The global object",
-                "The object the method was written inside",
-                "The object the call started from, which here is cart",
-                "undefined, always"
-              ],
-              "answer": 2,
-              "explanation": "`this` is decided by the call, not by where the function was written. `cart.add(2)` starts at `cart`, so `this` is `cart`; the same function called with no object in front of it has no `this` at all."
-            },
-            {
-              "id": "quiz-js-s38-q2",
-              "type": "identify-error",
-              "prompt": "What goes wrong here?",
-              "code": "const cart = {\n  count: 0,\n  add(price) {\n    this.count += price\n    return this.count\n  }\n}\n\nsetTimeout(cart.add, 100)",
-              "options": [
-                "Nothing, the callback runs with cart as this",
-                "A TypeError, because the detached call leaves this undefined",
-                "The count is reset to 0",
-                "It throws a SyntaxError at parse time"
-              ],
-              "answer": 1,
-              "explanation": "Handing `cart.add` to setTimeout passes the function with nothing in front of it, so `this` is undefined and `this.count` throws. `setTimeout(cart.add.bind(cart), 100)` or `setTimeout(() => cart.add(2), 100)` keeps the receiver attached."
-            },
-            {
-              "id": "quiz-js-s38-q3",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "const box = { value: 7 }\ndocument.body.textContent = box",
-              "options": [
-                "7",
-                "[object Object]",
-                "undefined",
-                "{ value: 7 }"
-              ],
-              "answer": 1,
-              "explanation": "Assigning an object where a string is expected runs the default string conversion, which for a plain object is \"[object Object]\". Convert explicitly with `JSON.stringify(box)` or take the field you meant."
-            },
-            {
-              "id": "quiz-js-s38-q4",
-              "type": "true-false",
-              "prompt": "The shorthand `add(price) { ... }` gives the method its own `this`, while `add: function (price) { ... }` does not.",
-              "answer": false,
-              "explanation": "Neither form gets its own `this`. Both are called with the object in front of them, and both lose it the moment the function is passed around on its own."
-            },
-            {
-              "id": "quiz-js-s38-q5",
-              "type": "blank",
-              "prompt": "Which console method prints a list of objects as a side-by-side table in the browser?",
-              "answers": [
-                "console.table",
-                "consoletable",
-                "console table",
-                "table"
-              ],
-              "explanation": "`console.table` is the quickest way to compare a few records. `console.log` is fine for one object, and `JSON.stringify` is the one to reach for when the value is going into HTML or over the network."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Objects, prototypes and closures"
       },
@@ -16858,70 +6095,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s39",
           "title": "Object accessors check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s39-q1",
-              "type": "multiple-choice",
-              "prompt": "What does a setter receive as its parameter?",
-              "options": [
-                "Every value assigned to the property, as an array",
-                "The value on the right-hand side of the assignment, exactly once",
-                "The object the property belongs to",
-                "Nothing — a setter takes no parameters"
-              ],
-              "answer": 1,
-              "explanation": "A setter is always called with the single assigned value. Assigning twice calls it twice, and whatever it returns is discarded, so the only way a setter can refuse a value is by not writing it."
-            },
-            {
-              "id": "quiz-js-s39-q2",
-              "type": "identify-error",
-              "prompt": "What happens when this runs?",
-              "code": "const box = {\n  get width() {\n    return this.width * 2\n  }\n}\n\nconsole.log(box.width)",
-              "options": [
-                "It prints 0",
-                "It prints 2",
-                "It recurses until the call stack overflows",
-                "It prints undefined"
-              ],
-              "answer": 2,
-              "explanation": "Reading `this.width` inside the getter calls the getter again, all the way up. The rule the error hides is simple: an accessor never refers to itself — back it with a differently named field such as `_width`."
-            },
-            {
-              "id": "quiz-js-s39-q3",
-              "type": "true-false",
-              "prompt": "Adding a getter and setter to a property is invisible to the code that already reads and writes it.",
-              "answer": true,
-              "explanation": "That is the reason to use them. Call sites keep the plain `obj.name = value` form, so a validation rule can be introduced later without hunting down every place that touches the property."
-            },
-            {
-              "id": "quiz-js-s39-q4",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "const fridge = { _temp: 4 }\nObject.defineProperty(fridge, 'temp', {\n  get() {\n    return this._temp * 2\n  }\n})\nconsole.log(fridge.temp)",
-              "options": [
-                "8",
-                "4",
-                "undefined",
-                "It prints nothing because the property is not enumerable"
-              ],
-              "answer": 0,
-              "explanation": "Being non-enumerable only affects `Object.keys` and `for…in`. Reading the property directly still runs the getter, and it reads `_temp`, a plain field holding 4, and returns 8."
-            },
-            {
-              "id": "quiz-js-s39-q5",
-              "type": "blank",
-              "prompt": "By convention, what prefix marks the private field an accessor reads and writes?",
-              "answers": [
-                "underscore",
-                "_",
-                "an underscore",
-                "_-",
-                "leading underscore",
-                "leading underscore and a prefix underscore"
-              ],
-              "explanation": "The underscore is a convention, not a keyword — nothing enforces it, it just tells the next reader which name is not theirs to touch. A Symbol would enforce it properly, at the cost of uglier code."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Objects, prototypes and closures"
       },
@@ -16948,68 +6122,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s40",
           "title": "Object constructors check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s40-q1",
-              "type": "multiple-choice",
-              "prompt": "What does `new Book(\"Dune\", 412)` do first?",
-              "options": [
-                "Calls the function and then copies its fields onto a blank object",
-                "Creates an empty object linked to Book.prototype, then calls Book with this bound to it",
-                "Runs Book twice, once with each argument",
-                "Validates the arguments before creating anything"
-              ],
-              "answer": 1,
-              "explanation": "The object exists before the body runs, which is why `this` is already usable on the first line. Only afterwards does the returned value matter — and only if it is an object."
-            },
-            {
-              "id": "quiz-js-s40-q2",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "function Box(label) {\n  this.label = label\n  return 42\n}\n\nconsole.log(new Box('a').label)",
-              "options": [
-                "a",
-                "42",
-                "undefined",
-                "It throws a TypeError"
-              ],
-              "answer": 0,
-              "explanation": "The constructor returned a primitive, and a primitive return is ignored, so you get the object `new` created — with its `label` intact. Return an *object* instead and that one replaces the whole thing, which is the case that catches people out."
-            },
-            {
-              "id": "quiz-js-s40-q3",
-              "type": "true-false",
-              "prompt": "In a strict-mode module, calling a constructor function without `new` throws a TypeError.",
-              "answer": true,
-              "explanation": "Strict mode gives `this` the value `undefined` inside a plain call, so the first `this.something = ...` throws immediately. In sloppy mode the same call writes to the global object and returns undefined, which pushes the failure somewhere else entirely."
-            },
-            {
-              "id": "quiz-js-s40-q4",
-              "type": "identify-error",
-              "prompt": "What is wrong with this constructor?",
-              "code": "function User(name) {\n  name = name\n  age = 30\n}\nconst u = new User('Ada')",
-              "options": [
-                "Nothing, it is fine",
-                "The assignments miss this, so nothing lands on the new object",
-                "age must come before name",
-                "A constructor cannot assign a number"
-              ],
-              "answer": 1,
-              "explanation": "`name = name` assigns a parameter to itself and touches nothing else, and in strict mode `age = 30` throws on an undeclared name. Every field a constructor sets has to start with `this.`."
-            },
-            {
-              "id": "quiz-js-s40-q5",
-              "type": "blank",
-              "prompt": "Which operator tells you an object was built by a particular constructor function?",
-              "answers": [
-                "instanceof",
-                "instance of",
-                "instanceOf",
-                "an instanceof check"
-              ],
-              "explanation": "`dune instanceof Book` walks the prototype chain, so it is true for the object and for anything built from it by a related constructor. Comparing `book.constructor === Book` answers a similar question but is easier to break with a hand-written prototype chain."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Objects, prototypes and closures"
       },
@@ -17036,68 +6149,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s41",
           "title": "Prototypes check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s41-q1",
-              "type": "multiple-choice",
-              "prompt": "Why can a plain `{}` call `hasOwnProperty` when nothing ever defined that method on it?",
-              "options": [
-                "The browser adds it to every object automatically",
-                "It is found further along the prototype chain, on Object.prototype",
-                "It is inherited from the window object",
-                "hasOwnProperty is a keyword built into the language"
-              ],
-              "answer": 1,
-              "explanation": "A read that misses walks the chain. Every object ends up at `Object.prototype`, which is where the methods that look built-in actually live — which is also why adding to that object is so dangerous."
-            },
-            {
-              "id": "quiz-js-s41-q2",
-              "type": "true-false",
-              "prompt": "A method defined inside a constructor is copied onto every instance, so each one gets its own version of the function.",
-              "answer": true,
-              "explanation": "Each call to the constructor runs that line and creates a fresh function object. It behaves the same when called, but `a.method === b.method` is false and a thousand objects cost a thousand functions."
-            },
-            {
-              "id": "quiz-js-s41-q3",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "function Task(title) {\n  this.title = title\n}\nTask.prototype.label = function () {\n  return 'T:' + this.title\n}\n\nconst t = new Task('a')\nconsole.log(Object.keys(t).join(','))",
-              "options": [
-                "title,label",
-                "title",
-                "label",
-                "title,label is a function"
-              ],
-              "answer": 1,
-              "explanation": "`Object.keys` lists own enumerable properties only. `label` lives on the prototype, so it is reachable with `t.label` but invisible to `Object.keys`, `for…in`-free iteration and `JSON.stringify`."
-            },
-            {
-              "id": "quiz-js-s41-q4",
-              "type": "identify-error",
-              "prompt": "What is the danger here?",
-              "code": "Object.prototype.get = function () {\n  return 'anything'\n}\n\nconst list = { get: 2 }\nconsole.log(list.get())",
-              "options": [
-                "Nothing — it works",
-                "Every object in the page now has a get method, and code that loops over properties will pick it up",
-                "Object.prototype is read-only so the assignment is ignored",
-                "It throws immediately"
-              ],
-              "answer": 1,
-              "explanation": "Extending `Object.prototype` changes every object, including ones other code owns, and anything that iterates over properties will see the new key. Shared behaviour belongs on your own constructor or prototype, which is what `class extends` is for."
-            },
-            {
-              "id": "quiz-js-s41-q5",
-              "type": "blank",
-              "prompt": "Which method creates an empty object whose prototype is the one you pass in?",
-              "answers": [
-                "object.create",
-                "objectcreate",
-                "object create",
-                "create"
-              ],
-              "explanation": "`Object.create(proto)` builds an object linked to `proto`, so it inherits from it but owns nothing — `Object.keys` on the result is empty. Passing `null` ends the chain, which is how you get an object with no inherited methods at all."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Objects, prototypes and closures"
       },
@@ -17124,71 +6176,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s42",
           "title": "Map and Set check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s42-q1",
-              "type": "multiple-choice",
-              "prompt": "How many entries does this Set have?",
-              "code": "const s = new Set()\ns.add('a')\ns.add('a')\ns.add('b')",
-              "options": [
-                "1",
-                "2",
-                "3",
-                "0"
-              ],
-              "answer": 1,
-              "explanation": "A Set stores each value once. The second `add(\"a\")` finds the value already there and changes nothing, so membership testing needs no `includes` check beforehand."
-            },
-            {
-              "id": "quiz-js-s42-q2",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "const m = new Map()\nm.set('a', 1)\nconsole.log(m.get('b'))",
-              "options": [
-                "null",
-                "undefined",
-                "0",
-                "It throws a TypeError"
-              ],
-              "answer": 1,
-              "explanation": "`get` on a missing key gives `undefined`, the same as reading a missing object property. That is why counting uses `(map.get(k) || 0) + 1` rather than reaching for a default at the end."
-            },
-            {
-              "id": "quiz-js-s42-q3",
-              "type": "true-false",
-              "prompt": "The right way to read the number of entries in a Map or a Set is `map.size()`.",
-              "answer": false,
-              "explanation": "`size` is a property, not a method: `map.size`, with no parentheses. Calling it throws a TypeError, and it is worth knowing that because reaching for `size()` is the single most common Map typo."
-            },
-            {
-              "id": "quiz-js-s42-q4",
-              "type": "identify-error",
-              "prompt": "What is wrong with this?",
-              "code": "const first = { id: 1 }\nconst rows = new Map()\nrows.set(first, 'row one')\n\nconsole.log(rows.get({ id: 1 }))",
-              "options": [
-                "Nothing, it logs row one",
-                "It logs undefined, because each object literal is a different key",
-                "It logs null",
-                "It throws a TypeError"
-              ],
-              "answer": 1,
-              "explanation": "Map keys are compared by identity, not by structure. The object in the `get` is a brand-new object, so it is a different key. Keep a reference to the key and reuse it."
-            },
-            {
-              "id": "quiz-js-s42-q5",
-              "type": "blank",
-              "prompt": "What is the Map equivalent of `Object.entries(obj)`?",
-              "answers": [
-                "a for…of loop over entries",
-                "spreading the map into entries",
-                "[...map]",
-                "[...map.entries()]",
-                "the map.entries() iterator",
-                "entries"
-              ],
-              "explanation": "A Map is iterable directly, so `for (const [key, value] of map)` works with no conversion call. Spreading with `[...map]` gives the `[key, value]` pairs as arrays, exactly the shape `Object.entries` produces for an object."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Objects, prototypes and closures"
       },
@@ -17215,68 +6203,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s43",
           "title": "Function definitions check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s43-q1",
-              "type": "multiple-choice",
-              "prompt": "Which of these can be called before the line it is written on?",
-              "options": [
-                "const hello = () => \"hi\"",
-                "function hello() { return \"hi\" }",
-                "let hello = function () { return \"hi\" }",
-                "var hello = function () { return \"hi\" }"
-              ],
-              "answer": 1,
-              "explanation": "Only a function declaration is hoisted with its body attached. The other three are assignments: the name is reserved but has no value yet, so the call lands in the temporal dead zone and throws."
-            },
-            {
-              "id": "quiz-js-s43-q2",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "console.log(typeof add)\n\nfunction add(a, b) {\n  return a + b\n}",
-              "options": [
-                "undefined",
-                "\"number\"",
-                "\"function\"",
-                "It throws a ReferenceError"
-              ],
-              "answer": 2,
-              "explanation": "The declaration is recorded with its value before any statement runs, so by the time the log executes `add` is already a function. That is why the call in the next line works too."
-            },
-            {
-              "id": "quiz-js-s43-q3",
-              "type": "identify-error",
-              "prompt": "What is wrong with this?",
-              "code": "const result = (function () {\n  const hidden = 42\n  return hidden * 2\n})\n\nconsole.log(result)",
-              "options": [
-                "Nothing, it logs 84",
-                "The function is never called, so result is the function itself",
-                "The parentheses are not allowed around a function",
-                "const hidden is not visible inside the function"
-              ],
-              "answer": 1,
-              "explanation": "The trailing `()` is what calls it. Without them the wrapper is just an expression that produces a function, and `result` holds that function rather than the number 84."
-            },
-            {
-              "id": "quiz-js-s43-q4",
-              "type": "true-false",
-              "prompt": "A named function expression can call itself by its own name, which a plain function stored in a variable cannot.",
-              "answer": true,
-              "explanation": "The name on `function area2() { }` exists only inside the body, and it is the one to use for recursion. A function assigned to `const area` has to refer to `area` itself — which works, but only because the variable happens to be in scope."
-            },
-            {
-              "id": "quiz-js-s43-q5",
-              "type": "blank",
-              "prompt": "What is the name for the behaviour where a function declaration is available before the line it is written on?",
-              "answers": [
-                "hoisting",
-                "function hoisting",
-                "hoisted",
-                "hoist"
-              ],
-              "explanation": "Hoisting applies to every declaration, but only function declarations carry their value up with the name. `let` and `const` are hoisted as names only, and touching one before its line is the ReferenceError the term also covers."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Objects, prototypes and closures"
       },
@@ -17303,70 +6230,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s44",
           "title": "Function parameters check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s44-q1",
-              "type": "multiple-choice",
-              "prompt": "What is a parameter?",
-              "options": [
-                "A value passed in at the call site",
-                "A name in the function definition that receives a value",
-                "A type declaration the engine checks",
-                "A default value"
-              ],
-              "answer": 1,
-              "explanation": "The names in the definition are parameters; the values in the parentheses at the call are arguments. The pairing is by position, so `area(3, 4)` computes `3 * 4` regardless of what the names are called."
-            },
-            {
-              "id": "quiz-js-s44-q2",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "function area(width, height) {\n  return width * height\n}\nconsole.log(area(3))",
-              "options": [
-                "9",
-                "NaN",
-                "0",
-                "It throws a TypeError"
-              ],
-              "answer": 1,
-              "explanation": "Nothing is checked, so `height` is `undefined` and `3 * undefined` is `NaN`. A default — `height = 1` — removes that case at the source instead of patching it afterwards."
-            },
-            {
-              "id": "quiz-js-s44-q3",
-              "type": "true-false",
-              "prompt": "A default parameter is used whenever the caller passes a falsy value, including an empty string or zero.",
-              "answer": false,
-              "explanation": "Only a missing argument or an explicit `undefined` triggers the default. `0` and `\"\"` are real values and win — which is what you want for a quantity, and a surprise when the parameter is a string."
-            },
-            {
-              "id": "quiz-js-s44-q4",
-              "type": "identify-error",
-              "prompt": "What goes wrong here?",
-              "code": "function first(...a, last) {\n  return a.length + last\n}\nconsole.log(first(1, 2, 3))",
-              "options": [
-                "It logs 6",
-                "It throws a SyntaxError, because a rest parameter must be last",
-                "It logs 4",
-                "last is undefined and the result is NaN"
-              ],
-              "answer": 1,
-              "explanation": "A rest parameter swallows everything left over, so it has to come last in the list. Move it to the end, or take the last argument separately and rest the front."
-            },
-            {
-              "id": "quiz-js-s44-q5",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "const nums = [1, 2, 3]\nfunction total(...values) {\n  return values.length\n}\nconsole.log(total(...nums))",
-              "options": [
-                "1",
-                "3",
-                "[1, 2, 3]",
-                "It throws a TypeError"
-              ],
-              "answer": 1,
-              "explanation": "The three dots work in both directions with opposite jobs. The rest parameter gathers the arguments into an array, and the spread in the call hands the array to the function one value at a time."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Objects, prototypes and closures"
       },
@@ -17406,65 +6270,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s45",
           "title": "Function invocation check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s45-q1",
-              "type": "multiple-choice",
-              "prompt": "What is `this` inside `function f() { return this }` when called as `f()` in a module?",
-              "options": [
-                "The global object",
-                "`undefined`",
-                "The module object",
-                "The function itself"
-              ],
-              "answer": 1,
-              "explanation": "A plain call has no receiver, and inside a module the code is strict by definition, so `this` is `undefined`. It is the global object only in sloppy mode, which is why the same code behaves differently in a script tag and in a module."
-            },
-            {
-              "id": "quiz-js-s45-q2",
-              "type": "code-output",
-              "prompt": "What does this log?",
-              "code": "const obj = {\n  name: 'obj',\n  show() { return this === obj },\n}\nconst loose = obj.show\nconsole.log(loose())",
-              "options": [
-                "`true`",
-                "`false`",
-                "`undefined`",
-                "It throws"
-              ],
-              "answer": 1,
-              "explanation": "Assigning `obj.show` to a new variable copies the function, not its receiver. There is nothing to the left of the call, so `this` is `undefined` and the comparison is false. Use `obj.show.bind(obj)` if the receiver matters."
-            },
-            {
-              "id": "quiz-js-s45-q3",
-              "type": "true-false",
-              "prompt": "`call` and `apply` modify the original function so that later calls use the receiver you passed.",
-              "answer": false,
-              "explanation": "They invoke the function immediately and return a result. The function object is untouched, which is exactly what lets you reuse one function across many receivers."
-            },
-            {
-              "id": "quiz-js-s45-q4",
-              "type": "blank",
-              "prompt": "Which method returns a new function with `this` permanently attached, for handing to an event listener?",
-              "answers": [
-                "bind"
-              ],
-              "explanation": "`bind` defers. `call` and `apply` run the function now, which is no use when something else decides when to invoke the callback."
-            },
-            {
-              "id": "quiz-js-s45-q5",
-              "type": "identify-error",
-              "prompt": "Why does this handler lose access to the object?",
-              "code": "const app = {\n  count: 0,\n  tick() { this.count += 1 },\n}\nsetInterval(app.tick, 1000)",
-              "options": [
-                "`setInterval` is not a real function",
-                "The handler is passed as a bare function, so the receiver is never supplied",
-                "`this.count += 1` is not valid syntax",
-                "The interval is too short"
-              ],
-              "answer": 1,
-              "explanation": "The object is not passed to `setInterval`, only the function. When the timer fires, there is nothing to the left of the call, so `this` is undefined. Write `setInterval(app.tick.bind(app), 1000)` or `setInterval(() => app.tick(), 1000)`."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Objects, prototypes and closures"
       },
@@ -17491,65 +6297,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s46",
           "title": "Function closures check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s46-q1",
-              "type": "multiple-choice",
-              "prompt": "In one sentence, what is a closure?",
-              "options": [
-                "A function bundled with its own copy of every global variable",
-                "A function that keeps a live reference to the variables in the scope where it was written",
-                "A function that cannot be called more than once",
-                "The memory freed when a function returns"
-              ],
-              "answer": 1,
-              "explanation": "It is a live reference, not a copy. That distinction is why a closure sees the current value of a variable rather than the value at the moment it was created, and why two closures from the same outer call can hold completely different values."
-            },
-            {
-              "id": "quiz-js-s46-q2",
-              "type": "code-output",
-              "prompt": "What does this log?",
-              "code": "function outer() {\n  let n = 0\n  return () => ++n\n}\nconst a = outer()\nconst b = outer()\na(); a(); b();\nconsole.log(a(), b())",
-              "options": [
-                "`3 2`",
-                "`2 2`",
-                "`3 1`",
-                "`1 1`"
-              ],
-              "answer": 2,
-              "explanation": "Each call to `outer` creates a fresh `n`. `a` has been incremented twice and the `a()` in the log makes three, while `b` was incremented once and its `b()` makes two."
-            },
-            {
-              "id": "quiz-js-s46-q3",
-              "type": "true-false",
-              "prompt": "A closure takes a snapshot of the values of the variables it uses when it is created.",
-              "answer": false,
-              "explanation": "It holds a reference to the variable, not a copy of its value. If the variable changes afterwards, the closure reads the new value."
-            },
-            {
-              "id": "quiz-js-s46-q4",
-              "type": "blank",
-              "prompt": "Which keyword gives each loop iteration its own binding, so closures created in the loop do not all share one counter?",
-              "answers": [
-                "let"
-              ],
-              "explanation": "`let` in a loop head is re-bound on every iteration, so each callback closes over a different variable. `var` is function-scoped, so all of them share one binding and every callback reports the final value."
-            },
-            {
-              "id": "quiz-js-s46-q5",
-              "type": "identify-error",
-              "prompt": "What is wrong with this module?",
-              "code": "let items = []\nexport function all() {\n  return items\n}",
-              "options": [
-                "Nothing, this is the correct way to return a list",
-                "It returns the live array, so any caller can mutate or clear the private state",
-                "`export function` is not valid syntax",
-                "The array must be declared with `const` to be exported"
-              ],
-              "answer": 1,
-              "explanation": "Returning the array itself hands out the one binding the module was trying to keep private. Any caller could then run `all().length = 0` and wipe the state. Return a copy instead, with `items.slice()`."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Objects, prototypes and closures"
       },
@@ -17576,65 +6324,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s47",
           "title": "Class syntax check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s47-q1",
-              "type": "multiple-choice",
-              "prompt": "Why must `super()` be called before any use of `this` in a subclass constructor?",
-              "options": [
-                "It is a style convention with no runtime effect",
-                "Until it runs there is no parent object for `this` to refer to",
-                "Because `this` is not allowed in constructors at all",
-                "To make the class static"
-              ],
-              "answer": 1,
-              "explanation": "The parent constructor is what creates the object. `super` runs it and hands you the result as `this`, so assigning to `this` before that is assigning to nothing, and you get a ReferenceError."
-            },
-            {
-              "id": "quiz-js-s47-q2",
-              "type": "code-output",
-              "prompt": "What does this log?",
-              "code": "class A { greet() { return 'A' } }\nclass B extends A { greet() { return 'B' + super.greet() } }\nconsole.log(new B().greet())",
-              "options": [
-                "`A`",
-                "`B`",
-                "`BA`",
-                "It throws"
-              ],
-              "answer": 2,
-              "explanation": "`super.greet()` runs the parent method and returns \"A\". The subclass prepends its own \"B\", so the result is \"BA\". Overriding without `super` would replace the parent behaviour instead of extending it."
-            },
-            {
-              "id": "quiz-js-s47-q3",
-              "type": "true-false",
-              "prompt": "A subclass of `Array` keeps its subclass type when you call `map` or `filter` on it.",
-              "answer": false,
-              "explanation": "By default those methods return whatever constructor `this.constructor` names, and a subclass that wants the normal behaviour usually sets `static get [Symbol.species]`. Add that getter if the subclass must survive the operation."
-            },
-            {
-              "id": "quiz-js-s47-q4",
-              "type": "blank",
-              "prompt": "Which keyword names the parent class in a class declaration?",
-              "answers": [
-                "extends"
-              ],
-              "explanation": "`class Child extends Parent` states the relationship. `super` is the separate keyword used inside the child to reach the parent."
-            },
-            {
-              "id": "quiz-js-s47-q5",
-              "type": "identify-error",
-              "prompt": "What goes wrong here?",
-              "code": "class Base {\n  constructor(name) { this.name = name }\n}\nclass Child extends Base {\n  constructor(name) {\n    this.tagged = true\n    super(name)\n  }\n}",
-              "options": [
-                "Nothing, the order is fine",
-                "`this.tagged = true` runs before any parent constructor, so `this` does not exist yet",
-                "`tagged` is a reserved word",
-                "A child class cannot have its own constructor"
-              ],
-              "answer": 1,
-              "explanation": "The parent constructor must run first. Move `super(name)` to the top of the child constructor, then set your own fields."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Objects, prototypes and closures"
       },
@@ -17661,65 +6351,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s48",
           "title": "Static methods check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s48-q1",
-              "type": "multiple-choice",
-              "prompt": "What is `this` inside a static method?",
-              "options": [
-                "The instance the method was called on",
-                "The class itself",
-                "`undefined` always",
-                "The global object"
-              ],
-              "answer": 1,
-              "explanation": "Statics live on the constructor, not the prototype, so `this` is the class. That is why a static can read `this.name` for a class name but can never see an instance field."
-            },
-            {
-              "id": "quiz-js-s48-q2",
-              "type": "code-output",
-              "prompt": "What does this log?",
-              "code": "class Counter {\n  constructor() { this.n = 0 }\n  static make() { return new Counter() }\n  bump() { this.n += 1; return this.n }\n}\nconsole.log(Counter.make().bump())",
-              "options": [
-                "`1`",
-                "`0`",
-                "`undefined`",
-                "It throws"
-              ],
-              "answer": 0,
-              "explanation": "`Counter.make` is a static factory returning a new instance, and `bump` is a prototype method that runs on that instance, giving 1."
-            },
-            {
-              "id": "quiz-js-s48-q3",
-              "type": "true-false",
-              "prompt": "A static method can read a property that was set on the instance.",
-              "answer": false,
-              "explanation": "There is no instance in a static method. If the helper needs instance data, it belongs on the prototype instead, which is the usual reason a static helper appears to ignore its arguments."
-            },
-            {
-              "id": "quiz-js-s48-q4",
-              "type": "blank",
-              "prompt": "Which keyword declares a method on the class rather than on its instances?",
-              "answers": [
-                "static"
-              ],
-              "explanation": "`static of(...)` hangs the method off the constructor, so it is called as `ClassName.of(...)` and can be used before any instance exists."
-            },
-            {
-              "id": "quiz-js-s48-q5",
-              "type": "identify-error",
-              "prompt": "What is wrong with this factory?",
-              "code": "class Config {\n  constructor(overrides) {\n    Object.assign(this, overrides)\n  }\n  static defaults() {\n    return { theme: 'dark' }\n  }\n}\nconst c = new Config()\nc.theme = Config.defaults().theme",
-              "options": [
-                "Nothing, this is correct",
-                "Nothing is wrong with the factory; the problem is `Object.assign` in a constructor",
-                "`static defaults` cannot return an object literal",
-                "A constructor cannot call `Object.assign`"
-              ],
-              "answer": 2,
-              "explanation": "Static methods can return ordinary values, including object literals, and `Object.assign` in a constructor is idiomatic. If the intent was a static that builds a configured instance, it should return `new Config(...)` rather than leaving callers to assemble the object themselves."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Objects, prototypes and closures"
       },
@@ -17746,68 +6378,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s49",
           "title": "Callbacks check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s49-q1",
-              "type": "multiple-choice",
-              "prompt": "What is a callback?",
-              "options": [
-                "A function that is called immediately when it is defined",
-                "A function passed to another function so it can be called later",
-                "A function that must return a value to be useful",
-                "A function declared inside another function"
-              ],
-              "answer": 1,
-              "explanation": "A callback is a function you hand over so somebody else can invoke it later. Nothing requires it to return anything — `forEach` and `addEventListener` ignore the return value entirely. And it does not have to be declared inside anything; a named function declared at the top level is a perfectly good callback."
-            },
-            {
-              "id": "quiz-js-s49-q2",
-              "type": "true-false",
-              "prompt": "`setTimeout(greet(), 1000)` delays the call to `greet` by one second.",
-              "answer": false,
-              "explanation": "The parentheses call `greet` immediately and pass whatever it returns to `setTimeout`, which then fails because a value is not a function. This is the classic \"my callback never ran\" bug: write `setTimeout(greet, 1000)` and let the timer decide when."
-            },
-            {
-              "id": "quiz-js-s49-q3",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "function each(list, callback) {\n  for (let i = 0; i < list.length; i++) {\n    callback(list[i], i)\n  }\n}\neach(['a', 'b'], function (item) {\n  console.log(item)\n})",
-              "options": [
-                "a then b",
-                "0: a then 1: b",
-                "aa then bb",
-                "Nothing — the callback needs two parameters"
-              ],
-              "answer": 0,
-              "explanation": "The receiver passes the item and the index; your callback declares only the first, and the index is quietly ignored. A callback may accept fewer parameters than it is given, which is what makes `forEach` usable for both counting and transforming."
-            },
-            {
-              "id": "quiz-js-s49-q4",
-              "type": "identify-error",
-              "prompt": "What is wrong with this function?",
-              "code": "function shoutAll(words) {\n  words.forEach(function (word) {\n    return word.toUpperCase()\n  })\n  return words\n}\nconsole.log(shoutAll(['hi', 'yo']))",
-              "options": [
-                "forEach cannot be used to build a new array",
-                "return inside the callback only leaves the callback, so words is unchanged",
-                "The callback is missing its index parameter",
-                "toUpperCase returns a number rather than a string"
-              ],
-              "answer": 1,
-              "explanation": "A `return` exits the function it sits in. The uppercased string goes back to `forEach`, which ignores it, so the array you return is still lowercase. `forEach` is for side effects only — to transform, use `map`, or collect the results yourself."
-            },
-            {
-              "id": "quiz-js-s49-q5",
-              "type": "blank",
-              "prompt": "Which syntax passes a function to `setTimeout` so that it runs later, without running it now?",
-              "answers": [
-                "settimeout(fn, 500)",
-                "fn",
-                "settimeout(fn, 500)",
-                "without the parentheses"
-              ],
-              "explanation": "Pass the bare function reference — `setTimeout(fn, 500)` — and the browser calls it when the delay expires. Adding parentheses turns the passing into a call, which is the mistake the rule exists to prevent."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Async and the DOM"
       },
@@ -17836,66 +6407,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s50",
           "title": "Asynchronous code check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s50-q1",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "console.log('one')\nsetTimeout(function () {\n  console.log('two')\n}, 1000)\nconsole.log('three')",
-              "options": [
-                "one, two, three",
-                "one, three, two",
-                "three, one, two",
-                "one, two, three, but two arrives immediately"
-              ],
-              "answer": 1,
-              "explanation": "The current function runs to its end before the browser gets control back, so `one` and `three` both print immediately. Only once the call stack is empty does the event loop run the expired timer. Writing is not running — the position of a `setTimeout` in your file says nothing about when its callback fires."
-            },
-            {
-              "id": "quiz-js-s50-q2",
-              "type": "true-false",
-              "prompt": "A promise can be fulfilled and then rejected later, and `then` will run for both.",
-              "answer": false,
-              "explanation": "A promise settles exactly once, and only the first outcome counts. The second call to `resolve` or `reject` is silently ignored, which is what lets `then` code assume a single, stable result instead of checking whether anything changed."
-            },
-            {
-              "id": "quiz-js-s50-q3",
-              "type": "multiple-choice",
-              "prompt": "Why is the callback pyramid hard to maintain?",
-              "options": [
-                "Callbacks cannot be nested in modern JavaScript",
-                "Each dependent step adds a level of indentation, pushing the real code right and the error handling out of reach",
-                "The browser only runs one callback per page",
-                "Nested callbacks are always slower than promises"
-              ],
-              "answer": 1,
-              "explanation": "The cost is legibility, not speed. Every dependency adds a level of nesting and another closing brace, so by the third or fourth level there is nowhere sensible to put an `if` and an error handler has to be threaded through every layer. Promises remove the nesting without removing the wait."
-            },
-            {
-              "id": "quiz-js-s50-q4",
-              "type": "identify-error",
-              "prompt": "What is wrong with this snippet?",
-              "code": "const response = fetch('/api/users')\nconst users = response.json()\nconsole.log(users.length)",
-              "options": [
-                "fetch must be called with await before its result can be used",
-                "json() should be called without parentheses",
-                "A response cannot be stored in a const",
-                "Nothing — the promise resolves before the next line runs"
-              ],
-              "answer": 0,
-              "explanation": "Without `await`, `response` is a promise and `users` is a promise of an array, so `users.length` is `undefined` and nothing throws to warn you. `fetch` hands you the envelope asynchronously no matter where it appears; add `await` on both lines."
-            },
-            {
-              "id": "quiz-js-s50-q5",
-              "type": "blank",
-              "prompt": "Which method waits for every promise you give it and rejects as soon as the first one fails?",
-              "answers": [
-                "promise.all",
-                "promise.allsettled"
-              ],
-              "explanation": "`Promise.all` needs every result to be meaningful, so it rejects on the first failure and discards the successes. `Promise.allSettled` always waits for the lot and reports each outcome with a `status` of `fulfilled` or `rejected`, which is the one you want when partial results still have value."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Async and the DOM"
       },
@@ -17923,67 +6435,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s51",
           "title": "Promises check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s51-q1",
-              "type": "multiple-choice",
-              "prompt": "What does the executor function passed to `new Promise` do?",
-              "options": [
-                "It runs when the promise is awaited",
-                "It runs immediately when the promise is created, and settles it once",
-                "It runs on every `then` in the chain",
-                "It returns the value the promise will eventually hold"
-              ],
-              "answer": 1,
-              "explanation": "The executor is synchronous: it runs during construction, and its job is to call `resolve` or `reject` later. That is why a promise can already be fulfilled before you attach anything, and why attaching a handler after the fact still receives the value."
-            },
-            {
-              "id": "quiz-js-s51-q2",
-              "type": "true-false",
-              "prompt": "A promise that has been rejected can later be changed to fulfilled by calling `resolve`.",
-              "answer": false,
-              "explanation": "Settlement happens once. The second call is ignored, and there is no API to reset a promise. Code that reassigns the variable holding a promise instead creates a second, unrelated promise — everyone still holding the old one keeps waiting for a value that will never arrive."
-            },
-            {
-              "id": "quiz-js-s51-q3",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "Promise.resolve(2)\n  .then(function (n) { return n * 3 })\n  .then(function (n) { console.log(n) })",
-              "options": [
-                "2",
-                "3",
-                "6",
-                "undefined"
-              ],
-              "answer": 2,
-              "explanation": "Each `then` returns a new promise fulfilled with what its callback returned, so the second link receives 6. Forget the `return n * 3` and the next link gets `undefined` — that is the most common way a promise chain goes quietly wrong."
-            },
-            {
-              "id": "quiz-js-s51-q4",
-              "type": "identify-error",
-              "prompt": "What is wrong with this chain?",
-              "code": "fetch('/api/posts')\n  .then(function (r) { r.json() })\n  .then(function (data) {\n    console.log(data.items.length)\n  })\n  .catch(showError)",
-              "options": [
-                "The first then is missing a return, so the second link receives undefined",
-                "catch must be attached before then in a chain",
-                "forEach and map are not allowed inside a promise callback",
-                "response.json() must be awaited rather than returned"
-              ],
-              "answer": 0,
-              "explanation": "A `then` callback that does not return hands the next link `undefined`, not the parsed body — so the error appears as \"cannot read length of undefined\" one line away from the mistake. Returning the promise from `r.json()` (or awaiting it inside an async callback) is what passes the data along."
-            },
-            {
-              "id": "quiz-js-s51-q5",
-              "type": "blank",
-              "prompt": "Which combinator waits for every promise and hands back one `{ status, value }` record each, never rejecting?",
-              "answers": [
-                "promise.allsettled",
-                "promise.all settled",
-                "allsettled"
-              ],
-              "explanation": "`Promise.allSettled` reports outcomes instead of collapsing them into a single success or failure, which makes it right for several independent widgets where one failure should not blank the page. `Promise.all` needs every result and rejects on the first failure."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Async and the DOM"
       },
@@ -18011,67 +6463,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s52",
           "title": "Async and await check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s52-q1",
-              "type": "multiple-choice",
-              "prompt": "What does `await` suspend?",
-              "options": [
-                "The whole script, until the promise settles",
-                "Only the async function that contains it",
-                "Every function in the current file",
-                "Nothing — it blocks the thread until the value is ready"
-              ],
-              "answer": 1,
-              "explanation": "Only the enclosing function stops; control returns to the event loop, which is why clicks and timers keep firing. The code after the `await` resumes when the promise settles, and everything queued outside runs in the meantime — which is exactly why the line after an un-awaited call usually beats the data it wanted."
-            },
-            {
-              "id": "quiz-js-s52-q2",
-              "type": "true-false",
-              "prompt": "An async function that does nothing but `return 42` gives you the number 42 to the caller.",
-              "answer": false,
-              "explanation": "It gives you a promise fulfilled with 42. `async` wraps the return value unconditionally, so every caller must `await` it or attach a `.then`. Reading `.name` straight off the call result gives `undefined`, with no error to point at the mistake."
-            },
-            {
-              "id": "quiz-js-s52-q3",
-              "type": "identify-error",
-              "prompt": "What is wrong with this snippet?",
-              "code": "async function loadAll(ids) {\n  const users = []\n  for (const id of ids) {\n    users.push(await getUser(id))\n  }\n  return users\n}",
-              "options": [
-                "users should be declared with let before the loop",
-                "Awaiting inside the loop runs every request one after another instead of together",
-                "A for...of loop cannot be used in an async function",
-                "push returns a value, so await is applied to the wrong thing"
-              ],
-              "answer": 1,
-              "explanation": "Each await completes before the next iteration starts, so ten ids cost ten round trips. Start them all with `ids.map(getUser)` and then `await Promise.all(...)`. Go serial only when each step depends on the previous result, such as paging through an unknown number of pages."
-            },
-            {
-              "id": "quiz-js-s52-q4",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "async function work() {\n  console.log('1')\n  await Promise.resolve()\n  console.log('3')\n}\nwork()\nconsole.log('2')",
-              "options": [
-                "1, 2, 3",
-                "1, 3, 2",
-                "1, 2, then never 3",
-                "2, 1, 3"
-              ],
-              "answer": 0,
-              "explanation": "`work()` runs synchronously up to the first `await`, so `1` prints, then the function returns to the caller and `2` prints. The promise was already resolved, so the microtask queue runs next and `3` follows. Even a zero-cost await defers the rest of the function."
-            },
-            {
-              "id": "quiz-js-s52-q5",
-              "type": "blank",
-              "prompt": "Which block runs whether the `try` succeeded or failed, and is the right place to re-enable a disabled button?",
-              "answers": [
-                "finally",
-                "finally block",
-                "finally()"
-              ],
-              "explanation": "`finally` runs on both paths and does not swallow the value or the error, so cleanup belongs there. `catch` alone would leave the button disabled whenever the request failed — which is the case where the user most needs to try again."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Async and the DOM"
       },
@@ -18099,67 +6491,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s53",
           "title": "DOM intro check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s53-q1",
-              "type": "multiple-choice",
-              "prompt": "What is the DOM?",
-              "options": [
-                "The HTML source of the page, as a string",
-                "The browser's live tree of objects, one per node, which JavaScript reads and writes",
-                "The CSS applied to the page, compiled to objects",
-                "A built-in library you have to import"
-              ],
-              "answer": 1,
-              "explanation": "The DOM is a live model, not the source text. Writing to it changes what is on screen without touching your file, and an element created in JavaScript lands in exactly the same tree as one written in markup."
-            },
-            {
-              "id": "quiz-js-s53-q2",
-              "type": "true-false",
-              "prompt": "`document.write(\"hello\")` is the safest way to put text on a page.",
-              "answer": false,
-              "explanation": "`document.write` injects raw HTML into the parser stream and, when called after load, replaces everything already on the page. Build an element and set `textContent` instead — same amount of code, no destruction and no injection risk."
-            },
-            {
-              "id": "quiz-js-s53-q3",
-              "type": "code-output",
-              "prompt": "What does this produce in the page?",
-              "code": "const list = document.querySelector('#tasks')\nconst item = document.createElement('li')\nitem.textContent = 'Buy milk'\nlist.appendChild(item)",
-              "options": [
-                "A li reading \"Buy milk\" inside #tasks",
-                "Nothing — createElement only makes an element in memory",
-                "A list of three items, because appendChild runs once per property set",
-                "An error, because appendChild only works on elements you created in the same statement"
-              ],
-              "answer": 0,
-              "explanation": "That is the whole pattern: create, fill, attach. `createElement` alone would indeed put nothing on the page — it is `appendChild` that inserts the node and triggers the repaint, and it can be called from a different statement, or a different function, entirely."
-            },
-            {
-              "id": "quiz-js-s53-q4",
-              "type": "identify-error",
-              "prompt": "What is wrong with this script?",
-              "code": "<head>\n  <script>\n    const out = document.getElementById('status')\n    out.textContent = 'ready'\n  </script>\n</head>\n<body>\n  <p id=\"status\">loading</p>\n</body>",
-              "options": [
-                "getElementById cannot be used in a script",
-                "The script runs before the parser reaches the p element, so out is null",
-                "textContent cannot be set from a script in the head",
-                "The id must be written as #status in getElementById"
-              ],
-              "answer": 1,
-              "explanation": "Scripts execute as the parser reaches them, so a script in `<head>` runs before the body exists and the lookup returns null. Move the tag to the end of `<body>`, or wrap the code in a `DOMContentLoaded` listener — both fix it."
-            },
-            {
-              "id": "quiz-js-s53-q5",
-              "type": "blank",
-              "prompt": "Which property should you use to write plain text into an element, given that its value might have come from a user?",
-              "answers": [
-                "textcontent",
-                "textcontent property",
-                "el.textcontent"
-              ],
-              "explanation": "`textContent` treats every character as text, so a `<` stays a `<` and nothing executes. `innerHTML` parses the string as markup, which is what turns a pasted `<img onerror=...>` into a script running on your page."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Async and the DOM"
       },
@@ -18186,66 +6518,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s54",
           "title": "DOM document check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s54-q1",
-              "type": "multiple-choice",
-              "prompt": "What does `document.querySelector(\"#missing\")` return when no element has that id?",
-              "options": [
-                "null",
-                "undefined",
-                "An empty element",
-                "It throws an error"
-              ],
-              "answer": 0,
-              "explanation": "It returns `null`, which is why reading a property straight afterwards throws \"Cannot read properties of null\". Guard the lookup, or use optional chaining with `?.`, which gives `undefined` instead of stopping the program."
-            },
-            {
-              "id": "quiz-js-s54-q2",
-              "type": "true-false",
-              "prompt": "`document.querySelectorAll` returns a live list that updates when new matching elements are added to the page.",
-              "answer": false,
-              "explanation": "`querySelectorAll` returns a static NodeList — a snapshot taken at the moment of the call. New elements added later will not appear in it. Use `getElementsByClassName` or `getElementsByTagName` if you need a live collection."
-            },
-            {
-              "id": "quiz-js-s54-q3",
-              "type": "code-output",
-              "prompt": "What does the page show after this runs?",
-              "code": "const out = document.querySelector('#out')\nout.innerHTML = '<strong>Bold</strong>'",
-              "options": [
-                "The plain text <strong>Bold</strong>, with tags shown as characters",
-                "The word Bold in bold text",
-                "Nothing — innerHTML was removed from modern browsers",
-                "An error, because #out is not a valid selector"
-              ],
-              "answer": 1,
-              "explanation": "`innerHTML` parses the string as HTML, so the `<strong>` tags become real elements and the word renders in bold. `textContent` would write the tags as visible characters instead."
-            },
-            {
-              "id": "quiz-js-s54-q4",
-              "type": "identify-error",
-              "prompt": "What is wrong with this way of creating an element?",
-              "code": "const div = document.createElement('<div>')\ndiv.textContent = 'Hello'\ndocument.body.append(div)",
-              "options": [
-                "Nothing is wrong",
-                "createElement takes a tag name without angle brackets",
-                "textContent does not work on created elements",
-                "append only works on the document, not on body"
-              ],
-              "answer": 1,
-              "explanation": "`createElement` expects a tag name like `\"div\"`, not `\"<div>\"`. The angle brackets make it an invalid tag name and the browser will create an element named `HTMLUnknownElement` instead."
-            },
-            {
-              "id": "quiz-js-s54-q5",
-              "type": "blank",
-              "prompt": "Which method creates a plain text node that can be appended to an element?",
-              "answers": [
-                "createTextNode",
-                "document.createTextNode"
-              ],
-              "explanation": "`document.createTextNode(\"text\")` makes a text node. It is rarely needed directly because `textContent` and `append` with a string handle it for you, but it exists for cases where you need fine-grained control."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Async and the DOM"
       },
@@ -18272,66 +6545,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s55",
           "title": "DOM elements check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s55-q1",
-              "type": "multiple-choice",
-              "prompt": "What does `document.createElement(\"li\")` return?",
-              "options": [
-                "A string of HTML",
-                "A detached li element not yet in the page",
-                "A live li element already in the document",
-                "A DocumentFragment"
-              ],
-              "answer": 1,
-              "explanation": "`createElement` builds an element in memory. It is detached — no styles apply, no layout is calculated, and it is not in the accessibility tree — until you insert it with `append`, `prepend`, or `replaceChildren`."
-            },
-            {
-              "id": "quiz-js-s55-q2",
-              "type": "true-false",
-              "prompt": "Appending fifty items one at a time with `list.append(item)` in a loop causes fifty repaints.",
-              "answer": true,
-              "explanation": "Each `append` into the live tree triggers a style recalculation and repaint. Building a DocumentFragment first and appending it once batches the work into a single repaint."
-            },
-            {
-              "id": "quiz-js-s55-q3",
-              "type": "code-output",
-              "prompt": "What does the list contain after this runs?",
-              "code": "const list = document.querySelector('#list')\nlist.replaceChildren()\nfor (const name of ['A', 'B']) {\n  const li = document.createElement('li')\n  li.textContent = name\n  list.append(li)\n}",
-              "options": [
-                "One li with text \"A, B\"",
-                "Two lis: \"A\" and \"B\"",
-                "An empty list — replaceChildren clears it",
-                "An error — replaceChildren takes a fragment"
-              ],
-              "answer": 1,
-              "explanation": "`replaceChildren()` with no arguments empties the container. Then the loop creates two separate li elements and appends each. The list ends up with two items."
-            },
-            {
-              "id": "quiz-js-s55-q4",
-              "type": "identify-error",
-              "prompt": "Why does this render function produce duplicates on the second call?",
-              "code": "let tasks = ['One']\nfunction render() {\n  const list = document.querySelector('#tasks')\n  for (const task of tasks) {\n    const li = document.createElement('li')\n    li.textContent = task\n    list.append(li)\n  }\n}\nrender()\ntasks.push('Two')\nrender()",
-              "options": [
-                "tasks array is not being updated",
-                "The list is not cleared before adding new items",
-                "createElement creates duplicates",
-                "append does not work inside a loop"
-              ],
-              "answer": 1,
-              "explanation": "The function never empties the container. Each call to `render` appends new items on top of the old ones. Start with `list.replaceChildren()` or `list.innerHTML = \"\"` to clear it first."
-            },
-            {
-              "id": "quiz-js-s55-q5",
-              "type": "blank",
-              "prompt": "What method on a container removes all children and inserts new nodes in a single operation?",
-              "answers": [
-                "replaceChildren",
-                "replaceChildren()"
-              ],
-              "explanation": "`list.replaceChildren(...nodes)` clears the container and inserts the given nodes in one atomic step. It is the modern replacement for `innerHTML = \"\"` followed by multiple appends."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Async and the DOM"
       },
@@ -18358,66 +6572,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s56",
           "title": "DOM HTML check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s56-q1",
-              "type": "multiple-choice",
-              "prompt": "What does `element.textContent` return when the element contains `<strong>bold</strong>`?",
-              "options": [
-                "The string \"bold\"",
-                "The string \"<strong>bold</strong>\"",
-                "An HTML element",
-                "undefined"
-              ],
-              "answer": 1,
-              "explanation": "textContent returns all text as plain characters. The tags are not parsed -- they are returned as literal characters in the string."
-            },
-            {
-              "id": "quiz-js-s56-q2",
-              "type": "true-false",
-              "prompt": "`querySelectorAll` returns a live NodeList that automatically updates when new matching elements are added.",
-              "answer": false,
-              "explanation": "querySelectorAll returns a static snapshot. New elements added after the call are not included. Use getElementsByClassName or getElementsByTagName for a live collection."
-            },
-            {
-              "id": "quiz-js-s56-q3",
-              "type": "code-output",
-              "prompt": "What does the page show after this runs?",
-              "code": "const el = document.querySelector('#out')\nel.innerHTML = '<em>Italic</em>'",
-              "options": [
-                "The plain text <em>Italic</em>",
-                "The word Italic in italics",
-                "An error",
-                "Nothing"
-              ],
-              "answer": 1,
-              "explanation": "innerHTML parses the string as HTML. The <em> tags become real elements and the browser renders the text in italics."
-            },
-            {
-              "id": "quiz-js-s56-q4",
-              "type": "identify-error",
-              "prompt": "What is the problem with this code?",
-              "code": "const btn = document.querySelector('#btn')\nbtn.addEventListener('click', function () {\n  const el = document.querySelector('#missing')\n  el.textContent = 'Hello'\n})",
-              "options": [
-                "Nothing is wrong",
-                "querySelector returns null if nothing matches, so el.textContent throws",
-                "addEventListener does not work on buttons",
-                "textContent cannot be assigned"
-              ],
-              "answer": 1,
-              "explanation": "If #missing does not exist, querySelector returns null. Accessing .textContent on null throws \"Cannot read properties of null\". Guard the lookup or use optional chaining."
-            },
-            {
-              "id": "quiz-js-s56-q5",
-              "type": "blank",
-              "prompt": "Which property on an element gives you a token list for adding, removing, and toggling CSS classes?",
-              "answers": [
-                "classList",
-                "element.classList"
-              ],
-              "explanation": "element.classList is a DOMTokenList with add, remove, toggle, and contains methods. It is the standard way to manipulate classes without string concatenation."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Async and the DOM"
       },
@@ -18444,66 +6599,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s57",
           "title": "DOM forms check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s57-q1",
-              "type": "multiple-choice",
-              "prompt": "What does `new FormData(form)` give you?",
-              "options": [
-                "An array of input elements",
-                "A collection of all named form controls and their values",
-                "A JSON string of the form",
-                "The form element itself"
-              ],
-              "answer": 1,
-              "explanation": "FormData is a collection keyed by the name attribute of each control. It handles checkboxes, file inputs, and multiple values per name automatically."
-            },
-            {
-              "id": "quiz-js-s57-q2",
-              "type": "true-false",
-              "prompt": "`form.checkValidity()` shows the browser's own validation messages to the user.",
-              "answer": false,
-              "explanation": "checkValidity returns true or false without showing anything. reportValidity checks and shows the browser messages. Use reportValidity when you want the user to see the errors."
-            },
-            {
-              "id": "quiz-js-s57-q3",
-              "type": "code-output",
-              "prompt": "What happens when this runs on a valid form?",
-              "code": "form.addEventListener('submit', function (event) {\n  event.preventDefault()\n  const data = new FormData(form)\n  console.log(data.get('email'))\n})",
-              "options": [
-                "The page reloads",
-                "The email value is logged, page does not reload",
-                "An error is thrown",
-                "Nothing happens"
-              ],
-              "answer": 1,
-              "explanation": "preventDefault stops the navigation. FormData reads the values. The handler runs and logs the email."
-            },
-            {
-              "id": "quiz-js-s57-q4",
-              "type": "identify-error",
-              "prompt": "What is wrong with validating on the submit button's click event?",
-              "code": "document.querySelector('#submit-btn').addEventListener('click', function () {\n  if (!form.checkValidity()) return\n  // process form\n})",
-              "options": [
-                "Nothing is wrong",
-                "Misses Enter key in fields and runs before browser validation",
-                "click does not fire on buttons",
-                "checkValidity only works on submit"
-              ],
-              "answer": 1,
-              "explanation": "A click listener on the button misses the Enter key in any field. It also runs before the browser's native validation can stop invalid submissions. Listen for submit on the form instead."
-            },
-            {
-              "id": "quiz-js-s57-q5",
-              "type": "blank",
-              "prompt": "What method on a form element stops the browser from navigating away on submit?",
-              "answers": [
-                "preventDefault",
-                "event.preventDefault()"
-              ],
-              "explanation": "Call event.preventDefault() inside the submit handler. It cancels the default navigation while letting your code run."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Async and the DOM"
       },
@@ -18530,67 +6626,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s58",
           "title": "DOM CSS check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s58-q1",
-              "type": "multiple-choice",
-              "prompt": "Which approach should you use for a named UI state like \"loading\" or \"error\"?",
-              "options": [
-                "element.style.color = \"red\"",
-                "element.classList.add(\"error\")",
-                "element.setAttribute(\"style\", \"color: red\")",
-                "element.style.setProperty(\"--error\", \"red\")"
-              ],
-              "answer": 1,
-              "explanation": "Named states belong in classes. The CSS defines what .error looks like; JavaScript only decides when it applies. This keeps styling in the stylesheet."
-            },
-            {
-              "id": "quiz-js-s58-q2",
-              "type": "true-false",
-              "prompt": "`el.style.width = 100` sets the width to 100px.",
-              "answer": false,
-              "explanation": "Inline styles require units. `el.style.width = \"100px\"` works; `el.style.width = 100` is ignored."
-            },
-            {
-              "id": "quiz-js-s58-q3",
-              "type": "code-output",
-              "prompt": "What is the result after this runs?",
-              "code": "el.style.setProperty('--gap', '16px')\nel.style.setProperty('--gap', '24px')\nconsole.log(el.style.getPropertyValue('--gap'))",
-              "options": [
-                "16px",
-                "24px",
-                "Empty string",
-                "Error"
-              ],
-              "answer": 1,
-              "explanation": "setProperty overwrites the previous value. The second call sets --gap to 24px."
-            },
-            {
-              "id": "quiz-js-s58-q4",
-              "type": "identify-error",
-              "prompt": "Why does the .active class not change the color in this case?",
-              "code": ".active { color: blue; }\n<div id=\"el\" style=\"color: red\" class=\"active\">Text</div>\n<script>\n  document.querySelector('#el').classList.add('active')\n</script>",
-              "options": [
-                "The class is not added",
-                "Inline style has higher specificity than class",
-                "color property cannot be overridden",
-                "active is a reserved class name"
-              ],
-              "answer": 1,
-              "explanation": "Inline styles (the style attribute) have higher specificity than classes. The inline color: red wins over .active { color: blue }. Remove the inline style or use !important in CSS (not recommended)."
-            },
-            {
-              "id": "quiz-js-s58-q5",
-              "type": "blank",
-              "prompt": "What method sets a CSS custom property on an element from JavaScript?",
-              "answers": [
-                "setProperty",
-                "style.setProperty",
-                "element.style.setProperty"
-              ],
-              "explanation": "element.style.setProperty(\"--name\", \"value\") sets a custom property. It is the only way to set a variable with a dash in its name from JavaScript."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Async and the DOM"
       },
@@ -18617,66 +6653,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s59",
           "title": "DOM animations check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s59-q1",
-              "type": "multiple-choice",
-              "prompt": "What does `element.animate(keyframes, options)` return?",
-              "options": [
-                "A Promise",
-                "An Animation object",
-                "The element itself",
-                "A keyframe array"
-              ],
-              "answer": 1,
-              "explanation": "animate returns an Animation object with play, pause, reverse, cancel, finish, and a finished Promise."
-            },
-            {
-              "id": "quiz-js-s59-q2",
-              "type": "true-false",
-              "prompt": "The Web Animations API automatically respects prefers-reduced-motion without any extra code.",
-              "answer": false,
-              "explanation": "The browser does not auto-pause WAAPI animations. You must check matchMedia and either skip the animation or set duration to 0 when reduced motion is preferred."
-            },
-            {
-              "id": "quiz-js-s59-q3",
-              "type": "code-output",
-              "prompt": "What does this log when the animation finishes?",
-              "code": "el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 100 })\n  .finished.then(function () { console.log('done') })",
-              "options": [
-                "done",
-                "Nothing",
-                "An error",
-                "The Animation object"
-              ],
-              "answer": 0,
-              "explanation": "The finished Promise resolves when the animation completes. The callback logs \"done\"."
-            },
-            {
-              "id": "quiz-js-s59-q4",
-              "type": "identify-error",
-              "prompt": "What is wrong with this RAF loop?",
-              "code": "function tick() {\n  el.style.left = x + 'px'\n  x += 1\n  requestAnimationFrame(tick)\n}\ntick()",
-              "options": [
-                "Nothing is wrong",
-                "No way to stop the loop -- missing cancelAnimationFrame",
-                "requestAnimationFrame does not take a function",
-                "tick must be an arrow function"
-              ],
-              "answer": 1,
-              "explanation": "The loop runs forever with no way to stop it. Store the return value of requestAnimationFrame and pass it to cancelAnimationFrame when you need to stop."
-            },
-            {
-              "id": "quiz-js-s59-q5",
-              "type": "blank",
-              "prompt": "What method on an Animation object stops it and jumps to the end state (if fill: forwards)?",
-              "answers": [
-                "finish",
-                "finish()"
-              ],
-              "explanation": "anim.finish() completes the animation immediately and resolves the finished Promise. cancel() stops it and reverts unless fill: forwards is set."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Async and the DOM"
       },
@@ -18718,66 +6695,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s60",
           "title": "DOM events check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s60-q1",
-              "type": "multiple-choice",
-              "prompt": "What is the real difference between `addEventListener` and setting the `onclick` property?",
-              "options": [
-                "None — they are two spellings of the same thing",
-                "addEventListener can attach several handlers to the same event and remove them again, while onclick overwrites whatever was there",
-                "onclick is the modern version and addEventListener is deprecated",
-                "addEventListener only works on the document, not on elements"
-              ],
-              "answer": 1,
-              "explanation": "The `onclick` property holds one handler, so a second assignment erases the first. `addEventListener` keeps a list, which is why it can also take a listener off again with `removeEventListener` and the same function reference."
-            },
-            {
-              "id": "quiz-js-s60-q2",
-              "type": "true-false",
-              "prompt": "A click listener is attached to a `ul`, and the user clicks a `button` inside one of its `li` children. Inside the handler, `event.currentTarget` is the button.",
-              "answer": false,
-              "explanation": "`currentTarget` is always the element whose listener is running, so it is the `ul`. `event.target` is the deepest element the event started on, which is the button — and that is the one you want when you need to know which control was used."
-            },
-            {
-              "id": "quiz-js-s60-q3",
-              "type": "code-output",
-              "prompt": "The button is inside a form. What happens when it is clicked?",
-              "code": "button.addEventListener('click', function (event) {\n  event.preventDefault()\n  console.log('saved')\n})",
-              "options": [
-                "The page navigates and \"saved\" never prints",
-                "\"saved\" prints, and the click default (activating the button, which submits the form) is cancelled",
-                "It is a syntax error, because preventDefault has to be called first",
-                "The handler runs twice, once for the click and once for the submit"
-              ],
-              "answer": 1,
-              "explanation": "`preventDefault` cancels the action the browser would have taken for that event. It does not stop other listeners — that is `stopPropagation` — and it is better practice to handle `submit` on the form, which also covers the Enter key."
-            },
-            {
-              "id": "quiz-js-s60-q4",
-              "type": "blank",
-              "prompt": "Which single event fires both when the submit button is clicked and when the user presses Enter inside a field?",
-              "answers": [
-                "submit",
-                "the submit event"
-              ],
-              "explanation": "Listen for `submit` on the form element. There is no separate event for the button, and `click` on the button misses the Enter key entirely — which is the shortcut people actually use."
-            },
-            {
-              "id": "quiz-js-s60-q5",
-              "type": "identify-error",
-              "prompt": "After the first render everything works. After the second render, one click logs \"picked\" twice. What is wrong?",
-              "code": "const list = document.querySelector('#list')\nfor (const item of list.children) {\n  item.addEventListener('click', function () {\n    console.log('picked')\n  })\n}\nrender()   // called again after every change",
-              "options": [
-                "Nothing is wrong — one handler per item is the correct pattern",
-                "The handlers should be attached to list.children in reverse order",
-                "Each call to render attaches a second handler to every item, so the handlers stack up",
-                "children is a live collection, so the loop runs twice in one pass"
-              ],
-              "answer": 2,
-              "explanation": "The first pass is fine; the second pass doubles every handler. Either attach once outside any re-render, or put a single listener on the list and read `event.target` — delegation has no way to double up."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "DOM events and the window"
       },
@@ -18805,67 +6723,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s61",
           "title": "DOM navigation check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s61-q1",
-              "type": "multiple-choice",
-              "prompt": "You have an element and you know its parent is an element, not the document. Which property should you use?",
-              "options": [
-                "parentNode",
-                "parentElement",
-                "closest()",
-                "previousElementSibling"
-              ],
-              "answer": 1,
-              "explanation": "`parentNode` can hand you a document, a fragment or any other node type, which is why it is typed as a general node. `parentElement` is narrowed to an element or `null`, so it is the honest choice when you are about to call element methods on it."
-            },
-            {
-              "id": "quiz-js-s61-q2",
-              "type": "true-false",
-              "prompt": "`children` includes text nodes; `childNodes` does not.",
-              "answer": false,
-              "explanation": "It is the other way round. `children` gives elements only, and `childNodes` gives every node, including the whitespace text nodes that sit between indented tags."
-            },
-            {
-              "id": "quiz-js-s61-q3",
-              "type": "blank",
-              "prompt": "Which method walks up from an element, including the element itself, and returns the nearest ancestor matching a selector?",
-              "answers": [
-                "closest",
-                "element.closest",
-                ".closest"
-              ],
-              "explanation": "`closest` starts at the element you call it on, so it matches the element itself as well as its ancestors. It never walks downwards, which is why a listener on a parent is the usual partner for it."
-            },
-            {
-              "id": "quiz-js-s61-q4",
-              "type": "code-output",
-              "prompt": "Given `<section><div class=\"card\">Hi</div></section>` in the document, what does this print?",
-              "code": "const card = document.querySelector('.card')\nconsole.log(card.parentElement.tagName)",
-              "options": [
-                "DIV",
-                "SECTION",
-                "BODY",
-                "null"
-              ],
-              "answer": 1,
-              "explanation": "`parentElement` is the `section` that wraps the card in the markup, and `tagName` is always upper case for HTML elements, so it prints `SECTION`. If the card were a direct child of `body` you would get `BODY` instead."
-            },
-            {
-              "id": "quiz-js-s61-q5",
-              "type": "identify-error",
-              "prompt": "The console prints an empty string instead of the first item. What is wrong?",
-              "code": "<ul id=\"list\">\n  <li>Tea</li>\n  <li>Coffee</li>\n</ul>\n<script>\nconst list = document.querySelector('#list')\nconst first = list.firstChild\nconsole.log(first.textContent)\n</script>",
-              "options": [
-                "Nothing is wrong, firstChild is the first list item",
-                "firstChild is the indentation before the first tag, a text node whose textContent is empty",
-                "firstChild does not exist on a ul element",
-                "textContent does not work on the first item"
-              ],
-              "answer": 1,
-              "explanation": "`firstChild` is the first node of any kind, and in indented markup that is a text node holding a newline and some spaces. `firstElementChild` skips text nodes and gives you the `li` you meant."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "DOM events and the window"
       },
@@ -18893,68 +6751,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s62",
           "title": "DOM nodes check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s62-q1",
-              "type": "multiple-choice",
-              "prompt": "What does `document.createElement(\"li\")` return?",
-              "options": [
-                "An element that is already on the page and can be seen",
-                "A detached element that becomes part of the page only when you insert it",
-                "A string of HTML you still have to parse",
-                "null, because li cannot be created from JavaScript"
-              ],
-              "answer": 1,
-              "explanation": "It is a real element, but it is not in the document: no stylesheet rule applies to it and nothing is painted until you insert it. That is why the right order is create, fill, then attach."
-            },
-            {
-              "id": "quiz-js-s62-q2",
-              "type": "true-false",
-              "prompt": "`row.cloneNode(true)` produces a deep copy of the row that is not yet part of the document.",
-              "answer": true,
-              "explanation": "The `true` copies the whole subtree, and the copy is detached until you insert it. What it does not copy is anything JavaScript added: listeners, inline styles, or the text a user had typed into an input."
-            },
-            {
-              "id": "quiz-js-s62-q3",
-              "type": "blank",
-              "prompt": "Which method inserts a node directly *before* an existing sibling, without touching the parent?",
-              "answers": [
-                "before",
-                "node.before",
-                ".before",
-                "element.before"
-              ],
-              "explanation": "`before` and `after` are called on the existing node and position the new one relative to it. `prepend` would have put it first among the children instead, which is a different place entirely."
-            },
-            {
-              "id": "quiz-js-s62-q4",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "const list = document.querySelector('#list')\nlist.replaceChildren()\nconsole.log(list.children.length)",
-              "options": [
-                "0",
-                "1",
-                "undefined",
-                "It throws an error"
-              ],
-              "answer": 0,
-              "explanation": "`replaceChildren` with no arguments removes every child in one operation, so the list is empty and `children.length` is 0. It is the fast way to clear a container before refilling it."
-            },
-            {
-              "id": "quiz-js-s62-q5",
-              "type": "identify-error",
-              "prompt": "The new element never appears, and the next line fails. What is wrong?",
-              "code": "const list = document.querySelector('#list')\nconst item = document.createElement('li')\nitem = item.append('Tea')\nconsole.log(item.tagName)",
-              "options": [
-                "Nothing is wrong, append returns the node it appended",
-                "append returns undefined, so item is now undefined and reading a property from it fails",
-                "createElement returns undefined for a list item",
-                "append is spelled appendChild"
-              ],
-              "answer": 1,
-              "explanation": "The mutating methods return nothing on purpose, so nothing waits for a return value. Assigning one back to the variable throws the element away — the item is on the page, but you no longer have a reference to it."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "DOM events and the window"
       },
@@ -18982,67 +6779,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s63",
           "title": "DOM collections check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s63-q1",
-              "type": "multiple-choice",
-              "prompt": "Which of these returns a **static** list — a snapshot taken at the moment of the call?",
-              "options": [
-                "document.getElementsByClassName(\"item\")",
-                "document.getElementsByTagName(\"li\")",
-                "element.children",
-                "document.querySelectorAll(\".item\")"
-              ],
-              "answer": 3,
-              "explanation": "Everything from `getElementsBy…` and `children` is a live HTMLCollection that re-reads the document. `querySelectorAll` is the one that hands you a frozen NodeList, so elements added afterwards are not in it."
-            },
-            {
-              "id": "quiz-js-s63-q2",
-              "type": "true-false",
-              "prompt": "A live collection can report a different `length` than it did a second ago, without you re-running the query.",
-              "answer": true,
-              "explanation": "That is the definition of live: it is a standing view of the page, and it re-reads when you touch a property. It is why removing from a live list inside a loop over it never terminates."
-            },
-            {
-              "id": "quiz-js-s63-q3",
-              "type": "blank",
-              "prompt": "Which built-in call turns a NodeList or HTMLCollection into a real array, with every array method available?",
-              "answers": [
-                "array.from",
-                "from",
-                "array.from()"
-              ],
-              "explanation": "`Array.from(items)` copies the collection into an array. That copy is a snapshot, so removing elements afterwards cannot disturb the loop that is walking it."
-            },
-            {
-              "id": "quiz-js-s63-q4",
-              "type": "code-output",
-              "prompt": "There is one element with the class `item` on the page. What does this print?",
-              "code": "const items = document.getElementsByClassName('item')\nconst first = items[0]\nfirst.remove()\nconsole.log(first === items[0])",
-              "options": [
-                "true",
-                "false",
-                "It throws an error",
-                "undefined"
-              ],
-              "answer": 1,
-              "explanation": "`first` still points at the removed element, and the live collection no longer contains it, so `items[0]` is now `undefined`. Comparing them is false. This is why a node reference and an index are not interchangeable once removal starts."
-            },
-            {
-              "id": "quiz-js-s63-q5",
-              "type": "identify-error",
-              "prompt": "This loop should empty the list, but the tab freezes. Why?",
-              "code": "const items = document.getElementsByClassName('item')\nwhile (items.length) {\n  items[0].remove()\n}\nconsole.log('done')",
-              "options": [
-                "The loop is correct, it just runs slowly",
-                "It never ends: the collection is live, so every removal makes the loop condition shorter by one, and there is always another item to remove",
-                "remove() cannot be called on an element from a live collection",
-                "items.length is only read once, so the condition is always true"
-              ],
-              "answer": 1,
-              "explanation": "With a live collection the condition genuinely reaches zero — on a list that has more items than can be removed in time, or a collection that re-queries. The version people actually hit is the reverse: a `querySelectorAll` list is a stale copy, so items added during the loop survive. Copy with `Array.from` first and both problems disappear."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "DOM events and the window"
       },
@@ -19070,67 +6807,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s64",
           "title": "The window object check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s64-q1",
-              "type": "multiple-choice",
-              "prompt": "In browser JavaScript, what does `window` refer to?",
-              "options": [
-                "The HTML document currently loaded",
-                "The browser application itself",
-                "The global object — the same one as globalThis",
-                "A hidden iframe every page secretly contains"
-              ],
-              "answer": 2,
-              "explanation": "`window` is the global object in a page: it owns `document`, `console`, the timing functions and anything a script declared with `var` at the top level. That is why `window === globalThis` in a browser."
-            },
-            {
-              "id": "quiz-js-s64-q2",
-              "type": "true-false",
-              "prompt": "`window` is the standard way to reach shared state from server-side Node.js code.",
-              "answer": false,
-              "explanation": "There is no `window` in Node. Node has `global`, and modern code in both environments uses the portable `globalThis` instead of guessing which one it is running in."
-            },
-            {
-              "id": "quiz-js-s64-q3",
-              "type": "blank",
-              "prompt": "Which property of `window` gives the width of the viewport, in CSS pixels, scrollbar included?",
-              "answers": [
-                "innerwidth",
-                "window.innerwidth",
-                ".innerwidth"
-              ],
-              "explanation": "`innerWidth` measures the viewport. `outerWidth` is the whole browser window including tabs and toolbars, and `document.documentElement.clientWidth` is the viewport without the scrollbar — the right number for layout."
-            },
-            {
-              "id": "quiz-js-s64-q4",
-              "type": "code-output",
-              "prompt": "What does this print in a browser?",
-              "code": "console.log(typeof window.document)\nconsole.log(window === globalThis)",
-              "options": [
-                "\"object\" then true",
-                "\"object\" then false",
-                "\"undefined\" then false",
-                "\"window\" then true"
-              ],
-              "answer": 0,
-              "explanation": "`window.document` is the document object, so the first line prints `\"object\"`. In a page `window` and `globalThis` are the same object, so the second line prints `true` — which is the portable way to write code that works in a browser and in Node."
-            },
-            {
-              "id": "quiz-js-s64-q5",
-              "type": "identify-error",
-              "prompt": "On a narrow screen the panel sticks out past the right edge. What is wrong?",
-              "code": "const panel = document.querySelector('#panel')\npanel.style.width = window.innerWidth + 'px'",
-              "options": [
-                "Nothing is wrong, innerWidth is exactly the space available",
-                "It should be screen.width, which is the real display width",
-                "innerWidth includes the vertical scrollbar and the panel has its own padding and border, so the box overflows",
-                "innerWidth is a string and cannot be used in arithmetic"
-              ],
-              "answer": 2,
-              "explanation": "`innerWidth` counts the scrollbar, and `width` on a content-box element adds padding and border on top. For a full-width panel use `width: 100%` and let the box model do the work; use `clientWidth` when you genuinely need a measured number."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "DOM events and the window"
       },
@@ -19158,67 +6835,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s65",
           "title": "Screen and location check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s65-q1",
-              "type": "multiple-choice",
-              "prompt": "What does the `screen` object describe?",
-              "options": [
-                "The browser window, tabs and toolbars included",
-                "The whole display the browser window happens to be on",
-                "The scrollable area of the page",
-                "The document, as it was when the page loaded"
-              ],
-              "answer": 1,
-              "explanation": "`screen` is the display, not the window and not the page. That is why `screen.availHeight` is smaller than `screen.height` on a machine with a taskbar, and why it is the wrong number to lay out with."
-            },
-            {
-              "id": "quiz-js-s65-q2",
-              "type": "true-false",
-              "prompt": "`location` is read-only in the sense that you cannot set it to a new value — to change the page you must use a method.",
-              "answer": false,
-              "explanation": "You can assign to `location.href` and the browser navigates, which is exactly what `location.assign` does. What you cannot do is make the property *hold* something other than the current URL."
-            },
-            {
-              "id": "quiz-js-s65-q3",
-              "type": "blank",
-              "prompt": "For the URL `https://codeingot.dev/courses/dom?q=events`, which property gives you `/courses/dom`?",
-              "answers": [
-                "pathname",
-                "location.pathname",
-                ".pathname"
-              ],
-              "explanation": "`pathname` is the path only. `href` is the whole URL, `host` is the domain with any port, and `search` is the query string including its leading question mark."
-            },
-            {
-              "id": "quiz-js-s65-q4",
-              "type": "code-output",
-              "prompt": "The page is `https://codeingot.dev/courses/dom?q=events`. What does this print?",
-              "code": "console.log(location.search)",
-              "options": [
-                "q=events",
-                "?q=events",
-                "events",
-                "?q=events#listeners"
-              ],
-              "answer": 1,
-              "explanation": "`search` is the raw query string, question mark and all, as a single string. `new URLSearchParams(location.search).get(\"q\")` is what gives you just `events`, or `null` when the key is missing."
-            },
-            {
-              "id": "quiz-js-s65-q5",
-              "type": "identify-error",
-              "prompt": "The user cannot get back to the page they were on. What happened?",
-              "code": "const go = document.querySelector('#go')\ngo.addEventListener('click', function () {\n  window.location.href = nextPage\n})",
-              "options": [
-                "Nothing — assigning to href is the recommended way to navigate",
-                "It should have been screen.width rather than the href",
-                "This navigates away and nothing after it runs; an anchor with an href would at least give the user Back and a new tab",
-                "location.href cannot be assigned to, so nothing happened at all"
-              ],
-              "answer": 2,
-              "explanation": "Navigation is not wrong, but the page that stays in the history depends on it: assigning `href` adds an entry, and the user does get Back. The real cost of doing it from a handler is that there is no link to middle-click or open in a new tab — so use a real `<a href>` whenever the destination is a URL you could have linked to."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "DOM events and the window"
       },
@@ -19246,65 +6863,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s66",
           "title": "History check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s66-q1",
-              "type": "multiple-choice",
-              "prompt": "What does history.length actually count?",
-              "options": [
-                "Every entry the current tab has pushed, across all same-origin pages in that tab",
-                "The number of entries on the current page only",
-                "The number of times the current page has been reloaded",
-                "The number of URLs in your bookmarks for this site"
-              ],
-              "answer": 0,
-              "explanation": "The session history belongs to the tab, not the page. A single-page app that pushes an entry on every filter change is exactly why the number gets large, and it is why Back can take twenty clicks to leave a site."
-            },
-            {
-              "id": "quiz-js-s66-q2",
-              "type": "true-false",
-              "prompt": "Calling history.pushState loads the new URL and fires a page load.",
-              "answer": false,
-              "explanation": "pushState only adds an entry and rewrites the address bar. No request is made, no document is parsed, and neither load nor hashchange fires. Nothing renders until you listen for popstate and draw it yourself."
-            },
-            {
-              "id": "quiz-js-s66-q3",
-              "type": "blank",
-              "prompt": "Which event fires when the user presses Back after you have used pushState?",
-              "answers": [
-                "popstate"
-              ],
-              "explanation": "popstate fires for Back and Forward across same-document entries, and its event.state is the object you passed to the entry now being shown."
-            },
-            {
-              "id": "quiz-js-s66-q4",
-              "type": "code-output",
-              "prompt": "What does this log?",
-              "code": "history.pushState({ page: 2 }, '', '?page=2')\nconsole.log(history.state.page)",
-              "options": [
-                "2",
-                "null",
-                "undefined",
-                "?page=2"
-              ],
-              "answer": 0,
-              "explanation": "The first argument is stored on the entry and handed back by history.state. The third argument is only what the address bar shows — a string, not data."
-            },
-            {
-              "id": "quiz-js-s66-q5",
-              "type": "identify-error",
-              "prompt": "A developer calls pushState and listens for nothing. What happens when the user presses Back?",
-              "code": "history.pushState({ page: 2 }, '', '/page-2')\n// no popstate listener anywhere",
-              "options": [
-                "The address bar returns to the previous URL but the page still shows the old content, because nothing re-rendered it",
-                "The browser restores the previous page from its cache",
-                "The entry is removed automatically, as if pushState had never been called",
-                "A SecurityError is reported in the console"
-              ],
-              "answer": 0,
-              "explanation": "The entry is still there and the URL still changes. Only your own listener can move the content, which is the whole reason popstate exists."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Browser APIs and storage"
       },
@@ -19331,66 +6890,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s67",
           "title": "Navigator check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s67-q1",
-              "type": "multiple-choice",
-              "prompt": "What is navigator.userAgent?",
-              "options": [
-                "A string describing the browser and platform",
-                "A unique identifier that stays constant for one visitor",
-                "The width of the browser window in pixels",
-                "A promise that resolves once the page has loaded"
-              ],
-              "answer": 0,
-              "explanation": "It is a descriptive string about the browser build and platform. It is not an identity: it describes the software, not the person, which is exactly why it has been reduced and frozen by browsers."
-            },
-            {
-              "id": "quiz-js-s67-q2",
-              "type": "true-false",
-              "prompt": "navigator.onLine can be trusted to tell you whether a server is actually reachable.",
-              "answer": false,
-              "explanation": "It reports whether the machine has a network interface. A captive portal, a dead router or a stale DNS cache all leave it reporting true, so it is fine for a hint and useless as a health check."
-            },
-            {
-              "id": "quiz-js-s67-q3",
-              "type": "blank",
-              "prompt": "Which navigator property reports how many logical CPU cores the browser may use?",
-              "answers": [
-                "hardwareconcurrency",
-                "navigator.hardwareconcurrency"
-              ],
-              "explanation": "hardwareConcurrency is a practical hint for how much work to hand to a web worker, and it is capped by the browser rather than being a raw count of the silicon."
-            },
-            {
-              "id": "quiz-js-s67-q4",
-              "type": "code-output",
-              "prompt": "What does this log?",
-              "code": "console.log(typeof navigator.onLine)",
-              "options": [
-                "boolean",
-                "string",
-                "number",
-                "undefined"
-              ],
-              "answer": 0,
-              "explanation": "It is a live boolean, and the online and offline events are how you find out when it changes. Reading it once at the start of your script is not enough on its own."
-            },
-            {
-              "id": "quiz-js-s67-q5",
-              "type": "identify-error",
-              "prompt": "What is the real problem with branching the layout on the user agent string?",
-              "code": "if (navigator.userAgent.indexOf('Mobile') > -1) {\n  showDesktopLayout()\n}",
-              "options": [
-                "The string can be frozen, spoofed or reduced, so it is an unreliable test of the thing you actually care about",
-                "indexOf does not exist on strings",
-                "userAgent is undefined in every browser",
-                "It fails only when the page is served over http"
-              ],
-              "answer": 0,
-              "explanation": "The string format is not a contract. Test the feature instead: matchMedia(\"(pointer: coarse)\") for a touch device, or the presence of the API or CSS you are about to use."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Browser APIs and storage"
       },
@@ -19418,65 +6918,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s68",
           "title": "Popups check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s68-q1",
-              "type": "multiple-choice",
-              "prompt": "What does window.open return when a popup blocker stops the window?",
-              "options": [
-                "null",
-                "undefined",
-                "an empty window object",
-                "the URL it was about to load"
-              ],
-              "answer": 0,
-              "explanation": "It returns null, so every use of the result needs a guard. Calling a method on the result without checking is the crash you will meet otherwise."
-            },
-            {
-              "id": "quiz-js-s68-q2",
-              "type": "true-false",
-              "prompt": "A window.open call inside a page load event handler works reliably in every current browser.",
-              "answer": false,
-              "explanation": "Blockers key on user activation, so a load-time call has none and is blocked. Some blockers then treat the whole origin as suspicious and block the popup you actually wanted."
-            },
-            {
-              "id": "quiz-js-s68-q3",
-              "type": "blank",
-              "prompt": "Which features string value stops the opened page getting a window.opener reference back to your page?",
-              "answers": [
-                "noopener"
-              ],
-              "explanation": "noopener is the direct answer. noreferrer also implies it in current browsers, and it additionally drops the Referer header, which is its own reason to use it."
-            },
-            {
-              "id": "quiz-js-s68-q4",
-              "type": "code-output",
-              "prompt": "With a popup blocker active, what reaches the console?",
-              "code": "var win = window.open('about:blank', '_blank', 'width=400')\nif (win) {\n  win.close()\n} else {\n  console.log('blocked')\n}",
-              "options": [
-                "blocked",
-                "nothing is logged",
-                "an error is reported",
-                "400"
-              ],
-              "answer": 0,
-              "explanation": "The blocked call gives null, so the else branch is the one that runs. The point of the check is that the user is told, rather than the app carrying on as if a window existed."
-            },
-            {
-              "id": "quiz-js-s68-q5",
-              "type": "identify-error",
-              "prompt": "What is the risk in this line?",
-              "code": "window.open('https://example.com/report', '_blank')",
-              "options": [
-                "The page that opens gets window.opener and can navigate or redirect the page that opened it",
-                "The URL is malformed because it is not encoded",
-                "It always opens a full window instead of a tab",
-                "It cannot open an https page from an http page"
-              ],
-              "answer": 0,
-              "explanation": "That is tabnabbing. The fix is a third argument of \"noopener\", and the same rel=\"noopener\" on any link in your own markup that uses target=\"_blank\"."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Browser APIs and storage"
       },
@@ -19504,65 +6946,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s69",
           "title": "Timing check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s69-q1",
-              "type": "multiple-choice",
-              "prompt": "Which function should redraw an animation so it stays in step with the display?",
-              "options": [
-                "requestAnimationFrame",
-                "setTimeout at 16ms",
-                "setInterval at 16ms",
-                "Date.now in a while loop"
-              ],
-              "answer": 0,
-              "explanation": "The frame callback is scheduled for the display itself, and it stops costing anything when the tab is hidden. A timer runs on its own clock whether or not anything was painted."
-            },
-            {
-              "id": "quiz-js-s69-q2",
-              "type": "true-false",
-              "prompt": "setTimeout(fn, 0) runs fn straight away, before the rest of the current code.",
-              "answer": false,
-              "explanation": "It queues a task, so the rest of the current script finishes first, and the browser clamps the delay to something like 4ms. Zero means \"as soon as possible\", not \"now\"."
-            },
-            {
-              "id": "quiz-js-s69-q3",
-              "type": "blank",
-              "prompt": "Which method cancels a requestAnimationFrame callback that has not run yet?",
-              "answers": [
-                "cancelanimationframe"
-              ],
-              "explanation": "It takes the id returned by the call you want to cancel, which is the frame callback equivalent of clearTimeout."
-            },
-            {
-              "id": "quiz-js-s69-q4",
-              "type": "code-output",
-              "prompt": "What does this log?",
-              "code": "var n = 0\nfunction tick() {\n  n = n + 1\n  if (n < 3) requestAnimationFrame(tick)\n}\nrequestAnimationFrame(tick)\nconsole.log(n)",
-              "options": [
-                "0",
-                "1",
-                "3",
-                "undefined"
-              ],
-              "answer": 0,
-              "explanation": "The callback is scheduled for a later frame, so the synchronous log statement runs first with nothing done yet. That is the same queuing behaviour as a timer, and the same reason a frame loop is written the way it is."
-            },
-            {
-              "id": "quiz-js-s69-q5",
-              "type": "identify-error",
-              "prompt": "What is the problem with this loop?",
-              "code": "setInterval(function () {\n  position = position + 10\n}, 0)",
-              "options": [
-                "A delay of 0 floods the main thread with timer tasks instead of waiting for the display",
-                "setInterval cannot be given a delay of 0",
-                "position has to be declared with let before it can be added to",
-                "The callback must be an arrow function"
-              ],
-              "answer": 0,
-              "explanation": "The browser clamps nested timers to roughly 4ms and throttles them further, so you get a busy loop that is not in step with any frame and keeps running in a hidden tab. Use requestAnimationFrame for motion."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Browser APIs and storage"
       },
@@ -19590,65 +6974,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s70",
           "title": "Cookies check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s70-q1",
-              "type": "multiple-choice",
-              "prompt": "What does document.cookie give you?",
-              "options": [
-                "One string holding every cookie this page is allowed to read",
-                "An object with one property per cookie",
-                "Only the cookies that the current page set",
-                "An array with one entry per cookie"
-              ],
-              "answer": 0,
-              "explanation": "It is a single name=value string joined by semicolons, and it is filtered by the HttpOnly attribute and by the path and domain rules. That is why every piece of cookie code starts by parsing it."
-            },
-            {
-              "id": "quiz-js-s70-q2",
-              "type": "true-false",
-              "prompt": "A cookie set with the httpOnly attribute can be read from JavaScript with document.cookie.",
-              "answer": false,
-              "explanation": "httpOnly exists precisely to hide a value from page scripts. It is still sent on matching requests, which is what makes it right for a session identifier."
-            },
-            {
-              "id": "quiz-js-s70-q3",
-              "type": "blank",
-              "prompt": "Which cookie attribute keeps a cookie from being sent on cross-site requests?",
-              "answers": [
-                "samesite"
-              ],
-              "explanation": "SameSite=Lax or Strict withholds the cookie from requests initiated by another site, which is the main defence against cross-site request forgery and against third-party tracking."
-            },
-            {
-              "id": "quiz-js-s70-q4",
-              "type": "code-output",
-              "prompt": "Roughly how long does this cookie last?",
-              "code": "document.cookie = 'theme=dark; path=/; max-age=60'",
-              "options": [
-                "60 seconds",
-                "60 minutes",
-                "60 days",
-                "Until the tab is closed"
-              ],
-              "answer": 0,
-              "explanation": "max-age is counted in seconds, not minutes, and the expires attribute is the alternative spelling with a date. Get this wrong and a \"remember me\" cookie lasts a minute."
-            },
-            {
-              "id": "quiz-js-s70-q5",
-              "type": "identify-error",
-              "prompt": "What is the problem with this line?",
-              "code": "document.cookie = 'sessionToken=' + token + '; path=/'",
-              "options": [
-                "Any script on the page can read the token, and it is resent with every request to the site",
-                "Cookie values cannot be built from a variable",
-                "The name is too long for a cookie",
-                "path=/ means the cookie is only sent to the root path"
-              ],
-              "answer": 0,
-              "explanation": "A cookie set this way is readable by every script on the page and is attached to every matching request. A session identifier belongs in a server-set httpOnly cookie instead."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Browser APIs and storage"
       },
@@ -19677,65 +7003,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s71",
           "title": "Web APIs check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s71-q1",
-              "type": "multiple-choice",
-              "prompt": "What does form.checkValidity() do?",
-              "options": [
-                "Runs every control’s constraint rules and returns true or false, without showing any message",
-                "Shows the browser’s own validation popup and returns the result",
-                "Submits the form if everything passes",
-                "Turns the invalid fields red"
-              ],
-              "answer": 0,
-              "explanation": "checkValidity is the quiet version: it asks the question and answers it. reportValidity is the one that talks to the user, and the popup it shows is not yours to style."
-            },
-            {
-              "id": "quiz-js-s71-q2",
-              "type": "true-false",
-              "prompt": "Calling event.preventDefault() inside a submit handler stops the browser from submitting the form.",
-              "answer": true,
-              "explanation": "It is the first line of any submit handler that talks to a server. Skip it and the browser does a full page submit, the page unloads, and any fetch you started goes with it."
-            },
-            {
-              "id": "quiz-js-s71-q3",
-              "type": "blank",
-              "prompt": "Which object exposes the specific reason an input is invalid, such as valueMissing or typeMismatch?",
-              "answers": [
-                "validity"
-              ],
-              "explanation": "input.validity is a set of booleans naming the failed rule, which is what lets you point at one specific field. input.validationMessage is the sentence that goes with it."
-            },
-            {
-              "id": "quiz-js-s71-q4",
-              "type": "code-output",
-              "prompt": "What does this log?",
-              "code": "var input = document.querySelector('#age')\ninput.setCustomValidity('')\ninput.setCustomValidity('You must be 18 or over')\nconsole.log(input.validity.valid)",
-              "options": [
-                "false",
-                "true",
-                "undefined",
-                "It depends on the current value"
-              ],
-              "answer": 0,
-              "explanation": "A custom message sets the customError flag, which makes the field invalid regardless of the other rules. The empty-string call before it is what lets the built-in rules work again later."
-            },
-            {
-              "id": "quiz-js-s71-q5",
-              "type": "identify-error",
-              "prompt": "What is missing here?",
-              "code": "form.addEventListener('submit', function (e) {\n  fetch('/save', { method: 'POST', body: new FormData(form) })\n})",
-              "options": [
-                "e.preventDefault(), so the browser also does its own submit and the data is sent twice",
-                "A content-type header on the request",
-                "An action attribute on the form",
-                "FormData cannot be sent with fetch"
-              ],
-              "answer": 0,
-              "explanation": "Without preventDefault the browser performs its own navigation, and the page unloads before the fetch can be read. FormData sets its own multipart content type, so that header is the browser’s job."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Browser APIs and storage"
       },
@@ -19763,65 +7031,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s72",
           "title": "Web storage check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s72-q1",
-              "type": "multiple-choice",
-              "prompt": "Which of these survives closing the tab?",
-              "options": [
-                "localStorage",
-                "sessionStorage",
-                "Both of them",
-                "Neither of them"
-              ],
-              "answer": 0,
-              "explanation": "localStorage is kept until something deletes it or the user clears site data. sessionStorage belongs to the tab and is discarded with it, which is exactly why it suits a wizard and not a saved draft."
-            },
-            {
-              "id": "quiz-js-s72-q2",
-              "type": "true-false",
-              "prompt": "Values in localStorage are stored as strings, so saving an object needs JSON.stringify.",
-              "answer": true,
-              "explanation": "Storing an object coerces it to \"[object Object]\" and you get it back as that string. JSON.stringify on the way in and JSON.parse on the way out are the only way to keep the structure."
-            },
-            {
-              "id": "quiz-js-s72-q3",
-              "type": "blank",
-              "prompt": "Which method removes a single named key from localStorage?",
-              "answers": [
-                "removeitem"
-              ],
-              "explanation": "removeItem takes one key. clear() is the blunt version that empties storage for the whole origin, including keys another feature put there."
-            },
-            {
-              "id": "quiz-js-s72-q4",
-              "type": "code-output",
-              "prompt": "What does this log?",
-              "code": "localStorage.setItem('count', 4)\nconsole.log(localStorage.getItem('count') + 1)",
-              "options": [
-                "\"41\"",
-                "5",
-                "\"5\"",
-                "null"
-              ],
-              "answer": 0,
-              "explanation": "getItem hands back the string \"4\", and the + operator joins two strings rather than adding two numbers. Convert with Number() on the way out and String() on the way in."
-            },
-            {
-              "id": "quiz-js-s72-q5",
-              "type": "identify-error",
-              "prompt": "What is wrong with this?",
-              "code": "for (var i = 0; i < 1000000; i++) {\n  localStorage.setItem('log-' + i, 'x')\n}",
-              "options": [
-                "Every write is synchronous, and the 5 MB quota will be hit long before a million keys",
-                "localStorage cannot be written from inside a loop",
-                "setItem returns a promise that has to be awaited",
-                "A key cannot contain a hyphen"
-              ],
-              "answer": 0,
-              "explanation": "Storage is not a database: writes block the main thread, the origin has roughly 5 MB, and the excess raises a QuotaExceededError. Keep one key with a bounded value rather than a key per row."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Browser APIs and storage"
       },
@@ -19849,64 +7059,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s73",
           "title": "Web workers check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s73-q1",
-              "type": "multiple-choice",
-              "prompt": "A page freezes while a large loop runs. What is happening?",
-              "options": [
-                "The loop has an infinite recursion and the browser has stopped responding",
-                "The loop occupies the only JavaScript thread, so queued events cannot be handled",
-                "The garbage collector has run out of memory",
-                "The loop is waiting on a network response that never arrives"
-              ],
-              "answer": 1,
-              "explanation": "A page has one main thread and one task queue. A synchronous loop is one task that does not yield, so the click or keypress events arriving during it wait their turn. That is the freeze, and it is why the fix is either to yield with setTimeout or requestAnimationFrame, or to move the loop to a worker thread."
-            },
-            {
-              "id": "quiz-js-s73-q2",
-              "type": "true-false",
-              "prompt": "A web worker script can read and modify elements in the page with `document.querySelector`.",
-              "answer": false,
-              "explanation": "There is no `document` in a worker. It runs on a separate thread with its own global scope, and its only way back to the page is postMessage, which the main thread receives through onmessage and acts on. Attempting to touch the DOM from a worker is a ReferenceError, not a subtle bug."
-            },
-            {
-              "id": "quiz-js-s73-q3",
-              "type": "blank",
-              "prompt": "Which method sends data from a worker thread back to the page?",
-              "answers": [
-                "postmessage"
-              ],
-              "explanation": "`self.postMessage(value)` inside the worker is the return channel, and it mirrors `worker.postMessage(value)` in the other direction. Data crosses as a structured clone, so functions and DOM nodes are refused at the call rather than arriving broken."
-            },
-            {
-              "id": "quiz-js-s73-q4",
-              "type": "identify-error",
-              "prompt": "This worker is supposed to paint a progress bar. What is wrong?",
-              "code": "const worker = new Worker('worker.js')\nworker.onmessage = function (event) {\n  document.getElementById('bar').style.width = event.data + '%'\n}",
-              "options": [
-                "postMessage should be called with an object rather than a number",
-                "onmessage must be assigned before the Worker is constructed",
-                "Nothing is wrong: a worker script runs on the same thread as the page"
-              ],
-              "answer": 0,
-              "explanation": "Nothing here is wrong at all - this is the correct shape for updating the page from a worker. The worker does the calculation, posts a number back, and the onmessage handler on the main thread is what touches the DOM. Contrast it with a worker that reaches for document itself, which fails immediately."
-            },
-            {
-              "id": "quiz-js-s73-q5",
-              "type": "code-output",
-              "prompt": "The main thread runs the first snippet. What does it print?",
-              "code": "// w.js\nself.onmessage = function (event) {\n  self.postMessage(event.data * 2)\n}\n\n// main.js\nconst w = new Worker('w.js')\nw.onmessage = function (event) {\n  console.log(event.data)\n}\nw.postMessage(7)",
-              "options": [
-                "7",
-                "14",
-                "undefined",
-                "It prints nothing"
-              ],
-              "answer": 1,
-              "explanation": "The message arrives with data 7, the worker doubles it and posts 14 back, and the main thread logs it. The result is asynchronous: the console line appears after postMessage returns, never before it, which is why nothing in main.js needs to wait for a worker to be ready."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Fetch, AJAX and workers"
       },
@@ -19933,68 +7086,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s74",
           "title": "Fetch check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s74-q1",
-              "type": "multiple-choice",
-              "prompt": "What does `await fetch(url)` give you?",
-              "options": [
-                "The parsed body as a plain object",
-                "A promise for the response, whose body still needs .json() or .text()",
-                "A string of the response body",
-                "Nothing, until you call a second function"
-              ],
-              "answer": 1,
-              "explanation": "fetch resolves with a Response: the envelope carrying status, headers and a body you have not read yet. Reading the body is a separate promise from .json(), .text() or .blob(), which is why a full request needs two awaits and why `await fetch(url)` followed by a direct property access usually gives you undefined."
-            },
-            {
-              "id": "quiz-js-s74-q2",
-              "type": "true-false",
-              "prompt": "A 404 response makes the promise returned by `fetch` reject, so a `catch` block will run.",
-              "answer": false,
-              "explanation": "The promise resolves. As far as the network is concerned the request succeeded - something answered. That is exactly why `response.ok` exists and has to be checked by hand: without it you call .json() on an error page and the message you get is about unexpected tokens rather than about the missing record."
-            },
-            {
-              "id": "quiz-js-s74-q3",
-              "type": "blank",
-              "prompt": "Which property tells you whether the HTTP status was a success?",
-              "answers": [
-                "response.ok",
-                "ok",
-                "response.ok",
-                "response.ok"
-              ],
-              "explanation": "`response.ok` is true for statuses in the 200 to 299 range and false for everything else, including 3xx after no redirect and every 4xx and 5xx. Checking it immediately after the await is the single habit that separates a readable error message from a confusing parse failure."
-            },
-            {
-              "id": "quiz-js-s74-q4",
-              "type": "identify-error",
-              "prompt": "This POST always fails on the server. Why?",
-              "code": "await fetch('/api/posts', {\n  method: 'POST',\n  body: { title: 'New post' }\n})",
-              "options": [
-                "method must be lowercase to be accepted",
-                "The body is an object, so it arrives as \"[object Object]\", and the Content-Type header that says how to read it is missing",
-                "fetch cannot be called without a second argument",
-                "A POST request must use response.text() instead of response.json()"
-              ],
-              "answer": 1,
-              "explanation": "The body option takes a string, so an object is coerced to \"[object Object]\" before it leaves. And without `Content-Type: application/json` the server has no instruction for how to read what arrived. Both fixes are the same line: `body: JSON.stringify(newPost)` with the header alongside it."
-            },
-            {
-              "id": "quiz-js-s74-q5",
-              "type": "code-output",
-              "prompt": "The server answers with status 404 and an HTML error page. What is logged?",
-              "code": "try {\n  const response = await fetch('/api/posts/999')\n  const posts = await response.json()\n  console.log(posts.length)\n} catch (error) {\n  console.log('failed')\n}",
-              "options": [
-                "0",
-                "failed",
-                "undefined",
-                "A SyntaxError object"
-              ],
-              "answer": 3,
-              "explanation": "The 404 resolves rather than rejecting, so the catch never runs and the code goes on to parse an HTML error page as JSON. The rejection happens inside response.json(), which produces a SyntaxError about unexpected tokens - an accurate message about the wrong thing. Checking response.ok first would have turned this into a clear \"HTTP 404\"."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Fetch, AJAX and workers"
       },
@@ -20021,67 +7113,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s75",
           "title": "Geolocation check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s75-q1",
-              "type": "multiple-choice",
-              "prompt": "A visitor clicks your button and refuses the location prompt. What happens with `getCurrentPosition(success)`?",
-              "options": [
-                "The success callback runs with coordinates of 0, 0",
-                "The promise rejects, so a .catch block runs",
-                "Neither callback runs and nothing is reported, because no error callback was supplied",
-                "The browser throws a ReferenceError inside your page"
-              ],
-              "answer": 2,
-              "explanation": "getCurrentPosition is callback based, not promise based, and a refusal is delivered to the second argument. Leave that argument out and the refusal goes nowhere: no error, no log, and a feature that silently never appears. Always supply both callbacks, and check error.code when the reason matters to the user."
-            },
-            {
-              "id": "quiz-js-s75-q2",
-              "type": "true-false",
-              "prompt": "The geolocation API is available to pages served over plain `http://` as well as `https://`.",
-              "answer": false,
-              "explanation": "It requires a secure origin: HTTPS, with `http://localhost` allowed so development still works. On any other http page `navigator.geolocation` is undefined and the property access itself throws, which reads as a code bug but is really the browser refusing to expose a sensitive API over a channel anyone on the network can read."
-            },
-            {
-              "id": "quiz-js-s75-q3",
-              "type": "blank",
-              "prompt": "In the position object, which field gives the radius in metres of the circle around the reported point?",
-              "answers": [
-                "accuracy",
-                "coords.accuracy",
-                "coords.accuracy"
-              ],
-              "explanation": "`coords.accuracy` is a radius in metres, not a per-axis error. It tells you how much to trust the fix: sorting places by a 50 metre difference in a reading accurate to 2000 metres is ordering noise."
-            },
-            {
-              "id": "quiz-js-s75-q4",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "const pos = { latitude: -33.87, longitude: 151.21 }\nconsole.log(pos.latitude >= 0 ? 'north' : 'south')",
-              "options": [
-                "north",
-                "south",
-                "east",
-                "It throws"
-              ],
-              "answer": 1,
-              "explanation": "Latitude is negative south of the equator, so the test is false and the else branch runs. The same convention applies to longitude: positive is east of the prime meridian. Reading a position as `latitude, longitude` in that order, with north and east positive, is the convention every mapping API uses."
-            },
-            {
-              "id": "quiz-js-s75-q5",
-              "type": "identify-error",
-              "prompt": "This feature never shows anything on any browser, and nothing appears in the console. What is the likely cause?",
-              "code": "navigator.geolocation.getCurrentPosition(function (position) {\n  document.getElementById('here').textContent = position.coords.latitude\n})",
-              "options": [
-                "The success callback must be declared with the async keyword",
-                "document is not available inside a geolocation callback",
-                "The second, error callback is missing, so a refusal is reported nowhere",
-                "textContent cannot be set to a number"
-              ],
-              "answer": 2,
-              "explanation": "A refusal is delivered to the error callback, and there is none here, so the user declining produces complete silence - which is exactly the symptom described. The page being served over plain http, so geolocation is undefined, is the other candidate worth checking; it usually throws rather than failing silently."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Fetch, AJAX and workers"
       },
@@ -20147,67 +7179,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s76",
           "title": "AJAX check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s76-q1",
-              "type": "multiple-choice",
-              "prompt": "What does AJAX mean today, given that almost nobody transfers XML any more?",
-              "options": [
-                "A markup format for describing a request and a response together",
-                "Talking to a server in the background and updating part of the page in place",
-                "The specific XMLHttpRequest API, and nothing else",
-                "A way of compressing page data before it is sent"
-              ],
-              "answer": 1,
-              "explanation": "The X in the original name came from XML documents, and the technique outlived the format. What survived is the idea: a request runs alongside the page, and only the region that needs new data is rebuilt. You can do it with fetch, with XMLHttpRequest, or with a library wrapping either."
-            },
-            {
-              "id": "quiz-js-s76-q2",
-              "type": "true-false",
-              "prompt": "Reading `xhr.responseText` as soon as `readyState` is 3 is safe, because the body is nearly all there by then.",
-              "answer": false,
-              "explanation": "State 3 means the body is still arriving, so the text you read is truncated. Parsing it gives a confusing \"Unexpected end of JSON input\" that disappears on a fast connection, which is what makes it such a bad bug. Only state 4, DONE, means the response is complete."
-            },
-            {
-              "id": "quiz-js-s76-q3",
-              "type": "blank",
-              "prompt": "Which numeric `readyState` value means the request has finished and the response is complete?",
-              "answers": [
-                "4",
-                "4 (done)",
-                "done"
-              ],
-              "explanation": "It is 4, and the named constant is XMLHttpRequest.DONE. The full ladder is 0 UNOPENED, 1 OPENED, 2 HEADERS_RECEIVED, 3 LOADING, 4 DONE. Using the constant instead of the number means nobody has to remember which is which."
-            },
-            {
-              "id": "quiz-js-s76-q4",
-              "type": "identify-error",
-              "prompt": "On a fast machine this works. On a slow connection it throws \"Unexpected end of JSON input\". Why?",
-              "code": "xhr.onreadystatechange = function () {\n  if (xhr.readyState === 3) {\n    render(JSON.parse(xhr.responseText))\n  }\n}",
-              "options": [
-                "JSON.parse cannot be used inside an event handler",
-                "readyState 3 means the body is still arriving, so the text is incomplete",
-                "readyState 3 means the request failed, so the text is an error page",
-                "render must be called after send, not before"
-              ],
-              "answer": 1,
-              "explanation": "State 3 is LOADING. Whatever has arrived so far is in responseText, and it grows as the rest comes in. Gate on state 4 instead, or use onload, which fires only once the body is complete."
-            },
-            {
-              "id": "quiz-js-s76-q5",
-              "type": "code-output",
-              "prompt": "What is logged?",
-              "code": "const xhr = new XMLHttpRequest()\nxhr.open('GET', '/api/posts')\nconsole.log(xhr.readyState, xhr.sent)",
-              "options": [
-                "1 false",
-                "0 false",
-                "4 true",
-                "It throws, because open needs a callback"
-              ],
-              "answer": 0,
-              "explanation": "open names the request and moves the object to OPENED, so readyState is 1, and nothing has gone over the wire yet, so sent is false. Calling open with a method and a URL is enough; the third argument is only for asynchronous behaviour and defaults to true."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Fetch, AJAX and workers"
       },
@@ -20247,66 +7219,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s77",
           "title": "AJAX applications check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s77-q1",
-              "type": "multiple-choice",
-              "prompt": "Why did JSON replace XML as the format for most AJAX responses?",
-              "options": [
-                "JSON is smaller, so responses arrive faster",
-                "JSON.parse produces objects you can use immediately, with no node walking or namespace rules",
-                "XML cannot be sent over HTTP",
-                "Browsers refuse to parse XML for security reasons"
-              ],
-              "answer": 1,
-              "explanation": "JSON is a subset of JavaScript syntax, so a parsed response is already an object with properties you can read. XML needs a parser, a walk and an escape for every special character in a value. XML survives where a document rather than a record is the point: feeds, sitemaps, SVG."
-            },
-            {
-              "id": "quiz-js-s77-q2",
-              "type": "true-false",
-              "prompt": "Setting `container.innerHTML = \"\"` and then appending new items is a safe way to update part of a page in place.",
-              "answer": true,
-              "explanation": "As long as the container element itself is kept, the listeners attached to it survive and the rest of the page is untouched. What destroys listeners is replacing the container element itself, or assigning to document.body.innerHTML, which throws away the whole page you were trying to update."
-            },
-            {
-              "id": "quiz-js-s77-q3",
-              "type": "blank",
-              "prompt": "Which built-in object parses an XML string into a document, with no library?",
-              "answers": [
-                "domparser",
-                "new domparser()"
-              ],
-              "explanation": "`new DOMParser().parseFromString(text, \"application/xml\")` is the whole story. Pass the XML content type, not text/html, or the browser will accept broken input and hand you a document built out of guesses instead of reporting a parsererror."
-            },
-            {
-              "id": "quiz-js-s77-q4",
-              "type": "code-output",
-              "prompt": "What does this log?",
-              "code": "const doc = new DOMParser().parseFromString('<a><b>one</b></a>', 'application/xml')\nconsole.log(doc.getElementsByTagName('b')[0].textContent)",
-              "options": [
-                "one",
-                "<b>one</b>",
-                "undefined",
-                "It throws, because an XML node has no textContent"
-              ],
-              "answer": 0,
-              "explanation": "The live list from getElementsByTagName holds the one matching element, and its textContent is the text inside it. Note that there is no innerText on an XML node - there is no layout - and that the same method returns every matching element at any depth, so nested tags come back together."
-            },
-            {
-              "id": "quiz-js-s77-q5",
-              "type": "identify-error",
-              "prompt": "Typing quickly in a search box sometimes shows results for a word the box no longer contains. Why?",
-              "code": "search.addEventListener('input', function () {\n  fetch('/api/search?q=' + search.value)\n    .then(function (r) { return r.json() })\n    .then(function (data) {\n      container.innerHTML = ''\n      data.forEach(function (item) {\n        container.innerHTML += '<li>' + item.title + '</li>'\n      })\n    })\n})",
-              "options": [
-                "The listener fires twice per keystroke on some browsers",
-                "fetch does not send the value of the input when it is read in the handler",
-                "Responses can arrive out of order, so a slow earlier request overwrites the newer result",
-                "innerHTML cannot be assigned inside a then block"
-              ],
-              "answer": 2,
-              "explanation": "Nothing orders the responses, so a slow request started two keystrokes ago can land after the newest one and overwrite it. Number the requests and drop any answer that is not the latest, or abort the previous request. The string-building on the last line is a second problem: it re-parses the whole list on every item and would execute markup that came from the server."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Fetch, AJAX and workers"
       },
@@ -20346,69 +7259,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s78",
           "title": "JSON syntax check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s78-q1",
-              "type": "multiple-choice",
-              "prompt": "Which of these four is a valid JSON document?",
-              "options": [
-                "{ name: 'Ada' }",
-                "{ 'name': 'Ada' }",
-                "{ \"name\": \"Ada\" }",
-                "{ \"name\": \"Ada\", }"
-              ],
-              "answer": 2,
-              "explanation": "Only the third obeys all three rules: double quotes on the key, double quotes on the text value, no trailing comma. The first has an unquoted key and single quotes, the second uses single quotes, and the fourth has a comma after the last pair."
-            },
-            {
-              "id": "quiz-js-s78-q2",
-              "type": "true-false",
-              "prompt": "JSON allows comments, so a line starting with // inside a document is ignored when it is parsed.",
-              "answer": false,
-              "explanation": "There is no comment syntax in JSON at all. A // line is a parse error, and that is why config files that ship as JSON with comments in them fail in production but work on your machine, where a different file was used."
-            },
-            {
-              "id": "quiz-js-s78-q3",
-              "type": "blank",
-              "prompt": "Which method turns a JavaScript value into JSON text?",
-              "answers": [
-                "json.stringify",
-                "stringify",
-                "json.stringify()",
-                "stringify()",
-                "json . stringify"
-              ],
-              "explanation": "`JSON.stringify` is the outbound half of the bridge: values in, a string out. The `JSON` part is the object that owns the method, so the full name is `JSON.stringify`, not a bare `stringify`."
-            },
-            {
-              "id": "quiz-js-s78-q4",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "const text = '{\"total\": 9.50}'\nconst data = JSON.parse(text)\nconsole.log(typeof data.total)",
-              "options": [
-                "number",
-                "string",
-                "object",
-                "NaN"
-              ],
-              "answer": 0,
-              "explanation": "The value is unquoted, so JSON reads it as a number and parse produces a JavaScript number. Had the document said \"9.50\" with quotes, the answer would be string and any arithmetic on it would concatenate instead."
-            },
-            {
-              "id": "quiz-js-s78-q5",
-              "type": "identify-error",
-              "prompt": "What stops this document from parsing?",
-              "code": "const text = '{\"total\": 9.50,}'\nconst order = JSON.parse(text)",
-              "options": [
-                "Nothing — JavaScript objects allow a trailing comma",
-                "The trailing comma before the closing brace",
-                "total is not a valid key name",
-                "9.50 has too many decimal places for JSON"
-              ],
-              "answer": 1,
-              "explanation": "JSON has no trailing commas anywhere, and a parser stops at the comma it cannot use. This is the most common copy-paste failure, because JavaScript object literals accept the very same thing and nothing warns you until the parse."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "JSON, modules and the final project"
       },
@@ -20461,69 +7312,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s79",
           "title": "JSON parsing check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s79-q1",
-              "type": "multiple-choice",
-              "prompt": "What happens when you pass text that is not valid JSON to JSON.parse?",
-              "options": [
-                "It returns null and carries on",
-                "It returns an object built from whatever it could read",
-                "It raises a SyntaxError that you can catch, and nothing after the call runs",
-                "It returns undefined"
-              ],
-              "answer": 2,
-              "explanation": "The parser stops at the first thing it cannot read and throws, so every line after that call is dead code unless you wrap it. This is why text from a file, a form field or a response body always goes inside a try/catch."
-            },
-            {
-              "id": "quiz-js-s79-q2",
-              "type": "true-false",
-              "prompt": "After a parse and stringify round trip, a Date is still a Date.",
-              "answer": false,
-              "explanation": "JSON has no date type, so stringify writes it as a UTC text timestamp and parse gives that text back as a string. `new Date(text)` is the repair, and you have to do it yourself every time."
-            },
-            {
-              "id": "quiz-js-s79-q3",
-              "type": "blank",
-              "prompt": "Which response method is JSON.parse in disguise?",
-              "answers": [
-                "response.json",
-                "json",
-                "response.json()",
-                "r.json()",
-                "response . json"
-              ],
-              "explanation": "`response.json()` reads the body as text and parses it. That is also why it throws on an HTML error page, and why checking `response.ok` first is not optional."
-            },
-            {
-              "id": "quiz-js-s79-q4",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "const text = '{\"tags\":[\"a\",\"b\"]}'\nconst data = JSON.parse(text)\nconsole.log(data.tags.length, typeof data.tags[0])",
-              "options": [
-                "2 string",
-                "2 object",
-                "1 string",
-                "undefined undefined"
-              ],
-              "answer": 0,
-              "explanation": "The array has two entries, so the length is 2, and each entry is a JSON string, so typeof reports \"string\". If it printed \"object\" you would be looking at a nested object rather than an array of names."
-            },
-            {
-              "id": "quiz-js-s79-q5",
-              "type": "identify-error",
-              "prompt": "What is wrong with this line?",
-              "code": "const island = document.querySelector('#site-data')\nconst tags = island.textContent.tags.join(', ')\nconsole.log(tags)",
-              "options": [
-                "textContent is a string, so it has no tags property to join",
-                "The script tag must be type=\"text/javascript\" to be readable",
-                "join only works on arrays of numbers",
-                "querySelector cannot reach a script element"
-              ],
-              "answer": 0,
-              "explanation": "The text inside the script tag is characters, so you have to parse it before reading properties: `JSON.parse(island.textContent).tags`. Skipping the parse gives a TypeError about reading a property of undefined."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "JSON, modules and the final project"
       },
@@ -20550,65 +7339,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s80",
           "title": "Modules check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s80-q1",
-              "type": "multiple-choice",
-              "prompt": "What does type=\"module\" do to a script file?",
-              "options": [
-                "It downloads the file before the rest of the page so it runs first",
-                "It gives the file its own scope, runs it in strict mode and defers it until the document is parsed",
-                "It turns the file into a library that other pages can use",
-                "It runs the file once for the page and once for every importer"
-              ],
-              "answer": 1,
-              "explanation": "Three effects in one attribute: private top-level scope, strict mode, and deferred execution. Deferring is why module code can query elements at the top level without a load handler. It does not run first — that would be the opposite of what defer means."
-            },
-            {
-              "id": "quiz-js-s80-q2",
-              "type": "true-false",
-              "prompt": "Two module files can share a value by both declaring it with var at the top level.",
-              "answer": false,
-              "explanation": "Each module has its own scope, so the two declarations are unrelated and nothing is shared. Sharing happens through an export on one side and an import on the other, which makes it visible in the source instead of depending on load order."
-            },
-            {
-              "id": "quiz-js-s80-q3",
-              "type": "blank",
-              "prompt": "Which keyword publishes a named value from a module so another file can import it?",
-              "answers": [
-                "export"
-              ],
-              "explanation": "`export` marks what the outside world may use, `import` asks for it by name. Naming your public surface is what makes a module readable: the reader of an import statement sees exactly what the file offers."
-            },
-            {
-              "id": "quiz-js-s80-q4",
-              "type": "code-output",
-              "prompt": "Two modules as written here. What does main.js print?",
-              "code": "// counter.js\nexport let count = 0\nexport function increment() { count += 1 }\n\n// main.js\nimport { count, increment } from './counter.js'\nincrement()\nconsole.log(count)",
-              "options": [
-                "0",
-                "1",
-                "undefined",
-                "2"
-              ],
-              "answer": 1,
-              "explanation": "An imported binding is a live view of the exporting module, not a copy taken at import time. The increment changes count in counter.js, and the log reads the new value: 1. Copying the value instead would print 0."
-            },
-            {
-              "id": "quiz-js-s80-q5",
-              "type": "identify-error",
-              "prompt": "What is wrong with this import?",
-              "code": "// utils.js\nexport function greet(name) { return 'Hi, ' + name }\n\n// main.js\nimport greet from './utils.js'\nconsole.log(greet('Ada'))",
-              "options": [
-                "Nothing is wrong, this is the usual form",
-                "utils.js has no default export, so greet is undefined here — it needs a named import",
-                "The path must drop the .js extension",
-                "greet has to be called before it is imported"
-              ],
-              "answer": 1,
-              "explanation": "A default import without braces expects a default export, and utils.js only has a named one. `import { greet } from \"./utils.js\"` is the fix, and the failure is loud rather than silent, which is exactly why named exports are the safer default."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "JSON, modules and the final project"
       },
@@ -20635,68 +7366,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-js-s81",
           "title": "Final project check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-js-s81-q1",
-              "type": "multiple-choice",
-              "prompt": "Where should the task list live so the count and the empty message stay in step with it?",
-              "options": [
-                "In the DOM, read back out of it whenever you need the data",
-                "In one array that every handler updates before calling render()",
-                "In a cookie, so it survives a refresh",
-                "In a separate function for each action, each with its own copy"
-              ],
-              "answer": 1,
-              "explanation": "One array, one render function. The page is drawn from the data and never edited directly, so the list, the count and the empty message can never disagree with each other or with the state."
-            },
-            {
-              "id": "quiz-js-s81-q2",
-              "type": "true-false",
-              "prompt": "Rebuilding the whole list on every change is wasteful at any size.",
-              "answer": false,
-              "explanation": "For a list of tens or hundreds of rows, emptying and rebuilding is instant, and it removes the whole category of bug where the page and the data drift apart. Patching individual rows is the optimisation you reach for only when you have measured a real problem."
-            },
-            {
-              "id": "quiz-js-s81-q3",
-              "type": "blank",
-              "prompt": "Which method call empties an element so it can be re-rendered?",
-              "answers": [
-                "replacechildren",
-                "replacechildren()",
-                ".replacechildren()",
-                "element.replacechildren"
-              ],
-              "explanation": "Calling it with no arguments removes every child in one step, which is exactly what render() needs before appending the rows it has just built."
-            },
-            {
-              "id": "quiz-js-s81-q4",
-              "type": "code-output",
-              "prompt": "What does this print?",
-              "code": "let tasks = [{ text: 'Walk', done: false }]\ntasks.push({ text: 'Read', done: false })\nconsole.log(tasks.length, tasks[1].text)",
-              "options": [
-                "2 Read",
-                "1 Read",
-                "2 undefined",
-                "0 Read"
-              ],
-              "answer": 0,
-              "explanation": "push appends, so the array holds two tasks and index 1 is the one just added. This is the shape the submit handler produces: the new task is always the last element, which is why the render loop reads the index rather than capturing a task object."
-            },
-            {
-              "id": "quiz-js-s81-q5",
-              "type": "identify-error",
-              "prompt": "Clicking Add twice leaves two copies of every task on the page. What is missing?",
-              "code": "function render() {\n  const list = document.querySelector('#task-list')\n  tasks.forEach(function (task) {\n    const item = document.createElement('li')\n    item.textContent = task.text\n    list.appendChild(item)\n  })\n}",
-              "options": [
-                "The push has to happen outside the forEach",
-                "The list is never emptied, so each render appends a second copy of every row",
-                "appendChild cannot be called inside forEach",
-                "render has to be declared before tasks"
-              ],
-              "answer": 1,
-              "explanation": "The first line inside render must be `list.replaceChildren()`. Without it the loop adds the whole array to whatever is already there, and the visible list grows every time while the data stays correct — the drift that rebuilding from scratch exists to prevent."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "JSON, modules and the final project"
       }
@@ -20770,63 +7440,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-dom-s1",
           "title": "DOM Fundamentals quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-dom-s1-q1",
-              "type": "multiple-choice",
-              "prompt": "What is the DOM?",
-              "options": [
-                "The raw HTML file the browser downloads",
-                "A live tree of nodes the browser builds from the markup",
-                "A CSS data structure that controls layout",
-                "A JavaScript object that stores cookies"
-              ],
-              "answer": 1,
-              "explanation": "The DOM is the browser's live tree representation of the document. It is what JavaScript reads and writes, not the text file."
-            },
-            {
-              "id": "quiz-dom-s1-q2",
-              "type": "true-false",
-              "prompt": "The DOM and the HTML source are always identical.",
-              "answer": false,
-              "explanation": "The browser repairs broken markup, adds inferred elements like <tbody>, and may normalise attribute casing. Inspect the live DOM, not just view-source."
-            },
-            {
-              "id": "quiz-dom-s1-q3",
-              "type": "multiple-choice",
-              "prompt": "Which method returns a static NodeList?",
-              "options": [
-                "getElementsByClassName",
-                "getElementById",
-                "querySelectorAll",
-                "children"
-              ],
-              "answer": 2,
-              "explanation": "querySelectorAll snapshots the matches at call time. HTMLCollection methods return live collections."
-            },
-            {
-              "id": "quiz-dom-s1-q4",
-              "type": "blank",
-              "prompt": "What object is the root of the DOM tree? (one word)",
-              "answers": [
-                "document"
-              ],
-              "explanation": "document is the single entry point. Every lookup, creation and write starts from it."
-            },
-            {
-              "id": "quiz-dom-s1-q5",
-              "type": "multiple-choice",
-              "prompt": "What does querySelector return when nothing matches?",
-              "options": [
-                "undefined",
-                "An empty NodeList",
-                "null",
-                "false"
-              ],
-              "answer": 2,
-              "explanation": "Single-element selectors return null on no match. querySelectorAll returns an empty NodeList."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -20865,63 +7479,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-dom-s2",
           "title": "DOM Traversal quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-dom-s2-q1",
-              "type": "multiple-choice",
-              "prompt": "Which property gives you only element children, skipping text nodes?",
-              "options": [
-                "childNodes",
-                "children",
-                "childElementCount",
-                "nodeValue"
-              ],
-              "answer": 1,
-              "explanation": "children is an HTMLCollection of element children only. childNodes includes text nodes for whitespace."
-            },
-            {
-              "id": "quiz-dom-s2-q2",
-              "type": "true-false",
-              "prompt": "closest searches downward from the element you call it on.",
-              "answer": false,
-              "explanation": "closest walks upward through ancestors. It includes the starting element itself in the check."
-            },
-            {
-              "id": "quiz-dom-s2-q3",
-              "type": "multiple-choice",
-              "prompt": "What does firstElementChild return when the element has only whitespace children?",
-              "options": [
-                "A text node",
-                "The first whitespace node",
-                "null",
-                "undefined"
-              ],
-              "answer": 2,
-              "explanation": "firstElementChild ignores text nodes. Whitespace-only children are text nodes, so the result is null."
-            },
-            {
-              "id": "quiz-dom-s2-q4",
-              "type": "blank",
-              "prompt": "Which method tests whether one node is inside another? (one word)",
-              "answers": [
-                "contains"
-              ],
-              "explanation": "contains(node) returns true if the argument is the element itself or anywhere inside it."
-            },
-            {
-              "id": "quiz-dom-s2-q5",
-              "type": "multiple-choice",
-              "prompt": "Why is nextElementSibling safer than nextSibling?",
-              "options": [
-                "It is faster",
-                "It skips text nodes and returns only the next element",
-                "It works in all browsers",
-                "It returns a NodeList"
-              ],
-              "answer": 1,
-              "explanation": "nextSibling can return a text node for whitespace. nextElementSibling skips straight to the next element."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -20960,64 +7518,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-dom-s3",
           "title": "DOM Manipulation quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-dom-s3-q1",
-              "type": "multiple-choice",
-              "prompt": "Which method creates a new element without adding it to the document?",
-              "options": [
-                "append",
-                "createElement",
-                "insertBefore",
-                "replaceChildren"
-              ],
-              "answer": 1,
-              "explanation": "createElement returns a detached node. You insert it with append, prepend or insertBefore."
-            },
-            {
-              "id": "quiz-dom-s3-q2",
-              "type": "true-false",
-              "prompt": "textContent automatically escapes markup inside the string.",
-              "answer": true,
-              "explanation": "textContent treats the string as plain text. Any angle brackets become characters, not elements."
-            },
-            {
-              "id": "quiz-dom-s3-q3",
-              "type": "multiple-choice",
-              "prompt": "Which method removes an element from its parent?",
-              "options": [
-                "delete()",
-                "remove()",
-                "destroy()",
-                "pop()"
-              ],
-              "answer": 1,
-              "explanation": "remove() detaches the node from its parent. It returns undefined and cannot be chained."
-            },
-            {
-              "id": "quiz-dom-s3-q4",
-              "type": "blank",
-              "prompt": "Which method empties an element and inserts new children in one call?",
-              "answers": [
-                "replacechildren",
-                "replaceChildren"
-              ],
-              "explanation": "replaceChildren removes everything and inserts the new nodes in a single operation."
-            },
-            {
-              "id": "quiz-dom-s3-q5",
-              "type": "multiple-choice",
-              "prompt": "When is innerHTML safe to use?",
-              "options": [
-                "When the string comes from a form field",
-                "When the string is static and authored by you",
-                "It is never safe",
-                "When the element has no event listeners"
-              ],
-              "answer": 1,
-              "explanation": "Static, authored strings are safe. User input is not, because the browser parses and executes script tags."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -21056,63 +7557,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-dom-s4",
           "title": "DOM Attributes and Styles quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-dom-s4-q1",
-              "type": "multiple-choice",
-              "prompt": "How do you read a data-user-id attribute from JavaScript?",
-              "options": [
-                "element.getAttribute(\"userId\")",
-                "element.dataset.userId",
-                "element.data[\"user-id\"]",
-                "element.attributes.userId"
-              ],
-              "answer": 1,
-              "explanation": "Data attributes are exposed on dataset with the name after data- converted to camelCase."
-            },
-            {
-              "id": "quiz-dom-s4-q2",
-              "type": "true-false",
-              "prompt": "className and classList do the same thing.",
-              "answer": false,
-              "explanation": "className is a single string; setting it replaces every class. classList lets you add, remove and toggle individual classes."
-            },
-            {
-              "id": "quiz-dom-s4-q3",
-              "type": "multiple-choice",
-              "prompt": "Which method reads the final, resolved value of a CSS property?",
-              "options": [
-                "element.style",
-                "getComputedStyle",
-                "document.styleSheets",
-                "window.getStyle"
-              ],
-              "answer": 1,
-              "explanation": "getComputedStyle returns the final value after every stylesheet and inherited rule has been applied."
-            },
-            {
-              "id": "quiz-dom-s4-q4",
-              "type": "blank",
-              "prompt": "What property on an element gives you direct access to its inline style declarations?",
-              "answers": [
-                "style"
-              ],
-              "explanation": "element.style is a CSSStyleDeclaration for the inline declarations. It is camelCased, not kebab-cased."
-            },
-            {
-              "id": "quiz-dom-s4-q5",
-              "type": "multiple-choice",
-              "prompt": "Why are CSS custom properties the preferred way to pass dynamic values from JS to CSS?",
-              "options": [
-                "They are faster than inline styles",
-                "They keep the dynamic value separate from the layout logic",
-                "They override every stylesheet rule automatically",
-                "They do not require JavaScript to read"
-              ],
-              "answer": 1,
-              "explanation": "Custom properties let the stylesheet consume the value through var() while keeping layout and theme logic in CSS."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -21151,63 +7596,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-dom-s5",
           "title": "DOM Events quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-dom-s5-q1",
-              "type": "multiple-choice",
-              "prompt": "What does event.currentTarget refer to?",
-              "options": [
-                "The element the event originally landed on",
-                "The element the listener is attached to",
-                "The parent of the target",
-                "The document root"
-              ],
-              "answer": 1,
-              "explanation": "currentTarget is the element the listener is on. target is the deepest clicked element."
-            },
-            {
-              "id": "quiz-dom-s5-q2",
-              "type": "true-false",
-              "prompt": "stopPropagation and preventDefault do the same thing.",
-              "answer": false,
-              "explanation": "preventDefault cancels the browser default. stopPropagation stops the event from reaching ancestor listeners."
-            },
-            {
-              "id": "quiz-dom-s5-q3",
-              "type": "multiple-choice",
-              "prompt": "Why is event delegation useful?",
-              "options": [
-                "It makes event listeners faster",
-                "It handles dynamic children without re-attaching listeners",
-                "It prevents all events from bubbling",
-                "It is required for custom events"
-              ],
-              "answer": 1,
-              "explanation": "Delegation relies on bubbling, so one listener on a stable parent handles every child, including ones added later."
-            },
-            {
-              "id": "quiz-dom-s5-q4",
-              "type": "blank",
-              "prompt": "What method on event stops the browser default action?",
-              "answers": [
-                "preventDefault"
-              ],
-              "explanation": "preventDefault cancels the browser default — the form submit, the link navigation, the checkbox toggle."
-            },
-            {
-              "id": "quiz-dom-s5-q5",
-              "type": "multiple-choice",
-              "prompt": "Which argument to addEventListener makes the listener fire during the capture phase?",
-              "options": [
-                "true as the third argument",
-                "{ capture: true } as the third argument",
-                "A fourth argument with phase: \"capture\"",
-                "There is no way to listen during capture"
-              ],
-              "answer": 1,
-              "explanation": "The third argument can be a boolean or an options object with capture: true."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -21246,63 +7635,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-dom-s6",
           "title": "Browser Object Model quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-dom-s6-q1",
-              "type": "multiple-choice",
-              "prompt": "What is window in the browser?",
-              "options": [
-                "The document element",
-                "The global object of the browser",
-                "A storage API",
-                "A CSS property"
-              ],
-              "answer": 1,
-              "explanation": "window is the global object. document, localStorage, fetch and the rest all hang off it."
-            },
-            {
-              "id": "quiz-dom-s6-q2",
-              "type": "true-false",
-              "prompt": "setTimeout is always accurate to the millisecond.",
-              "answer": false,
-              "explanation": "Timers are delayed by background tabs, long-running tasks, and browser throttling."
-            },
-            {
-              "id": "quiz-dom-s6-q3",
-              "type": "multiple-choice",
-              "prompt": "Why are alert and confirm discouraged in production?",
-              "options": [
-                "They are ugly",
-                "They block the main thread",
-                "They are not supported in Safari",
-                "They leak memory"
-              ],
-              "answer": 1,
-              "explanation": "Blocking dialogs freeze JavaScript, timers and repainting until the user dismisses them."
-            },
-            {
-              "id": "quiz-dom-s6-q4",
-              "type": "blank",
-              "prompt": "What method scrolls the page smoothly to a given position?",
-              "answers": [
-                "scrollTo"
-              ],
-              "explanation": "scrollTo accepts options including behavior: \"smooth\"."
-            },
-            {
-              "id": "quiz-dom-s6-q5",
-              "type": "multiple-choice",
-              "prompt": "What does devicePixelRatio represent?",
-              "options": [
-                "The number of CSS pixels on the screen",
-                "Physical device pixels per CSS pixel",
-                "The pixel density of the document",
-                "The width of the viewport in pixels"
-              ],
-              "answer": 1,
-              "explanation": "devicePixelRatio is the ratio of physical pixels to CSS pixels. 2 on Retina displays."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -21341,63 +7674,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-dom-s7",
           "title": "Location and Navigation quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-dom-s7-q1",
-              "type": "multiple-choice",
-              "prompt": "Which location method navigates without adding to session history?",
-              "options": [
-                "location.href",
-                "location.assign",
-                "location.replace",
-                "location.reload"
-              ],
-              "answer": 2,
-              "explanation": "replace swaps the current history entry. The back button skips it."
-            },
-            {
-              "id": "quiz-dom-s7-q2",
-              "type": "true-false",
-              "prompt": "pushState makes a network request.",
-              "answer": false,
-              "explanation": "pushState only changes the URL and the history entry. The page does not reload."
-            },
-            {
-              "id": "quiz-dom-s7-q3",
-              "type": "multiple-choice",
-              "prompt": "When does popstate fire?",
-              "options": [
-                "Every time pushState is called",
-                "When the user navigates to a history entry created with pushState",
-                "On every page load",
-                "Only in SPA routers"
-              ],
-              "answer": 1,
-              "explanation": "popstate fires when the active history entry changes because of back, forward or go, not when pushState is called."
-            },
-            {
-              "id": "quiz-dom-s7-q4",
-              "type": "blank",
-              "prompt": "Which property gives you the query string including the leading question mark?",
-              "answers": [
-                "search"
-              ],
-              "explanation": "location.search is the query string with the leading ?."
-            },
-            {
-              "id": "quiz-dom-s7-q5",
-              "type": "multiple-choice",
-              "prompt": "Why use replace for a redirect?",
-              "options": [
-                "It is faster",
-                "It removes the intermediate page from history",
-                "It avoids CORS",
-                "It updates the URL without reloading"
-              ],
-              "answer": 1,
-              "explanation": "replace removes the current entry so the back button does not return to the redirect."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -21436,64 +7713,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-dom-s8",
           "title": "Browser Storage quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-dom-s8-q1",
-              "type": "multiple-choice",
-              "prompt": "Which storage API persists until explicitly cleared?",
-              "options": [
-                "sessionStorage",
-                "localStorage",
-                "Cookies",
-                "IndexedDB"
-              ],
-              "answer": 1,
-              "explanation": "localStorage persists until cleared. sessionStorage is cleared when the tab closes."
-            },
-            {
-              "id": "quiz-dom-s8-q2",
-              "type": "true-false",
-              "prompt": "localStorage can store objects directly.",
-              "answer": false,
-              "explanation": "localStorage stores strings only. Use JSON.stringify to serialize and JSON.parse to read back."
-            },
-            {
-              "id": "quiz-dom-s8-q3",
-              "type": "multiple-choice",
-              "prompt": "When does the storage event fire?",
-              "options": [
-                "In the tab that wrote the value",
-                "In all other tabs on the same origin",
-                "In every browser window",
-                "Only in incognito mode"
-              ],
-              "answer": 1,
-              "explanation": "The storage event fires in every other tab on the same origin, not the tab that made the change."
-            },
-            {
-              "id": "quiz-dom-s8-q4",
-              "type": "blank",
-              "prompt": "What attribute makes a cookie inaccessible to JavaScript?",
-              "answers": [
-                "HttpOnly",
-                "httponly"
-              ],
-              "explanation": "HttpOnly cookies are not exposed through document.cookie, which is the defence against XSS reading them."
-            },
-            {
-              "id": "quiz-dom-s8-q5",
-              "type": "multiple-choice",
-              "prompt": "Why should cookies be kept small?",
-              "options": [
-                "Large cookies crash the browser",
-                "Cookies are sent with every request to the origin",
-                "localStorage rejects values over 4 KB",
-                "The storage event has a size limit"
-              ],
-              "answer": 1,
-              "explanation": "Cookies travel with every request. Large cookies increase request size and slow every page load."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -21532,63 +7752,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-dom-s9",
           "title": "Fetch API quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-dom-s9-q1",
-              "type": "multiple-choice",
-              "prompt": "What does fetch return on a network failure?",
-              "options": [
-                "A resolved promise with status 0",
-                "A rejected promise",
-                "undefined",
-                "A resolved promise with status 500"
-              ],
-              "answer": 1,
-              "explanation": "Network failures reject the fetch promise. HTTP errors like 404 resolve normally."
-            },
-            {
-              "id": "quiz-dom-s9-q2",
-              "type": "true-false",
-              "prompt": "response.json() can be called more than once on the same response.",
-              "answer": false,
-              "explanation": "The body is a stream that can only be consumed once."
-            },
-            {
-              "id": "quiz-dom-s9-q3",
-              "type": "multiple-choice",
-              "prompt": "What header tells the server the body is JSON?",
-              "options": [
-                "Accept",
-                "Content-Type",
-                "X-Requested-With",
-                "Authorization"
-              ],
-              "answer": 1,
-              "explanation": "Content-Type: application/json describes the request body format."
-            },
-            {
-              "id": "quiz-dom-s9-q4",
-              "type": "blank",
-              "prompt": "What does CORS stand for?",
-              "answers": [
-                "Cross-Origin Resource Sharing"
-              ],
-              "explanation": "CORS is the browser security model for cross-origin reads."
-            },
-            {
-              "id": "quiz-dom-s9-q5",
-              "type": "multiple-choice",
-              "prompt": "How do you distinguish a 404 from a network failure?",
-              "options": [
-                "fetch throws on 404",
-                "fetch resolves; check response.ok",
-                "fetch returns status 0 for 404",
-                "json() throws on 404"
-              ],
-              "answer": 1,
-              "explanation": "fetch only rejects on network failure. HTTP errors resolve, so check response.ok."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -21627,63 +7791,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-dom-s10",
           "title": "Web APIs quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-dom-s10-q1",
-              "type": "multiple-choice",
-              "prompt": "What must be true for the Geolocation API to work?",
-              "options": [
-                "The page must use HTTP",
-                "The page must use HTTPS and the user must grant permission",
-                "The browser must be Chrome",
-                "The user must be signed in"
-              ],
-              "answer": 1,
-              "explanation": "Geolocation requires HTTPS and explicit user permission. It is gated behind both for privacy."
-            },
-            {
-              "id": "quiz-dom-s10-q2",
-              "type": "true-false",
-              "prompt": "matchMedia returns a boolean directly.",
-              "answer": false,
-              "explanation": "It returns a MediaQueryList with a matches property. You listen for changes on the object."
-            },
-            {
-              "id": "quiz-dom-s10-q3",
-              "type": "multiple-choice",
-              "prompt": "What does the storage event give you?",
-              "options": [
-                "The entire localStorage object",
-                "The key, old value and new value that changed",
-                "A list of all keys",
-                "The storage quota"
-              ],
-              "answer": 1,
-              "explanation": "The storage event carries the key, oldValue and newValue of the change that triggered it."
-            },
-            {
-              "id": "quiz-dom-s10-q4",
-              "type": "blank",
-              "prompt": "What method on navigator.geolocation requests the user position?",
-              "answers": [
-                "getCurrentPosition"
-              ],
-              "explanation": "getCurrentPosition takes success and error callbacks and optional options."
-            },
-            {
-              "id": "quiz-dom-s10-q5",
-              "type": "multiple-choice",
-              "prompt": "Why should you prefer CSS media queries over matchMedia?",
-              "options": [
-                "CSS is faster",
-                "CSS runs before JavaScript and avoids a flash of unstyled content",
-                "matchMedia is deprecated",
-                "CSS supports more queries"
-              ],
-              "answer": 1,
-              "explanation": "CSS media queries apply before the page renders, avoiding layout shifts that JavaScript cannot prevent."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -21722,63 +7830,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-dom-s11",
           "title": "Canvas and SVG quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-dom-s11-q1",
-              "type": "multiple-choice",
-              "prompt": "What does canvas.getContext return?",
-              "options": [
-                "The DOM of the drawn shapes",
-                "A drawing context object",
-                "An SVG namespace",
-                "A Promise"
-              ],
-              "answer": 1,
-              "explanation": "getContext returns the drawing context. Canvas has no DOM for the shapes you draw."
-            },
-            {
-              "id": "quiz-dom-s11-q2",
-              "type": "true-false",
-              "prompt": "SVG elements can have event listeners attached to them.",
-              "answer": true,
-              "explanation": "SVG is part of the DOM, so you can query, style and listen on individual elements."
-            },
-            {
-              "id": "quiz-dom-s11-q3",
-              "type": "multiple-choice",
-              "prompt": "Why do you need createElementNS for SVG?",
-              "options": [
-                "SVG elements are case-sensitive",
-                "SVG lives in a different XML namespace from HTML",
-                "createElement does not support attributes",
-                "It is a security requirement"
-              ],
-              "answer": 1,
-              "explanation": "SVG elements belong to the \"http://www.w3.org/2000/svg\" namespace."
-            },
-            {
-              "id": "quiz-dom-s11-q4",
-              "type": "blank",
-              "prompt": "What method clears the entire canvas? (two words)",
-              "answers": [
-                "clearRect"
-              ],
-              "explanation": "clearRect(x, y, width, height) clears the specified rectangle. Use the canvas dimensions to clear everything."
-            },
-            {
-              "id": "quiz-dom-s11-q5",
-              "type": "multiple-choice",
-              "prompt": "When is Canvas a better choice than SVG?",
-              "options": [
-                "When you need to attach event listeners to shapes",
-                "When you need to redraw thousands of objects every frame",
-                "When you need scalable vector graphics",
-                "When you need CSS styling of individual shapes"
-              ],
-              "answer": 1,
-              "explanation": "Canvas is faster for high-frequency redraws of many objects. SVG is better for interactive, styled vector graphics."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -21817,64 +7869,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-dom-s12",
           "title": "Summary quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-dom-s12-q1",
-              "type": "multiple-choice",
-              "prompt": "What is a reflow?",
-              "options": [
-                "A syntax error in CSS",
-                "The browser recalculating element positions after a layout change",
-                "A network request for a stylesheet",
-                "The process of parsing HTML"
-              ],
-              "answer": 1,
-              "explanation": "A reflow is the browser recalculating the position and size of elements after a layout-affecting change."
-            },
-            {
-              "id": "quiz-dom-s12-q2",
-              "type": "true-false",
-              "prompt": "Reading offsetHeight does not trigger a reflow.",
-              "answer": false,
-              "explanation": "Reading layout properties forces a synchronous reflow so the browser returns up-to-date values."
-            },
-            {
-              "id": "quiz-dom-s12-q3",
-              "type": "multiple-choice",
-              "prompt": "When should you use requestAnimationFrame?",
-              "options": [
-                "For all timers",
-                "For visual updates and animations",
-                "For network requests",
-                "For form validation"
-              ],
-              "answer": 1,
-              "explanation": "requestAnimationFrame runs before the next paint and pauses when the tab is hidden."
-            },
-            {
-              "id": "quiz-dom-s12-q4",
-              "type": "blank",
-              "prompt": "What API replaces innerHTML when inserting user input safely? (one method name)",
-              "answers": [
-                "createElement",
-                "createElementNS"
-              ],
-              "explanation": "createElement (or createElementNS for SVG) creates a node you can populate with textContent safely."
-            },
-            {
-              "id": "quiz-dom-s12-q5",
-              "type": "multiple-choice",
-              "prompt": "Why does event delegation help with dynamic content?",
-              "options": [
-                "It makes listeners faster",
-                "The parent listener handles children added after the listener is attached",
-                "It prevents memory leaks",
-                "It reduces the number of event phases"
-              ],
-              "answer": 1,
-              "explanation": "Delegation relies on bubbling, so one listener on a stable parent handles children added later."
-            }
-          ]
+          "questionCount": 5
         }
       }
     ]
@@ -21945,63 +7940,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-rwd-s1",
           "title": "RWD Fundamentals quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-rwd-s1-q1",
-              "type": "multiple-choice",
-              "prompt": "What is the goal of responsive design?",
-              "options": [
-                "Make the page look identical on every device",
-                "Make the page usable on every device",
-                "Use only mobile-friendly images",
-                "Avoid JavaScript on mobile"
-              ],
-              "answer": 1,
-              "explanation": "Responsive design makes content usable on any screen, not visually identical."
-            },
-            {
-              "id": "quiz-rwd-s1-q2",
-              "type": "true-false",
-              "prompt": "A fixed-width layout of 960px works well on a 320px phone screen.",
-              "answer": false,
-              "explanation": "Fixed widths do not adapt. The page would require horizontal scrolling or be zoomed out."
-            },
-            {
-              "id": "quiz-rwd-s1-q3",
-              "type": "multiple-choice",
-              "prompt": "What does the viewport meta tag do?",
-              "options": [
-                "Sets the page title",
-                "Tells the mobile browser to use the device width",
-                "Disables zoom on mobile",
-                "Sets the character encoding"
-              ],
-              "answer": 1,
-              "explanation": "width=device-width maps the CSS viewport to the physical screen width."
-            },
-            {
-              "id": "quiz-rwd-s1-q4",
-              "type": "blank",
-              "prompt": "What approach starts with the small-screen layout and enhances for larger screens?",
-              "answers": [
-                "mobile-first"
-              ],
-              "explanation": "Mobile-first means writing the base layout for small screens and adding complexity with breakpoints."
-            },
-            {
-              "id": "quiz-rwd-s1-q5",
-              "type": "multiple-choice",
-              "prompt": "Why should you avoid user-scalable=no?",
-              "options": [
-                "It breaks media queries",
-                "It prevents users from zooming, which is an accessibility failure",
-                "It slows down page load",
-                "It is not supported in Safari"
-              ],
-              "answer": 1,
-              "explanation": "Disabling zoom prevents users from reading small text and fails WCAG guidelines."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -22040,63 +7979,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-rwd-s2",
           "title": "Media Queries quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-rwd-s2-q1",
-              "type": "multiple-choice",
-              "prompt": "Which media query feature is used for responsive breakpoints?",
-              "options": [
-                "width",
-                "min-width",
-                "screen",
-                "resolution"
-              ],
-              "answer": 1,
-              "explanation": "min-width is the standard feature for mobile-first breakpoints."
-            },
-            {
-              "id": "quiz-rwd-s2-q2",
-              "type": "true-false",
-              "prompt": "max-width applies styles above the threshold.",
-              "answer": false,
-              "explanation": "max-width applies styles below the threshold. min-width applies above."
-            },
-            {
-              "id": "quiz-rwd-s2-q3",
-              "type": "multiple-choice",
-              "prompt": "Why are em-based breakpoints more accessible?",
-              "options": [
-                "They are larger",
-                "They respect the user's font size setting",
-                "They work in more browsers",
-                "They are easier to calculate"
-              ],
-              "answer": 1,
-              "explanation": "em-based breakpoints scale with the user's default font size, keeping layouts usable at larger text sizes."
-            },
-            {
-              "id": "quiz-rwd-s2-q4",
-              "type": "blank",
-              "prompt": "What unit is recommended for media query breakpoints?",
-              "answers": [
-                "em"
-              ],
-              "explanation": "em units respect user font size preferences and are the standard for accessible breakpoints."
-            },
-            {
-              "id": "quiz-rwd-s2-q5",
-              "type": "multiple-choice",
-              "prompt": "How many breakpoints does a typical responsive site need?",
-              "options": [
-                "1-2",
-                "3-4",
-                "6-8",
-                "As many as devices"
-              ],
-              "answer": 1,
-              "explanation": "Three to four breakpoints covers most layouts. More than that is a sign the layout is too complex."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -22135,63 +8018,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-rwd-s3",
           "title": "Fluid Layouts quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-rwd-s3-q1",
-              "type": "multiple-choice",
-              "prompt": "Which unit is relative to the parent width?",
-              "options": [
-                "rem",
-                "em",
-                "%",
-                "px"
-              ],
-              "answer": 2,
-              "explanation": "% is relative to the parent width. rem and em are relative to font sizes."
-            },
-            {
-              "id": "quiz-rwd-s3-q2",
-              "type": "true-false",
-              "prompt": "max-width: 100% on an image makes it grow beyond its natural size.",
-              "answer": false,
-              "explanation": "max-width: 100% prevents the image from exceeding its container, but it never scales up beyond its intrinsic size."
-            },
-            {
-              "id": "quiz-rwd-s3-q3",
-              "type": "multiple-choice",
-              "prompt": "What does object-fit: cover do?",
-              "options": [
-                "Scales the image to fit without cropping",
-                "Fills the container, cropping if necessary",
-                "Stretches the image to fill",
-                "Keeps the image at its natural size"
-              ],
-              "answer": 1,
-              "explanation": "object-fit: cover fills the container while preserving aspect ratio, cropping overflow."
-            },
-            {
-              "id": "quiz-rwd-s3-q4",
-              "type": "blank",
-              "prompt": "What CSS unit is relative to the root font size?",
-              "answers": [
-                "rem"
-              ],
-              "explanation": "rem (root em) is relative to the root element font size."
-            },
-            {
-              "id": "quiz-rwd-s3-q5",
-              "type": "multiple-choice",
-              "prompt": "Why should you set width and height attributes on images?",
-              "options": [
-                "To make them load faster",
-                "To reserve space and prevent layout shift",
-                "To improve SEO",
-                "To enable lazy loading"
-              ],
-              "answer": 1,
-              "explanation": "Width and height let the browser calculate the aspect ratio before the image loads, preventing cumulative layout shift."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -22230,63 +8057,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-rwd-s4",
           "title": "Responsive Typography quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-rwd-s4-q1",
-              "type": "multiple-choice",
-              "prompt": "What does clamp(1.5rem, 4vw, 3rem) do?",
-              "options": [
-                "Sets the font size to 4vw",
-                "Scales between 1.5rem and 3rem, preferring 4vw",
-                "Always uses 1.5rem",
-                "Sets the font size to 3rem"
-              ],
-              "answer": 1,
-              "explanation": "clamp scales between the minimum and maximum, using the preferred value in between."
-            },
-            {
-              "id": "quiz-rwd-s4-q2",
-              "type": "true-false",
-              "prompt": "The ch unit represents the width of the character \"0\".",
-              "answer": true,
-              "explanation": "1ch is the width of the zero glyph in the current font."
-            },
-            {
-              "id": "quiz-rwd-s4-q3",
-              "type": "multiple-choice",
-              "prompt": "Why should line length be constrained?",
-              "options": [
-                "To save bandwidth",
-                "To keep lines between 60 and 75 characters for readability",
-                "To make the page load faster",
-                "To improve SEO"
-              ],
-              "answer": 1,
-              "explanation": "Lines that are too long or too short are hard to read. 60-75 characters is the optimal range."
-            },
-            {
-              "id": "quiz-rwd-s4-q4",
-              "type": "blank",
-              "prompt": "What CSS function sets a value between a minimum and maximum?",
-              "answers": [
-                "clamp"
-              ],
-              "explanation": "clamp(min, preferred, max) scales the preferred value between the bounds."
-            },
-            {
-              "id": "quiz-rwd-s4-q5",
-              "type": "multiple-choice",
-              "prompt": "What is a good max-width for body text?",
-              "options": [
-                "30ch",
-                "65ch",
-                "100ch",
-                "120ch"
-              ],
-              "answer": 1,
-              "explanation": "65ch is roughly 65 characters, which is the optimal line length for readability."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -22325,63 +8096,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-rwd-s5",
           "title": "CSS Grid for Layouts quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-rwd-s5-q1",
-              "type": "multiple-choice",
-              "prompt": "What does auto-fit do in grid-template-columns?",
-              "options": [
-                "Creates exactly one column",
-                "Creates as many columns as will fit",
-                "Fills empty cells with auto-generated content",
-                "Centers the grid"
-              ],
-              "answer": 1,
-              "explanation": "auto-fit creates as many columns as will fit in the available space."
-            },
-            {
-              "id": "quiz-rwd-s5-q2",
-              "type": "true-false",
-              "prompt": "Grid is one-dimensional like flexbox.",
-              "answer": false,
-              "explanation": "Grid is two-dimensional: it controls rows and columns simultaneously. Flexbox is one-dimensional."
-            },
-            {
-              "id": "quiz-rwd-s5-q3",
-              "type": "multiple-choice",
-              "prompt": "What does minmax(250px, 1fr) mean?",
-              "options": [
-                "Exactly 250px",
-                "At least 250px, growing to fill available space",
-                "At most 250px",
-                "A fixed fraction of 250px"
-              ],
-              "answer": 1,
-              "explanation": "minmax sets the minimum and maximum size. The column grows from 250px up to 1fr."
-            },
-            {
-              "id": "quiz-rwd-s5-q4",
-              "type": "blank",
-              "prompt": "What CSS property defines named grid regions?",
-              "answers": [
-                "grid-template-areas"
-              ],
-              "explanation": "grid-template-areas lets you name regions and place elements with grid-area."
-            },
-            {
-              "id": "quiz-rwd-s5-q5",
-              "type": "multiple-choice",
-              "prompt": "When should you use grid over flexbox?",
-              "options": [
-                "For centering a single element",
-                "For two-dimensional page layouts",
-                "For inline text alignment",
-                "For animating height changes"
-              ],
-              "answer": 1,
-              "explanation": "Grid is designed for two-dimensional layouts. Flexbox handles one-dimensional alignment."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -22420,63 +8135,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-rwd-s6",
           "title": "Mobile-First Design quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-rwd-s6-q1",
-              "type": "multiple-choice",
-              "prompt": "What does mobile-first mean?",
-              "options": [
-                "Designing for desktop first",
-                "Writing base styles for the smallest screen and enhancing upward",
-                "Using only mobile devices for testing",
-                "Removing content for mobile"
-              ],
-              "answer": 1,
-              "explanation": "Mobile-first writes base styles for mobile and uses min-width queries to enhance for larger screens."
-            },
-            {
-              "id": "quiz-rwd-s6-q2",
-              "type": "true-false",
-              "prompt": "Progressive enhancement means hiding content on capable browsers.",
-              "answer": false,
-              "explanation": "Progressive enhancement means the base experience works everywhere and capable browsers get more features."
-            },
-            {
-              "id": "quiz-rwd-s6-q3",
-              "type": "multiple-choice",
-              "prompt": "Why does mobile-first produce simpler CSS?",
-              "options": [
-                "It uses fewer properties",
-                "Each breakpoint builds on the previous one instead of overriding",
-                "It avoids media queries entirely",
-                "It uses fixed widths"
-              ],
-              "answer": 1,
-              "explanation": "Mobile-first adds layers of enhancement rather than overriding desktop styles downward."
-            },
-            {
-              "id": "quiz-rwd-s6-q4",
-              "type": "blank",
-              "prompt": "What media query direction does mobile-first use?",
-              "answers": [
-                "min-width"
-              ],
-              "explanation": "Mobile-first uses min-width media queries that activate as the viewport grows."
-            },
-            {
-              "id": "quiz-rwd-s6-q5",
-              "type": "multiple-choice",
-              "prompt": "When should you hide content on mobile?",
-              "options": [
-                "For primary content",
-                "For secondary navigation and optional widgets",
-                "For all images",
-                "Never"
-              ],
-              "answer": 1,
-              "explanation": "Hide only secondary navigation, decorative elements, and optional widgets. Primary content should remain visible."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -22515,63 +8174,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-rwd-s7",
           "title": "Responsive Navigation quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-rwd-s7-q1",
-              "type": "multiple-choice",
-              "prompt": "What does the checkbox hack use to toggle a menu?",
-              "options": [
-                "A radio button",
-                "A hidden checkbox and the :checked selector",
-                "A JavaScript function",
-                "The :hover pseudo-class"
-              ],
-              "answer": 1,
-              "explanation": "The checkbox hack uses a hidden checkbox and the :checked selector to toggle content without JavaScript."
-            },
-            {
-              "id": "quiz-rwd-s7-q2",
-              "type": "true-false",
-              "prompt": "aria-expanded should be true when the menu is closed.",
-              "answer": false,
-              "explanation": "aria-expanded should be true when the menu is open and false when it is closed."
-            },
-            {
-              "id": "quiz-rwd-s7-q3",
-              "type": "multiple-choice",
-              "prompt": "What HTML attribute hides an element from assistive technology?",
-              "options": [
-                "display: none",
-                "hidden",
-                "aria-hidden",
-                "visibility: hidden"
-              ],
-              "answer": 1,
-              "explanation": "The hidden attribute removes the element from the accessibility tree. aria-hidden is also valid but requires more care."
-            },
-            {
-              "id": "quiz-rwd-s7-q4",
-              "type": "blank",
-              "prompt": "What ARIA attribute indicates whether a menu is open?",
-              "answers": [
-                "aria-expanded"
-              ],
-              "explanation": "aria-expanded is a boolean attribute that communicates the open or closed state to assistive technology."
-            },
-            {
-              "id": "quiz-rwd-s7-q5",
-              "type": "multiple-choice",
-              "prompt": "What should happen when a user presses Escape in an open menu?",
-              "options": [
-                "Nothing",
-                "The menu closes and focus returns to the button",
-                "The page reloads",
-                "The menu expands further"
-              ],
-              "answer": 1,
-              "explanation": "Pressing Escape should close the menu and return focus to the toggle button."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -22610,63 +8213,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-rwd-s8",
           "title": "Performance for Responsive Sites quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-rwd-s8-q1",
-              "type": "multiple-choice",
-              "prompt": "What does the sizes attribute do?",
-              "options": [
-                "Sets the image intrinsic size",
-                "Tells the browser the image layout width at different viewports",
-                "Compresses the image",
-                "Sets the image alt text"
-              ],
-              "answer": 1,
-              "explanation": "sizes tells the browser how large the image will be in the layout, which helps it choose the right srcset candidate."
-            },
-            {
-              "id": "quiz-rwd-s8-q2",
-              "type": "true-false",
-              "prompt": "font-display: swap shows the web font before loading.",
-              "answer": false,
-              "explanation": "font-display: swap shows the fallback font immediately and swaps in the web font once it loads."
-            },
-            {
-              "id": "quiz-rwd-s8-q3",
-              "type": "multiple-choice",
-              "prompt": "Why are system fonts a performance win?",
-              "options": [
-                "They are smaller than web fonts",
-                "They are already on the device and load instantly",
-                "They have more styles",
-                "They work offline"
-              ],
-              "answer": 1,
-              "explanation": "System fonts are already installed on the user's device, so they require zero download time."
-            },
-            {
-              "id": "quiz-rwd-s8-q4",
-              "type": "blank",
-              "prompt": "What HTML element supports art direction with multiple sources?",
-              "answers": [
-                "picture"
-              ],
-              "explanation": "The picture element lets you define different sources for different conditions."
-            },
-            {
-              "id": "quiz-rwd-s8-q5",
-              "type": "multiple-choice",
-              "prompt": "How much can modern image formats reduce file size compared to JPEG?",
-              "options": [
-                "5-10%",
-                "25-50%",
-                "75-90%",
-                "No reduction"
-              ],
-              "answer": 1,
-              "explanation": "WebP and AVIF typically reduce file sizes by 25 to 50 percent compared to JPEG."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -22705,63 +8252,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-rwd-s9",
           "title": "Testing Responsive Designs quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-rwd-s9-q1",
-              "type": "multiple-choice",
-              "prompt": "What is visual regression testing?",
-              "options": [
-                "Testing how fast the page loads",
-                "Comparing screenshots against a baseline to catch visual changes",
-                "Testing accessibility with a screen reader",
-                "Measuring JavaScript performance"
-              ],
-              "answer": 1,
-              "explanation": "Visual regression testing compares screenshots to detect unintended visual changes."
-            },
-            {
-              "id": "quiz-rwd-s9-q2",
-              "type": "true-false",
-              "prompt": "Emulators catch every issue that real devices would show.",
-              "answer": false,
-              "explanation": "Real devices catch touch target, font rendering and performance issues that emulators miss."
-            },
-            {
-              "id": "quiz-rwd-s9-q3",
-              "type": "multiple-choice",
-              "prompt": "What is the minimum recommended touch target size?",
-              "options": [
-                "24x24px",
-                "32x32px",
-                "44x44px",
-                "56x56px"
-              ],
-              "answer": 2,
-              "explanation": "Apple and Google recommend a minimum touch target size of 44x44px."
-            },
-            {
-              "id": "quiz-rwd-s9-q4",
-              "type": "blank",
-              "prompt": "What Playwright method changes the viewport size?",
-              "answers": [
-                "setViewportSize"
-              ],
-              "explanation": "page.setViewportSize({ width, height }) changes the viewport dimensions."
-            },
-            {
-              "id": "quiz-rwd-s9-q5",
-              "type": "multiple-choice",
-              "prompt": "Where should responsive tests run?",
-              "options": [
-                "Only on developer machines",
-                "In CI on every pull request",
-                "Only before major releases",
-                "Only on staging"
-              ],
-              "answer": 1,
-              "explanation": "Running responsive tests in CI ensures broken layouts are caught before they reach production."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -22800,63 +8291,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-rwd-s10",
           "title": "Real-World Responsive Patterns quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-rwd-s10-q1",
-              "type": "multiple-choice",
-              "prompt": "What is the best pattern for a data-heavy dashboard on mobile?",
-              "options": [
-                "Shrink all widgets to fit",
-                "Stack cards vertically and use horizontal scroll for tables",
-                "Hide all data on mobile",
-                "Use fixed-width containers"
-              ],
-              "answer": 1,
-              "explanation": "Cards stack vertically on mobile, and tables scroll horizontally with a sticky first column."
-            },
-            {
-              "id": "quiz-rwd-s10-q2",
-              "type": "true-false",
-              "prompt": "Tables should never scroll horizontally on mobile.",
-              "answer": false,
-              "explanation": "Data tables can scroll horizontally with a sticky first column to keep context."
-            },
-            {
-              "id": "quiz-rwd-s10-q3",
-              "type": "multiple-choice",
-              "prompt": "Why should the primary CTA be visible without scrolling on mobile?",
-              "options": [
-                "To increase page load speed",
-                "So users can act immediately without hunting for it",
-                "To improve SEO",
-                "To reduce bandwidth"
-              ],
-              "answer": 1,
-              "explanation": "The primary call to action should be immediately visible so users can act without scrolling."
-            },
-            {
-              "id": "quiz-rwd-s10-q4",
-              "type": "blank",
-              "prompt": "What CSS value makes the first column of a table sticky during horizontal scroll?",
-              "answers": [
-                "position: sticky"
-              ],
-              "explanation": "position: sticky; left: 0 on the first column keeps it visible during horizontal scroll."
-            },
-            {
-              "id": "quiz-rwd-s10-q5",
-              "type": "multiple-choice",
-              "prompt": "What grid pattern reflows cards automatically without media queries?",
-              "options": [
-                "grid-template-columns: 1fr 1fr",
-                "grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))",
-                "display: flex",
-                "float: left"
-              ],
-              "answer": 1,
-              "explanation": "repeat(auto-fit, minmax(250px, 1fr)) creates as many columns as will fit, each at least 250px wide."
-            }
-          ]
+          "questionCount": 5
         }
       }
     ]
@@ -22928,63 +8363,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-git-s1",
           "title": "Introduction to Version Control quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-git-s1-q1",
-              "type": "multiple-choice",
-              "prompt": "What is the main advantage of a distributed version control system?",
-              "options": [
-                "There is only one server",
-                "Every clone is a full backup and can work offline",
-                "It uses less disk space",
-                "It does not need a network"
-              ],
-              "answer": 1,
-              "explanation": "In a distributed system, every clone contains the full history and can function independently."
-            },
-            {
-              "id": "quiz-git-s1-q2",
-              "type": "true-false",
-              "prompt": "A Git commit stores a list of changes (deltas) between versions.",
-              "answer": false,
-              "explanation": "A Git commit is a snapshot of the entire project at a point in time, not a delta."
-            },
-            {
-              "id": "quiz-git-s1-q3",
-              "type": "multiple-choice",
-              "prompt": "What is the staging area in Git?",
-              "options": [
-                "A remote server",
-                "An index where you prepare changes before committing",
-                "The folder where Git stores files",
-                "A backup location"
-              ],
-              "answer": 1,
-              "explanation": "The staging area (index) is where you prepare changes for the next commit."
-            },
-            {
-              "id": "quiz-git-s1-q4",
-              "type": "blank",
-              "prompt": "What command creates a new Git repository?",
-              "answers": [
-                "git init"
-              ],
-              "explanation": "git init creates a new Git repository in the current directory."
-            },
-            {
-              "id": "quiz-git-s1-q5",
-              "type": "multiple-choice",
-              "prompt": "What does git status show?",
-              "options": [
-                "The commit history",
-                "The current branch and which files are modified, staged, or untracked",
-                "The remote URL",
-                "The latest release tag"
-              ],
-              "answer": 1,
-              "explanation": "git status shows the state of the working tree: modified, staged, and untracked files."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -23023,63 +8402,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-git-s2",
           "title": "Daily Git Workflow quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-git-s2-q1",
-              "type": "multiple-choice",
-              "prompt": "What does git clone do?",
-              "options": [
-                "Creates a new empty repository",
-                "Downloads an existing repository with full history",
-                "Pushes local commits to a remote",
-                "Creates a branch"
-              ],
-              "answer": 1,
-              "explanation": "git clone downloads the entire repository including its full history."
-            },
-            {
-              "id": "quiz-git-s2-q2",
-              "type": "true-false",
-              "prompt": "The staging area lets you prepare changes before committing.",
-              "answer": true,
-              "explanation": "The staging area (index) lets you select which changes to include in the next commit."
-            },
-            {
-              "id": "quiz-git-s2-q3",
-              "type": "multiple-choice",
-              "prompt": "What is the conventional commits type for a bug fix?",
-              "options": [
-                "feat",
-                "fix",
-                "docs",
-                "refactor"
-              ],
-              "answer": 1,
-              "explanation": "fix is used for bug fixes in the conventional commits specification."
-            },
-            {
-              "id": "quiz-git-s2-q4",
-              "type": "blank",
-              "prompt": "What command pushes local commits to the remote?",
-              "answers": [
-                "git push"
-              ],
-              "explanation": "git push uploads local commits to the remote repository."
-            },
-            {
-              "id": "quiz-git-s2-q5",
-              "type": "multiple-choice",
-              "prompt": "What does git add -p do?",
-              "options": [
-                "Stages all files",
-                "Stages changes interactively by hunk",
-                "Pushes to the remote",
-                "Creates a patch file"
-              ],
-              "answer": 1,
-              "explanation": "git add -p stages changes interactively, letting you select hunks."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -23118,63 +8441,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-git-s3",
           "title": "Branching quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-git-s3-q1",
-              "type": "multiple-choice",
-              "prompt": "What is a Git branch?",
-              "options": [
-                "A copy of all files",
-                "A lightweight pointer to a commit",
-                "A remote repository",
-                "A merge strategy"
-              ],
-              "answer": 1,
-              "explanation": "A branch is a lightweight movable pointer to a commit. Creating one is instant."
-            },
-            {
-              "id": "quiz-git-s3-q2",
-              "type": "true-false",
-              "prompt": "Git Flow is simpler than GitHub Flow.",
-              "answer": false,
-              "explanation": "Git Flow has more branches and rules. GitHub Flow is simpler, using only main and feature branches."
-            },
-            {
-              "id": "quiz-git-s3-q3",
-              "type": "multiple-choice",
-              "prompt": "What is the default branch name in modern Git?",
-              "options": [
-                "master",
-                "main",
-                "trunk",
-                "develop"
-              ],
-              "answer": 1,
-              "explanation": "GitHub and Git now default to main as the primary branch name."
-            },
-            {
-              "id": "quiz-git-s3-q4",
-              "type": "blank",
-              "prompt": "What command creates and switches to a new branch in one step?",
-              "answers": [
-                "git switch -c"
-              ],
-              "explanation": "git switch -c branch-name creates and switches to the new branch."
-            },
-            {
-              "id": "quiz-git-s3-q5",
-              "type": "multiple-choice",
-              "prompt": "When should you delete a merged branch?",
-              "options": [
-                "Immediately after cloning",
-                "After the work is merged to main",
-                "Never",
-                "Before creating a pull request"
-              ],
-              "answer": 1,
-              "explanation": "Delete branches after they are merged to keep the branch list clean."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -23213,63 +8480,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-git-s4",
           "title": "Merging and Rebasing quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-git-s4-q1",
-              "type": "multiple-choice",
-              "prompt": "What does git merge create?",
-              "options": [
-                "A linear history",
-                "A merge commit with two parents",
-                "A new branch",
-                "A remote"
-              ],
-              "answer": 1,
-              "explanation": "A merge commit has two parents, preserving the history of both branches."
-            },
-            {
-              "id": "quiz-git-s4-q2",
-              "type": "true-false",
-              "prompt": "You should rebase branches that other people are using.",
-              "answer": false,
-              "explanation": "Rebasing rewrites history and changes commit hashes. Never rebase a shared branch."
-            },
-            {
-              "id": "quiz-git-s4-q3",
-              "type": "multiple-choice",
-              "prompt": "What do conflict markers look like?",
-              "options": [
-                "=== and ===",
-                "<<<<<<< and >>>>>>>",
-                "/* start */ and /* end */",
-                "<!-- conflict -->"
-              ],
-              "answer": 1,
-              "explanation": "Git uses <<<<<<< HEAD, =======, and >>>>>>> branch as conflict markers."
-            },
-            {
-              "id": "quiz-git-s4-q4",
-              "type": "blank",
-              "prompt": "What Git command replays commits on top of another branch?",
-              "answers": [
-                "git rebase"
-              ],
-              "explanation": "git rebase replays commits from one branch onto another, producing a linear history."
-            },
-            {
-              "id": "quiz-git-s4-q5",
-              "type": "multiple-choice",
-              "prompt": "When is it safe to rebase?",
-              "options": [
-                "On any public branch",
-                "Only on private branches before they are shared",
-                "After merging to main",
-                "Never"
-              ],
-              "answer": 1,
-              "explanation": "Rebase only private branches before they are shared. Once shared, treat the history as public."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -23308,63 +8519,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-git-s5",
           "title": "Collaborating with Remotes quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-git-s5-q1",
-              "type": "multiple-choice",
-              "prompt": "What does git fetch do?",
-              "options": [
-                "Downloads and merges remote changes",
-                "Downloads remote changes without merging",
-                "Pushes local changes",
-                "Deletes a remote branch"
-              ],
-              "answer": 1,
-              "explanation": "git fetch downloads remote changes without modifying your working tree."
-            },
-            {
-              "id": "quiz-git-s5-q2",
-              "type": "true-false",
-              "prompt": "A pull request is a proposal to merge changes.",
-              "answer": true,
-              "explanation": "A pull request proposes merging changes from one branch into another."
-            },
-            {
-              "id": "quiz-git-s5-q3",
-              "type": "multiple-choice",
-              "prompt": "What is the benefit of squash and merge?",
-              "options": [
-                "It preserves every commit individually",
-                "It produces a clean linear history on main",
-                "It is faster than a regular merge",
-                "It avoids merge conflicts"
-              ],
-              "answer": 1,
-              "explanation": "Squash and merge combines all commits into one, producing a clean history on main."
-            },
-            {
-              "id": "quiz-git-s5-q4",
-              "type": "blank",
-              "prompt": "What command downloads remote changes without merging?",
-              "answers": [
-                "git fetch"
-              ],
-              "explanation": "git fetch downloads remote changes without touching your working tree."
-            },
-            {
-              "id": "quiz-git-s5-q5",
-              "type": "multiple-choice",
-              "prompt": "Why should pull requests be small?",
-              "options": [
-                "To use less disk space",
-                "They get reviewed faster and more thoroughly",
-                "To avoid merge conflicts",
-                "To reduce CI time"
-              ],
-              "answer": 1,
-              "explanation": "Small PRs are easier and faster to review, leading to higher quality reviews."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -23403,63 +8558,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-git-s6",
           "title": "Undoing Changes quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-git-s6-q1",
-              "type": "multiple-choice",
-              "prompt": "What does git restore do?",
-              "options": [
-                "Deletes commits",
-                "Resets the working tree to the last commit",
-                "Pushes changes to the remote",
-                "Creates a new branch"
-              ],
-              "answer": 1,
-              "explanation": "git restore resets the working tree to match the last commit without deleting commits."
-            },
-            {
-              "id": "quiz-git-s6-q2",
-              "type": "true-false",
-              "prompt": "git reset is safe to use on public branches.",
-              "answer": false,
-              "explanation": "git reset rewrites history. Use it only on private branches."
-            },
-            {
-              "id": "quiz-git-s6-q3",
-              "type": "multiple-choice",
-              "prompt": "What does git revert do?",
-              "options": [
-                "Deletes the commit from history",
-                "Creates a new commit that undoes the specified commit",
-                "Resets the branch pointer",
-                "Stashes changes"
-              ],
-              "answer": 1,
-              "explanation": "git revert creates a new commit that undoes the changes from an earlier commit."
-            },
-            {
-              "id": "quiz-git-s6-q4",
-              "type": "blank",
-              "prompt": "What git reset mode keeps changes staged?",
-              "answers": [
-                "--soft"
-              ],
-              "explanation": "git reset --soft moves the branch pointer and keeps changes staged."
-            },
-            {
-              "id": "quiz-git-s6-q5",
-              "type": "multiple-choice",
-              "prompt": "When should you use revert instead of reset?",
-              "options": [
-                "On private branches",
-                "On public branches that others have pulled",
-                "Never",
-                "Only on the first commit"
-              ],
-              "answer": 1,
-              "explanation": "Use revert on public branches because it does not rewrite history."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -23498,63 +8597,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-git-s7",
           "title": "Stashing and Cleanup quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-git-s7-q1",
-              "type": "multiple-choice",
-              "prompt": "What does git stash do?",
-              "options": [
-                "Commits all changes",
-                "Saves uncommitted changes and reverts the working tree",
-                "Deletes untracked files",
-                "Creates a new branch"
-              ],
-              "answer": 1,
-              "explanation": "git stash saves uncommitted changes and reverts the working tree to a clean state."
-            },
-            {
-              "id": "quiz-git-s7-q2",
-              "type": "true-false",
-              "prompt": "git clean deletes tracked files.",
-              "answer": false,
-              "explanation": "git clean deletes only untracked files. Tracked files are managed by Git."
-            },
-            {
-              "id": "quiz-git-s7-q3",
-              "type": "multiple-choice",
-              "prompt": "What does git reflog record?",
-              "options": [
-                "Remote branches",
-                "Every move of HEAD",
-                "Stash entries",
-                "Tag names"
-              ],
-              "answer": 1,
-              "explanation": "git reflog records every move of HEAD, including resets, checkouts and rebases."
-            },
-            {
-              "id": "quiz-git-s7-q4",
-              "type": "blank",
-              "prompt": "What command applies and removes the top stash?",
-              "answers": [
-                "git stash pop"
-              ],
-              "explanation": "git stash pop applies the top stash and removes it from the stash list."
-            },
-            {
-              "id": "quiz-git-s7-q5",
-              "type": "multiple-choice",
-              "prompt": "When should you use git clean?",
-              "options": [
-                "To remove committed files",
-                "To remove untracked files",
-                "To clean the stash",
-                "To reset the branch"
-              ],
-              "answer": 1,
-              "explanation": "git clean removes untracked files from the working tree."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -23593,63 +8636,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-git-s8",
           "title": "Git Best Practices quiz",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-git-s8-q1",
-              "type": "multiple-choice",
-              "prompt": "What is an atomic commit?",
-              "options": [
-                "A commit that changes every file",
-                "A commit that does exactly one thing",
-                "A commit with no tests",
-                "A commit on the main branch"
-              ],
-              "answer": 1,
-              "explanation": "An atomic commit does one thing completely and can be reverted without side effects."
-            },
-            {
-              "id": "quiz-git-s8-q2",
-              "type": "true-false",
-              "prompt": ".gitignore can untrack files that are already tracked.",
-              "answer": false,
-              "explanation": ".gitignore only prevents untracked files from being added. Use git rm --cached to untrack."
-            },
-            {
-              "id": "quiz-git-s8-q3",
-              "type": "multiple-choice",
-              "prompt": "What does a pre-commit hook do?",
-              "options": [
-                "Pushes commits to the remote",
-                "Runs before each commit",
-                "Creates a new branch",
-                "Deletes the repository"
-              ],
-              "answer": 1,
-              "explanation": "A pre-commit hook runs before each commit, letting you run checks or tests."
-            },
-            {
-              "id": "quiz-git-s8-q4",
-              "type": "blank",
-              "prompt": "What file tells Git which files to ignore?",
-              "answers": [
-                ".gitignore"
-              ],
-              "explanation": ".gitignore lists patterns of files that Git should not track."
-            },
-            {
-              "id": "quiz-git-s8-q5",
-              "type": "multiple-choice",
-              "prompt": "Why should you commit .gitignore early?",
-              "options": [
-                "It makes commits faster",
-                "Tracked files are not affected by later .gitignore rules",
-                "It reduces repository size",
-                "It enables hooks"
-              ],
-              "answer": 1,
-              "explanation": "Once a file is tracked, .gitignore does not affect it. Commit .gitignore first."
-            }
-          ]
+          "questionCount": 5
         }
       }
     ]
@@ -23736,66 +8723,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-ts-s1",
           "title": "Getting started check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-ts-s1-q1",
-              "type": "multiple-choice",
-              "prompt": "What does TypeScript add to JavaScript?",
-              "options": [
-                "New runtime features",
-                "Static type checking that compiles away",
-                "A different standard library",
-                "Server-side rendering"
-              ],
-              "answer": 1,
-              "explanation": "TypeScript is a superset that adds static types; it compiles to plain JavaScript and adds no runtime overhead."
-            },
-            {
-              "id": "quiz-ts-s1-q2",
-              "type": "true-false",
-              "prompt": "TypeScript code runs directly in the browser without compilation.",
-              "answer": false,
-              "explanation": "Browsers only run JavaScript. TypeScript must be compiled (transpiled) to JavaScript first."
-            },
-            {
-              "id": "quiz-ts-s1-q3",
-              "type": "multiple-choice",
-              "prompt": "Which file configures the TypeScript compiler?",
-              "options": [
-                "package.json",
-                "tsconfig.json",
-                "webpack.config.js",
-                ".babelrc"
-              ],
-              "answer": 1,
-              "explanation": "tsconfig.json is the standard configuration file for the TypeScript compiler."
-            },
-            {
-              "id": "quiz-ts-s1-q4",
-              "type": "blank",
-              "prompt": "What command runs the TypeScript compiler in watch mode?",
-              "answers": [
-                "tsc -w",
-                "tsc --watch",
-                "tsc watch"
-              ],
-              "explanation": "`tsc -w` or `tsc --watch` recompiles on file changes, which is ideal during development."
-            },
-            {
-              "id": "quiz-ts-s1-q5",
-              "type": "identify-error",
-              "prompt": "Which line is a compile error?",
-              "code": "let message: string = 'Hello'\nmessage = 42",
-              "options": [
-                "Nothing is wrong",
-                "The second line: a number cannot be assigned to a string",
-                "The first line: string needs a capital S",
-                "message is a reserved word"
-              ],
-              "answer": 1,
-              "explanation": "message was annotated as a string, so assigning the number 42 is rejected before the code runs. In plain JavaScript it would silently change the type."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -23860,65 +8788,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-ts-s2",
           "title": "TypeScript Basics check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-ts-s2-q1",
-              "type": "multiple-choice",
-              "prompt": "Which is NOT a primitive type in TypeScript?",
-              "options": [
-                "string",
-                "number",
-                "object",
-                "boolean"
-              ],
-              "answer": 2,
-              "explanation": "object is a non-primitive (reference) type. The primitives are string, number, boolean, null, undefined, symbol, and bigint."
-            },
-            {
-              "id": "quiz-ts-s2-q2",
-              "type": "true-false",
-              "prompt": "TypeScript can always infer the type of a variable from its initial value.",
-              "answer": false,
-              "explanation": "Inference works when there is an initial value. Variables declared without initialization need explicit annotations."
-            },
-            {
-              "id": "quiz-ts-s2-q3",
-              "type": "multiple-choice",
-              "prompt": "What does readonly string[] mean?",
-              "options": [
-                "An array of strings that cannot be reassigned",
-                "An array of strings whose elements cannot be changed",
-                "A tuple of strings",
-                "An array of readonly strings"
-              ],
-              "answer": 1,
-              "explanation": "readonly prevents mutation of the array contents (push, pop, index assignment). The variable itself can still be reassigned unless also declared const."
-            },
-            {
-              "id": "quiz-ts-s2-q4",
-              "type": "blank",
-              "prompt": "What syntax creates a tuple of exactly two elements, a string and a number?",
-              "answers": [
-                "[string, number]",
-                "tuple<string, number>"
-              ],
-              "explanation": "Tuple types use bracket syntax with comma-separated element types: [string, number]."
-            },
-            {
-              "id": "quiz-ts-s2-q5",
-              "type": "identify-error",
-              "prompt": "What is the issue with this type?",
-              "code": "type User = {\n  name: string\n  age?: number\n  [key: string]: any\n}",
-              "options": [
-                "Nothing is wrong",
-                "Optional property must come after index signature",
-                "Index signature value type must be compatible with all properties",
-                "Cannot mix optional properties with index signatures"
-              ],
-              "answer": 2,
-              "explanation": "The index signature says every property is `any`, but `name` is `string` and `age?` is `number | undefined`. The index signature value type must be a supertype of all property types."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -23970,65 +8840,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-ts-s3",
           "title": "Functions check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-ts-s3-q1",
-              "type": "multiple-choice",
-              "prompt": "How do you type a function that takes a string and returns a number?",
-              "options": [
-                "(string) => number",
-                "function(string): number",
-                "string -> number",
-                "func(string): number"
-              ],
-              "answer": 0,
-              "explanation": "The function type expression uses arrow syntax: (param: type) => returnType."
-            },
-            {
-              "id": "quiz-ts-s3-q2",
-              "type": "true-false",
-              "prompt": "A function with return type void can return undefined.",
-              "answer": true,
-              "explanation": "void means the return value is ignored. Returning undefined is allowed; returning any other value is an error."
-            },
-            {
-              "id": "quiz-ts-s3-q3",
-              "type": "multiple-choice",
-              "prompt": "What does a rest parameter look like in a function type?",
-              "options": [
-                "...args: string[]",
-                "args: ...string[]",
-                "rest: string...",
-                "params: string..."
-              ],
-              "answer": 0,
-              "explanation": "Rest parameters in function types use the spread syntax before the parameter name: (...args: string[]) => void."
-            },
-            {
-              "id": "quiz-ts-s3-q4",
-              "type": "blank",
-              "prompt": "What keyword declares multiple call signatures for one function implementation?",
-              "answers": [
-                "overload",
-                "function overload"
-              ],
-              "explanation": "Function overloads let you declare multiple signatures before the single implementation."
-            },
-            {
-              "id": "quiz-ts-s3-q5",
-              "type": "identify-error",
-              "prompt": "What is wrong with this callback type?",
-              "code": "function process(callback: (x: number) => string) {}\n\nprocess((n) => n * 2)",
-              "options": [
-                "Nothing is wrong",
-                "The callback returns number but the type expects string",
-                "The callback parameter needs a type annotation",
-                "Arrow functions cannot be used as callbacks"
-              ],
-              "answer": 1,
-              "explanation": "The callback is typed to return string, but the arrow function returns number. The return type must match."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -24080,65 +8892,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-ts-s4",
           "title": "Interfaces & Type Aliases check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-ts-s4-q1",
-              "type": "multiple-choice",
-              "prompt": "Which feature is ONLY available with interfaces, not type aliases?",
-              "options": [
-                "Extending",
-                "Declaration merging",
-                "Union types",
-                "Generic parameters"
-              ],
-              "answer": 1,
-              "explanation": "Declaration merging (multiple interface declarations with the same name combining) only works with interfaces."
-            },
-            {
-              "id": "quiz-ts-s4-q2",
-              "type": "true-false",
-              "prompt": "A class must declare implements Interface to satisfy that interface.",
-              "answer": false,
-              "explanation": "TypeScript uses structural typing. A class matches an interface if it has all the required members, regardless of implements."
-            },
-            {
-              "id": "quiz-ts-s4-q3",
-              "type": "multiple-choice",
-              "prompt": "What does interface B extends A do?",
-              "options": [
-                "Copies all members of A into B",
-                "Creates a new interface with A members plus B own members",
-                "Makes B a subclass of A",
-                "Merges B into A"
-              ],
-              "answer": 1,
-              "explanation": "extends creates a new interface that includes all members from the parent plus its own members."
-            },
-            {
-              "id": "quiz-ts-s4-q4",
-              "type": "blank",
-              "prompt": "Which keyword defines a type alias?",
-              "answers": [
-                "type",
-                "Type"
-              ],
-              "explanation": "type MyType = { ... } defines a type alias."
-            },
-            {
-              "id": "quiz-ts-s4-q5",
-              "type": "identify-error",
-              "prompt": "What is wrong with this type alias?",
-              "code": "type EventHandler = (event: MouseEvent) => void\n  | (event: KeyboardEvent) => void",
-              "options": [
-                "Nothing is wrong",
-                "Function types cannot be unioned",
-                "Parentheses are needed around the union",
-                "void cannot be used in union types"
-              ],
-              "answer": 2,
-              "explanation": "Function types in a union need parentheses: type EventHandler = ((event: MouseEvent) => void) | ((event: KeyboardEvent) => void)."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -24190,66 +8944,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-ts-s5",
           "title": "Generics check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-ts-s5-q1",
-              "type": "multiple-choice",
-              "prompt": "What does function identity<T>(value: T): T mean?",
-              "options": [
-                "A function that only accepts type T",
-                "A function that works with any type and returns the same type",
-                "A function that converts any value to type T",
-                "A function that requires T to be a class"
-              ],
-              "answer": 1,
-              "explanation": "The type parameter T is a placeholder. The function accepts any type and returns that exact same type."
-            },
-            {
-              "id": "quiz-ts-s5-q2",
-              "type": "true-false",
-              "prompt": "TypeScript can infer the type argument when you call a generic function.",
-              "answer": true,
-              "explanation": "TypeScript infers T from the argument type. identity(\"hello\") infers T = string."
-            },
-            {
-              "id": "quiz-ts-s5-q3",
-              "type": "multiple-choice",
-              "prompt": "What does interface Box<T = string> mean?",
-              "options": [
-                "T defaults to string if not provided",
-                "T must be string",
-                "T extends string",
-                "Box only works with strings"
-              ],
-              "answer": 0,
-              "explanation": "Default type parameters let callers omit the argument. Box<number> uses number; Box uses string."
-            },
-            {
-              "id": "quiz-ts-s5-q4",
-              "type": "blank",
-              "prompt": "What syntax constrains a type parameter to types that have a length property?",
-              "answers": [
-                "T extends { length: number }",
-                "T extends Length",
-                "T has length"
-              ],
-              "explanation": "Constraints use extends with the required shape: function logLength<T extends { length: number }>(item: T)."
-            },
-            {
-              "id": "quiz-ts-s5-q5",
-              "type": "identify-error",
-              "prompt": "What does this conditional type evaluate to?",
-              "code": "type IsString<T> = T extends string ? \"yes\" : \"no\"\n\ntype Test = IsString<string | number>",
-              "options": [
-                "\"yes\"",
-                "\"no\"",
-                "\"yes\" | \"no\"",
-                "never"
-              ],
-              "answer": 2,
-              "explanation": "Conditional types distribute over unions. IsString<string | number> becomes IsString<string> | IsString<number> = \"yes\" | \"no\"."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -24301,64 +8996,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-ts-s6",
           "title": "Utility Types check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-ts-s6-q1",
-              "type": "multiple-choice",
-              "prompt": "What does Partial<User> do?",
-              "options": [
-                "Makes all properties required",
-                "Makes all properties optional",
-                "Removes all properties",
-                "Makes all properties readonly"
-              ],
-              "answer": 1,
-              "explanation": "Partial<T> maps all properties of T to optional. Useful for update/patch objects."
-            },
-            {
-              "id": "quiz-ts-s6-q2",
-              "type": "true-false",
-              "prompt": "Omit<T, K> and Pick<T, K> are opposites.",
-              "answer": true,
-              "explanation": "Pick keeps the listed keys; Omit removes the listed keys. Omit<T, K> === Pick<T, Exclude<keyof T, K>>."
-            },
-            {
-              "id": "quiz-ts-s6-q3",
-              "type": "multiple-choice",
-              "prompt": "What does Record<string, number> create?",
-              "options": [
-                "An object with string keys and number values",
-                "A tuple of strings and numbers",
-                "A union of string and number",
-                "An array of objects"
-              ],
-              "answer": 0,
-              "explanation": "Record<K, V> creates an object type where all keys are of type K and all values are of type V."
-            },
-            {
-              "id": "quiz-ts-s6-q4",
-              "type": "blank",
-              "prompt": "Which utility type removes null and undefined from a union?",
-              "answers": [
-                "NonNullable<T>",
-                "NonNullable"
-              ],
-              "explanation": "NonNullable<T> excludes null and undefined from T."
-            },
-            {
-              "id": "quiz-ts-s6-q5",
-              "type": "multiple-choice",
-              "prompt": "What is the type of ReturnType<() => string>?",
-              "options": [
-                "string",
-                "() => string",
-                "void",
-                "never"
-              ],
-              "answer": 0,
-              "explanation": "ReturnType extracts the return type of a function type. For () => string, it is string."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -24410,65 +9048,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-ts-s7",
           "title": "Advanced Types check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-ts-s7-q1",
-              "type": "multiple-choice",
-              "prompt": "What makes a union \"discriminated\"?",
-              "options": [
-                "All members are primitive types",
-                "All members share a common literal property",
-                "The union has exactly two members",
-                "The union uses the discriminated keyword"
-              ],
-              "answer": 1,
-              "explanation": "A discriminated union has a shared property (the discriminant) with a different literal value in each member, enabling narrowing."
-            },
-            {
-              "id": "quiz-ts-s7-q2",
-              "type": "true-false",
-              "prompt": "The never type in a switch default case ensures exhaustiveness.",
-              "answer": true,
-              "explanation": "If all cases are handled, the default branch receives never. Adding a new variant without handling it makes the default reachable, causing a compile error."
-            },
-            {
-              "id": "quiz-ts-s7-q3",
-              "type": "multiple-choice",
-              "prompt": "What does type EventNames = `on${Capitalize<string>}` produce?",
-              "options": [
-                "A union of all possible event handler names",
-                "A template that matches any string starting with \"on\"",
-                "A type that can only be \"onClick\"",
-                "An error, Capitalize only works on literal strings"
-              ],
-              "answer": 1,
-              "explanation": "Template literal types with intrinsic string manipulation (Capitalize, Lowercase, etc.) produce pattern types that match the pattern."
-            },
-            {
-              "id": "quiz-ts-s7-q4",
-              "type": "blank",
-              "prompt": "What keyword captures a type inside a conditional type?",
-              "answers": [
-                "infer",
-                "Infer"
-              ],
-              "explanation": "infer declares a type variable to be inferred within a conditional type: T extends Array<infer U> ? U : never."
-            },
-            {
-              "id": "quiz-ts-s7-q5",
-              "type": "identify-error",
-              "prompt": "What does this mapped type produce?",
-              "code": "type ReadonlyKeys<T> = {\n  readonly [K in keyof T]: T[K]\n}",
-              "options": [
-                "An error, readonly cannot be used in mapped types",
-                "A type with all properties readonly",
-                "A type with only the readonly properties from T",
-                "A type where keys are readonly but values are not"
-              ],
-              "answer": 1,
-              "explanation": "The readonly modifier in a mapped type makes all properties readonly. This is how the built-in Readonly<T> is implemented."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -24520,66 +9100,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-ts-s8",
           "title": "Modules & Declarations check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-ts-s8-q1",
-              "type": "multiple-choice",
-              "prompt": "What does \"moduleResolution\": \"node16\" enable?",
-              "options": [
-                "CommonJS require only",
-                "ESM imports with package.json exports support",
-                "AMD module loading",
-                "SystemJS module loading"
-              ],
-              "answer": 1,
-              "explanation": "node16 (and nodenext) resolution understands package.json \"exports\" and \"imports\" fields for proper ESM support."
-            },
-            {
-              "id": "quiz-ts-s8-q2",
-              "type": "true-false",
-              "prompt": "A .d.ts file can contain implementation code.",
-              "answer": false,
-              "explanation": "Declaration files (.d.ts) contain only type information. No implementation code is allowed."
-            },
-            {
-              "id": "quiz-ts-s8-q3",
-              "type": "multiple-choice",
-              "prompt": "How do you augment a module declaration from an external package?",
-              "options": [
-                "Modify node_modules directly",
-                "declare module \"package-name\" { ... }",
-                "Create a file named package-name.d.ts",
-                "Use import type from \"package-name\""
-              ],
-              "answer": 1,
-              "explanation": "declare module \"package-name\" lets you add types to an existing module without modifying it."
-            },
-            {
-              "id": "quiz-ts-s8-q4",
-              "type": "blank",
-              "prompt": "Which tsconfig option generates .d.ts files alongside .js output?",
-              "answers": [
-                "declaration: true",
-                "declaration",
-                "\"declaration\": true"
-              ],
-              "explanation": "declaration: true emits declaration files. Combine with declarationMap for source maps."
-            },
-            {
-              "id": "quiz-ts-s8-q5",
-              "type": "identify-error",
-              "prompt": "What is wrong with this package.json for a typed package?",
-              "code": "{\n  \"name\": \"my-lib\",\n  \"main\": \"dist/index.js\",\n  \"types\": \"dist/index.d.ts\"\n}",
-              "options": [
-                "Nothing is wrong",
-                "Missing \"exports\" field for modern resolution",
-                "types must be \"typings\"",
-                "main and types cannot be in the same folder"
-              ],
-              "answer": 1,
-              "explanation": "Modern packages should use \"exports\" with conditional exports for proper dual CJS/ESM support with types."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -24631,66 +9152,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-ts-s9",
           "title": "Configuration check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-ts-s9-q1",
-              "type": "multiple-choice",
-              "prompt": "How many flags does strict: true enable?",
-              "options": [
-                "5",
-                "6",
-                "7",
-                "8"
-              ],
-              "answer": 2,
-              "explanation": "strict enables 7 flags: noImplicitAny, strictNullChecks, strictFunctionTypes, strictBindCallApply, strictPropertyInitialization, noImplicitThis, alwaysStrict."
-            },
-            {
-              "id": "quiz-ts-s9-q2",
-              "type": "true-false",
-              "prompt": "strictNullChecks makes null and undefined valid values of every type.",
-              "answer": false,
-              "explanation": "strictNullChecks does the opposite: it makes null and undefined NOT assignable to other types unless explicitly included in a union (e.g., string | null)."
-            },
-            {
-              "id": "quiz-ts-s9-q3",
-              "type": "multiple-choice",
-              "prompt": "What does // @ts-expect-error do?",
-              "options": [
-                "Suppresses all errors on the next line",
-                "Suppresses errors on the next line, but errors if there are none",
-                "Disables type checking for the entire file",
-                "Marks a line as intentionally broken for testing"
-              ],
-              "answer": 1,
-              "explanation": "@ts-expect-error suppresses errors on the next line AND causes an error if that line has no errors, preventing stale suppressions."
-            },
-            {
-              "id": "quiz-ts-s9-q4",
-              "type": "blank",
-              "prompt": "Which tsconfig option enables incremental compilation with cache?",
-              "answers": [
-                "incremental: true",
-                "incremental",
-                "\"incremental\": true"
-              ],
-              "explanation": "incremental: true saves compilation info to .tsbuildinfo for faster subsequent builds."
-            },
-            {
-              "id": "quiz-ts-s9-q5",
-              "type": "identify-error",
-              "prompt": "What does composite: true require?",
-              "code": "{\n  \"compilerOptions\": {\n    \"composite\": true\n  }\n}",
-              "options": [
-                "Nothing else",
-                "declaration: true and declarationMap: true",
-                "strict: false",
-                "module: commonjs"
-              ],
-              "answer": 1,
-              "explanation": "composite: true (for project references) requires declaration: true and implies declarationMap: true."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -24768,65 +9230,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-ts-s10",
           "title": "Typed Task Tracker check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-ts-s10-q1",
-              "type": "multiple-choice",
-              "prompt": "Why use a discriminated union for reducer actions?",
-              "options": [
-                "It makes the code shorter",
-                "TypeScript narrows the action type based on action.type",
-                "It runs faster at runtime",
-                "It is required by Redux"
-              ],
-              "answer": 1,
-              "explanation": "Discriminated unions let TypeScript narrow the action shape in each case branch, giving full type safety for payloads."
-            },
-            {
-              "id": "quiz-ts-s10-q2",
-              "type": "true-false",
-              "prompt": "localStorage stores only strings, so Date objects must be serialized and revived.",
-              "answer": true,
-              "explanation": "localStorage only stores strings. Dates must be serialized (toISOString) and revived (new Date(str)) when loading."
-            },
-            {
-              "id": "quiz-ts-s10-q3",
-              "type": "multiple-choice",
-              "prompt": "What event type do you use for a form submit handler?",
-              "options": [
-                "Event",
-                "SubmitEvent",
-                "FormEvent",
-                "InputEvent"
-              ],
-              "answer": 1,
-              "explanation": "SubmitEvent is the specific type for form submit events, with access to event.submitter."
-            },
-            {
-              "id": "quiz-ts-s10-q4",
-              "type": "blank",
-              "prompt": "What DataTransfer method sets the drag data for a custom type?",
-              "answers": [
-                "setData",
-                "dataTransfer.setData"
-              ],
-              "explanation": "dataTransfer.setData(format, data) sets the drag payload. Use a custom format like \"application/x-task-id\"."
-            },
-            {
-              "id": "quiz-ts-s10-q5",
-              "type": "identify-error",
-              "prompt": "What is the type of e.currentTarget in a click handler on a button?",
-              "code": "button.addEventListener(\"click\", (e) => {\n  console.log(e.currentTarget)\n})",
-              "options": [
-                "HTMLButtonElement",
-                "EventTarget",
-                "HTMLElement",
-                "Element"
-              ],
-              "answer": 1,
-              "explanation": "Event.currentTarget is typed as EventTarget because the same handler could be attached to different element types. Cast or use a type guard for specificity."
-            }
-          ]
+          "questionCount": 5
         }
       }
     ]
@@ -24948,65 +9352,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-react-s1",
           "title": "Getting started check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-react-s1-q1",
-              "type": "multiple-choice",
-              "prompt": "What does React solve?",
-              "options": [
-                "It replaces the browser entirely",
-                "It keeps the DOM in sync with your data declaratively",
-                "It compiles TypeScript to JavaScript",
-                "It provides a backend for React applications"
-              ],
-              "answer": 1,
-              "explanation": "React lets you describe what the UI should look like for a given state, and it handles updating the DOM to match."
-            },
-            {
-              "id": "quiz-react-s1-q2",
-              "type": "true-false",
-              "prompt": "JSX is required to use React.",
-              "answer": false,
-              "explanation": "JSX is syntactic sugar, not a requirement. React can be used with React.createElement or any renderer, though JSX is the standard."
-            },
-            {
-              "id": "quiz-react-s1-q3",
-              "type": "multiple-choice",
-              "prompt": "Which function mounts a React app to the DOM?",
-              "options": [
-                "ReactDOM.render",
-                "createRoot",
-                "hydrateRoot",
-                "Both B and C"
-              ],
-              "answer": 3,
-              "explanation": "createRoot replaces the older ReactDOM.render. hydrateRoot is used for server-rendered apps. Both mount the app."
-            },
-            {
-              "id": "quiz-react-s1-q4",
-              "type": "blank",
-              "prompt": "What is the name of the modern React API entry point?",
-              "answers": [
-                "createRoot",
-                "React-dom createRoot"
-              ],
-              "explanation": "import { createRoot } from \"react-dom/client\" is the modern way to mount an app."
-            },
-            {
-              "id": "quiz-react-s1-q5",
-              "type": "identify-error",
-              "prompt": "What is wrong with this component?",
-              "code": "function Welcome(props) {\n  return <h1>Hello, {props.name}</h1>\n}",
-              "options": [
-                "Missing return statement",
-                "Props needs to be destructured",
-                "Missing closing parenthesis",
-                "Nothing - it is valid JSX"
-              ],
-              "answer": 3,
-              "explanation": "This is valid JSX. Props is the implicit parameter of a function component. With TypeScript you would annotate it, but plain JS accepts this."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -25100,65 +9446,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-react-s2",
           "title": "Components and Props check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-react-s2-q1",
-              "type": "multiple-choice",
-              "prompt": "What makes a component reusable?",
-              "options": [
-                "It never re-renders",
-                "It accepts props so the same component can render different data",
-                "It uses useState",
-                "It imports a CSS file"
-              ],
-              "answer": 1,
-              "explanation": "Props are the mechanism for passing data into a component, making it reusable across different contexts."
-            },
-            {
-              "id": "quiz-react-s2-q2",
-              "type": "true-false",
-              "prompt": "Components must return a single root element.",
-              "answer": false,
-              "explanation": "A component can return a fragment or a single element; a fragment groups siblings without adding a wrapper node to the DOM."
-            },
-            {
-              "id": "quiz-react-s2-q3",
-              "type": "multiple-choice",
-              "prompt": "Why does React warn about keys when rendering a list?",
-              "options": [
-                "To make the list sortable",
-                "To track which items changed, were added, or were removed",
-                "To style each item differently",
-                "To prevent memory leaks"
-              ],
-              "answer": 1,
-              "explanation": "Keys help React identify which items in a list have changed. Without them, reordering causes bugs and poor performance."
-            },
-            {
-              "id": "quiz-react-s2-q4",
-              "type": "blank",
-              "prompt": "What prop does a component receive by default to render its child content?",
-              "answers": [
-                "children",
-                "props.children"
-              ],
-              "explanation": "The children prop contains whatever content is nested between a component's opening and closing tags."
-            },
-            {
-              "id": "quiz-react-s2-q5",
-              "type": "identify-error",
-              "prompt": "What is wrong with using array index as key?",
-              "code": "items.map((item, index) => (\n  <li key={index}>{item.name}</li>\n))",
-              "options": [
-                "Nothing - index keys are always fine",
-                "The list will not sort correctly",
-                "Reordering, inserting or removing items breaks reconciliation",
-                "TypeScript will not compile"
-              ],
-              "answer": 2,
-              "explanation": "Index keys cause bugs when the list changes order, because React uses keys to track identity. Use a stable unique id instead."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -25210,66 +9498,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-react-s3",
           "title": "State and Effects check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-react-s3-q1",
-              "type": "multiple-choice",
-              "prompt": "What does useState return?",
-              "options": [
-                "A single value",
-                "An array of [value, setter]",
-                "An object with val and set",
-                "A promise"
-              ],
-              "answer": 1,
-              "explanation": "useState returns a tuple: the current state value and a function to update it."
-            },
-            {
-              "id": "quiz-react-s3-q2",
-              "type": "true-false",
-              "prompt": "You must always modify state directly for React to detect the change.",
-              "answer": false,
-              "explanation": "React detects changes by reference. Always create a new array or object rather than mutating the old one."
-            },
-            {
-              "id": "quiz-react-s3-q3",
-              "type": "multiple-choice",
-              "prompt": "When does useEffect run with an empty dependency array?",
-              "options": [
-                "After every render",
-                "Only on mount and only on unmount",
-                "Never, it is a bug",
-                "On mount and whenever the component re-renders"
-              ],
-              "answer": 1,
-              "explanation": "An empty dependency array means the effect runs on mount, and the cleanup runs on unmount."
-            },
-            {
-              "id": "quiz-react-s3-q4",
-              "type": "blank",
-              "prompt": "What is the first argument to useEffect used for?",
-              "answers": [
-                "side effects",
-                "effects",
-                "the side effect function"
-              ],
-              "explanation": "The first argument is a function containing the side effect logic; the second argument is the dependency array."
-            },
-            {
-              "id": "quiz-react-s3-q5",
-              "type": "identify-error",
-              "prompt": "What is wrong with this hook usage?",
-              "code": "function List({ items }) {\n  const [open, setOpen] = useState(false)\n  if (items.length > 0) {\n    useEffect(() => {}, [])\n  }\n  return ...\n}",
-              "options": [
-                "Nothing is wrong",
-                "useEffect is called conditionally, violating the rules of hooks",
-                "useState should not be called before useEffect",
-                "Items should not be a prop"
-              ],
-              "answer": 1,
-              "explanation": "Hooks must be called unconditionally. Calling useEffect inside an if block violates the rules of hooks and causes errors."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -25349,65 +9578,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-react-s4",
           "title": "Events and Forms check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-react-s4-q1",
-              "type": "multiple-choice",
-              "prompt": "In a controlled component, where does the input value come from?",
-              "options": [
-                "The DOM element itself",
-                "React state",
-                "localStorage",
-                "A global variable"
-              ],
-              "answer": 1,
-              "explanation": "In a controlled component, the value is held in React state and passed back to the input via the value prop."
-            },
-            {
-              "id": "quiz-react-s4-q2",
-              "type": "true-false",
-              "prompt": "You should always use preventDefault() on form submissions.",
-              "answer": true,
-              "explanation": "preventDefault() stops the browser from reloading the page on form submit, which is almost never what you want in a SPA."
-            },
-            {
-              "id": "quiz-react-s4-q3",
-              "type": "multiple-choice",
-              "prompt": "React events use what naming convention?",
-              "options": [
-                "onclick",
-                "onClick",
-                "on-click",
-                "handle_click"
-              ],
-              "answer": 1,
-              "explanation": "React uses camelCase event names: onClick, onChange, onSubmit, etc."
-            },
-            {
-              "id": "quiz-react-s4-q4",
-              "type": "blank",
-              "prompt": "What does event.target refer to in a React event handler?",
-              "answers": [
-                "the element that triggered the event",
-                "the DOM element"
-              ],
-              "explanation": "event.target is the DOM element that the event originated from."
-            },
-            {
-              "id": "quiz-react-s4-q5",
-              "type": "identify-error",
-              "prompt": "What is the issue with this input?",
-              "code": "<input value=\"hello\" />",
-              "options": [
-                "Nothing is wrong",
-                "It is missing an onChange handler, making it read-only",
-                "The value should not be a string",
-                "Input must have a name prop"
-              ],
-              "answer": 1,
-              "explanation": "Without onChange, a controlled input cannot be edited. React sets the value but nothing updates the state to change it."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -25528,65 +9699,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-react-s5",
           "title": "Advanced Hooks check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-react-s5-q1",
-              "type": "multiple-choice",
-              "prompt": "When should you use useContext?",
-              "options": [
-                "When a prop needs to reach deeply nested components",
-                "When you want to store local state",
-                "When you want to optimize rendering",
-                "When you need to fetch data"
-              ],
-              "answer": 0,
-              "explanation": "Context solves prop drilling: when a value is needed by many components at different levels, context avoids passing it through every intermediate component."
-            },
-            {
-              "id": "quiz-react-s5-q2",
-              "type": "true-false",
-              "prompt": "useReducer is always better than useState.",
-              "answer": false,
-              "explanation": "useReducer adds complexity. Use it when state logic is complex or involves multiple sub-values, not for simple booleans."
-            },
-            {
-              "id": "quiz-react-s5-q3",
-              "type": "multiple-choice",
-              "prompt": "What does useCallback(fn, deps) return?",
-              "options": [
-                "The result of calling fn",
-                "A memoized version of fn that only changes when deps change",
-                "A new function every render",
-                "undefined"
-              ],
-              "answer": 1,
-              "explanation": "useCallback returns a memoized callback that only changes when one of its dependencies changes."
-            },
-            {
-              "id": "quiz-react-s5-q4",
-              "type": "blank",
-              "prompt": "What property of a ref holds the current value?",
-              "answers": [
-                "current",
-                "ref.current"
-              ],
-              "explanation": "useRef returns an object whose .current property holds the value."
-            },
-            {
-              "id": "quiz-react-s5-q5",
-              "type": "identify-error",
-              "prompt": "What is wrong with this useMemo usage?",
-              "code": "const filtered = useMemo(\n  () => items.filter(expensiveCheck),\n  [items]\n)",
-              "options": [
-                "Nothing is wrong",
-                "expensiveCheck is not in the dependency array",
-                "useMemo should not be used for filtering",
-                "The function should not take arguments"
-              ],
-              "answer": 1,
-              "explanation": "If expensiveCheck depends on outer variables, they must be in the dependency array. Otherwise stale values cause subtle bugs."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -25666,65 +9779,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-react-s6",
           "title": "Routing check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-react-s6-q1",
-              "type": "multiple-choice",
-              "prompt": "Which component wraps the entire app for routing?",
-              "options": [
-                "Routes",
-                "Route",
-                "RouterProvider",
-                "Link"
-              ],
-              "answer": 2,
-              "explanation": "RouterProvider (or BrowserRouter in older versions) wraps the app to provide routing context."
-            },
-            {
-              "id": "quiz-react-s6-q2",
-              "type": "true-false",
-              "prompt": "useParams returns an object of URL parameters.",
-              "answer": true,
-              "explanation": "useParams returns a key-value object where keys are parameter names from the route path."
-            },
-            {
-              "id": "quiz-react-s6-q3",
-              "type": "multiple-choice",
-              "prompt": "What does React.lazy require to work?",
-              "options": [
-                "A callback returning a promise",
-                "A callback returning a module with a default export",
-                "A string URL",
-                "A separate JS file"
-              ],
-              "answer": 1,
-              "explanation": "React.lazy takes a function returning a Promise that resolves to a module with a default export of the component."
-            },
-            {
-              "id": "quiz-react-s6-q4",
-              "type": "blank",
-              "prompt": "What component renders the matched child route?",
-              "answers": [
-                "Outlet",
-                "<Outlet />"
-              ],
-              "explanation": "Outlet is rendered inside a layout route and displays the matched child route component."
-            },
-            {
-              "id": "quiz-react-s6-q5",
-              "type": "identify-error",
-              "prompt": "How do you redirect a user in a route component?",
-              "code": "if (!user) return <Navigate to=\"/login\" />",
-              "options": [
-                "<Navigate /> only works in route components, not loaders",
-                "Correct — Navigate is used inside route components",
-                "You must use useNavigate instead",
-                "Redirections require window.location.assign"
-              ],
-              "answer": 1,
-              "explanation": "<Navigate /> is the correct way to redirect from within a route component. useNavigate is for imperative redirects in handlers."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -25816,65 +9871,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-react-s7",
           "title": "Performance check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-react-s7-q1",
-              "type": "multiple-choice",
-              "prompt": "What does React.memo do?",
-              "options": [
-                "Memoizes the return value of a function",
-                "Prevents re-render when props have not changed",
-                "Converts a function component to a class component",
-                "Adds a cache to API calls"
-              ],
-              "answer": 1,
-              "explanation": "React.memo is a higher-order component that skips re-rendering when props are shallowly equal."
-            },
-            {
-              "id": "quiz-react-s7-q2",
-              "type": "true-false",
-              "prompt": "You should memoize everything to make React fast.",
-              "answer": false,
-              "explanation": "Over-memoization adds overhead. Memoize only when re-renders are expensive or children are memoized."
-            },
-            {
-              "id": "quiz-react-s7-q3",
-              "type": "multiple-choice",
-              "prompt": "What is the correct order for React.memo and hooks in a component?",
-              "options": [
-                "Hooks outside, memo inside the file export",
-                "memo wraps the component, hooks stay inside the component",
-                "Hooks must come before the component definition",
-                "Order does not matter"
-              ],
-              "answer": 1,
-              "explanation": "React.memo wraps the component function. The hooks stay inside the function component — the wrapper is external."
-            },
-            {
-              "id": "quiz-react-s7-q4",
-              "type": "blank",
-              "prompt": "When should you NOT use useCallback?",
-              "answers": [
-                "when the callback is not passed to a memoized child",
-                "when there are no children"
-              ],
-              "explanation": "useCallback is only useful when a function reference stability matters — i.e. when passing to a memoized child or as a dependency."
-            },
-            {
-              "id": "quiz-react-s7-q5",
-              "type": "identify-error",
-              "prompt": "What is the issue with this component?",
-              "code": "function Item({ data, onClick }) {\n  const processed = expensiveCalc(data)\n  return <div onClick={onClick}>{processed}</div>\n}",
-              "options": [
-                "No issue",
-                "The div has no children",
-                "expensiveCalc runs on every render, should be wrapped in useMemo",
-                "onClick must be useCallback"
-              ],
-              "answer": 2,
-              "explanation": "expensiveCalc(data) runs on every render. If it is genuinely expensive, wrap it in useMemo with data as the dependency."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -25926,65 +9923,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-react-s8",
           "title": "Testing check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-react-s8-q1",
-              "type": "multiple-choice",
-              "prompt": "What does @testing-library/react encourage?",
-              "options": [
-                "Querying by element id",
-                "Querying by display value the way a user would",
-                "Testing implementation details",
-                "Mocking every dependency"
-              ],
-              "answer": 1,
-              "explanation": "Testing Library encourages querying as a user would: by role, text, label, etc. This makes tests resilient to refactors."
-            },
-            {
-              "id": "quiz-react-s8-q2",
-              "type": "true-false",
-              "prompt": "screen.getByRole(\"button\") can find a button even without a test id.",
-              "answer": true,
-              "explanation": "getByRole queries by accessible role, which is more robust than test IDs and matches how users perceive the UI."
-            },
-            {
-              "id": "quiz-react-s8-q3",
-              "type": "multiple-choice",
-              "prompt": "Which function finds elements that appear after an async action?",
-              "options": [
-                "getByText",
-                "queryByText",
-                "findByText",
-                "waitFor"
-              ],
-              "answer": 2,
-              "explanation": "findByText returns a promise that resolves when the element appears, retrying until it times out."
-            },
-            {
-              "id": "quiz-react-s8-q4",
-              "type": "blank",
-              "prompt": "What Testing Library function returns null instead of throwing when not found?",
-              "answers": [
-                "queryByText",
-                "queryBy"
-              ],
-              "explanation": "The query* family returns null when not found, unlike get* which throws and find* which waits."
-            },
-            {
-              "id": "quiz-react-s8-q5",
-              "type": "identify-error",
-              "prompt": "What is wrong with this test approach?",
-              "code": "const container = render(<App />)\nconst button = container.querySelector(\".submit\")\nbutton.click()",
-              "options": [
-                "querySelector is slower than getBy",
-                "querySelector bypasses Testing Library and should be avoided for queries",
-                "It is missing an await",
-                "The render result is wrong"
-              ],
-              "answer": 1,
-              "explanation": "Testing Library recommends using screen queries (getByRole, getByText) rather than container.querySelector, because the former matches how users interact."
-            }
-          ]
+          "questionCount": 5
         }
       },
       {
@@ -26062,65 +10001,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-react-s9",
           "title": "Dashboard Application check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-react-s9-q1",
-              "type": "multiple-choice",
-              "prompt": "What is the purpose of a layout route?",
-              "options": [
-                "To group routes that share a common UI",
-                "To speed up builds",
-                "To define API endpoints",
-                "To handle 404 pages"
-              ],
-              "answer": 0,
-              "explanation": "Layout routes share a common element (header, sidebar, etc.) across multiple child routes without duplicating it."
-            },
-            {
-              "id": "quiz-react-s9-q2",
-              "type": "true-false",
-              "prompt": "React Context is the best solution for state used by less than 3 components.",
-              "answer": false,
-              "explanation": "Context adds complexity. For simple prop passing, use props. Context shines when many components at different levels need the same data."
-            },
-            {
-              "id": "quiz-react-s9-q3",
-              "type": "multiple-choice",
-              "prompt": "Which testing approach is most robust?",
-              "options": [
-                "Querying by test ID exclusively",
-                "Querying by display value and role",
-                "Querying by class name",
-                "Querying by element type"
-              ],
-              "answer": 1,
-              "explanation": "Testing Library prioritizes role, text, label, and display queries — the same way users find things on the page."
-            },
-            {
-              "id": "quiz-react-s9-q4",
-              "type": "blank",
-              "prompt": "What hook provides typed context to descendants?",
-              "answers": [
-                "useContext",
-                "useContext<ContextType>"
-              ],
-              "explanation": "useContext returns the current context value, typed by the Context<T> you created."
-            },
-            {
-              "id": "quiz-react-s9-q5",
-              "type": "identify-error",
-              "prompt": "What does React.memo not help with?",
-              "code": "// A list of 1000 memoized items, each receiving a new inline object as prop",
-              "options": [
-                "Passing a new object literal as a prop every render defeats memoization",
-                "The items are not memoized themselves",
-                "React.memo is not needed for lists",
-                "Inline objects are always fast"
-              ],
-              "answer": 0,
-              "explanation": "React.memo does a shallow comparison of props. If you pass a new object literal each render, the comparison always fails and memoization is wasted."
-            }
-          ]
+          "questionCount": 5
         }
       }
     ]
@@ -26193,66 +10074,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-fp-s1",
           "title": "Project foundations check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-fp-s1-q1",
-              "type": "multiple-choice",
-              "prompt": "What is the first step when starting a frontend project?",
-              "options": [
-                "Write the CSS styles",
-                "Write the HTML structure",
-                "Set up the JavaScript logic",
-                "Pick a color scheme"
-              ],
-              "answer": 1,
-              "explanation": "Start with HTML structure: semantics and content come first, then styling, then behavior."
-            },
-            {
-              "id": "quiz-fp-s1-q2",
-              "type": "true-false",
-              "prompt": "Progressive enhancement means building with JavaScript first and adding HTML as a fallback.",
-              "answer": false,
-              "explanation": "Progressive enhancement means building from core HTML content upward, adding CSS for layout and styling, then JavaScript for enhanced behavior."
-            },
-            {
-              "id": "quiz-fp-s1-q3",
-              "type": "multiple-choice",
-              "prompt": "Which CSS layout method is best for two-dimensional layouts?",
-              "options": [
-                "Flexbox",
-                "Float",
-                "Grid",
-                "Positioning"
-              ],
-              "answer": 2,
-              "explanation": "CSS Grid handles two dimensions (rows and columns). Flexbox is one-dimensional and best for single-axis layouts."
-            },
-            {
-              "id": "quiz-fp-s1-q4",
-              "type": "blank",
-              "prompt": "What does a <section> element represent?",
-              "answers": [
-                "a thematic grouping of content",
-                "a section of content",
-                "a content section"
-              ],
-              "explanation": "A section element groups related content, typically with a heading."
-            },
-            {
-              "id": "quiz-fp-s1-q5",
-              "type": "identify-error",
-              "prompt": "What is wrong with this approach?",
-              "code": "<div class=\"header\">\n  <div class=\"logo\">Brand</div>\n  <div class=\"nav\">...</div>\n</div>",
-              "options": [
-                "Nothing — divs are fine",
-                "Should use header for the top banner and nav for navigation",
-                "Class names should be lowercase",
-                "There is no closing tag"
-              ],
-              "answer": 1,
-              "explanation": "Use semantic elements: <header> for the top banner, <nav> for navigation. This conveys meaning to assistive technology."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Foundations"
       },
@@ -26292,66 +10114,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-fp-s2",
           "title": "Responsive Design check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-fp-s2-q1",
-              "type": "multiple-choice",
-              "prompt": "What does \"mobile-first\" mean in CSS?",
-              "options": [
-                "Designing for phones only",
-                "Writing styles for mobile first, then adding breakpoints for larger screens",
-                "Testing on a phone first",
-                "Using media queries that only target mobile"
-              ],
-              "answer": 1,
-              "explanation": "Mobile-first means your base styles target the smallest screen, and media queries add complexity for larger screens."
-            },
-            {
-              "id": "quiz-fp-s2-q2",
-              "type": "true-false",
-              "prompt": "The viewport meta tag is not needed if you use responsive CSS.",
-              "answer": false,
-              "explanation": "Without a viewport meta tag, mobile browsers render at a virtual width and your responsive CSS has no effect."
-            },
-            {
-              "id": "quiz-fp-s2-q3",
-              "type": "multiple-choice",
-              "prompt": "Which unit scales with the root font size?",
-              "options": [
-                "px",
-                "em",
-                "rem",
-                "vh"
-              ],
-              "answer": 2,
-              "explanation": "rem is relative to the root element's font size, making it ideal for consistent scaling."
-            },
-            {
-              "id": "quiz-fp-s2-q4",
-              "type": "blank",
-              "prompt": "What attribute on img offers the browser several candidate files to choose from?",
-              "answers": [
-                "srcset",
-                "sizes",
-                "the srcset attribute"
-              ],
-              "explanation": "srcset lists the candidates and sizes describes how wide the image will be displayed, so the browser can pick the smallest one that still looks sharp."
-            },
-            {
-              "id": "quiz-fp-s2-q5",
-              "type": "identify-error",
-              "prompt": "What is the problem with this CSS?",
-              "code": "@media (min-width: 768px) {\n  .card { width: 50%; }\n}\n@media (max-width: 768px) {\n  .card { width: 100%; }\n}",
-              "options": [
-                "Nothing is wrong",
-                "Using min-width and max-width for the same breakpoint double-applies at 768px",
-                "The card should use flex instead",
-                "Both media queries should use min-width"
-              ],
-              "answer": 3,
-              "explanation": "Using both min-width and max-width at the same breakpoint creates ambiguity at exactly 768px. Stick to one direction (usually min-width/mobile-first)."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Build skills"
       },
@@ -26391,65 +10154,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-fp-s3",
           "title": "Accessibility check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-fp-s3-q1",
-              "type": "multiple-choice",
-              "prompt": "Which should you use first for accessibility?",
-              "options": [
-                "ARIA attributes",
-                "Native HTML elements with built-in semantics",
-                "JavaScript event handlers",
-                "CSS :focus-visible"
-              ],
-              "answer": 1,
-              "explanation": "Native elements like button, label, nav, and section have built-in semantics. Use ARIA only when native semantics are not enough."
-            },
-            {
-              "id": "quiz-fp-s3-q2",
-              "type": "true-false",
-              "prompt": "Every form input must have an id.",
-              "answer": false,
-              "explanation": "An input needs an id only if it is associated with a label via for. A label can also wrap the input, which does not need an id."
-            },
-            {
-              "id": "quiz-fp-s3-q3",
-              "type": "multiple-choice",
-              "prompt": "What does aria-live do?",
-              "options": [
-                "Makes an element visible",
-                "Announces changes to the element to screen readers",
-                "Adds keyboard navigation",
-                "Hides the element from all users"
-              ],
-              "answer": 1,
-              "explanation": "aria-live tells screen readers to announce content changes in that region, useful for status messages and alerts."
-            },
-            {
-              "id": "quiz-fp-s3-q4",
-              "type": "blank",
-              "prompt": "What CSS pseudo-class shows focus only for keyboard users?",
-              "answers": [
-                ":focus-visible",
-                "focus-visible"
-              ],
-              "explanation": ":focus-visible shows focus only when the user is navigating with the keyboard, not on mouse click."
-            },
-            {
-              "id": "quiz-fp-s3-q5",
-              "type": "identify-error",
-              "prompt": "What is wrong with this control?",
-              "code": "<div onclick=\"handleClick()\">Click me</div>",
-              "options": [
-                "Nothing is wrong",
-                "A div is not keyboard accessible and should be a button",
-                "onclick should be on:click",
-                "The function call is wrong"
-              ],
-              "answer": 1,
-              "explanation": "A div is not focusable by default and does not respond to Enter. Use a <button> element which is natively keyboard-accessible."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Build skills"
       },
@@ -26489,65 +10194,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-fp-s4",
           "title": "Profile page check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-fp-s4-q1",
-              "type": "multiple-choice",
-              "prompt": "Which element should contain the page's unique primary content?",
-              "options": [
-                "<section>",
-                "<main>",
-                "<article>",
-                "<div>"
-              ],
-              "answer": 1,
-              "explanation": "main is the landmark for the primary content of the page. A page has one main region, and it is the fastest way for assistive technology to skip the repeated header and navigation."
-            },
-            {
-              "id": "quiz-fp-s4-q2",
-              "type": "true-false",
-              "prompt": "Every image must have a non-empty alt attribute.",
-              "answer": false,
-              "explanation": "A decorative image should use alt=\"\" so it is skipped. A meaningful image needs descriptive alt text; omitting the attribute entirely is the mistake."
-            },
-            {
-              "id": "quiz-fp-s4-q3",
-              "type": "multiple-choice",
-              "prompt": "Why give a profile image explicit width and height attributes?",
-              "options": [
-                "To make the file smaller",
-                "To reserve space and avoid layout shift while it loads",
-                "To improve the colour accuracy",
-                "To add a border automatically"
-              ],
-              "answer": 1,
-              "explanation": "The browser can reserve the correct box before the image arrives, so the text does not jump when it loads."
-            },
-            {
-              "id": "quiz-fp-s4-q4",
-              "type": "blank",
-              "prompt": "The HTML element used for the page's primary content is ___.",
-              "answers": [
-                "main",
-                "<main>"
-              ],
-              "explanation": "main is the landmark that holds the content unique to this page."
-            },
-            {
-              "id": "quiz-fp-s4-q5",
-              "type": "identify-error",
-              "prompt": "What is wrong with this heading outline?",
-              "code": "<h1>Alex Rivera</h1>\n<h3>About</h3>\n<h3>Skills</h3>\n<h3>Contact</h3>",
-              "options": [
-                "There is more than one heading",
-                "The section headings skip h2",
-                "Headings must be inside a div",
-                "h1 should come last"
-              ],
-              "answer": 1,
-              "explanation": "The outline jumps from h1 to h3. The three peer sections should use h2, so the document has no missing level."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Capstone builds"
       },
@@ -26587,65 +10234,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-fp-s5",
           "title": "Responsive landing page check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-fp-s5-q1",
-              "type": "multiple-choice",
-              "prompt": "What does mobile-first mean in practice?",
-              "options": [
-                "The base styles describe the narrow layout, and wider layouts are added with min-width queries",
-                "The page is designed at 1440px and then shrunk with max-width queries",
-                "The page hides content on phones",
-                "JavaScript chooses the layout after the page loads"
-              ],
-              "answer": 0,
-              "explanation": "The unqualified rules are the narrow layout. Add a min-width breakpoint only when the content needs more room."
-            },
-            {
-              "id": "quiz-fp-s5-q2",
-              "type": "true-false",
-              "prompt": "A responsive page needs a breakpoint for every popular phone size.",
-              "answer": false,
-              "explanation": "Breakpoints belong where the content breaks, not where a particular device happens to sit. One well-chosen breakpoint is often enough."
-            },
-            {
-              "id": "quiz-fp-s5-q3",
-              "type": "multiple-choice",
-              "prompt": "Why wrap the content in a max-width container?",
-              "options": [
-                "To stop images from loading",
-                "To keep line length readable on very wide screens",
-                "To replace CSS grid",
-                "To make the page scroll horizontally"
-              ],
-              "answer": 1,
-              "explanation": "A maximum width keeps text lines from becoming too long to read comfortably while still allowing the layout to shrink on small screens."
-            },
-            {
-              "id": "quiz-fp-s5-q4",
-              "type": "blank",
-              "prompt": "The CSS at-rule used to apply styles at a viewport width is ___.",
-              "answers": [
-                "@media",
-                "media"
-              ],
-              "explanation": "@media wraps rules that only apply when the condition, such as min-width, matches."
-            },
-            {
-              "id": "quiz-fp-s5-q5",
-              "type": "identify-error",
-              "prompt": "Why does this hero overflow on a phone?",
-              "code": ".hero {\n  height: 600px;\n  padding: 4rem 2rem;\n}\n.hero img {\n  width: 1200px;\n}",
-              "options": [
-                "Grid is missing",
-                "The fixed height and 1200px image cannot shrink to the viewport",
-                "The padding uses rem instead of px",
-                "The hero needs a media query inside the image"
-              ],
-              "answer": 1,
-              "explanation": "A fixed image width wider than the viewport causes horizontal overflow, and a fixed height cannot accommodate wrapped content. Use max-width: 100% and let the height follow the content."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Capstone builds"
       },
@@ -26685,68 +10274,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-fp-s6",
           "title": "Calculator check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-fp-s6-q1",
-              "type": "multiple-choice",
-              "prompt": "Where should the calculator keep the number being typed?",
-              "options": [
-                "Only in the display text, read back on every press",
-                "In a JavaScript variable, with the display rendered from it",
-                "In a cookie",
-                "In a CSS custom property"
-              ],
-              "answer": 1,
-              "explanation": "The variables are the source of truth. Reading the display back breaks as soon as it contains an operator, a trailing decimal or an error message."
-            },
-            {
-              "id": "quiz-fp-s6-q2",
-              "type": "multiple-choice",
-              "prompt": "Why give every key a data-action attribute?",
-              "options": [
-                "So CSS can style the keypad",
-                "So one delegated click handler can route every press",
-                "So the browser computes the result automatically",
-                "So the keypad works without JavaScript"
-              ],
-              "answer": 1,
-              "explanation": "The handler reads the action and value from the clicked button, so the whole keypad needs one listener instead of one per key."
-            },
-            {
-              "id": "quiz-fp-s6-q3",
-              "type": "multiple-choice",
-              "prompt": "What should pressing 5, +, ×, 4, = produce?",
-              "options": [
-                "Two operators in a row",
-                "20, because × replaces +",
-                "0, because the first operator wins",
-                "A syntax error"
-              ],
-              "answer": 1,
-              "explanation": "A second operator pressed while waiting for the next number replaces the pending operator. The calculation becomes 5 × 4."
-            },
-            {
-              "id": "quiz-fp-s6-q4",
-              "type": "true-false",
-              "prompt": "A decimal point can appear more than once in the same number.",
-              "answer": false,
-              "explanation": "The decimal handler should ignore the press when current already contains a dot, so typing 1.2.3 stays a valid number."
-            },
-            {
-              "id": "quiz-fp-s6-q5",
-              "type": "identify-error",
-              "prompt": "Why is this a poor way to evaluate the expression?",
-              "code": "const result = eval(display.textContent);",
-              "options": [
-                "eval is slower than a button",
-                "It executes arbitrary text and cannot handle repeated operators safely",
-                "display.textContent is always a number",
-                "It needs a semicolon"
-              ],
-              "answer": 1,
-              "explanation": "eval runs whatever string is on screen and turns malformed input into a syntax error. A compute function with explicit branches is safer and easier to test."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Capstone builds"
       },
@@ -26786,65 +10314,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-fp-s7",
           "title": "Todo application check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-fp-s7-q1",
-              "type": "multiple-choice",
-              "prompt": "What is the source of truth for the todo list?",
-              "options": [
-                "The rendered list items",
-                "The task array in JavaScript",
-                "The localStorage key alone",
-                "The filter buttons"
-              ],
-              "answer": 1,
-              "explanation": "The array is the state. The list, count and empty state are all rendered from it after every change."
-            },
-            {
-              "id": "quiz-fp-s7-q2",
-              "type": "multiple-choice",
-              "prompt": "Why give each task a stable id instead of using its array index?",
-              "options": [
-                "Indexes are not numbers",
-                "Filtering and reordering change the index, so a row can act on the wrong task",
-                "localStorage cannot store arrays",
-                "Ids make the text longer"
-              ],
-              "answer": 1,
-              "explanation": "The index describes a position, not a task. A stable id keeps toggle and delete pointed at the same task through every filter change."
-            },
-            {
-              "id": "quiz-fp-s7-q3",
-              "type": "true-false",
-              "prompt": "If the stored JSON is corrupt, the app should throw so the problem is visible.",
-              "answer": false,
-              "explanation": "A corrupt value should fall back to an empty list. The app remains usable, and the person does not lose the page because of one bad key."
-            },
-            {
-              "id": "quiz-fp-s7-q4",
-              "type": "blank",
-              "prompt": "The attribute that marks the current filter button as pressed is ___.",
-              "answers": [
-                "aria-pressed",
-                "aria pressed"
-              ],
-              "explanation": "aria-pressed exposes a toggle button's state to assistive technology, so the current filter is announced rather than only coloured."
-            },
-            {
-              "id": "quiz-fp-s7-q5",
-              "type": "identify-error",
-              "prompt": "What is the main problem with this render code?",
-              "code": "list.innerHTML += `<li>${task.title}</li>`;",
-              "options": [
-                "It is too slow to type",
-                "The title is inserted as HTML, and every render destroys the existing rows and focus",
-                "It needs a semicolon",
-                "localStorage does not allow lists"
-              ],
-              "answer": 1,
-              "explanation": "User text must not become markup, and replacing the whole list on every change loses focus and state. Create elements and set textContent instead."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Capstone builds"
       },
@@ -26884,68 +10354,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-fp-s8",
           "title": "Quiz application check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-fp-s8-q1",
-              "type": "multiple-choice",
-              "prompt": "Why keep the questions in a JavaScript array instead of writing each one into the HTML?",
-              "options": [
-                "Arrays load faster than HTML",
-                "One render function can show any question, and the score can read the same data",
-                "HTML cannot contain questions",
-                "It makes the answer key secret"
-              ],
-              "answer": 1,
-              "explanation": "The array is the single source of truth. The question screen, progress, score and review all derive from it."
-            },
-            {
-              "id": "quiz-fp-s8-q2",
-              "type": "true-false",
-              "prompt": "Options should stay clickable after a question has been answered.",
-              "answer": false,
-              "explanation": "The options should be disabled after the first answer, so one question cannot be answered twice and the recorded score cannot change."
-            },
-            {
-              "id": "quiz-fp-s8-q3",
-              "type": "multiple-choice",
-              "prompt": "With 4 correct answers out of 5 questions, what percentage should be shown?",
-              "options": [
-                "40%",
-                "75%",
-                "80%",
-                "90%"
-              ],
-              "answer": 2,
-              "explanation": "4 / 5 = 0.8, which is 80% when multiplied by 100 and rounded."
-            },
-            {
-              "id": "quiz-fp-s8-q4",
-              "type": "multiple-choice",
-              "prompt": "What belongs on the results screen besides the score?",
-              "options": [
-                "Only the score",
-                "A per-question review with the explanation",
-                "The source code of the quiz",
-                "A second copy of every option"
-              ],
-              "answer": 1,
-              "explanation": "The review is what makes the result useful. Each question should show whether it was right and explain the answer."
-            },
-            {
-              "id": "quiz-fp-s8-q5",
-              "type": "identify-error",
-              "prompt": "Why is this restart incomplete?",
-              "code": "function restart() {\n  index = 0;\n  resultsEl.hidden = true;\n  questionArea.hidden = false;\n  renderQuestion();\n}",
-              "options": [
-                "It forgets to reset answers and locked",
-                "It renders the first question twice",
-                "It should reload the page",
-                "It needs a new question array"
-              ],
-              "answer": 0,
-              "explanation": "The previous answers are still in the array, so the next attempt starts with the old score. Reset answers and locked as well."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Capstone builds"
       },
@@ -26985,68 +10394,7 @@ export const courseMeta: CourseMeta[] = [
           "id": "quiz-fp-s9",
           "title": "Ship and present check",
           "passingScore": 60,
-          "questions": [
-            {
-              "id": "quiz-fp-s9-q1",
-              "type": "multiple-choice",
-              "prompt": "A project is hosted at /my-project/. Which stylesheet link works there?",
-              "options": [
-                "<link rel=\"stylesheet\" href=\"/style.css\">",
-                "<link rel=\"stylesheet\" href=\"style.css\">",
-                "<link rel=\"stylesheet\" href=\"file:///style.css\">",
-                "<link rel=\"stylesheet\" href=\"localhost/style.css\">"
-              ],
-              "answer": 1,
-              "explanation": "A relative path resolves from the page's own folder, so it works at the root and under a subpath. A leading slash resolves from the domain root."
-            },
-            {
-              "id": "quiz-fp-s9-q2",
-              "type": "true-false",
-              "prompt": "An API key placed in a front-end JavaScript file is hidden from visitors.",
-              "answer": false,
-              "explanation": "Every file the browser runs is public. A private key needs a backend or serverless function; a static host cannot keep it secret."
-            },
-            {
-              "id": "quiz-fp-s9-q3",
-              "type": "multiple-choice",
-              "prompt": "What should a project README include first?",
-              "options": [
-                "A list of every CSS property used",
-                "What the project is, a live link and how to run it",
-                "The entire source code",
-                "A promise of features that are not built"
-              ],
-              "answer": 1,
-              "explanation": "The README answers the first questions a visitor has: what is this, where can I see it, and how do I run it."
-            },
-            {
-              "id": "quiz-fp-s9-q4",
-              "type": "multiple-choice",
-              "prompt": "Which portfolio entry is strongest?",
-              "options": [
-                "Built a todo app with HTML, CSS and JavaScript.",
-                "Used localStorage and CSS grid.",
-                "The list had to survive a reload without a backend, so every change writes one JSON array and renders from it.",
-                "A beautiful modern responsive website."
-              ],
-              "answer": 2,
-              "explanation": "It names the constraint, the decision and the tradeoff. That is the part an interviewer cannot infer from the source alone."
-            },
-            {
-              "id": "quiz-fp-s9-q5",
-              "type": "identify-error",
-              "prompt": "What is wrong with committing this file?",
-              "code": "// config.js\nconst API_KEY = \"sk-live-123456789\";\nexport { API_KEY };",
-              "options": [
-                "The variable name is too short",
-                "The secret is public in the deployed JavaScript and must be removed and rotated",
-                "It should use var instead of const",
-                "It needs a semicolon"
-              ],
-              "answer": 1,
-              "explanation": "Static files are downloaded by every visitor. Remove the key from the repository, rotate it, and call the API through a server or serverless function that can keep a secret."
-            }
-          ]
+          "questionCount": 5
         },
         "chapter": "Ship it"
       }

@@ -177,7 +177,15 @@ const lesson = computed(() => {
 
 const { isLessonComplete, isExerciseComplete, completeLesson, visitLesson } = useLearningProgress()
 
-useHead({ title: computed(() => lesson.value?.title ?? 'Lesson') })
+usePageSeo({
+  title: computed(() => lesson.value?.title ?? 'Lesson'),
+  description: computed(
+    () =>
+      lesson.value?.description ??
+      'A short guided lesson with a live example, an exercise and a section quiz.',
+  ),
+  type: 'article',
+})
 
 const drawerOpen = ref(false)
 const drawerEl = ref<HTMLElement | null>(null)

@@ -326,6 +326,30 @@ export interface Section {
   chapter?: string
 }
 
+export type ProjectGroup = 'core' | 'html' | 'css' | 'javascript' | 'typescript' | 'react'
+
+/**
+ * The catalogue-facing half of a project. The brief, starter files, design
+ * reference and checklist travel with the project module, which `loadProject`
+ * imports when a workspace is opened. Cards, search, course summaries and
+ * lesson callouts only need this much.
+ */
+export interface ProjectSummary {
+  id: string
+  slug: string
+  title: string
+  tagline: string
+  summary: string
+  difficulty: Difficulty
+  technologies: Technology[]
+  estimatedMinutes: number
+  xp: number
+  /** Total checklist items, for the lesson callout. */
+  checklistCount: number
+  /** Which module owns the full project. */
+  group: ProjectGroup
+}
+
 export interface Project {
   id: string
   slug: string
@@ -406,7 +430,7 @@ export interface Course {
  * A course with everything the catalogue needs and none of the lesson
  * bodies. The metadata is bundled eagerly so navigation, search and stats
  * work without downloading a single lesson; the bodies load on demand
- * through `loadCourse`.
+ * through `loadLesson` / `loadSection`.
  */
 export interface CourseLessonMeta {
   id: string
@@ -419,13 +443,23 @@ export interface CourseLessonMeta {
   exerciseCount: number
 }
 
+/**
+ * The catalogue-facing half of a quiz. Question bodies travel with the section
+ * module, so a lesson list does not download every explanation in the course.
+ */
+export interface QuizSummary {
+  id: string
+  title: string
+  passingScore: number
+  questionCount: number
+}
+
 export interface CourseSectionMeta {
   id: string
   title: string
   description: string
   lessons: CourseLessonMeta[]
-  /** Quizzes are small, so they travel with the metadata. */
-  quiz?: Quiz
+  quiz?: QuizSummary
   /** Presentation grouping; see `Section.chapter`. */
   chapter?: string
 }

@@ -68,6 +68,11 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       /**
+       * The public origin used for canonical URLs and the sitemap. Deployment
+       * can override it without touching the pages.
+       */
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL ?? 'https://codeingot-7a761.web.app',
+      /**
        * Firebase web app config for project codeingot-7a761. These values are
        * public by design: they identify the project but grant no access on their
        * own, and Firestore is gated by security rules rather than by hiding them.

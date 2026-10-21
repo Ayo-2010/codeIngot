@@ -50,7 +50,11 @@
 
 <script setup lang="ts">
 definePageMeta({ layout: 'reference' })
-useHead({ title: 'HTML reference' })
+usePageSeo({
+  title: 'HTML reference',
+  description:
+    'Every HTML element, attribute and event, grouped by category with syntax, examples and browser notes.',
+})
 
 import { tagSlug } from '~/content/reference/html-tag-pages'
 

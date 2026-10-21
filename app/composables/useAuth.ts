@@ -1,17 +1,6 @@
-import {
-  GoogleAuthProvider,
-  RecaptchaVerifier,
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-  signInWithPhoneNumber,
-  signInWithPopup,
-  signOut as firebaseSignOut,
-  updateProfile,
-} from 'firebase/auth'
-import type { ConfirmationResult, User } from 'firebase/auth'
+import type { ConfirmationResult, RecaptchaVerifier, User } from 'firebase/auth'
+import { loadFirebaseServices } from '~/utils/firebase-services'
 import { readDeviceFingerprint } from '~/utils/device-fingerprint'
-import { clearOtherDeviceSessions, writeDeviceRecord, writeUserProfile } from '~/utils/firebase-store'
 import type { NetworkInfo } from '~~/server/api/device-info.get'
 
 /**
@@ -29,6 +18,8 @@ const phoneConfirmation = ref<ConfirmationResult | null>(null)
 const syncState = ref<'idle' | 'syncing' | 'synced' | 'error'>('idle')
 
 let bound = false
+let binding: Promise<void> | null = null
+let scheduled = false
 let unsubscribe: (() => void) | null = null
 let verifier: RecaptchaVerifier | null = null
 
@@ -91,6 +82,7 @@ async function recordThisDevice() {
   }
 
   try {
+    const { writeDeviceRecord, clearOtherDeviceSessions } = await import('~/utils/firebase-store')
     await writeDeviceRecord({ auth, db }, device, network)
     await clearOtherDeviceSessions({ auth, db }, device.deviceId)
   } catch {
@@ -105,6 +97,7 @@ async function onSignedIn(next: User) {
 
   syncState.value = 'syncing'
   try {
+    const { writeUserProfile } = await import('~/utils/firebase-store')
     await writeUserProfile({ auth, db }, next)
     // Guest progress is merged into the account rather than replacing it.
     await useLearningProgress().refreshFromStorage()
@@ -116,28 +109,61 @@ async function onSignedIn(next: User) {
   await recordThisDevice()
 }
 
-function bindListener() {
-  if (bound) return
-  const services = useFirebase()
-  if (!services) {
-    // No Firebase: the learner stays anonymous and the app stays local-only.
-    ready.value = true
-    bound = true
-    return
+/**
+ * Firebase is deliberately not imported until it is needed. Waiting for an idle
+ * moment keeps the SDK out of the critical path while still restoring a
+ * returning learner's session shortly after the page settles.
+ */
+function scheduleBind() {
+  if (!import.meta.client || scheduled) return
+  scheduled = true
+  const run = () => {
+    void bindListener()
   }
-  bound = true
-  unsubscribe = onAuthStateChanged(services.auth, async (next) => {
-    const previousUid = user.value?.uid
-    user.value = next
-    if (next && next.uid !== previousUid) {
-      await onSignedIn(next)
+  if (typeof window.requestIdleCallback === 'function') {
+    window.requestIdleCallback(run, { timeout: 4000 })
+  } else {
+    setTimeout(run, 2500)
+  }
+}
+
+function bindListener() {
+  if (bound) return Promise.resolve()
+  if (binding) return binding
+
+  binding = (async () => {
+    const services = await loadFirebaseServices()
+    if (!services) {
+      // No Firebase: the learner stays anonymous and the app stays local-only.
+      ready.value = true
+      bound = true
+      return
     }
-    ready.value = true
-  })
+
+    const { onAuthStateChanged } = await import('firebase/auth')
+    bound = true
+    unsubscribe = onAuthStateChanged(services.auth, async (next) => {
+      const previousUid = user.value?.uid
+      user.value = next
+      if (next && next.uid !== previousUid) {
+        await onSignedIn(next)
+      }
+      ready.value = true
+    })
+  })()
+    .catch(() => {
+      ready.value = true
+      bound = true
+    })
+    .finally(() => {
+      binding = null
+    })
+
+  return binding
 }
 
 export function useAuth() {
-  bindListener()
+  scheduleBind()
 
   const isSignedIn = computed(() => user.value !== null)
   const displayName = computed(
@@ -155,6 +181,7 @@ export function useAuth() {
     busy.value = true
     errorMessage.value = null
     try {
+      await bindListener()
       return await task()
     } catch (error) {
       errorMessage.value = explain(error)
@@ -164,10 +191,16 @@ export function useAuth() {
     }
   }
 
+  async function servicesForAuth() {
+    const services = await loadFirebaseServices()
+    if (!services) throw new Error('Sign-in is unavailable on this build.')
+    return services
+  }
+
   function signUpWithEmail(email: string, password: string, display: string) {
     return run(async () => {
-      const services = useFirebase()
-      if (!services) throw new Error('Sign-in is unavailable on this build.')
+      const services = await servicesForAuth()
+      const { createUserWithEmailAndPassword, updateProfile } = await import('firebase/auth')
       const credential = await createUserWithEmailAndPassword(services.auth, email, password)
       if (display.trim()) {
         await updateProfile(credential.user, { displayName: display.trim() })
@@ -178,8 +211,8 @@ export function useAuth() {
 
   function signInWithEmail(email: string, password: string) {
     return run(async () => {
-      const services = useFirebase()
-      if (!services) throw new Error('Sign-in is unavailable on this build.')
+      const services = await servicesForAuth()
+      const { signInWithEmailAndPassword } = await import('firebase/auth')
       const credential = await signInWithEmailAndPassword(services.auth, email, password)
       return credential.user
     })
@@ -187,8 +220,8 @@ export function useAuth() {
 
   function signInWithGoogle() {
     return run(async () => {
-      const services = useFirebase()
-      if (!services) throw new Error('Sign-in is unavailable on this build.')
+      const services = await servicesForAuth()
+      const { GoogleAuthProvider, signInWithPopup } = await import('firebase/auth')
       const credential = await signInWithPopup(services.auth, new GoogleAuthProvider())
       return credential.user
     })
@@ -200,8 +233,8 @@ export function useAuth() {
    */
   async function sendPhoneCode(phone: string) {
     return run(async () => {
-      const services = useFirebase()
-      if (!services) throw new Error('Sign-in is unavailable on this build.')
+      const services = await servicesForAuth()
+      const { RecaptchaVerifier, signInWithPhoneNumber } = await import('firebase/auth')
       await nextTick()
       if (!document.getElementById('recaptcha-container')) {
         throw new Error('The sign-in form is not ready yet. Try again.')
@@ -235,7 +268,10 @@ export function useAuth() {
 
   async function signOut() {
     phoneConfirmation.value = null
-    await firebaseSignOut(useFirebase()!.auth).catch(() => {
+    const services = await loadFirebaseServices()
+    if (!services) return
+    const { signOut: firebaseSignOut } = await import('firebase/auth')
+    await firebaseSignOut(services.auth).catch(() => {
       /* already signed out */
     })
   }

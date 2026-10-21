@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { allProjectsList, courseChapters } from '~/composables/useCourses'
 import { courseMeta } from '~/content/courses/meta'
+import { sectionLoaderIds } from '~/content/courses/section-loaders'
 import { cssFundamentals } from '~/content/courses/css-fundamentals'
 import { domBrowserApisCourse } from '~/content/courses/dom-browser-apis-course'
 import { frontendProjectsCourse } from '~/content/courses/frontend-projects-course'
@@ -191,6 +192,29 @@ describe('course content invariants', () => {
       const meta = courseMeta.find((item) => item.slug === course.slug)
       expect(meta, course.slug).toBeDefined()
       expect(summarise(meta!), course.slug).toEqual(summarise(course))
+    }
+  })
+
+  it('has a section loader for every section in the catalogue', () => {
+    const expected = courses.flatMap((course) => course.sections.map((section) => section.id)).sort()
+    expect([...sectionLoaderIds].sort()).toEqual(expected)
+  })
+
+  it('ships quiz counts without question bodies in the eager metadata', () => {
+    for (const course of courses) {
+      const meta = courseMeta.find((item) => item.slug === course.slug)!
+      for (const section of meta.sections) {
+        const full = course.sections.find((item) => item.id === section.id)?.quiz
+        if (!full) {
+          expect(section.quiz, section.id).toBeUndefined()
+          continue
+        }
+        expect(section.quiz, section.id).toBeDefined()
+        expect(section.quiz!.id).toBe(full.id)
+        expect(section.quiz!.passingScore).toBe(full.passingScore)
+        expect(section.quiz!.questionCount).toBe(full.questions.length)
+        expect(section.quiz).not.toHaveProperty('questions')
+      }
     }
   })
 })

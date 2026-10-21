@@ -77,3 +77,14 @@ test('a capstone lesson hands off to the project workspace', async ({ page }) =>
     '/projects/personal-profile-page',
   )
 })
+
+test('a project workspace loads its brief and checklist after the lazy load', async ({ page }) => {
+  await gotoHydrated(page, '/projects/personal-profile-page')
+
+  await expect(
+    page.getByRole('heading', { level: 1, name: 'Personal Profile Page' }),
+  ).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Brief' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Checklist' })).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Download folder' })).toBeVisible()
+})

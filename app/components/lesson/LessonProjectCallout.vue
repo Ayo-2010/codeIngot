@@ -23,7 +23,7 @@
         </div>
         <div class="flex items-baseline gap-1.5">
           <dt>Checks</dt>
-          <dd class="text-mist-50">{{ project.checklist.length }}</dd>
+          <dd class="text-mist-50">{{ project.checklistCount }}</dd>
         </div>
       </dl>
 
@@ -44,7 +44,7 @@ import { renderInline } from '~/utils/inline-markdown'
 
 const props = defineProps<{ block: ProjectBlock }>()
 
-const project = computed(() => getProject(props.block.projectSlug))
+const project = computed(() => getProjectSummary(props.block.projectSlug))
 
 function inline(value: string) {
   return renderInline(value)

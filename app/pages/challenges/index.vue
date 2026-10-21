@@ -57,7 +57,11 @@
 const all = allChallenges()
 const { progress } = useLearningProgress()
 
-useHead({ title: 'Challenges' })
+usePageSeo({
+  title: 'Challenges',
+  description:
+    'Practise HTML, CSS and JavaScript with browser-checked challenges that test the page you actually built.',
+})
 
 const technology = ref('all')
 const difficulty = ref('all')

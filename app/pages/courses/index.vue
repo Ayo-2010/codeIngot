@@ -120,7 +120,11 @@ import type { CourseCategory, Difficulty } from '~/types/content'
 const { courses } = useCourses()
 const { courseProgressPercent } = useLearningProgress()
 
-useHead({ title: 'Courses' })
+usePageSeo({
+  title: 'Courses',
+  description:
+    'Browse the full frontend curriculum: HTML, CSS, JavaScript, DOM APIs, responsive design, Git, TypeScript, React and project builds.',
+})
 
 const search = ref('')
 const category = ref<'all' | CourseCategory>('all')

@@ -169,7 +169,11 @@
 import type { CourseMeta } from '~/types/content'
 import { jsPDF } from 'jspdf'
 
-useHead({ title: 'Progress' })
+usePageSeo({
+  title: 'Progress',
+  description: 'Your private lesson, quiz and project progress.',
+  noindex: true,
+})
 
 const { courses } = useCourses()
 const { progress, totals, streak, streakWeek, courseProgressPercent, resetProgress, exportProgress } =

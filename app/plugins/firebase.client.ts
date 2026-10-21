@@ -1,16 +1,20 @@
-import { getApp, getApps, initializeApp } from 'firebase/app'
-import { browserLocalPersistence, getAuth, setPersistence } from 'firebase/auth'
-import { getFirestore } from 'firebase/firestore'
+import {
+  loadFirebaseServices,
+  setFirebaseLoader,
+  setFirebaseServices,
+} from '~/utils/firebase-services'
 import { registerCloudStorage } from '~/utils/progress-storage'
-import { FirestoreProgressStorage } from '~/utils/firebase-store'
-import { setFirebaseServices } from '~/utils/firebase-services'
 
 /**
  * Starts Firebase in the browser and hands progress storage a cloud provider.
  *
+ * The SDK is not imported here. The plugin registers an importer, then warms it
+ * once the page is idle. Signing in is an upgrade, never a requirement, so a
+ * visitor who only reads lessons never downloads the auth and Firestore code.
+ *
  * The plugin is deliberately forgiving: if the config is incomplete or the SDK
  * refuses to start, nothing is registered and the app carries on with
- * localStorage only. Signing in is an upgrade, never a requirement.
+ * localStorage only.
  */
 export default defineNuxtPlugin(() => {
   const config = useRuntimeConfig().public.firebase
@@ -21,20 +25,41 @@ export default defineNuxtPlugin(() => {
     return
   }
 
-  try {
-    const app = getApps().length > 0 ? getApp() : initializeApp(config)
-    const auth = getAuth(app)
-    // Keeps the learner signed in across reloads, which is what makes "your
-    // progress is saved" feel true once an account exists.
-    void setPersistence(auth, browserLocalPersistence).catch(() => {
-      /* private browsing can refuse; the in-memory session still works */
-    })
-    const db = getFirestore(app)
+  setFirebaseLoader(async () => {
+    try {
+      const [appSdk, authSdk, firestoreSdk] = await Promise.all([
+        import('firebase/app'),
+        import('firebase/auth'),
+        import('firebase/firestore'),
+      ])
 
-    setFirebaseServices({ app, auth, db })
-    registerCloudStorage(new FirestoreProgressStorage(() => ({ auth, db })))
-  } catch (error) {
-    console.warn('[firebase] init failed; running with local progress only', error)
-    setFirebaseServices(null)
+      const app = appSdk.getApps().length > 0 ? appSdk.getApp() : appSdk.initializeApp(config)
+      const auth = authSdk.getAuth(app)
+      // Keeps the learner signed in across reloads, which is what makes "your
+      // progress is saved" feel true once an account exists.
+      void authSdk.setPersistence(auth, authSdk.browserLocalPersistence).catch(() => {
+        /* private browsing can refuse; the in-memory session still works */
+      })
+      const db = firestoreSdk.getFirestore(app)
+
+      const { FirestoreProgressStorage } = await import('~/utils/firebase-store')
+      const services = { app, auth, db }
+      setFirebaseServices(services)
+      registerCloudStorage(new FirestoreProgressStorage(() => ({ auth, db })))
+      return services
+    } catch (error) {
+      console.warn('[firebase] init failed; running with local progress only', error)
+      setFirebaseServices(null)
+      return null
+    }
+  })
+
+  const warm = () => {
+    void loadFirebaseServices()
+  }
+  if (typeof window.requestIdleCallback === 'function') {
+    window.requestIdleCallback(warm, { timeout: 4000 })
+  } else {
+    setTimeout(warm, 2500)
   }
 })

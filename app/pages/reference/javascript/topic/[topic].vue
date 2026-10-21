@@ -180,5 +180,14 @@ async function copy(code: string) {
   await navigator.clipboard.writeText(code)
 }
 
-useHead({ title: computed(() => topic.value?.label ?? 'Topic not found') })
+usePageSeo({
+  title: computed(() => topic.value?.label ?? 'Topic not found'),
+  description: computed(
+    () =>
+      topic.value?.summary ??
+      topic.value?.usage ??
+      'A JavaScript reference topic with members, examples and browser notes.',
+  ),
+  type: 'article',
+})
 </script>
