@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test'
 import { gotoHydrated } from './helpers'
 
-const SITE_URL = 'https://codeingot-7a761.web.app'
+const SITE_URL = 'https://codeingot.vercel.app'
 
 /**
  * Search metadata is server-rendered, so these checks read the same tags a
