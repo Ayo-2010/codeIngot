@@ -48,6 +48,10 @@ export default defineNuxtConfig({
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         {
+          name: 'google-site-verification',
+          content: 'OOMrRBi4eYrVRvTFhX1dRDaM3yLq8CgqOV2j4af0etU',
+        },
+        {
           name: 'description',
           content:
             'codeIngot is an interactive HTML, CSS and JavaScript learning platform. Learn by writing code, running it and solving challenges.',
