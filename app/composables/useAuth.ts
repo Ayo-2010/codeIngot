@@ -23,6 +23,31 @@ let scheduled = false
 let unsubscribe: (() => void) | null = null
 let verifier: RecaptchaVerifier | null = null
 
+/**
+ * Firebase persists the session in IndexedDB, which is not readable without
+ * loading the SDK. This tiny flag is enough to know whether a returning visitor
+ * might have a session worth restoring; anonymous visitors never download
+ * Firebase just to discover they are anonymous.
+ */
+const AUTH_HINT_KEY = 'codeingot-auth-hint'
+
+function hasAuthHint(): boolean {
+  try {
+    return window.localStorage.getItem(AUTH_HINT_KEY) === '1'
+  } catch {
+    return false
+  }
+}
+
+function setAuthHint(active: boolean): void {
+  try {
+    if (active) window.localStorage.setItem(AUTH_HINT_KEY, '1')
+    else window.localStorage.removeItem(AUTH_HINT_KEY)
+  } catch {
+    // Private browsing can refuse storage; the in-memory session still works.
+  }
+}
+
 /** Firebase error codes are stable, so they are translated once, here. */
 function explain(error: unknown): string {
   const code = typeof error === 'object' && error !== null && 'code' in error ? String(error.code) : ''
@@ -110,13 +135,16 @@ async function onSignedIn(next: User) {
 }
 
 /**
- * Firebase is deliberately not imported until it is needed. Waiting for an idle
- * moment keeps the SDK out of the critical path while still restoring a
- * returning learner's session shortly after the page settles.
+ * Firebase is deliberately not imported until it is needed. A browser that has
+ * signed in before carries a hint, so only that browser warms the SDK after the
+ * page settles. Anonymous visitors wait until they actually start signing in,
+ * which keeps the auth SDK and its iframe out of the first-load path on mobile.
  */
 function scheduleBind() {
   if (!import.meta.client || scheduled) return
   scheduled = true
+  if (!hasAuthHint()) return
+
   const run = () => {
     void bindListener()
   }
@@ -135,6 +163,7 @@ function bindListener() {
     const services = await loadFirebaseServices()
     if (!services) {
       // No Firebase: the learner stays anonymous and the app stays local-only.
+      setAuthHint(false)
       ready.value = true
       bound = true
       return
@@ -145,6 +174,7 @@ function bindListener() {
     unsubscribe = onAuthStateChanged(services.auth, async (next) => {
       const previousUid = user.value?.uid
       user.value = next
+      setAuthHint(Boolean(next))
       if (next && next.uid !== previousUid) {
         await onSignedIn(next)
       }

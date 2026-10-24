@@ -82,6 +82,30 @@ test('the mobile header menu opens and labels its groups', async ({ page }) => {
   await expect(mobileNav.getByRole('link', { name: 'All courses' })).toBeVisible()
 })
 
+test('the home page does not prefetch route chunks', async ({ page }) => {
+  await gotoHydrated(page, '/')
+
+  // Every dynamic import reachable from the catalogue used to get a prefetch
+  // hint. Those hints downloaded project bodies and Firebase on first load.
+  await expect(page.locator('link[rel="prefetch"][as="script"]')).toHaveCount(0)
+})
+
+test('the home page does not download auth or reference modules', async ({ page }) => {
+  const requested: string[] = []
+  page.on('request', (request) => requested.push(request.url()))
+
+  await gotoHydrated(page, '/')
+  await page.waitForTimeout(1500)
+
+  // The reference libraries used to be module-level `import()` calls, so the
+  // home page pulled the whole HTML/CSS/JS reference before anyone asked for it.
+  // The plugin shim itself is part of the app; the SDK and corpus are not.
+  const eager = requested.filter(
+    (url) => url.includes('/content/reference/') || url.includes('/deps/firebase'),
+  )
+  expect(eager).toEqual([])
+})
+
 test('the sidebar links to the current lesson and reveals it', async ({ page }) => {
   await gotoHydrated(page, '/learn/javascript-fundamentals/js-l65')
 

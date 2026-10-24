@@ -41,6 +41,22 @@ export default defineNuxtConfig({
       include: ['sucrase'],
     },
   },
+  experimental: {
+    defaults: {
+      nuxtLink: {
+        /**
+         * Do not speculate on route chunks merely because a link is visible.
+         * On a phone that races the page's own JavaScript for bandwidth and
+         * pulls in whole project and Firebase payloads the visitor has not
+         * asked for yet. Hover and focus still prefetch ahead of a click.
+         *
+         * `visibility` has to be turned off explicitly: Nuxt merges this
+         * object into its defaults, where visibility prefetching is on.
+         */
+        prefetchOn: { interaction: true, visibility: false },
+      },
+    },
+  },
   app: {
     head: {
       htmlAttrs: { lang: 'en' },

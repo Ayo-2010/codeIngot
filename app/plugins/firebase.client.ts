@@ -1,16 +1,13 @@
-import {
-  loadFirebaseServices,
-  setFirebaseLoader,
-  setFirebaseServices,
-} from '~/utils/firebase-services'
+import { setFirebaseLoader, setFirebaseServices } from '~/utils/firebase-services'
 import { registerCloudStorage } from '~/utils/progress-storage'
 
 /**
  * Starts Firebase in the browser and hands progress storage a cloud provider.
  *
- * The SDK is not imported here. The plugin registers an importer, then warms it
- * once the page is idle. Signing in is an upgrade, never a requirement, so a
- * visitor who only reads lessons never downloads the auth and Firestore code.
+ * The SDK is not imported here. The plugin registers an importer; the auth
+ * composable asks for it only when a remembered session is being restored or
+ * the visitor starts signing in. Signing in is an upgrade, never a requirement,
+ * so a visitor who only reads lessons never downloads the auth and Firestore code.
  *
  * The plugin is deliberately forgiving: if the config is incomplete or the SDK
  * refuses to start, nothing is registered and the app carries on with
@@ -53,13 +50,4 @@ export default defineNuxtPlugin(() => {
       return null
     }
   })
-
-  const warm = () => {
-    void loadFirebaseServices()
-  }
-  if (typeof window.requestIdleCallback === 'function') {
-    window.requestIdleCallback(warm, { timeout: 4000 })
-  } else {
-    setTimeout(warm, 2500)
-  }
 })

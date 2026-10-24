@@ -96,75 +96,182 @@ for (const course of allCourses) {
 }
 
 /**
- * Lazy loaders for reference corpora — each language loads on first use.
-const htmlRefPromise = import('~/content/reference/html').then((m) => ({
-  tags: m.htmlTags,
-  categories: m.htmlTagCategories,
-  globalAttributes: m.htmlGlobalAttributes,
-}))
-const htmlAttrPromise = import('~/content/reference/html-attributes').then((m) => m.htmlAttributes)
-const htmlTagPagesPromise = import('~/content/reference/html-tag-pages').then((m) => ({
-  pages: m.htmlTagPages,
-  findPage: m.findHtmlTagPage,
-}))
-const htmlEventsPromise = import('~/content/reference/html-events').then((m) => m.htmlEvents)
-const htmlNavPromise = import('~/content/reference/html-nav').then((m) => ({
-  navItems: m.htmlNavItems,
-  tagNavItems: m.htmlTagNavItems,
-}))
-const htmlCanvasPromise = import('~/content/reference/html-canvas').then((m) => ({
-  members: m.htmlCanvasMembers,
-  properties: m.htmlCanvasProperties,
-}))
-const htmlSectionsPromise = import('~/content/reference/html-sections').then((m) => ({
-  characterSets: m.htmlCharacterSets,
-  colorNames: m.htmlColorNames,
-  countryCodes: m.htmlCountryCodes,
-  doctypes: m.htmlDoctypes,
-  languageCodes: m.htmlLanguageCodes,
-  httpMethods: m.httpMethods,
-  httpStatuses: m.httpStatuses,
-  keyboardShortcuts: m.keyboardShortcuts,
-  mediaFormats: m.mediaFormats,
-}))
+ * Lazy loaders for reference corpora.
+ *
+ * These used to be module-level `import()` calls. That looks lazy, but the
+ * promise is created as soon as the catalogue module is evaluated, so visiting
+ * the home page started downloading the whole HTML, CSS and JavaScript
+ * reference. Returning the promise from a function defers the import until a
+ * reference page actually asks for it, and the null check keeps it shared.
+ */
+let htmlRefPromise: Promise<{
+  tags: typeof import('~/content/reference/html').htmlTags
+  categories: typeof import('~/content/reference/html').htmlTagCategories
+  globalAttributes: typeof import('~/content/reference/html').htmlGlobalAttributes
+}> | null = null
+function getHtmlReference() {
+  return (htmlRefPromise ??= import('~/content/reference/html').then((m) => ({
+    tags: m.htmlTags,
+    categories: m.htmlTagCategories,
+    globalAttributes: m.htmlGlobalAttributes,
+  })))
+}
 
-const cssPropertiesPromise = import('~/content/reference/css-properties').then((m) => ({
-  properties: m.cssProperties,
-  animatable: m.cssAnimatableProperties,
-  inherited: m.cssInheritedProperties,
-  nonAnimatable: m.cssNonAnimatableProperties,
-  categories: m.cssPropertyCategories,
-}))
-const cssNavPromise = import('~/content/reference/css-nav').then((m) => ({
-  navItems: m.cssNavItems,
-  propertyNavItems: m.cssPropertyNavItems,
-}))
-const cssPropertyPagesPromise = import('~/content/reference/css-property-pages').then((m) => ({
-  pages: m.cssPropertyPages,
-  findPage: m.findCssPropertyPage,
-  propertySlug: m.propertySlug,
-}))
+let htmlAttrPromise: Promise<typeof import('~/content/reference/html-attributes').htmlAttributes> | null = null
+function getHtmlAttributes() {
+  return (htmlAttrPromise ??= import('~/content/reference/html-attributes').then((m) => m.htmlAttributes))
+}
 
-const cssPropertyPagesSlugPromise = import('~/content/reference/css-property-pages').then((m) => m.propertySlug)
-const cssSectionsPromise = import('~/content/reference/css-sections').then((m) => ({
-  auralProperties: m.cssAuralProperties,
-  colorNames: m.cssColorNames,
-  colorValues: m.cssColorValues,
-  entities: m.cssEntities,
-  fontFallbacks: m.cssFontFallbacks,
-  functions: m.cssFunctions,
-  selectors: m.cssSelectors,
-  units: m.cssUnits,
-  webSafeFonts: m.cssWebSafeFonts,
-}))
+let htmlTagPagesPromise: Promise<{
+  pages: typeof import('~/content/reference/html-tag-pages').htmlTagPages
+  findPage: typeof import('~/content/reference/html-tag-pages').findHtmlTagPage
+}> | null = null
+function getHtmlTagPages() {
+  return (htmlTagPagesPromise ??= import('~/content/reference/html-tag-pages').then((m) => ({
+    pages: m.htmlTagPages,
+    findPage: m.findHtmlTagPage,
+  })))
+}
 
-const javascriptPromise = import('~/content/reference/javascript').then((m) => ({
-  allMembers: m.allJsMembers,
-  topicBySlug: m.javascriptTopicBySlug,
-  topicSlug: m.javascriptTopicSlug,
-  topics: m.javascriptTopics,
-}))
-const javascriptNavPromise = import('~/content/reference/javascript-nav').then((m) => m.javascriptNavGroups)
+let htmlEventsPromise: Promise<typeof import('~/content/reference/html-events').htmlEvents> | null = null
+function getHtmlEvents() {
+  return (htmlEventsPromise ??= import('~/content/reference/html-events').then((m) => m.htmlEvents))
+}
+
+let htmlNavPromise: Promise<{
+  navItems: typeof import('~/content/reference/html-nav').htmlNavItems
+  tagNavItems: typeof import('~/content/reference/html-nav').htmlTagNavItems
+}> | null = null
+function getHtmlNav() {
+  return (htmlNavPromise ??= import('~/content/reference/html-nav').then((m) => ({
+    navItems: m.htmlNavItems,
+    tagNavItems: m.htmlTagNavItems,
+  })))
+}
+
+let htmlCanvasPromise: Promise<{
+  members: typeof import('~/content/reference/html-canvas').htmlCanvasMembers
+  properties: typeof import('~/content/reference/html-canvas').htmlCanvasProperties
+}> | null = null
+function getHtmlCanvas() {
+  return (htmlCanvasPromise ??= import('~/content/reference/html-canvas').then((m) => ({
+    members: m.htmlCanvasMembers,
+    properties: m.htmlCanvasProperties,
+  })))
+}
+
+let htmlSectionsPromise: Promise<{
+  characterSets: typeof import('~/content/reference/html-sections').htmlCharacterSets
+  colorNames: typeof import('~/content/reference/html-sections').htmlColorNames
+  countryCodes: typeof import('~/content/reference/html-sections').htmlCountryCodes
+  doctypes: typeof import('~/content/reference/html-sections').htmlDoctypes
+  languageCodes: typeof import('~/content/reference/html-sections').htmlLanguageCodes
+  httpMethods: typeof import('~/content/reference/html-sections').httpMethods
+  httpStatuses: typeof import('~/content/reference/html-sections').httpStatuses
+  keyboardShortcuts: typeof import('~/content/reference/html-sections').keyboardShortcuts
+  mediaFormats: typeof import('~/content/reference/html-sections').mediaFormats
+}> | null = null
+function getHtmlSections() {
+  return (htmlSectionsPromise ??= import('~/content/reference/html-sections').then((m) => ({
+    characterSets: m.htmlCharacterSets,
+    colorNames: m.htmlColorNames,
+    countryCodes: m.htmlCountryCodes,
+    doctypes: m.htmlDoctypes,
+    languageCodes: m.htmlLanguageCodes,
+    httpMethods: m.httpMethods,
+    httpStatuses: m.httpStatuses,
+    keyboardShortcuts: m.keyboardShortcuts,
+    mediaFormats: m.mediaFormats,
+  })))
+}
+
+let cssPropertiesPromise: Promise<{
+  properties: typeof import('~/content/reference/css-properties').cssProperties
+  animatable: typeof import('~/content/reference/css-properties').cssAnimatableProperties
+  inherited: typeof import('~/content/reference/css-properties').cssInheritedProperties
+  nonAnimatable: typeof import('~/content/reference/css-properties').cssNonAnimatableProperties
+  categories: typeof import('~/content/reference/css-properties').cssPropertyCategories
+}> | null = null
+function getCssProperties() {
+  return (cssPropertiesPromise ??= import('~/content/reference/css-properties').then((m) => ({
+    properties: m.cssProperties,
+    animatable: m.cssAnimatableProperties,
+    inherited: m.cssInheritedProperties,
+    nonAnimatable: m.cssNonAnimatableProperties,
+    categories: m.cssPropertyCategories,
+  })))
+}
+
+let cssNavPromise: Promise<{
+  navItems: typeof import('~/content/reference/css-nav').cssNavItems
+  propertyNavItems: typeof import('~/content/reference/css-nav').cssPropertyNavItems
+}> | null = null
+function getCssNav() {
+  return (cssNavPromise ??= import('~/content/reference/css-nav').then((m) => ({
+    navItems: m.cssNavItems,
+    propertyNavItems: m.cssPropertyNavItems,
+  })))
+}
+
+let cssPropertyPagesPromise: Promise<{
+  pages: typeof import('~/content/reference/css-property-pages').cssPropertyPages
+  findPage: typeof import('~/content/reference/css-property-pages').findCssPropertyPage
+  propertySlug: typeof import('~/content/reference/css-property-pages').propertySlug
+}> | null = null
+function getCssPropertyPages() {
+  return (cssPropertyPagesPromise ??= import('~/content/reference/css-property-pages').then((m) => ({
+    pages: m.cssPropertyPages,
+    findPage: m.findCssPropertyPage,
+    propertySlug: m.propertySlug,
+  })))
+}
+
+let cssSectionsPromise: Promise<{
+  auralProperties: typeof import('~/content/reference/css-sections').cssAuralProperties
+  colorNames: typeof import('~/content/reference/css-sections').cssColorNames
+  colorValues: typeof import('~/content/reference/css-sections').cssColorValues
+  entities: typeof import('~/content/reference/css-sections').cssEntities
+  fontFallbacks: typeof import('~/content/reference/css-sections').cssFontFallbacks
+  functions: typeof import('~/content/reference/css-sections').cssFunctions
+  selectors: typeof import('~/content/reference/css-sections').cssSelectors
+  units: typeof import('~/content/reference/css-sections').cssUnits
+  webSafeFonts: typeof import('~/content/reference/css-sections').cssWebSafeFonts
+}> | null = null
+function getCssSections() {
+  return (cssSectionsPromise ??= import('~/content/reference/css-sections').then((m) => ({
+    auralProperties: m.cssAuralProperties,
+    colorNames: m.cssColorNames,
+    colorValues: m.cssColorValues,
+    entities: m.cssEntities,
+    fontFallbacks: m.cssFontFallbacks,
+    functions: m.cssFunctions,
+    selectors: m.cssSelectors,
+    units: m.cssUnits,
+    webSafeFonts: m.cssWebSafeFonts,
+  })))
+}
+
+let javascriptPromise: Promise<{
+  allMembers: typeof import('~/content/reference/javascript').allJsMembers
+  topicBySlug: typeof import('~/content/reference/javascript').javascriptTopicBySlug
+  topicSlug: typeof import('~/content/reference/javascript').javascriptTopicSlug
+  topics: typeof import('~/content/reference/javascript').javascriptTopics
+}> | null = null
+function getJavascriptReference() {
+  return (javascriptPromise ??= import('~/content/reference/javascript').then((m) => ({
+    allMembers: m.allJsMembers,
+    topicBySlug: m.javascriptTopicBySlug,
+    topicSlug: m.javascriptTopicSlug,
+    topics: m.javascriptTopics,
+  })))
+}
+
+let javascriptNavPromise: Promise<typeof import('~/content/reference/javascript-nav').javascriptNavGroups> | null = null
+function getJavascriptNav() {
+  return (javascriptNavPromise ??= import('~/content/reference/javascript-nav').then(
+    (m) => m.javascriptNavGroups,
+  ))
+}
 
 /**
  * A lesson body with its content. The catalogue already knows which section
@@ -327,174 +434,174 @@ export function allProjectsList(): ProjectSummary[] {
 }
 
 export async function htmlReferenceTags() {
-  const { tags } = await htmlRefPromise
+  const { tags } = await getHtmlReference()
   return tags
 }
 
 export async function htmlReferenceCategories() {
-  const { categories } = await htmlRefPromise
+  const { categories } = await getHtmlReference()
   return categories
 }
 
 export async function htmlReferenceGlobalAttributes() {
-  const { globalAttributes } = await htmlRefPromise
+  const { globalAttributes } = await getHtmlReference()
   return globalAttributes
 }
 
 export async function htmlReferenceAttributes() {
-  return htmlAttrPromise
+  return getHtmlAttributes()
 }
 
 export async function htmlReferenceEvents() {
-  return htmlEventsPromise
+  return getHtmlEvents()
 }
 
 export async function htmlReferenceNav() {
-  const { navItems } = await htmlNavPromise
+  const { navItems } = await getHtmlNav()
   return navItems
 }
 
 export async function htmlReferenceTagNav() {
-  const { tagNavItems } = await htmlNavPromise
+  const { tagNavItems } = await getHtmlNav()
   return tagNavItems
 }
 
 export async function htmlReferenceTagPages() {
-  const { pages } = await htmlTagPagesPromise
+  const { pages } = await getHtmlTagPages()
   return pages
 }
 
 export async function htmlReferenceTagPage(slug: string) {
-  const { findPage } = await htmlTagPagesPromise
+  const { findPage } = await getHtmlTagPages()
   return findPage(slug)
 }
 
 export async function htmlReferenceColorNames() {
-  const { colorNames } = await htmlSectionsPromise
+  const { colorNames } = await getHtmlSections()
   return colorNames
 }
 
 export async function htmlReferenceCharacterSets() {
-  const { characterSets } = await htmlSectionsPromise
+  const { characterSets } = await getHtmlSections()
   return characterSets
 }
 
 export async function htmlReferenceDoctypes() {
-  const { doctypes } = await htmlSectionsPromise
+  const { doctypes } = await getHtmlSections()
   return doctypes
 }
 
 export async function htmlReferenceLanguageCodes() {
-  const { languageCodes } = await htmlSectionsPromise
+  const { languageCodes } = await getHtmlSections()
   return languageCodes
 }
 
 export async function htmlReferenceCountryCodes() {
-  const { countryCodes } = await htmlSectionsPromise
+  const { countryCodes } = await getHtmlSections()
   return countryCodes
 }
 
 export async function htmlReferenceHttpStatuses() {
-  const { httpStatuses } = await htmlSectionsPromise
+  const { httpStatuses } = await getHtmlSections()
   return httpStatuses
 }
 
 export async function htmlReferenceHttpMethods() {
-  const { httpMethods } = await htmlSectionsPromise
+  const { httpMethods } = await getHtmlSections()
   return httpMethods
 }
 
 export async function htmlReferenceCanvas() {
-  return htmlCanvasPromise
+  return getHtmlCanvas()
 }
 
 export async function htmlReferenceMediaFormats() {
-  const { mediaFormats } = await htmlSectionsPromise
+  const { mediaFormats } = await getHtmlSections()
   return mediaFormats
 }
 
 export async function htmlReferenceKeyboardShortcuts() {
-  const { keyboardShortcuts } = await htmlSectionsPromise
+  const { keyboardShortcuts } = await getHtmlSections()
   return keyboardShortcuts
 }
 
 export async function cssReferenceProperties() {
-  const { properties } = await cssPropertiesPromise
+  const { properties } = await getCssProperties()
   return properties
 }
 
 export async function cssReferenceNav() {
-  const { navItems } = await cssNavPromise
+  const { navItems } = await getCssNav()
   return navItems
 }
 
 export async function cssReferencePropertyNav() {
-  const { propertyNavItems } = await cssNavPromise
+  const { propertyNavItems } = await getCssNav()
   return propertyNavItems
 }
 
 export async function cssReferencePropertyPages() {
-  const { pages } = await cssPropertyPagesPromise
+  const { pages } = await getCssPropertyPages()
   return pages
 }
 
 export async function cssReferencePropertyPage(slug: string) {
-  const { findPage } = await cssPropertyPagesPromise
+  const { findPage } = await getCssPropertyPages()
   return findPage(slug)
 }
 
 export async function cssReferenceSelectors() {
-  const { selectors } = await cssSectionsPromise
+  const { selectors } = await getCssSections()
   return selectors
 }
 
 export async function cssReferenceFunctions() {
-  const { functions } = await cssSectionsPromise
+  const { functions } = await getCssSections()
   return functions
 }
 
 export async function cssReferenceUnits() {
-  const { units } = await cssSectionsPromise
+  const { units } = await getCssSections()
   return units
 }
 
 export async function cssReferenceColorNames() {
-  const { colorNames } = await cssSectionsPromise
+  const { colorNames } = await getCssSections()
   return colorNames
 }
 
 export async function cssReferenceColorValues() {
-  const { colorValues } = await cssSectionsPromise
+  const { colorValues } = await getCssSections()
   return colorValues
 }
 
 export async function cssReferenceWebSafeFonts() {
-  const { webSafeFonts } = await cssSectionsPromise
+  const { webSafeFonts } = await getCssSections()
   return webSafeFonts
 }
 
 export async function cssReferenceFontFallbacks() {
-  const { fontFallbacks } = await cssSectionsPromise
+  const { fontFallbacks } = await getCssSections()
   return fontFallbacks
 }
 
 export async function cssReferenceEntities() {
-  const { entities } = await cssSectionsPromise
+  const { entities } = await getCssSections()
   return entities
 }
 
 export async function cssReferenceAuralProperties() {
-  const { auralProperties } = await cssSectionsPromise
+  const { auralProperties } = await getCssSections()
   return auralProperties
 }
 
 export async function cssReferenceAnimatable() {
-  const { animatable, nonAnimatable } = await cssPropertiesPromise
+  const { animatable, nonAnimatable } = await getCssProperties()
   return { animatable: animatable(), static: nonAnimatable() }
 }
 
 export async function cssReferenceInherited() {
-  const { inherited } = await cssPropertiesPromise
+  const { inherited } = await getCssProperties()
   return inherited()
 }
 
@@ -503,7 +610,7 @@ export async function cssReferenceInherited() {
  * property, so the overview needs no route of its own per category.
  */
 export async function cssReferenceCategories() {
-  const { properties, categories } = await cssPropertiesPromise
+  const { properties, categories } = await getCssProperties()
   const groups = []
   for (const category of categories) {
     const members = properties.filter((property) => property.category === category)
@@ -516,34 +623,34 @@ export async function cssReferenceCategories() {
 }
 
 export async function cssReferencePropertySlug(name: string) {
-  const { propertySlug: slugFn } = await cssPropertyPagesPromise
+  const { propertySlug: slugFn } = await getCssPropertyPages()
   return slugFn(name)
 }
 
 export async function javascriptReferenceTopics() {
-  const { topics } = await javascriptPromise
+  const { topics } = await getJavascriptReference()
   return topics
 }
 
 export async function javascriptReferenceTopicBySlug(slug: string) {
-  const { topicBySlug } = await javascriptPromise
+  const { topicBySlug } = await getJavascriptReference()
   return topicBySlug(slug)
 }
 
 export async function javascriptReferenceTopicSlug(label: string) {
-  const { topicSlug } = await javascriptPromise
+  const { topicSlug } = await getJavascriptReference()
   return topicSlug(label)
 }
 
 /** Every member in the reference, paired with the topic it belongs to. */
 export async function javascriptReferenceMembers() {
-  const { allMembers } = await javascriptPromise
+  const { allMembers } = await getJavascriptReference()
   return allMembers
 }
 
 /** The sidebar groups, which keep the source index headings and their order. */
 export async function javascriptReferenceNavGroups() {
-  return javascriptNavPromise
+  return getJavascriptNav()
 }
 
 /**
