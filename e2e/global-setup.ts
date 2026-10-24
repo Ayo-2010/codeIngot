@@ -8,6 +8,8 @@ import { chromium } from '@playwright/test'
  * Visiting every route the specs use here means the specs measure the app rather
  * than the compiler, and no reload lands in the middle of a test.
  */
+const origin = process.env.PLAYWRIGHT_ORIGIN ?? 'http://127.0.0.1:3000'
+
 const WARM_ROUTES = [
   '/',
   '/courses',
@@ -38,7 +40,7 @@ export default async function globalSetup() {
     // the first visits, leaving a page that never hydrates. Reloading once the
     // optimiser has settled is what a learner's refresh would do.
     for (let attempt = 0; ; attempt += 1) {
-      await page.goto(`http://127.0.0.1:3000${path}`, {
+      await page.goto(`${origin}${path}`, {
         waitUntil: 'domcontentloaded',
         timeout: 120_000,
       })

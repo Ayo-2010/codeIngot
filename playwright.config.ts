@@ -1,5 +1,9 @@
 import { defineConfig } from '@playwright/test'
 
+// Allow a run to step aside when another local project already owns port 3000.
+const origin = process.env.PLAYWRIGHT_ORIGIN ?? 'http://127.0.0.1:3000'
+const port = new URL(origin).port || '3000'
+
 /**
  * Browser smoke tests.
  *
@@ -25,7 +29,7 @@ export default defineConfig({
   retries: process.env.CI ? 1 : 0,
   reporter: process.env.CI ? 'github' : 'list',
   use: {
-    baseURL: 'http://127.0.0.1:3000',
+    baseURL: origin,
     channel: 'chrome',
     viewport: { width: 1440, height: 900 },
     trace: 'on-first-retry',
@@ -33,8 +37,8 @@ export default defineConfig({
   // A dev server under load can take several seconds to answer a click.
   expect: { timeout: 10_000 },
   webServer: {
-    command: 'npm run dev -- --port 3000 --host 127.0.0.1',
-    url: 'http://127.0.0.1:3000',
+    command: `npm run dev -- --port ${port} --host 127.0.0.1`,
+    url: origin,
     reuseExistingServer: !process.env.CI,
     timeout: 300_000,
     stdout: 'ignore',
