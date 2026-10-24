@@ -156,17 +156,31 @@ const { courses, paths } = useCourses()
 const siteUrl = String(useRuntimeConfig().public.siteUrl).replace(/\/+$/, '')
 
 usePageSeo({
-  title: 'Learn to code by coding',
+  title: 'Learn HTML, CSS and JavaScript by writing real code',
   description:
     'Learn HTML, CSS, JavaScript and the browser by writing code in guided lessons, challenge tests and five complete capstone projects.',
-  jsonLd: {
+  jsonLd: computed(() => ({
     '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: 'codeIngot',
-    url: siteUrl,
-    description:
-      'Interactive lessons, browser challenges and capstone projects for learning frontend development.',
-  },
+    '@graph': [
+      {
+        '@type': 'WebSite',
+        '@id': `${siteUrl}/#website`,
+        name: 'codeIngot',
+        url: siteUrl,
+        inLanguage: 'en',
+        description:
+          'Interactive lessons, browser challenges and capstone projects for learning frontend development.',
+      },
+      {
+        '@type': 'Organization',
+        '@id': `${siteUrl}/#organization`,
+        name: 'codeIngot',
+        url: siteUrl,
+        description:
+          'The team behind codeIngot, an interactive platform for learning frontend development in the browser.',
+      },
+    ],
+  })),
 })
 
 const stats = computed(() => {

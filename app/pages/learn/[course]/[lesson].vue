@@ -175,6 +175,9 @@ import { scrollBlockIntoView } from '~/utils/scroll-to-block'
 const route = useRoute()
 const router = useRouter()
 
+// Breadcrumbs and canonical URLs always advertise the production origin.
+const siteUrl = String(useRuntimeConfig().public.siteUrl).replace(/\/+$/, '')
+
 const course = computed(() => getCourse(String(route.params.course)))
 const lesson = computed(() => {
   const slug = String(route.params.course)
@@ -192,6 +195,22 @@ usePageSeo({
       'A short guided lesson with a live example, an exercise and its own quiz.',
   ),
   type: 'article',
+  jsonLd: computed(() => {
+    const value = lesson.value
+    const owner = course.value
+    if (!value || !owner) return undefined
+    const items = [
+      { name: 'Home', item: siteUrl },
+      { name: 'Courses', item: `${siteUrl}/courses` },
+      { name: owner.title, item: `${siteUrl}/courses/${owner.slug}` },
+      { name: value.title, item: `${siteUrl}/learn/${owner.slug}/${value.id}` },
+    ].map((entry, index) => ({ '@type': 'ListItem', position: index + 1, ...entry }))
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: items,
+    }
+  }),
 })
 
 const drawerOpen = ref(false)

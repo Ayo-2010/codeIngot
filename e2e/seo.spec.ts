@@ -38,6 +38,38 @@ test('a course exposes structured data for its lessons', async ({ page }) => {
   expect(data.inLanguage).toBe('en')
 })
 
+test('the home page declares the brand as WebSite and Organization', async ({ page }) => {
+  await gotoHydrated(page, '/')
+
+  const jsonLd = page.locator('script[type="application/ld+json"]').first()
+  const data = JSON.parse((await jsonLd.textContent()) ?? '{}')
+  const types = data['@graph'].map((entry: { '@type': string }) => entry['@type'])
+  expect(types).toContain('WebSite')
+  expect(types).toContain('Organization')
+  for (const entry of data['@graph']) {
+    expect(entry.name).toBe('codeIngot')
+    expect(entry.url).toBe(SITE_URL)
+  }
+  await expect(page.locator('meta[property="og:title"]')).toHaveAttribute(
+    'content',
+    /Learn HTML, CSS and JavaScript/,
+  )
+})
+
+test('a lesson ships a BreadcrumbList matching its real location', async ({ page }) => {
+  await gotoHydrated(page, '/learn/html-fundamentals/html-l1')
+
+  // <script> elements have no inner text, so read textContent directly.
+  const jsonLd = page.locator('script[type="application/ld+json"]')
+  await expect(jsonLd).toHaveCount(1)
+  const data = JSON.parse((await jsonLd.textContent()) ?? '{}')
+  expect(data['@type']).toBe('BreadcrumbList')
+  const crumbs = data.itemListElement.map((item: { name: string }) => item.name)
+  expect(crumbs).toEqual(['Home', 'Courses', 'HTML Fundamentals', 'How this course works'])
+  expect(data.itemListElement[0].position).toBe(1)
+  expect(data.itemListElement[3].item).toBe(`${SITE_URL}/learn/html-fundamentals/html-l1`)
+})
+
 test('sitemap.xml lists public pages and keeps private pages out', async ({ request }) => {
   const response = await request.get('/sitemap.xml')
   expect(response.status()).toBe(200)
