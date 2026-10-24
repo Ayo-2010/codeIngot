@@ -82,6 +82,16 @@ test('the mobile header menu opens and labels its groups', async ({ page }) => {
   await expect(mobileNav.getByRole('link', { name: 'All courses' })).toBeVisible()
 })
 
+test('the mobile account control has an accessible name', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 })
+  await gotoHydrated(page, '/')
+
+  // The visible "Sign in" label is hidden at this width; the icon is
+  // decorative, so the button itself has to carry the name.
+  const account = page.locator('header button[aria-controls="account-dialog"]')
+  await expect(account).toHaveAccessibleName('Sign in')
+})
+
 test('the home page does not prefetch route chunks', async ({ page }) => {
   await gotoHydrated(page, '/')
 

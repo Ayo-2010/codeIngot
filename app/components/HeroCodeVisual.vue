@@ -87,7 +87,7 @@ onMounted(() => {
 
 @keyframes blink {
   to {
-    visibility: hidden;
+    opacity: 0;
   }
 }
 </style>

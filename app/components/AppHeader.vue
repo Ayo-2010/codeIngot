@@ -136,6 +136,7 @@
           type="button"
           class="flex items-center gap-2 rounded-lg border border-ink-600 bg-ink-900 px-3 py-1.5 text-sm font-medium text-mist-50 transition hover:border-brand/40 hover:bg-ink-800 shrink-0"
           :aria-expanded="accountOpen"
+          :aria-label="isSignedIn ? 'Account menu' : 'Sign in'"
           aria-controls="account-dialog"
           @click="accountOpen = true"
         >
