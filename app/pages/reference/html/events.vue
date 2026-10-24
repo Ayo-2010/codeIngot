@@ -50,7 +50,11 @@
 
 <script setup lang="ts">
 definePageMeta({ layout: 'reference' })
-useHead({ title: 'HTML events' })
+usePageSeo({
+  title: 'HTML events',
+  description:
+    'The HTML event handler attributes and their addEventListener equivalents, with why the listener form usually keeps the markup cleaner.',
+})
 
 const events = await htmlReferenceEvents()
 const search = ref('')

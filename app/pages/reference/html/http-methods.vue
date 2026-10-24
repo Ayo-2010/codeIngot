@@ -52,7 +52,11 @@
 
 <script setup lang="ts">
 definePageMeta({ layout: 'reference' })
-useHead({ title: 'HTTP methods' })
+usePageSeo({
+  title: 'HTTP methods',
+  description:
+    'The HTTP methods a browser or API can send and which are idempotent — the property that decides whether a request is safe to retry.',
+})
 
 const methods = await htmlReferenceHttpMethods()
 </script>

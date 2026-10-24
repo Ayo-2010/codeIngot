@@ -49,7 +49,11 @@
 
 <script setup lang="ts">
 definePageMeta({ layout: 'reference' })
-useHead({ title: 'CSS units' })
+usePageSeo({
+  title: 'CSS units',
+  description:
+    'The CSS units and when each fits: rem for font sizes and em inside components, so a page keeps scaling when text size preferences change.',
+})
 
 const all = await cssReferenceUnits()
 const search = ref('')

@@ -41,7 +41,11 @@
 
 <script setup lang="ts">
 definePageMeta({ layout: 'reference' })
-useHead({ title: 'CSS functions' })
+usePageSeo({
+  title: 'CSS functions',
+  description:
+    'Every CSS function across maths, colour, gradients, filters and transforms — and most of them nest inside one another.',
+})
 
 const functions = await cssReferenceFunctions()
 const search = ref('')

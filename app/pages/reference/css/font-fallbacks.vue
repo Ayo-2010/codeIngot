@@ -45,7 +45,11 @@ body {
 
 <script setup lang="ts">
 definePageMeta({ layout: 'reference' })
-useHead({ title: 'CSS font fallbacks' })
+usePageSeo({
+  title: 'CSS font fallbacks',
+  description:
+    'Ready-made CSS font stacks that end in the generic family guaranteed to resolve, so text still renders when a webfont fails to load.',
+})
 
 const stacks = await cssReferenceFontFallbacks()
 </script>

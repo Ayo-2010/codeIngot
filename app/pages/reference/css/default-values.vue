@@ -50,7 +50,11 @@
 
 <script setup lang="ts">
 definePageMeta({ layout: 'reference' })
-useHead({ title: 'CSS default values' })
+usePageSeo({
+  title: 'CSS default values',
+  description:
+    'The initial value of every CSS property and whether descendants inherit it — what an element gets before any stylesheet applies.',
+})
 
 const [properties, inherited] = await Promise.all([
   cssReferenceProperties(),

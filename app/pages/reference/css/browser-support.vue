@@ -66,7 +66,11 @@
 import type { BrowserName } from '~/types/content'
 
 definePageMeta({ layout: 'reference' })
-useHead({ title: 'CSS browser support' })
+usePageSeo({
+  title: 'CSS browser support',
+  description:
+    'The first browser version with usable support for every CSS property, plus the at-rules and the engine versions that implemented them.',
+})
 
 const [properties, pages] = await Promise.all([
   cssReferenceProperties(),

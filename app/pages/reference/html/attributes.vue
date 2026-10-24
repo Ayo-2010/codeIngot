@@ -35,7 +35,11 @@
 
 <script setup lang="ts">
 definePageMeta({ layout: 'reference' })
-useHead({ title: 'HTML attributes' })
+usePageSeo({
+  title: 'HTML attributes',
+  description:
+    'The HTML attributes that belong to particular elements, searchable by name and kept apart from the global attributes every element accepts.',
+})
 
 const attributes = await htmlReferenceAttributes()
 const search = ref('')

@@ -101,7 +101,11 @@
 
 <script setup lang="ts">
 definePageMeta({ layout: 'reference' })
-useHead({ title: 'PX to EM converter' })
+usePageSeo({
+  title: 'PX to EM converter',
+  description:
+    'Convert pixels to ems and back: an em scales with the text size a reader picks, and the converter shows the maths for any base font size.',
+})
 
 const base = ref(16)
 const px = ref(24)

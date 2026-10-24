@@ -40,7 +40,11 @@
 
 <script setup lang="ts">
 definePageMeta({ layout: 'reference' })
-useHead({ title: 'HTTP messages' })
+usePageSeo({
+  title: 'HTTP messages',
+  description:
+    'HTTP status codes grouped by class: 4xx means the request needs changing, 5xx means the server does, with each code next to its message.',
+})
 
 const statuses = await htmlReferenceHttpStatuses()
 

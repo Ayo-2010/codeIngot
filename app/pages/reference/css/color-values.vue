@@ -23,7 +23,11 @@
 
 <script setup lang="ts">
 definePageMeta({ layout: 'reference' })
-useHead({ title: 'CSS color values' })
+usePageSeo({
+  title: 'CSS color values',
+  description:
+    'Every way to write a colour in CSS: rgb() and hsl() with optional slash alpha, and oklch for palettes that need to stay perceptually even.',
+})
 
 const values = await cssReferenceColorValues()
 </script>

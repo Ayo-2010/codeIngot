@@ -53,7 +53,11 @@
 
 <script setup lang="ts">
 definePageMeta({ layout: 'reference' })
-useHead({ title: 'HTML language codes' })
+usePageSeo({
+  title: 'HTML language codes',
+  description:
+    'Values for the HTML lang attribute: start with the two-letter code and add a region subtag only when spelling or vocabulary genuinely differs.',
+})
 
 const codes = await htmlReferenceLanguageCodes()
 const search = ref('')

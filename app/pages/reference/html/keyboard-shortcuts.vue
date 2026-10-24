@@ -70,7 +70,11 @@
 
 <script setup lang="ts">
 definePageMeta({ layout: 'reference' })
-useHead({ title: 'Keyboard shortcuts' })
+usePageSeo({
+  title: 'Keyboard shortcuts',
+  description:
+    'The keyboard shortcuts split between the ones the browser supplies and the ones this site adds — Tab order, Enter and Escape above all.',
+})
 
 const shortcuts = await htmlReferenceKeyboardShortcuts()
 

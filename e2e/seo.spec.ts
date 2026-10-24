@@ -70,6 +70,19 @@ test('a lesson ships a BreadcrumbList matching its real location', async ({ page
   expect(data.itemListElement[3].item).toBe(`${SITE_URL}/learn/html-fundamentals/html-l1`)
 })
 
+test('a reference page is a proper landing page with canonical and description', async ({ page }) => {
+  await gotoHydrated(page, '/reference/css/px-to-em')
+
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+    'href',
+    `${SITE_URL}/reference/css/px-to-em`,
+  )
+  await expect(page.locator('meta[name="description"]')).toHaveAttribute(
+    'content',
+    /PX to EM|Convert PX to EM/,
+  )
+})
+
 test('sitemap.xml lists public pages and keeps private pages out', async ({ request }) => {
   const response = await request.get('/sitemap.xml')
   expect(response.status()).toBe(200)

@@ -22,7 +22,11 @@
 
 <script setup lang="ts">
 definePageMeta({ layout: 'reference' })
-useHead({ title: 'JavaScript by alphabet' })
+usePageSeo({
+  title: 'JavaScript by alphabet',
+  description:
+    'Every member of the JavaScript reference in one A to Z list, each linking to its own topic page.',
+})
 
 const entries = await javascriptReferenceMembers()
 </script>

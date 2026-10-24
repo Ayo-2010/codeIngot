@@ -55,7 +55,11 @@
 
 <script setup lang="ts">
 definePageMeta({ layout: 'reference' })
-useHead({ title: 'HTML global attributes' })
+usePageSeo({
+  title: 'HTML global attributes',
+  description:
+    'The attributes valid on every HTML element — id, class, lang, data-* and the rest — with element-specific attributes kept on their own page.',
+})
 
 const globalAttributes = await htmlReferenceGlobalAttributes()
 const search = ref('')

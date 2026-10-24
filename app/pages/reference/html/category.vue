@@ -17,7 +17,11 @@
 
 <script setup lang="ts">
 definePageMeta({ layout: 'reference' })
-useHead({ title: 'HTML by category' })
+usePageSeo({
+  title: 'HTML by category',
+  description:
+    'Every HTML element grouped by what it is for — structure, forms, tables, media — so you can find the tag when you know the job but not the name.',
+})
 
 const tags = await htmlReferenceTags()
 </script>

@@ -72,7 +72,11 @@
 
 <script setup lang="ts">
 definePageMeta({ layout: 'reference' })
-useHead({ title: 'CSS animatable' })
+usePageSeo({
+  title: 'CSS animatable',
+  description:
+    'Which CSS properties interpolate between two values and which jump at the halfway point instead — the difference between animatable and static.',
+})
 
 const { animatable, static: staticProperties } = await cssReferenceAnimatable()
 </script>

@@ -80,7 +80,11 @@
 
 <script setup lang="ts">
 definePageMeta({ layout: 'reference' })
-useHead({ title: 'HTML URL encode' })
+usePageSeo({
+  title: 'HTML URL encode',
+  description:
+    'Which characters a URL can carry and how to percent-encode the rest, including when encodeURIComponent and encodeURI differ.',
+})
 
 const value = ref('a b & c=d/Ã©')
 

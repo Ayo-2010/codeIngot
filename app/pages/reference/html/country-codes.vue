@@ -42,7 +42,11 @@
 
 <script setup lang="ts">
 definePageMeta({ layout: 'reference' })
-useHead({ title: 'HTML country codes' })
+usePageSeo({
+  title: 'HTML country codes',
+  description:
+    'Region subtags for the HTML lang attribute: choose by the spelling and vocabulary a reader expects, not by where the content was written.',
+})
 
 const codes = await htmlReferenceCountryCodes()
 const search = ref('')

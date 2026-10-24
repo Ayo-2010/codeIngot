@@ -49,7 +49,11 @@
 
 <script setup lang="ts">
 definePageMeta({ layout: 'reference' })
-useHead({ title: 'CSS selectors' })
+usePageSeo({
+  title: 'CSS selectors',
+  description:
+    'Every kind of CSS selector, which ones only match while hovering, and why a hover-only state is unreachable by keyboard without focus.',
+})
 
 const all = await cssReferenceSelectors()
 const search = ref('')

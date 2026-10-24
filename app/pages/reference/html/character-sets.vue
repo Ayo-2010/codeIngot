@@ -52,7 +52,11 @@
 
 <script setup lang="ts">
 definePageMeta({ layout: 'reference' })
-useHead({ title: 'HTML character sets' })
+usePageSeo({
+  title: 'HTML character sets',
+  description:
+    'Why UTF-8 is the only character set to declare in HTML, where the meta charset goes and how a wrong guess turns text into mojibake.',
+})
 
 const characterSets = await htmlReferenceCharacterSets()
 

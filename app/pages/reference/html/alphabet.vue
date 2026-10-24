@@ -17,7 +17,11 @@
 
 <script setup lang="ts">
 definePageMeta({ layout: 'reference' })
-useHead({ title: 'HTML by alphabet' })
+usePageSeo({
+  title: 'HTML by alphabet',
+  description:
+    'Every HTML element from A to Z, each linking to its own reference page with an example, browser support and related elements.',
+})
 
 const tags = await htmlReferenceTags()
 </script>

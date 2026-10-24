@@ -68,7 +68,11 @@ a[title="Tips &amp; tricks"] {
 
 <script setup lang="ts">
 definePageMeta({ layout: 'reference' })
-useHead({ title: 'CSS entities' })
+usePageSeo({
+  title: 'CSS entities',
+  description:
+    'Named and numeric character references and where they matter in CSS: content strings, selectors and url() values.',
+})
 
 const entities = await cssReferenceEntities()
 const search = ref('')

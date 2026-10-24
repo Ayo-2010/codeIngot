@@ -54,7 +54,11 @@
 
 <script setup lang="ts">
 definePageMeta({ layout: 'reference' })
-useHead({ title: 'HTML audio and video' })
+usePageSeo({
+  title: 'HTML audio and video',
+  description:
+    'How to embed audio and video in HTML: the file formats browsers support, the attributes that matter and an accessible player example.',
+})
 
 const formats = await htmlReferenceMediaFormats()
 

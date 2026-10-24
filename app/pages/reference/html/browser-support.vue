@@ -72,7 +72,11 @@
 import { tagSlug } from '~/content/reference/html-tag-pages'
 
 definePageMeta({ layout: 'reference' })
-useHead({ title: 'HTML browser support' })
+usePageSeo({
+  title: 'HTML browser support',
+  description:
+    'The first browser version with usable support for every HTML element, including the elements that were removed rather than replaced.',
+})
 
 const [pages, tags] = await Promise.all([
   htmlReferenceTagPages(),

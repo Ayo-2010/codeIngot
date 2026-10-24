@@ -47,7 +47,11 @@
 
 <script setup lang="ts">
 definePageMeta({ layout: 'reference' })
-useHead({ title: 'CSS colors' })
+usePageSeo({
+  title: 'CSS colors',
+  description:
+    'All named CSS colour keywords with their hex values, plus the case rules and the four-digit hex form that means transparent black.',
+})
 
 const colors = await cssReferenceColorNames()
 const search = ref('')

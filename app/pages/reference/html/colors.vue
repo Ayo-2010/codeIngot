@@ -54,7 +54,11 @@
 
 <script setup lang="ts">
 definePageMeta({ layout: 'reference' })
-useHead({ title: 'HTML colors' })
+usePageSeo({
+  title: 'HTML colors',
+  description:
+    'The named colours browsers still accept, with their hex values, and why an rgb() value or a custom property is usually the better choice.',
+})
 
 const colors = await htmlReferenceColorNames()
 

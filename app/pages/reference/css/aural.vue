@@ -55,7 +55,11 @@
 
 <script setup lang="ts">
 definePageMeta({ layout: 'reference' })
-useHead({ title: 'CSS aural reference' })
+usePageSeo({
+  title: 'CSS aural reference',
+  description:
+    'The CSS 2 aural properties no browser ever implemented, documented so the names become recognisable rather than looking invented.',
+})
 
 const properties = await cssReferenceAuralProperties()
 </script>

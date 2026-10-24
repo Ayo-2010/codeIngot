@@ -37,7 +37,11 @@
 
 <script setup lang="ts">
 definePageMeta({ layout: 'reference' })
-useHead({ title: 'HTML doctypes' })
+usePageSeo({
+  title: 'HTML doctypes',
+  description:
+    'What an HTML doctype actually switches on: which parser rules apply, and how a missing doctype drops the page into quirks mode.',
+})
 
 const doctypes = await htmlReferenceDoctypes()
 const html5 = doctypes.find((doctype) => doctype.name === 'HTML5') ?? doctypes[0]!

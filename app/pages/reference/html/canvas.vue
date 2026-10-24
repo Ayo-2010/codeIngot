@@ -75,7 +75,11 @@
 import type { HtmlCanvasMember } from '~/types/content'
 
 definePageMeta({ layout: 'reference' })
-useHead({ title: 'HTML canvas' })
+usePageSeo({
+  title: 'HTML canvas',
+  description:
+    'How the HTML canvas element works: a bitmap you draw on with JavaScript, width and height as attributes and context transforms you must save and restore.',
+})
 
 const { members, properties } = await htmlReferenceCanvas()
 const view = ref<'methods' | 'properties'>('methods')

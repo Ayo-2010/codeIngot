@@ -43,7 +43,11 @@ code {
 
 <script setup lang="ts">
 definePageMeta({ layout: 'reference' })
-useHead({ title: 'CSS web safe fonts' })
+usePageSeo({
+  title: 'CSS web safe fonts',
+  description:
+    'CSS font stacks that need no download, honest about no longer being safe now most are absent on Linux and Android.',
+})
 
 const fonts = await cssReferenceWebSafeFonts()
 </script>
