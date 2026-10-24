@@ -18,6 +18,79 @@ export const frontendProjectsQuizSections: Section[] = [
           'Plan the results screen as a review of every question, not just a score',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-fp-l15',
+          title: 'Plan the quiz app quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-fp-l15-q1',
+              type: 'multiple-choice',
+              prompt: 'Why keep the questions in a JavaScript array instead of writing each one into the HTML?',
+              options: [
+                'Arrays load faster than HTML',
+                'One render function can show any question, and the score can read the same data',
+                'HTML cannot contain questions',
+                'It makes the answer key secret',
+              ],
+              answer: 1,
+              explanation: 'The array is the single source of truth. The question screen, progress, score and review all derive from it.',
+            },
+            {
+              id: 'quiz-fp-l15-q2',
+              type: 'multiple-choice',
+              prompt: 'With 4 correct answers out of 5 questions, what percentage should be shown?',
+              options: [
+                '40%',
+                '75%',
+                '80%',
+                '90%',
+              ],
+              answer: 2,
+              explanation: '4 / 5 = 0.8, which is 80% when multiplied by 100 and rounded.',
+            },
+            {
+              id: 'quiz-fp-l15-q3',
+              type: 'identify-error',
+              prompt: 'Why is this restart incomplete?',
+              code: 'function restart() {\n  index = 0;\n  resultsEl.hidden = true;\n  questionArea.hidden = false;\n  renderQuestion();\n}',
+              options: [
+                'It forgets to reset answers and locked',
+                'It renders the first question twice',
+                'It should reload the page',
+                'It needs a new question array',
+              ],
+              answer: 0,
+              explanation: 'The previous answers are still in the array, so the next attempt starts with the old score. Reset answers and locked as well.',
+            },
+            {
+              id: 'quiz-fp-l15-q4',
+              type: 'multiple-choice',
+              prompt: 'Why store `answer` as an index into `options` instead of a copy of the correct string?',
+              options: [
+                'Strings cannot be stored in JSON',
+                'It makes the answer key shorter to type',
+                'It prevents the browser from reading the answer key',
+                'One number can be compared during render and used to highlight the right option in the review',
+              ],
+              answer: 3,
+              explanation: 'The renderer compares the chosen index with the correct index, and the review can mark exactly that option. Duplicated strings would need a second lookup and could drift out of sync with the options.',
+            },
+            {
+              id: 'quiz-fp-l15-q5',
+              type: 'multiple-choice',
+              prompt: 'A quiz runs entirely in the browser. What does the lesson say about keeping the answer key secret?',
+              options: [
+                'Anyone can read the data array in DevTools, so a score that matters must be calculated on a server',
+                'Minifying the JavaScript makes the key unreadable',
+                'ARIA attributes hide the answers from visitors',
+                'The browser encrypts the array automatically',
+              ],
+              answer: 0,
+              explanation: 'Every file the browser receives is readable, including the questions and their answer indices. For a learning quiz that is acceptable, but a real assessment has to score on a server the learner cannot inspect.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -136,6 +209,72 @@ let locked = false;
           'Build the results review and a restart that resets state and DOM together',
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-fp-l16',
+          title: 'Build and submit the quiz app quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-fp-l16-q1',
+              type: 'true-false',
+              prompt: 'Options should stay clickable after a question has been answered.',
+              answer: false,
+              explanation: 'The options should be disabled after the first answer, so one question cannot be answered twice and the recorded score cannot change.',
+            },
+            {
+              id: 'quiz-fp-l16-q2',
+              type: 'multiple-choice',
+              prompt: 'What belongs on the results screen besides the score?',
+              options: [
+                'Only the score',
+                'A per-question review with the explanation',
+                'The source code of the quiz',
+                'A second copy of every option',
+              ],
+              answer: 1,
+              explanation: 'The review is what makes the result useful. Each question should show whether it was right and explain the answer.',
+            },
+            {
+              id: 'quiz-fp-l16-q3',
+              type: 'multiple-choice',
+              prompt: 'Why call `optionsEl.replaceChildren()` at the start of renderQuestion()?',
+              options: [
+                'It removes the click listeners from the page',
+                'It clears the previous options so question two does not render below question one',
+                'It resets the score to zero',
+                'It re-enables the disabled buttons from the last question',
+              ],
+              answer: 1,
+              explanation: 'Appending without clearing would stack every set of options inside the same container. replaceChildren empties the container so each question is rendered from a clean slate.',
+            },
+            {
+              id: 'quiz-fp-l16-q4',
+              type: 'multiple-choice',
+              prompt: 'What does `tabindex="-1"` on the question heading allow?',
+              options: [
+                'It makes the heading programmatically focusable without adding a tab stop',
+                'It adds the heading to the normal tab order',
+                'It hides the heading from screen readers',
+                'It makes the heading editable by the learner',
+              ],
+              answer: 0,
+              explanation: 'A negative tabindex keeps an element out of the Tab sequence while still allowing focus() to move there. That lets the script announce the new question without making the heading a stop the learner must tab past.',
+            },
+            {
+              id: 'quiz-fp-l16-q5',
+              type: 'multiple-choice',
+              prompt: 'The progress bar width is `((index + 1) / questions.length) * 100`. On the third of five questions, what width is set?',
+              options: [
+                '30%',
+                '50%',
+                '60%',
+                '75%',
+              ],
+              answer: 2,
+              explanation: 'Three of five questions are now in view, so 3 / 5 × 100 = 60%. Using the same index as the progress text is what keeps the bar and the words from disagreeing.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -380,71 +519,5 @@ function restart() {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-fp-s8',
-      title: 'Quiz application check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-fp-s8-q1',
-          type: 'multiple-choice',
-          prompt: 'Why keep the questions in a JavaScript array instead of writing each one into the HTML?',
-          options: [
-            'Arrays load faster than HTML',
-            'One render function can show any question, and the score can read the same data',
-            'HTML cannot contain questions',
-            'It makes the answer key secret',
-          ],
-          answer: 1,
-          explanation:
-            'The array is the single source of truth. The question screen, progress, score and review all derive from it.',
-        },
-        {
-          id: 'quiz-fp-s8-q2',
-          type: 'true-false',
-          prompt: 'Options should stay clickable after a question has been answered.',
-          answer: false,
-          explanation:
-            'The options should be disabled after the first answer, so one question cannot be answered twice and the recorded score cannot change.',
-        },
-        {
-          id: 'quiz-fp-s8-q3',
-          type: 'multiple-choice',
-          prompt: 'With 4 correct answers out of 5 questions, what percentage should be shown?',
-          options: ['40%', '75%', '80%', '90%'],
-          answer: 2,
-          explanation: '4 / 5 = 0.8, which is 80% when multiplied by 100 and rounded.',
-        },
-        {
-          id: 'quiz-fp-s8-q4',
-          type: 'multiple-choice',
-          prompt: 'What belongs on the results screen besides the score?',
-          options: [
-            'Only the score',
-            'A per-question review with the explanation',
-            'The source code of the quiz',
-            'A second copy of every option',
-          ],
-          answer: 1,
-          explanation:
-            'The review is what makes the result useful. Each question should show whether it was right and explain the answer.',
-        },
-        {
-          id: 'quiz-fp-s8-q5',
-          type: 'identify-error',
-          prompt: 'Why is this restart incomplete?',
-          code: 'function restart() {\n  index = 0;\n  resultsEl.hidden = true;\n  questionArea.hidden = false;\n  renderQuestion();\n}',
-          options: [
-            'It forgets to reset answers and locked',
-            'It renders the first question twice',
-            'It should reload the page',
-            'It needs a new question array',
-          ],
-          answer: 0,
-          explanation:
-            'The previous answers are still in the array, so the next attempt starts with the old score. Reset answers and locked as well.',
-        },
-      ],
-    },
   },
 ]

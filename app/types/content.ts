@@ -304,8 +304,10 @@ export interface Lesson {
   description: string
   duration: number
   objectives: string[]
-  content: LessonBlock[]
   xp: number
+  /** This lesson's complete quiz, including every question body. */
+  quiz: Quiz
+  content: LessonBlock[]
 }
 
 export interface Section {
@@ -313,15 +315,13 @@ export interface Section {
   title: string
   description: string
   lessons: Lesson[]
-  quiz?: Quiz
   /**
    * The chapter this section belongs to, when the course groups its sections.
    *
    * The three original courses were authored as one section per lesson, which
    * puts 66-81 headings in the sidebar. A chapter is a presentation grouping
-   * only: it never changes lesson order, ids, quizzes or progress, so tagging a
-   * section is safe where merging sections would not be (each section owns its
-   * quiz). Courses without chapters fall back to one chapter per section.
+   * only: it never changes lesson order, ids, quizzes or progress. Courses
+   * without chapters fall back to one chapter per section.
    */
   chapter?: string
 }
@@ -441,11 +441,14 @@ export interface CourseLessonMeta {
   xp: number
   /** How many exercise blocks the lesson body contains. */
   exerciseCount: number
+  /** The catalogue-facing summary of this lesson's own quiz. */
+  quiz: QuizSummary
 }
 
 /**
- * The catalogue-facing half of a quiz. Question bodies travel with the section
- * module, so a lesson list does not download every explanation in the course.
+ * The catalogue-facing half of a lesson quiz. Question bodies travel with the
+ * lesson's section module, so a lesson list does not download every explanation
+ * in the course.
  */
 export interface QuizSummary {
   id: string
@@ -459,7 +462,6 @@ export interface CourseSectionMeta {
   title: string
   description: string
   lessons: CourseLessonMeta[]
-  quiz?: QuizSummary
   /** Presentation grouping; see `Section.chapter`. */
   chapter?: string
 }

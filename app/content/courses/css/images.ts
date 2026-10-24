@@ -18,6 +18,71 @@ export const cssImageSections: Section[] = [
           'Separate filter from opacity and say which one you should reach for',
           'Build the grey-until-hover pattern with a transition rather than a jump',
         ],
+        quiz: {
+          id: 'quiz-css-l96',
+          title: 'CSS Style Images quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l96-q1',
+              type: 'multiple-choice',
+              prompt: 'What is the difference between `border-radius: 50%` and `border-radius: 9999px` on a 200px by 60px box?',
+              options: [
+                'They are identical, because 9999px is clamped to the box size',
+                '`50%` resolves per axis and gives an ellipse on the long axis, while `9999px` is clamped to half the shorter side and gives a pill',
+                '`9999px` is invalid and is ignored',
+                '`50%` applies only to the corners and `9999px` applies to the whole box',
+              ],
+              answer: 1,
+              explanation: 'A percentage radius resolves against each axis separately, so the corners are elliptical on a non-square box. An absolute length is clamped to half the shorter side, which is what produces the stadium shape people actually mean by "pill".',
+            },
+            {
+              id: 'quiz-css-l96-q2',
+              type: 'true-false',
+              prompt: '`opacity: 0.5` and `filter: grayscale(0.5)` are two ways of writing the same thing.',
+              answer: false,
+              explanation: 'Opacity makes the element see-through, blending with whatever is behind it. A grayscale filter only drains colour from the element\'s own pixels and stays fully opaque.',
+            },
+            {
+              id: 'quiz-css-l96-q3',
+              type: 'blank',
+              prompt: 'Which filter function follows the shape of the content rather than drawing a rectangle, so it works on an icon or a letter?',
+              answers: [
+                'drop-shadow',
+                'dropshadow',
+                'drop-shadow()',
+              ],
+              explanation: '`drop-shadow()` operates on the alpha channel, so the shadow traces the outline of the glyph or icon. `box-shadow` only ever draws a rectangle, which is why icons so often end up with a rectangular smudge behind them.',
+            },
+            {
+              id: 'quiz-css-l96-q4',
+              type: 'multiple-choice',
+              prompt: 'A tile is grey until hovered, then snaps to full colour. What is missing?',
+              options: [
+                'A `border-radius` on the tile',
+                'A transition on the filter, declared on the base rule',
+                'A higher z-index on the hover state',
+                '`filter: none` in the base rule instead of `:hover`',
+              ],
+              answer: 1,
+              explanation: 'Without a transition the two states change instantly, which reads as a flicker rather than an effect. Put `transition: filter 0.3s` on the base rule so the change is animated in both directions.',
+            },
+            {
+              id: 'quiz-css-l96-q5',
+              type: 'identify-error',
+              prompt: 'The pill-shaped button has square corners on its parent background. What is wrong?',
+              code: '.pill {\n  border-radius: 9999px;\n}\n\n.card {\n  background: #29e2bd;\n  padding: 0.5rem;\n}',
+              options: [
+                'The parent needs the same radius, or an `overflow: hidden`, for its background to follow the curve',
+                '`border-radius` does not work on background colours',
+                'The radius has to be written as a percentage',
+                '`padding` prevents the background from rounding',
+              ],
+              answer: 0,
+              explanation: 'A radius only rounds the box it is applied to. The parent paints its own rectangle, so unless it shares the radius or clips its overflow, its background stays square behind the curved child.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -189,79 +254,6 @@ filter: none;`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s57',
-      title: 'CSS Style Images quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s57-q1',
-          type: 'multiple-choice',
-          prompt: 'What is the difference between `border-radius: 50%` and `border-radius: 9999px` on a 200px by 60px box?',
-          options: [
-            'They are identical, because 9999px is clamped to the box size',
-            '`50%` resolves per axis and gives an ellipse on the long axis, while `9999px` is clamped to half the shorter side and gives a pill',
-            '`9999px` is invalid and is ignored',
-            '`50%` applies only to the corners and `9999px` applies to the whole box',
-          ],
-          answer: 1,
-          explanation:
-            'A percentage radius resolves against each axis separately, so the corners are elliptical on a non-square box. An absolute length is clamped to half the shorter side, which is what produces the stadium shape people actually mean by "pill".',
-        },
-        {
-          id: 'quiz-css-s57-q2',
-          type: 'true-false',
-          prompt: '`opacity: 0.5` and `filter: grayscale(0.5)` are two ways of writing the same thing.',
-          answer: false,
-          explanation:
-            'Opacity makes the element see-through, blending with whatever is behind it. A grayscale filter only drains colour from the element\'s own pixels and stays fully opaque.',
-        },
-        {
-          id: 'quiz-css-s57-q3',
-          type: 'blank',
-          prompt: 'Which filter function follows the shape of the content rather than drawing a rectangle, so it works on an icon or a letter?',
-          answers: ['drop-shadow', 'dropshadow', 'drop-shadow()'],
-          explanation:
-            '`drop-shadow()` operates on the alpha channel, so the shadow traces the outline of the glyph or icon. `box-shadow` only ever draws a rectangle, which is why icons so often end up with a rectangular smudge behind them.',
-        },
-        {
-          id: 'quiz-css-s57-q4',
-          type: 'multiple-choice',
-          prompt: 'A tile is grey until hovered, then snaps to full colour. What is missing?',
-          options: [
-            'A `border-radius` on the tile',
-            'A transition on the filter, declared on the base rule',
-            'A higher z-index on the hover state',
-            '`filter: none` in the base rule instead of `:hover`',
-          ],
-          answer: 1,
-          explanation:
-            'Without a transition the two states change instantly, which reads as a flicker rather than an effect. Put `transition: filter 0.3s` on the base rule so the change is animated in both directions.',
-        },
-        {
-          id: 'quiz-css-s57-q5',
-          type: 'identify-error',
-          prompt: 'The pill-shaped button has square corners on its parent background. What is wrong?',
-          code: `.pill {
-  border-radius: 9999px;
-}
-
-.card {
-  background: #29e2bd;
-  padding: 0.5rem;
-}`,
-          options: [
-            'The parent needs the same radius, or an `overflow: hidden`, for its background to follow the curve',
-            '`border-radius` does not work on background colours',
-            'The radius has to be written as a percentage',
-            '`padding` prevents the background from rounding',
-          ],
-          answer: 0,
-          explanation:
-            'A radius only rounds the box it is applied to. The parent paints its own rectangle, so unless it shares the radius or clips its overflow, its background stays square behind the curved child.',
-        },
-      ],
-    },
   },
   {
     id: 'css-s58',
@@ -280,6 +272,72 @@ filter: none;`,
           'Explain the direction and mask-size relationship',
           'Build the fallback with a duplicated element and scaleY(-1)',
         ],
+        quiz: {
+          id: 'quiz-css-l97',
+          title: 'CSS Image Reflection quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l97-q1',
+              type: 'multiple-choice',
+              prompt: 'A reflection appears but ends on a hard visible edge. What is missing from the declaration?',
+              options: [
+                'A mask gradient on the reflection',
+                'A larger `border-radius`',
+                'A `z-index` value',
+                '`overflow: hidden` on the parent',
+              ],
+              answer: 0,
+              explanation: 'The mirror is a full duplicate by default, so it stops abruptly where it is clipped. A gradient mask from `transparent` to a partly opaque colour is what makes it read as a reflection rather than as a second copy.',
+            },
+            {
+              id: 'quiz-css-l97-q2',
+              type: 'true-false',
+              prompt: '`-webkit-box-reflect` is a fully standardised property supported without a prefix in every current browser.',
+              answer: false,
+              explanation: 'It is not in any specification. Every current engine happens to support it behind the prefix, which makes it usable in practice, but a linter will flag the unknown property and a future engine is under no obligation to keep it.',
+            },
+            {
+              id: 'quiz-css-l97-q3',
+              type: 'blank',
+              prompt: 'In `-webkit-box-reflect: below 8px ...`, what does the `8px` control?',
+              answers: [
+                'the gap',
+                'gap',
+                'the distance between the element and its reflection',
+                'the offset',
+              ],
+              explanation: 'The length is the space between the element and the mirror. It is part of the reflect effect rather than a margin, so it does not shift the element or affect the space it occupies in layout.',
+            },
+            {
+              id: 'quiz-css-l97-q4',
+              type: 'multiple-choice',
+              prompt: 'You build the fallback with a duplicated element and `transform: scaleY(-1)`. What must you also do?',
+              options: [
+                'Give the copy `position: fixed`',
+                'Hide the duplicate from assistive technology, because it is announced twice',
+                'Set `filter: blur(1px)` on the original',
+                'Remove the original element from the DOM',
+              ],
+              answer: 1,
+              explanation: 'A decorative mirror carries no information, so it should be `aria-hidden="true"` (and ideally `alt=""` if it is an image). Otherwise a screen reader reads the same content twice.',
+            },
+            {
+              id: 'quiz-css-l97-q5',
+              type: 'identify-error',
+              prompt: 'This is meant to put the reflection above the logo. What is wrong?',
+              code: '.logo {\n  box-reflect: above 6px;\n}',
+              options: [
+                'The property name is missing its `-webkit-` prefix, so the whole declaration is dropped',
+                '`above` is not a valid direction',
+                'The gap must be written as a percentage',
+                'A reflection needs `position: relative`',
+              ],
+              answer: 0,
+              explanation: 'The property has only ever shipped under the `-webkit-` prefix, so the unprefixed name is an unknown property and is discarded. Write `-webkit-box-reflect: above 6px`.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -431,74 +489,6 @@ figcaption {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s58',
-      title: 'CSS Image Reflection quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s58-q1',
-          type: 'multiple-choice',
-          prompt: 'A reflection appears but ends on a hard visible edge. What is missing from the declaration?',
-          options: [
-            'A mask gradient on the reflection',
-            'A larger `border-radius`',
-            'A `z-index` value',
-            '`overflow: hidden` on the parent',
-          ],
-          answer: 0,
-          explanation:
-            'The mirror is a full duplicate by default, so it stops abruptly where it is clipped. A gradient mask from `transparent` to a partly opaque colour is what makes it read as a reflection rather than as a second copy.',
-        },
-        {
-          id: 'quiz-css-s58-q2',
-          type: 'true-false',
-          prompt: '`-webkit-box-reflect` is a fully standardised property supported without a prefix in every current browser.',
-          answer: false,
-          explanation:
-            'It is not in any specification. Every current engine happens to support it behind the prefix, which makes it usable in practice, but a linter will flag the unknown property and a future engine is under no obligation to keep it.',
-        },
-        {
-          id: 'quiz-css-s58-q3',
-          type: 'blank',
-          prompt: 'In `-webkit-box-reflect: below 8px ...`, what does the `8px` control?',
-          answers: ['the gap', 'gap', 'the distance between the element and its reflection', 'the offset'],
-          explanation:
-            'The length is the space between the element and the mirror. It is part of the reflect effect rather than a margin, so it does not shift the element or affect the space it occupies in layout.',
-        },
-        {
-          id: 'quiz-css-s58-q4',
-          type: 'multiple-choice',
-          prompt: 'You build the fallback with a duplicated element and `transform: scaleY(-1)`. What must you also do?',
-          options: [
-            'Give the copy `position: fixed`',
-            'Hide the duplicate from assistive technology, because it is announced twice',
-            'Set `filter: blur(1px)` on the original',
-            'Remove the original element from the DOM',
-          ],
-          answer: 1,
-          explanation:
-            'A decorative mirror carries no information, so it should be `aria-hidden="true"` (and ideally `alt=""` if it is an image). Otherwise a screen reader reads the same content twice.',
-        },
-        {
-          id: 'quiz-css-s58-q5',
-          type: 'identify-error',
-          prompt: 'This is meant to put the reflection above the logo. What is wrong?',
-          code: `.logo {
-  box-reflect: above 6px;
-}`,
-          options: [
-            'The property name is missing its `-webkit-` prefix, so the whole declaration is dropped',
-            '`above` is not a valid direction',
-            'The gap must be written as a percentage',
-            'A reflection needs `position: relative`',
-          ],
-          answer: 0,
-          explanation:
-            'The property has only ever shipped under the `-webkit-` prefix, so the unprefixed name is an unknown property and is discarded. Write `-webkit-box-reflect: above 6px`.',
-        },
-      ],
-    },
   },
   {
     id: 'css-s59',
@@ -517,6 +507,71 @@ figcaption {
           'Explain why object-fit does nothing until the box size differs from the intrinsic size',
           'Combine object-fit with a fixed-height card and say what scale-down guarantees',
         ],
+        quiz: {
+          id: 'quiz-css-l98',
+          title: 'CSS object-fit quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l98-q1',
+              type: 'multiple-choice',
+              prompt: 'An `img` has `object-fit: cover` set but the picture is still stretched. What is the most likely reason?',
+              options: [
+                '`object-fit` only applies to `background-image`',
+                'The image has no definite width or height, so it lays out at its intrinsic size and there is no mismatch to resolve',
+                'The file has to be a JPEG',
+                'The parent needs `position: relative`',
+              ],
+              answer: 1,
+              explanation: 'With no size of its own the image occupies exactly its intrinsic box, so the fit mode has nothing to do. `object-fit` becomes visible the moment you give the element explicit `width` and `height`.',
+            },
+            {
+              id: 'quiz-css-l98-q2',
+              type: 'true-false',
+              prompt: '`object-fit: contain` guarantees that nothing is cropped, and `object-fit: cover` guarantees that no empty space is left.',
+              answer: true,
+              explanation: 'That is exactly the tradeoff. `contain` shrinks until the whole image fits, leaving letterbox space. `cover` grows until the box is full, cutting off the overflow.',
+            },
+            {
+              id: 'quiz-css-l98-q3',
+              type: 'blank',
+              prompt: 'Which value of `object-fit` guarantees the content is never scaled up, only down to fit?',
+              answers: [
+                'scale-down',
+                'scale down',
+                'scaledown',
+              ],
+              explanation: '`scale-down` acts as `none` while the content is smaller than the box and as `contain` once it is larger, so it will never magnify a low-resolution image past its own pixels.',
+            },
+            {
+              id: 'quiz-css-l98-q4',
+              type: 'multiple-choice',
+              prompt: 'A hero image has been squashed by a grid cell that is shorter than the picture. Which combination fixes it?',
+              options: [
+                'Set an explicit `height` on the image and add `object-fit: cover`',
+                'Add `border-radius` to the image',
+                'Set `overflow: visible` on the grid item',
+                'Use `object-position: top`',
+              ],
+              answer: 0,
+              explanation: 'The fix is a definite box plus a fit mode. `cover` then fills that box and crops the overflow instead of squashing the whole picture into it.',
+            },
+            {
+              id: 'quiz-css-l98-q5',
+              type: 'identify-error',
+              prompt: 'The crop is not happening. What is the mistake?',
+              code: '.card {\n  height: 180px;\n  overflow: hidden;\n}\n\n.card img {\n  width: 100%;\n  object-fit: cover;\n}',
+              options: [
+                '`height: auto` is missing from the image',
+                'Only `width` is set, so the image still lays out at its intrinsic height and `cover` has no mismatch to resolve',
+                '`overflow: hidden` on the parent cancels out `object-fit`',
+                '`object-fit` must be set on the parent, not the image',
+              ],
+              answer: 1,
+              explanation: 'The parent being a fixed height is not enough; the replaced element needs its own definite height. Add `height: 100%` or `height: 180px` to the `img` and the crop appears.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -642,80 +697,6 @@ img {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s59',
-      title: 'CSS object-fit quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s59-q1',
-          type: 'multiple-choice',
-          prompt: 'An `img` has `object-fit: cover` set but the picture is still stretched. What is the most likely reason?',
-          options: [
-            '`object-fit` only applies to `background-image`',
-            'The image has no definite width or height, so it lays out at its intrinsic size and there is no mismatch to resolve',
-            'The file has to be a JPEG',
-            'The parent needs `position: relative`',
-          ],
-          answer: 1,
-          explanation:
-            'With no size of its own the image occupies exactly its intrinsic box, so the fit mode has nothing to do. `object-fit` becomes visible the moment you give the element explicit `width` and `height`.',
-        },
-        {
-          id: 'quiz-css-s59-q2',
-          type: 'true-false',
-          prompt: '`object-fit: contain` guarantees that nothing is cropped, and `object-fit: cover` guarantees that no empty space is left.',
-          answer: true,
-          explanation:
-            'That is exactly the tradeoff. `contain` shrinks until the whole image fits, leaving letterbox space. `cover` grows until the box is full, cutting off the overflow.',
-        },
-        {
-          id: 'quiz-css-s59-q3',
-          type: 'blank',
-          prompt: 'Which value of `object-fit` guarantees the content is never scaled up, only down to fit?',
-          answers: ['scale-down', 'scale down', 'scaledown'],
-          explanation:
-            '`scale-down` acts as `none` while the content is smaller than the box and as `contain` once it is larger, so it will never magnify a low-resolution image past its own pixels.',
-        },
-        {
-          id: 'quiz-css-s59-q4',
-          type: 'multiple-choice',
-          prompt: 'A hero image has been squashed by a grid cell that is shorter than the picture. Which combination fixes it?',
-          options: [
-            'Set an explicit `height` on the image and add `object-fit: cover`',
-            'Add `border-radius` to the image',
-            'Set `overflow: visible` on the grid item',
-            'Use `object-position: top`',
-          ],
-          answer: 0,
-          explanation:
-            'The fix is a definite box plus a fit mode. `cover` then fills that box and crops the overflow instead of squashing the whole picture into it.',
-        },
-        {
-          id: 'quiz-css-s59-q5',
-          type: 'identify-error',
-          prompt: 'The crop is not happening. What is the mistake?',
-          code: `.card {
-  height: 180px;
-  overflow: hidden;
-}
-
-.card img {
-  width: 100%;
-  object-fit: cover;
-}`,
-          options: [
-            '`height: auto` is missing from the image',
-            'Only `width` is set, so the image still lays out at its intrinsic height and `cover` has no mismatch to resolve',
-            '`overflow: hidden` on the parent cancels out `object-fit`',
-            '`object-fit` must be set on the parent, not the image',
-          ],
-          answer: 1,
-          explanation:
-            'The parent being a fixed height is not enough; the replaced element needs its own definite height. Add `height: 100%` or `height: 180px` to the `img` and the crop appears.',
-        },
-      ],
-    },
   },
   {
     id: 'css-s60',
@@ -734,6 +715,72 @@ img {
           'Explain why a percentage anchor is the useful one for faces and products',
           'Say how object-position relates to background-position',
         ],
+        quiz: {
+          id: 'quiz-css-l99',
+          title: 'CSS object-position quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l99-q1',
+              type: 'multiple-choice',
+              prompt: 'Which set of keywords is valid for `object-position`?',
+              options: [
+                '`top`, `right`, `bottom`, `left`, plus `center`',
+                '`start`, `end`, `top`, `bottom`',
+                'Any CSS keyword, since it shares the grammar with `background-position`',
+                'Only `top-left`, `top-right`, `bottom-left`, `bottom-right`',
+              ],
+              answer: 0,
+              explanation: 'The four edge keywords plus `center` are the whole set. There is no `top-left`: that position is written as two keywords, `top left`, and the order does not matter.',
+            },
+            {
+              id: 'quiz-css-l99-q2',
+              type: 'true-false',
+              prompt: 'A centred `object-fit: cover` crop is a safe default for portrait photographs, because the subject is usually in the middle.',
+              answer: false,
+              explanation: 'A centred crop cuts heads off, because the interesting part of a portrait is near the top of the frame rather than in its middle. `object-position: top` survives far more crop ratios.',
+            },
+            {
+              id: 'quiz-css-l99-q3',
+              type: 'blank',
+              prompt: 'What does `object-position: 50% 50%` mean, and what is it equivalent to?',
+              answers: [
+                'center',
+                'centre',
+                'the centre',
+                'centered',
+              ],
+              explanation: 'Fifty percent on both axes is the centred position, and it is the initial value. Note that percentages here resolve against the overflow rather than against the image itself.',
+            },
+            {
+              id: 'quiz-css-l99-q4',
+              type: 'multiple-choice',
+              prompt: 'Why is a percentage anchor usually better than a fixed pixel offset?',
+              options: [
+                'Percentages are the only valid syntax for the vertical axis',
+                'The anchor stays on the same relative part of the subject at any crop size, so it survives being shown at several different aspect ratios',
+                'Pixels do not work on replaced elements',
+                'Percentages ignore object-fit',
+              ],
+              answer: 1,
+              explanation: 'A percentage is relative to the overflow, so `20% 20%` tracks the same point of the subject whether the card is 80 or 800 pixels wide. A fixed length drifts as the crop changes and stops lining up.',
+            },
+            {
+              id: 'quiz-css-l99-q5',
+              type: 'identify-error',
+              prompt: 'The crop position is ignored. What is wrong?',
+              code: '.thumb {\n  width: 120px;\n  height: 120px;\n  object-position: 50% 0%;\n}',
+              options: [
+                'The value is invalid, because percentages cannot be mixed with object-fit',
+                'The property is on the wrapper rather than on the `img` itself',
+                '`object-position` requires `position: absolute`',
+                'The anchor should be a length, not a percentage',
+              ],
+              answer: 1,
+              explanation: '`object-position` applies to the replaced element, so it has to be on the `img` or `video`. Put it on the container and it describes the container\'s own replaced content, of which there is none.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -879,75 +926,5 @@ object-position: 30% 70%;           /* percentages, which is the useful one */`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s60',
-      title: 'CSS object-position quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s60-q1',
-          type: 'multiple-choice',
-          prompt: 'Which set of keywords is valid for `object-position`?',
-          options: [
-            '`top`, `right`, `bottom`, `left`, plus `center`',
-            '`start`, `end`, `top`, `bottom`',
-            'Any CSS keyword, since it shares the grammar with `background-position`',
-            'Only `top-left`, `top-right`, `bottom-left`, `bottom-right`',
-          ],
-          answer: 0,
-          explanation:
-            'The four edge keywords plus `center` are the whole set. There is no `top-left`: that position is written as two keywords, `top left`, and the order does not matter.',
-        },
-        {
-          id: 'quiz-css-s60-q2',
-          type: 'true-false',
-          prompt: 'A centred `object-fit: cover` crop is a safe default for portrait photographs, because the subject is usually in the middle.',
-          answer: false,
-          explanation:
-            'A centred crop cuts heads off, because the interesting part of a portrait is near the top of the frame rather than in its middle. `object-position: top` survives far more crop ratios.',
-        },
-        {
-          id: 'quiz-css-s60-q3',
-          type: 'blank',
-          prompt: 'What does `object-position: 50% 50%` mean, and what is it equivalent to?',
-          answers: ['center', 'centre', 'the centre', 'centered'],
-          explanation:
-            'Fifty percent on both axes is the centred position, and it is the initial value. Note that percentages here resolve against the overflow rather than against the image itself.',
-        },
-        {
-          id: 'quiz-css-s60-q4',
-          type: 'multiple-choice',
-          prompt: 'Why is a percentage anchor usually better than a fixed pixel offset?',
-          options: [
-            'Percentages are the only valid syntax for the vertical axis',
-            'The anchor stays on the same relative part of the subject at any crop size, so it survives being shown at several different aspect ratios',
-            'Pixels do not work on replaced elements',
-            'Percentages ignore object-fit',
-          ],
-          answer: 1,
-          explanation:
-            'A percentage is relative to the overflow, so `20% 20%` tracks the same point of the subject whether the card is 80 or 800 pixels wide. A fixed length drifts as the crop changes and stops lining up.',
-        },
-        {
-          id: 'quiz-css-s60-q5',
-          type: 'identify-error',
-          prompt: 'The crop position is ignored. What is wrong?',
-          code: `.thumb {
-  width: 120px;
-  height: 120px;
-  object-position: 50% 0%;
-}`,
-          options: [
-            'The value is invalid, because percentages cannot be mixed with object-fit',
-            'The property is on the wrapper rather than on the `img` itself',
-            '`object-position` requires `position: absolute`',
-            'The anchor should be a length, not a percentage',
-          ],
-          answer: 1,
-          explanation:
-            '`object-position` applies to the replaced element, so it has to be on the `img` or `video`. Put it on the container and it describes the container\'s own replaced content, of which there is none.',
-        },
-      ],
-    },
   },
 ]

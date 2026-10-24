@@ -16,10 +16,14 @@ test('the course page groups legacy lessons into chapters', async ({ page }) => 
   // 77 lessons, and no section heading per lesson any more.
   await expect(page.locator('main ol > li')).toHaveCount(77)
 
-  // Every section still owns its quiz: 60 one-lesson sections carry it inline,
-  // the 6 multi-lesson sections keep the full quiz card.
-  await expect(page.locator('main a[aria-label^="Take the"]')).toHaveCount(60)
-  await expect(page.getByText(/\d+ questions · pass at \d+%/)).toHaveCount(6)
+  // Every lesson row carries its own quiz at its side.
+  const quizLinks = page.locator('main a[aria-label^="Take the quiz for"]')
+  await expect(quizLinks).toHaveCount(77)
+  const hrefs = await quizLinks.evaluateAll((links) =>
+    links.map((link) => link.getAttribute('href')),
+  )
+  expect(new Set(hrefs).size).toBe(77)
+  await expect(page.getByText(/\d+ questions · pass at \d+%/)).toHaveCount(0)
 })
 
 test('the lesson sidebar lists chapters rather than every section', async ({ page }) => {
@@ -31,6 +35,14 @@ test('the lesson sidebar lists chapters rather than every section', async ({ pag
 
   // The current lesson is still marked, so the reveal-on-load logic keeps working.
   await expect(list.locator('[aria-current="page"]')).toHaveCount(1)
+
+  // Every lesson in the sidebar has its own quiz on the same row.
+  const quizLinks = list.locator('a[aria-label^="Take the quiz for"]')
+  await expect(quizLinks).toHaveCount(77)
+  const hrefs = await quizLinks.evaluateAll((links) =>
+    links.map((link) => link.getAttribute('href')),
+  )
+  expect(new Set(hrefs).size).toBe(77)
 })
 
 /**
@@ -62,9 +74,23 @@ test('the projects course presents its five capstone builds', async ({ page }) =
   await expect(chapters.nth(3).getByRole('heading', { level: 2 })).toHaveText('Capstone builds')
   await expect(chapters.nth(4).getByRole('heading', { level: 2 })).toHaveText('Ship it')
 
-  // 18 lessons, grouped into 4 chapters, and every section still owns its quiz.
+  // 18 lessons, grouped into 4 chapters, and every lesson shows its own quiz inline.
   await expect(page.locator('main ol > li')).toHaveCount(18)
-  await expect(page.getByText(/\d+ questions · pass at \d+%/)).toHaveCount(9)
+  await expect(page.locator('main a[aria-label^="Take the quiz for"]')).toHaveCount(18)
+  await expect(page.getByText(/\d+ questions · pass at \d+%/)).toHaveCount(0)
+})
+
+test('a lesson quiz loads its lesson title and a full question set', async ({ page }) => {
+  await gotoHydrated(page, '/learn/dom-browser-apis/quiz/quiz-dom-l1')
+
+  await expect(
+    page.getByRole('heading', { level: 1, name: 'What the DOM is quiz' }),
+  ).toBeVisible()
+  await expect(page.getByText('0/5 answered · pass at 60%')).toBeVisible()
+  await expect(page.getByRole('link', { name: 'Back to lesson' })).toHaveAttribute(
+    'href',
+    '/learn/dom-browser-apis/dom-l1',
+  )
 })
 
 test('a capstone lesson hands off to the project workspace', async ({ page }) => {

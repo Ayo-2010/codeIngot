@@ -17,6 +17,70 @@ export const htmlApiSections: Section[] = [
           'Say why a page must never ask for location on load',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-html-l71',
+          title: 'HTML Geolocation quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l71-q1',
+              type: 'multiple-choice',
+              prompt: 'What does the accuracy value describe?',
+              options: [
+                'How wrong the reading is',
+                'A radius in metres within which the true position probably lies',
+                'The number of satellites used',
+                'A percentage from 0 to 100',
+              ],
+              answer: 1,
+              explanation: 'A value of 2000 means the position is within 2 km, not that it is wrong by 2 km.',
+            },
+            {
+              id: 'quiz-html-l71-q2',
+              type: 'true-false',
+              prompt: 'The Geolocation API works over plain HTTP.',
+              answer: false,
+              explanation: 'It requires a secure context. Over plain HTTP the API is absent rather than blocked.',
+            },
+            {
+              id: 'quiz-html-l71-q3',
+              type: 'multiple-choice',
+              prompt: 'Which error code means the user refused?',
+              options: [
+                '1',
+                '2',
+                '3',
+                '0',
+              ],
+              answer: 0,
+              explanation: '1 is PERMISSION_DENIED, 2 is POSITION_UNAVAILABLE and 3 is TIMEOUT.',
+            },
+            {
+              id: 'quiz-html-l71-q4',
+              type: 'blank',
+              prompt: 'Which option forces a fresh fix rather than accepting a cached one?',
+              answers: [
+                'maximumAge: 0',
+                'maximumAge',
+                'maximumAge: 0',
+              ],
+              explanation: 'A large maximumAge accepts an old fix, which is faster and cheaper but less accurate.',
+            },
+            {
+              id: 'quiz-html-l71-q5',
+              type: 'multiple-choice',
+              prompt: 'When should a page request a position?',
+              options: [
+                'On page load, so it is ready',
+                'At the moment the user asks for the feature that needs it',
+                'After a fixed delay',
+                'Whenever the connection improves',
+              ],
+              answer: 1,
+              explanation: 'A prompt on load is refused and can be a consent violation. Ask when the user asks for the thing.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -208,65 +272,6 @@ navigator.permissions.query({ name: 'geolocation' })
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s60',
-      title: 'HTML Geolocation quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s60-q1',
-          type: 'multiple-choice',
-          prompt: 'What does the accuracy value describe?',
-          options: [
-            'How wrong the reading is',
-            'A radius in metres within which the true position probably lies',
-            'The number of satellites used',
-            'A percentage from 0 to 100',
-          ],
-          answer: 1,
-          explanation:
-            'A value of 2000 means the position is within 2 km, not that it is wrong by 2 km.',
-        },
-        {
-          id: 'quiz-html-s60-q2',
-          type: 'true-false',
-          prompt: 'The Geolocation API works over plain HTTP.',
-          answer: false,
-          explanation:
-            'It requires a secure context. Over plain HTTP the API is absent rather than blocked.',
-        },
-        {
-          id: 'quiz-html-s60-q3',
-          type: 'multiple-choice',
-          prompt: 'Which error code means the user refused?',
-          options: ['1', '2', '3', '0'],
-          answer: 0,
-          explanation:
-            '1 is PERMISSION_DENIED, 2 is POSITION_UNAVAILABLE and 3 is TIMEOUT.',
-        },
-        {
-          id: 'quiz-html-s60-q4',
-          type: 'blank',
-          prompt: 'Which option forces a fresh fix rather than accepting a cached one?',
-          answers: ['maximumAge: 0', 'maximumAge', 'maximumAge: 0'],
-          explanation: 'A large maximumAge accepts an old fix, which is faster and cheaper but less accurate.',
-        },
-        {
-          id: 'quiz-html-s60-q5',
-          type: 'multiple-choice',
-          prompt: 'When should a page request a position?',
-          options: [
-            'On page load, so it is ready',
-            'At the moment the user asks for the feature that needs it',
-            'After a fixed delay',
-            'Whenever the connection improves',
-          ],
-          answer: 1,
-          explanation:
-            'A prompt on load is refused and can be a consent violation. Ask when the user asks for the thing.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s61',
@@ -284,6 +289,70 @@ navigator.permissions.query({ name: 'geolocation' })
           'Explain why a keyboard-accessible alternative is required alongside it',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-html-l72',
+          title: 'HTML Drag and Drop quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l72-q1',
+              type: 'multiple-choice',
+              prompt: 'Why must a dragover handler call preventDefault()?',
+              options: [
+                'To stop the page scrolling',
+                'Without it the browser refuses the drop and no drop event fires',
+                'To make the cursor change',
+                'To stop the drag leaving the window',
+              ],
+              answer: 1,
+              explanation: 'It is the required opt-in, and forgetting it is the most common drag-and-drop bug.',
+            },
+            {
+              id: 'quiz-html-l72-q2',
+              type: 'true-false',
+              prompt: 'HTML5 drag and drop is fully keyboard accessible on its own.',
+              answer: false,
+              explanation: 'The native gesture has no keyboard equivalent, so every drag interaction needs a button-based path alongside it.',
+            },
+            {
+              id: 'quiz-html-l72-q3',
+              type: 'multiple-choice',
+              prompt: 'What attribute makes an element draggable?',
+              options: [
+                'draggable',
+                'drag',
+                'moveable',
+                'droppable',
+              ],
+              answer: 0,
+              explanation: 'draggable="true" on any element; the value "auto" is the default and does not enable it.',
+            },
+            {
+              id: 'quiz-html-l72-q4',
+              type: 'blank',
+              prompt: 'Which object carries the payload between the source and the target?',
+              answers: [
+                'dataTransfer',
+                'event.dataTransfer',
+                'DataTransfer',
+              ],
+              explanation: 'setData on dragstart, getData on drop.',
+            },
+            {
+              id: 'quiz-html-l72-q5',
+              type: 'multiple-choice',
+              prompt: 'Which event is the reliable place to clean up after a drag?',
+              options: [
+                'drop',
+                'dragend',
+                'dragleave',
+                'dragover',
+              ],
+              answer: 1,
+              explanation: 'drop may not fire — the drag can be cancelled or released outside any target — so dragend on the source is the safe place.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -489,58 +558,6 @@ drop.addEventListener('drop', (e) => {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s61',
-      title: 'HTML Drag and Drop quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s61-q1',
-          type: 'multiple-choice',
-          prompt: 'Why must a dragover handler call preventDefault()?',
-          options: [
-            'To stop the page scrolling',
-            'Without it the browser refuses the drop and no drop event fires',
-            'To make the cursor change',
-            'To stop the drag leaving the window',
-          ],
-          answer: 1,
-          explanation: 'It is the required opt-in, and forgetting it is the most common drag-and-drop bug.',
-        },
-        {
-          id: 'quiz-html-s61-q2',
-          type: 'true-false',
-          prompt: 'HTML5 drag and drop is fully keyboard accessible on its own.',
-          answer: false,
-          explanation:
-            'The native gesture has no keyboard equivalent, so every drag interaction needs a button-based path alongside it.',
-        },
-        {
-          id: 'quiz-html-s61-q3',
-          type: 'multiple-choice',
-          prompt: 'What attribute makes an element draggable?',
-          options: ['draggable', 'drag', 'moveable', 'droppable'],
-          answer: 0,
-          explanation: 'draggable="true" on any element; the value "auto" is the default and does not enable it.',
-        },
-        {
-          id: 'quiz-html-s61-q4',
-          type: 'blank',
-          prompt: 'Which object carries the payload between the source and the target?',
-          answers: ['dataTransfer', 'event.dataTransfer', 'DataTransfer'],
-          explanation: 'setData on dragstart, getData on drop.',
-        },
-        {
-          id: 'quiz-html-s61-q5',
-          type: 'multiple-choice',
-          prompt: 'Which event is the reliable place to clean up after a drag?',
-          options: ['drop', 'dragend', 'dragleave', 'dragover'],
-          answer: 1,
-          explanation:
-            'drop may not fire — the drag can be cancelled or released outside any target — so dragend on the source is the safe place.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s62',
@@ -558,6 +575,70 @@ drop.addEventListener('drop', (e) => {
           'Say why storage is a quota, not a database',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-html-l73',
+          title: 'HTML Web Storage quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l73-q1',
+              type: 'multiple-choice',
+              prompt: 'How does sessionStorage differ from localStorage?',
+              options: [
+                'It is larger',
+                'It is scoped to one tab and is gone when that tab closes',
+                'It is read-only',
+                'It is encrypted',
+              ],
+              answer: 1,
+              explanation: 'localStorage persists per origin; sessionStorage lives for one tab session.',
+            },
+            {
+              id: 'quiz-html-l73-q2',
+              type: 'true-false',
+              prompt: 'A long-lived authentication token belongs in localStorage.',
+              answer: false,
+              explanation: 'Every script on the origin can read it. A long-lived credential belongs in an HttpOnly cookie, which JavaScript cannot read.',
+            },
+            {
+              id: 'quiz-html-l73-q3',
+              type: 'multiple-choice',
+              prompt: 'What does getItem return for a key that is not set?',
+              options: [
+                'undefined',
+                'null',
+                '""',
+                'false',
+              ],
+              answer: 1,
+              explanation: 'null, which is different from an empty string and is worth checking explicitly.',
+            },
+            {
+              id: 'quiz-html-l73-q4',
+              type: 'blank',
+              prompt: 'What does a full quota cause?',
+              answers: [
+                'a QuotaExceededError to be thrown',
+                'QuotaExceededError',
+                'a thrown error',
+              ],
+              explanation: 'setItem throws rather than returning a status, so writes have to be wrapped in a try/catch.',
+            },
+            {
+              id: 'quiz-html-l73-q5',
+              type: 'multiple-choice',
+              prompt: 'Where does the storage event fire?',
+              options: [
+                'In the tab that made the change',
+                'In other tabs on the same origin',
+                'On the server',
+                'In every browser',
+              ],
+              answer: 1,
+              explanation: 'The tab that wrote the value is not notified, which is why the same-tab UI has to be updated directly.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -757,65 +838,6 @@ window.addEventListener('storage', (e) => {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s62',
-      title: 'HTML Web Storage quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s62-q1',
-          type: 'multiple-choice',
-          prompt: 'How does sessionStorage differ from localStorage?',
-          options: [
-            'It is larger',
-            'It is scoped to one tab and is gone when that tab closes',
-            'It is read-only',
-            'It is encrypted',
-          ],
-          answer: 1,
-          explanation:
-            'localStorage persists per origin; sessionStorage lives for one tab session.',
-        },
-        {
-          id: 'quiz-html-s62-q2',
-          type: 'true-false',
-          prompt: 'A long-lived authentication token belongs in localStorage.',
-          answer: false,
-          explanation:
-            'Every script on the origin can read it. A long-lived credential belongs in an HttpOnly cookie, which JavaScript cannot read.',
-        },
-        {
-          id: 'quiz-html-s62-q3',
-          type: 'multiple-choice',
-          prompt: 'What does getItem return for a key that is not set?',
-          options: ['undefined', 'null', '""', 'false'],
-          answer: 1,
-          explanation: 'null, which is different from an empty string and is worth checking explicitly.',
-        },
-        {
-          id: 'quiz-html-s62-q4',
-          type: 'blank',
-          prompt: 'What does a full quota cause?',
-          answers: ['a QuotaExceededError to be thrown', 'QuotaExceededError', 'a thrown error'],
-          explanation:
-            'setItem throws rather than returning a status, so writes have to be wrapped in a try/catch.',
-        },
-        {
-          id: 'quiz-html-s62-q5',
-          type: 'multiple-choice',
-          prompt: 'Where does the storage event fire?',
-          options: [
-            'In the tab that made the change',
-            'In other tabs on the same origin',
-            'On the server',
-            'In every browser',
-          ],
-          answer: 1,
-          explanation:
-            'The tab that wrote the value is not notified, which is why the same-tab UI has to be updated directly.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s63',
@@ -833,6 +855,70 @@ window.addEventListener('storage', (e) => {
           'Decide whether a task belongs in a worker or on the main thread',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-html-l74',
+          title: 'HTML Web Workers quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l74-q1',
+              type: 'multiple-choice',
+              prompt: 'What cannot be posted to a worker?',
+              options: [
+                'A plain object',
+                'A DOM node',
+                'A typed array',
+                'A Date',
+              ],
+              answer: 1,
+              explanation: 'There is no DOM in a worker, so a node cannot be cloned across the boundary. Use an id and look it up on the other side.',
+            },
+            {
+              id: 'quiz-html-l74-q2',
+              type: 'true-false',
+              prompt: 'An object posted to a worker is shared, so mutating it affects both sides.',
+              answer: false,
+              explanation: 'It is copied with the structured clone algorithm. Later changes on either side are independent.',
+            },
+            {
+              id: 'quiz-html-l74-q3',
+              type: 'multiple-choice',
+              prompt: 'How do you stop a running worker?',
+              options: [
+                'postMessage with a stop flag',
+                'worker.terminate()',
+                'worker.close()',
+                'You cannot',
+              ],
+              answer: 1,
+              explanation: 'terminate is the only control from the outside. A stop flag only works if the worker happens to be checking for it.',
+            },
+            {
+              id: 'quiz-html-l74-q4',
+              type: 'blank',
+              prompt: 'Which buffer type can be transferred to a worker with no copying?',
+              answers: [
+                'ArrayBuffer',
+                'an ArrayBuffer',
+                'Transferable',
+              ],
+              explanation: 'Passing an ArrayBuffer in the transfer list detaches it in the sending thread, so the data moves rather than being duplicated.',
+            },
+            {
+              id: 'quiz-html-l74-q5',
+              type: 'multiple-choice',
+              prompt: 'When is a worker worth the overhead?',
+              options: [
+                'For any computation at all',
+                'When the main thread would otherwise be blocked and the page unresponsive',
+                'For every network request',
+                'For work under a few milliseconds',
+              ],
+              answer: 1,
+              explanation: 'Each worker is a whole JavaScript environment. Starting one for thirty milliseconds of work costs more than it saves.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1008,66 +1094,6 @@ worker.postMessage({ shared }, [shared]);`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s63',
-      title: 'HTML Web Workers quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s63-q1',
-          type: 'multiple-choice',
-          prompt: 'What cannot be posted to a worker?',
-          options: [
-            'A plain object',
-            'A DOM node',
-            'A typed array',
-            'A Date',
-          ],
-          answer: 1,
-          explanation:
-            'There is no DOM in a worker, so a node cannot be cloned across the boundary. Use an id and look it up on the other side.',
-        },
-        {
-          id: 'quiz-html-s63-q2',
-          type: 'true-false',
-          prompt: 'An object posted to a worker is shared, so mutating it affects both sides.',
-          answer: false,
-          explanation:
-            'It is copied with the structured clone algorithm. Later changes on either side are independent.',
-        },
-        {
-          id: 'quiz-html-s63-q3',
-          type: 'multiple-choice',
-          prompt: 'How do you stop a running worker?',
-          options: ['postMessage with a stop flag', 'worker.terminate()', 'worker.close()', 'You cannot'],
-          answer: 1,
-          explanation:
-            'terminate is the only control from the outside. A stop flag only works if the worker happens to be checking for it.',
-        },
-        {
-          id: 'quiz-html-s63-q4',
-          type: 'blank',
-          prompt: 'Which buffer type can be transferred to a worker with no copying?',
-          answers: ['ArrayBuffer', 'an ArrayBuffer', 'Transferable'],
-          explanation:
-            'Passing an ArrayBuffer in the transfer list detaches it in the sending thread, so the data moves rather than being duplicated.',
-        },
-        {
-          id: 'quiz-html-s63-q5',
-          type: 'multiple-choice',
-          prompt: 'When is a worker worth the overhead?',
-          options: [
-            'For any computation at all',
-            'When the main thread would otherwise be blocked and the page unresponsive',
-            'For every network request',
-            'For work under a few milliseconds',
-          ],
-          answer: 1,
-          explanation:
-            'Each worker is a whole JavaScript environment. Starting one for thirty milliseconds of work costs more than it saves.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s64',
@@ -1085,6 +1111,70 @@ worker.postMessage({ shared }, [shared]);`,
           'Decide between SSE and a WebSocket for a given requirement',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-html-l75',
+          title: 'HTML Server Sent Events quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l75-q1',
+              type: 'multiple-choice',
+              prompt: 'What is the main advantage of SSE over a WebSocket?',
+              options: [
+                'It is bidirectional',
+                'It is plain HTTP, so it survives proxies, and the browser reconnects by itself',
+                'It carries binary data',
+                'It needs no server',
+              ],
+              answer: 1,
+              explanation: 'The automatic reconnection and the absence of a protocol upgrade are what make SSE the easier choice for a one-way feed.',
+            },
+            {
+              id: 'quiz-html-l75-q2',
+              type: 'true-false',
+              prompt: 'SSE can send data from the browser to the server over the same connection.',
+              answer: false,
+              explanation: 'The stream is one-way. Anything the browser sends is an ordinary HTTP request.',
+            },
+            {
+              id: 'quiz-html-l75-q3',
+              type: 'multiple-choice',
+              prompt: 'What stops the browser reconnecting an EventSource?',
+              options: [
+                'Setting readyState to 2',
+                'Calling source.close()',
+                'Sending a stop message',
+                'Reloading the page',
+              ],
+              answer: 1,
+              explanation: 'close is the only control from the page. A stop message only works if the server happens to honour it.',
+            },
+            {
+              id: 'quiz-html-l75-q4',
+              type: 'blank',
+              prompt: 'What field in the event stream sets the reconnection interval?',
+              answers: [
+                'retry',
+                'retry:',
+                'the retry field',
+              ],
+              explanation: 'A large retry value effectively disables reconnection and hands the decision to the page.',
+            },
+            {
+              id: 'quiz-html-l75-q5',
+              type: 'multiple-choice',
+              prompt: 'Which case is better served by a WebSocket?',
+              options: [
+                'A build finishing and reporting progress',
+                'A dashboard receiving updates',
+                'A log tail the client only reads',
+                'Two participants in a chat sending messages both ways',
+              ],
+              answer: 3,
+              explanation: 'The first three are one-way and suit SSE. A conversation with both sides speaking needs a WebSocket.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1271,69 +1361,5 @@ setInterval(() => res.write('data: ' + Date.now() + '\\n\\n'), 1000);`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s64',
-      title: 'HTML Server Sent Events quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s64-q1',
-          type: 'multiple-choice',
-          prompt: 'What is the main advantage of SSE over a WebSocket?',
-          options: [
-            'It is bidirectional',
-            'It is plain HTTP, so it survives proxies, and the browser reconnects by itself',
-            'It carries binary data',
-            'It needs no server',
-          ],
-          answer: 1,
-          explanation:
-            'The automatic reconnection and the absence of a protocol upgrade are what make SSE the easier choice for a one-way feed.',
-        },
-        {
-          id: 'quiz-html-s64-q2',
-          type: 'true-false',
-          prompt: 'SSE can send data from the browser to the server over the same connection.',
-          answer: false,
-          explanation:
-            'The stream is one-way. Anything the browser sends is an ordinary HTTP request.',
-        },
-        {
-          id: 'quiz-html-s64-q3',
-          type: 'multiple-choice',
-          prompt: 'What stops the browser reconnecting an EventSource?',
-          options: [
-            'Setting readyState to 2',
-            'Calling source.close()',
-            'Sending a stop message',
-            'Reloading the page',
-          ],
-          answer: 1,
-          explanation:
-            'close is the only control from the page. A stop message only works if the server happens to honour it.',
-        },
-        {
-          id: 'quiz-html-s64-q4',
-          type: 'blank',
-          prompt: 'What field in the event stream sets the reconnection interval?',
-          answers: ['retry', 'retry:', 'the retry field'],
-          explanation: 'A large retry value effectively disables reconnection and hands the decision to the page.',
-        },
-        {
-          id: 'quiz-html-s64-q5',
-          type: 'multiple-choice',
-          prompt: 'Which case is better served by a WebSocket?',
-          options: [
-            'A build finishing and reporting progress',
-            'A dashboard receiving updates',
-            'A log tail the client only reads',
-            'Two participants in a chat sending messages both ways',
-          ],
-          answer: 3,
-          explanation:
-            'The first three are one-way and suit SSE. A conversation with both sides speaking needs a WebSocket.',
-        },
-      ],
-    },
   },
 ]

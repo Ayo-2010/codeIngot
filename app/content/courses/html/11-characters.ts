@@ -17,6 +17,70 @@ export const htmlCharacterSections: Section[] = [
           'Choose between a named and a numeric reference',
         ],
         xp: 35,
+        quiz: {
+          id: 'quiz-html-l52',
+          title: 'HTML Entities quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l52-q1',
+              type: 'multiple-choice',
+              prompt: 'How many characters are reserved in HTML syntax?',
+              options: [
+                'Two',
+                'Three',
+                'Four',
+                'Six',
+              ],
+              answer: 2,
+              explanation: 'The ampersand, the less-than sign, the greater-than sign and the quotation mark.',
+            },
+            {
+              id: 'quiz-html-l52-q2',
+              type: 'blank',
+              prompt: 'What is the entity for the less-than sign?',
+              answers: [
+                '&lt;',
+                'lt',
+                '&lt;',
+              ],
+              explanation: '&lt; is the named reference. &#60; and &#x3C; are the numeric forms.',
+            },
+            {
+              id: 'quiz-html-l52-q3',
+              type: 'true-false',
+              prompt: 'A bare ampersand in a paragraph is harmless.',
+              answer: false,
+              explanation: 'It usually recovers silently, but if what follows looks like an entity name it is consumed. AT&T is fine; &copy; in a name is not.',
+            },
+            {
+              id: 'quiz-html-l52-q4',
+              type: 'multiple-choice',
+              prompt: 'When should you use a numeric rather than a named reference?',
+              options: [
+                'For speed',
+                'For characters that have no name',
+                'Never',
+                'In attributes only',
+              ],
+              answer: 1,
+              explanation: 'Named references are more readable. Numeric covers everything else, including most emoji.',
+            },
+            {
+              id: 'quiz-html-l52-q5',
+              type: 'multiple-choice',
+              prompt: 'What happens if you write &lt;div&gt; in a paragraph without escaping?',
+              options: [
+                'It displays as the text <div>',
+                'The parser creates a real div element',
+                'It is a syntax error',
+                'The div is commented out',
+              ],
+              answer: 1,
+              explanation: 'The parser acts on the brackets. Escaping them with &lt; and &gt; makes them characters instead.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -145,65 +209,6 @@ p { margin: 0 0 0.5rem; }`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s41',
-      title: 'HTML Entities quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s41-q1',
-          type: 'multiple-choice',
-          prompt: 'How many characters are reserved in HTML syntax?',
-          options: ['Two', 'Three', 'Four', 'Six'],
-          answer: 2,
-          explanation:
-            'The ampersand, the less-than sign, the greater-than sign and the quotation mark.',
-        },
-        {
-          id: 'quiz-html-s41-q2',
-          type: 'blank',
-          prompt: 'What is the entity for the less-than sign?',
-          answers: ['&lt;', 'lt', '&lt;'],
-          explanation: '&lt; is the named reference. &#60; and &#x3C; are the numeric forms.',
-        },
-        {
-          id: 'quiz-html-s41-q3',
-          type: 'true-false',
-          prompt: 'A bare ampersand in a paragraph is harmless.',
-          answer: false,
-          explanation:
-            'It usually recovers silently, but if what follows looks like an entity name it is consumed. AT&T is fine; &copy; in a name is not.',
-        },
-        {
-          id: 'quiz-html-s41-q4',
-          type: 'multiple-choice',
-          prompt: 'When should you use a numeric rather than a named reference?',
-          options: [
-            'For speed',
-            'For characters that have no name',
-            'Never',
-            'In attributes only',
-          ],
-          answer: 1,
-          explanation:
-            'Named references are more readable. Numeric covers everything else, including most emoji.',
-        },
-        {
-          id: 'quiz-html-s41-q5',
-          type: 'multiple-choice',
-          prompt: 'What happens if you write &lt;div&gt; in a paragraph without escaping?',
-          options: [
-            'It displays as the text <div>',
-            'The parser creates a real div element',
-            'It is a syntax error',
-            'The div is commented out',
-          ],
-          answer: 1,
-          explanation:
-            'The parser acts on the brackets. Escaping them with &lt; and &gt; makes them characters instead.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s42',
@@ -221,6 +226,70 @@ p { margin: 0 0 0.5rem; }`,
           'Choose between a symbol, an image and an inline SVG for an icon',
         ],
         xp: 35,
+        quiz: {
+          id: 'quiz-html-l53',
+          title: 'HTML Symbols quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l53-q1',
+              type: 'multiple-choice',
+              prompt: 'What problem does a non-breaking space solve?',
+              options: [
+                'It makes text bold',
+                'It prevents a line break between two things that must stay together',
+                'It adds a paragraph break',
+                'It indents the line',
+              ],
+              answer: 1,
+              explanation: 'A number and its unit, or a name and its following word, should never be split across two lines.',
+            },
+            {
+              id: 'quiz-html-l53-q2',
+              type: 'true-false',
+              prompt: 'An em dash should be written with a space on either side.',
+              answer: false,
+              explanation: 'An em dash is closed up: waited—and then. A spaced dash is an en dash used wrong.',
+            },
+            {
+              id: 'quiz-html-l53-q3',
+              type: 'multiple-choice',
+              prompt: 'Why is an inline SVG better than a dingbat character for an icon?',
+              options: [
+                'It is smaller in bytes',
+                'It inherits currentColor, scales cleanly, and can be hidden from assistive technology',
+                'SVGs are always accessible',
+                'Characters cannot be coloured',
+              ],
+              answer: 1,
+              explanation: 'A character renders differently per platform font and may be announced as an unpronounceable name.',
+            },
+            {
+              id: 'quiz-html-l53-q4',
+              type: 'blank',
+              prompt: 'What is the entity for a multiplication sign?',
+              answers: [
+                '&times;',
+                'times',
+                '×',
+              ],
+              explanation: '&times; is the named reference. The character itself is also fine in UTF-8.',
+            },
+            {
+              id: 'quiz-html-l53-q5',
+              type: 'multiple-choice',
+              prompt: 'When is writing the character directly better than an entity?',
+              options: [
+                'Never, entities are always required',
+                'In a UTF-8 page, for any character that is not one of the four reserved ones',
+                'Only inside attributes',
+                'Only for characters above U+2000',
+              ],
+              answer: 1,
+              explanation: 'With a UTF-8 charset the character is simpler and more readable. Entities are for the reserved characters and the invisible ones.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -355,69 +424,6 @@ p { margin: 0 0 0.35rem; }`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s42',
-      title: 'HTML Symbols quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s42-q1',
-          type: 'multiple-choice',
-          prompt: 'What problem does a non-breaking space solve?',
-          options: [
-            'It makes text bold',
-            'It prevents a line break between two things that must stay together',
-            'It adds a paragraph break',
-            'It indents the line',
-          ],
-          answer: 1,
-          explanation:
-            'A number and its unit, or a name and its following word, should never be split across two lines.',
-        },
-        {
-          id: 'quiz-html-s42-q2',
-          type: 'true-false',
-          prompt: 'An em dash should be written with a space on either side.',
-          answer: false,
-          explanation: 'An em dash is closed up: waited—and then. A spaced dash is an en dash used wrong.',
-        },
-        {
-          id: 'quiz-html-s42-q3',
-          type: 'multiple-choice',
-          prompt: 'Why is an inline SVG better than a dingbat character for an icon?',
-          options: [
-            'It is smaller in bytes',
-            'It inherits currentColor, scales cleanly, and can be hidden from assistive technology',
-            'SVGs are always accessible',
-            'Characters cannot be coloured',
-          ],
-          answer: 1,
-          explanation:
-            'A character renders differently per platform font and may be announced as an unpronounceable name.',
-        },
-        {
-          id: 'quiz-html-s42-q4',
-          type: 'blank',
-          prompt: 'What is the entity for a multiplication sign?',
-          answers: ['&times;', 'times', '×'],
-          explanation: '&times; is the named reference. The character itself is also fine in UTF-8.',
-        },
-        {
-          id: 'quiz-html-s42-q5',
-          type: 'multiple-choice',
-          prompt: 'When is writing the character directly better than an entity?',
-          options: [
-            'Never, entities are always required',
-            'In a UTF-8 page, for any character that is not one of the four reserved ones',
-            'Only inside attributes',
-            'Only for characters above U+2000',
-          ],
-          answer: 1,
-          explanation:
-            'With a UTF-8 charset the character is simpler and more readable. Entities are for the reserved characters and the invisible ones.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s43',
@@ -435,6 +441,69 @@ p { margin: 0 0 0.35rem; }`,
           'Give a meaningful emoji an accessible name',
         ],
         xp: 35,
+        quiz: {
+          id: 'quiz-html-l54',
+          title: 'HTML Emojis quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l54-q1',
+              type: 'multiple-choice',
+              prompt: 'What does the variation selector U+FE0F do?',
+              options: [
+                'Changes the colour of the emoji',
+                'Requests emoji presentation rather than text presentation',
+                'Makes the emoji smaller',
+                'Combines two emoji into one',
+              ],
+              answer: 1,
+              explanation: 'Many symbols default to a monochrome text form. U+FE0F asks for the colour pictograph instead.',
+            },
+            {
+              id: 'quiz-html-l54-q2',
+              type: 'true-false',
+              prompt: 'A status shown only as a coloured emoji is reliably understandable.',
+              answer: false,
+              explanation: 'Screen readers announce one character and skip another, and the colours vanish in high contrast mode. State the status in words.',
+            },
+            {
+              id: 'quiz-html-l54-q3',
+              type: 'multiple-choice',
+              prompt: 'How do you give an emoji an accessible name?',
+              options: [
+                'alt text on a span',
+                'role="img" with aria-label on the element',
+                'A title attribute',
+                'Wrapping it in a figure',
+              ],
+              answer: 1,
+              explanation: 'role="img" makes it a single image-like node, and aria-label gives that node a name to announce.',
+            },
+            {
+              id: 'quiz-html-l54-q4',
+              type: 'blank',
+              prompt: 'Which attribute removes a decorative emoji from the accessibility tree?',
+              answers: [
+                'aria-hidden',
+                'aria-hidden="true"',
+              ],
+              explanation: 'aria-hidden="true" hides the element and its contents from assistive technology.',
+            },
+            {
+              id: 'quiz-html-l54-q5',
+              type: 'multiple-choice',
+              prompt: 'Why are emoji a poor choice for functional icons?',
+              options: [
+                'They are large files',
+                'They render differently per platform, disappear in high contrast and print, and need a colour font',
+                'They cannot be coloured',
+                'Browsers block them',
+              ],
+              answer: 1,
+              explanation: 'An SVG inherits currentColor, scales, and survives every rendering mode. An emoji depends on a font being installed.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -546,70 +615,6 @@ p { margin: 0 0 0.4rem; }
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s43',
-      title: 'HTML Emojis quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s43-q1',
-          type: 'multiple-choice',
-          prompt: 'What does the variation selector U+FE0F do?',
-          options: [
-            'Changes the colour of the emoji',
-            'Requests emoji presentation rather than text presentation',
-            'Makes the emoji smaller',
-            'Combines two emoji into one',
-          ],
-          answer: 1,
-          explanation:
-            'Many symbols default to a monochrome text form. U+FE0F asks for the colour pictograph instead.',
-        },
-        {
-          id: 'quiz-html-s43-q2',
-          type: 'true-false',
-          prompt: 'A status shown only as a coloured emoji is reliably understandable.',
-          answer: false,
-          explanation:
-            'Screen readers announce one character and skip another, and the colours vanish in high contrast mode. State the status in words.',
-        },
-        {
-          id: 'quiz-html-s43-q3',
-          type: 'multiple-choice',
-          prompt: 'How do you give an emoji an accessible name?',
-          options: [
-            'alt text on a span',
-            'role="img" with aria-label on the element',
-            'A title attribute',
-            'Wrapping it in a figure',
-          ],
-          answer: 1,
-          explanation:
-            'role="img" makes it a single image-like node, and aria-label gives that node a name to announce.',
-        },
-        {
-          id: 'quiz-html-s43-q4',
-          type: 'blank',
-          prompt: 'Which attribute removes a decorative emoji from the accessibility tree?',
-          answers: ['aria-hidden', 'aria-hidden="true"'],
-          explanation: 'aria-hidden="true" hides the element and its contents from assistive technology.',
-        },
-        {
-          id: 'quiz-html-s43-q5',
-          type: 'multiple-choice',
-          prompt: 'Why are emoji a poor choice for functional icons?',
-          options: [
-            'They are large files',
-            'They render differently per platform, disappear in high contrast and print, and need a colour font',
-            'They cannot be coloured',
-            'Browsers block them',
-          ],
-          answer: 1,
-          explanation:
-            'An SVG inherits currentColor, scales, and survives every rendering mode. An emoji depends on a font being installed.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s44',
@@ -627,6 +632,70 @@ p { margin: 0 0 0.4rem; }
           'Explain why a character set is not a font',
         ],
         xp: 35,
+        quiz: {
+          id: 'quiz-html-l55',
+          title: 'HTML Charset quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l55-q1',
+              type: 'multiple-choice',
+              prompt: 'Where must the charset meta appear?',
+              options: [
+                'Anywhere in the head',
+                'As the first element in the head, within the first 1024 bytes',
+                'In the body',
+                'After the closing html tag',
+              ],
+              answer: 1,
+              explanation: 'The browser sniffs for an encoding before parsing and gives up after 1024 bytes, so a late declaration is ignored.',
+            },
+            {
+              id: 'quiz-html-l55-q2',
+              type: 'true-false',
+              prompt: 'A charset declaration chooses the font used to render text.',
+              answer: false,
+              explanation: 'The charset maps bytes to characters. The font is chosen separately with font-family.',
+            },
+            {
+              id: 'quiz-html-l55-q3',
+              type: 'multiple-choice',
+              prompt: 'What is the only sensible charset for a new web page?',
+              options: [
+                'ISO-8859-1',
+                'windows-1252',
+                'UTF-8',
+                'UTF-16',
+              ],
+              answer: 2,
+              explanation: 'UTF-8 covers every script, and it is the encoding the web has standardised on.',
+            },
+            {
+              id: 'quiz-html-l55-q4',
+              type: 'blank',
+              prompt: 'What are the garbled characters from a mis-read encoding called?',
+              answers: [
+                'mojibake',
+                'garbled text',
+                'mismatched encoding',
+              ],
+              explanation: 'Mojibake is text decoded with the wrong encoding.',
+            },
+            {
+              id: 'quiz-html-l55-q5',
+              type: 'multiple-choice',
+              prompt: 'Besides the meta element, where else can a charset be declared?',
+              options: [
+                'In the CSS',
+                'In the HTTP Content-Type response header',
+                'In a JavaScript variable',
+                'In the lang attribute',
+              ],
+              answer: 1,
+              explanation: 'The header takes precedence in practice, and it is where servers more often get it wrong.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -750,64 +819,6 @@ p { margin: 0 0 0.4rem; }`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s44',
-      title: 'HTML Charset quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s44-q1',
-          type: 'multiple-choice',
-          prompt: 'Where must the charset meta appear?',
-          options: [
-            'Anywhere in the head',
-            'As the first element in the head, within the first 1024 bytes',
-            'In the body',
-            'After the closing html tag',
-          ],
-          answer: 1,
-          explanation:
-            'The browser sniffs for an encoding before parsing and gives up after 1024 bytes, so a late declaration is ignored.',
-        },
-        {
-          id: 'quiz-html-s44-q2',
-          type: 'true-false',
-          prompt: 'A charset declaration chooses the font used to render text.',
-          answer: false,
-          explanation:
-            'The charset maps bytes to characters. The font is chosen separately with font-family.',
-        },
-        {
-          id: 'quiz-html-s44-q3',
-          type: 'multiple-choice',
-          prompt: 'What is the only sensible charset for a new web page?',
-          options: ['ISO-8859-1', 'windows-1252', 'UTF-8', 'UTF-16'],
-          answer: 2,
-          explanation: 'UTF-8 covers every script, and it is the encoding the web has standardised on.',
-        },
-        {
-          id: 'quiz-html-s44-q4',
-          type: 'blank',
-          prompt: 'What are the garbled characters from a mis-read encoding called?',
-          answers: ['mojibake', 'garbled text', 'mismatched encoding'],
-          explanation: 'Mojibake is text decoded with the wrong encoding.',
-        },
-        {
-          id: 'quiz-html-s44-q5',
-          type: 'multiple-choice',
-          prompt: 'Besides the meta element, where else can a charset be declared?',
-          options: [
-            'In the CSS',
-            'In the HTTP Content-Type response header',
-            'In a JavaScript variable',
-            'In the lang attribute',
-          ],
-          answer: 1,
-          explanation:
-            'The header takes precedence in practice, and it is where servers more often get it wrong.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s45',
@@ -825,6 +836,69 @@ p { margin: 0 0 0.4rem; }`,
           'Say when the form urlencoded and multipart encodings apply',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-html-l56',
+          title: 'HTML URL Encoding quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l56-q1',
+              type: 'multiple-choice',
+              prompt: 'Which function should encode a single value going into a query string?',
+              options: [
+                'encodeURI',
+                'encodeURIComponent',
+                'escape',
+                'encode',
+              ],
+              answer: 1,
+              explanation: 'encodeURIComponent encodes everything including the separators, so a value cannot break out of its parameter.',
+            },
+            {
+              id: 'quiz-html-l56-q2',
+              type: 'multiple-choice',
+              prompt: 'What does encodeURI leave unencoded that encodeURIComponent encodes?',
+              options: [
+                'Letters and digits',
+                'Reserved separators such as / ? & = and :',
+                'Spaces',
+                'Nothing — they are identical',
+              ],
+              answer: 1,
+              explanation: 'encodeURI is for a complete URL, so it must preserve the structure of the URL.',
+            },
+            {
+              id: 'quiz-html-l56-q3',
+              type: 'true-false',
+              prompt: 'A query string value containing a raw ampersand can be safely concatenated.',
+              answer: false,
+              explanation: 'The ampersand ends the parameter and starts a new one, so the server reads the wrong value.',
+            },
+            {
+              id: 'quiz-html-l56-q4',
+              type: 'blank',
+              prompt: 'What is the percent encoding of a space in a query string?',
+              answers: [
+                '%20',
+                '+',
+              ],
+              explanation: 'In a path or a fragment it is %20. In a urlencoded form body it becomes +.',
+            },
+            {
+              id: 'quiz-html-l56-q5',
+              type: 'multiple-choice',
+              prompt: 'Which form encoding is used when submitting a file?',
+              options: [
+                'application/x-www-form-urlencoded',
+                'multipart/form-data',
+                'text/plain',
+                'application/json',
+              ],
+              answer: 1,
+              explanation: 'enctype="multipart/form-data" is required for file inputs. The server parses it differently.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -993,66 +1067,6 @@ params.toString();   // "q=Tea+%26+coffee&page=2"
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s45',
-      title: 'HTML URL Encoding quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s45-q1',
-          type: 'multiple-choice',
-          prompt: 'Which function should encode a single value going into a query string?',
-          options: ['encodeURI', 'encodeURIComponent', 'escape', 'encode'],
-          answer: 1,
-          explanation:
-            'encodeURIComponent encodes everything including the separators, so a value cannot break out of its parameter.',
-        },
-        {
-          id: 'quiz-html-s45-q2',
-          type: 'multiple-choice',
-          prompt: 'What does encodeURI leave unencoded that encodeURIComponent encodes?',
-          options: [
-            'Letters and digits',
-            'Reserved separators such as / ? & = and :',
-            'Spaces',
-            'Nothing — they are identical',
-          ],
-          answer: 1,
-          explanation:
-            'encodeURI is for a complete URL, so it must preserve the structure of the URL.',
-        },
-        {
-          id: 'quiz-html-s45-q3',
-          type: 'true-false',
-          prompt: 'A query string value containing a raw ampersand can be safely concatenated.',
-          answer: false,
-          explanation:
-            'The ampersand ends the parameter and starts a new one, so the server reads the wrong value.',
-        },
-        {
-          id: 'quiz-html-s45-q4',
-          type: 'blank',
-          prompt: 'What is the percent encoding of a space in a query string?',
-          answers: ['%20', '+'],
-          explanation:
-            'In a path or a fragment it is %20. In a urlencoded form body it becomes +.',
-        },
-        {
-          id: 'quiz-html-s45-q5',
-          type: 'multiple-choice',
-          prompt: 'Which form encoding is used when submitting a file?',
-          options: [
-            'application/x-www-form-urlencoded',
-            'multipart/form-data',
-            'text/plain',
-            'application/json',
-          ],
-          answer: 1,
-          explanation:
-            'enctype="multipart/form-data" is required for file inputs. The server parses it differently.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s46',
@@ -1070,6 +1084,70 @@ params.toString();   // "q=Tea+%26+coffee&page=2"
           'Recognise the small number of XHTML habits still worth keeping',
         ],
         xp: 35,
+        quiz: {
+          id: 'quiz-html-l57',
+          title: 'HTML versus XHTML quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l57-q1',
+              type: 'multiple-choice',
+              prompt: 'What is the main syntactic difference between HTML5 and XHTML?',
+              options: [
+                'XHTML uses lowercase tags',
+                'XHTML requires every element closed and every attribute valued',
+                'HTML5 allows attributes without values',
+                'XHTML does not allow self-closing syntax',
+              ],
+              answer: 1,
+              explanation: 'Self-closing void elements and boolean attributes written with a value were both mandatory in XHTML.',
+            },
+            {
+              id: 'quiz-html-l57-q2',
+              type: 'true-false',
+              prompt: 'A single unescaped ampersand can stop an XHTML page rendering entirely.',
+              answer: true,
+              explanation: 'XML parsing is fatal on malformed input, unlike the HTML parser, which recovers and continues.',
+            },
+            {
+              id: 'quiz-html-l57-q3',
+              type: 'multiple-choice',
+              prompt: 'Why did XHTML fail to replace HTML?',
+              options: [
+                'It was slower',
+                'Most pages were never valid, and serving XHTML as text/html gave none of the strictness',
+                'Browsers did not support XML',
+                'It could not handle images',
+              ],
+              answer: 1,
+              explanation: 'The web could not be made valid, and the two ways of serving it were both worse than plain HTML.',
+            },
+            {
+              id: 'quiz-html-l57-q4',
+              type: 'blank',
+              prompt: 'How is a self-closing br written in XHTML?',
+              answers: [
+                '<br />',
+                '<br/>',
+                'br />',
+              ],
+              explanation: 'With a trailing slash. HTML5 accepts the same syntax as a style choice.',
+            },
+            {
+              id: 'quiz-html-l57-q5',
+              type: 'multiple-choice',
+              prompt: 'Which of these is still worth copying from XHTML into HTML5?',
+              options: [
+                'Serving pages as application/xhtml+xml',
+                'Quoting every attribute value and closing void elements with a slash',
+                'Treating a malformed tag as a fatal error',
+                'Writing all tag names in lower case with no exceptions',
+              ],
+              answer: 1,
+              explanation: 'Both are harmless tidiness in HTML5. The rest is a constraint HTML5 explicitly does not need.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1189,69 +1267,5 @@ pre { background: #f8fafc; padding: 0.75rem; border-radius: 6px; overflow-x: aut
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s46',
-      title: 'HTML versus XHTML quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s46-q1',
-          type: 'multiple-choice',
-          prompt: 'What is the main syntactic difference between HTML5 and XHTML?',
-          options: [
-            'XHTML uses lowercase tags',
-            'XHTML requires every element closed and every attribute valued',
-            'HTML5 allows attributes without values',
-            'XHTML does not allow self-closing syntax',
-          ],
-          answer: 1,
-          explanation:
-            'Self-closing void elements and boolean attributes written with a value were both mandatory in XHTML.',
-        },
-        {
-          id: 'quiz-html-s46-q2',
-          type: 'true-false',
-          prompt: 'A single unescaped ampersand can stop an XHTML page rendering entirely.',
-          answer: true,
-          explanation:
-            'XML parsing is fatal on malformed input, unlike the HTML parser, which recovers and continues.',
-        },
-        {
-          id: 'quiz-html-s46-q3',
-          type: 'multiple-choice',
-          prompt: 'Why did XHTML fail to replace HTML?',
-          options: [
-            'It was slower',
-            'Most pages were never valid, and serving XHTML as text/html gave none of the strictness',
-            'Browsers did not support XML',
-            'It could not handle images',
-          ],
-          answer: 1,
-          explanation:
-            'The web could not be made valid, and the two ways of serving it were both worse than plain HTML.',
-        },
-        {
-          id: 'quiz-html-s46-q4',
-          type: 'blank',
-          prompt: 'How is a self-closing br written in XHTML?',
-          answers: ['<br />', '<br/>', 'br />'],
-          explanation: 'With a trailing slash. HTML5 accepts the same syntax as a style choice.',
-        },
-        {
-          id: 'quiz-html-s46-q5',
-          type: 'multiple-choice',
-          prompt: 'Which of these is still worth copying from XHTML into HTML5?',
-          options: [
-            'Serving pages as application/xhtml+xml',
-            'Quoting every attribute value and closing void elements with a slash',
-            'Treating a malformed tag as a fatal error',
-            'Writing all tag names in lower case with no exceptions',
-          ],
-          answer: 1,
-          explanation:
-            'Both are harmless tidiness in HTML5. The rest is a constraint HTML5 explicitly does not need.',
-        },
-      ],
-    },
   },
 ]

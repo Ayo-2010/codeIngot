@@ -18,6 +18,73 @@ export const frontendProjectsShipSections: Section[] = [
           'Verify the deployed site in a private window and on a phone',
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-fp-l17',
+          title: 'Deploy a static build quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-fp-l17-q1',
+              type: 'multiple-choice',
+              prompt: 'A project is hosted at /my-project/. Which stylesheet link works there?',
+              options: [
+                '<link rel="stylesheet" href="/style.css">',
+                '<link rel="stylesheet" href="style.css">',
+                '<link rel="stylesheet" href="file:///style.css">',
+                '<link rel="stylesheet" href="localhost/style.css">',
+              ],
+              answer: 1,
+              explanation: 'A relative path resolves from the page\'s own folder, so it works at the root and under a subpath. A leading slash resolves from the domain root.',
+            },
+            {
+              id: 'quiz-fp-l17-q2',
+              type: 'true-false',
+              prompt: 'An API key placed in a front-end JavaScript file is hidden from visitors.',
+              answer: false,
+              explanation: 'Every file the browser runs is public. A private key needs a backend or serverless function; a static host cannot keep it secret.',
+            },
+            {
+              id: 'quiz-fp-l17-q3',
+              type: 'identify-error',
+              prompt: 'What is wrong with committing this file?',
+              code: '// config.js\nconst API_KEY = "sk-live-123456789";\nexport { API_KEY };',
+              options: [
+                'The variable name is too short',
+                'The secret is public in the deployed JavaScript and must be removed and rotated',
+                'It should use var instead of const',
+                'It needs a semicolon',
+              ],
+              answer: 1,
+              explanation: 'Static files are downloaded by every visitor. Remove the key from the repository, rotate it, and call the API through a server or serverless function that can keep a secret.',
+            },
+            {
+              id: 'quiz-fp-l17-q4',
+              type: 'multiple-choice',
+              prompt: 'Which file counts as part of the deployed build?',
+              options: [
+                'Every image, font and data file the page needs, committed inside the project folder',
+                'A JSON file the page fetches that exists only on your machine',
+                'The editor settings folder',
+                'Your local package cache',
+              ],
+              answer: 0,
+              explanation: 'The host serves only what you upload, so any asset that lives outside the folder is missing in production. A file that works locally because it sits on your disk is not part of the build.',
+            },
+            {
+              id: 'quiz-fp-l17-q5',
+              type: 'multiple-choice',
+              prompt: 'Why open the deployed URL in a private window?',
+              options: [
+                'Private windows load pages faster',
+                'It blocks JavaScript errors from appearing',
+                'It uses no cache or existing session, so you see roughly what a first-time visitor sees',
+                'It assigns the page a different domain',
+              ],
+              answer: 2,
+              explanation: 'A cached copy or an existing login can hide a broken path or a stale file. A private window forces a fresh request, which is much closer to a stranger opening the link.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -156,6 +223,78 @@ export const frontendProjectsShipSections: Section[] = [
           'Present a project in two minutes without overclaiming',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-fp-l18',
+          title: 'Write the README and present the work quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-fp-l18-q1',
+              type: 'multiple-choice',
+              prompt: 'What should a project README include first?',
+              options: [
+                'A list of every CSS property used',
+                'What the project is, a live link and how to run it',
+                'The entire source code',
+                'A promise of features that are not built',
+              ],
+              answer: 1,
+              explanation: 'The README answers the first questions a visitor has: what is this, where can I see it, and how do I run it.',
+            },
+            {
+              id: 'quiz-fp-l18-q2',
+              type: 'multiple-choice',
+              prompt: 'Which portfolio entry is strongest?',
+              options: [
+                'Built a todo app with HTML, CSS and JavaScript.',
+                'Used localStorage and CSS grid.',
+                'The list had to survive a reload without a backend, so every change writes one JSON array and renders from it.',
+                'A beautiful modern responsive website.',
+              ],
+              answer: 2,
+              explanation: 'It names the constraint, the decision and the tradeoff. That is the part an interviewer cannot infer from the source alone.',
+            },
+            {
+              id: 'quiz-fp-l18-q3',
+              type: 'multiple-choice',
+              prompt: 'What makes the run instructions in a README trustworthy?',
+              options: [
+                'They list every dependency version in exhaustive detail',
+                'They assume the reader already has the project running',
+                'They are copied from another project with a similar stack',
+                'They work from a clean checkout of the repository',
+              ],
+              answer: 3,
+              explanation: 'A reader starts with nothing but the repository, so the commands have to succeed from that state. Instructions tested only on the author already-configured machine usually miss a first step.',
+            },
+            {
+              id: 'quiz-fp-l18-q4',
+              type: 'multiple-choice',
+              prompt: 'What is the shape of the two-minute walkthrough?',
+              options: [
+                'The brief in a sentence, narrow and wide views, one decision and why, then what you would do next',
+                'A narration of every file in the repository',
+                'Reading the README aloud to the audience',
+                'Showing only the final desktop screenshot',
+              ],
+              answer: 0,
+              explanation: 'The walkthrough exists to show judgement that a repository cannot, so it centres on one decision and its reason. File-by-file narration spends the time on information the README already covers.',
+            },
+            {
+              id: 'quiz-fp-l18-q5',
+              type: 'multiple-choice',
+              prompt: 'A statically hosted contact form uses `action="/contact"` but nothing is wired to that endpoint. What should the README do?',
+              options: [
+                'State that the form sends email successfully',
+                'Say nothing, since the form looks complete',
+                'Label the form as a demo, or connect it to a real endpoint',
+                'Claim the backend is temporarily down',
+              ],
+              answer: 2,
+              explanation: 'A static host cannot process that POST, so the form sends nothing. Labeling it honestly or wiring a real endpoint keeps the documentation aligned with what the project actually does.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -280,77 +419,5 @@ Add a real form endpoint and test the page with a screen reader.`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-fp-s9',
-      title: 'Ship and present check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-fp-s9-q1',
-          type: 'multiple-choice',
-          prompt: 'A project is hosted at /my-project/. Which stylesheet link works there?',
-          options: [
-            '<link rel="stylesheet" href="/style.css">',
-            '<link rel="stylesheet" href="style.css">',
-            '<link rel="stylesheet" href="file:///style.css">',
-            '<link rel="stylesheet" href="localhost/style.css">',
-          ],
-          answer: 1,
-          explanation:
-            'A relative path resolves from the page\'s own folder, so it works at the root and under a subpath. A leading slash resolves from the domain root.',
-        },
-        {
-          id: 'quiz-fp-s9-q2',
-          type: 'true-false',
-          prompt: 'An API key placed in a front-end JavaScript file is hidden from visitors.',
-          answer: false,
-          explanation:
-            'Every file the browser runs is public. A private key needs a backend or serverless function; a static host cannot keep it secret.',
-        },
-        {
-          id: 'quiz-fp-s9-q3',
-          type: 'multiple-choice',
-          prompt: 'What should a project README include first?',
-          options: [
-            'A list of every CSS property used',
-            'What the project is, a live link and how to run it',
-            'The entire source code',
-            'A promise of features that are not built',
-          ],
-          answer: 1,
-          explanation:
-            'The README answers the first questions a visitor has: what is this, where can I see it, and how do I run it.',
-        },
-        {
-          id: 'quiz-fp-s9-q4',
-          type: 'multiple-choice',
-          prompt: 'Which portfolio entry is strongest?',
-          options: [
-            'Built a todo app with HTML, CSS and JavaScript.',
-            'Used localStorage and CSS grid.',
-            'The list had to survive a reload without a backend, so every change writes one JSON array and renders from it.',
-            'A beautiful modern responsive website.',
-          ],
-          answer: 2,
-          explanation:
-            'It names the constraint, the decision and the tradeoff. That is the part an interviewer cannot infer from the source alone.',
-        },
-        {
-          id: 'quiz-fp-s9-q5',
-          type: 'identify-error',
-          prompt: 'What is wrong with committing this file?',
-          code: '// config.js\nconst API_KEY = "sk-live-123456789";\nexport { API_KEY };',
-          options: [
-            'The variable name is too short',
-            'The secret is public in the deployed JavaScript and must be removed and rotated',
-            'It should use var instead of const',
-            'It needs a semicolon',
-          ],
-          answer: 1,
-          explanation:
-            'Static files are downloaded by every visitor. Remove the key from the repository, rotate it, and call the API through a server or serverless function that can keep a secret.',
-        },
-      ],
-    },
   },
 ]

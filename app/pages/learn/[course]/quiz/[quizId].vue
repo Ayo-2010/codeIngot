@@ -53,7 +53,7 @@
                 {{ quiz.title }}
               </h1>
               <p class="mt-2 text-muted">
-                Test your understanding of this section's lessons.
+                Test your understanding of {{ target?.lesson.title ?? 'this lesson' }}.
               </p>
             </header>
 
@@ -62,11 +62,11 @@
             <footer class="mt-12 border-t border-ink-600 pt-6">
               <div class="flex justify-between">
               <NuxtLink
-                :to="`/learn/${course.slug}/${prevLesson?.id ?? ''}`"
-                v-if="prevLesson"
+                v-if="target"
+                :to="`/learn/${course.slug}/${target.lesson.id}`"
                 class="rounded-xl border border-ink-600 px-4 py-2.5 text-sm text-mist-50 transition hover:border-brand/40"
               >
-                ← Previous lesson
+                ← Back to lesson
               </NuxtLink>
               <NuxtLink
                 :to="followingLessonHref"
@@ -97,8 +97,8 @@ const courseSlug = computed(() => String(route.params.course))
 const quizId = computed(() => String(route.params.quizId))
 
 const course = computed(() => getCourse(courseSlug.value))
-const section = computed(() => getQuizSection(courseSlug.value, quizId.value))
-const quizSummary = computed(() => section.value?.quiz)
+const target = computed(() => getQuizTarget(courseSlug.value, quizId.value))
+const quizSummary = computed(() => target.value?.quiz)
 
 /** Question bodies are not in the catalogue metadata; fetch the owning course. */
 const { data: quiz } = await useAsyncData(
@@ -110,32 +110,22 @@ const { recordQuiz } = useLearningProgress()
 
 usePageSeo({
   title: computed(() => quiz.value?.title ?? quizSummary.value?.title ?? 'Quiz'),
-  description: computed(
-    () =>
-      course.value
-        ? `Check your understanding of ${course.value.title} with a short section quiz.`
-        : 'A short section quiz that checks what you just learned.',
-  ),
+  description: computed(() => {
+    const lesson = target.value?.lesson
+    if (lesson && course.value) {
+      return `Check your understanding of ${lesson.title} in ${course.value.title}.`
+    }
+    return 'A short lesson quiz that checks what you just learned.'
+  }),
 })
 
 const drawerOpen = ref(false)
 
-const currentLessonId = computed(() => '')
-
-const lastLessonId = computed(() => {
-  const current = section.value
-  if (!current) return ''
-  return current.lessons[current.lessons.length - 1]?.id ?? ''
-})
-
-const prevLesson = computed(() => {
-  if (!lastLessonId.value) return undefined
-  return previousLesson(lastLessonId.value)
-})
+const currentLessonId = computed(() => target.value?.lesson.id ?? '')
 
 const followingLesson = computed(() => {
-  if (!lastLessonId.value) return undefined
-  return nextLesson(lastLessonId.value)
+  if (!target.value) return undefined
+  return nextLesson(target.value.lesson.id)
 })
 
 const followingLessonHref = computed(() => {

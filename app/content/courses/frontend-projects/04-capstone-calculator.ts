@@ -18,6 +18,72 @@ export const frontendProjectsCalculatorSections: Section[] = [
           'Write down the operator, decimal and clear edge cases as behaviour',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-fp-l11',
+          title: 'Plan the calculator quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-fp-l11-q1',
+              type: 'multiple-choice',
+              prompt: 'Where should the calculator keep the number being typed?',
+              options: [
+                'Only in the display text, read back on every press',
+                'In a JavaScript variable, with the display rendered from it',
+                'In a cookie',
+                'In a CSS custom property',
+              ],
+              answer: 1,
+              explanation: 'The variables are the source of truth. Reading the display back breaks as soon as it contains an operator, a trailing decimal or an error message.',
+            },
+            {
+              id: 'quiz-fp-l11-q2',
+              type: 'multiple-choice',
+              prompt: 'Why give every key a data-action attribute?',
+              options: [
+                'So CSS can style the keypad',
+                'So one delegated click handler can route every press',
+                'So the browser computes the result automatically',
+                'So the keypad works without JavaScript',
+              ],
+              answer: 1,
+              explanation: 'The handler reads the action and value from the clicked button, so the whole keypad needs one listener instead of one per key.',
+            },
+            {
+              id: 'quiz-fp-l11-q3',
+              type: 'true-false',
+              prompt: 'A decimal point can appear more than once in the same number.',
+              answer: false,
+              explanation: 'The decimal handler should ignore the press when current already contains a dot, so typing 1.2.3 stays a valid number.',
+            },
+            {
+              id: 'quiz-fp-l11-q4',
+              type: 'multiple-choice',
+              prompt: 'Why keep `current` as text rather than converting it to a number immediately?',
+              options: [
+                'Text values are faster to append to',
+                'A trailing decimal point has to survive until the next digit arrives',
+                'Numbers cannot be written into an output element',
+                'It removes the need for Number() anywhere in the app',
+              ],
+              answer: 1,
+              explanation: 'If "1." became the number 1 the decimal would vanish, and typing 2 would produce 12 instead of 1.2. Keeping the display value as text lets the input buffer stay exactly what the person pressed.',
+            },
+            {
+              id: 'quiz-fp-l11-q5',
+              type: 'multiple-choice',
+              prompt: 'Which element should show the calculator result while announcing changes politely?',
+              options: [
+                'A div with a class of display',
+                'A paragraph with role="alert"',
+                'An input with the readonly attribute',
+                'An output element carrying aria-live="polite"',
+              ],
+              answer: 3,
+              explanation: 'output is the element for a calculated result, and aria-live="polite" announces updates when the user pauses. An alert role would interrupt on every key press, which is far too noisy.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -137,6 +203,79 @@ let waitingForOperand = false;`,
           'Guard division by zero, repeated operators and repeated decimals',
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-fp-l12',
+          title: 'Build and submit the calculator quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-fp-l12-q1',
+              type: 'multiple-choice',
+              prompt: 'What should pressing 5, +, ×, 4, = produce?',
+              options: [
+                'Two operators in a row',
+                '20, because × replaces +',
+                '0, because the first operator wins',
+                'A syntax error',
+              ],
+              answer: 1,
+              explanation: 'A second operator pressed while waiting for the next number replaces the pending operator. The calculation becomes 5 × 4.',
+            },
+            {
+              id: 'quiz-fp-l12-q2',
+              type: 'identify-error',
+              prompt: 'Why is this a poor way to evaluate the expression?',
+              code: 'const result = eval(display.textContent);',
+              options: [
+                'eval is slower than a button',
+                'It executes arbitrary text and cannot handle repeated operators safely',
+                'display.textContent is always a number',
+                'It needs a semicolon',
+              ],
+              answer: 1,
+              explanation: 'eval runs whatever string is on screen and turns malformed input into a syntax error. A compute function with explicit branches is safer and easier to test.',
+            },
+            {
+              id: 'quiz-fp-l12-q3',
+              type: 'multiple-choice',
+              prompt: 'Why does the keypad listener use `event.target.closest("button[data-action]")`?',
+              options: [
+                'A click can land on a child of the button, and closest climbs to the button itself',
+                'It finds the first button anywhere on the page',
+                'It prevents the default form submission',
+                'It sorts the keypad buttons into order',
+              ],
+              answer: 0,
+              explanation: 'Buttons often contain a span or an icon, so event.target may be that child rather than the button. closest walks up to the nearest matching ancestor, keeping one delegated listener reliable.',
+            },
+            {
+              id: 'quiz-fp-l12-q4',
+              type: 'multiple-choice',
+              prompt: 'Why does format() pass results through `Number(value.toFixed(10))`?',
+              options: [
+                'To convert the result into a string',
+                'To round every result to exactly ten decimal places for display',
+                'To trim floating-point noise such as 0.30000000000000004 down to 0.3',
+                'To catch division by zero before it happens',
+              ],
+              answer: 2,
+              explanation: 'Binary floating point leaves tiny leftovers after some sums, and limiting the decimals removes them. Wrapping the fixed string in Number strips the trailing zeros as well, so the display stays clean.',
+            },
+            {
+              id: 'quiz-fp-l12-q5',
+              type: 'multiple-choice',
+              prompt: 'Why is every keypad button given `type="button"`?',
+              options: [
+                'So pressing it cannot submit a surrounding form',
+                'So it receives a focus ring automatically',
+                'So it can be styled like a button',
+                'So the browser treats it as the equals key',
+              ],
+              answer: 0,
+              explanation: 'A button inside a form defaults to type="submit", so a stray key press could send the form. Declaring type="button" makes each key purely a control the click handler reacts to.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -308,72 +447,5 @@ function format(value) {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-fp-s6',
-      title: 'Calculator check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-fp-s6-q1',
-          type: 'multiple-choice',
-          prompt: 'Where should the calculator keep the number being typed?',
-          options: [
-            'Only in the display text, read back on every press',
-            'In a JavaScript variable, with the display rendered from it',
-            'In a cookie',
-            'In a CSS custom property',
-          ],
-          answer: 1,
-          explanation:
-            'The variables are the source of truth. Reading the display back breaks as soon as it contains an operator, a trailing decimal or an error message.',
-        },
-        {
-          id: 'quiz-fp-s6-q2',
-          type: 'multiple-choice',
-          prompt: 'Why give every key a data-action attribute?',
-          options: [
-            'So CSS can style the keypad',
-            'So one delegated click handler can route every press',
-            'So the browser computes the result automatically',
-            'So the keypad works without JavaScript',
-          ],
-          answer: 1,
-          explanation:
-            'The handler reads the action and value from the clicked button, so the whole keypad needs one listener instead of one per key.',
-        },
-        {
-          id: 'quiz-fp-s6-q3',
-          type: 'multiple-choice',
-          prompt: 'What should pressing 5, +, ×, 4, = produce?',
-          options: ['Two operators in a row', '20, because × replaces +', '0, because the first operator wins', 'A syntax error'],
-          answer: 1,
-          explanation:
-            'A second operator pressed while waiting for the next number replaces the pending operator. The calculation becomes 5 × 4.',
-        },
-        {
-          id: 'quiz-fp-s6-q4',
-          type: 'true-false',
-          prompt: 'A decimal point can appear more than once in the same number.',
-          answer: false,
-          explanation:
-            'The decimal handler should ignore the press when current already contains a dot, so typing 1.2.3 stays a valid number.',
-        },
-        {
-          id: 'quiz-fp-s6-q5',
-          type: 'identify-error',
-          prompt: 'Why is this a poor way to evaluate the expression?',
-          code: 'const result = eval(display.textContent);',
-          options: [
-            'eval is slower than a button',
-            'It executes arbitrary text and cannot handle repeated operators safely',
-            'display.textContent is always a number',
-            'It needs a semicolon',
-          ],
-          answer: 1,
-          explanation:
-            'eval runs whatever string is on screen and turns malformed input into a syntax error. A compute function with explicit branches is safer and easier to test.',
-        },
-      ],
-    },
   },
 ]

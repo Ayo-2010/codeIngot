@@ -18,6 +18,69 @@ export const cssUiPartSections: Section[] = [
           'Explain why a styled link needs display: inline-block and explicit padding',
           'Make a button full width or auto width with the right property',
         ],
+        quiz: {
+          id: 'quiz-css-l100',
+          title: 'Buttons quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l100-q1',
+              type: 'multiple-choice',
+              prompt: 'Why does a styled link need `display: inline-block`?',
+              options: [
+                'To give it a wider click area',
+                'Because an inline box ignores vertical padding, so padding would not apply',
+                'To make it accept `cursor: pointer`',
+                'To remove the underline automatically',
+              ],
+              answer: 1,
+              explanation: 'Vertical padding on a non-replaced inline element has no effect on layout. `inline-block` makes the box real so padding moves it.',
+            },
+            {
+              id: 'quiz-css-l100-q2',
+              type: 'true-false',
+              prompt: 'Setting `outline: none` on `:focus` is safe as long as you style `:hover`.',
+              answer: false,
+              explanation: 'Hover styling is invisible to keyboard users. Remove the outline only if you add a visible `:focus-visible` replacement.',
+            },
+            {
+              id: 'quiz-css-l100-q3',
+              type: 'code-output',
+              prompt: 'What does this rule do?',
+              code: '.btn { cursor: pointer; transition: background 0.15s ease; }',
+              options: [
+                'Makes the button unclickable for 0.15s',
+                'Shows a pointer cursor and animates background colour changes over 150ms',
+                'Animates the button size over 150ms',
+                'Adds a 0.15s delay before the button responds',
+              ],
+              answer: 1,
+              explanation: '`transition` only names the property, the duration and the easing. It does not animate size or add input delay.',
+            },
+            {
+              id: 'quiz-css-l100-q4',
+              type: 'blank',
+              prompt: 'Which pseudo-class styles the moment a button is held down?',
+              answers: [
+                ':active',
+              ],
+              explanation: '`:active` is the pressed state, usually paired with a small `transform` so the button appears to move.',
+            },
+            {
+              id: 'quiz-css-l100-q5',
+              type: 'multiple-choice',
+              prompt: 'How do you make a button span the full width of its container?',
+              options: [
+                'Set `width: auto` on it',
+                'Add `display: block; width: 100%;`',
+                'Add `flex: 1` to the parent',
+                'Add `margin: 0 auto` to it',
+              ],
+              answer: 1,
+              explanation: 'A `<button>` is `inline-block` by default, so `width: 100%` needs `display: block` to fill the line.',
+            },
+          ],
+        },
         content: [
           { type: 'text', id: 'c-l100-b1', body: 'A button is the most-clicked element on most pages, and the browser gives you almost nothing to work with: a grey slab with a hairline border. Styling one is a padding job, a colour job and a states job — and the states are the part that makes it feel real.' },
           {
@@ -148,18 +211,6 @@ a.btn:hover {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s61',
-      title: 'CSS Buttons quiz',
-      passingScore: 60,
-      questions: [
-        { id: 'quiz-css-s61-q1', type: 'multiple-choice', prompt: 'Why does a styled link need `display: inline-block`?', options: ['To give it a wider click area', 'Because an inline box ignores vertical padding, so padding would not apply', 'To make it accept `cursor: pointer`', 'To remove the underline automatically'], answer: 1, explanation: 'Vertical padding on a non-replaced inline element has no effect on layout. `inline-block` makes the box real so padding moves it.' },
-        { id: 'quiz-css-s61-q2', type: 'true-false', prompt: 'Setting `outline: none` on `:focus` is safe as long as you style `:hover`.', answer: false, explanation: 'Hover styling is invisible to keyboard users. Remove the outline only if you add a visible `:focus-visible` replacement.' },
-        { id: 'quiz-css-s61-q3', type: 'code-output', prompt: 'What does this rule do?', code: '.btn { cursor: pointer; transition: background 0.15s ease; }', options: ['Makes the button unclickable for 0.15s', 'Shows a pointer cursor and animates background colour changes over 150ms', 'Animates the button size over 150ms', 'Adds a 0.15s delay before the button responds'], answer: 1, explanation: '`transition` only names the property, the duration and the easing. It does not animate size or add input delay.' },
-        { id: 'quiz-css-s61-q4', type: 'blank', prompt: 'Which pseudo-class styles the moment a button is held down?', answers: [':active'], explanation: '`:active` is the pressed state, usually paired with a small `transform` so the button appears to move.' },
-        { id: 'quiz-css-s61-q5', type: 'multiple-choice', prompt: 'How do you make a button span the full width of its container?', options: ['Set `width: auto` on it', 'Add `display: block; width: 100%;`', 'Add `flex: 1` to the parent', 'Add `margin: 0 auto` to it'], answer: 1, explanation: 'A `<button>` is `inline-block` by default, so `width: 100%` needs `display: block` to fill the line.' },
-      ],
-    },
   },
   {
     id: 'css-s62',
@@ -178,6 +229,69 @@ a.btn:hover {
           'Round only the first and last item with :first-child and :last-child',
           'Mark the current page with aria-current and label the surrounding <nav>',
         ],
+        quiz: {
+          id: 'quiz-css-l101',
+          title: 'Pagination quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l101-q1',
+              type: 'multiple-choice',
+              prompt: 'How do you round only the first and last items of a pagination bar?',
+              options: [
+                'Apply a large `border-radius` to every `.page`',
+                'Use `li:first-child .page` and `li:last-child .page`',
+                'Use `:first-of-type` on the `<ul>`',
+                'Set `overflow: hidden` on the list',
+              ],
+              answer: 1,
+              explanation: 'Targeting the first and last list items and then their links keeps the rounding on the outer ends only.',
+            },
+            {
+              id: 'quiz-css-l101-q2',
+              type: 'true-false',
+              prompt: '`.active` is a CSS pseudo-class built into the language for marking the current page.',
+              answer: false,
+              explanation: '`.active` is a class name you invent in your markup. The only CSS pseudo-class of that name is `:active`, which means "being pressed".',
+            },
+            {
+              id: 'quiz-css-l101-q3',
+              type: 'multiple-choice',
+              prompt: 'Why does the current page link need `aria-current="page"`?',
+              options: [
+                'So CSS can style it with an attribute selector',
+                'So the link is excluded from the tab order',
+                'So assistive technology can announce which page you are on',
+                'So the browser scrolls to the top',
+              ],
+              answer: 2,
+              explanation: 'Styling it is a side effect of the selector, not the point. The attribute exists so a screen reader announces "current page" out loud.',
+            },
+            {
+              id: 'quiz-css-l101-q4',
+              type: 'code-output',
+              prompt: 'What is wrong with this markup?',
+              code: '<ul class="pager"><li><a href="#">1</a><li><a href="#" class="active">2</a></ul>',
+              options: [
+                'Nothing, it is valid',
+                'The `<li>` tags are never closed, so the list is malformed',
+                'A `<ul>` cannot contain `<li>` elements',
+                'The `.active` class has no matching CSS rule',
+              ],
+              answer: 1,
+              explanation: '`<li>` is not a void element — each one needs a closing tag. The bars in this lesson close every `<li>`.',
+            },
+            {
+              id: 'quiz-css-l101-q5',
+              type: 'blank',
+              prompt: 'Which attribute labels the navigation landmark so a screen reader knows what the bar controls?',
+              answers: [
+                'aria-label',
+              ],
+              explanation: '`<nav aria-label="Pagination">` names the landmark. Without it the reader just announces "navigation" with no context.',
+            },
+          ],
+        },
         content: [
           { type: 'text', id: 'c-l101-b1', body: 'Pagination is a row of numbered links. There is no CSS property for it — you build it from a list, mark the current page with a class, and round the two ends. The one thing that is not optional is telling assistive technology which page you are on.' },
           {
@@ -303,18 +417,6 @@ a.btn:hover {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s62',
-      title: 'CSS Pagination quiz',
-      passingScore: 60,
-      questions: [
-        { id: 'quiz-css-s62-q1', type: 'multiple-choice', prompt: 'How do you round only the first and last items of a pagination bar?', options: ['Apply a large `border-radius` to every `.page`', 'Use `li:first-child .page` and `li:last-child .page`', 'Use `:first-of-type` on the `<ul>`', 'Set `overflow: hidden` on the list'], answer: 1, explanation: 'Targeting the first and last list items and then their links keeps the rounding on the outer ends only.' },
-        { id: 'quiz-css-s62-q2', type: 'true-false', prompt: '`.active` is a CSS pseudo-class built into the language for marking the current page.', answer: false, explanation: '`.active` is a class name you invent in your markup. The only CSS pseudo-class of that name is `:active`, which means "being pressed".' },
-        { id: 'quiz-css-s62-q3', type: 'multiple-choice', prompt: 'Why does the current page link need `aria-current="page"`?', options: ['So CSS can style it with an attribute selector', 'So the link is excluded from the tab order', 'So assistive technology can announce which page you are on', 'So the browser scrolls to the top'], answer: 2, explanation: 'Styling it is a side effect of the selector, not the point. The attribute exists so a screen reader announces "current page" out loud.' },
-        { id: 'quiz-css-s62-q4', type: 'code-output', prompt: 'What is wrong with this markup?', code: '<ul class="pager"><li><a href="#">1</a><li><a href="#" class="active">2</a></ul>', options: ['Nothing, it is valid', 'The `<li>` tags are never closed, so the list is malformed', 'A `<ul>` cannot contain `<li>` elements', 'The `.active` class has no matching CSS rule'], answer: 1, explanation: '`<li>` is not a void element — each one needs a closing tag. The bars in this lesson close every `<li>`.' },
-        { id: 'quiz-css-s62-q5', type: 'blank', prompt: 'Which attribute labels the navigation landmark so a screen reader knows what the bar controls?', answers: ['aria-label'], explanation: '`<nav aria-label="Pagination">` names the landmark. Without it the reader just announces "navigation" with no context.' },
-      ],
-    },
   },
   {
     id: 'css-s63',
@@ -333,6 +435,69 @@ a.btn:hover {
           'Control the space and divider with column-gap and column-rule',
           'Stop a card breaking across columns with break-inside: avoid',
         ],
+        quiz: {
+          id: 'quiz-css-l102',
+          title: 'Multiple Columns quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l102-q1',
+              type: 'multiple-choice',
+              prompt: 'What does `column-width: 16rem` do?',
+              options: [
+                'Forces exactly one column 16rem wide',
+                'Asks for as many columns as fit, each at least 16rem wide',
+                'Sets each column to exactly 16rem regardless of space',
+                'Sets the gap between columns to 16rem',
+              ],
+              answer: 1,
+              explanation: 'It is a minimum, not a fixed value. The browser adds columns while each one can stay at least 16rem wide.',
+            },
+            {
+              id: 'quiz-css-l102-q2',
+              type: 'true-false',
+              prompt: 'Setting both `column-count` and `column-width` makes the count win outright.',
+              answer: false,
+              explanation: '`column-count` acts as a maximum. `column-width` can still reduce the count below it, which is why the two combine safely.',
+            },
+            {
+              id: 'quiz-css-l102-q3',
+              type: 'code-output',
+              prompt: 'What does this rule stop from happening?',
+              code: '.card { break-inside: avoid; }',
+              options: [
+                'The card from being split across two columns',
+                'The card from ever being displayed',
+                'The card from having a background colour',
+                'The card from breaking out across all columns',
+              ],
+              answer: 0,
+              explanation: '`break-inside: avoid` tells the layout engine to move the whole box to the next column rather than divide it.',
+            },
+            {
+              id: 'quiz-css-l102-q4',
+              type: 'multiple-choice',
+              prompt: 'How do you make a heading run across the full width above the columns?',
+              options: [
+                'Set `column-span: all` on the heading',
+                'Set `column-count: 1` on the heading',
+                'Move the heading outside the multicol container',
+                'Set `position: absolute` on the heading',
+              ],
+              answer: 0,
+              explanation: '`column-span: all` lifts a descendant out of the column flow so it spans every column.',
+            },
+            {
+              id: 'quiz-css-l102-q5',
+              type: 'blank',
+              prompt: 'Which property draws the hairline divider between columns? It takes width, style and colour.',
+              answers: [
+                'column-rule',
+              ],
+              explanation: '`column-rule` is the shorthand; `column-rule-width`, `-style` and `-color` are the long hands.',
+            },
+          ],
+        },
         content: [
           { type: 'text', id: 'c-l102-b1', body: 'Multi-column layout lets the browser flow one block of content into several side-by-side columns, like a newspaper. You do not write the columns yourself — you say how many you want or how wide each should be, and the browser fills them evenly.' },
           {
@@ -464,18 +629,6 @@ a.btn:hover {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s63',
-      title: 'CSS Multiple Columns quiz',
-      passingScore: 60,
-      questions: [
-        { id: 'quiz-css-s63-q1', type: 'multiple-choice', prompt: 'What does `column-width: 16rem` do?', options: ['Forces exactly one column 16rem wide', 'Asks for as many columns as fit, each at least 16rem wide', 'Sets each column to exactly 16rem regardless of space', 'Sets the gap between columns to 16rem'], answer: 1, explanation: 'It is a minimum, not a fixed value. The browser adds columns while each one can stay at least 16rem wide.' },
-        { id: 'quiz-css-s63-q2', type: 'true-false', prompt: 'Setting both `column-count` and `column-width` makes the count win outright.', answer: false, explanation: '`column-count` acts as a maximum. `column-width` can still reduce the count below it, which is why the two combine safely.' },
-        { id: 'quiz-css-s63-q3', type: 'code-output', prompt: 'What does this rule stop from happening?', code: '.card { break-inside: avoid; }', options: ['The card from being split across two columns', 'The card from ever being displayed', 'The card from having a background colour', 'The card from breaking out across all columns'], answer: 0, explanation: '`break-inside: avoid` tells the layout engine to move the whole box to the next column rather than divide it.' },
-        { id: 'quiz-css-s63-q4', type: 'multiple-choice', prompt: 'How do you make a heading run across the full width above the columns?', options: ['Set `column-span: all` on the heading', 'Set `column-count: 1` on the heading', 'Move the heading outside the multicol container', 'Set `position: absolute` on the heading'], answer: 0, explanation: '`column-span: all` lifts a descendant out of the column flow so it spans every column.' },
-        { id: 'quiz-css-s63-q5', type: 'blank', prompt: 'Which property draws the hairline divider between columns? It takes width, style and colour.', answers: ['column-rule'], explanation: '`column-rule` is the shorthand; `column-rule-width`, `-style` and `-color` are the long hands.' },
-      ],
-    },
   },
   {
     id: 'css-s64',
@@ -494,6 +647,69 @@ a.btn:hover {
           'Style form controls with accent-color and keep them readable',
           'Explain what appearance: none costs you in accessibility',
         ],
+        quiz: {
+          id: 'quiz-css-l103',
+          title: 'User Interface quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l103-q1',
+              type: 'multiple-choice',
+              prompt: 'Which property recolours a checkbox without rebuilding it?',
+              options: [
+                '`appearance: none`',
+                '`accent-color`',
+                '`caret-color`',
+                '`user-select`',
+              ],
+              answer: 1,
+              explanation: '`accent-color` re-tints checkboxes, radios, ranges and progress bars while the platform keeps every behaviour and state.',
+            },
+            {
+              id: 'quiz-css-l103-q2',
+              type: 'true-false',
+              prompt: '`cursor: pointer` makes an element actually perform an action when clicked.',
+              answer: false,
+              explanation: '`cursor` is purely a visual hint about what a click might do. The behaviour comes from the element type and the code behind it.',
+            },
+            {
+              id: 'quiz-css-l103-q3',
+              type: 'code-output',
+              prompt: 'What does this rule do?',
+              code: 'textarea { resize: vertical; caret-color: #1f6feb; }',
+              options: [
+                'Makes the textarea blue',
+                'Lets the textarea be dragged taller but not wider, and colours the text caret blue',
+                'Makes the textarea 1rem tall',
+                'Prevents the caret from blinking',
+              ],
+              answer: 1,
+              explanation: '`resize` limits the drag handle to one axis; `caret-color` sets the colour of the insertion caret inside the field.',
+            },
+            {
+              id: 'quiz-css-l103-q4',
+              type: 'multiple-choice',
+              prompt: 'What is the main cost of `appearance: none`?',
+              options: [
+                'The element disappears from the page',
+                'It stops working in older browsers only',
+                'You lose platform affordances and must rebuild focus, hover and checked states yourself',
+                'It changes the element type',
+              ],
+              answer: 2,
+              explanation: 'Removing appearance removes the pressed depth, focus ring and disabled styling. Whatever you draw instead has to cover all of it.',
+            },
+            {
+              id: 'quiz-css-l103-q5',
+              type: 'blank',
+              prompt: 'Which property stops a visitor from selecting the text of an element?',
+              answers: [
+                'user-select',
+              ],
+              explanation: '`user-select: none` makes text unselectable. Use it on button labels and chrome, not on content the reader may need to copy.',
+            },
+          ],
+        },
         content: [
           { type: 'text', id: 'c-l103-b1', body: 'Browsers ship with user-interface properties for the parts of a page people actually touch: the mouse cursor, resize handles, focus rings, the text caret, whether text can be selected, and the colour of checkboxes and radios. Most are one-liners, and they are the difference between a form that feels native and one that feels like a screenshot.' },
           {
@@ -647,17 +863,5 @@ textarea {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s64',
-      title: 'CSS User Interface quiz',
-      passingScore: 60,
-      questions: [
-        { id: 'quiz-css-s64-q1', type: 'multiple-choice', prompt: 'Which property recolours a checkbox without rebuilding it?', options: ['`appearance: none`', '`accent-color`', '`caret-color`', '`user-select`'], answer: 1, explanation: '`accent-color` re-tints checkboxes, radios, ranges and progress bars while the platform keeps every behaviour and state.' },
-        { id: 'quiz-css-s64-q2', type: 'true-false', prompt: '`cursor: pointer` makes an element actually perform an action when clicked.', answer: false, explanation: '`cursor` is purely a visual hint about what a click might do. The behaviour comes from the element type and the code behind it.' },
-        { id: 'quiz-css-s64-q3', type: 'code-output', prompt: 'What does this rule do?', code: 'textarea { resize: vertical; caret-color: #1f6feb; }', options: ['Makes the textarea blue', 'Lets the textarea be dragged taller but not wider, and colours the text caret blue', 'Makes the textarea 1rem tall', 'Prevents the caret from blinking'], answer: 1, explanation: '`resize` limits the drag handle to one axis; `caret-color` sets the colour of the insertion caret inside the field.' },
-        { id: 'quiz-css-s64-q4', type: 'multiple-choice', prompt: 'What is the main cost of `appearance: none`?', options: ['The element disappears from the page', 'It stops working in older browsers only', 'You lose platform affordances and must rebuild focus, hover and checked states yourself', 'It changes the element type'], answer: 2, explanation: 'Removing appearance removes the pressed depth, focus ring and disabled styling. Whatever you draw instead has to cover all of it.' },
-        { id: 'quiz-css-s64-q5', type: 'blank', prompt: 'Which property stops a visitor from selecting the text of an element?', answers: ['user-select'], explanation: '`user-select: none` makes text unselectable. Use it on button labels and chrome, not on content the reader may need to copy.' },
-      ],
-    },
   },
 ]

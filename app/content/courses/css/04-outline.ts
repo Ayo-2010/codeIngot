@@ -20,6 +20,78 @@ export const cssOutlineSections: Section[] = [
           'Style a focus ring with `outline` and `:focus-visible`',
         ],
         xp: 35,
+        quiz: {
+          id: 'quiz-css-l27',
+          title: 'Outline quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l27-q1',
+              type: 'multiple-choice',
+              prompt: 'Where is an outline drawn?',
+              options: [
+                'Inside the padding, between the content and the border',
+                'Outside the border edge',
+                'In the margin, replacing the margin',
+                'As a shadow one pixel outside the border',
+              ],
+              answer: 1,
+              explanation: 'An outline is painted outside the border edge, further from the content than the border itself, and it is never part of the box model.',
+            },
+            {
+              id: 'quiz-css-l27-q2',
+              type: 'multiple-choice',
+              prompt: 'Which statement about an outline\'s place in the box model is correct?',
+              options: [
+                'It is the outermost layer of the box model, beyond the margin',
+                'It is part of the border and enlarges the border box',
+                'It is not part of the box model, so it takes up no layout space',
+                'It sits inside the padding and shrinks the content box',
+              ],
+              answer: 2,
+              explanation: 'The outline is painted outside the border but is not content, padding, border or margin. Because it is outside the box model entirely, it never affects layout.',
+            },
+            {
+              id: 'quiz-css-l27-q3',
+              type: 'multiple-choice',
+              prompt: 'A wide outline on one element can paint over which part of a neighbour?',
+              options: [
+                'The neighbour\'s text content',
+                'The neighbour\'s margin gap',
+                'The neighbour\'s scrollbar',
+                'Nothing — an outline is clipped to its own element',
+              ],
+              answer: 1,
+              explanation: 'The outline sits outside the margin, so a thick line can spill into the empty margin gap of an adjacent element. It paints on top rather than pushing anything aside.',
+            },
+            {
+              id: 'quiz-css-l27-q4',
+              type: 'multiple-choice',
+              prompt: 'An element has `border-radius: 12px` and a solid outline. How is the outline drawn?',
+              options: [
+                'As a rounded line following the border edge',
+                'As a square rectangle that ignores the radius',
+                'Only at the four corners of the box',
+                'Inside the border, following the content box',
+              ],
+              answer: 0,
+              explanation: 'The outline follows the border edge, so a rounded border produces a rounded outline. It is not a separate rectangle drawn around the box.',
+            },
+            {
+              id: 'quiz-css-l27-q5',
+              type: 'multiple-choice',
+              prompt: 'Why is `:focus-visible` preferred over `:focus` for a custom focus ring?',
+              options: [
+                'It only matches when the browser cannot draw a default ring',
+                'It matches keyboard focus without showing the ring on every mouse click',
+                'It works on links but not on buttons',
+                'It removes the need to set an outline style',
+              ],
+              answer: 1,
+              explanation: '`:focus-visible` lets the browser decide when focus should be visible, which normally means keyboard navigation. A plain `:focus` rule also fires on mouse clicks.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -229,6 +301,74 @@ export const cssOutlineSections: Section[] = [
           'Combine `outline-width` with an explicit style so the width is visible',
         ],
         xp: 35,
+        quiz: {
+          id: 'quiz-css-l28',
+          title: 'Outline Width quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l28-q1',
+              type: 'code-output',
+              prompt: 'What does this produce?',
+              code: '.card {\n  border: 1px solid #111;\n  outline: 3px solid #29e2bd;\n  outline-offset: 5px;\n}',
+              options: [
+                'A 3px teal border with a 5px inset gap',
+                'A 5px teal border with a 3px outline',
+                'A 3px teal outline 5px away from the border',
+                'Nothing visible, because an outline and a border cannot be used together',
+              ],
+              answer: 2,
+              explanation: 'The `outline` shorthand takes width, style and colour, and `outline-offset` pushes the whole outline 5px further out, leaving a gap between it and the border.',
+            },
+            {
+              id: 'quiz-css-l28-q2',
+              type: 'multiple-choice',
+              prompt: 'Which pixel values match the keywords `thin`, `medium` and `thick` in current browsers?',
+              options: [
+                '1px, 3px, 5px',
+                '1px, 2px, 4px',
+                '2px, 4px, 6px',
+                '1px, 4px, 8px',
+              ],
+              answer: 0,
+              explanation: 'The three outline keywords resolve to roughly 1px, 3px and 5px. They are user-agent values rather than fixed numbers, but every current browser ships the same sizes.',
+            },
+            {
+              id: 'quiz-css-l28-q3',
+              type: 'multiple-choice',
+              prompt: 'What is the initial value of `outline-width`?',
+              options: [
+                '`0`',
+                '`thin`',
+                '`medium`',
+                '`thick`',
+              ],
+              answer: 2,
+              explanation: '`medium` is the initial value and resolves to about 3px. A styled outline with no width therefore still draws a 3px line.',
+            },
+            {
+              id: 'quiz-css-l28-q4',
+              type: 'code-output',
+              prompt: 'What is drawn around the box?',
+              code: '.box {\n  outline-width: 12px;\n}',
+              options: [
+                'A 12px line, because the width is enough on its own',
+                'A 3px line, because the width falls back to medium',
+                'No line, because `outline-style` still has its initial value of `none`',
+                'A 12px line, but only while the box is hovered',
+              ],
+              answer: 2,
+              explanation: '`outline-style` starts at `none`, and no line is painted for a style of `none` whatever the width. Width, style and colour must all be present before anything appears.',
+            },
+            {
+              id: 'quiz-css-l28-q5',
+              type: 'true-false',
+              prompt: 'Changing `outline-width` from `2px` to `20px` changes the element\'s border-box width.',
+              answer: false,
+              explanation: 'The outline is outside the box model, so neither its width nor any change to it alters the border box. Only the painted line gets thicker.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -379,6 +519,77 @@ export const cssOutlineSections: Section[] = [
           'Know the initial value of `outline-color` and why it surprises people',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-css-l29',
+          title: 'Outline Color quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l29-q1',
+              type: 'blank',
+              prompt: 'What property sets the gap between an element\'s border and its outline? Give the property name.',
+              answers: [
+                'outline-offset',
+                'outlineoffset',
+                'outline offset',
+              ],
+              explanation: '`outline-offset` takes a length. Positive values push the outline outward, negative values pull it inward over the element.',
+            },
+            {
+              id: 'quiz-css-l29-q2',
+              type: 'multiple-choice',
+              prompt: 'On a white background, what colour does `outline-color: invert` paint?',
+              options: [
+                'White',
+                'Black',
+                'The current text colour',
+                'Transparent',
+              ],
+              answer: 1,
+              explanation: '`invert` flips the colours of the pixels it covers, so on white it paints black and on a black surface it paints white. That makes it useful on backgrounds you do not control.',
+            },
+            {
+              id: 'quiz-css-l29-q3',
+              type: 'multiple-choice',
+              prompt: 'What is the initial value of `outline-color`?',
+              options: [
+                '`black`',
+                '`currentColor`',
+                '`invert`',
+                '`transparent`',
+              ],
+              answer: 1,
+              explanation: 'The initial value is `currentColor`, so `outline: solid;` with no colour draws the ring in the element\'s text colour. That is why a custom focus ring often needs only width and style.',
+            },
+            {
+              id: 'quiz-css-l29-q4',
+              type: 'multiple-choice',
+              prompt: 'What does `currentColor` resolve to for an outline?',
+              options: [
+                'The colour of the root element',
+                'The element\'s background colour',
+                'The computed value of `color` on the same element',
+                'A fixed browser default that cannot be changed',
+              ],
+              answer: 2,
+              explanation: '`currentColor` means exactly "whatever `color` computes to here". Change the text colour and the outline follows with no second declaration.',
+            },
+            {
+              id: 'quiz-css-l29-q5',
+              type: 'code-output',
+              prompt: 'What is drawn around the badge?',
+              code: '.badge {\n  color: #ff8c3c;\n  outline: 5px solid;\n}',
+              options: [
+                'A 5px orange outline matching the text colour',
+                'A 5px black outline, because no colour was named',
+                'Nothing, because the outline colour is missing',
+                'A 5px outline in the browser default focus colour',
+              ],
+              answer: 0,
+              explanation: 'The shorthand omits the colour, so `outline-color` stays at its initial value of `currentColor`. That resolves to the badge\'s own orange text colour.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -506,6 +717,79 @@ export const cssOutlineSections: Section[] = [
           'Say what `outline: auto` does differently from a value you write yourself',
         ],
         xp: 45,
+        quiz: {
+          id: 'quiz-css-l30',
+          title: 'Outline Shorthand quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l30-q1',
+              type: 'identify-error',
+              prompt: 'A stylesheet contains `button:focus { outline: none; }` and nothing else. What is wrong with it?',
+              code: 'button:focus {\n  outline: none;\n}',
+              options: [
+                '`outline: none` is not a valid value',
+                'Nothing, because the default ring can be safely removed',
+                'The focus ring is gone and nothing replaces it, so keyboard users cannot see where they are',
+                'It should have been written `outline: 0` to be valid',
+              ],
+              answer: 2,
+              explanation: 'Removing a focus outline is only acceptable if a `:focus-visible` rule puts a visible ring back. `outline: none` and `outline: 0` are equivalent, and both delete the only focus cue the browser was providing.',
+            },
+            {
+              id: 'quiz-css-l30-q2',
+              type: 'multiple-choice',
+              prompt: 'What does `outline: solid;` leave the other outline longhands at?',
+              options: [
+                'It keeps any width and colour set by an earlier rule',
+                'It resets the width to `medium` and the colour to `currentColor`',
+                'It sets the width to `0`, so nothing is drawn',
+                'It is invalid, because the shorthand requires all three parts',
+              ],
+              answer: 1,
+              explanation: 'A shorthand resets every longhand it omits to its initial value. `outline: solid` therefore sets style to solid, width to medium and colour to currentColor.',
+            },
+            {
+              id: 'quiz-css-l30-q3',
+              type: 'multiple-choice',
+              prompt: 'How do `outline: none` and `outline: 0` differ in effect?',
+              options: [
+                '`none` removes the ring only on focus, while `0` removes it everywhere',
+                '`0` keeps a hairline outline, while `none` removes it completely',
+                'There is no difference in effect: both remove the outline',
+                'Only `none` is a valid declaration',
+              ],
+              answer: 2,
+              explanation: '`none` sets the style to its initial value and `0` sets the width to zero, but both leave no visible line. Neither means "leave the current outline alone".',
+            },
+            {
+              id: 'quiz-css-l30-q4',
+              type: 'multiple-choice',
+              prompt: 'What is special about `outline: auto`?',
+              options: [
+                'It always draws a 1px solid black ring',
+                'It asks the user agent for its own focus ring, which varies between browsers',
+                'It is another way of writing `outline: none`',
+                'It forces the outline colour to `invert`',
+              ],
+              answer: 1,
+              explanation: '`auto` hands the ring design to the browser. It has no single specified colour and implementations differ, so it works as a fallback rather than a designed ring.',
+            },
+            {
+              id: 'quiz-css-l30-q5',
+              type: 'multiple-choice',
+              prompt: 'Which pair of rules removes the default ring but keeps focus visible for keyboard users?',
+              options: [
+                '`:focus { outline: 3px solid blue; }` then `:focus-visible { outline: none; }`',
+                '`:focus { outline: none; }` then `:focus-visible { outline: 3px solid blue; }`',
+                '`:focus-visible { outline: none; }` on its own',
+                '`button { outline: 0; }` on its own',
+              ],
+              answer: 1,
+              explanation: 'The `:focus` rule clears the browser ring and the `:focus-visible` rule puts a designed ring back for keyboard focus. Removing the ring without a replacement leaves no focus cue at all.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -684,6 +968,72 @@ export const cssOutlineSections: Section[] = [
           'Use an offset to keep a focus ring clear of a thick or rounded border',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-css-l31',
+          title: 'Outline Offset quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l31-q1',
+              type: 'true-false',
+              prompt: 'Adding a wide outline to an element makes its neighbours move.',
+              answer: false,
+              explanation: 'Outlines take up no space in the layout. Nothing reflows, no sibling shifts, and the parent height is unchanged, which is exactly why outlines are safe for focus rings.',
+            },
+            {
+              id: 'quiz-css-l31-q2',
+              type: 'multiple-choice',
+              prompt: 'What does `outline-offset: 8px` do?',
+              options: [
+                'Moves the outline 8px inward, over the padding',
+                'Leaves an 8px gap between the border and the outline',
+                'Makes the outline itself 8px thick',
+                'Adds 8px of margin around the element',
+              ],
+              answer: 1,
+              explanation: '`outline-offset` controls the distance between the border edge and the outline. A positive value pushes the line outward and leaves that much empty space between them.',
+            },
+            {
+              id: 'quiz-css-l31-q3',
+              type: 'multiple-choice',
+              prompt: 'Where is an outline drawn on a 2px border with `outline-offset: -10px`?',
+              options: [
+                'Completely outside the element, 10px away from the border',
+                'Exactly on top of the 2px border',
+                'Over the padding and possibly over the content',
+                'It disappears, because negative offsets are ignored',
+              ],
+              answer: 2,
+              explanation: 'A negative offset pulls the line inward. Once it exceeds the border width it lands on the padding and can overlap the content, because it is painted where it is placed.',
+            },
+            {
+              id: 'quiz-css-l31-q4',
+              type: 'multiple-choice',
+              prompt: 'What is the initial value of `outline-offset`, and what does it look like?',
+              options: [
+                '`0`, so the outline sits flush against the outer border edge',
+                '`2px`, so there is always a small gap',
+                '`-2px`, so the outline tucks inside the border',
+                '`auto`, so the browser chooses a gap per element',
+              ],
+              answer: 0,
+              explanation: 'The initial offset is zero: the outline is drawn immediately against the outside of the border with no gap. A small offset such as 2px is a deliberate choice to separate the two lines.',
+            },
+            {
+              id: 'quiz-css-l31-q5',
+              type: 'multiple-choice',
+              prompt: 'A percentage in `outline-offset` is resolved against what?',
+              options: [
+                'The viewport width',
+                'The element\'s own width',
+                'The parent element\'s height',
+                'The current font size',
+              ],
+              answer: 1,
+              explanation: 'A percentage offset resolves against the width of the element itself, so the gap scales with the box. That is rarely what you want on a non-square element.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -805,78 +1155,5 @@ export const cssOutlineSections: Section[] = [
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s14',
-      title: 'CSS Outline quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s14-q1',
-          type: 'multiple-choice',
-          prompt: 'Where is an outline drawn?',
-          options: [
-            'Inside the padding, between the content and the border',
-            'Outside the border edge',
-            'In the margin, replacing the margin',
-            'As a shadow one pixel outside the border',
-          ],
-          answer: 1,
-          explanation:
-            'An outline is painted outside the border edge, further from the content than the border itself, and it is never part of the box model.',
-        },
-        {
-          id: 'quiz-css-s14-q2',
-          type: 'true-false',
-          prompt: 'Adding a wide outline to an element makes its neighbours move.',
-          answer: false,
-          explanation:
-            'Outlines take up no space in the layout. Nothing reflows, no sibling shifts, and the parent height is unchanged, which is exactly why outlines are safe for focus rings.',
-        },
-        {
-          id: 'quiz-css-s14-q3',
-          type: 'code-output',
-          prompt: 'What does this produce?',
-          code: `.card {
-  border: 1px solid #111;
-  outline: 3px solid #29e2bd;
-  outline-offset: 5px;
-}`,
-          options: [
-            'A 3px teal border with a 5px inset gap',
-            'A 5px teal border with a 3px outline',
-            'A 3px teal outline 5px away from the border',
-            'Nothing visible, because an outline and a border cannot be used together',
-          ],
-          answer: 2,
-          explanation:
-            'The `outline` shorthand takes width, style and colour, and `outline-offset` pushes the whole outline 5px further out, leaving a gap between it and the border.',
-        },
-        {
-          id: 'quiz-css-s14-q4',
-          type: 'blank',
-          prompt:
-            'What property sets the gap between an element\'s border and its outline? Give the property name.',
-          answers: ['outline-offset', 'outlineoffset', 'outline offset'],
-          explanation:
-            '`outline-offset` takes a length. Positive values push the outline outward, negative values pull it inward over the element.',
-        },
-        {
-          id: 'quiz-css-s14-q5',
-          type: 'identify-error',
-          prompt:
-            'A stylesheet contains `button:focus { outline: none; }` and nothing else. What is wrong with it?',
-          code: 'button:focus {\n  outline: none;\n}',
-          options: [
-            '`outline: none` is not a valid value',
-            'Nothing, because the default ring can be safely removed',
-            'The focus ring is gone and nothing replaces it, so keyboard users cannot see where they are',
-            'It should have been written `outline: 0` to be valid',
-          ],
-          answer: 2,
-          explanation:
-            'Removing a focus outline is only acceptable if a `:focus-visible` rule puts a visible ring back. `outline: none` and `outline: 0` are equivalent, and both delete the only focus cue the browser was providing.',
-        },
-      ],
-    },
   },
 ]

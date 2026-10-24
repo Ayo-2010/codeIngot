@@ -17,6 +17,71 @@ export const jsDomWritesSections: Section[] = [
           'Create new elements with document.createElement and document.createTextNode',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-js-l65',
+          title: 'The document object quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l65-q1',
+              type: 'multiple-choice',
+              prompt: 'What does `document.querySelector("#missing")` return when no element has that id?',
+              options: [
+                'null',
+                'undefined',
+                'An empty element',
+                'It throws an error',
+              ],
+              answer: 0,
+              explanation: 'It returns `null`, which is why reading a property straight afterwards throws "Cannot read properties of null". Guard the lookup, or use optional chaining with `?.`, which gives `undefined` instead of stopping the program.',
+            },
+            {
+              id: 'quiz-js-l65-q2',
+              type: 'true-false',
+              prompt: '`document.querySelectorAll` returns a live list that updates when new matching elements are added to the page.',
+              answer: false,
+              explanation: '`querySelectorAll` returns a static NodeList — a snapshot taken at the moment of the call. New elements added later will not appear in it. Use `getElementsByClassName` or `getElementsByTagName` if you need a live collection.',
+            },
+            {
+              id: 'quiz-js-l65-q3',
+              type: 'code-output',
+              prompt: 'What does the page show after this runs?',
+              code: 'const out = document.querySelector(\'#out\')\nout.innerHTML = \'<strong>Bold</strong>\'',
+              options: [
+                'The plain text <strong>Bold</strong>, with tags shown as characters',
+                'The word Bold in bold text',
+                'Nothing — innerHTML was removed from modern browsers',
+                'An error, because #out is not a valid selector',
+              ],
+              answer: 1,
+              explanation: '`innerHTML` parses the string as HTML, so the `<strong>` tags become real elements and the word renders in bold. `textContent` would write the tags as visible characters instead.',
+            },
+            {
+              id: 'quiz-js-l65-q4',
+              type: 'identify-error',
+              prompt: 'What is wrong with this way of creating an element?',
+              code: 'const div = document.createElement(\'<div>\')\ndiv.textContent = \'Hello\'\ndocument.body.append(div)',
+              options: [
+                'Nothing is wrong',
+                'createElement takes a tag name without angle brackets',
+                'textContent does not work on created elements',
+                'append only works on the document, not on body',
+              ],
+              answer: 1,
+              explanation: '`createElement` expects a tag name like `"div"`, not `"<div>"`. The angle brackets make it an invalid tag name and the browser will create an element named `HTMLUnknownElement` instead.',
+            },
+            {
+              id: 'quiz-js-l65-q5',
+              type: 'blank',
+              prompt: 'Which method creates a plain text node that can be appended to an element?',
+              answers: [
+                'createTextNode',
+                'document.createTextNode',
+              ],
+              explanation: '`document.createTextNode("text")` makes a text node. It is rarely needed directly because `textContent` and `append` with a string handle it for you, but it exists for cases where you need fine-grained control.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -181,66 +246,6 @@ button.addEventListener('click', showTime)`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s54',
-      title: 'DOM document check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s54-q1',
-          type: 'multiple-choice',
-          prompt: 'What does `document.querySelector("#missing")` return when no element has that id?',
-          options: ['null', 'undefined', 'An empty element', 'It throws an error'],
-          answer: 0,
-          explanation: 'It returns `null`, which is why reading a property straight afterwards throws "Cannot read properties of null". Guard the lookup, or use optional chaining with `?.`, which gives `undefined` instead of stopping the program.',
-        },
-        {
-          id: 'quiz-js-s54-q2',
-          type: 'true-false',
-          prompt: '`document.querySelectorAll` returns a live list that updates when new matching elements are added to the page.',
-          answer: false,
-          explanation: '`querySelectorAll` returns a static NodeList — a snapshot taken at the moment of the call. New elements added later will not appear in it. Use `getElementsByClassName` or `getElementsByTagName` if you need a live collection.',
-        },
-        {
-          id: 'quiz-js-s54-q3',
-          type: 'code-output',
-          prompt: 'What does the page show after this runs?',
-          code: `const out = document.querySelector('#out')
-out.innerHTML = '<strong>Bold</strong>'`,
-          options: [
-            'The plain text <strong>Bold</strong>, with tags shown as characters',
-            'The word Bold in bold text',
-            'Nothing — innerHTML was removed from modern browsers',
-            'An error, because #out is not a valid selector',
-          ],
-          answer: 1,
-          explanation: '`innerHTML` parses the string as HTML, so the `<strong>` tags become real elements and the word renders in bold. `textContent` would write the tags as visible characters instead.',
-        },
-        {
-          id: 'quiz-js-s54-q4',
-          type: 'identify-error',
-          prompt: 'What is wrong with this way of creating an element?',
-          code: `const div = document.createElement('<div>')
-div.textContent = 'Hello'
-document.body.append(div)`,
-          options: [
-            'Nothing is wrong',
-            'createElement takes a tag name without angle brackets',
-            'textContent does not work on created elements',
-            'append only works on the document, not on body',
-          ],
-          answer: 1,
-          explanation: '`createElement` expects a tag name like `"div"`, not `"<div>"`. The angle brackets make it an invalid tag name and the browser will create an element named `HTMLUnknownElement` instead.',
-        },
-        {
-          id: 'quiz-js-s54-q5',
-          type: 'blank',
-          prompt: 'Which method creates a plain text node that can be appended to an element?',
-          answers: ['createTextNode', 'document.createTextNode'],
-          explanation: '`document.createTextNode("text")` makes a text node. It is rarely needed directly because `textContent` and `append` with a string handle it for you, but it exists for cases where you need fine-grained control.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s55',
@@ -258,6 +263,71 @@ document.body.append(div)`,
           'Keep data in a variable and re-render on every change',
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-js-l66',
+          title: 'Creating elements and rendering a list quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l66-q1',
+              type: 'multiple-choice',
+              prompt: 'What does `document.createElement("li")` return?',
+              options: [
+                'A string of HTML',
+                'A detached li element not yet in the page',
+                'A live li element already in the document',
+                'A DocumentFragment',
+              ],
+              answer: 1,
+              explanation: '`createElement` builds an element in memory. It is detached — no styles apply, no layout is calculated, and it is not in the accessibility tree — until you insert it with `append`, `prepend`, or `replaceChildren`.',
+            },
+            {
+              id: 'quiz-js-l66-q2',
+              type: 'true-false',
+              prompt: 'Appending fifty items one at a time with `list.append(item)` in a loop causes fifty repaints.',
+              answer: true,
+              explanation: 'Each `append` into the live tree triggers a style recalculation and repaint. Building a DocumentFragment first and appending it once batches the work into a single repaint.',
+            },
+            {
+              id: 'quiz-js-l66-q3',
+              type: 'code-output',
+              prompt: 'What does the list contain after this runs?',
+              code: 'const list = document.querySelector(\'#list\')\nlist.replaceChildren()\nfor (const name of [\'A\', \'B\']) {\n  const li = document.createElement(\'li\')\n  li.textContent = name\n  list.append(li)\n}',
+              options: [
+                'One li with text "A, B"',
+                'Two lis: "A" and "B"',
+                'An empty list — replaceChildren clears it',
+                'An error — replaceChildren takes a fragment',
+              ],
+              answer: 1,
+              explanation: '`replaceChildren()` with no arguments empties the container. Then the loop creates two separate li elements and appends each. The list ends up with two items.',
+            },
+            {
+              id: 'quiz-js-l66-q4',
+              type: 'identify-error',
+              prompt: 'Why does this render function produce duplicates on the second call?',
+              code: 'let tasks = [\'One\']\nfunction render() {\n  const list = document.querySelector(\'#tasks\')\n  for (const task of tasks) {\n    const li = document.createElement(\'li\')\n    li.textContent = task\n    list.append(li)\n  }\n}\nrender()\ntasks.push(\'Two\')\nrender()',
+              options: [
+                'tasks array is not being updated',
+                'The list is not cleared before adding new items',
+                'createElement creates duplicates',
+                'append does not work inside a loop',
+              ],
+              answer: 1,
+              explanation: 'The function never empties the container. Each call to `render` appends new items on top of the old ones. Start with `list.replaceChildren()` or `list.innerHTML = ""` to clear it first.',
+            },
+            {
+              id: 'quiz-js-l66-q5',
+              type: 'blank',
+              prompt: 'What method on a container removes all children and inserts new nodes in a single operation?',
+              answers: [
+                'replaceChildren',
+                'replaceChildren()',
+              ],
+              explanation: '`list.replaceChildren(...nodes)` clears the container and inserts the given nodes in one atomic step. It is the modern replacement for `innerHTML = ""` followed by multiple appends.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -469,80 +539,6 @@ render()`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s55',
-      title: 'DOM elements check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s55-q1',
-          type: 'multiple-choice',
-          prompt: 'What does `document.createElement("li")` return?',
-          options: ['A string of HTML', 'A detached li element not yet in the page', 'A live li element already in the document', 'A DocumentFragment'],
-          answer: 1,
-          explanation: '`createElement` builds an element in memory. It is detached — no styles apply, no layout is calculated, and it is not in the accessibility tree — until you insert it with `append`, `prepend`, or `replaceChildren`.',
-        },
-        {
-          id: 'quiz-js-s55-q2',
-          type: 'true-false',
-          prompt: 'Appending fifty items one at a time with `list.append(item)` in a loop causes fifty repaints.',
-          answer: true,
-          explanation: 'Each `append` into the live tree triggers a style recalculation and repaint. Building a DocumentFragment first and appending it once batches the work into a single repaint.',
-        },
-        {
-          id: 'quiz-js-s55-q3',
-          type: 'code-output',
-          prompt: 'What does the list contain after this runs?',
-          code: `const list = document.querySelector('#list')
-list.replaceChildren()
-for (const name of ['A', 'B']) {
-  const li = document.createElement('li')
-  li.textContent = name
-  list.append(li)
-}`,
-          options: [
-            'One li with text "A, B"',
-            'Two lis: "A" and "B"',
-            'An empty list — replaceChildren clears it',
-            'An error — replaceChildren takes a fragment',
-          ],
-          answer: 1,
-          explanation: '`replaceChildren()` with no arguments empties the container. Then the loop creates two separate li elements and appends each. The list ends up with two items.',
-        },
-        {
-          id: 'quiz-js-s55-q4',
-          type: 'identify-error',
-          prompt: 'Why does this render function produce duplicates on the second call?',
-          code: `let tasks = ['One']
-function render() {
-  const list = document.querySelector('#tasks')
-  for (const task of tasks) {
-    const li = document.createElement('li')
-    li.textContent = task
-    list.append(li)
-  }
-}
-render()
-tasks.push('Two')
-render()`,
-          options: [
-            'tasks array is not being updated',
-            'The list is not cleared before adding new items',
-            'createElement creates duplicates',
-            'append does not work inside a loop',
-          ],
-          answer: 1,
-          explanation: 'The function never empties the container. Each call to `render` appends new items on top of the old ones. Start with `list.replaceChildren()` or `list.innerHTML = ""` to clear it first.',
-        },
-        {
-          id: 'quiz-js-s55-q5',
-          type: 'blank',
-          prompt: 'What method on a container removes all children and inserts new nodes in a single operation?',
-          answers: ['replaceChildren', 'replaceChildren()'],
-          explanation: '`list.replaceChildren(...nodes)` clears the container and inserts the given nodes in one atomic step. It is the modern replacement for `innerHTML = ""` followed by multiple appends.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s56',
@@ -560,6 +556,71 @@ render()`,
           'Change text, attributes, classes and styles, and know why textContent is safer than innerHTML',
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-js-l67',
+          title: 'Reading and changing the page quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l67-q1',
+              type: 'multiple-choice',
+              prompt: 'What does `element.textContent` return when the element contains `<strong>bold</strong>`?',
+              options: [
+                'The string "bold"',
+                'The string "<strong>bold</strong>"',
+                'An HTML element',
+                'undefined',
+              ],
+              answer: 1,
+              explanation: 'textContent returns all text as plain characters. The tags are not parsed -- they are returned as literal characters in the string.',
+            },
+            {
+              id: 'quiz-js-l67-q2',
+              type: 'true-false',
+              prompt: '`querySelectorAll` returns a live NodeList that automatically updates when new matching elements are added.',
+              answer: false,
+              explanation: 'querySelectorAll returns a static snapshot. New elements added after the call are not included. Use getElementsByClassName or getElementsByTagName for a live collection.',
+            },
+            {
+              id: 'quiz-js-l67-q3',
+              type: 'code-output',
+              prompt: 'What does the page show after this runs?',
+              code: 'const el = document.querySelector(\'#out\')\nel.innerHTML = \'<em>Italic</em>\'',
+              options: [
+                'The plain text <em>Italic</em>',
+                'The word Italic in italics',
+                'An error',
+                'Nothing',
+              ],
+              answer: 1,
+              explanation: 'innerHTML parses the string as HTML. The <em> tags become real elements and the browser renders the text in italics.',
+            },
+            {
+              id: 'quiz-js-l67-q4',
+              type: 'identify-error',
+              prompt: 'What is the problem with this code?',
+              code: 'const btn = document.querySelector(\'#btn\')\nbtn.addEventListener(\'click\', function () {\n  const el = document.querySelector(\'#missing\')\n  el.textContent = \'Hello\'\n})',
+              options: [
+                'Nothing is wrong',
+                'querySelector returns null if nothing matches, so el.textContent throws',
+                'addEventListener does not work on buttons',
+                'textContent cannot be assigned',
+              ],
+              answer: 1,
+              explanation: 'If #missing does not exist, querySelector returns null. Accessing .textContent on null throws "Cannot read properties of null". Guard the lookup or use optional chaining.',
+            },
+            {
+              id: 'quiz-js-l67-q5',
+              type: 'blank',
+              prompt: 'Which property on an element gives you a token list for adding, removing, and toggling CSS classes?',
+              answers: [
+                'classList',
+                'element.classList',
+              ],
+              explanation: 'element.classList is a DOMTokenList with add, remove, toggle, and contains methods. It is the standard way to manipulate classes without string concatenation.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -742,68 +803,6 @@ button.addEventListener('click', function () {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s56',
-      title: 'DOM HTML check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s56-q1',
-          type: 'multiple-choice',
-          prompt: 'What does `element.textContent` return when the element contains `<strong>bold</strong>`?',
-          options: ['The string "bold"', 'The string "<strong>bold</strong>"', 'An HTML element', 'undefined'],
-          answer: 1,
-          explanation: 'textContent returns all text as plain characters. The tags are not parsed -- they are returned as literal characters in the string.',
-        },
-        {
-          id: 'quiz-js-s56-q2',
-          type: 'true-false',
-          prompt: '`querySelectorAll` returns a live NodeList that automatically updates when new matching elements are added.',
-          answer: false,
-          explanation: 'querySelectorAll returns a static snapshot. New elements added after the call are not included. Use getElementsByClassName or getElementsByTagName for a live collection.',
-        },
-        {
-          id: 'quiz-js-s56-q3',
-          type: 'code-output',
-          prompt: 'What does the page show after this runs?',
-          code: `const el = document.querySelector('#out')
-el.innerHTML = '<em>Italic</em>'`,
-          options: [
-            'The plain text <em>Italic</em>',
-            'The word Italic in italics',
-            'An error',
-            'Nothing',
-          ],
-          answer: 1,
-          explanation: 'innerHTML parses the string as HTML. The <em> tags become real elements and the browser renders the text in italics.',
-        },
-        {
-          id: 'quiz-js-s56-q4',
-          type: 'identify-error',
-          prompt: 'What is the problem with this code?',
-          code: `const btn = document.querySelector('#btn')
-btn.addEventListener('click', function () {
-  const el = document.querySelector('#missing')
-  el.textContent = 'Hello'
-})`,
-          options: [
-            'Nothing is wrong',
-            'querySelector returns null if nothing matches, so el.textContent throws',
-            'addEventListener does not work on buttons',
-            'textContent cannot be assigned',
-          ],
-          answer: 1,
-          explanation: 'If #missing does not exist, querySelector returns null. Accessing .textContent on null throws "Cannot read properties of null". Guard the lookup or use optional chaining.',
-        },
-        {
-          id: 'quiz-js-s56-q5',
-          type: 'blank',
-          prompt: 'Which property on an element gives you a token list for adding, removing, and toggling CSS classes?',
-          answers: ['classList', 'element.classList'],
-          explanation: 'element.classList is a DOMTokenList with add, remove, toggle, and contains methods. It is the standard way to manipulate classes without string concatenation.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s57',
@@ -821,6 +820,71 @@ btn.addEventListener('click', function () {
           'Handle form submit with preventDefault and stop the browser from navigating',
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-js-l68',
+          title: 'Form data and validation quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l68-q1',
+              type: 'multiple-choice',
+              prompt: 'What does `new FormData(form)` give you?',
+              options: [
+                'An array of input elements',
+                'A collection of all named form controls and their values',
+                'A JSON string of the form',
+                'The form element itself',
+              ],
+              answer: 1,
+              explanation: 'FormData is a collection keyed by the name attribute of each control. It handles checkboxes, file inputs, and multiple values per name automatically.',
+            },
+            {
+              id: 'quiz-js-l68-q2',
+              type: 'true-false',
+              prompt: '`form.checkValidity()` shows the browser\'s own validation messages to the user.',
+              answer: false,
+              explanation: 'checkValidity returns true or false without showing anything. reportValidity checks and shows the browser messages. Use reportValidity when you want the user to see the errors.',
+            },
+            {
+              id: 'quiz-js-l68-q3',
+              type: 'code-output',
+              prompt: 'What happens when this runs on a valid form?',
+              code: 'form.addEventListener(\'submit\', function (event) {\n  event.preventDefault()\n  const data = new FormData(form)\n  console.log(data.get(\'email\'))\n})',
+              options: [
+                'The page reloads',
+                'The email value is logged, page does not reload',
+                'An error is thrown',
+                'Nothing happens',
+              ],
+              answer: 1,
+              explanation: 'preventDefault stops the navigation. FormData reads the values. The handler runs and logs the email.',
+            },
+            {
+              id: 'quiz-js-l68-q4',
+              type: 'identify-error',
+              prompt: 'What is wrong with validating on the submit button\'s click event?',
+              code: 'document.querySelector(\'#submit-btn\').addEventListener(\'click\', function () {\n  if (!form.checkValidity()) return\n  // process form\n})',
+              options: [
+                'Nothing is wrong',
+                'Misses Enter key in fields and runs before browser validation',
+                'click does not fire on buttons',
+                'checkValidity only works on submit',
+              ],
+              answer: 1,
+              explanation: 'A click listener on the button misses the Enter key in any field. It also runs before the browser\'s native validation can stop invalid submissions. Listen for submit on the form instead.',
+            },
+            {
+              id: 'quiz-js-l68-q5',
+              type: 'blank',
+              prompt: 'What method on a form element stops the browser from navigating away on submit?',
+              answers: [
+                'preventDefault',
+                'event.preventDefault()',
+              ],
+              explanation: 'Call event.preventDefault() inside the submit handler. It cancels the default navigation while letting your code run.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1030,70 +1094,6 @@ form.addEventListener('submit', function (event) {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s57',
-      title: 'DOM forms check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s57-q1',
-          type: 'multiple-choice',
-          prompt: 'What does `new FormData(form)` give you?',
-          options: ['An array of input elements', 'A collection of all named form controls and their values', 'A JSON string of the form', 'The form element itself'],
-          answer: 1,
-          explanation: 'FormData is a collection keyed by the name attribute of each control. It handles checkboxes, file inputs, and multiple values per name automatically.',
-        },
-        {
-          id: 'quiz-js-s57-q2',
-          type: 'true-false',
-          prompt: '`form.checkValidity()` shows the browser\'s own validation messages to the user.',
-          answer: false,
-          explanation: 'checkValidity returns true or false without showing anything. reportValidity checks and shows the browser messages. Use reportValidity when you want the user to see the errors.',
-        },
-        {
-          id: 'quiz-js-s57-q3',
-          type: 'code-output',
-          prompt: 'What happens when this runs on a valid form?',
-          code: `form.addEventListener('submit', function (event) {
-  event.preventDefault()
-  const data = new FormData(form)
-  console.log(data.get('email'))
-})`,
-          options: [
-            'The page reloads',
-            'The email value is logged, page does not reload',
-            'An error is thrown',
-            'Nothing happens',
-          ],
-          answer: 1,
-          explanation: 'preventDefault stops the navigation. FormData reads the values. The handler runs and logs the email.',
-        },
-        {
-          id: 'quiz-js-s57-q4',
-          type: 'identify-error',
-          prompt: 'What is wrong with validating on the submit button\'s click event?',
-          code: `document.querySelector('#submit-btn').addEventListener('click', function () {
-  if (!form.checkValidity()) return
-  // process form
-})`,
-          options: [
-            'Nothing is wrong',
-            'Misses Enter key in fields and runs before browser validation',
-            'click does not fire on buttons',
-            'checkValidity only works on submit',
-          ],
-          answer: 1,
-          explanation: 'A click listener on the button misses the Enter key in any field. It also runs before the browser\'s native validation can stop invalid submissions. Listen for submit on the form instead.',
-        },
-        {
-          id: 'quiz-js-s57-q5',
-          type: 'blank',
-          prompt: 'What method on a form element stops the browser from navigating away on submit?',
-          answers: ['preventDefault', 'event.preventDefault()'],
-          explanation: 'Call event.preventDefault() inside the submit handler. It cancels the default navigation while letting your code run.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s58',
@@ -1111,6 +1111,72 @@ form.addEventListener('submit', function (event) {
           'Write CSS custom properties from JavaScript for values that belong in the stylesheet',
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-js-l69',
+          title: 'Changing styles with the DOM quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l69-q1',
+              type: 'multiple-choice',
+              prompt: 'Which approach should you use for a named UI state like "loading" or "error"?',
+              options: [
+                'element.style.color = "red"',
+                'element.classList.add("error")',
+                'element.setAttribute("style", "color: red")',
+                'element.style.setProperty("--error", "red")',
+              ],
+              answer: 1,
+              explanation: 'Named states belong in classes. The CSS defines what .error looks like; JavaScript only decides when it applies. This keeps styling in the stylesheet.',
+            },
+            {
+              id: 'quiz-js-l69-q2',
+              type: 'true-false',
+              prompt: '`el.style.width = 100` sets the width to 100px.',
+              answer: false,
+              explanation: 'Inline styles require units. `el.style.width = "100px"` works; `el.style.width = 100` is ignored.',
+            },
+            {
+              id: 'quiz-js-l69-q3',
+              type: 'code-output',
+              prompt: 'What is the result after this runs?',
+              code: 'el.style.setProperty(\'--gap\', \'16px\')\nel.style.setProperty(\'--gap\', \'24px\')\nconsole.log(el.style.getPropertyValue(\'--gap\'))',
+              options: [
+                '16px',
+                '24px',
+                'Empty string',
+                'Error',
+              ],
+              answer: 1,
+              explanation: 'setProperty overwrites the previous value. The second call sets --gap to 24px.',
+            },
+            {
+              id: 'quiz-js-l69-q4',
+              type: 'identify-error',
+              prompt: 'Why does the .active class not change the color in this case?',
+              code: '.active { color: blue; }\n<div id="el" style="color: red" class="active">Text</div>\n<script>\n  document.querySelector(\'#el\').classList.add(\'active\')\n</script>',
+              options: [
+                'The class is not added',
+                'Inline style has higher specificity than class',
+                'color property cannot be overridden',
+                'active is a reserved class name',
+              ],
+              answer: 1,
+              explanation: 'Inline styles (the style attribute) have higher specificity than classes. The inline color: red wins over .active { color: blue }. Remove the inline style or use !important in CSS (not recommended).',
+            },
+            {
+              id: 'quiz-js-l69-q5',
+              type: 'blank',
+              prompt: 'What method sets a CSS custom property on an element from JavaScript?',
+              answers: [
+                'setProperty',
+                'style.setProperty',
+                'element.style.setProperty',
+              ],
+              explanation: 'element.style.setProperty("--name", "value") sets a custom property. It is the only way to set a variable with a dash in its name from JavaScript.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1328,64 +1394,6 @@ document.querySelector('#var-btn').addEventListener('click', function () {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s58',
-      title: 'DOM CSS check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s58-q1',
-          type: 'multiple-choice',
-          prompt: 'Which approach should you use for a named UI state like "loading" or "error"?',
-          options: ['element.style.color = "red"', 'element.classList.add("error")', 'element.setAttribute("style", "color: red")', 'element.style.setProperty("--error", "red")'],
-          answer: 1,
-          explanation: 'Named states belong in classes. The CSS defines what .error looks like; JavaScript only decides when it applies. This keeps styling in the stylesheet.',
-        },
-        {
-          id: 'quiz-js-s58-q2',
-          type: 'true-false',
-          prompt: '`el.style.width = 100` sets the width to 100px.',
-          answer: false,
-          explanation: 'Inline styles require units. `el.style.width = "100px"` works; `el.style.width = 100` is ignored.',
-        },
-        {
-          id: 'quiz-js-s58-q3',
-          type: 'code-output',
-          prompt: 'What is the result after this runs?',
-          code: `el.style.setProperty('--gap', '16px')
-el.style.setProperty('--gap', '24px')
-console.log(el.style.getPropertyValue('--gap'))`,
-          options: ['16px', '24px', 'Empty string', 'Error'],
-          answer: 1,
-          explanation: 'setProperty overwrites the previous value. The second call sets --gap to 24px.',
-        },
-        {
-          id: 'quiz-js-s58-q4',
-          type: 'identify-error',
-          prompt: 'Why does the .active class not change the color in this case?',
-          code: `.active { color: blue; }
-<div id="el" style="color: red" class="active">Text</div>
-<script>
-  document.querySelector('#el').classList.add('active')
-</script>`,
-          options: [
-            'The class is not added',
-            'Inline style has higher specificity than class',
-            'color property cannot be overridden',
-            'active is a reserved class name',
-          ],
-          answer: 1,
-          explanation: 'Inline styles (the style attribute) have higher specificity than classes. The inline color: red wins over .active { color: blue }. Remove the inline style or use !important in CSS (not recommended).',
-        },
-        {
-          id: 'quiz-js-s58-q5',
-          type: 'blank',
-          prompt: 'What method sets a CSS custom property on an element from JavaScript?',
-          answers: ['setProperty', 'style.setProperty', 'element.style.setProperty'],
-          explanation: 'element.style.setProperty("--name", "value") sets a custom property. It is the only way to set a variable with a dash in its name from JavaScript.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s59',
@@ -1403,6 +1411,71 @@ console.log(el.style.getPropertyValue('--gap'))`,
           'Chain animations with Promise-based finish and handle reduce-motion preference',
         ],
         xp: 55,
+        quiz: {
+          id: 'quiz-js-l70',
+          title: 'Simple animations quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l70-q1',
+              type: 'multiple-choice',
+              prompt: 'What does `element.animate(keyframes, options)` return?',
+              options: [
+                'A Promise',
+                'An Animation object',
+                'The element itself',
+                'A keyframe array',
+              ],
+              answer: 1,
+              explanation: 'animate returns an Animation object with play, pause, reverse, cancel, finish, and a finished Promise.',
+            },
+            {
+              id: 'quiz-js-l70-q2',
+              type: 'true-false',
+              prompt: 'The Web Animations API automatically respects prefers-reduced-motion without any extra code.',
+              answer: false,
+              explanation: 'The browser does not auto-pause WAAPI animations. You must check matchMedia and either skip the animation or set duration to 0 when reduced motion is preferred.',
+            },
+            {
+              id: 'quiz-js-l70-q3',
+              type: 'code-output',
+              prompt: 'What does this log when the animation finishes?',
+              code: 'el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 100 })\n  .finished.then(function () { console.log(\'done\') })',
+              options: [
+                'done',
+                'Nothing',
+                'An error',
+                'The Animation object',
+              ],
+              answer: 0,
+              explanation: 'The finished Promise resolves when the animation completes. The callback logs "done".',
+            },
+            {
+              id: 'quiz-js-l70-q4',
+              type: 'identify-error',
+              prompt: 'What is wrong with this RAF loop?',
+              code: 'function tick() {\n  el.style.left = x + \'px\'\n  x += 1\n  requestAnimationFrame(tick)\n}\ntick()',
+              options: [
+                'Nothing is wrong',
+                'No way to stop the loop -- missing cancelAnimationFrame',
+                'requestAnimationFrame does not take a function',
+                'tick must be an arrow function',
+              ],
+              answer: 1,
+              explanation: 'The loop runs forever with no way to stop it. Store the return value of requestAnimationFrame and pass it to cancelAnimationFrame when you need to stop.',
+            },
+            {
+              id: 'quiz-js-l70-q5',
+              type: 'blank',
+              prompt: 'What method on an Animation object stops it and jumps to the end state (if fill: forwards)?',
+              answers: [
+                'finish',
+                'finish()',
+              ],
+              explanation: 'anim.finish() completes the animation immediately and resolves the finished Promise. cancel() stops it and reverts unless fill: forwards is set.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1631,63 +1704,5 @@ document.querySelector('#slide-btn').addEventListener('click', function () {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s59',
-      title: 'DOM animations check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s59-q1',
-          type: 'multiple-choice',
-          prompt: 'What does `element.animate(keyframes, options)` return?',
-          options: ['A Promise', 'An Animation object', 'The element itself', 'A keyframe array'],
-          answer: 1,
-          explanation: 'animate returns an Animation object with play, pause, reverse, cancel, finish, and a finished Promise.',
-        },
-        {
-          id: 'quiz-js-s59-q2',
-          type: 'true-false',
-          prompt: 'The Web Animations API automatically respects prefers-reduced-motion without any extra code.',
-          answer: false,
-          explanation: 'The browser does not auto-pause WAAPI animations. You must check matchMedia and either skip the animation or set duration to 0 when reduced motion is preferred.',
-        },
-        {
-          id: 'quiz-js-s59-q3',
-          type: 'code-output',
-          prompt: 'What does this log when the animation finishes?',
-          code: `el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 100 })
-  .finished.then(function () { console.log('done') })`,
-          options: ['done', 'Nothing', 'An error', 'The Animation object'],
-          answer: 0,
-          explanation: 'The finished Promise resolves when the animation completes. The callback logs "done".',
-        },
-        {
-          id: 'quiz-js-s59-q4',
-          type: 'identify-error',
-          prompt: 'What is wrong with this RAF loop?',
-          code: `function tick() {
-  el.style.left = x + 'px'
-  x += 1
-  requestAnimationFrame(tick)
-}
-tick()`,
-          options: [
-            'Nothing is wrong',
-            'No way to stop the loop -- missing cancelAnimationFrame',
-            'requestAnimationFrame does not take a function',
-            'tick must be an arrow function',
-          ],
-          answer: 1,
-          explanation: 'The loop runs forever with no way to stop it. Store the return value of requestAnimationFrame and pass it to cancelAnimationFrame when you need to stop.',
-        },
-        {
-          id: 'quiz-js-s59-q5',
-          type: 'blank',
-          prompt: 'What method on an Animation object stops it and jumps to the end state (if fill: forwards)?',
-          answers: ['finish', 'finish()'],
-          explanation: 'anim.finish() completes the animation immediately and resolves the finished Promise. cancel() stops it and reverts unless fill: forwards is set.',
-        },
-      ],
-    },
   },
 ]

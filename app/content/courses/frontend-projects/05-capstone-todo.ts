@@ -18,6 +18,72 @@ export const frontendProjectsTodoSections: Section[] = [
           'Derive the visible list and remaining count from state',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-fp-l13',
+          title: 'Plan the todo app quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-fp-l13-q1',
+              type: 'multiple-choice',
+              prompt: 'What is the source of truth for the todo list?',
+              options: [
+                'The rendered list items',
+                'The task array in JavaScript',
+                'The localStorage key alone',
+                'The filter buttons',
+              ],
+              answer: 1,
+              explanation: 'The array is the state. The list, count and empty state are all rendered from it after every change.',
+            },
+            {
+              id: 'quiz-fp-l13-q2',
+              type: 'true-false',
+              prompt: 'If the stored JSON is corrupt, the app should throw so the problem is visible.',
+              answer: false,
+              explanation: 'A corrupt value should fall back to an empty list. The app remains usable, and the person does not lose the page because of one bad key.',
+            },
+            {
+              id: 'quiz-fp-l13-q3',
+              type: 'multiple-choice',
+              prompt: 'Which field in the task object is expected to change after the task is created?',
+              options: [
+                'id',
+                'title',
+                'done',
+                'STORAGE_KEY',
+              ],
+              answer: 2,
+              explanation: 'The id is fixed for the life of the task and the title is set once, but done flips whenever the task is toggled. That is why update() merges a change into the existing object.',
+            },
+            {
+              id: 'quiz-fp-l13-q4',
+              type: 'multiple-choice',
+              prompt: 'What is written under the storage key each time save() runs?',
+              options: [
+                'Only the currently active tasks',
+                'The current filter value',
+                'The whole task array serialised as JSON',
+                'The rendered list HTML',
+              ],
+              answer: 2,
+              explanation: 'The array is the single source of truth, so the entire array is stringified and stored. Saving only a filtered subset would silently lose the hidden tasks on reload.',
+            },
+            {
+              id: 'quiz-fp-l13-q5',
+              type: 'multiple-choice',
+              prompt: 'How should the remaining-task count be calculated?',
+              options: [
+                'Count the rows currently rendered in the list',
+                'Count the tasks whose done flag is false in the full array',
+                'Read a count value out of localStorage',
+                'Count the completed tasks and subtract them from the total rows',
+              ],
+              answer: 1,
+              explanation: 'The count describes the whole list, not the current view, so it must come from tasks rather than the visible rows. Otherwise opening the completed filter would claim that nothing is left.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -141,6 +207,76 @@ let filter = 'all';`,
           'Wire add, toggle, delete and filter through one update path',
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-fp-l14',
+          title: 'Build and submit the todo app quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-fp-l14-q1',
+              type: 'multiple-choice',
+              prompt: 'Why give each task a stable id instead of using its array index?',
+              options: [
+                'Indexes are not numbers',
+                'Filtering and reordering change the index, so a row can act on the wrong task',
+                'localStorage cannot store arrays',
+                'Ids make the text longer',
+              ],
+              answer: 1,
+              explanation: 'The index describes a position, not a task. A stable id keeps toggle and delete pointed at the same task through every filter change.',
+            },
+            {
+              id: 'quiz-fp-l14-q2',
+              type: 'blank',
+              prompt: 'The attribute that marks the current filter button as pressed is ___.',
+              answers: [
+                'aria-pressed',
+                'aria pressed',
+              ],
+              explanation: 'aria-pressed exposes a toggle button\'s state to assistive technology, so the current filter is announced rather than only coloured.',
+            },
+            {
+              id: 'quiz-fp-l14-q3',
+              type: 'identify-error',
+              prompt: 'What is the main problem with this render code?',
+              code: 'list.innerHTML += `<li>${task.title}</li>`;',
+              options: [
+                'It is too slow to type',
+                'The title is inserted as HTML, and every render destroys the existing rows and focus',
+                'It needs a semicolon',
+                'localStorage does not allow lists',
+              ],
+              answer: 1,
+              explanation: 'User text must not become markup, and replacing the whole list on every change loses focus and state. Create elements and set textContent instead.',
+            },
+            {
+              id: 'quiz-fp-l14-q4',
+              type: 'multiple-choice',
+              prompt: 'Why does load() check `Array.isArray(parsed)` after JSON.parse succeeds?',
+              options: [
+                'JSON.parse always returns an array',
+                'Valid JSON can still be an object or a number rather than a task array',
+                'Array.isArray converts the parsed value into an array',
+                'localStorage can only hold strings',
+              ],
+              answer: 1,
+              explanation: 'A stored value like `{"oops": true}` parses without throwing but is not a list, so rendering it would fail. The type check turns that case into the same safe empty starting point as corrupt text.',
+            },
+            {
+              id: 'quiz-fp-l14-q5',
+              type: 'multiple-choice',
+              prompt: 'Why does the submit handler call `event.preventDefault()`?',
+              options: [
+                'To stop the new task from being saved',
+                'To keep the browser from navigating away and reloading the page',
+                'To clear the input field automatically',
+                'To make the browser validate the title',
+              ],
+              answer: 1,
+              explanation: 'A form submit normally navigates, which would throw away the in-memory list. Preventing the default lets the handler add the task, save it and re-render in place.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -385,71 +521,5 @@ filterButtons.forEach((button) => {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-fp-s7',
-      title: 'Todo application check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-fp-s7-q1',
-          type: 'multiple-choice',
-          prompt: 'What is the source of truth for the todo list?',
-          options: [
-            'The rendered list items',
-            'The task array in JavaScript',
-            'The localStorage key alone',
-            'The filter buttons',
-          ],
-          answer: 1,
-          explanation:
-            'The array is the state. The list, count and empty state are all rendered from it after every change.',
-        },
-        {
-          id: 'quiz-fp-s7-q2',
-          type: 'multiple-choice',
-          prompt: 'Why give each task a stable id instead of using its array index?',
-          options: [
-            'Indexes are not numbers',
-            'Filtering and reordering change the index, so a row can act on the wrong task',
-            'localStorage cannot store arrays',
-            'Ids make the text longer',
-          ],
-          answer: 1,
-          explanation:
-            'The index describes a position, not a task. A stable id keeps toggle and delete pointed at the same task through every filter change.',
-        },
-        {
-          id: 'quiz-fp-s7-q3',
-          type: 'true-false',
-          prompt: 'If the stored JSON is corrupt, the app should throw so the problem is visible.',
-          answer: false,
-          explanation:
-            'A corrupt value should fall back to an empty list. The app remains usable, and the person does not lose the page because of one bad key.',
-        },
-        {
-          id: 'quiz-fp-s7-q4',
-          type: 'blank',
-          prompt: 'The attribute that marks the current filter button as pressed is ___.',
-          answers: ['aria-pressed', 'aria pressed'],
-          explanation:
-            'aria-pressed exposes a toggle button\'s state to assistive technology, so the current filter is announced rather than only coloured.',
-        },
-        {
-          id: 'quiz-fp-s7-q5',
-          type: 'identify-error',
-          prompt: 'What is the main problem with this render code?',
-          code: 'list.innerHTML += `<li>${task.title}</li>`;',
-          options: [
-            'It is too slow to type',
-            'The title is inserted as HTML, and every render destroys the existing rows and focus',
-            'It needs a semicolon',
-            'localStorage does not allow lists',
-          ],
-          answer: 1,
-          explanation:
-            'User text must not become markup, and replacing the whole list on every change loses focus and state. Create elements and set textContent instead.',
-        },
-      ],
-    },
   },
 ]

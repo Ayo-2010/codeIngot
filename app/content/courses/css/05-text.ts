@@ -18,6 +18,72 @@ export const cssTextSection: Section = {
         'Override an inherited colour on a single child without touching the rest',
       ],
       xp: 30,
+      quiz: {
+        id: 'quiz-css-l32',
+        title: 'Text Color quiz',
+        passingScore: 60,
+        questions: [
+          {
+            id: 'quiz-css-l32-q1',
+            type: 'multiple-choice',
+            prompt: 'Why does one `color` declaration on `body` usually style text across the whole page?',
+            options: [
+              '`color` applies to every element automatically, without inheritance',
+              '`color` is inherited, so descendants use the nearest value set by an ancestor',
+              'Styles on `body` are global while other selectors are local',
+              'The browser copies the body colour into each element’s stylesheet',
+            ],
+            answer: 1,
+            explanation: '`color` is an inherited property. Set it once on a container and its descendants use it until a more specific rule overrides the value.',
+          },
+          {
+            id: 'quiz-css-l32-q2',
+            type: 'multiple-choice',
+            prompt: 'A wrapper sets a text colour and one paragraph inside it should differ. What is the minimal change?',
+            options: [
+              'Set the colour on `body` instead',
+              'Add a `color` declaration to that paragraph\'s selector',
+              'Add `!important` to the wrapper rule',
+              'Re-declare the inherited colour on every other paragraph',
+            ],
+            answer: 1,
+            explanation: 'Inheritance handles every child that has no colour of its own. One declaration on the target child beats inheritance for that element and leaves its siblings untouched.',
+          },
+          {
+            id: 'quiz-css-l32-q3',
+            type: 'multiple-choice',
+            prompt: 'What minimum contrast ratio does the lesson give for body text against its background?',
+            options: [
+              '2:1',
+              '3:1',
+              '4.5:1',
+              '7:1',
+            ],
+            answer: 2,
+            explanation: 'Body text should reach at least 4.5:1. Colour also should not be the only signal, since some readers cannot distinguish it.',
+          },
+          {
+            id: 'quiz-css-l32-q4',
+            type: 'true-false',
+            prompt: 'A child element must repeat an inherited `color` value to keep it.',
+            answer: false,
+            explanation: 'Inheritance does the work on its own. A child only needs a `color` declaration when it should differ from its parent.',
+          },
+          {
+            id: 'quiz-css-l32-q5',
+            type: 'multiple-choice',
+            prompt: 'What does the `color` property change on an element?',
+            options: [
+              'The background behind the text',
+              'The colour of the text, which descendants inherit',
+              'The colour of the border and outline',
+              'The colour of every edge in the box model',
+            ],
+            answer: 1,
+            explanation: '`color` sets the text colour, and because it is inherited descendants pick it up. Borders, outlines and backgrounds each have their own colour properties.',
+          },
+        ],
+      },
       content: [
         {
           type: 'text',
@@ -130,6 +196,72 @@ export const cssTextSection: Section = {
         'Use `start` and `end` so alignment follows writing direction',
       ],
       xp: 32,
+      quiz: {
+        id: 'quiz-css-l33',
+        title: 'Text Alignment quiz',
+        passingScore: 60,
+        questions: [
+          {
+            id: 'quiz-css-l33-q1',
+            type: 'multiple-choice',
+            prompt: 'Why does `text-align: center` appear to do nothing on a full-width paragraph?',
+            options: [
+              '`text-align` only works on inline elements',
+              'The paragraph already fills its container, so there is no leftover space to centre within',
+              'Centring requires `display: flex`',
+              'The browser ignores it below 400px',
+            ],
+            answer: 1,
+            explanation: 'A block element is as wide as its container by default, so every line already reaches both edges. You need a `width` or `max-width` on the block first — centre the block with margin, then align the text inside it.',
+          },
+          {
+            id: 'quiz-css-l33-q2',
+            type: 'multiple-choice',
+            prompt: 'What is the default value of `text-align` for left-to-right text?',
+            options: [
+              '`left`',
+              '`right`',
+              '`center`',
+              '`justify`',
+            ],
+            answer: 0,
+            explanation: 'Text is left-aligned by default, which is why `text-align` is only written when you want a different alignment. It moves lines within the element, not the element itself.',
+          },
+          {
+            id: 'quiz-css-l33-q3',
+            type: 'multiple-choice',
+            prompt: 'What does `text-align: justify` do to a paragraph?',
+            options: [
+              'Centres every line in the element',
+              'Stretches every line, including the last one, to both edges',
+              'Stretches every line except the last so both edges are flush',
+              'Adds equal space above and below each line',
+            ],
+            answer: 2,
+            explanation: 'Justification adjusts word spacing so all lines but the last reach both edges. On narrow lines the gaps become large and uneven, which is why it is a poor choice on phones.',
+          },
+          {
+            id: 'quiz-css-l33-q4',
+            type: 'multiple-choice',
+            prompt: 'How do `start` and `end` differ from `left` and `right`?',
+            options: [
+              'They align to the top and bottom of the line box',
+              'They follow the writing direction, so they flip in a right-to-left language',
+              'They only work with `display: flex`',
+              'They are aliases and behave identically in every language',
+            ],
+            answer: 1,
+            explanation: '`start` and `end` are logical values tied to the reading direction. In a left-to-right document they act like left and right, but in a right-to-left one they swap automatically.',
+          },
+          {
+            id: 'quiz-css-l33-q5',
+            type: 'true-false',
+            prompt: '`text-align` is inherited, so one rule on a container aligns the text of its descendants.',
+            answer: true,
+            explanation: 'Inheritance lets a single `text-align` on a container reach every block inside it. A descendant can still override it with its own rule.',
+          },
+        ],
+      },
       content: [
         {
           type: 'text',
@@ -251,6 +383,73 @@ export const cssTextSection: Section = {
         'Lift a decoration off the text with `text-underline-offset`',
       ],
       xp: 36,
+      quiz: {
+        id: 'quiz-css-l34',
+        title: 'Text Decoration quiz',
+        passingScore: 60,
+        questions: [
+          {
+            id: 'quiz-css-l34-q1',
+            type: 'code-output',
+            prompt: 'What does this rule produce?',
+            code: '.notice {\n  text-decoration-line: underline;\n  text-decoration-thickness: 4px;\n  text-underline-offset: 3px;\n}',
+            options: [
+              'A 4px underline sitting 3px below the text',
+              'A 3px underline sitting 4px below the text',
+              'A 4px underline offset 3px in from the text',
+              'Nothing — a decoration needs a style keyword',
+            ],
+            answer: 0,
+            explanation: '`text-decoration-thickness` is the line thickness and `text-underline-offset` is the gap between the line and the text: 4px and 3px respectively.',
+          },
+          {
+            id: 'quiz-css-l34-q2',
+            type: 'true-false',
+            prompt: '`text-decoration-style` has no visible effect when `text-decoration-line` is `none`.',
+            answer: true,
+            explanation: 'The style property describes how a decoration is drawn, so it needs a line to draw. With no decoration line there is nothing for `dotted`, `wavy` or `double` to apply to.',
+          },
+          {
+            id: 'quiz-css-l34-q3',
+            type: 'multiple-choice',
+            prompt: 'What does `text-decoration-line: underline line-through` render?',
+            options: [
+              'Only an underline, because the last value wins',
+              'Both an underline and a line through the text',
+              'An overline in place of both',
+              'Nothing, because two line values are invalid',
+            ],
+            answer: 1,
+            explanation: '`text-decoration-line` accepts several keywords separated by spaces. Listing two draws both decorations on the same element at once.',
+          },
+          {
+            id: 'quiz-css-l34-q4',
+            type: 'multiple-choice',
+            prompt: 'What does the default value `auto` of `text-decoration-thickness` mean?',
+            options: [
+              'The line is always 1px',
+              'The browser chooses a thickness that suits the font size',
+              'The line takes the thickness of the border',
+              'No line is drawn until a length is supplied',
+            ],
+            answer: 1,
+            explanation: '`auto` lets the browser pick a sensible stroke weight for the current font size. A length or percentage overrides it when you need exact control.',
+          },
+          {
+            id: 'quiz-css-l34-q5',
+            type: 'multiple-choice',
+            prompt: 'What does `text-decoration-skip-ink: auto` achieve on a link?',
+            options: [
+              'It lets the underline pass behind descenders and whitespace instead of cutting through them',
+              'It removes the underline entirely',
+              'It changes the underline to a dotted line',
+              'It moves the underline above the text',
+            ],
+            answer: 0,
+            explanation: 'Skip-ink adds small breaks where the underline would cross a descender or gap, which keeps the glyphs legible. It is why long link underlines look cleaner in modern browsers.',
+          },
+        ],
+      },
       content: [
         {
           type: 'text',
@@ -371,6 +570,67 @@ export const cssTextSection: Section = {
         'Avoid transforming text that a screen reader or search engine must read correctly',
       ],
       xp: 40,
+      quiz: {
+        id: 'quiz-css-l35',
+        title: 'Text Transformation quiz',
+        passingScore: 60,
+        questions: [
+          {
+            id: 'quiz-css-l35-q1',
+            type: 'true-false',
+            prompt: '`text-transform: uppercase` changes the actual characters stored in the DOM.',
+            answer: false,
+            explanation: 'It is visual only. The DOM keeps the original string, which is why screen readers, search and anything copying the text get the original casing.',
+          },
+          {
+            id: 'quiz-css-l35-q2',
+            type: 'code-output',
+            prompt: 'The element contains `don\'t stop now`. What is displayed?',
+            code: '.label {\n  text-transform: capitalize;\n}',
+            options: [
+              'Don\'t Stop Now',
+              'Don\'T Stop Now',
+              'DON\'T STOP NOW',
+              'don\'t stop now',
+            ],
+            answer: 1,
+            explanation: '`capitalize` uppercases the first letter of every word and also the letter after an apostrophe. That turns `don\'t` into `Don\'T`.',
+          },
+          {
+            id: 'quiz-css-l35-q3',
+            type: 'true-false',
+            prompt: '`text-transform` is inherited, so a rule on a container affects the text inside it.',
+            answer: true,
+            explanation: 'The transformation inherits down the tree. One rule on a container therefore changes the displayed case of all its descendants, while the DOM strings stay unchanged.',
+          },
+          {
+            id: 'quiz-css-l35-q4',
+            type: 'multiple-choice',
+            prompt: 'A brand acronym must be announced and searched exactly as capitals. What is the right approach?',
+            options: [
+              'Apply `text-transform: uppercase` so it looks right',
+              'Type the capitals in the HTML and do not transform it',
+              'Use `text-transform: capitalize` on the parent',
+              'Set `font-weight: bold` instead of changing the case',
+            ],
+            answer: 1,
+            explanation: 'When the casing carries meaning, the DOM should hold the real characters. `text-transform` only changes the painting, so assistive tech and search still see the original casing.',
+          },
+          {
+            id: 'quiz-css-l35-q5',
+            type: 'multiple-choice',
+            prompt: 'A heading is typed as `the quiet art` and displayed in uppercase with `text-transform`. What happens when a reader searches the page for "The"?',
+            options: [
+              'It matches, because the browser searches what is painted',
+              'It matches, because search is case-insensitive only for transformed text',
+              'It does not match, because the DOM still contains the lower-case string',
+              'It matches only if the page uses a webfont',
+            ],
+            answer: 2,
+            explanation: 'Search and copy operate on the underlying text, not the rendered case. The DOM still holds `the quiet art`, so a search for "The" misses a heading that looks like it says THE.',
+          },
+        ],
+      },
       content: [
         {
           type: 'text',
@@ -483,6 +743,70 @@ export const cssTextSection: Section = {
         'Explain why a unitless `line-height` survives a font-size change',
       ],
       xp: 44,
+      quiz: {
+        id: 'quiz-css-l36',
+        title: 'Text Spacing quiz',
+        passingScore: 60,
+        questions: [
+          {
+            id: 'quiz-css-l36-q1',
+            type: 'blank',
+            prompt: 'Complete the sentence: `line-height` should usually be written without a unit so it stays proportional when the ________ changes.',
+            answers: [
+              'font size',
+              'font-size',
+            ],
+            explanation: 'A unitless value is a multiplier of the element\'s own font size, so `1.6` stays a 1.6-to-1 ratio no matter how large or small the text becomes.',
+          },
+          {
+            id: 'quiz-css-l36-q2',
+            type: 'multiple-choice',
+            prompt: 'Which property controls the space between words only, leaving the letters alone?',
+            options: [
+              '`letter-spacing`',
+              '`word-spacing`',
+              '`line-height`',
+              '`text-indent`',
+            ],
+            answer: 1,
+            explanation: '`word-spacing` adds space between words. `letter-spacing` adds space after each character, so it changes the gaps inside words as well.',
+          },
+          {
+            id: 'quiz-css-l36-q3',
+            type: 'multiple-choice',
+            prompt: 'Which `line-height` range is described as comfortable for body copy?',
+            options: [
+              'Around `1`',
+              'Around `1.5` to `1.7`',
+              'Around `2.5` to `3`',
+              'Around `0.5`',
+            ],
+            answer: 1,
+            explanation: 'Roughly 1.5 to 1.7 keeps lines apart without wasting vertical space. At `1`, ascenders and descenders from neighbouring lines begin to collide.',
+          },
+          {
+            id: 'quiz-css-l36-q4',
+            type: 'true-false',
+            prompt: 'Negative `letter-spacing` is valid and is used to tighten large display type.',
+            answer: true,
+            explanation: 'Both `letter-spacing` and `word-spacing` accept negative lengths. Pulling letters closer is a common way to make a large heading feel more deliberate.',
+          },
+          {
+            id: 'quiz-css-l36-q5',
+            type: 'code-output',
+            prompt: 'What is the computed height of each line box?',
+            code: '.body {\n  font-size: 20px;\n  line-height: 1.6;\n}',
+            options: [
+              '20px',
+              '26px',
+              '32px',
+              '1.6px',
+            ],
+            answer: 2,
+            explanation: 'A unitless `line-height` is a multiplier of the element\'s font size, so 1.6 times 20px is 32px. It sets the line box height, not the height of the glyphs.',
+          },
+        ],
+      },
       content: [
         {
           type: 'text',
@@ -600,6 +924,72 @@ export const cssTextSection: Section = {
         'Explain what `filter: drop-shadow()` does differently from `text-shadow`',
       ],
       xp: 48,
+      quiz: {
+        id: 'quiz-css-l37',
+        title: 'Text Shadow quiz',
+        passingScore: 60,
+        questions: [
+          {
+            id: 'quiz-css-l37-q1',
+            type: 'multiple-choice',
+            prompt: 'When is `filter: drop-shadow()` the better choice over `text-shadow`?',
+            options: [
+              'When the text needs a soft blur',
+              'When the shadow must follow the shape of the whole element rather than the glyphs',
+              'When the shadow should sit inside the border box',
+              'When you want to stack several shadows',
+            ],
+            answer: 1,
+            explanation: '`text-shadow` is derived from text geometry and can only follow the glyphs. A filter applies to the entire rendered element, so it also follows avatars, badges and transparent images.',
+          },
+          {
+            id: 'quiz-css-l37-q2',
+            type: 'multiple-choice',
+            prompt: 'In `text-shadow: 2px 2px 4px #000`, what does the `4px` value control?',
+            options: [
+              'The horizontal offset',
+              'The vertical offset',
+              'The blur radius',
+              'The shadow spread',
+            ],
+            answer: 2,
+            explanation: 'A shadow is written as x-offset, y-offset, optional blur, optional colour. The third length is the blur, and `text-shadow` has no spread value.',
+          },
+          {
+            id: 'quiz-css-l37-q3',
+            type: 'multiple-choice',
+            prompt: 'What does omitting the blur radius from `text-shadow` produce?',
+            options: [
+              'A hard-edged offset copy of the text',
+              'A soft glow with a default blur',
+              'No shadow at all',
+              'A shadow that follows the element box',
+            ],
+            answer: 0,
+            explanation: 'The blur radius defaults to `0`, so the shadow is an exact copy of the glyphs offset by the two lengths. Adding a blur is what turns it into a soft glow.',
+          },
+          {
+            id: 'quiz-css-l37-q4',
+            type: 'multiple-choice',
+            prompt: 'How do you stack two `text-shadow` values, and which one ends up on top?',
+            options: [
+              'Separate with spaces; the first is painted underneath',
+              'Separate with commas; the last is painted on top',
+              'Separate with commas; the first is painted on top',
+              'Stacking is not possible with `text-shadow`',
+            ],
+            answer: 2,
+            explanation: 'Several shadows go in one comma-separated declaration and are painted front to back, so the first entry appears above the rest.',
+          },
+          {
+            id: 'quiz-css-l37-q5',
+            type: 'true-false',
+            prompt: '`text-shadow` paints a rectangular shadow behind the element\'s box.',
+            answer: false,
+            explanation: '`text-shadow` is derived from the glyph outlines, so it follows the letters and never draws a rectangle. A filter or `box-shadow` is needed when the whole element should cast a shadow.',
+          },
+        ],
+      },
       content: [
         {
           type: 'text',
@@ -709,71 +1099,4 @@ export const cssTextSection: Section = {
       ],
     },
   ],
-  quiz: {
-    id: 'quiz-css-s15',
-    title: 'CSS Text quiz',
-    passingScore: 60,
-    questions: [
-      {
-        id: 'quiz-css-s15-q1',
-        type: 'multiple-choice',
-        prompt: 'Why does `text-align: center` appear to do nothing on a full-width paragraph?',
-        options: [
-          '`text-align` only works on inline elements',
-          'The paragraph already fills its container, so there is no leftover space to centre within',
-          'Centring requires `display: flex`',
-          'The browser ignores it below 400px',
-        ],
-        answer: 1,
-        explanation:
-          'A block element is as wide as its container by default, so every line already reaches both edges. You need a `width` or `max-width` on the block first — centre the block with margin, then align the text inside it.',
-      },
-      {
-        id: 'quiz-css-s15-q2',
-        type: 'true-false',
-        prompt: '`text-transform: uppercase` changes the actual characters stored in the DOM.',
-        answer: false,
-        explanation:
-          'It is visual only. The DOM keeps the original string, which is why screen readers, search and anything copying the text get the original casing.',
-      },
-      {
-        id: 'quiz-css-s15-q3',
-        type: 'code-output',
-        prompt: 'What does this rule produce?',
-        code: '.notice {\n  text-decoration-line: underline;\n  text-decoration-thickness: 4px;\n  text-underline-offset: 3px;\n}',
-        options: [
-          'A 4px underline sitting 3px below the text',
-          'A 3px underline sitting 4px below the text',
-          'A 4px underline offset 3px in from the text',
-          'Nothing — a decoration needs a style keyword',
-        ],
-        answer: 0,
-        explanation:
-          '`text-decoration-thickness` is the line thickness and `text-underline-offset` is the gap between the line and the text: 4px and 3px respectively.',
-      },
-      {
-        id: 'quiz-css-s15-q4',
-        type: 'blank',
-        prompt:
-          'Complete the sentence: `line-height` should usually be written without a unit so it stays proportional when the ________ changes.',
-        answers: ['font size', 'font-size'],
-        explanation:
-          'A unitless value is a multiplier of the element\'s own font size, so `1.6` stays a 1.6-to-1 ratio no matter how large or small the text becomes.',
-      },
-      {
-        id: 'quiz-css-s15-q5',
-        type: 'multiple-choice',
-        prompt: 'When is `filter: drop-shadow()` the better choice over `text-shadow`?',
-        options: [
-          'When the text needs a soft blur',
-          'When the shadow must follow the shape of the whole element rather than the glyphs',
-          'When the shadow should sit inside the border box',
-          'When you want to stack several shadows',
-        ],
-        answer: 1,
-        explanation:
-          '`text-shadow` is derived from text geometry and can only follow the glyphs. A filter applies to the entire rendered element, so it also follows avatars, badges and transparent images.',
-      },
-    ],
-  },
 }

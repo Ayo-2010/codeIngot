@@ -19,6 +19,72 @@ export const jsFoundationsSections: Section[] = [
           'Use the console as your first debugging tool',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-js-l1',
+          title: 'What JavaScript is and how it runs quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l1-q1',
+              type: 'multiple-choice',
+              prompt: 'A button on a working-looking page does nothing when clicked. Where do you look first?',
+              options: [
+                'The console, because a JavaScript error leaves the HTML and CSS untouched',
+                'The HTML file, because a broken script usually deletes its markup',
+                'The CSS, because scripts cannot attach to styled elements',
+                'Nothing — this is a known browser bug with buttons',
+              ],
+              answer: 0,
+              explanation: 'A script that throws stops at the error; everything the browser has already drawn stays drawn. That is why the page can look perfect and do nothing. The console names the failing line, and the error message usually contains the exact identifier that went wrong.',
+            },
+            {
+              id: 'quiz-js-l1-q2',
+              type: 'true-false',
+              prompt: 'A script in `<head>` and the same script at the end of `<body>` behave identically, because JavaScript runs wherever it is written.',
+              answer: false,
+              explanation: 'A plain inline script runs the instant the parser reaches it. At the top of the `body` the elements below it do not exist yet, so a lookup finds nothing. `defer` and `type="module"` both hold the script until the document has been parsed.',
+            },
+            {
+              id: 'quiz-js-l1-q3',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'function shout() {\n  return \'hi\'\n}\n\nconsole.log(shout)',
+              options: [
+                'hi',
+                'undefined',
+                '"function shout() { return \'hi\' }"',
+                'an empty string',
+              ],
+              answer: 2,
+              explanation: '`shout` on its own is the function value, not the result of calling it. Nothing is printed until the parentheses appear — that is the difference between defining something and running it.',
+            },
+            {
+              id: 'quiz-js-l1-q4',
+              type: 'identify-error',
+              prompt: 'Which name cannot be used as a variable?',
+              code: 'const 2ndPlace = \'Bo\'\nlet class = \'JavaScript\'',
+              options: [
+                '`2ndPlace`, because a name cannot begin with a digit',
+                '`class`, because it is a reserved word',
+                'Both, because names must be camelCase',
+                'Neither — both are valid names',
+              ],
+              answer: 0,
+              explanation: 'A name may contain letters, digits, `$` and `_`, but it may not start with a digit — the parser cannot tell where the name ends. `class` is also illegal, since reserved words cannot be identifiers at all. Note the two errors are independent: fix both.',
+            },
+            {
+              id: 'quiz-js-l1-q5',
+              type: 'blank',
+              prompt: 'Which two characters start a comment that runs to the end of the line?',
+              answers: [
+                '//',
+                'slash slash',
+                'two slashes',
+              ],
+              explanation: 'A double slash comments out the rest of the line, which is why it is the everyday choice and the fastest way to park a line while you bisect a bug. A block comment uses `/*` and `*/` and can span lines.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -217,80 +283,6 @@ console.log(site, count)`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s1',
-      title: 'Getting started check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s1-q1',
-          type: 'multiple-choice',
-          prompt:
-            'A button on a working-looking page does nothing when clicked. Where do you look first?',
-          options: [
-            'The console, because a JavaScript error leaves the HTML and CSS untouched',
-            'The HTML file, because a broken script usually deletes its markup',
-            'The CSS, because scripts cannot attach to styled elements',
-            'Nothing — this is a known browser bug with buttons',
-          ],
-          answer: 0,
-          explanation:
-            'A script that throws stops at the error; everything the browser has already drawn stays drawn. That is why the page can look perfect and do nothing. The console names the failing line, and the error message usually contains the exact identifier that went wrong.',
-        },
-        {
-          id: 'quiz-js-s1-q2',
-          type: 'true-false',
-          prompt:
-            'A script in `<head>` and the same script at the end of `<body>` behave identically, because JavaScript runs wherever it is written.',
-          answer: false,
-          explanation:
-            'A plain inline script runs the instant the parser reaches it. At the top of the `body` the elements below it do not exist yet, so a lookup finds nothing. `defer` and `type="module"` both hold the script until the document has been parsed.',
-        },
-        {
-          id: 'quiz-js-s1-q3',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `function shout() {
-  return 'hi'
-}
-
-console.log(shout)`,
-          options: [
-            'hi',
-            'undefined',
-            '"function shout() { return \'hi\' }"',
-            'an empty string',
-          ],
-          answer: 2,
-          explanation:
-            '`shout` on its own is the function value, not the result of calling it. Nothing is printed until the parentheses appear — that is the difference between defining something and running it.',
-        },
-        {
-          id: 'quiz-js-s1-q4',
-          type: 'identify-error',
-          prompt: 'Which name cannot be used as a variable?',
-          code: `const 2ndPlace = 'Bo'
-let class = 'JavaScript'`,
-          options: [
-            '`2ndPlace`, because a name cannot begin with a digit',
-            '`class`, because it is a reserved word',
-            'Both, because names must be camelCase',
-            'Neither — both are valid names',
-          ],
-          answer: 0,
-          explanation:
-            'A name may contain letters, digits, `$` and `_`, but it may not start with a digit — the parser cannot tell where the name ends. `class` is also illegal, since reserved words cannot be identifiers at all. Note the two errors are independent: fix both.',
-        },
-        {
-          id: 'quiz-js-s1-q5',
-          type: 'blank',
-          prompt: 'Which two characters start a comment that runs to the end of the line?',
-          answers: ['//', 'slash slash', 'two slashes'],
-          explanation:
-            'A double slash comments out the rest of the line, which is why it is the everyday choice and the fastest way to park a line while you bisect a bug. A block comment uses `/*` and `*/` and can span lines.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s2',
@@ -310,6 +302,73 @@ let class = 'JavaScript'`,
           'Tell the language apart from the libraries built on it',
         ],
         xp: 45,
+        quiz: {
+          id: 'quiz-js-l2',
+          title: 'What JavaScript can do quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l2-q1',
+              type: 'multiple-choice',
+              prompt: 'Which job can JavaScript not do on its own?',
+              options: [
+                'Read a value out of the page',
+                'Change the text of an element',
+                'Read a row from the database directly',
+                'React to a click',
+              ],
+              answer: 2,
+              explanation: 'The script runs on the visitor\'s machine, not on the server, so the database is simply not reachable from it. Reading or writing data means a request to a server, and the server decides what to return — which is also why an API key in a script is a key you must treat as public.',
+            },
+            {
+              id: 'quiz-js-l2-q2',
+              type: 'true-false',
+              prompt: 'A page with ten event listeners attached but no event fired yet looks exactly like the same page with no JavaScript.',
+              answer: true,
+              explanation: 'Listeners are just registrations. Nothing in the DOM changes until a handler runs, so the page renders identically. This is worth knowing when a page "looks broken but nothing is wrong" — the code is loaded, it simply has not been triggered.',
+            },
+            {
+              id: 'quiz-js-l2-q3',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'const field = document.querySelector(\'#search\')\nconsole.log(field ? \'found\' : \'missing\')',
+              options: [
+                'found',
+                'missing',
+                'undefined',
+                'It throws a TypeError',
+              ],
+              answer: 0,
+              explanation: '`querySelector` returns `null` when nothing matches, and a missing element is falsy rather than an error — so the ternary takes the `found` branch only when the element is really there. An empty or absent id is why the rest of this course checks before it reads.',
+            },
+            {
+              id: 'quiz-js-l2-q4',
+              type: 'blank',
+              prompt: 'Name the JavaScript job that has to wait for the network: the one that asks a server for data the original HTML did not contain.',
+              answers: [
+                'fetch',
+                'Fetch',
+                'the fetch',
+                'fetching',
+              ],
+              explanation: 'Fetching is the only job that waits. Reading, changing and reacting all happen immediately against what is already in the page, which is why they are the ones you can debug by staring at the DOM.',
+            },
+            {
+              id: 'quiz-js-l2-q5',
+              type: 'identify-error',
+              prompt: 'What is wrong with this list of the four jobs?',
+              code: 'const jobs = [\'read\', \'change\', \'react\', \'refresh\']',
+              options: [
+                'Nothing — refreshing the page is the fourth job',
+                'The fourth job is "fetch", not "refresh"; a reload throws away the page you were working on',
+                '"read" and "change" are the same job',
+                'The array must be an object to be iterated',
+              ],
+              answer: 1,
+              explanation: 'The fourth job is fetching data from a server. Reloading is the opposite of the point: it discards every variable and every listener, taking you back to the state the server sent. That is why modern pages change the DOM instead of reloading it.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -497,71 +556,6 @@ console.log(jobs.length)`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s2',
-      title: 'Introduction check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s2-q1',
-          type: 'multiple-choice',
-          prompt: 'Which job can JavaScript not do on its own?',
-          options: [
-            'Read a value out of the page',
-            'Change the text of an element',
-            'Read a row from the database directly',
-            'React to a click',
-          ],
-          answer: 2,
-          explanation:
-            'The script runs on the visitor\'s machine, not on the server, so the database is simply not reachable from it. Reading or writing data means a request to a server, and the server decides what to return — which is also why an API key in a script is a key you must treat as public.',
-        },
-        {
-          id: 'quiz-js-s2-q2',
-          type: 'true-false',
-          prompt:
-            'A page with ten event listeners attached but no event fired yet looks exactly like the same page with no JavaScript.',
-          answer: true,
-          explanation:
-            'Listeners are just registrations. Nothing in the DOM changes until a handler runs, so the page renders identically. This is worth knowing when a page "looks broken but nothing is wrong" — the code is loaded, it simply has not been triggered.',
-        },
-        {
-          id: 'quiz-js-s2-q3',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `const field = document.querySelector('#search')
-console.log(field ? 'found' : 'missing')`,
-          options: ['found', 'missing', 'undefined', 'It throws a TypeError'],
-          answer: 0,
-          explanation:
-            '`querySelector` returns `null` when nothing matches, and a missing element is falsy rather than an error — so the ternary takes the `found` branch only when the element is really there. An empty or absent id is why the rest of this course checks before it reads.',
-        },
-        {
-          id: 'quiz-js-s2-q4',
-          type: 'blank',
-          prompt:
-            'Name the JavaScript job that has to wait for the network: the one that asks a server for data the original HTML did not contain.',
-          answers: ['fetch', 'Fetch', 'the fetch', 'fetching'],
-          explanation:
-            'Fetching is the only job that waits. Reading, changing and reacting all happen immediately against what is already in the page, which is why they are the ones you can debug by staring at the DOM.',
-        },
-        {
-          id: 'quiz-js-s2-q5',
-          type: 'identify-error',
-          prompt: 'What is wrong with this list of the four jobs?',
-          code: `const jobs = ['read', 'change', 'react', 'refresh']`,
-          options: [
-            'Nothing — refreshing the page is the fourth job',
-            'The fourth job is "fetch", not "refresh"; a reload throws away the page you were working on',
-            '"read" and "change" are the same job',
-            'The array must be an object to be iterated',
-          ],
-          answer: 1,
-          explanation:
-            'The fourth job is fetching data from a server. Reloading is the opposite of the point: it discards every variable and every listener, taking you back to the state the server sent. That is why modern pages change the DOM instead of reloading it.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s3',
@@ -581,6 +575,73 @@ console.log(field ? 'found' : 'missing')`,
           'Attach a listener to the document for code that must run after loading',
         ],
         xp: 45,
+        quiz: {
+          id: 'quiz-js-l3',
+          title: 'Where to put JavaScript quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l3-q1',
+              type: 'multiple-choice',
+              prompt: 'An external script with no attributes sits at the top of `<body>` and `document.querySelector("#total")` returns null. Why?',
+              options: [
+                '`querySelector` only works inside `<script>` tags at the end of the page',
+                'The script ran before the parser reached that element, so the element did not exist yet',
+                'External scripts cannot use the document object at all',
+                'The id is wrong — `#total` only matches ids on form fields',
+              ],
+              answer: 1,
+              explanation: 'A plain script with no attributes blocks and runs the instant the parser reaches it. Anything further down the document has not been built at that moment, so the lookup correctly returns null. Add `defer`, move the tag to the bottom, or listen for `DOMContentLoaded`.',
+            },
+            {
+              id: 'quiz-js-l3-q2',
+              type: 'true-false',
+              prompt: '`<script type="module" src="app.js"></script>` in `<head>` will run before the page has been parsed, because module scripts are smaller.',
+              answer: false,
+              explanation: 'Module scripts are deferred by default — that is part of what `type="module"` means, not an accident of file size. They also get their own scope, strict mode, and the ability to import. If you add `defer` as well it changes nothing.',
+            },
+            {
+              id: 'quiz-js-l3-q3',
+              type: 'blank',
+              prompt: 'Which attribute makes an external script wait until the document has been parsed before it runs?',
+              answers: [
+                'defer',
+                'Defer',
+                'DEFER',
+                'the defer attribute',
+              ],
+              explanation: '`defer` downloads the file in parallel with the HTML and runs it once parsing is done. That is both safer and faster than putting the tag at the bottom, where the browser cannot start the download until it reads that line.',
+            },
+            {
+              id: 'quiz-js-l3-q4',
+              type: 'identify-error',
+              prompt: 'What goes wrong when this page loads?',
+              code: '<script src="theme.js"></script>\n<script src="cart.js"></script>',
+              options: [
+                'Nothing, two scripts are always fine',
+                'Both files declare `const app = {}` at the top level, so the second one fails with a redeclaration error',
+                'Scripts cannot be loaded from the same folder',
+                'The second script never runs because the first blocks it',
+              ],
+              answer: 1,
+              explanation: 'Two classic scripts share one global scope, so the same `const` name declared twice is a SyntaxError and the second file never runs a single line. Split by job and use `type="module"`, where each file has its own scope and the collision becomes impossible.',
+            },
+            {
+              id: 'quiz-js-l3-q5',
+              type: 'code-output',
+              prompt: 'What does this print, and when?',
+              code: '<script src="app.js" defer></script>\n<h1 id="title">Shop</h1>\n\n<script>\n  console.log(document.querySelector(\'#title\') !== null)\n</script>',
+              options: [
+                'true, after the document is parsed',
+                'false, because the inline script runs during parsing',
+                'false, because `defer` removes the element',
+                'true, before the heading is drawn',
+              ],
+              answer: 1,
+              explanation: 'The inline script has no attributes, so it runs the moment the parser reaches it — at which point the heading below it does not exist. The deferred script runs after parsing, when it would find the element. This is the exact ordering problem `defer` exists to remove.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -749,82 +810,6 @@ console.log(inlineScript, appScript)`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s3',
-      title: 'Where To check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s3-q1',
-          type: 'multiple-choice',
-          prompt:
-            'An external script with no attributes sits at the top of `<body>` and `document.querySelector("#total")` returns null. Why?',
-          options: [
-            '`querySelector` only works inside `<script>` tags at the end of the page',
-            'The script ran before the parser reached that element, so the element did not exist yet',
-            'External scripts cannot use the document object at all',
-            'The id is wrong — `#total` only matches ids on form fields',
-          ],
-          answer: 1,
-          explanation:
-            'A plain script with no attributes blocks and runs the instant the parser reaches it. Anything further down the document has not been built at that moment, so the lookup correctly returns null. Add `defer`, move the tag to the bottom, or listen for `DOMContentLoaded`.',
-        },
-        {
-          id: 'quiz-js-s3-q2',
-          type: 'true-false',
-          prompt:
-            '`<script type="module" src="app.js"></script>` in `<head>` will run before the page has been parsed, because module scripts are smaller.',
-          answer: false,
-          explanation:
-            'Module scripts are deferred by default — that is part of what `type="module"` means, not an accident of file size. They also get their own scope, strict mode, and the ability to import. If you add `defer` as well it changes nothing.',
-        },
-        {
-          id: 'quiz-js-s3-q3',
-          type: 'blank',
-          prompt:
-            'Which attribute makes an external script wait until the document has been parsed before it runs?',
-          answers: ['defer', 'Defer', 'DEFER', 'the defer attribute'],
-          explanation:
-            '`defer` downloads the file in parallel with the HTML and runs it once parsing is done. That is both safer and faster than putting the tag at the bottom, where the browser cannot start the download until it reads that line.',
-        },
-        {
-          id: 'quiz-js-s3-q4',
-          type: 'identify-error',
-          prompt: 'What goes wrong when this page loads?',
-          code: `<script src="theme.js"></script>
-<script src="cart.js"></script>`,
-          options: [
-            'Nothing, two scripts are always fine',
-            'Both files declare `const app = {}` at the top level, so the second one fails with a redeclaration error',
-            'Scripts cannot be loaded from the same folder',
-            'The second script never runs because the first blocks it',
-          ],
-          answer: 1,
-          explanation:
-            'Two classic scripts share one global scope, so the same `const` name declared twice is a SyntaxError and the second file never runs a single line. Split by job and use `type="module"`, where each file has its own scope and the collision becomes impossible.',
-        },
-        {
-          id: 'quiz-js-s3-q5',
-          type: 'code-output',
-          prompt: 'What does this print, and when?',
-          code: `<script src="app.js" defer></script>
-<h1 id="title">Shop</h1>
-
-<script>
-  console.log(document.querySelector('#title') !== null)
-</script>`,
-          options: [
-            'true, after the document is parsed',
-            'false, because the inline script runs during parsing',
-            'false, because `defer` removes the element',
-            'true, before the heading is drawn',
-          ],
-          answer: 1,
-          explanation:
-            'The inline script has no attributes, so it runs the moment the parser reaches it — at which point the heading below it does not exist. The deferred script runs after parsing, when it would find the element. This is the exact ordering problem `defer` exists to remove.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s4',
@@ -844,6 +829,73 @@ console.log(inlineScript, appScript)`,
           'Read a value back out of the DOM to confirm a change landed',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-js-l4',
+          title: 'Displaying output quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l4-q1',
+              type: 'multiple-choice',
+              prompt: 'A visitor\'s name came from a form and must be shown on the page. Which line is correct?',
+              options: [
+                '`el.innerHTML = name`, because it always escapes the value safely',
+                '`el.textContent = name`, because the value is inserted as text and never parsed as markup',
+                '`document.write(name)`',
+                '`alert(name)`',
+              ],
+              answer: 1,
+              explanation: '`textContent` inserts characters; `innerHTML` parses its argument as markup, so a name containing a tag becomes part of the document. Any value you did not write yourself goes through `textContent`.',
+            },
+            {
+              id: 'quiz-js-l4-q2',
+              type: 'true-false',
+              prompt: 'Assigning to `element.textContent` replaces every child element inside that element.',
+              answer: true,
+              explanation: '`textContent` is a setter for the text of the node, so writing to it throws away the existing children. That is convenient for a status line and destructive for a container you meant to fill — in that case add children instead of writing text.',
+            },
+            {
+              id: 'quiz-js-l4-q3',
+              type: 'identify-error',
+              prompt: 'What happens on the second call to this line?',
+              code: 'document.write(\'loading...\')\n// ... a second document.write call later in a click handler\ndocument.write(\'done\')',
+              options: [
+                'It appends "done" below "loading..."',
+                'It replaces the entire document with the text "done"',
+                'It logs "done" to the console',
+                'It throws a ReferenceError',
+              ],
+              answer: 1,
+              explanation: 'After the page has loaded there is no parser position to write into, so `document.write` replaces the whole document. That is why the debugging reflex belongs on `console.log`, which can only ever add a line.',
+            },
+            {
+              id: 'quiz-js-l4-q4',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'const total = 50\nconsole.log(total)\nconsole.log(\'total =\', total)',
+              options: [
+                '50, then total = 50',
+                'total = 50, twice',
+                '50, then "total = 50"',
+                'Nothing, because total is a number',
+              ],
+              answer: 0,
+              explanation: 'A bare `console.log` prints the value with no label, so the first line is just `50`. The second call has two arguments, so the console shows the string and the number separated by a space. Labelling the value is what makes a long log readable.',
+            },
+            {
+              id: 'quiz-js-l4-q5',
+              type: 'blank',
+              prompt: 'Which property reads the text back out of an element, so you can confirm a write actually landed?',
+              answers: [
+                'textContent',
+                'innerText',
+                'textcontent',
+                '.textContent',
+              ],
+              explanation: 'Reading `element.textContent` gives you exactly what the page now holds, which is the only way to catch a typo in the selector — the writing line and the reading line take different paths through the page.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1023,74 +1075,6 @@ console.log(shown)`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s4',
-      title: 'Output check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s4-q1',
-          type: 'multiple-choice',
-          prompt: 'A visitor\'s name came from a form and must be shown on the page. Which line is correct?',
-          options: [
-            '`el.innerHTML = name`, because it always escapes the value safely',
-            '`el.textContent = name`, because the value is inserted as text and never parsed as markup',
-            '`document.write(name)`',
-            '`alert(name)`',
-          ],
-          answer: 1,
-          explanation:
-            '`textContent` inserts characters; `innerHTML` parses its argument as markup, so a name containing a tag becomes part of the document. Any value you did not write yourself goes through `textContent`.',
-        },
-        {
-          id: 'quiz-js-s4-q2',
-          type: 'true-false',
-          prompt:
-            'Assigning to `element.textContent` replaces every child element inside that element.',
-          answer: true,
-          explanation:
-            '`textContent` is a setter for the text of the node, so writing to it throws away the existing children. That is convenient for a status line and destructive for a container you meant to fill — in that case add children instead of writing text.',
-        },
-        {
-          id: 'quiz-js-s4-q3',
-          type: 'identify-error',
-          prompt: 'What happens on the second call to this line?',
-          code: `document.write('loading...')
-// ... a second document.write call later in a click handler
-document.write('done')`,
-          options: [
-            'It appends "done" below "loading..."',
-            'It replaces the entire document with the text "done"',
-            'It logs "done" to the console',
-            'It throws a ReferenceError',
-          ],
-          answer: 1,
-          explanation:
-            'After the page has loaded there is no parser position to write into, so `document.write` replaces the whole document. That is why the debugging reflex belongs on `console.log`, which can only ever add a line.',
-        },
-        {
-          id: 'quiz-js-s4-q4',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `const total = 50
-console.log(total)
-console.log('total =', total)`,
-          options: ['50, then total = 50', 'total = 50, twice', '50, then "total = 50"', 'Nothing, because total is a number'],
-          answer: 0,
-          explanation:
-            'A bare `console.log` prints the value with no label, so the first line is just `50`. The second call has two arguments, so the console shows the string and the number separated by a space. Labelling the value is what makes a long log readable.',
-        },
-        {
-          id: 'quiz-js-s4-q5',
-          type: 'blank',
-          prompt:
-            'Which property reads the text back out of an element, so you can confirm a write actually landed?',
-          answers: ['textContent', 'innerText', 'textcontent', '.textContent'],
-          explanation:
-            'Reading `element.textContent` gives you exactly what the page now holds, which is the only way to catch a typo in the selector — the writing line and the reading line take different paths through the page.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s5',
@@ -1110,6 +1094,74 @@ console.log('total =', total)`,
           'Tell a statement that runs from a function that only waits',
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-js-l5',
+          title: 'Statements and syntax quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l5-q1',
+              type: 'code-output',
+              prompt: 'What does this function return?',
+              code: 'function broken() {\n  return\n  5\n}',
+              options: [
+                '5',
+                'undefined',
+                '"5"',
+                'It throws a SyntaxError',
+              ],
+              answer: 1,
+              explanation: 'The line break ends the statement right after `return`, which is legal — it just returns nothing. Then `5` on its own line is an expression statement with no effect. Keep the value on the same line, or wrap it in parentheses, which holds the statement open across the break.',
+            },
+            {
+              id: 'quiz-js-l5-q2',
+              type: 'identify-error',
+              prompt: 'Which line is the mistake?',
+              code: 'const price = 12.5\nlet label = \'Total: 12.5 EUR\'\nconsole.log(label, price)',
+              options: [
+                '`console.log` cannot print two values at once',
+                'The single-quoted string contains a colon, which must be escaped',
+                'Nothing — this is valid JavaScript',
+                '`price` must be declared with `var` to be logged',
+              ],
+              answer: 2,
+              explanation: 'Colons and dots are ordinary characters inside a string; only the quote that opened the string ends it. `console.log` accepts any number of arguments, and `const` is fine. Read the string carefully to see where it actually closes.',
+            },
+            {
+              id: 'quiz-js-l5-q3',
+              type: 'multiple-choice',
+              prompt: 'Which of these is a definition rather than a statement that runs?',
+              options: [
+                '`console.log(total)`',
+                '`function greet() { console.log("hi") }`',
+                '`total = total + 1`',
+                '`document.querySelector("#out").textContent = total`',
+              ],
+              answer: 1,
+              explanation: 'A `function` statement registers the name and the body without running the body. Every other option performs its work the moment the line is reached. The parentheses are what turn a definition into a call.',
+            },
+            {
+              id: 'quiz-js-l5-q4',
+              type: 'true-false',
+              prompt: 'Modern JavaScript always inserts a semicolon where a line break would otherwise be ambiguous, so semicolons are optional everywhere.',
+              answer: false,
+              explanation: 'Automatic insertion is a fallback, not a feature to lean on. It is exactly why a line break after `return` silently ends the statement: the parser supplies the semicolon you did not write. Write your own, and the whole class of ambiguity disappears.',
+            },
+            {
+              id: 'quiz-js-l5-q5',
+              type: 'multiple-choice',
+              prompt: 'A string literal is missing its closing quote partway through a file. Where does the parser usually report the error?',
+              options: [
+                'On the line with the missing quote',
+                'At the end of the file, because the string swallows every following line',
+                'On the line after the string, because that is where the next statement starts',
+                'Nowhere — an unclosed string is treated as a comment',
+              ],
+              answer: 1,
+              explanation: 'An unclosed quote keeps consuming characters, including line breaks, until it finds another matching quote or reaches the end of the file. The reported position is therefore far from the real mistake, so check the quote that opened the string.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1305,6 +1357,69 @@ console.log(city + ': ' + days)`,
           'Bisect a bug by commenting lines out, then delete the parking',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-js-l6',
+          title: 'Comments quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l6-q1',
+              type: 'blank',
+              prompt: 'Which two characters start a comment that can span multiple lines?',
+              answers: [
+                '/*',
+                'slash star',
+              ],
+              explanation: 'A block comment opens with /* and closes with */, so it can cover several lines. The double slash used for a line comment stops at the next line break.',
+            },
+            {
+              id: 'quiz-js-l6-q2',
+              type: 'multiple-choice',
+              prompt: 'What happens if a `/*` block comment is never closed?',
+              options: [
+                'Only the next line is ignored',
+                'The rest of the file is treated as comment text',
+                'The browser throws a SyntaxError at the first line inside it',
+                'The comment ends automatically at the next blank line',
+              ],
+              answer: 1,
+              explanation: 'A block comment runs until the matching `*/`, so a missing close turns everything after it into comment text. That is why `//` is the safer everyday choice for short notes.',
+            },
+            {
+              id: 'quiz-js-l6-q3',
+              type: 'multiple-choice',
+              prompt: 'Which comment is worth writing above `const vatRate = 0.2`?',
+              options: [
+                '`// sets vatRate to 0.2`',
+                '`// this is a number`',
+                '`// German VAT rate, checked 2026-01; never use it as a default`',
+                '`// increase vatRate`',
+              ],
+              answer: 2,
+              explanation: 'The useful comment explains why the value is 0.2 and when it applies — facts the code cannot express. The others restate the line and will go stale when the value changes.',
+            },
+            {
+              id: 'quiz-js-l6-q4',
+              type: 'multiple-choice',
+              prompt: 'You comment out half of a misbehaving program and the error disappears. What have you learned?',
+              options: [
+                'The whole program is broken',
+                'The fault is in the half you disabled',
+                'The fault is in the half you left running',
+                'Comments fix errors by preventing the code from parsing',
+              ],
+              answer: 1,
+              explanation: 'Bisecting works because the removed half can no longer cause the failure. If the error vanishes, the culprit is in the disabled code; if it remains, the fault is in the code still running.',
+            },
+            {
+              id: 'quiz-js-l6-q5',
+              type: 'true-false',
+              prompt: '`/** ... */` is a block comment that tooling can read as documentation for the function that follows it.',
+              answer: true,
+              explanation: 'The extra asterisk marks a documentation comment, which editors and generators can surface for the next declaration. It is still ignored by the JavaScript engine.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1486,75 +1601,6 @@ console.log('plan: ' + plan)`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s5',
-      title: 'Syntax and comments check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s5-q1',
-          type: 'code-output',
-          prompt: 'What does this function return?',
-          code: `function broken() {
-  return
-  5
-}`,
-          options: ['5', 'undefined', '"5"', 'It throws a SyntaxError'],
-          answer: 1,
-          explanation:
-            'The line break ends the statement right after `return`, which is legal — it just returns nothing. Then `5` on its own line is an expression statement with no effect. Keep the value on the same line, or wrap it in parentheses, which holds the statement open across the break.',
-        },
-        {
-          id: 'quiz-js-s5-q2',
-          type: 'identify-error',
-          prompt: 'Which line is the mistake?',
-          code: `const price = 12.5
-let label = 'Total: 12.5 EUR'
-console.log(label, price)`,
-          options: [
-            '`console.log` cannot print two values at once',
-            'The single-quoted string contains a colon, which must be escaped',
-            'Nothing — this is valid JavaScript',
-            '`price` must be declared with `var` to be logged',
-          ],
-          answer: 2,
-          explanation:
-            'Colons and dots are ordinary characters inside a string; only the quote that opened the string ends it. `console.log` accepts any number of arguments, and `const` is fine. Read the string carefully to see where it actually closes.',
-        },
-        {
-          id: 'quiz-js-s5-q3',
-          type: 'multiple-choice',
-          prompt: 'Which of these is a definition rather than a statement that runs?',
-          options: [
-            '`console.log(total)`',
-            '`function greet() { console.log("hi") }`',
-            '`total = total + 1`',
-            '`document.querySelector("#out").textContent = total`',
-          ],
-          answer: 1,
-          explanation:
-            'A `function` statement registers the name and the body without running the body. Every other option performs its work the moment the line is reached. The parentheses are what turn a definition into a call.',
-        },
-        {
-          id: 'quiz-js-s5-q4',
-          type: 'true-false',
-          prompt:
-            'Modern JavaScript always inserts a semicolon where a line break would otherwise be ambiguous, so semicolons are optional everywhere.',
-          answer: false,
-          explanation:
-            'Automatic insertion is a fallback, not a feature to lean on. It is exactly why a line break after `return` silently ends the statement: the parser supplies the semicolon you did not write. Write your own, and the whole class of ambiguity disappears.',
-        },
-        {
-          id: 'quiz-js-s5-q5',
-          type: 'blank',
-          prompt:
-            'Which two characters start a comment that runs to the end of the line?',
-          answers: ['//', 'slash slash', 'two slashes'],
-          explanation:
-            'A double slash comments out the rest of the line, which makes it the everyday choice and the fastest way to park a line while you bisect a bug. A block comment starts with /* and ends with */ and can span lines.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s6',
@@ -1574,6 +1620,72 @@ console.log(label, price)`,
           'Choose names that carry meaning instead of placeholders',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-js-l7',
+          title: 'Variables and their names quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l7-q1',
+              type: 'multiple-choice',
+              prompt: 'Which of these is a legal variable name?',
+              options: [
+                '`2nd-place`',
+                '`place2`',
+                '`my-thing`',
+                '`total` (as in `Total`)',
+              ],
+              answer: 1,
+              explanation: 'A name may contain letters, digits, `$` and `_`, but it cannot begin with a digit or contain a hyphen — `my-thing` parses as subtraction. `place2` starts with a letter and keeps the digit after it, which is unambiguous.',
+            },
+            {
+              id: 'quiz-js-l7-q2',
+              type: 'true-false',
+              prompt: '`Total` and `total` refer to the same variable, because JavaScript ignores capitalisation in names.',
+              answer: false,
+              explanation: 'Names are case sensitive, so those are two unrelated variables. Reading the wrong one gives you `total is not defined` — or worse, a plausible wrong number if both names happen to exist.',
+            },
+            {
+              id: 'quiz-js-l7-q3',
+              type: 'multiple-choice',
+              prompt: 'Why is `const my-thing = 1` a syntax error rather than a variable named `my-thing`?',
+              options: [
+                'Hyphens are reserved for CSS properties',
+                'The parser reads it as `my` minus `thing`, which is subtraction',
+                'A name may not contain more than one word',
+                '`thing` is a reserved word',
+              ],
+              answer: 1,
+              explanation: 'The minus sign is an operator, so the parser stops the name at `my` and treats the rest as arithmetic. That is also why JavaScript uses camelCase or underscores instead of kebab-case.',
+            },
+            {
+              id: 'quiz-js-l7-q4',
+              type: 'multiple-choice',
+              prompt: '`const 2ndPlace = \'Bo\'` is illegal. Which rename keeps the same meaning and is legal?',
+              options: [
+                '`const place2 = \'Bo\'`',
+                '`const 2nd_place = \'Bo\'`',
+                '`const 2ndPlace = \'Bo\'`',
+                '`const place-2 = \'Bo\'`',
+              ],
+              answer: 0,
+              explanation: 'A name cannot start with a digit because the parser cannot tell where the number ends and the name begins. Starting with a letter and keeping the digit later, as in `place2`, removes the ambiguity.',
+            },
+            {
+              id: 'quiz-js-l7-q5',
+              type: 'multiple-choice',
+              prompt: 'Why does the lesson prefer `isLoggedIn` to `flag` for a boolean?',
+              options: [
+                'It is shorter to type',
+                'It states the question the value answers, which stays true when more booleans are added',
+                'It makes the variable block-scoped',
+                'It stops the value being reassigned',
+              ],
+              answer: 1,
+              explanation: 'A boolean name should read as a yes-or-no question at the call site. `flag` says nothing and becomes actively misleading as soon as a second boolean appears, while `isLoggedIn` keeps its meaning.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1745,6 +1857,80 @@ console.log(totalPrice)`,
           'Avoid var and accidental globals',
         ],
         xp: 45,
+        quiz: {
+          id: 'quiz-js-l8',
+          title: 'let and const quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l8-q1',
+              type: 'blank',
+              prompt: 'Which keyword do you write before a variable so it belongs to the current block instead of the whole page?',
+              answers: [
+                'const',
+                'let',
+                'var',
+                'Const',
+              ],
+              explanation: '`const` and `let` both declare a block-scoped name. Assigning to a name you never declared creates an implicit global instead, which two unrelated scripts can silently fight over — that is the bug the keyword prevents.',
+            },
+            {
+              id: 'quiz-js-l8-q2',
+              type: 'identify-error',
+              prompt: 'What is wrong with this line?',
+              code: 'const price = 12\nlet tax = price * 0.2\nlet total = price + tax',
+              options: [
+                'Nothing — this is valid',
+                '`total` is a reserved word',
+                'Names must be written in snake_case in JavaScript',
+                'A variable cannot be declared from the value of another variable',
+              ],
+              answer: 0,
+              explanation: 'A `const` or `let` can be initialised from any expression, including the value of another variable. `total` is not reserved. This is the normal way to build a value up in readable steps.',
+            },
+            {
+              id: 'quiz-js-l8-q3',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'const grossPay = 38 * 24.5\nconsole.log(grossPay)',
+              options: [
+                '931',
+                '"931"',
+                '931.0',
+                'undefined',
+              ],
+              answer: 0,
+              explanation: 'Two numbers multiply to a number, so the log shows 931 with no quotes. Quotation marks in the output are how you tell a string from a number at a glance — which matters more than it sounds once values start arriving from a form.',
+            },
+            {
+              id: 'quiz-js-l8-q4',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'const list = [1, 2, 3]\nlist.push(4)\nconsole.log(list.length)',
+              options: [
+                '3',
+                '4',
+                'undefined',
+                'TypeError',
+              ],
+              answer: 1,
+              explanation: '`const` fixes the binding, not the contents: the same array can still be mutated with `push`. Only pointing `list` at a different array would throw.',
+            },
+            {
+              id: 'quiz-js-l8-q5',
+              type: 'multiple-choice',
+              prompt: 'What is the main reason the lesson says to avoid `var`?',
+              options: [
+                'It is slower than `let` at runtime',
+                'It is function-scoped and can be redeclared, so a block-local name can leak and be silently shared',
+                'It cannot hold numbers',
+                'It must be declared at the top of the file',
+              ],
+              answer: 1,
+              explanation: '`var` ignores block boundaries and allows redeclaration in the same function, so unrelated code can share a name without warning. `let` and `const` are block-scoped and refuse a second declaration.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1919,67 +2105,5 @@ console.log(visits)`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s6',
-      title: 'Variables check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s6-q1',
-          type: 'multiple-choice',
-          prompt: 'Which of these is a legal variable name?',
-          options: ['`2nd-place`', '`place2`', '`my-thing`', '`total` (as in `Total`)'],
-          answer: 1,
-          explanation:
-            'A name may contain letters, digits, `$` and `_`, but it cannot begin with a digit or contain a hyphen — `my-thing` parses as subtraction. `place2` starts with a letter and keeps the digit after it, which is unambiguous.',
-        },
-        {
-          id: 'quiz-js-s6-q2',
-          type: 'true-false',
-          prompt:
-            '`Total` and `total` refer to the same variable, because JavaScript ignores capitalisation in names.',
-          answer: false,
-          explanation:
-            'Names are case sensitive, so those are two unrelated variables. Reading the wrong one gives you `total is not defined` — or worse, a plausible wrong number if both names happen to exist.',
-        },
-        {
-          id: 'quiz-js-s6-q3',
-          type: 'blank',
-          prompt:
-            'Which keyword do you write before a variable so it belongs to the current block instead of the whole page?',
-          answers: ['const', 'let', 'var', 'Const'],
-          explanation:
-            '`const` and `let` both declare a block-scoped name. Assigning to a name you never declared creates an implicit global instead, which two unrelated scripts can silently fight over — that is the bug the keyword prevents.',
-        },
-        {
-          id: 'quiz-js-s6-q4',
-          type: 'identify-error',
-          prompt: 'What is wrong with this line?',
-          code: `const price = 12
-let tax = price * 0.2
-let total = price + tax`,
-          options: [
-            'Nothing — this is valid',
-            '`total` is a reserved word',
-            'Names must be written in snake_case in JavaScript',
-            'A variable cannot be declared from the value of another variable',
-          ],
-          answer: 0,
-          explanation:
-            'A `const` or `let` can be initialised from any expression, including the value of another variable. `total` is not reserved. This is the normal way to build a value up in readable steps.',
-        },
-        {
-          id: 'quiz-js-s6-q5',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `const grossPay = 38 * 24.5
-console.log(grossPay)`,
-          options: ['931', '"931"', '931.0', 'undefined'],
-          answer: 0,
-          explanation:
-            'Two numbers multiply to a number, so the log shows 931 with no quotes. Quotation marks in the output are how you tell a string from a number at a glance — which matters more than it sounds once values start arriving from a form.',
-        },
-      ],
-    },
   },
 ]

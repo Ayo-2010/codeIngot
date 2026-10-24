@@ -17,6 +17,73 @@ export const jsObjectsPrototypesSections: Section[] = [
           'Tell the difference between a missing property and a property holding undefined'
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-js-l47',
+          title: 'Object definitions and properties quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l47-q1',
+              type: 'multiple-choice',
+              prompt: 'What do you get when you read a property that does not exist on an object?',
+              options: [
+                'null',
+                'undefined',
+                '0',
+                'A TypeError is thrown',
+              ],
+              answer: 1,
+              explanation: 'Reading a missing property gives `undefined`, and nothing is thrown. The error appears one step later if you use that value, which is why the failure message points at the code that assumed the property was there rather than at the line that reads it.',
+            },
+            {
+              id: 'quiz-js-l47-q2',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'const book = { title: \'Dune\', pages: 412 }\nconsole.log(book.author)',
+              options: [
+                '\'Dune\'',
+                'undefined',
+                'null',
+                'It throws a ReferenceError',
+              ],
+              answer: 1,
+              explanation: '`author` was never written, so reading it gives `undefined`. Had the code gone on to call `book.author.toUpperCase()`, that line would be the one that throws — the read itself is harmless.',
+            },
+            {
+              id: 'quiz-js-l47-q3',
+              type: 'true-false',
+              prompt: 'A `const` object cannot have its properties changed after it is created.',
+              answer: false,
+              explanation: '`const` freezes the binding, not the container. `settings.theme = "light"` is fine; `settings = {}` is the line that throws.',
+            },
+            {
+              id: 'quiz-js-l47-q4',
+              type: 'blank',
+              prompt: 'Which method returns an array of an object property names?',
+              answers: [
+                'object.keys',
+                'objectkeys',
+                'object keys',
+                'keys',
+              ],
+              explanation: '`Object.keys` gives the names, `Object.values` gives the values and `Object.entries` gives name-value pairs. Keys come back in insertion order, so an object with numeric-looking keys will not keep them in the order you wrote them.',
+            },
+            {
+              id: 'quiz-js-l47-q5',
+              type: 'identify-error',
+              prompt: 'What is wrong with this?',
+              code: 'const config = { retries: 3 }\nconfig.retries = config.retries + 1\nconsole.log(config[\'retries\'])',
+              options: [
+                'Nothing — this logs 4',
+                'The bracket notation is invalid on an object',
+                'A trailing comma is missing between the properties',
+                'config cannot be reassigned because it is declared with const',
+              ],
+              answer: 0,
+              explanation: 'Reading and writing a property of a `const` object is fine — only assigning to the name `config` itself is blocked. Bracket and dot notation are interchangeable here, and the one-property literal needs no comma after it.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -241,66 +308,6 @@ console.log(settings.theme + '-' + settings.language)`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s37',
-      title: 'Object definitions check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s37-q1',
-          type: 'multiple-choice',
-          prompt: 'What do you get when you read a property that does not exist on an object?',
-          options: ['null', 'undefined', '0', 'A TypeError is thrown'],
-          answer: 1,
-          explanation:
-            'Reading a missing property gives `undefined`, and nothing is thrown. The error appears one step later if you use that value, which is why the failure message points at the code that assumed the property was there rather than at the line that reads it.',
-        },
-        {
-          id: 'quiz-js-s37-q2',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `const book = { title: 'Dune', pages: 412 }
-console.log(book.author)`,
-          options: ["'Dune'", 'undefined', 'null', 'It throws a ReferenceError'],
-          answer: 1,
-          explanation:
-            '`author` was never written, so reading it gives `undefined`. Had the code gone on to call `book.author.toUpperCase()`, that line would be the one that throws — the read itself is harmless.',
-        },
-        {
-          id: 'quiz-js-s37-q3',
-          type: 'true-false',
-          prompt: 'A `const` object cannot have its properties changed after it is created.',
-          answer: false,
-          explanation:
-            '`const` freezes the binding, not the container. `settings.theme = "light"` is fine; `settings = {}` is the line that throws.',
-        },
-        {
-          id: 'quiz-js-s37-q4',
-          type: 'blank',
-          prompt: 'Which method returns an array of an object property names?',
-          answers: ['object.keys', 'objectkeys', 'object keys', 'keys'],
-          explanation:
-            '`Object.keys` gives the names, `Object.values` gives the values and `Object.entries` gives name-value pairs. Keys come back in insertion order, so an object with numeric-looking keys will not keep them in the order you wrote them.',
-        },
-        {
-          id: 'quiz-js-s37-q5',
-          type: 'identify-error',
-          prompt: 'What is wrong with this?',
-          code: `const config = { retries: 3 }
-config.retries = config.retries + 1
-console.log(config['retries'])`,
-          options: [
-            'Nothing — this logs 4',
-            'The bracket notation is invalid on an object',
-            'A trailing comma is missing between the properties',
-            'config cannot be reassigned because it is declared with const',
-          ],
-          answer: 0,
-          explanation:
-            'Reading and writing a property of a `const` object is fine — only assigning to the name `config` itself is blocked. Bracket and dot notation are interchangeable here, and the one-property literal needs no comma after it.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s38',
@@ -318,6 +325,73 @@ console.log(config['retries'])`,
           'Choose between console.log, JSON.stringify, Object.entries and a table'
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-js-l48',
+          title: 'Object methods and display quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l48-q1',
+              type: 'multiple-choice',
+              prompt: 'Inside a method called as `cart.add(2)`, what does `this` refer to?',
+              options: [
+                'The global object',
+                'The object the method was written inside',
+                'The object the call started from, which here is cart',
+                'undefined, always',
+              ],
+              answer: 2,
+              explanation: '`this` is decided by the call, not by where the function was written. `cart.add(2)` starts at `cart`, so `this` is `cart`; the same function called with no object in front of it has no `this` at all.',
+            },
+            {
+              id: 'quiz-js-l48-q2',
+              type: 'identify-error',
+              prompt: 'What goes wrong here?',
+              code: 'const cart = {\n  count: 0,\n  add(price) {\n    this.count += price\n    return this.count\n  }\n}\n\nsetTimeout(cart.add, 100)',
+              options: [
+                'Nothing, the callback runs with cart as this',
+                'A TypeError, because the detached call leaves this undefined',
+                'The count is reset to 0',
+                'It throws a SyntaxError at parse time',
+              ],
+              answer: 1,
+              explanation: 'Handing `cart.add` to setTimeout passes the function with nothing in front of it, so `this` is undefined and `this.count` throws. `setTimeout(cart.add.bind(cart), 100)` or `setTimeout(() => cart.add(2), 100)` keeps the receiver attached.',
+            },
+            {
+              id: 'quiz-js-l48-q3',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'const box = { value: 7 }\ndocument.body.textContent = box',
+              options: [
+                '7',
+                '[object Object]',
+                'undefined',
+                '{ value: 7 }',
+              ],
+              answer: 1,
+              explanation: 'Assigning an object where a string is expected runs the default string conversion, which for a plain object is "[object Object]". Convert explicitly with `JSON.stringify(box)` or take the field you meant.',
+            },
+            {
+              id: 'quiz-js-l48-q4',
+              type: 'true-false',
+              prompt: 'The shorthand `add(price) { ... }` gives the method its own `this`, while `add: function (price) { ... }` does not.',
+              answer: false,
+              explanation: 'Neither form gets its own `this`. Both are called with the object in front of them, and both lose it the moment the function is passed around on its own.',
+            },
+            {
+              id: 'quiz-js-l48-q5',
+              type: 'blank',
+              prompt: 'Which console method prints a list of objects as a side-by-side table in the browser?',
+              answers: [
+                'console.table',
+                'consoletable',
+                'console table',
+                'table',
+              ],
+              explanation: '`console.table` is the quickest way to compare a few records. `console.log` is fine for one object, and `JSON.stringify` is the one to reach for when the value is going into HTML or over the network.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -567,77 +641,6 @@ console.log(player.add(5))`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s38',
-      title: 'Object methods check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s38-q1',
-          type: 'multiple-choice',
-          prompt: 'Inside a method called as `cart.add(2)`, what does `this` refer to?',
-          options: [
-            'The global object',
-            'The object the method was written inside',
-            'The object the call started from, which here is cart',
-            'undefined, always',
-          ],
-          answer: 2,
-          explanation:
-            '`this` is decided by the call, not by where the function was written. `cart.add(2)` starts at `cart`, so `this` is `cart`; the same function called with no object in front of it has no `this` at all.',
-        },
-        {
-          id: 'quiz-js-s38-q2',
-          type: 'identify-error',
-          prompt: 'What goes wrong here?',
-          code: `const cart = {
-  count: 0,
-  add(price) {
-    this.count += price
-    return this.count
-  }
-}
-
-setTimeout(cart.add, 100)`,
-          options: [
-            'Nothing, the callback runs with cart as this',
-            'A TypeError, because the detached call leaves this undefined',
-            'The count is reset to 0',
-            'It throws a SyntaxError at parse time',
-          ],
-          answer: 1,
-          explanation:
-            'Handing `cart.add` to setTimeout passes the function with nothing in front of it, so `this` is undefined and `this.count` throws. `setTimeout(cart.add.bind(cart), 100)` or `setTimeout(() => cart.add(2), 100)` keeps the receiver attached.',
-        },
-        {
-          id: 'quiz-js-s38-q3',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `const box = { value: 7 }
-document.body.textContent = box`,
-          options: ['7', '[object Object]', 'undefined', '{ value: 7 }'],
-          answer: 1,
-          explanation:
-            'Assigning an object where a string is expected runs the default string conversion, which for a plain object is "[object Object]". Convert explicitly with `JSON.stringify(box)` or take the field you meant.',
-        },
-        {
-          id: 'quiz-js-s38-q4',
-          type: 'true-false',
-          prompt: 'The shorthand `add(price) { ... }` gives the method its own `this`, while `add: function (price) { ... }` does not.',
-          answer: false,
-          explanation:
-            'Neither form gets its own `this`. Both are called with the object in front of them, and both lose it the moment the function is passed around on its own.',
-        },
-        {
-          id: 'quiz-js-s38-q5',
-          type: 'blank',
-          prompt: 'Which console method prints a list of objects as a side-by-side table in the browser?',
-          answers: ['console.table', 'consoletable', 'console table', 'table'],
-          explanation:
-            '`console.table` is the quickest way to compare a few records. `console.log` is fine for one object, and `JSON.stringify` is the one to reach for when the value is going into HTML or over the network.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s39',
@@ -655,6 +658,75 @@ document.body.textContent = box`,
           'Explain why a getter that writes its own property does not do what it looks like'
         ],
         xp: 60,
+        quiz: {
+          id: 'quiz-js-l49',
+          title: 'Getters and setters quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l49-q1',
+              type: 'multiple-choice',
+              prompt: 'What does a setter receive as its parameter?',
+              options: [
+                'Every value assigned to the property, as an array',
+                'The value on the right-hand side of the assignment, exactly once',
+                'The object the property belongs to',
+                'Nothing — a setter takes no parameters',
+              ],
+              answer: 1,
+              explanation: 'A setter is always called with the single assigned value. Assigning twice calls it twice, and whatever it returns is discarded, so the only way a setter can refuse a value is by not writing it.',
+            },
+            {
+              id: 'quiz-js-l49-q2',
+              type: 'identify-error',
+              prompt: 'What happens when this runs?',
+              code: 'const box = {\n  get width() {\n    return this.width * 2\n  }\n}\n\nconsole.log(box.width)',
+              options: [
+                'It prints 0',
+                'It prints 2',
+                'It recurses until the call stack overflows',
+                'It prints undefined',
+              ],
+              answer: 2,
+              explanation: 'Reading `this.width` inside the getter calls the getter again, all the way up. The rule the error hides is simple: an accessor never refers to itself — back it with a differently named field such as `_width`.',
+            },
+            {
+              id: 'quiz-js-l49-q3',
+              type: 'true-false',
+              prompt: 'Adding a getter and setter to a property is invisible to the code that already reads and writes it.',
+              answer: true,
+              explanation: 'That is the reason to use them. Call sites keep the plain `obj.name = value` form, so a validation rule can be introduced later without hunting down every place that touches the property.',
+            },
+            {
+              id: 'quiz-js-l49-q4',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'const fridge = { _temp: 4 }\nObject.defineProperty(fridge, \'temp\', {\n  get() {\n    return this._temp * 2\n  }\n})\nconsole.log(fridge.temp)',
+              options: [
+                '8',
+                '4',
+                'undefined',
+                'It prints nothing because the property is not enumerable',
+              ],
+              answer: 0,
+              explanation: 'Being non-enumerable only affects `Object.keys` and `for…in`. Reading the property directly still runs the getter, and it reads `_temp`, a plain field holding 4, and returns 8.',
+            },
+            {
+              id: 'quiz-js-l49-q5',
+              type: 'blank',
+              prompt: 'By convention, what prefix marks the private field an accessor reads and writes?',
+              answers: [
+                'underscore',
+                '_',
+                'an underscore',
+                '_-',
+                'leading underscore',
+                'leading underscore and a prefix underscore',
+              ],
+              explanation: 'The underscore is a convention, not a keyword — nothing enforces it, it just tells the next reader which name is not theirs to touch. A Symbol would enforce it properly, at the cost of uglier code.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -950,80 +1022,6 @@ console.log(cart.count)`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s39',
-      title: 'Object accessors check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s39-q1',
-          type: 'multiple-choice',
-          prompt: 'What does a setter receive as its parameter?',
-          options: [
-            'Every value assigned to the property, as an array',
-            'The value on the right-hand side of the assignment, exactly once',
-            'The object the property belongs to',
-            'Nothing — a setter takes no parameters',
-          ],
-          answer: 1,
-          explanation:
-            'A setter is always called with the single assigned value. Assigning twice calls it twice, and whatever it returns is discarded, so the only way a setter can refuse a value is by not writing it.',
-        },
-        {
-          id: 'quiz-js-s39-q2',
-          type: 'identify-error',
-          prompt: 'What happens when this runs?',
-          code: `const box = {
-  get width() {
-    return this.width * 2
-  }
-}
-
-console.log(box.width)`,
-          options: [
-            'It prints 0',
-            'It prints 2',
-            'It recurses until the call stack overflows',
-            'It prints undefined',
-          ],
-          answer: 2,
-          explanation:
-            'Reading `this.width` inside the getter calls the getter again, all the way up. The rule the error hides is simple: an accessor never refers to itself — back it with a differently named field such as `_width`.',
-        },
-        {
-          id: 'quiz-js-s39-q3',
-          type: 'true-false',
-          prompt: 'Adding a getter and setter to a property is invisible to the code that already reads and writes it.',
-          answer: true,
-          explanation:
-            'That is the reason to use them. Call sites keep the plain `obj.name = value` form, so a validation rule can be introduced later without hunting down every place that touches the property.',
-        },
-        {
-          id: 'quiz-js-s39-q4',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `const fridge = { _temp: 4 }
-Object.defineProperty(fridge, 'temp', {
-  get() {
-    return this._temp * 2
-  }
-})
-console.log(fridge.temp)`,
-          options: ['8', '4', 'undefined', 'It prints nothing because the property is not enumerable'],
-          answer: 0,
-          explanation:
-            'Being non-enumerable only affects `Object.keys` and `for…in`. Reading the property directly still runs the getter, and it reads `_temp`, a plain field holding 4, and returns 8.',
-        },
-        {
-          id: 'quiz-js-s39-q5',
-          type: 'blank',
-          prompt: 'By convention, what prefix marks the private field an accessor reads and writes?',
-          answers: ['underscore', '_', 'an underscore', '_-', 'leading underscore', 'leading underscore and a prefix underscore'],
-          explanation:
-            'The underscore is a convention, not a keyword — nothing enforces it, it just tells the next reader which name is not theirs to touch. A Symbol would enforce it properly, at the cost of uglier code.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s40',
@@ -1041,6 +1039,73 @@ console.log(fridge.temp)`,
           'Check a constructed object with instanceof and Object.keys'
         ],
         xp: 60,
+        quiz: {
+          id: 'quiz-js-l50',
+          title: 'Object constructors quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l50-q1',
+              type: 'multiple-choice',
+              prompt: 'What does `new Book("Dune", 412)` do first?',
+              options: [
+                'Calls the function and then copies its fields onto a blank object',
+                'Creates an empty object linked to Book.prototype, then calls Book with this bound to it',
+                'Runs Book twice, once with each argument',
+                'Validates the arguments before creating anything',
+              ],
+              answer: 1,
+              explanation: 'The object exists before the body runs, which is why `this` is already usable on the first line. Only afterwards does the returned value matter — and only if it is an object.',
+            },
+            {
+              id: 'quiz-js-l50-q2',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'function Box(label) {\n  this.label = label\n  return 42\n}\n\nconsole.log(new Box(\'a\').label)',
+              options: [
+                'a',
+                '42',
+                'undefined',
+                'It throws a TypeError',
+              ],
+              answer: 0,
+              explanation: 'The constructor returned a primitive, and a primitive return is ignored, so you get the object `new` created — with its `label` intact. Return an *object* instead and that one replaces the whole thing, which is the case that catches people out.',
+            },
+            {
+              id: 'quiz-js-l50-q3',
+              type: 'true-false',
+              prompt: 'In a strict-mode module, calling a constructor function without `new` throws a TypeError.',
+              answer: true,
+              explanation: 'Strict mode gives `this` the value `undefined` inside a plain call, so the first `this.something = ...` throws immediately. In sloppy mode the same call writes to the global object and returns undefined, which pushes the failure somewhere else entirely.',
+            },
+            {
+              id: 'quiz-js-l50-q4',
+              type: 'identify-error',
+              prompt: 'What is wrong with this constructor?',
+              code: 'function User(name) {\n  name = name\n  age = 30\n}\nconst u = new User(\'Ada\')',
+              options: [
+                'Nothing, it is fine',
+                'The assignments miss this, so nothing lands on the new object',
+                'age must come before name',
+                'A constructor cannot assign a number',
+              ],
+              answer: 1,
+              explanation: '`name = name` assigns a parameter to itself and touches nothing else, and in strict mode `age = 30` throws on an undeclared name. Every field a constructor sets has to start with `this.`.',
+            },
+            {
+              id: 'quiz-js-l50-q5',
+              type: 'blank',
+              prompt: 'Which operator tells you an object was built by a particular constructor function?',
+              answers: [
+                'instanceof',
+                'instance of',
+                'instanceOf',
+                'an instanceof check',
+              ],
+              explanation: '`dune instanceof Book` walks the prototype chain, so it is true for the object and for anything built from it by a related constructor. Comparing `book.constructor === Book` answers a similar question but is easier to break with a hand-written prototype chain.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1269,77 +1334,6 @@ console.log(task.label())`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s40',
-      title: 'Object constructors check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s40-q1',
-          type: 'multiple-choice',
-          prompt: 'What does `new Book("Dune", 412)` do first?',
-          options: [
-            'Calls the function and then copies its fields onto a blank object',
-            'Creates an empty object linked to Book.prototype, then calls Book with this bound to it',
-            'Runs Book twice, once with each argument',
-            'Validates the arguments before creating anything',
-          ],
-          answer: 1,
-          explanation:
-            'The object exists before the body runs, which is why `this` is already usable on the first line. Only afterwards does the returned value matter — and only if it is an object.',
-        },
-        {
-          id: 'quiz-js-s40-q2',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `function Box(label) {
-  this.label = label
-  return 42
-}
-
-console.log(new Box('a').label)`,
-          options: ['a', '42', 'undefined', 'It throws a TypeError'],
-          answer: 0,
-          explanation:
-            'The constructor returned a primitive, and a primitive return is ignored, so you get the object `new` created — with its `label` intact. Return an *object* instead and that one replaces the whole thing, which is the case that catches people out.',
-        },
-        {
-          id: 'quiz-js-s40-q3',
-          type: 'true-false',
-          prompt: 'In a strict-mode module, calling a constructor function without `new` throws a TypeError.',
-          answer: true,
-          explanation:
-            'Strict mode gives `this` the value `undefined` inside a plain call, so the first `this.something = ...` throws immediately. In sloppy mode the same call writes to the global object and returns undefined, which pushes the failure somewhere else entirely.',
-        },
-        {
-          id: 'quiz-js-s40-q4',
-          type: 'identify-error',
-          prompt: 'What is wrong with this constructor?',
-          code: `function User(name) {
-  name = name
-  age = 30
-}
-const u = new User('Ada')`,
-          options: [
-            'Nothing, it is fine',
-            'The assignments miss this, so nothing lands on the new object',
-            'age must come before name',
-            'A constructor cannot assign a number',
-          ],
-          answer: 1,
-          explanation:
-            '`name = name` assigns a parameter to itself and touches nothing else, and in strict mode `age = 30` throws on an undeclared name. Every field a constructor sets has to start with `this.`.',
-        },
-        {
-          id: 'quiz-js-s40-q5',
-          type: 'blank',
-          prompt: 'Which operator tells you an object was built by a particular constructor function?',
-          answers: ['instanceof', 'instance of', 'instanceOf', 'an instanceof check'],
-          explanation:
-            '`dune instanceof Book` walks the prototype chain, so it is true for the object and for anything built from it by a related constructor. Comparing `book.constructor === Book` answers a similar question but is easier to break with a hand-written prototype chain.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s41',
@@ -1357,6 +1351,73 @@ const u = new User('Ada')`,
           'Use Object.create to start an object from a specific prototype'
         ],
         xp: 70,
+        quiz: {
+          id: 'quiz-js-l51',
+          title: 'Prototypes quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l51-q1',
+              type: 'multiple-choice',
+              prompt: 'Why can a plain `{}` call `hasOwnProperty` when nothing ever defined that method on it?',
+              options: [
+                'The browser adds it to every object automatically',
+                'It is found further along the prototype chain, on Object.prototype',
+                'It is inherited from the window object',
+                'hasOwnProperty is a keyword built into the language',
+              ],
+              answer: 1,
+              explanation: 'A read that misses walks the chain. Every object ends up at `Object.prototype`, which is where the methods that look built-in actually live — which is also why adding to that object is so dangerous.',
+            },
+            {
+              id: 'quiz-js-l51-q2',
+              type: 'true-false',
+              prompt: 'A method defined inside a constructor is copied onto every instance, so each one gets its own version of the function.',
+              answer: true,
+              explanation: 'Each call to the constructor runs that line and creates a fresh function object. It behaves the same when called, but `a.method === b.method` is false and a thousand objects cost a thousand functions.',
+            },
+            {
+              id: 'quiz-js-l51-q3',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'function Task(title) {\n  this.title = title\n}\nTask.prototype.label = function () {\n  return \'T:\' + this.title\n}\n\nconst t = new Task(\'a\')\nconsole.log(Object.keys(t).join(\',\'))',
+              options: [
+                'title,label',
+                'title',
+                'label',
+                'title,label is a function',
+              ],
+              answer: 1,
+              explanation: '`Object.keys` lists own enumerable properties only. `label` lives on the prototype, so it is reachable with `t.label` but invisible to `Object.keys`, `for…in`-free iteration and `JSON.stringify`.',
+            },
+            {
+              id: 'quiz-js-l51-q4',
+              type: 'identify-error',
+              prompt: 'What is the danger here?',
+              code: 'Object.prototype.get = function () {\n  return \'anything\'\n}\n\nconst list = { get: 2 }\nconsole.log(list.get())',
+              options: [
+                'Nothing — it works',
+                'Every object in the page now has a get method, and code that loops over properties will pick it up',
+                'Object.prototype is read-only so the assignment is ignored',
+                'It throws immediately',
+              ],
+              answer: 1,
+              explanation: 'Extending `Object.prototype` changes every object, including ones other code owns, and anything that iterates over properties will see the new key. Shared behaviour belongs on your own constructor or prototype, which is what `class extends` is for.',
+            },
+            {
+              id: 'quiz-js-l51-q5',
+              type: 'blank',
+              prompt: 'Which method creates an empty object whose prototype is the one you pass in?',
+              answers: [
+                'object.create',
+                'objectcreate',
+                'object create',
+                'create',
+              ],
+              explanation: '`Object.create(proto)` builds an object linked to `proto`, so it inherits from it but owns nothing — `Object.keys` on the result is empty. Passing `null` ends the chain, which is how you get an object with no inherited methods at all.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1631,81 +1692,6 @@ console.log(circle.describe())`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s41',
-      title: 'Prototypes check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s41-q1',
-          type: 'multiple-choice',
-          prompt: 'Why can a plain `{}` call `hasOwnProperty` when nothing ever defined that method on it?',
-          options: [
-            'The browser adds it to every object automatically',
-            'It is found further along the prototype chain, on Object.prototype',
-            'It is inherited from the window object',
-            'hasOwnProperty is a keyword built into the language',
-          ],
-          answer: 1,
-          explanation:
-            'A read that misses walks the chain. Every object ends up at `Object.prototype`, which is where the methods that look built-in actually live — which is also why adding to that object is so dangerous.',
-        },
-        {
-          id: 'quiz-js-s41-q2',
-          type: 'true-false',
-          prompt: 'A method defined inside a constructor is copied onto every instance, so each one gets its own version of the function.',
-          answer: true,
-          explanation:
-            'Each call to the constructor runs that line and creates a fresh function object. It behaves the same when called, but `a.method === b.method` is false and a thousand objects cost a thousand functions.',
-        },
-        {
-          id: 'quiz-js-s41-q3',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `function Task(title) {
-  this.title = title
-}
-Task.prototype.label = function () {
-  return 'T:' + this.title
-}
-
-const t = new Task('a')
-console.log(Object.keys(t).join(','))`,
-          options: ['title,label', 'title', 'label', 'title,label is a function'],
-          answer: 1,
-          explanation:
-            '`Object.keys` lists own enumerable properties only. `label` lives on the prototype, so it is reachable with `t.label` but invisible to `Object.keys`, `for…in`-free iteration and `JSON.stringify`.',
-        },
-        {
-          id: 'quiz-js-s41-q4',
-          type: 'identify-error',
-          prompt: 'What is the danger here?',
-          code: `Object.prototype.get = function () {
-  return 'anything'
-}
-
-const list = { get: 2 }
-console.log(list.get())`,
-          options: [
-            'Nothing — it works',
-            'Every object in the page now has a get method, and code that loops over properties will pick it up',
-            'Object.prototype is read-only so the assignment is ignored',
-            'It throws immediately',
-          ],
-          answer: 1,
-          explanation:
-            'Extending `Object.prototype` changes every object, including ones other code owns, and anything that iterates over properties will see the new key. Shared behaviour belongs on your own constructor or prototype, which is what `class extends` is for.',
-        },
-        {
-          id: 'quiz-js-s41-q5',
-          type: 'blank',
-          prompt: 'Which method creates an empty object whose prototype is the one you pass in?',
-          answers: ['object.create', 'objectcreate', 'object create', 'create'],
-          explanation:
-            '`Object.create(proto)` builds an object linked to `proto`, so it inherits from it but owns nothing — `Object.keys` on the result is empty. Passing `null` ends the chain, which is how you get an object with no inherited methods at all.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s42',
@@ -1723,6 +1709,76 @@ console.log(list.get())`,
           'Choose between Map and a plain object on the actual weakness of each'
         ],
         xp: 60,
+        quiz: {
+          id: 'quiz-js-l52',
+          title: 'Map and Set quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l52-q1',
+              type: 'multiple-choice',
+              prompt: 'How many entries does this Set have?',
+              code: 'const s = new Set()\ns.add(\'a\')\ns.add(\'a\')\ns.add(\'b\')',
+              options: [
+                '1',
+                '2',
+                '3',
+                '0',
+              ],
+              answer: 1,
+              explanation: 'A Set stores each value once. The second `add("a")` finds the value already there and changes nothing, so membership testing needs no `includes` check beforehand.',
+            },
+            {
+              id: 'quiz-js-l52-q2',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'const m = new Map()\nm.set(\'a\', 1)\nconsole.log(m.get(\'b\'))',
+              options: [
+                'null',
+                'undefined',
+                '0',
+                'It throws a TypeError',
+              ],
+              answer: 1,
+              explanation: '`get` on a missing key gives `undefined`, the same as reading a missing object property. That is why counting uses `(map.get(k) || 0) + 1` rather than reaching for a default at the end.',
+            },
+            {
+              id: 'quiz-js-l52-q3',
+              type: 'true-false',
+              prompt: 'The right way to read the number of entries in a Map or a Set is `map.size()`.',
+              answer: false,
+              explanation: '`size` is a property, not a method: `map.size`, with no parentheses. Calling it throws a TypeError, and it is worth knowing that because reaching for `size()` is the single most common Map typo.',
+            },
+            {
+              id: 'quiz-js-l52-q4',
+              type: 'identify-error',
+              prompt: 'What is wrong with this?',
+              code: 'const first = { id: 1 }\nconst rows = new Map()\nrows.set(first, \'row one\')\n\nconsole.log(rows.get({ id: 1 }))',
+              options: [
+                'Nothing, it logs row one',
+                'It logs undefined, because each object literal is a different key',
+                'It logs null',
+                'It throws a TypeError',
+              ],
+              answer: 1,
+              explanation: 'Map keys are compared by identity, not by structure. The object in the `get` is a brand-new object, so it is a different key. Keep a reference to the key and reuse it.',
+            },
+            {
+              id: 'quiz-js-l52-q5',
+              type: 'blank',
+              prompt: 'What is the Map equivalent of `Object.entries(obj)`?',
+              answers: [
+                'a for…of loop over entries',
+                'spreading the map into entries',
+                '[...map]',
+                '[...map.entries()]',
+                'the map.entries() iterator',
+                'entries',
+              ],
+              explanation: 'A Map is iterable directly, so `for (const [key, value] of map)` works with no conversion call. Spreading with `[...map]` gives the `[key, value]` pairs as arrays, exactly the shape `Object.entries` produces for an object.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1965,73 +2021,6 @@ console.log(lengths.get('two'))`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s42',
-      title: 'Map and Set check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s42-q1',
-          type: 'multiple-choice',
-          prompt: 'How many entries does this Set have?',
-          code: `const s = new Set()
-s.add('a')
-s.add('a')
-s.add('b')`,
-          options: ['1', '2', '3', '0'],
-          answer: 1,
-          explanation:
-            'A Set stores each value once. The second `add("a")` finds the value already there and changes nothing, so membership testing needs no `includes` check beforehand.',
-        },
-        {
-          id: 'quiz-js-s42-q2',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `const m = new Map()
-m.set('a', 1)
-console.log(m.get('b'))`,
-          options: ['null', 'undefined', '0', 'It throws a TypeError'],
-          answer: 1,
-          explanation:
-            '`get` on a missing key gives `undefined`, the same as reading a missing object property. That is why counting uses `(map.get(k) || 0) + 1` rather than reaching for a default at the end.',
-        },
-        {
-          id: 'quiz-js-s42-q3',
-          type: 'true-false',
-          prompt: 'The right way to read the number of entries in a Map or a Set is `map.size()`.',
-          answer: false,
-          explanation:
-            '`size` is a property, not a method: `map.size`, with no parentheses. Calling it throws a TypeError, and it is worth knowing that because reaching for `size()` is the single most common Map typo.',
-        },
-        {
-          id: 'quiz-js-s42-q4',
-          type: 'identify-error',
-          prompt: 'What is wrong with this?',
-          code: `const first = { id: 1 }
-const rows = new Map()
-rows.set(first, 'row one')
-
-console.log(rows.get({ id: 1 }))`,
-          options: [
-            'Nothing, it logs row one',
-            'It logs undefined, because each object literal is a different key',
-            'It logs null',
-            'It throws a TypeError',
-          ],
-          answer: 1,
-          explanation:
-            'Map keys are compared by identity, not by structure. The object in the `get` is a brand-new object, so it is a different key. Keep a reference to the key and reuse it.',
-        },
-        {
-          id: 'quiz-js-s42-q5',
-          type: 'blank',
-          prompt: 'What is the Map equivalent of `Object.entries(obj)`?',
-          answers: ['a for…of loop over entries', 'spreading the map into entries', '[...map]', '[...map.entries()]', 'the map.entries() iterator', 'entries'],
-          explanation:
-            'A Map is iterable directly, so `for (const [key, value] of map)` works with no conversion call. Spreading with `[...map]` gives the `[key, value]` pairs as arrays, exactly the shape `Object.entries` produces for an object.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s43',
@@ -2049,6 +2038,73 @@ console.log(rows.get({ id: 1 }))`,
           'Recognise an immediately invoked function expression and what it is for'
         ],
         xp: 60,
+        quiz: {
+          id: 'quiz-js-l53',
+          title: 'Function definitions and the function keyword quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l53-q1',
+              type: 'multiple-choice',
+              prompt: 'Which of these can be called before the line it is written on?',
+              options: [
+                'const hello = () => "hi"',
+                'function hello() { return "hi" }',
+                'let hello = function () { return "hi" }',
+                'var hello = function () { return "hi" }',
+              ],
+              answer: 1,
+              explanation: 'Only a function declaration is hoisted with its body attached. The other three are assignments: the name is reserved but has no value yet, so the call lands in the temporal dead zone and throws.',
+            },
+            {
+              id: 'quiz-js-l53-q2',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'console.log(typeof add)\n\nfunction add(a, b) {\n  return a + b\n}',
+              options: [
+                'undefined',
+                '"number"',
+                '"function"',
+                'It throws a ReferenceError',
+              ],
+              answer: 2,
+              explanation: 'The declaration is recorded with its value before any statement runs, so by the time the log executes `add` is already a function. That is why the call in the next line works too.',
+            },
+            {
+              id: 'quiz-js-l53-q3',
+              type: 'identify-error',
+              prompt: 'What is wrong with this?',
+              code: 'const result = (function () {\n  const hidden = 42\n  return hidden * 2\n})\n\nconsole.log(result)',
+              options: [
+                'Nothing, it logs 84',
+                'The function is never called, so result is the function itself',
+                'The parentheses are not allowed around a function',
+                'const hidden is not visible inside the function',
+              ],
+              answer: 1,
+              explanation: 'The trailing `()` is what calls it. Without them the wrapper is just an expression that produces a function, and `result` holds that function rather than the number 84.',
+            },
+            {
+              id: 'quiz-js-l53-q4',
+              type: 'true-false',
+              prompt: 'A named function expression can call itself by its own name, which a plain function stored in a variable cannot.',
+              answer: true,
+              explanation: 'The name on `function area2() { }` exists only inside the body, and it is the one to use for recursion. A function assigned to `const area` has to refer to `area` itself — which works, but only because the variable happens to be in scope.',
+            },
+            {
+              id: 'quiz-js-l53-q5',
+              type: 'blank',
+              prompt: 'What is the name for the behaviour where a function declaration is available before the line it is written on?',
+              answers: [
+                'hoisting',
+                'function hoisting',
+                'hoisted',
+                'hoist',
+              ],
+              explanation: 'Hoisting applies to every declaration, but only function declarations carry their value up with the name. `let` and `const` are hoisted as names only, and touching one before its line is the ReferenceError the term also covers.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -2271,77 +2327,6 @@ function shout(text) {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s43',
-      title: 'Function definitions check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s43-q1',
-          type: 'multiple-choice',
-          prompt: 'Which of these can be called before the line it is written on?',
-          options: [
-            'const hello = () => "hi"',
-            'function hello() { return "hi" }',
-            'let hello = function () { return "hi" }',
-            'var hello = function () { return "hi" }',
-          ],
-          answer: 1,
-          explanation:
-            'Only a function declaration is hoisted with its body attached. The other three are assignments: the name is reserved but has no value yet, so the call lands in the temporal dead zone and throws.',
-        },
-        {
-          id: 'quiz-js-s43-q2',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `console.log(typeof add)
-
-function add(a, b) {
-  return a + b
-}`,
-          options: ['undefined', '"number"', '"function"', 'It throws a ReferenceError'],
-          answer: 2,
-          explanation:
-            'The declaration is recorded with its value before any statement runs, so by the time the log executes `add` is already a function. That is why the call in the next line works too.',
-        },
-        {
-          id: 'quiz-js-s43-q3',
-          type: 'identify-error',
-          prompt: 'What is wrong with this?',
-          code: `const result = (function () {
-  const hidden = 42
-  return hidden * 2
-})
-
-console.log(result)`,
-          options: [
-            'Nothing, it logs 84',
-            'The function is never called, so result is the function itself',
-            'The parentheses are not allowed around a function',
-            'const hidden is not visible inside the function',
-          ],
-          answer: 1,
-          explanation:
-            'The trailing `()` is what calls it. Without them the wrapper is just an expression that produces a function, and `result` holds that function rather than the number 84.',
-        },
-        {
-          id: 'quiz-js-s43-q4',
-          type: 'true-false',
-          prompt: 'A named function expression can call itself by its own name, which a plain function stored in a variable cannot.',
-          answer: true,
-          explanation:
-            'The name on `function area2() { }` exists only inside the body, and it is the one to use for recursion. A function assigned to `const area` has to refer to `area` itself — which works, but only because the variable happens to be in scope.',
-        },
-        {
-          id: 'quiz-js-s43-q5',
-          type: 'blank',
-          prompt: 'What is the name for the behaviour where a function declaration is available before the line it is written on?',
-          answers: ['hoisting', 'function hoisting', 'hoisted', 'hoist'],
-          explanation:
-            'Hoisting applies to every declaration, but only function declarations carry their value up with the name. `let` and `const` are hoisted as names only, and touching one before its line is the ReferenceError the term also covers.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s44',
@@ -2359,6 +2344,75 @@ console.log(result)`,
           'Collect any number of arguments with a rest parameter'
         ],
         xp: 60,
+        quiz: {
+          id: 'quiz-js-l54',
+          title: 'Parameters and default values quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l54-q1',
+              type: 'multiple-choice',
+              prompt: 'What is a parameter?',
+              options: [
+                'A value passed in at the call site',
+                'A name in the function definition that receives a value',
+                'A type declaration the engine checks',
+                'A default value',
+              ],
+              answer: 1,
+              explanation: 'The names in the definition are parameters; the values in the parentheses at the call are arguments. The pairing is by position, so `area(3, 4)` computes `3 * 4` regardless of what the names are called.',
+            },
+            {
+              id: 'quiz-js-l54-q2',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'function area(width, height) {\n  return width * height\n}\nconsole.log(area(3))',
+              options: [
+                '9',
+                'NaN',
+                '0',
+                'It throws a TypeError',
+              ],
+              answer: 1,
+              explanation: 'Nothing is checked, so `height` is `undefined` and `3 * undefined` is `NaN`. A default — `height = 1` — removes that case at the source instead of patching it afterwards.',
+            },
+            {
+              id: 'quiz-js-l54-q3',
+              type: 'true-false',
+              prompt: 'A default parameter is used whenever the caller passes a falsy value, including an empty string or zero.',
+              answer: false,
+              explanation: 'Only a missing argument or an explicit `undefined` triggers the default. `0` and `""` are real values and win — which is what you want for a quantity, and a surprise when the parameter is a string.',
+            },
+            {
+              id: 'quiz-js-l54-q4',
+              type: 'identify-error',
+              prompt: 'What goes wrong here?',
+              code: 'function first(...a, last) {\n  return a.length + last\n}\nconsole.log(first(1, 2, 3))',
+              options: [
+                'It logs 6',
+                'It throws a SyntaxError, because a rest parameter must be last',
+                'It logs 4',
+                'last is undefined and the result is NaN',
+              ],
+              answer: 1,
+              explanation: 'A rest parameter swallows everything left over, so it has to come last in the list. Move it to the end, or take the last argument separately and rest the front.',
+            },
+            {
+              id: 'quiz-js-l54-q5',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'const nums = [1, 2, 3]\nfunction total(...values) {\n  return values.length\n}\nconsole.log(total(...nums))',
+              options: [
+                '1',
+                '3',
+                '[1, 2, 3]',
+                'It throws a TypeError',
+              ],
+              answer: 1,
+              explanation: 'The three dots work in both directions with opposite jobs. The rest parameter gathers the arguments into an array, and the spread in the call hands the array to the function one value at a time.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -2572,79 +2626,5 @@ console.log(average(2, 4, 6))`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s44',
-      title: 'Function parameters check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s44-q1',
-          type: 'multiple-choice',
-          prompt: 'What is a parameter?',
-          options: [
-            'A value passed in at the call site',
-            'A name in the function definition that receives a value',
-            'A type declaration the engine checks',
-            'A default value',
-          ],
-          answer: 1,
-          explanation:
-            'The names in the definition are parameters; the values in the parentheses at the call are arguments. The pairing is by position, so `area(3, 4)` computes `3 * 4` regardless of what the names are called.',
-        },
-        {
-          id: 'quiz-js-s44-q2',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `function area(width, height) {
-  return width * height
-}
-console.log(area(3))`,
-          options: ['9', 'NaN', '0', 'It throws a TypeError'],
-          answer: 1,
-          explanation:
-            'Nothing is checked, so `height` is `undefined` and `3 * undefined` is `NaN`. A default — `height = 1` — removes that case at the source instead of patching it afterwards.',
-        },
-        {
-          id: 'quiz-js-s44-q3',
-          type: 'true-false',
-          prompt: 'A default parameter is used whenever the caller passes a falsy value, including an empty string or zero.',
-          answer: false,
-          explanation:
-            'Only a missing argument or an explicit `undefined` triggers the default. `0` and `""` are real values and win — which is what you want for a quantity, and a surprise when the parameter is a string.',
-        },
-        {
-          id: 'quiz-js-s44-q4',
-          type: 'identify-error',
-          prompt: 'What goes wrong here?',
-          code: `function first(...a, last) {
-  return a.length + last
-}
-console.log(first(1, 2, 3))`,
-          options: [
-            'It logs 6',
-            'It throws a SyntaxError, because a rest parameter must be last',
-            'It logs 4',
-            'last is undefined and the result is NaN',
-          ],
-          answer: 1,
-          explanation:
-            'A rest parameter swallows everything left over, so it has to come last in the list. Move it to the end, or take the last argument separately and rest the front.',
-        },
-        {
-          id: 'quiz-js-s44-q5',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `const nums = [1, 2, 3]
-function total(...values) {
-  return values.length
-}
-console.log(total(...nums))`,
-          options: ['1', '3', '[1, 2, 3]', 'It throws a TypeError'],
-          answer: 1,
-          explanation:
-            'The three dots work in both directions with opposite jobs. The rest parameter gathers the arguments into an array, and the spread in the call hands the array to the function one value at a time.',
-        },
-      ],
-    },
   },
 ]

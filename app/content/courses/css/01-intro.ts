@@ -17,6 +17,68 @@ export const cssIntroSections: Section[] = [
           'Name the four things you will be able to do once you finish',
         ],
         xp: 30,
+        quiz: {
+          id: 'quiz-css-l1',
+          title: 'How this course works quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l1-q1',
+              type: 'multiple-choice',
+              prompt: 'What does CSS change about a page?',
+              options: [
+                'The meaning of the content and the tags used',
+                'Only how things look and where they sit',
+                'What happens when someone clicks a button',
+                'The file size of the HTML',
+              ],
+              answer: 1,
+              explanation: 'CSS is presentation only. Structure lives in HTML and behaviour lives in JavaScript, which is what keeps the three of them independently replaceable.',
+            },
+            {
+              id: 'quiz-css-l1-q2',
+              type: 'true-false',
+              prompt: 'In the two cards shown at the top of this lesson, the HTML markup was different.',
+              answer: false,
+              explanation: 'The markup was identical. Only the CSS differed, which is the point the example was making.',
+            },
+            {
+              id: 'quiz-css-l1-q3',
+              type: 'multiple-choice',
+              prompt: 'What is the first thing you see in every lesson of this course?',
+              options: [
+                'A block of code to read',
+                'A quiz question',
+                'A live rendered example',
+                'A list of objectives',
+              ],
+              answer: 2,
+              explanation: 'Every lesson opens with a live example so you know what you are aiming at before you read any syntax.',
+            },
+            {
+              id: 'quiz-css-l1-q4',
+              type: 'blank',
+              prompt: 'Complete the sentence: the order matters because media queries make no sense before you know ________.',
+              answers: [
+                'flexbox',
+              ],
+              explanation: 'Responsive design is built on top of a layout system. Without flexbox or grid there is nothing for a media query to rearrange.',
+            },
+            {
+              id: 'quiz-css-l1-q5',
+              type: 'multiple-choice',
+              prompt: 'Which section of the course should you understand first?',
+              options: [
+                'Animations',
+                'The box model',
+                'Grid',
+                'Specificity',
+              ],
+              answer: 1,
+              explanation: 'The box model comes first because almost every later concept — margins, flexbox gaps, grid tracks — is defined in terms of it.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -159,72 +221,6 @@ export const cssIntroSections: Section[] = [
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s1',
-      title: 'Getting started check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s1-q1',
-          type: 'multiple-choice',
-          prompt: 'What does CSS change about a page?',
-          options: [
-            'The meaning of the content and the tags used',
-            'Only how things look and where they sit',
-            'What happens when someone clicks a button',
-            'The file size of the HTML',
-          ],
-          answer: 1,
-          explanation:
-            'CSS is presentation only. Structure lives in HTML and behaviour lives in JavaScript, which is what keeps the three of them independently replaceable.',
-        },
-        {
-          id: 'quiz-css-s1-q2',
-          type: 'true-false',
-          prompt: 'In the two cards shown at the top of this lesson, the HTML markup was different.',
-          answer: false,
-          explanation:
-            'The markup was identical. Only the CSS differed, which is the point the example was making.',
-        },
-        {
-          id: 'quiz-css-s1-q3',
-          type: 'multiple-choice',
-          prompt: 'What is the first thing you see in every lesson of this course?',
-          options: [
-            'A block of code to read',
-            'A quiz question',
-            'A live rendered example',
-            'A list of objectives',
-          ],
-          answer: 2,
-          explanation:
-            'Every lesson opens with a live example so you know what you are aiming at before you read any syntax.',
-        },
-        {
-          id: 'quiz-css-s1-q4',
-          type: 'blank',
-          prompt:
-            'Complete the sentence: the order matters because media queries make no sense before you know ________.',
-          answers: ['flexbox'],
-          explanation:
-            'Responsive design is built on top of a layout system. Without flexbox or grid there is nothing for a media query to rearrange.',
-        },
-        {
-          id: 'quiz-css-s1-q5',
-          type: 'multiple-choice',
-          prompt: 'Which section of the course should you understand first?',
-          options: [
-            'Animations',
-            'The box model',
-            'Grid',
-            'Specificity',
-          ],
-          answer: 1,
-          explanation:
-            'The box model comes first because almost every later concept — margins, flexbox gaps, grid tracks — is defined in terms of it.',
-        },
-      ],
-    },
   },
   {
     id: 'css-s2',
@@ -243,6 +239,73 @@ export const cssIntroSections: Section[] = [
           'Name the three ways to attach a stylesheet and their trade-offs',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-css-l2',
+          title: 'CSS Introduction quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l2-q1',
+              type: 'multiple-choice',
+              prompt: 'Which of these is CSS responsible for?',
+              options: [
+                'Deciding a paragraph is a paragraph',
+                'Deciding what happens on click',
+                'Deciding how that paragraph is coloured and spaced',
+                'Fetching the data the paragraph shows',
+              ],
+              answer: 2,
+              explanation: 'Structure is HTML, behaviour is JavaScript, and presentation is CSS. Each can be replaced without touching the others.',
+            },
+            {
+              id: 'quiz-css-l2-q2',
+              type: 'multiple-choice',
+              prompt: 'At which step does the browser work out which rules apply to an element?',
+              options: [
+                'Parse',
+                'Match',
+                'Paint',
+                'Composite',
+              ],
+              answer: 1,
+              explanation: 'Matching happens after parsing and before layout. The cascade collects matching rules, then the winning values are computed.',
+            },
+            {
+              id: 'quiz-css-l2-q3',
+              type: 'true-false',
+              prompt: 'A later CSS rule always beats an earlier one.',
+              answer: false,
+              explanation: 'Source order only breaks ties. A more specific earlier rule wins over a less specific later one, no matter which comes second in the file.',
+            },
+            {
+              id: 'quiz-css-l2-q4',
+              type: 'multiple-choice',
+              prompt: 'Why is inline styling a poor choice in a real project?',
+              options: [
+                'Browsers ignore it',
+                'It cannot be cached, reused or themed, and it beats every other rule',
+                'It only works on paragraphs',
+                'It makes the page load slower than any stylesheet',
+              ],
+              answer: 1,
+              explanation: 'Inline styles have the highest specificity, so they are very hard to override, and they cannot be shared or cached across pages.',
+            },
+            {
+              id: 'quiz-css-l2-q5',
+              type: 'code-output',
+              prompt: 'What colour is the paragraph?',
+              code: 'body { color: grey; }\np { color: teal; }',
+              options: [
+                'Grey',
+                'Teal',
+                'Black',
+                'The browser default',
+              ],
+              answer: 1,
+              explanation: 'Both rules match the `p`. The `p` rule is more specific, so it wins even though the `body` rule would have inherited down to it.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -435,69 +498,6 @@ button {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s2',
-      title: 'CSS Introduction quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s2-q1',
-          type: 'multiple-choice',
-          prompt: 'Which of these is CSS responsible for?',
-          options: [
-            'Deciding a paragraph is a paragraph',
-            'Deciding what happens on click',
-            'Deciding how that paragraph is coloured and spaced',
-            'Fetching the data the paragraph shows',
-          ],
-          answer: 2,
-          explanation:
-            'Structure is HTML, behaviour is JavaScript, and presentation is CSS. Each can be replaced without touching the others.',
-        },
-        {
-          id: 'quiz-css-s2-q2',
-          type: 'multiple-choice',
-          prompt: 'At which step does the browser work out which rules apply to an element?',
-          options: ['Parse', 'Match', 'Paint', 'Composite'],
-          answer: 1,
-          explanation:
-            'Matching happens after parsing and before layout. The cascade collects matching rules, then the winning values are computed.',
-        },
-        {
-          id: 'quiz-css-s2-q3',
-          type: 'true-false',
-          prompt: 'A later CSS rule always beats an earlier one.',
-          answer: false,
-          explanation:
-            'Source order only breaks ties. A more specific earlier rule wins over a less specific later one, no matter which comes second in the file.',
-        },
-        {
-          id: 'quiz-css-s2-q4',
-          type: 'multiple-choice',
-          prompt: 'Why is inline styling a poor choice in a real project?',
-          options: [
-            'Browsers ignore it',
-            'It cannot be cached, reused or themed, and it beats every other rule',
-            'It only works on paragraphs',
-            'It makes the page load slower than any stylesheet',
-          ],
-          answer: 1,
-          explanation:
-            'Inline styles have the highest specificity, so they are very hard to override, and they cannot be shared or cached across pages.',
-        },
-        {
-          id: 'quiz-css-s2-q5',
-          type: 'code-output',
-          prompt: 'What colour is the paragraph?',
-          code: `body { color: grey; }
-p { color: teal; }`,
-          options: ['Grey', 'Teal', 'Black', 'The browser default'],
-          answer: 1,
-          explanation:
-            'Both rules match the `p`. The `p` rule is more specific, so it wins even though the `body` rule would have inherited down to it.',
-        },
-      ],
-    },
   },
   {
     id: 'css-s3',
@@ -516,6 +516,70 @@ p { color: teal; }`,
           'Explain what inheritance does and when it applies',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-css-l3',
+          title: 'CSS Syntax quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l3-q1',
+              type: 'multiple-choice',
+              prompt: 'In `p { color: teal; }`, what is `color`?',
+              options: [
+                'The selector',
+                'The property',
+                'The value',
+                'The at-rule',
+              ],
+              answer: 1,
+              explanation: '`p` is the selector, `color` is the property, and `teal` is the value. A declaration is the property and value together.',
+            },
+            {
+              id: 'quiz-css-l3-q2',
+              type: 'code-output',
+              prompt: 'What colour is the paragraph?',
+              code: 'p {\n  color: red\n  font-weight: 700;\n}',
+              options: [
+                'Red and bold, as written',
+                'Red only, with the font-weight ignored',
+                'The browser default colour',
+                'Nothing renders at all',
+              ],
+              answer: 2,
+              explanation: 'The missing semicolon makes the whole declaration invalid, so the browser discards it and the rule has nothing left to apply. The paragraph falls back to the default colour.',
+            },
+            {
+              id: 'quiz-css-l3-q3',
+              type: 'true-false',
+              prompt: 'Margins are inherited by default.',
+              answer: false,
+              explanation: '`margin` does not inherit. Properties like `color` and `font-family` do, which is why you set them once on a parent.',
+            },
+            {
+              id: 'quiz-css-l3-q4',
+              type: 'blank',
+              prompt: 'Which HTML element links an external stylesheet to a page? Give the element name only.',
+              answers: [
+                'link',
+              ],
+              explanation: 'The `link` element with `rel="stylesheet"` in the `head` is the standard way to attach an external stylesheet.',
+            },
+            {
+              id: 'quiz-css-l3-q5',
+              type: 'identify-error',
+              prompt: 'Why does this rule do nothing at all?',
+              code: '.card {\n  color blue;\n  padding: 1rem;\n}',
+              options: [
+                '`.card` is not a valid selector',
+                'The colon after `color` is missing',
+                '`padding` cannot be set on this element',
+                'The property should be `text-color`',
+              ],
+              answer: 1,
+              explanation: 'It reads `color blue` as a property named `color blue` with no value, which is invalid, so the declaration is dropped and only `padding` survives.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -702,75 +766,6 @@ p { color: teal; }`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s3',
-      title: 'CSS Syntax quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s3-q1',
-          type: 'multiple-choice',
-          prompt: 'In `p { color: teal; }`, what is `color`?',
-          options: ['The selector', 'The property', 'The value', 'The at-rule'],
-          answer: 1,
-          explanation:
-            '`p` is the selector, `color` is the property, and `teal` is the value. A declaration is the property and value together.',
-        },
-        {
-          id: 'quiz-css-s3-q2',
-          type: 'code-output',
-          prompt: 'What colour is the paragraph?',
-          code: `p {
-  color: red
-  font-weight: 700;
-}`,
-          options: [
-            'Red and bold, as written',
-            'Red only, with the font-weight ignored',
-            'The browser default colour',
-            'Nothing renders at all',
-          ],
-          answer: 2,
-          explanation:
-            'The missing semicolon makes the whole declaration invalid, so the browser discards it and the rule has nothing left to apply. The paragraph falls back to the default colour.',
-        },
-        {
-          id: 'quiz-css-s3-q3',
-          type: 'true-false',
-          prompt: 'Margins are inherited by default.',
-          answer: false,
-          explanation:
-            '`margin` does not inherit. Properties like `color` and `font-family` do, which is why you set them once on a parent.',
-        },
-        {
-          id: 'quiz-css-s3-q4',
-          type: 'blank',
-          prompt:
-            'Which HTML element links an external stylesheet to a page? Give the element name only.',
-          answers: ['link'],
-          explanation:
-            'The `link` element with `rel="stylesheet"` in the `head` is the standard way to attach an external stylesheet.',
-        },
-        {
-          id: 'quiz-css-s3-q5',
-          type: 'identify-error',
-          prompt: 'Why does this rule do nothing at all?',
-          code: `.card {
-  color blue;
-  padding: 1rem;
-}`,
-          options: [
-            '`.card` is not a valid selector',
-            'The colon after `color` is missing',
-            '`padding` cannot be set on this element',
-            'The property should be `text-color`',
-          ],
-          answer: 1,
-          explanation:
-            'It reads `color blue` as a property named `color blue` with no value, which is invalid, so the declaration is dropped and only `padding` survives.',
-        },
-      ],
-    },
   },
   {
     id: 'css-s4',
@@ -789,6 +784,71 @@ p { color: teal; }`,
           'Predict which of two competing rules wins and why',
         ],
         xp: 45,
+        quiz: {
+          id: 'quiz-css-l4',
+          title: 'CSS Selectors quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l4-q1',
+              type: 'multiple-choice',
+              prompt: 'Which selector targets every element carrying `class="card"`?',
+              options: [
+                '`card`',
+                '`.card`',
+                '`#card`',
+                '`*card`',
+              ],
+              answer: 1,
+              explanation: 'A dot introduces a class selector. `#` is for an id and a bare name is an element selector.',
+            },
+            {
+              id: 'quiz-css-l4-q2',
+              type: 'multiple-choice',
+              prompt: 'Why are id selectors discouraged in stylesheets?',
+              options: [
+                'Browsers do not support them',
+                'They cannot be combined with classes',
+                'Their high specificity makes them very hard to override later',
+                'They only work in inline styles',
+              ],
+              answer: 2,
+              explanation: 'An id outranks any number of classes, so once an id rule exists, overriding it usually needs an even more specific selector or `!important`.',
+            },
+            {
+              id: 'quiz-css-l4-q3',
+              type: 'code-output',
+              prompt: 'What colour is the paragraph?',
+              code: '#x { color: blue; }\np { color: red; }',
+              options: [
+                'Blue',
+                'Red',
+                'The browser default',
+                'Both apply, blue wins the paint order',
+              ],
+              answer: 0,
+              explanation: 'The id selector is more specific, so it wins. The `p` rule written later is ignored entirely for this element.',
+            },
+            {
+              id: 'quiz-css-l4-q4',
+              type: 'true-false',
+              prompt: 'An element can carry more than one class.',
+              answer: true,
+              explanation: 'Classes are a list, not a slot. `class="card card--featured"` is valid and both selectors match.',
+            },
+            {
+              id: 'quiz-css-l4-q5',
+              type: 'blank',
+              prompt: 'Which universal-selector declaration is most commonly set on `*` at the top of a reset? Give the property name only.',
+              answers: [
+                'box-sizing',
+                'box-sizing: border-box',
+                'boxsizing',
+              ],
+              explanation: '`box-sizing: border-box` makes a declared width include padding and border, which removes a whole class of sizing bugs.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -998,64 +1058,6 @@ p { color: teal; }`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s4',
-      title: 'CSS Selectors quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s4-q1',
-          type: 'multiple-choice',
-          prompt: 'Which selector targets every element carrying `class="card"`?',
-          options: ['`card`', '`.card`', '`#card`', '`*card`'],
-          answer: 1,
-          explanation:
-            'A dot introduces a class selector. `#` is for an id and a bare name is an element selector.',
-        },
-        {
-          id: 'quiz-css-s4-q2',
-          type: 'multiple-choice',
-          prompt: 'Why are id selectors discouraged in stylesheets?',
-          options: [
-            'Browsers do not support them',
-            'They cannot be combined with classes',
-            'Their high specificity makes them very hard to override later',
-            'They only work in inline styles',
-          ],
-          answer: 2,
-          explanation:
-            'An id outranks any number of classes, so once an id rule exists, overriding it usually needs an even more specific selector or `!important`.',
-        },
-        {
-          id: 'quiz-css-s4-q3',
-          type: 'code-output',
-          prompt: 'What colour is the paragraph?',
-          code: `#x { color: blue; }
-p { color: red; }`,
-          options: ['Blue', 'Red', 'The browser default', 'Both apply, blue wins the paint order'],
-          answer: 0,
-          explanation:
-            'The id selector is more specific, so it wins. The `p` rule written later is ignored entirely for this element.',
-        },
-        {
-          id: 'quiz-css-s4-q4',
-          type: 'true-false',
-          prompt: 'An element can carry more than one class.',
-          answer: true,
-          explanation:
-            'Classes are a list, not a slot. `class="card card--featured"` is valid and both selectors match.',
-        },
-        {
-          id: 'quiz-css-s4-q5',
-          type: 'blank',
-          prompt:
-            'Which universal-selector declaration is most commonly set on `*` at the top of a reset? Give the property name only.',
-          answers: ['box-sizing', 'box-sizing: border-box', 'boxsizing'],
-          explanation:
-            '`box-sizing: border-box` makes a declared width include padding and border, which removes a whole class of sizing bugs.',
-        },
-      ],
-    },
   },
   {
     id: 'css-s5',
@@ -1074,6 +1076,68 @@ p { color: red; }`,
           'Explain why a stylesheet in the head prevents a flash of unstyled content',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-css-l5',
+          title: 'CSS How To quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l5-q1',
+              type: 'multiple-choice',
+              prompt: 'Which attachment method should you use by default in a multi-page project?',
+              options: [
+                'A `style` attribute on each element',
+                'An external stylesheet linked from the head',
+                'A `style` block repeated in every page',
+                'Inline styles generated by JavaScript',
+              ],
+              answer: 1,
+              explanation: 'An external file is cached across pages, kept in one place, and reviewable. The other options duplicate rules and are hard to override.',
+            },
+            {
+              id: 'quiz-css-l5-q2',
+              type: 'multiple-choice',
+              prompt: 'From `pages/about.html`, which `href` reaches `styles/site.css` in the site root?',
+              options: [
+                '`href="styles/site.css"`',
+                '`href="pages/styles/site.css"`',
+                '`href="/styles/site.css"`',
+                '`href="./../styles.css"`',
+              ],
+              answer: 2,
+              explanation: 'A leading slash resolves from the site root regardless of the current page depth. The first option would look inside `pages/`.',
+            },
+            {
+              id: 'quiz-css-l5-q3',
+              type: 'true-false',
+              prompt: 'A browser will paint a page before it finishes loading an external stylesheet.',
+              answer: false,
+              explanation: 'Rendering is blocked on the stylesheet. That is why putting the `link` in the head avoids a flash of unstyled content.',
+            },
+            {
+              id: 'quiz-css-l5-q4',
+              type: 'blank',
+              prompt: 'What attribute value on `link` marks the file as a stylesheet? Give the value only.',
+              answers: [
+                'stylesheet',
+              ],
+              explanation: '`rel="stylesheet"` is required. Without it the browser fetches the file and does nothing with it.',
+            },
+            {
+              id: 'quiz-css-l5-q5',
+              type: 'multiple-choice',
+              prompt: 'What is the main practical problem with inline styles?',
+              options: [
+                'They are ignored by modern browsers',
+                'They cannot be used on custom elements',
+                'They cannot be reused or cached and they outrank every stylesheet rule',
+                'They only work in print stylesheets',
+              ],
+              answer: 2,
+              explanation: 'Inline styles have the highest specificity of all, so they are effectively impossible to override from a stylesheet, and they repeat on every element.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1262,71 +1326,6 @@ p { color: red; }`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s5',
-      title: 'CSS How To quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s5-q1',
-          type: 'multiple-choice',
-          prompt: 'Which attachment method should you use by default in a multi-page project?',
-          options: [
-            'A `style` attribute on each element',
-            'An external stylesheet linked from the head',
-            'A `style` block repeated in every page',
-            'Inline styles generated by JavaScript',
-          ],
-          answer: 1,
-          explanation:
-            'An external file is cached across pages, kept in one place, and reviewable. The other options duplicate rules and are hard to override.',
-        },
-        {
-          id: 'quiz-css-s5-q2',
-          type: 'multiple-choice',
-          prompt: 'From `pages/about.html`, which `href` reaches `styles/site.css` in the site root?',
-          options: [
-            '`href="styles/site.css"`',
-            '`href="pages/styles/site.css"`',
-            '`href="/styles/site.css"`',
-            '`href="./../styles.css"`',
-          ],
-          answer: 2,
-          explanation:
-            'A leading slash resolves from the site root regardless of the current page depth. The first option would look inside `pages/`.',
-        },
-        {
-          id: 'quiz-css-s5-q3',
-          type: 'true-false',
-          prompt: 'A browser will paint a page before it finishes loading an external stylesheet.',
-          answer: false,
-          explanation:
-            'Rendering is blocked on the stylesheet. That is why putting the `link` in the head avoids a flash of unstyled content.',
-        },
-        {
-          id: 'quiz-css-s5-q4',
-          type: 'blank',
-          prompt:
-            'What attribute value on `link` marks the file as a stylesheet? Give the value only.',
-          answers: ['stylesheet'],
-          explanation: '`rel="stylesheet"` is required. Without it the browser fetches the file and does nothing with it.',
-        },
-        {
-          id: 'quiz-css-s5-q5',
-          type: 'multiple-choice',
-          prompt: 'What is the main practical problem with inline styles?',
-          options: [
-            'They are ignored by modern browsers',
-            'They cannot be used on custom elements',
-            'They cannot be reused or cached and they outrank every stylesheet rule',
-            'They only work in print stylesheets',
-          ],
-          answer: 2,
-          explanation:
-            'Inline styles have the highest specificity of all, so they are effectively impossible to override from a stylesheet, and they repeat on every element.',
-        },
-      ],
-    },
   },
   {
     id: 'css-s6',
@@ -1345,6 +1344,70 @@ p { color: red; }`,
           'Know when a comment is noise',
         ],
         xp: 30,
+        quiz: {
+          id: 'quiz-css-l6',
+          title: 'CSS Comments quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l6-q1',
+              type: 'blank',
+              prompt: 'What is the opening token of a CSS comment? Give the two characters only.',
+              answers: [
+                '/*',
+                '/ *',
+              ],
+              explanation: 'CSS has only the `/* ... */` form. There is no `//` line comment in a stylesheet.',
+            },
+            {
+              id: 'quiz-css-l6-q2',
+              type: 'true-false',
+              prompt: 'Comments are sent to the browser and ignored at render time.',
+              answer: false,
+              explanation: 'The parser discards comments before it builds the rule tree, so they cost nothing at runtime and never reach the browser.',
+            },
+            {
+              id: 'quiz-css-l6-q3',
+              type: 'multiple-choice',
+              prompt: 'Which comment is worth writing?',
+              options: [
+                '`/* set the color */` above `color: teal;`',
+                '`/* matches the 4xl spacing step, do not change */` above `margin-top: 56px;`',
+                '`/* this is the stylesheet for the card */` at the top of the file',
+                'A comment above every single declaration',
+              ],
+              answer: 1,
+              explanation: 'A good comment records intent or a constraint that the code cannot express. The rest restate what is already visible.',
+            },
+            {
+              id: 'quiz-css-l6-q4',
+              type: 'identify-error',
+              prompt: 'What is wrong with this?',
+              code: '.card {\n  // make it stand out\n  border: 2px solid teal;\n}',
+              options: [
+                'Comments cannot go inside a rule',
+                'CSS has no `//` line comment, so the parser reads it as a selector and breaks the rule',
+                'The comment needs to be a `<!-- -->` block',
+                'Nothing, this is valid',
+              ],
+              answer: 1,
+              explanation: '`//` is not a comment in CSS. It is parsed as a selector, which swallows the following declaration and invalidates the rule.',
+            },
+            {
+              id: 'quiz-css-l6-q5',
+              type: 'multiple-choice',
+              prompt: 'You want to try a change without losing the old rule. What should you do?',
+              options: [
+                'Comment the old rule out and commit it',
+                'Comment it out while experimenting, then delete it before committing',
+                'Keep both rules permanently',
+                'Copy the file as a backup and leave the original in place',
+              ],
+              answer: 1,
+              explanation: 'Commenting out is a fine temporary move. Leaving commented-out code in a commit is dead code — version control already holds the history.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1491,74 +1554,5 @@ p { color: red; }`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s6',
-      title: 'CSS Comments quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s6-q1',
-          type: 'blank',
-          prompt:
-            'What is the opening token of a CSS comment? Give the two characters only.',
-          answers: ['/*', '/ *'],
-          explanation: 'CSS has only the `/* ... */` form. There is no `//` line comment in a stylesheet.',
-        },
-        {
-          id: 'quiz-css-s6-q2',
-          type: 'true-false',
-          prompt: 'Comments are sent to the browser and ignored at render time.',
-          answer: false,
-          explanation:
-            'The parser discards comments before it builds the rule tree, so they cost nothing at runtime and never reach the browser.',
-        },
-        {
-          id: 'quiz-css-s6-q3',
-          type: 'multiple-choice',
-          prompt: 'Which comment is worth writing?',
-          options: [
-            '`/* set the color */` above `color: teal;`',
-            '`/* matches the 4xl spacing step, do not change */` above `margin-top: 56px;`',
-            '`/* this is the stylesheet for the card */` at the top of the file',
-            'A comment above every single declaration',
-          ],
-          answer: 1,
-          explanation:
-            'A good comment records intent or a constraint that the code cannot express. The rest restate what is already visible.',
-        },
-        {
-          id: 'quiz-css-s6-q4',
-          type: 'identify-error',
-          prompt: 'What is wrong with this?',
-          code: `.card {
-  // make it stand out
-  border: 2px solid teal;
-}`,
-          options: [
-            'Comments cannot go inside a rule',
-            'CSS has no `//` line comment, so the parser reads it as a selector and breaks the rule',
-            'The comment needs to be a `<!-- -->` block',
-            'Nothing, this is valid',
-          ],
-          answer: 1,
-          explanation:
-            '`//` is not a comment in CSS. It is parsed as a selector, which swallows the following declaration and invalidates the rule.',
-        },
-        {
-          id: 'quiz-css-s6-q5',
-          type: 'multiple-choice',
-          prompt: 'You want to try a change without losing the old rule. What should you do?',
-          options: [
-            'Comment the old rule out and commit it',
-            'Comment it out while experimenting, then delete it before committing',
-            'Keep both rules permanently',
-            'Copy the file as a backup and leave the original in place',
-          ],
-          answer: 1,
-          explanation:
-            'Commenting out is a fine temporary move. Leaving commented-out code in a commit is dead code — version control already holds the history.',
-        },
-      ],
-    },
   },
 ]

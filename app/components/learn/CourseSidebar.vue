@@ -38,31 +38,17 @@
                     <span class="block">{{ lesson.title }}</span>
                   </span>
                 </NuxtLink>
-                <!--
-                  A one-lesson section's quiz belongs to that lesson, so it is a
-                  star on the row instead of a 66-line list of quizzes.
-                -->
+                <!-- Every lesson row carries its own quiz. -->
                 <NuxtLink
-                  v-if="section.quiz && section.lessons.length === 1"
-                  :to="`/learn/${course.slug}/quiz/${section.quiz.id}`"
+                  :to="`/learn/${course.slug}/quiz/${lesson.quiz.id}`"
                   class="flex shrink-0 items-center border-l-2 border-transparent pr-3 text-xs transition"
-                  :class="section.quiz.id === currentQuizId ? 'text-brand' : 'text-dim hover:text-brand'"
-                  :aria-label="`Take the ${section.quiz.title} quiz`"
-                  :title="`${section.quiz.title} quiz`"
+                  :class="lesson.quiz.id === currentQuizId ? 'text-brand' : 'text-dim hover:text-brand'"
+                  :aria-label="`Take the quiz for ${lesson.title}`"
+                  :title="lesson.quiz.title"
                 >
                   <span aria-hidden="true">★</span>
                 </NuxtLink>
               </div>
-            </li>
-            <li v-if="section.quiz && section.lessons.length > 1" :key="`${section.id}-quiz`">
-              <NuxtLink
-                :to="`/learn/${course.slug}/quiz/${section.quiz.id}`"
-                class="flex items-center gap-2.5 border-l-2 px-4 py-2 text-sm text-muted transition hover:text-mist-50"
-                :class="section.quiz.id === currentQuizId ? 'text-mist-50 bg-brand/10 border-brand' : 'border-transparent'"
-              >
-                <span class="text-brand" aria-hidden="true">★</span>
-                {{ section.quiz.title }}
-              </NuxtLink>
             </li>
           </template>
         </ul>

@@ -19,6 +19,73 @@ export const jsAsyncDomIntroSections: Section[] = [
           'Write a function that takes a callback and calls it exactly once',
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-js-l60',
+          title: 'Callbacks quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l60-q1',
+              type: 'multiple-choice',
+              prompt: 'What is a callback?',
+              options: [
+                'A function that is called immediately when it is defined',
+                'A function passed to another function so it can be called later',
+                'A function that must return a value to be useful',
+                'A function declared inside another function',
+              ],
+              answer: 1,
+              explanation: 'A callback is a function you hand over so somebody else can invoke it later. Nothing requires it to return anything — `forEach` and `addEventListener` ignore the return value entirely. And it does not have to be declared inside anything; a named function declared at the top level is a perfectly good callback.',
+            },
+            {
+              id: 'quiz-js-l60-q2',
+              type: 'true-false',
+              prompt: '`setTimeout(greet(), 1000)` delays the call to `greet` by one second.',
+              answer: false,
+              explanation: 'The parentheses call `greet` immediately and pass whatever it returns to `setTimeout`, which then fails because a value is not a function. This is the classic "my callback never ran" bug: write `setTimeout(greet, 1000)` and let the timer decide when.',
+            },
+            {
+              id: 'quiz-js-l60-q3',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'function each(list, callback) {\n  for (let i = 0; i < list.length; i++) {\n    callback(list[i], i)\n  }\n}\neach([\'a\', \'b\'], function (item) {\n  console.log(item)\n})',
+              options: [
+                'a then b',
+                '0: a then 1: b',
+                'aa then bb',
+                'Nothing — the callback needs two parameters',
+              ],
+              answer: 0,
+              explanation: 'The receiver passes the item and the index; your callback declares only the first, and the index is quietly ignored. A callback may accept fewer parameters than it is given, which is what makes `forEach` usable for both counting and transforming.',
+            },
+            {
+              id: 'quiz-js-l60-q4',
+              type: 'identify-error',
+              prompt: 'What is wrong with this function?',
+              code: 'function shoutAll(words) {\n  words.forEach(function (word) {\n    return word.toUpperCase()\n  })\n  return words\n}\nconsole.log(shoutAll([\'hi\', \'yo\']))',
+              options: [
+                'forEach cannot be used to build a new array',
+                'return inside the callback only leaves the callback, so words is unchanged',
+                'The callback is missing its index parameter',
+                'toUpperCase returns a number rather than a string',
+              ],
+              answer: 1,
+              explanation: 'A `return` exits the function it sits in. The uppercased string goes back to `forEach`, which ignores it, so the array you return is still lowercase. `forEach` is for side effects only — to transform, use `map`, or collect the results yourself.',
+            },
+            {
+              id: 'quiz-js-l60-q5',
+              type: 'blank',
+              prompt: 'Which syntax passes a function to `setTimeout` so that it runs later, without running it now?',
+              answers: [
+                'settimeout(fn, 500)',
+                'fn',
+                'settimeout(fn, 500)',
+                'without the parentheses',
+              ],
+              explanation: 'Pass the bare function reference — `setTimeout(fn, 500)` — and the browser calls it when the delay expires. Adding parentheses turns the passing into a call, which is the mistake the rule exists to prevent.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -238,81 +305,6 @@ runInOrder(['a', 'b'], function (done) {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s49',
-      title: 'Callbacks check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s49-q1',
-          type: 'multiple-choice',
-          prompt: 'What is a callback?',
-          options: [
-            'A function that is called immediately when it is defined',
-            'A function passed to another function so it can be called later',
-            'A function that must return a value to be useful',
-            'A function declared inside another function',
-          ],
-          answer: 1,
-          explanation:
-            'A callback is a function you hand over so somebody else can invoke it later. Nothing requires it to return anything — `forEach` and `addEventListener` ignore the return value entirely. And it does not have to be declared inside anything; a named function declared at the top level is a perfectly good callback.',
-        },
-        {
-          id: 'quiz-js-s49-q2',
-          type: 'true-false',
-          prompt: '`setTimeout(greet(), 1000)` delays the call to `greet` by one second.',
-          answer: false,
-          explanation:
-            'The parentheses call `greet` immediately and pass whatever it returns to `setTimeout`, which then fails because a value is not a function. This is the classic "my callback never ran" bug: write `setTimeout(greet, 1000)` and let the timer decide when.',
-        },
-        {
-          id: 'quiz-js-s49-q3',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `function each(list, callback) {
-  for (let i = 0; i < list.length; i++) {
-    callback(list[i], i)
-  }
-}
-each(['a', 'b'], function (item) {
-  console.log(item)
-})`,
-          options: ['a then b', '0: a then 1: b', 'aa then bb', 'Nothing — the callback needs two parameters'],
-          answer: 0,
-          explanation:
-            'The receiver passes the item and the index; your callback declares only the first, and the index is quietly ignored. A callback may accept fewer parameters than it is given, which is what makes `forEach` usable for both counting and transforming.',
-        },
-        {
-          id: 'quiz-js-s49-q4',
-          type: 'identify-error',
-          prompt: 'What is wrong with this function?',
-          code: `function shoutAll(words) {
-  words.forEach(function (word) {
-    return word.toUpperCase()
-  })
-  return words
-}
-console.log(shoutAll(['hi', 'yo']))`,
-          options: [
-            'forEach cannot be used to build a new array',
-            'return inside the callback only leaves the callback, so words is unchanged',
-            'The callback is missing its index parameter',
-            'toUpperCase returns a number rather than a string',
-          ],
-          answer: 1,
-          explanation:
-            'A `return` exits the function it sits in. The uppercased string goes back to `forEach`, which ignores it, so the array you return is still lowercase. `forEach` is for side effects only — to transform, use `map`, or collect the results yourself.',
-        },
-        {
-          id: 'quiz-js-s49-q5',
-          type: 'blank',
-          prompt: 'Which syntax passes a function to `setTimeout` so that it runs later, without running it now?',
-          answers: ['settimeout(fn, 500)', 'fn', 'settimeout(fn, 500)', 'without the parentheses'],
-          explanation:
-            'Pass the bare function reference — `setTimeout(fn, 500)` — and the browser calls it when the delay expires. Adding parentheses turns the passing into a call, which is the mistake the rule exists to prevent.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s50',
@@ -334,6 +326,71 @@ console.log(shoutAll(['hi', 'yo']))`,
           'Choose between Promise.all and Promise.allSettled',
         ],
         xp: 55,
+        quiz: {
+          id: 'quiz-js-l61',
+          title: 'Callbacks and asynchronous code quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l61-q1',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'console.log(\'one\')\nsetTimeout(function () {\n  console.log(\'two\')\n}, 1000)\nconsole.log(\'three\')',
+              options: [
+                'one, two, three',
+                'one, three, two',
+                'three, one, two',
+                'one, two, three, but two arrives immediately',
+              ],
+              answer: 1,
+              explanation: 'The current function runs to its end before the browser gets control back, so `one` and `three` both print immediately. Only once the call stack is empty does the event loop run the expired timer. Writing is not running — the position of a `setTimeout` in your file says nothing about when its callback fires.',
+            },
+            {
+              id: 'quiz-js-l61-q2',
+              type: 'true-false',
+              prompt: 'A promise can be fulfilled and then rejected later, and `then` will run for both.',
+              answer: false,
+              explanation: 'A promise settles exactly once, and only the first outcome counts. The second call to `resolve` or `reject` is silently ignored, which is what lets `then` code assume a single, stable result instead of checking whether anything changed.',
+            },
+            {
+              id: 'quiz-js-l61-q3',
+              type: 'multiple-choice',
+              prompt: 'Why is the callback pyramid hard to maintain?',
+              options: [
+                'Callbacks cannot be nested in modern JavaScript',
+                'Each dependent step adds a level of indentation, pushing the real code right and the error handling out of reach',
+                'The browser only runs one callback per page',
+                'Nested callbacks are always slower than promises',
+              ],
+              answer: 1,
+              explanation: 'The cost is legibility, not speed. Every dependency adds a level of nesting and another closing brace, so by the third or fourth level there is nowhere sensible to put an `if` and an error handler has to be threaded through every layer. Promises remove the nesting without removing the wait.',
+            },
+            {
+              id: 'quiz-js-l61-q4',
+              type: 'identify-error',
+              prompt: 'What is wrong with this snippet?',
+              code: 'const response = fetch(\'/api/users\')\nconst users = response.json()\nconsole.log(users.length)',
+              options: [
+                'fetch must be called with await before its result can be used',
+                'json() should be called without parentheses',
+                'A response cannot be stored in a const',
+                'Nothing — the promise resolves before the next line runs',
+              ],
+              answer: 0,
+              explanation: 'Without `await`, `response` is a promise and `users` is a promise of an array, so `users.length` is `undefined` and nothing throws to warn you. `fetch` hands you the envelope asynchronously no matter where it appears; add `await` on both lines.',
+            },
+            {
+              id: 'quiz-js-l61-q5',
+              type: 'blank',
+              prompt: 'Which method waits for every promise you give it and rejects as soon as the first one fails?',
+              answers: [
+                'promise.all',
+                'promise.allsettled',
+              ],
+              explanation: '`Promise.all` needs every result to be meaningful, so it rejects on the first failure and discards the successes. `Promise.allSettled` always waits for the lot and reports each outcome with a `status` of `fulfilled` or `rejected`, which is the one you want when partial results still have value.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -650,79 +707,6 @@ fetchUser()
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s50',
-      title: 'Asynchronous code check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s50-q1',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `console.log('one')
-setTimeout(function () {
-  console.log('two')
-}, 1000)
-console.log('three')`,
-          options: [
-            'one, two, three',
-            'one, three, two',
-            'three, one, two',
-            'one, two, three, but two arrives immediately',
-          ],
-          answer: 1,
-          explanation:
-            'The current function runs to its end before the browser gets control back, so `one` and `three` both print immediately. Only once the call stack is empty does the event loop run the expired timer. Writing is not running — the position of a `setTimeout` in your file says nothing about when its callback fires.',
-        },
-        {
-          id: 'quiz-js-s50-q2',
-          type: 'true-false',
-          prompt: 'A promise can be fulfilled and then rejected later, and `then` will run for both.',
-          answer: false,
-          explanation:
-            'A promise settles exactly once, and only the first outcome counts. The second call to `resolve` or `reject` is silently ignored, which is what lets `then` code assume a single, stable result instead of checking whether anything changed.',
-        },
-        {
-          id: 'quiz-js-s50-q3',
-          type: 'multiple-choice',
-          prompt: 'Why is the callback pyramid hard to maintain?',
-          options: [
-            'Callbacks cannot be nested in modern JavaScript',
-            'Each dependent step adds a level of indentation, pushing the real code right and the error handling out of reach',
-            'The browser only runs one callback per page',
-            'Nested callbacks are always slower than promises',
-          ],
-          answer: 1,
-          explanation:
-            'The cost is legibility, not speed. Every dependency adds a level of nesting and another closing brace, so by the third or fourth level there is nowhere sensible to put an `if` and an error handler has to be threaded through every layer. Promises remove the nesting without removing the wait.',
-        },
-        {
-          id: 'quiz-js-s50-q4',
-          type: 'identify-error',
-          prompt: 'What is wrong with this snippet?',
-          code: `const response = fetch('/api/users')
-const users = response.json()
-console.log(users.length)`,
-          options: [
-            'fetch must be called with await before its result can be used',
-            'json() should be called without parentheses',
-            'A response cannot be stored in a const',
-            'Nothing — the promise resolves before the next line runs',
-          ],
-          answer: 0,
-          explanation:
-            'Without `await`, `response` is a promise and `users` is a promise of an array, so `users.length` is `undefined` and nothing throws to warn you. `fetch` hands you the envelope asynchronously no matter where it appears; add `await` on both lines.',
-        },
-        {
-          id: 'quiz-js-s50-q5',
-          type: 'blank',
-          prompt: 'Which method waits for every promise you give it and rejects as soon as the first one fails?',
-          answers: ['promise.all', 'promise.allsettled'],
-          explanation:
-            '`Promise.all` needs every result to be meaningful, so it rejects on the first failure and discards the successes. `Promise.allSettled` always waits for the lot and reports each outcome with a `status` of `fulfilled` or `rejected`, which is the one you want when partial results still have value.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s51',
@@ -743,6 +727,72 @@ console.log(users.length)`,
           'Choose between Promise.all, allSettled, race and any',
         ],
         xp: 60,
+        quiz: {
+          id: 'quiz-js-l62',
+          title: 'Promises quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l62-q1',
+              type: 'multiple-choice',
+              prompt: 'What does the executor function passed to `new Promise` do?',
+              options: [
+                'It runs when the promise is awaited',
+                'It runs immediately when the promise is created, and settles it once',
+                'It runs on every `then` in the chain',
+                'It returns the value the promise will eventually hold',
+              ],
+              answer: 1,
+              explanation: 'The executor is synchronous: it runs during construction, and its job is to call `resolve` or `reject` later. That is why a promise can already be fulfilled before you attach anything, and why attaching a handler after the fact still receives the value.',
+            },
+            {
+              id: 'quiz-js-l62-q2',
+              type: 'true-false',
+              prompt: 'A promise that has been rejected can later be changed to fulfilled by calling `resolve`.',
+              answer: false,
+              explanation: 'Settlement happens once. The second call is ignored, and there is no API to reset a promise. Code that reassigns the variable holding a promise instead creates a second, unrelated promise — everyone still holding the old one keeps waiting for a value that will never arrive.',
+            },
+            {
+              id: 'quiz-js-l62-q3',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'Promise.resolve(2)\n  .then(function (n) { return n * 3 })\n  .then(function (n) { console.log(n) })',
+              options: [
+                '2',
+                '3',
+                '6',
+                'undefined',
+              ],
+              answer: 2,
+              explanation: 'Each `then` returns a new promise fulfilled with what its callback returned, so the second link receives 6. Forget the `return n * 3` and the next link gets `undefined` — that is the most common way a promise chain goes quietly wrong.',
+            },
+            {
+              id: 'quiz-js-l62-q4',
+              type: 'identify-error',
+              prompt: 'What is wrong with this chain?',
+              code: 'fetch(\'/api/posts\')\n  .then(function (r) { r.json() })\n  .then(function (data) {\n    console.log(data.items.length)\n  })\n  .catch(showError)',
+              options: [
+                'The first then is missing a return, so the second link receives undefined',
+                'catch must be attached before then in a chain',
+                'forEach and map are not allowed inside a promise callback',
+                'response.json() must be awaited rather than returned',
+              ],
+              answer: 0,
+              explanation: 'A `then` callback that does not return hands the next link `undefined`, not the parsed body — so the error appears as "cannot read length of undefined" one line away from the mistake. Returning the promise from `r.json()` (or awaiting it inside an async callback) is what passes the data along.',
+            },
+            {
+              id: 'quiz-js-l62-q5',
+              type: 'blank',
+              prompt: 'Which combinator waits for every promise and hands back one `{ status, value }` record each, never rejecting?',
+              answers: [
+                'promise.allsettled',
+                'promise.all settled',
+                'allsettled',
+              ],
+              explanation: '`Promise.allSettled` reports outcomes instead of collapsing them into a single success or failure, which makes it right for several independent widgets where one failure should not blank the page. `Promise.all` needs every result and rejects on the first failure.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1042,75 +1092,6 @@ waitAll([delay(20), delay(20)]).then(function (results) {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s51',
-      title: 'Promises check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s51-q1',
-          type: 'multiple-choice',
-          prompt: 'What does the executor function passed to `new Promise` do?',
-          options: [
-            'It runs when the promise is awaited',
-            'It runs immediately when the promise is created, and settles it once',
-            'It runs on every `then` in the chain',
-            'It returns the value the promise will eventually hold',
-          ],
-          answer: 1,
-          explanation:
-            'The executor is synchronous: it runs during construction, and its job is to call `resolve` or `reject` later. That is why a promise can already be fulfilled before you attach anything, and why attaching a handler after the fact still receives the value.',
-        },
-        {
-          id: 'quiz-js-s51-q2',
-          type: 'true-false',
-          prompt: 'A promise that has been rejected can later be changed to fulfilled by calling `resolve`.',
-          answer: false,
-          explanation:
-            'Settlement happens once. The second call is ignored, and there is no API to reset a promise. Code that reassigns the variable holding a promise instead creates a second, unrelated promise — everyone still holding the old one keeps waiting for a value that will never arrive.',
-        },
-        {
-          id: 'quiz-js-s51-q3',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `Promise.resolve(2)
-  .then(function (n) { return n * 3 })
-  .then(function (n) { console.log(n) })`,
-          options: ['2', '3', '6', 'undefined'],
-          answer: 2,
-          explanation:
-            'Each `then` returns a new promise fulfilled with what its callback returned, so the second link receives 6. Forget the `return n * 3` and the next link gets `undefined` — that is the most common way a promise chain goes quietly wrong.',
-        },
-        {
-          id: 'quiz-js-s51-q4',
-          type: 'identify-error',
-          prompt: 'What is wrong with this chain?',
-          code: `fetch('/api/posts')
-  .then(function (r) { r.json() })
-  .then(function (data) {
-    console.log(data.items.length)
-  })
-  .catch(showError)`,
-          options: [
-            'The first then is missing a return, so the second link receives undefined',
-            'catch must be attached before then in a chain',
-            'forEach and map are not allowed inside a promise callback',
-            'response.json() must be awaited rather than returned',
-          ],
-          answer: 0,
-          explanation:
-            'A `then` callback that does not return hands the next link `undefined`, not the parsed body — so the error appears as "cannot read length of undefined" one line away from the mistake. Returning the promise from `r.json()` (or awaiting it inside an async callback) is what passes the data along.',
-        },
-        {
-          id: 'quiz-js-s51-q5',
-          type: 'blank',
-          prompt: 'Which combinator waits for every promise and hands back one `{ status, value }` record each, never rejecting?',
-          answers: ['promise.allsettled', 'promise.all settled', 'allsettled'],
-          explanation:
-            '`Promise.allSettled` reports outcomes instead of collapsing them into a single success or failure, which makes it right for several independent widgets where one failure should not blank the page. `Promise.all` needs every result and rejects on the first failure.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s52',
@@ -1131,6 +1112,72 @@ waitAll([delay(20), delay(20)]).then(function (results) {
           'Handle failures with try/catch and keep cleanup in finally',
         ],
         xp: 60,
+        quiz: {
+          id: 'quiz-js-l63',
+          title: 'Async and await quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l63-q1',
+              type: 'multiple-choice',
+              prompt: 'What does `await` suspend?',
+              options: [
+                'The whole script, until the promise settles',
+                'Only the async function that contains it',
+                'Every function in the current file',
+                'Nothing — it blocks the thread until the value is ready',
+              ],
+              answer: 1,
+              explanation: 'Only the enclosing function stops; control returns to the event loop, which is why clicks and timers keep firing. The code after the `await` resumes when the promise settles, and everything queued outside runs in the meantime — which is exactly why the line after an un-awaited call usually beats the data it wanted.',
+            },
+            {
+              id: 'quiz-js-l63-q2',
+              type: 'true-false',
+              prompt: 'An async function that does nothing but `return 42` gives you the number 42 to the caller.',
+              answer: false,
+              explanation: 'It gives you a promise fulfilled with 42. `async` wraps the return value unconditionally, so every caller must `await` it or attach a `.then`. Reading `.name` straight off the call result gives `undefined`, with no error to point at the mistake.',
+            },
+            {
+              id: 'quiz-js-l63-q3',
+              type: 'identify-error',
+              prompt: 'What is wrong with this snippet?',
+              code: 'async function loadAll(ids) {\n  const users = []\n  for (const id of ids) {\n    users.push(await getUser(id))\n  }\n  return users\n}',
+              options: [
+                'users should be declared with let before the loop',
+                'Awaiting inside the loop runs every request one after another instead of together',
+                'A for...of loop cannot be used in an async function',
+                'push returns a value, so await is applied to the wrong thing',
+              ],
+              answer: 1,
+              explanation: 'Each await completes before the next iteration starts, so ten ids cost ten round trips. Start them all with `ids.map(getUser)` and then `await Promise.all(...)`. Go serial only when each step depends on the previous result, such as paging through an unknown number of pages.',
+            },
+            {
+              id: 'quiz-js-l63-q4',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'async function work() {\n  console.log(\'1\')\n  await Promise.resolve()\n  console.log(\'3\')\n}\nwork()\nconsole.log(\'2\')',
+              options: [
+                '1, 2, 3',
+                '1, 3, 2',
+                '1, 2, then never 3',
+                '2, 1, 3',
+              ],
+              answer: 0,
+              explanation: '`work()` runs synchronously up to the first `await`, so `1` prints, then the function returns to the caller and `2` prints. The promise was already resolved, so the microtask queue runs next and `3` follows. Even a zero-cost await defers the rest of the function.',
+            },
+            {
+              id: 'quiz-js-l63-q5',
+              type: 'blank',
+              prompt: 'Which block runs whether the `try` succeeded or failed, and is the right place to re-enable a disabled button?',
+              answers: [
+                'finally',
+                'finally block',
+                'finally()',
+              ],
+              explanation: '`finally` runs on both paths and does not swallow the value or the error, so cleanup belongs there. `catch` alone would leave the button disabled whenever the request failed — which is the case where the user most needs to try again.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1427,80 +1474,6 @@ loadProfile().then(function (profile) {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s52',
-      title: 'Async and await check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s52-q1',
-          type: 'multiple-choice',
-          prompt: 'What does `await` suspend?',
-          options: [
-            'The whole script, until the promise settles',
-            'Only the async function that contains it',
-            'Every function in the current file',
-            'Nothing — it blocks the thread until the value is ready',
-          ],
-          answer: 1,
-          explanation:
-            'Only the enclosing function stops; control returns to the event loop, which is why clicks and timers keep firing. The code after the `await` resumes when the promise settles, and everything queued outside runs in the meantime — which is exactly why the line after an un-awaited call usually beats the data it wanted.',
-        },
-        {
-          id: 'quiz-js-s52-q2',
-          type: 'true-false',
-          prompt: 'An async function that does nothing but `return 42` gives you the number 42 to the caller.',
-          answer: false,
-          explanation:
-            'It gives you a promise fulfilled with 42. `async` wraps the return value unconditionally, so every caller must `await` it or attach a `.then`. Reading `.name` straight off the call result gives `undefined`, with no error to point at the mistake.',
-        },
-        {
-          id: 'quiz-js-s52-q3',
-          type: 'identify-error',
-          prompt: 'What is wrong with this snippet?',
-          code: `async function loadAll(ids) {
-  const users = []
-  for (const id of ids) {
-    users.push(await getUser(id))
-  }
-  return users
-}`,
-          options: [
-            'users should be declared with let before the loop',
-            'Awaiting inside the loop runs every request one after another instead of together',
-            'A for...of loop cannot be used in an async function',
-            'push returns a value, so await is applied to the wrong thing',
-          ],
-          answer: 1,
-          explanation:
-            'Each await completes before the next iteration starts, so ten ids cost ten round trips. Start them all with `ids.map(getUser)` and then `await Promise.all(...)`. Go serial only when each step depends on the previous result, such as paging through an unknown number of pages.',
-        },
-        {
-          id: 'quiz-js-s52-q4',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `async function work() {
-  console.log('1')
-  await Promise.resolve()
-  console.log('3')
-}
-work()
-console.log('2')`,
-          options: ['1, 2, 3', '1, 3, 2', '1, 2, then never 3', '2, 1, 3'],
-          answer: 0,
-          explanation:
-            '`work()` runs synchronously up to the first `await`, so `1` prints, then the function returns to the caller and `2` prints. The promise was already resolved, so the microtask queue runs next and `3` follows. Even a zero-cost await defers the rest of the function.',
-        },
-        {
-          id: 'quiz-js-s52-q5',
-          type: 'blank',
-          prompt: 'Which block runs whether the `try` succeeded or failed, and is the right place to re-enable a disabled button?',
-          answers: ['finally', 'finally block', 'finally()'],
-          explanation:
-            '`finally` runs on both paths and does not swallow the value or the error, so cleanup belongs there. `catch` alone would leave the button disabled whenever the request failed — which is the case where the user most needs to try again.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s53',
@@ -1521,6 +1494,72 @@ console.log('2')`,
           'Choose between textContent, innerHTML and attributes safely',
         ],
         xp: 60,
+        quiz: {
+          id: 'quiz-js-l64',
+          title: 'The DOM and its methods quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l64-q1',
+              type: 'multiple-choice',
+              prompt: 'What is the DOM?',
+              options: [
+                'The HTML source of the page, as a string',
+                'The browser\'s live tree of objects, one per node, which JavaScript reads and writes',
+                'The CSS applied to the page, compiled to objects',
+                'A built-in library you have to import',
+              ],
+              answer: 1,
+              explanation: 'The DOM is a live model, not the source text. Writing to it changes what is on screen without touching your file, and an element created in JavaScript lands in exactly the same tree as one written in markup.',
+            },
+            {
+              id: 'quiz-js-l64-q2',
+              type: 'true-false',
+              prompt: '`document.write("hello")` is the safest way to put text on a page.',
+              answer: false,
+              explanation: '`document.write` injects raw HTML into the parser stream and, when called after load, replaces everything already on the page. Build an element and set `textContent` instead — same amount of code, no destruction and no injection risk.',
+            },
+            {
+              id: 'quiz-js-l64-q3',
+              type: 'code-output',
+              prompt: 'What does this produce in the page?',
+              code: 'const list = document.querySelector(\'#tasks\')\nconst item = document.createElement(\'li\')\nitem.textContent = \'Buy milk\'\nlist.appendChild(item)',
+              options: [
+                'A li reading "Buy milk" inside #tasks',
+                'Nothing — createElement only makes an element in memory',
+                'A list of three items, because appendChild runs once per property set',
+                'An error, because appendChild only works on elements you created in the same statement',
+              ],
+              answer: 0,
+              explanation: 'That is the whole pattern: create, fill, attach. `createElement` alone would indeed put nothing on the page — it is `appendChild` that inserts the node and triggers the repaint, and it can be called from a different statement, or a different function, entirely.',
+            },
+            {
+              id: 'quiz-js-l64-q4',
+              type: 'identify-error',
+              prompt: 'What is wrong with this script?',
+              code: '<head>\n  <script>\n    const out = document.getElementById(\'status\')\n    out.textContent = \'ready\'\n  </script>\n</head>\n<body>\n  <p id="status">loading</p>\n</body>',
+              options: [
+                'getElementById cannot be used in a script',
+                'The script runs before the parser reaches the p element, so out is null',
+                'textContent cannot be set from a script in the head',
+                'The id must be written as #status in getElementById',
+              ],
+              answer: 1,
+              explanation: 'Scripts execute as the parser reaches them, so a script in `<head>` runs before the body exists and the lookup returns null. Move the tag to the end of `<body>`, or wrap the code in a `DOMContentLoaded` listener — both fix it.',
+            },
+            {
+              id: 'quiz-js-l64-q5',
+              type: 'blank',
+              prompt: 'Which property should you use to write plain text into an element, given that its value might have come from a user?',
+              answers: [
+                'textcontent',
+                'textcontent property',
+                'el.textcontent',
+              ],
+              explanation: '`textContent` treats every character as text, so a `<` stays a `<` and nothing executes. `innerHTML` parses the string as markup, which is what turns a pasted `<img onerror=...>` into a script running on your page.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1782,83 +1821,5 @@ button.addEventListener('click', function () {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s53',
-      title: 'DOM intro check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s53-q1',
-          type: 'multiple-choice',
-          prompt: 'What is the DOM?',
-          options: [
-            'The HTML source of the page, as a string',
-            "The browser's live tree of objects, one per node, which JavaScript reads and writes",
-            'The CSS applied to the page, compiled to objects',
-            'A built-in library you have to import',
-          ],
-          answer: 1,
-          explanation:
-            'The DOM is a live model, not the source text. Writing to it changes what is on screen without touching your file, and an element created in JavaScript lands in exactly the same tree as one written in markup.',
-        },
-        {
-          id: 'quiz-js-s53-q2',
-          type: 'true-false',
-          prompt: '`document.write("hello")` is the safest way to put text on a page.',
-          answer: false,
-          explanation:
-            '`document.write` injects raw HTML into the parser stream and, when called after load, replaces everything already on the page. Build an element and set `textContent` instead — same amount of code, no destruction and no injection risk.',
-        },
-        {
-          id: 'quiz-js-s53-q3',
-          type: 'code-output',
-          prompt: 'What does this produce in the page?',
-          code: `const list = document.querySelector('#tasks')
-const item = document.createElement('li')
-item.textContent = 'Buy milk'
-list.appendChild(item)`,
-          options: [
-            'A li reading "Buy milk" inside #tasks',
-            'Nothing — createElement only makes an element in memory',
-            'A list of three items, because appendChild runs once per property set',
-            'An error, because appendChild only works on elements you created in the same statement',
-          ],
-          answer: 0,
-          explanation:
-            'That is the whole pattern: create, fill, attach. `createElement` alone would indeed put nothing on the page — it is `appendChild` that inserts the node and triggers the repaint, and it can be called from a different statement, or a different function, entirely.',
-        },
-        {
-          id: 'quiz-js-s53-q4',
-          type: 'identify-error',
-          prompt: 'What is wrong with this script?',
-          code: `<head>
-  <script>
-    const out = document.getElementById('status')
-    out.textContent = 'ready'
-  </script>
-</head>
-<body>
-  <p id="status">loading</p>
-</body>`,
-          options: [
-            'getElementById cannot be used in a script',
-            'The script runs before the parser reaches the p element, so out is null',
-            'textContent cannot be set from a script in the head',
-            'The id must be written as #status in getElementById',
-          ],
-          answer: 1,
-          explanation:
-            'Scripts execute as the parser reaches them, so a script in `<head>` runs before the body exists and the lookup returns null. Move the tag to the end of `<body>`, or wrap the code in a `DOMContentLoaded` listener — both fix it.',
-        },
-        {
-          id: 'quiz-js-s53-q5',
-          type: 'blank',
-          prompt: 'Which property should you use to write plain text into an element, given that its value might have come from a user?',
-          answers: ['textcontent', 'textcontent property', 'el.textcontent'],
-          explanation:
-            '`textContent` treats every character as text, so a `<` stays a `<` and nothing executes. `innerHTML` parses the string as markup, which is what turns a pasted `<img onerror=...>` into a script running on your page.',
-        },
-      ],
-    },
   },
 ]

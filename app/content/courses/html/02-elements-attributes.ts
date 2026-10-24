@@ -17,6 +17,66 @@ export const htmlElementsSections: Section[] = [
           'Sort an unfamiliar element into a category you already know',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-html-l7',
+          title: 'The element catalogue quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l7-q1',
+              type: 'multiple-choice',
+              prompt: 'Which of these is NOT a void element?',
+              options: [
+                '<br>',
+                '<img>',
+                '<textarea>',
+                '<hr>',
+              ],
+              answer: 2,
+              explanation: '<textarea> holds content, so it needs a closing tag. Writing <textarea /> makes it swallow the rest of the document.',
+            },
+            {
+              id: 'quiz-html-l7-q2',
+              type: 'true-false',
+              prompt: 'Writing </img> is a harmless way of closing an image element.',
+              answer: false,
+              explanation: 'Void elements have no closing tag. The parser turns a stray </img> into a real element, which then wraps whatever follows it.',
+            },
+            {
+              id: 'quiz-html-l7-q3',
+              type: 'true-false',
+              prompt: 'An HTML5 parser treats <br> and <br /> as the same element.',
+              answer: true,
+              explanation: 'The slash is optional in HTML5; it exists as a visual hint that no closing tag is coming. Both forms produce one void br element.',
+            },
+            {
+              id: 'quiz-html-l7-q4',
+              type: 'multiple-choice',
+              prompt: 'Why do void elements such as <img> and <input> have no closing tag?',
+              options: [
+                'Because they always hold nothing, so there is no content to close',
+                'Because browsers have not implemented closing tags for them yet',
+                'Because they are deprecated',
+                'Because they must be written in uppercase in the specification',
+              ],
+              answer: 0,
+              explanation: 'A closing tag marks the end of content. A void element has no content to end, so a closing tag would be a stray tag rather than a pair.',
+            },
+            {
+              id: 'quiz-html-l7-q5',
+              type: 'multiple-choice',
+              prompt: 'Which of these elements must have a closing tag?',
+              options: [
+                '<input>',
+                '<link>',
+                '<style>',
+                '<hr>',
+              ],
+              answer: 2,
+              explanation: '<style> holds CSS text, so it needs a closing tag. <input>, <link> and <hr> are void and hold no content.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -166,6 +226,76 @@ code { background: #f1f5f9; padding: 0.1rem 0.3rem; border-radius: 4px; font-siz
           'Explain why a sectioning element changes the heading outline',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-html-l8',
+          title: 'Grouping and sectioning quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l8-q1',
+              type: 'multiple-choice',
+              prompt: 'Which element names a self-contained piece of content that would still make sense syndicated on its own?',
+              options: [
+                '<div>',
+                '<section>',
+                '<article>',
+                '<span>',
+              ],
+              answer: 2,
+              explanation: '<article> is specifically for content that stands alone. <section> is a topic within a page and <div> says nothing at all.',
+            },
+            {
+              id: 'quiz-html-l8-q2',
+              type: 'blank',
+              prompt: 'Wrapping content in a <section> creates a new outline level, so which heading element is correct for the title of a section that sits under the page h1?',
+              answers: [
+                'h2',
+                '<h2>',
+                'h2 heading',
+              ],
+              explanation: 'Because the section is nested under the page heading, its title is one level deeper. The number follows the tree, not the tag name.',
+            },
+            {
+              id: 'quiz-html-l8-q3',
+              type: 'multiple-choice',
+              prompt: 'When is a plain div the right choice?',
+              options: [
+                'Never, always prefer a sectioning element',
+                'When the grouping is purely visual and you have no meaningful name for it',
+                'When the element contains text',
+                'When the element needs a class for styling',
+              ],
+              answer: 1,
+              explanation: 'A div is exactly right for a grouping you cannot name. It becomes wrong only when it is standing in for a region that does have a meaning.',
+            },
+            {
+              id: 'quiz-html-l8-q4',
+              type: 'multiple-choice',
+              prompt: 'Which element is correct for a sidebar of links tangentially related to the main article?',
+              options: [
+                '<article>',
+                '<main>',
+                '<aside>',
+                '<section>',
+              ],
+              answer: 2,
+              explanation: '<aside> marks content related to its surroundings but not part of the main flow, which is exactly what a sidebar is.',
+            },
+            {
+              id: 'quiz-html-l8-q5',
+              type: 'multiple-choice',
+              prompt: 'Why should a <section> almost always begin with a heading?',
+              options: [
+                'The browser refuses to render a section without one',
+                'A heading is required to make the section valid HTML',
+                'It gives the section a default border',
+                'Without a heading the section is an anonymous region in the outline',
+              ],
+              answer: 3,
+              explanation: 'A section is a named topic by intent, and the heading is what supplies the name. Without it the outline contains a region nobody can identify.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -284,62 +414,6 @@ code { background: #f1f5f9; padding: 0.1rem 0.3rem; border-radius: 4px; font-siz
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s5',
-      title: 'HTML Elements quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s5-q1',
-          type: 'multiple-choice',
-          prompt: 'Which of these is NOT a void element?',
-          options: ['<br>', '<img>', '<textarea>', '<hr>'],
-          answer: 2,
-          explanation:
-            '<textarea> holds content, so it needs a closing tag. Writing <textarea /> makes it swallow the rest of the document.',
-        },
-        {
-          id: 'quiz-html-s5-q2',
-          type: 'true-false',
-          prompt: 'Writing </img> is a harmless way of closing an image element.',
-          answer: false,
-          explanation:
-            'Void elements have no closing tag. The parser turns a stray </img> into a real element, which then wraps whatever follows it.',
-        },
-        {
-          id: 'quiz-html-s5-q3',
-          type: 'multiple-choice',
-          prompt: 'Which element names a self-contained piece of content that would still make sense syndicated on its own?',
-          options: ['<div>', '<section>', '<article>', '<span>'],
-          answer: 2,
-          explanation:
-            '<article> is specifically for content that stands alone. <section> is a topic within a page and <div> says nothing at all.',
-        },
-        {
-          id: 'quiz-html-s5-q4',
-          type: 'blank',
-          prompt:
-            'Wrapping content in a <section> creates a new outline level, so which heading element is correct for the title of a section that sits under the page h1?',
-          answers: ['h2', '<h2>', 'h2 heading'],
-          explanation:
-            'Because the section is nested under the page heading, its title is one level deeper. The number follows the tree, not the tag name.',
-        },
-        {
-          id: 'quiz-html-s5-q5',
-          type: 'multiple-choice',
-          prompt: 'When is a plain div the right choice?',
-          options: [
-            'Never, always prefer a sectioning element',
-            'When the grouping is purely visual and you have no meaningful name for it',
-            'When the element contains text',
-            'When the element needs a class for styling',
-          ],
-          answer: 1,
-          explanation:
-            'A div is exactly right for a grouping you cannot name. It becomes wrong only when it is standing in for a region that does have a meaning.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s6',
@@ -357,6 +431,72 @@ code { background: #f1f5f9; padding: 0.1rem 0.3rem; border-radius: 4px; font-siz
           'Choose a sensible attribute for a job rather than inventing one',
         ],
         xp: 35,
+        quiz: {
+          id: 'quiz-html-l9',
+          title: 'Writing attributes quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l9-q1',
+              type: 'multiple-choice',
+              prompt: 'What happens with class=link link--primary written without quotes?',
+              options: [
+                'The class becomes "link link--primary" as intended',
+                'The class becomes "link" and link--primary is treated as a separate attribute',
+                'The attribute is dropped entirely',
+                'It is a syntax error and nothing renders',
+              ],
+              answer: 1,
+              explanation: 'An unquoted value ends at the first space. Everything after that is parsed as another attribute name, which is how broken class lists happen.',
+            },
+            {
+              id: 'quiz-html-l9-q2',
+              type: 'multiple-choice',
+              prompt: 'Why is a title attribute a poor substitute for a label?',
+              options: [
+                'It is not supported in modern browsers',
+                'It only appears on mouse hover, so touch and keyboard users never see it',
+                'It cannot contain spaces',
+                'It overrides the accessible name in every screen reader',
+              ],
+              answer: 1,
+              explanation: 'A tooltip is invisible on touch devices and invisible to keyboard users until hovered. Form controls need a real <label>.',
+            },
+            {
+              id: 'quiz-html-l9-q3',
+              type: 'multiple-choice',
+              prompt: 'Where does an attribute belong in an element such as a link?',
+              options: [
+                'Inside the opening tag, after the element name',
+                'Between the opening and closing tags, next to the content',
+                'After the closing tag',
+                'In the <head>, once for the whole page',
+              ],
+              answer: 0,
+              explanation: 'Attributes configure the element, so they live in the opening tag as name/value pairs. The content goes between the two tags.',
+            },
+            {
+              id: 'quiz-html-l9-q4',
+              type: 'true-false',
+              prompt: 'Attribute names are case-sensitive in HTML, so HREF and href are treated as different attributes.',
+              answer: false,
+              explanation: 'HTML attribute names are case-insensitive, and the parser lowercases them, so HREF becomes href. Attribute values are a different matter.',
+            },
+            {
+              id: 'quiz-html-l9-q5',
+              type: 'multiple-choice',
+              prompt: 'Which attribute should accompany target="_blank" on a link?',
+              options: [
+                'rel="noopener"',
+                'id="noopener"',
+                'class="noopener"',
+                'title="noopener"',
+              ],
+              answer: 0,
+              explanation: 'rel="noopener" stops the new page from reaching back through window.opener, which is a security and performance safeguard.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -475,6 +615,68 @@ a { color: #0f766e; }`,
           'Store and read a custom value with a data attribute',
         ],
         xp: 35,
+        quiz: {
+          id: 'quiz-html-l10',
+          title: 'Global, boolean and data attributes quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l10-q1',
+              type: 'true-false',
+              prompt: 'Writing disabled="false" on a button enables it.',
+              answer: false,
+              explanation: 'Boolean attributes are controlled by presence. The attribute is present, so the control is disabled no matter what the value says.',
+            },
+            {
+              id: 'quiz-html-l10-q2',
+              type: 'multiple-choice',
+              prompt: 'How do you read a data-user-id attribute from JavaScript?',
+              options: [
+                'element.getAttribute("userId")',
+                'element.dataset.userId',
+                'element.data["user-id"]',
+                'element.attributes.userId',
+              ],
+              answer: 1,
+              explanation: 'Data attributes are exposed on the dataset object with the name after data- converted to camelCase.',
+            },
+            {
+              id: 'quiz-html-l10-q3',
+              type: 'blank',
+              prompt: 'Which boolean attribute hides an element completely, overriding any CSS you write?',
+              answers: [
+                'hidden',
+              ],
+              explanation: '`hidden` is in the UA stylesheet as `display: none`, and it wins over author styles in the same way any other user-agent rule does.',
+            },
+            {
+              id: 'quiz-html-l10-q4',
+              type: 'multiple-choice',
+              prompt: 'What does tabindex="-1" do to an element?',
+              options: [
+                'Removes it from the page',
+                'Makes it the first stop when the user presses Tab',
+                'Makes it focusable by script but keeps it out of the normal tab order',
+                'Disables keyboard interaction entirely',
+              ],
+              answer: 2,
+              explanation: 'A negative tabindex lets you call focus() on the element without inserting it into the sequence a keyboard user tabs through.',
+            },
+            {
+              id: 'quiz-html-l10-q5',
+              type: 'multiple-choice',
+              prompt: 'The markup is <button data-count="3">. What does button.dataset.count return?',
+              options: [
+                'The number 3',
+                'The string "3"',
+                'The string "data-count"',
+                'undefined, because count is not a valid property',
+              ],
+              answer: 1,
+              explanation: 'A data attribute value is always a string. Convert it with Number() if you need to do arithmetic.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -614,71 +816,6 @@ button.dataset.confirm  // "Delete this file?"`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s6',
-      title: 'HTML Attributes quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s6-q1',
-          type: 'multiple-choice',
-          prompt: 'What happens with class=link link--primary written without quotes?',
-          options: [
-            'The class becomes "link link--primary" as intended',
-            'The class becomes "link" and link--primary is treated as a separate attribute',
-            'The attribute is dropped entirely',
-            'It is a syntax error and nothing renders',
-          ],
-          answer: 1,
-          explanation:
-            'An unquoted value ends at the first space. Everything after that is parsed as another attribute name, which is how broken class lists happen.',
-        },
-        {
-          id: 'quiz-html-s6-q2',
-          type: 'true-false',
-          prompt: 'Writing disabled="false" on a button enables it.',
-          answer: false,
-          explanation:
-            'Boolean attributes are controlled by presence. The attribute is present, so the control is disabled no matter what the value says.',
-        },
-        {
-          id: 'quiz-html-s6-q3',
-          type: 'multiple-choice',
-          prompt: 'How do you read a data-user-id attribute from JavaScript?',
-          options: [
-            'element.getAttribute("userId")',
-            'element.dataset.userId',
-            'element.data["user-id"]',
-            'element.attributes.userId',
-          ],
-          answer: 1,
-          explanation:
-            'Data attributes are exposed on the dataset object with the name after data- converted to camelCase.',
-        },
-        {
-          id: 'quiz-html-s6-q4',
-          type: 'blank',
-          prompt: 'Which boolean attribute hides an element completely, overriding any CSS you write?',
-          answers: ['hidden'],
-          explanation:
-            '`hidden` is in the UA stylesheet as `display: none`, and it wins over author styles in the same way any other user-agent rule does.',
-        },
-        {
-          id: 'quiz-html-s6-q5',
-          type: 'multiple-choice',
-          prompt: 'Why is a title attribute a poor substitute for a label?',
-          options: [
-            'It is not supported in modern browsers',
-            'It only appears on mouse hover, so touch and keyboard users never see it',
-            'It cannot contain spaces',
-            'It overrides the accessible name in every screen reader',
-          ],
-          answer: 1,
-          explanation:
-            'A tooltip is invisible on touch devices and invisible to keyboard users until hovered. Form controls need a real <label>.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s7',
@@ -696,6 +833,70 @@ button.dataset.confirm  // "Delete this file?"`,
           'Choose a level based on nesting depth rather than appearance',
         ],
         xp: 30,
+        quiz: {
+          id: 'quiz-html-l11',
+          title: 'HTML Headings quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l11-q1',
+              type: 'multiple-choice',
+              prompt: 'What does the number in an h3 element mean?',
+              options: [
+                'The font size to use',
+                'The depth of this heading in the document outline',
+                'The order the heading appears on the page',
+                'The importance of the heading for search engines',
+              ],
+              answer: 1,
+              explanation: 'The number is a nesting depth. Size is a styling decision and belongs in CSS.',
+            },
+            {
+              id: 'quiz-html-l11-q2',
+              type: 'true-false',
+              prompt: 'Going from an h4 back up to an h2 is a structural error.',
+              answer: false,
+              explanation: 'Going back up is unrestricted, because you have finished that subsection. Only skipping a level on the way down breaks the outline.',
+            },
+            {
+              id: 'quiz-html-l11-q3',
+              type: 'multiple-choice',
+              prompt: 'You need a seventh level of heading. What should you do?',
+              options: [
+                'Use h1 again',
+                'Use h6 and make the text smaller',
+                'Flatten the structure so h6 is deep enough',
+                'Use a div with a bold style',
+              ],
+              answer: 2,
+              explanation: 'Six levels is the whole range. If you genuinely need a seventh, the document is nested too deeply and the fix is structural.',
+            },
+            {
+              id: 'quiz-html-l11-q4',
+              type: 'blank',
+              prompt: 'How many h1 elements should a page have?',
+              answers: [
+                'one',
+                '1',
+                'exactly one',
+              ],
+              explanation: 'One h1 that names the page. More than one means the page has no single title.',
+            },
+            {
+              id: 'quiz-html-l11-q5',
+              type: 'multiple-choice',
+              prompt: 'Why does a broken heading outline matter beyond appearance?',
+              options: [
+                'Search engines penalise it',
+                'Screen reader users navigate pages by heading level, so a broken outline removes their fastest way around',
+                'Browsers refuse to render the page',
+                'It makes the page load slower',
+              ],
+              answer: 1,
+              explanation: 'Heading lists and rotor navigation are built entirely on levels. That is a primary way of moving through a long document without reading it linearly.',
+            },
+          ],
+        },
         content: [
       {
         type: 'text',
@@ -817,71 +1018,6 @@ button.dataset.confirm  // "Delete this file?"`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s7',
-      title: 'HTML Headings quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s7-q1',
-          type: 'multiple-choice',
-          prompt: 'What does the number in an h3 element mean?',
-          options: [
-            'The font size to use',
-            'The depth of this heading in the document outline',
-            'The order the heading appears on the page',
-            'The importance of the heading for search engines',
-          ],
-          answer: 1,
-          explanation:
-            'The number is a nesting depth. Size is a styling decision and belongs in CSS.',
-        },
-        {
-          id: 'quiz-html-s7-q2',
-          type: 'true-false',
-          prompt: 'Going from an h4 back up to an h2 is a structural error.',
-          answer: false,
-          explanation:
-            'Going back up is unrestricted, because you have finished that subsection. Only skipping a level on the way down breaks the outline.',
-        },
-        {
-          id: 'quiz-html-s7-q3',
-          type: 'multiple-choice',
-          prompt: 'You need a seventh level of heading. What should you do?',
-          options: [
-            'Use h1 again',
-            'Use h6 and make the text smaller',
-            'Flatten the structure so h6 is deep enough',
-            'Use a div with a bold style',
-          ],
-          answer: 2,
-          explanation:
-            'Six levels is the whole range. If you genuinely need a seventh, the document is nested too deeply and the fix is structural.',
-        },
-        {
-          id: 'quiz-html-s7-q4',
-          type: 'blank',
-          prompt: 'How many h1 elements should a page have?',
-          answers: ['one', '1', 'exactly one'],
-          explanation:
-            'One h1 that names the page. More than one means the page has no single title.',
-        },
-        {
-          id: 'quiz-html-s7-q5',
-          type: 'multiple-choice',
-          prompt: 'Why does a broken heading outline matter beyond appearance?',
-          options: [
-            'Search engines penalise it',
-            'Screen reader users navigate pages by heading level, so a broken outline removes their fastest way around',
-            'Browsers refuse to render the page',
-            'It makes the page load slower',
-          ],
-          answer: 1,
-          explanation:
-            'Heading lists and rotor navigation are built entirely on levels. That is a primary way of moving through a long document without reading it linearly.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s8',
@@ -899,6 +1035,69 @@ button.dataset.confirm  // "Delete this file?"`,
           'Choose an element for text that is not a paragraph of prose',
         ],
         xp: 30,
+        quiz: {
+          id: 'quiz-html-l12',
+          title: 'HTML Paragraphs quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l12-q1',
+              type: 'multiple-choice',
+              prompt: 'What does a blank line in your HTML source do?',
+              options: [
+                'It creates a visible gap in the page',
+                'Nothing, because the browser collapses runs of whitespace to a single space',
+                'It closes the current paragraph',
+                'It adds vertical margin',
+              ],
+              answer: 1,
+              explanation: 'Whitespace in the source is collapsed. Only elements create separation, which is why paragraphs need <p> tags rather than blank lines.',
+            },
+            {
+              id: 'quiz-html-l12-q2',
+              type: 'true-false',
+              prompt: 'A ul element written inside a p element will be nested inside the paragraph in the DOM.',
+              answer: false,
+              explanation: 'The parser closes the paragraph when it hits a block element. The list becomes a sibling, silently, and your source no longer matches the DOM.',
+            },
+            {
+              id: 'quiz-html-l12-q3',
+              type: 'multiple-choice',
+              prompt: 'Which element should hold a label attached to a form control?',
+              options: [
+                '<p>',
+                '<span>',
+                '<label>',
+                '<small>',
+              ],
+              answer: 2,
+              explanation: '<label> is not prose. It associates text with a control so clicking it focuses the field and screen readers announce the relationship.',
+            },
+            {
+              id: 'quiz-html-l12-q4',
+              type: 'blank',
+              prompt: 'Which element marks up a quotation from another source, and carries the source in a cite attribute?',
+              answers: [
+                'blockquote',
+                '<blockquote>',
+              ],
+              explanation: '<blockquote> marks the quotation itself. The optional cite attribute on it points at the source.',
+            },
+            {
+              id: 'quiz-html-l12-q5',
+              type: 'multiple-choice',
+              prompt: 'When should you split a paragraph?',
+              options: [
+                'When it reaches a fixed line length',
+                'When the idea changes',
+                'Whenever a sentence gets longer than the others',
+                'At the end of every sentence',
+              ],
+              answer: 1,
+              explanation: 'Split on meaning, not on width. A paragraph broken at a fixed column length reads badly on a phone, where the same text would fit on one screen.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1030,67 +1229,6 @@ pre { margin: 0; font-size: 11.5px; line-height: 1.5; white-space: pre-wrap; bac
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s8',
-      title: 'HTML Paragraphs quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s8-q1',
-          type: 'multiple-choice',
-          prompt: 'What does a blank line in your HTML source do?',
-          options: [
-            'It creates a visible gap in the page',
-            'Nothing, because the browser collapses runs of whitespace to a single space',
-            'It closes the current paragraph',
-            'It adds vertical margin',
-          ],
-          answer: 1,
-          explanation:
-            'Whitespace in the source is collapsed. Only elements create separation, which is why paragraphs need <p> tags rather than blank lines.',
-        },
-        {
-          id: 'quiz-html-s8-q2',
-          type: 'true-false',
-          prompt: 'A ul element written inside a p element will be nested inside the paragraph in the DOM.',
-          answer: false,
-          explanation:
-            'The parser closes the paragraph when it hits a block element. The list becomes a sibling, silently, and your source no longer matches the DOM.',
-        },
-        {
-          id: 'quiz-html-s8-q3',
-          type: 'multiple-choice',
-          prompt: 'Which element should hold a label attached to a form control?',
-          options: ['<p>', '<span>', '<label>', '<small>'],
-          answer: 2,
-          explanation:
-            '<label> is not prose. It associates text with a control so clicking it focuses the field and screen readers announce the relationship.',
-        },
-        {
-          id: 'quiz-html-s8-q4',
-          type: 'blank',
-          prompt:
-            'Which element marks up a quotation from another source, and carries the source in a cite attribute?',
-          answers: ['blockquote', '<blockquote>'],
-          explanation:
-            '<blockquote> marks the quotation itself. The optional cite attribute on it points at the source.',
-        },
-        {
-          id: 'quiz-html-s8-q5',
-          type: 'multiple-choice',
-          prompt: 'When should you split a paragraph?',
-          options: [
-            'When it reaches a fixed line length',
-            'When the idea changes',
-            'Whenever a sentence gets longer than the others',
-            'At the end of every sentence',
-          ],
-          answer: 1,
-          explanation:
-            'Split on meaning, not on width. A paragraph broken at a fixed column length reads badly on a phone, where the same text would fit on one screen.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s9',
@@ -1108,6 +1246,72 @@ pre { margin: 0; font-size: 11.5px; line-height: 1.5; white-space: pre-wrap; bac
           'Explain why b, i and u exist alongside the semantic elements',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-html-l13',
+          title: 'Semantic formatting elements quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l13-q1',
+              type: 'multiple-choice',
+              prompt: 'Which element should mark up text that carries importance or urgency?',
+              options: [
+                '<b>',
+                '<strong>',
+                '<em>',
+                '<span>',
+              ],
+              answer: 1,
+              explanation: '<strong> carries meaning. <b> only says "draw this in a bold face", which is a styling request.',
+            },
+            {
+              id: 'quiz-html-l13-q2',
+              type: 'true-false',
+              prompt: 'strong and em render identically by default in every browser.',
+              answer: false,
+              explanation: '<strong> is bold and <em> is italic by default, though you can restyle either. They are distinguishable both visually and to assistive technology.',
+            },
+            {
+              id: 'quiz-html-l13-q3',
+              type: 'multiple-choice',
+              prompt: 'Which element marks text that was deleted in a revision?',
+              options: [
+                '<del>',
+                '<ins>',
+                '<s>',
+                '<mark>',
+              ],
+              answer: 0,
+              explanation: '<del> and <ins> work as a pair for showing what changed, and both render with the conventional strikethrough and underline.',
+            },
+            {
+              id: 'quiz-html-l13-q4',
+              type: 'multiple-choice',
+              prompt: 'Which element is correct for a ship name or the title of a book inside a sentence?',
+              options: [
+                '<em>',
+                '<strong>',
+                '<mark>',
+                '<i>',
+              ],
+              answer: 3,
+              explanation: '<i> marks text in an alternate voice, such as a ship name or a title. <em> would add emphasis and change how the sentence reads.',
+            },
+            {
+              id: 'quiz-html-l13-q5',
+              type: 'multiple-choice',
+              prompt: 'Which element pairs with <del> to show text that was added in a revision?',
+              options: [
+                '<ins>',
+                '<mark>',
+                '<s>',
+                '<u>',
+              ],
+              answer: 0,
+              explanation: '<del> marks removed text and <ins> marks inserted text, so together they show what changed between two versions.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1254,6 +1458,69 @@ p { margin: 0 0 0.6rem; }`,
           'Identify the formatting element that cannot be replaced by CSS',
         ],
         xp: 30,
+        quiz: {
+          id: 'quiz-html-l14',
+          title: 'When formatting is the wrong tool quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l14-q1',
+              type: 'blank',
+              prompt: 'Which element is the one formatting choice that cannot be reproduced in CSS, because you cannot select arbitrary text yourself?',
+              answers: [
+                'mark',
+                '<mark>',
+              ],
+              explanation: 'User selection uses a system colour no stylesheet can override. <mark> is the only way to highlight text as relevant to the current context.',
+            },
+            {
+              id: 'quiz-html-l14-q2',
+              type: 'multiple-choice',
+              prompt: 'What should you use when text only needs to be large and coloured?',
+              options: [
+                '<big> and <font>',
+                'A <span> with a class, styled in CSS',
+                '<strong>',
+                'A heading element',
+              ],
+              answer: 1,
+              explanation: 'Size and colour are presentation, so they belong in a stylesheet. A span with a class keeps the document clean and the styling changeable.',
+            },
+            {
+              id: 'quiz-html-l14-q3',
+              type: 'multiple-choice',
+              prompt: 'Which element is obsolete and should not be used in modern HTML?',
+              options: [
+                '<font>',
+                '<small>',
+                '<strong>',
+                '<span>',
+              ],
+              answer: 0,
+              explanation: '<font> was removed from the specification because colour, size and face are presentation. CSS now does that job.',
+            },
+            {
+              id: 'quiz-html-l14-q4',
+              type: 'true-false',
+              prompt: 'Replacing a <b> element with a span and a class is always safe, because the two render the same.',
+              answer: false,
+              explanation: 'Rendering the same is not the test. <b> can carry the idea of a bold face for a product name; if removing it loses information for a non-visual reader, keep it.',
+            },
+            {
+              id: 'quiz-html-l14-q5',
+              type: 'multiple-choice',
+              prompt: 'What question settles whether to keep a semantic element or replace it with a styled span?',
+              options: [
+                'Which one is shorter to type',
+                'Which one renders faster',
+                'Does removing the element lose information for someone who cannot see the page',
+                'Does the element have a class attribute',
+              ],
+              answer: 2,
+              explanation: 'Semantic elements exist to carry meaning to tools and assistive technology. If nothing is lost by removing one, the styling was presentation and belongs in CSS.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1366,62 +1633,6 @@ p { margin: 0 0 0.6rem; }`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s9',
-      title: 'HTML Formatting quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s9-q1',
-          type: 'multiple-choice',
-          prompt: 'Which element should mark up text that carries importance or urgency?',
-          options: ['<b>', '<strong>', '<em>', '<span>'],
-          answer: 1,
-          explanation:
-            '<strong> carries meaning. <b> only says "draw this in a bold face", which is a styling request.',
-        },
-        {
-          id: 'quiz-html-s9-q2',
-          type: 'true-false',
-          prompt: 'strong and em render identically by default in every browser.',
-          answer: false,
-          explanation:
-            '<strong> is bold and <em> is italic by default, though you can restyle either. They are distinguishable both visually and to assistive technology.',
-        },
-        {
-          id: 'quiz-html-s9-q3',
-          type: 'multiple-choice',
-          prompt: 'Which element marks text that was deleted in a revision?',
-          options: ['<del>', '<ins>', '<s>', '<mark>'],
-          answer: 0,
-          explanation:
-            '<del> and <ins> work as a pair for showing what changed, and both render with the conventional strikethrough and underline.',
-        },
-        {
-          id: 'quiz-html-s9-q4',
-          type: 'blank',
-          prompt:
-            'Which element is the one formatting choice that cannot be reproduced in CSS, because you cannot select arbitrary text yourself?',
-          answers: ['mark', '<mark>'],
-          explanation:
-            'User selection uses a system colour no stylesheet can override. <mark> is the only way to highlight text as relevant to the current context.',
-        },
-        {
-          id: 'quiz-html-s9-q5',
-          type: 'multiple-choice',
-          prompt: 'What should you use when text only needs to be large and coloured?',
-          options: [
-            '<big> and <font>',
-            'A <span> with a class, styled in CSS',
-            '<strong>',
-            'A heading element',
-          ],
-          answer: 1,
-          explanation:
-            'Size and colour are presentation, so they belong in a stylesheet. A span with a class keeps the document clean and the styling changeable.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s10',
@@ -1439,6 +1650,69 @@ p { margin: 0 0 0.6rem; }`,
           'Mark up code that must keep its exact spacing',
         ],
         xp: 30,
+        quiz: {
+          id: 'quiz-html-l15',
+          title: 'HTML Quotation Elements quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l15-q1',
+              type: 'multiple-choice',
+              prompt: 'Which element is for a short quotation inside a sentence?',
+              options: [
+                '<blockquote>',
+                '<q>',
+                '<cite>',
+                '<pre>',
+              ],
+              answer: 1,
+              explanation: '<q> is inline and marks a phrase somebody else said. The browser adds the quotation marks.',
+            },
+            {
+              id: 'quiz-html-l15-q2',
+              type: 'true-false',
+              prompt: 'The cite attribute on a blockquote is visible in the rendered page.',
+              answer: false,
+              explanation: 'It is in the DOM but nothing renders it. If you want readers to see the source, add a visible link as well.',
+            },
+            {
+              id: 'quiz-html-l15-q3',
+              type: 'multiple-choice',
+              prompt: 'Which element marks the title of a work, such as a book or a film?',
+              options: [
+                '<cite>',
+                '<blockquote>',
+                '<em>',
+                '<dfn>',
+              ],
+              answer: 0,
+              explanation: '<cite> is specifically for the title of a creative or documentary work. <dfn> is for defining a technical term.',
+            },
+            {
+              id: 'quiz-html-l15-q4',
+              type: 'blank',
+              prompt: 'Which element preserves the exact spacing in a block of text?',
+              answers: [
+                'pre',
+                '<pre>',
+              ],
+              explanation: '<pre> turns off whitespace collapsing, which is what makes code and ASCII diagrams render correctly.',
+            },
+            {
+              id: 'quiz-html-l15-q5',
+              type: 'multiple-choice',
+              prompt: 'What is wrong with writing quotation marks by hand around a q element?',
+              options: [
+                'Nothing, it is the recommended style',
+                'The browser adds its own marks, so you end up with two sets',
+                'It stops the text being searchable',
+                'It converts the element into a blockquote',
+              ],
+              answer: 1,
+              explanation: 'The browser renders quotation marks for <q> and will localise them to the document language, so hand-typed marks are always a duplicate.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1542,61 +1816,6 @@ pre { background: #f4f6f8; padding: 0.7rem; border-radius: 6px; font-size: 13px;
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s10',
-      title: 'HTML Quotation Elements quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s10-q1',
-          type: 'multiple-choice',
-          prompt: 'Which element is for a short quotation inside a sentence?',
-          options: ['<blockquote>', '<q>', '<cite>', '<pre>'],
-          answer: 1,
-          explanation:
-            '<q> is inline and marks a phrase somebody else said. The browser adds the quotation marks.',
-        },
-        {
-          id: 'quiz-html-s10-q2',
-          type: 'true-false',
-          prompt: 'The cite attribute on a blockquote is visible in the rendered page.',
-          answer: false,
-          explanation:
-            'It is in the DOM but nothing renders it. If you want readers to see the source, add a visible link as well.',
-        },
-        {
-          id: 'quiz-html-s10-q3',
-          type: 'multiple-choice',
-          prompt: 'Which element marks the title of a work, such as a book or a film?',
-          options: ['<cite>', '<blockquote>', '<em>', '<dfn>'],
-          answer: 0,
-          explanation:
-            '<cite> is specifically for the title of a creative or documentary work. <dfn> is for defining a technical term.',
-        },
-        {
-          id: 'quiz-html-s10-q4',
-          type: 'blank',
-          prompt: 'Which element preserves the exact spacing in a block of text?',
-          answers: ['pre', '<pre>'],
-          explanation:
-            '<pre> turns off whitespace collapsing, which is what makes code and ASCII diagrams render correctly.',
-        },
-        {
-          id: 'quiz-html-s10-q5',
-          type: 'multiple-choice',
-          prompt: 'What is wrong with writing quotation marks by hand around a q element?',
-          options: [
-            'Nothing, it is the recommended style',
-            'The browser adds its own marks, so you end up with two sets',
-            'It stops the text being searchable',
-            'It converts the element into a blockquote',
-          ],
-          answer: 1,
-          explanation:
-            'The browser renders quotation marks for <q> and will localise them to the document language, so hand-typed marks are always a duplicate.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s11',
@@ -1614,6 +1833,71 @@ pre { background: #f4f6f8; padding: 0.7rem; border-radius: 6px; font-size: 13px;
           'Comment out a block of markup temporarily',
         ],
         xp: 25,
+        quiz: {
+          id: 'quiz-html-l16',
+          title: 'HTML Comments quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l16-q1',
+              type: 'multiple-choice',
+              prompt: 'What does a comment do to the rendered page?',
+              options: [
+                'It is rendered in small grey text',
+                'Nothing — the browser skips it entirely',
+                'It is rendered only on small screens',
+                'It collapses the elements around it',
+              ],
+              answer: 1,
+              explanation: 'Comments never render. They remain in the file and in view-source, which is why they cannot be used to hide anything.',
+            },
+            {
+              id: 'quiz-html-l16-q2',
+              type: 'true-false',
+              prompt: 'An API key in an HTML comment is safe because users cannot see it.',
+              answer: false,
+              explanation: 'Comments are in the page source for anyone to read. A commented-out secret is a published secret.',
+            },
+            {
+              id: 'quiz-html-l16-q3',
+              type: 'multiple-choice',
+              prompt: 'What happens if you wrap a block that already contains a comment in another comment?',
+              options: [
+                'The nested comment works normally',
+                'The first closing marker ends the comment early, so the rest becomes live markup',
+                'The browser throws an error',
+                'The inner comment is stripped automatically',
+              ],
+              answer: 1,
+              explanation: 'Comments cannot nest. The first --> encountered closes the comment, and everything after it is parsed as markup.',
+            },
+            {
+              id: 'quiz-html-l16-q4',
+              type: 'blank',
+              prompt: 'What are the two markers that delimit an HTML comment?',
+              answers: [
+                '<!-- and -->',
+                '<!-- -->',
+                '<!--',
+                '-->',
+              ],
+              explanation: 'The comment opens with `<!--` and closes with `-->`, and the closing marker is the first one that appears in the file.',
+            },
+            {
+              id: 'quiz-html-l16-q5',
+              type: 'multiple-choice',
+              prompt: 'Why is a large commented-out block of markup a problem?',
+              options: [
+                'It slows down HTML parsing significantly',
+                'It is dead weight in the file, and version control already remembers it',
+                'It breaks the heading outline',
+                'It prevents the page from being cached',
+              ],
+              answer: 1,
+              explanation: 'The block ships in every response for no benefit. Git remembers it perfectly well, so deleting it loses nothing.',
+            },
+          ],
+        },
         content: [
       {
             type: 'text',
@@ -1735,70 +2019,5 @@ p { margin: 0; color: #475569; }`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s11',
-      title: 'HTML Comments quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s11-q1',
-          type: 'multiple-choice',
-          prompt: 'What does a comment do to the rendered page?',
-          options: [
-            'It is rendered in small grey text',
-            'Nothing — the browser skips it entirely',
-            'It is rendered only on small screens',
-            'It collapses the elements around it',
-          ],
-          answer: 1,
-          explanation:
-            'Comments never render. They remain in the file and in view-source, which is why they cannot be used to hide anything.',
-        },
-        {
-          id: 'quiz-html-s11-q2',
-          type: 'true-false',
-          prompt: 'An API key in an HTML comment is safe because users cannot see it.',
-          answer: false,
-          explanation:
-            'Comments are in the page source for anyone to read. A commented-out secret is a published secret.',
-        },
-        {
-          id: 'quiz-html-s11-q3',
-          type: 'multiple-choice',
-          prompt: 'What happens if you wrap a block that already contains a comment in another comment?',
-          options: [
-            'The nested comment works normally',
-            'The first closing marker ends the comment early, so the rest becomes live markup',
-            'The browser throws an error',
-            'The inner comment is stripped automatically',
-          ],
-          answer: 1,
-          explanation:
-            'Comments cannot nest. The first --> encountered closes the comment, and everything after it is parsed as markup.',
-        },
-        {
-          id: 'quiz-html-s11-q4',
-          type: 'blank',
-          prompt: 'What are the two markers that delimit an HTML comment?',
-          answers: ['<!-- and -->', '<!-- -->', '<!--', '-->'],
-          explanation:
-            'The comment opens with `<!--` and closes with `-->`, and the closing marker is the first one that appears in the file.',
-        },
-        {
-          id: 'quiz-html-s11-q5',
-          type: 'multiple-choice',
-          prompt: 'Why is a large commented-out block of markup a problem?',
-          options: [
-            'It slows down HTML parsing significantly',
-            'It is dead weight in the file, and version control already remembers it',
-            'It breaks the heading outline',
-            'It prevents the page from being cached',
-          ],
-          answer: 1,
-          explanation:
-            'The block ships in every response for no benefit. Git remembers it perfectly well, so deleting it loses nothing.',
-        },
-      ],
-    },
   },
 ]

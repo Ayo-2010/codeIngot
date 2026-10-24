@@ -65,7 +65,7 @@ export const ACHIEVEMENTS: AchievementDefinition[] = [
   {
     id: 'first-quiz',
     title: 'Quiz Whiz',
-    description: 'Pass a section quiz.',
+    description: 'Pass a lesson quiz.',
     icon: '★',
     xp: 30,
     progress: (p) => ratio(Object.keys(p.quizScores).length, 1),

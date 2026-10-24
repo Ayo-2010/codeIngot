@@ -25,7 +25,7 @@ if (!existsSync(serverFile)) {
 const budgets = [
   { route: '/', maxGzipKB: 240, label: 'home' },
   { route: '/learn/css-fundamentals/css-l32', maxGzipKB: 260, label: 'lesson' },
-  { route: '/learn/css-fundamentals/quiz/quiz-css-s15', maxGzipKB: 240, label: 'quiz' },
+  { route: '/learn/css-fundamentals/quiz/quiz-css-l32', maxGzipKB: 240, label: 'quiz' },
   { route: '/projects', maxGzipKB: 240, label: 'projects' },
 ]
 const entryBudgetGzipKB = 60

@@ -18,6 +18,76 @@ export const frontendProjectsProfileSections: Section[] = [
           'Choose the landmark elements the page needs before styling it',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-fp-l7',
+          title: 'Plan the profile page quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-fp-l7-q1',
+              type: 'multiple-choice',
+              prompt: 'Which element should contain the page\'s unique primary content?',
+              options: [
+                '<section>',
+                '<main>',
+                '<article>',
+                '<div>',
+              ],
+              answer: 1,
+              explanation: 'main is the landmark for the primary content of the page. A page has one main region, and it is the fastest way for assistive technology to skip the repeated header and navigation.',
+            },
+            {
+              id: 'quiz-fp-l7-q2',
+              type: 'blank',
+              prompt: 'The HTML element used for the page\'s primary content is ___.',
+              answers: [
+                'main',
+                '<main>',
+              ],
+              explanation: 'main is the landmark that holds the content unique to this page.',
+            },
+            {
+              id: 'quiz-fp-l7-q3',
+              type: 'identify-error',
+              prompt: 'What is wrong with this heading outline?',
+              code: '<h1>Alex Rivera</h1>\n<h3>About</h3>\n<h3>Skills</h3>\n<h3>Contact</h3>',
+              options: [
+                'There is more than one heading',
+                'The section headings skip h2',
+                'Headings must be inside a div',
+                'h1 should come last',
+              ],
+              answer: 1,
+              explanation: 'The outline jumps from h1 to h3. The three peer sections should use h2, so the document has no missing level.',
+            },
+            {
+              id: 'quiz-fp-l7-q4',
+              type: 'multiple-choice',
+              prompt: 'How should the Skills content be marked up on the profile page?',
+              options: [
+                'A paragraph listing technologies separated by commas',
+                'A table with one column',
+                'A run of h3 headings, one per skill',
+                'An unordered list of the technologies the person actually uses',
+              ],
+              answer: 3,
+              explanation: 'A list is what assistive technology announces as a set of related items, so the skills read as a group. Headings would put them in the page outline as if each were its own section.',
+            },
+            {
+              id: 'quiz-fp-l7-q5',
+              type: 'multiple-choice',
+              prompt: 'Which landmark should hold the in-page links to About, Skills and Contact?',
+              options: [
+                'main',
+                'footer',
+                'nav',
+                'article',
+              ],
+              answer: 2,
+              explanation: 'nav marks a collection of navigation links, and here it sits inside the header. That lets a screen reader user jump straight to the links without reading the page from the top.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -179,6 +249,72 @@ export const frontendProjectsProfileSections: Section[] = [
           'Run the automated checks and the manual review before submitting',
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-fp-l8',
+          title: 'Build and submit the profile page quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-fp-l8-q1',
+              type: 'true-false',
+              prompt: 'Every image must have a non-empty alt attribute.',
+              answer: false,
+              explanation: 'A decorative image should use alt="" so it is skipped. A meaningful image needs descriptive alt text; omitting the attribute entirely is the mistake.',
+            },
+            {
+              id: 'quiz-fp-l8-q2',
+              type: 'multiple-choice',
+              prompt: 'Why give a profile image explicit width and height attributes?',
+              options: [
+                'To make the file smaller',
+                'To reserve space and avoid layout shift while it loads',
+                'To improve the colour accuracy',
+                'To add a border automatically',
+              ],
+              answer: 1,
+              explanation: 'The browser can reserve the correct box before the image arrives, so the text does not jump when it loads.',
+            },
+            {
+              id: 'quiz-fp-l8-q3',
+              type: 'multiple-choice',
+              prompt: 'Which document title best follows the advice in the lesson?',
+              options: [
+                'My Website',
+                'Portfolio',
+                'Alex Rivera — front-end developer',
+                'Home',
+              ],
+              answer: 2,
+              explanation: 'A title should say who the page is about before it is opened, which matters in search results and browser tabs. Generic words such as "Portfolio" describe a category rather than this person.',
+            },
+            {
+              id: 'quiz-fp-l8-q4',
+              type: 'multiple-choice',
+              prompt: 'In the contact form, what makes `<label for="email">` name the email input?',
+              options: [
+                'The label sits above the input in the markup',
+                'The input has id="email", matching the for value',
+                'The input has type="email"',
+                'The form uses method="post"',
+              ],
+              answer: 1,
+              explanation: 'A for attribute names the control whose id matches it, so the text and the field are linked programmatically. Proximity on screen means nothing to a screen reader.',
+            },
+            {
+              id: 'quiz-fp-l8-q5',
+              type: 'multiple-choice',
+              prompt: 'Why read the page with the stylesheet disabled during the outline audit?',
+              options: [
+                'To measure how quickly the page loads',
+                'To test the print layout',
+                'To check whether the web fonts arrived',
+                'To confirm the structure and content still make sense without the visual design',
+              ],
+              answer: 3,
+              explanation: 'With no CSS, only the markup remains, so a missing heading or a div pretending to be content is obvious. A page that reads correctly unstyled will also read correctly to assistive technology.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -342,65 +478,5 @@ export const frontendProjectsProfileSections: Section[] = [
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-fp-s4',
-      title: 'Profile page check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-fp-s4-q1',
-          type: 'multiple-choice',
-          prompt: 'Which element should contain the page\'s unique primary content?',
-          options: ['<section>', '<main>', '<article>', '<div>'],
-          answer: 1,
-          explanation:
-            'main is the landmark for the primary content of the page. A page has one main region, and it is the fastest way for assistive technology to skip the repeated header and navigation.',
-        },
-        {
-          id: 'quiz-fp-s4-q2',
-          type: 'true-false',
-          prompt: 'Every image must have a non-empty alt attribute.',
-          answer: false,
-          explanation:
-            'A decorative image should use alt="" so it is skipped. A meaningful image needs descriptive alt text; omitting the attribute entirely is the mistake.',
-        },
-        {
-          id: 'quiz-fp-s4-q3',
-          type: 'multiple-choice',
-          prompt: 'Why give a profile image explicit width and height attributes?',
-          options: [
-            'To make the file smaller',
-            'To reserve space and avoid layout shift while it loads',
-            'To improve the colour accuracy',
-            'To add a border automatically',
-          ],
-          answer: 1,
-          explanation:
-            'The browser can reserve the correct box before the image arrives, so the text does not jump when it loads.',
-        },
-        {
-          id: 'quiz-fp-s4-q4',
-          type: 'blank',
-          prompt: 'The HTML element used for the page\'s primary content is ___.',
-          answers: ['main', '<main>'],
-          explanation: 'main is the landmark that holds the content unique to this page.',
-        },
-        {
-          id: 'quiz-fp-s4-q5',
-          type: 'identify-error',
-          prompt: 'What is wrong with this heading outline?',
-          code: '<h1>Alex Rivera</h1>\n<h3>About</h3>\n<h3>Skills</h3>\n<h3>Contact</h3>',
-          options: [
-            'There is more than one heading',
-            'The section headings skip h2',
-            'Headings must be inside a div',
-            'h1 should come last',
-          ],
-          answer: 1,
-          explanation:
-            'The outline jumps from h1 to h3. The three peer sections should use h2, so the document has no missing level.',
-        },
-      ],
-    },
   },
 ]

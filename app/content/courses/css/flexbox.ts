@@ -20,6 +20,78 @@ export const cssFlexboxSections: Section[] = [
           'Name the main axis and the cross axis for a given flex-direction',
           'Say why flexbox is a one-dimensional layout model',
         ],
+        quiz: {
+          id: 'quiz-css-l111',
+          title: 'CSS Flexbox quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l111-q1',
+              type: 'multiple-choice',
+              prompt: 'Which elements become flex items when you set `display: flex` on a parent?',
+              options: [
+                'The parent\'s direct children only',
+                'Every descendant of the parent, at every depth',
+                'Only the children that are block-level elements',
+                'Any child that has a width set on it',
+              ],
+              answer: 0,
+              explanation: 'Flex items are the direct children of the flex container. A grandchild lives inside a flex item and is laid out by its own parent\'s `display`, not by the outer flex context. This is why nesting a new `display: flex` deep inside a flex item starts a completely independent layout.',
+            },
+            {
+              id: 'quiz-css-l111-q2',
+              type: 'multiple-choice',
+              prompt: 'Why is flexbox described as a one-dimensional layout model?',
+              options: [
+                'Because it only works in one browser dimension such as width',
+                'Because it arranges items along one axis at a time, and stacks them along the other axis separately',
+                'Because it can only ever produce a single row or a single column',
+                'Because it cannot be nested inside another flexbox',
+              ],
+              answer: 1,
+              explanation: 'Flexbox places items along the main axis first and then deals with the cross axis. It never tries to fill a two-dimensional area with tracked rows and columns, which is what CSS Grid is for. That single-axis focus is exactly why flexbox layouts are so predictable.',
+            },
+            {
+              id: 'quiz-css-l111-q3',
+              type: 'multiple-choice',
+              prompt: 'How does `display: inline-flex` differ from `display: flex`?',
+              options: [
+                'Its children are laid out as blocks',
+                'It disables the main axis',
+                'It can only hold one child',
+                'The container becomes inline-level, taking only the width it needs, while its children still flex',
+              ],
+              answer: 3,
+              explanation: 'The children are laid out identically; the difference is the container itself, which sits in a line of text and shrinks to its content like an inline box.',
+            },
+            {
+              id: 'quiz-css-l111-q4',
+              type: 'multiple-choice',
+              prompt: 'With `flex-direction: column`, which way does the cross axis run?',
+              options: [
+                'Left to right',
+                'Top to bottom',
+                'Bottom to top',
+                'Right to left',
+              ],
+              answer: 0,
+              explanation: 'A column flips the roles: the main axis runs top to bottom, so the cross axis runs left to right and `align-items` moves items horizontally.',
+            },
+            {
+              id: 'quiz-css-l111-q5',
+              type: 'multiple-choice',
+              prompt: 'Two flex items each have `margin: 1rem`. How much space is between them in a flex row?',
+              options: [
+                '1rem, because the margins collapse',
+                '0, because margins are ignored on flex items',
+                '2rem, because flex items do not collapse margins',
+                '4rem, because each margin is doubled',
+              ],
+              answer: 2,
+              explanation: 'Margin collapsing does not happen inside a flex container, so both margins apply and add up. `gap` avoids the doubled spacing and the trailing edge gap.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -238,6 +310,72 @@ export const cssFlexboxSections: Section[] = [
           'Let items flow onto a new line with flex-wrap and flex-wrap: wrap-reverse',
           'Space items with gap and explain why it beats margins for this job',
         ],
+        quiz: {
+          id: 'quiz-css-l112',
+          title: 'Flex Direction and Wrap quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l112-q1',
+              type: 'true-false',
+              prompt: 'With `flex-direction: column`, the main axis runs from top to bottom.',
+              answer: true,
+              explanation: 'Yes. `column` puts the main axis vertically and the cross axis horizontally, which means `justify-content` moves items up and down and `align-items` moves them left and right. Flip to `column-reverse` and the main axis runs bottom to top, so the same properties push items the other way.',
+            },
+            {
+              id: 'quiz-css-l112-q2',
+              type: 'multiple-choice',
+              prompt: 'What is the default value of `flex-wrap`?',
+              options: [
+                '`nowrap`',
+                '`wrap`',
+                '`wrap-reverse`',
+                '`inherit`',
+              ],
+              answer: 0,
+              explanation: '`nowrap` is the default, so items are squeezed onto one line and shrink to fit rather than moving onto a new line.',
+            },
+            {
+              id: 'quiz-css-l112-q3',
+              type: 'multiple-choice',
+              prompt: 'What does `flex-wrap: wrap-reverse` do?',
+              options: [
+                'It reverses the order of the items on each line',
+                'It makes the container scroll vertically',
+                'It stacks new lines from the bottom up, so the first line ends up underneath',
+                'It only wraps when the items are reversed',
+              ],
+              answer: 2,
+              explanation: 'The items keep their order within a line, but the lines themselves start at the bottom, which inverts which line counts as the first one.',
+            },
+            {
+              id: 'quiz-css-l112-q4',
+              type: 'multiple-choice',
+              prompt: 'A row has `flex-wrap: wrap` but nothing ever wraps. What is the likely reason?',
+              options: [
+                '`gap` is set on the container',
+                'The items can shrink, so they squeeze to fit instead of moving to a new line',
+                '`flex-direction` is `row`',
+                'The container has a background colour',
+              ],
+              answer: 1,
+              explanation: 'Shrinking is considered before wrapping, so items with the default `flex-shrink: 1` compress first. Give them a floor with `flex: 0 0 auto` or a `min-width`.',
+            },
+            {
+              id: 'quiz-css-l112-q5',
+              type: 'multiple-choice',
+              prompt: 'What is the accessibility cost of `flex-direction: row-reverse`?',
+              options: [
+                'The links lose their focus styles',
+                'The container stops wrapping',
+                'The items can no longer be clicked',
+                'Visual order no longer matches DOM order, so tab and screen-reader order disagree with the screen',
+              ],
+              answer: 3,
+              explanation: 'Reversing the direction reorders the screen without touching the DOM, so keyboard focus and screen reader order follow the original markup rather than what is seen.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -555,6 +693,75 @@ export const cssFlexboxSections: Section[] = [
           'Distinguish justify-content, align-items, align-self, align-content and justify-self',
           'Reorder items with order and explain the accessibility cost',
         ],
+        quiz: {
+          id: 'quiz-css-l113',
+          title: 'Flex Items quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l113-q1',
+              type: 'blank',
+              prompt: 'Which property makes the main axis run horizontally from right to left instead of left to right?',
+              answers: [
+                'flex-direction: row-reverse',
+                'row-reverse',
+              ],
+              explanation: '`flex-direction: row-reverse` reverses the start and end of the main axis without changing the DOM order of the items. `justify-content` still distributes along the main axis, but `flex-start` now means the right edge - which is a frequent source of confusion.',
+            },
+            {
+              id: 'quiz-css-l113-q2',
+              type: 'multiple-choice',
+              prompt: 'What is the difference between `flex: 1 1 0` and `flex: 1 1 auto`?',
+              options: [
+                'The first never shrinks',
+                '`auto` prevents the item from growing',
+                'A zero basis ignores content so items come out exactly equal, while `auto` starts from content width',
+                'The first only works in a column container',
+              ],
+              answer: 2,
+              explanation: 'With a zero basis all the space is shared by grow factor alone, so items are identical. With `auto` each item starts at its content width and a long label keeps an advantage.',
+            },
+            {
+              id: 'quiz-css-l113-q3',
+              type: 'multiple-choice',
+              prompt: 'An item has `width: 200px` and `flex-basis: 60px`. How wide does it start?',
+              options: [
+                '200px, because `width` wins',
+                '60px, because `flex-basis` beats `width` on a flex item',
+                '260px, the two added together',
+                'It depends on the container height',
+              ],
+              answer: 1,
+              explanation: 'The flex sizing algorithm reads the basis first, so `flex-basis` overrides `width` on a flex item. Use `width` only when the item is not being flexed.',
+            },
+            {
+              id: 'quiz-css-l113-q4',
+              type: 'multiple-choice',
+              prompt: 'Why does `justify-self` do nothing on a flex item?',
+              options: [
+                'It is a grid property; flexbox has no per-item control on the main axis',
+                'It only applies to absolutely positioned elements',
+                'It needs `!important` to take effect',
+                'It must be set on the container instead',
+              ],
+              answer: 0,
+              explanation: 'Main-axis space is shared by `flex-grow` and then positioned for all items by `justify-content`. The per-item override exists only on the cross axis, as `align-self`.',
+            },
+            {
+              id: 'quiz-css-l113-q5',
+              type: 'multiple-choice',
+              prompt: 'When does `align-content` have any effect?',
+              options: [
+                'Always, on every flex container',
+                'Only in a column container',
+                'Only when `align-items: stretch` is set',
+                'Only when the items wrap onto more than one line',
+              ],
+              answer: 3,
+              explanation: '`align-content` distributes wrapped lines along the cross axis. With a single line there is nothing to distribute, so the property does nothing.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -852,6 +1059,79 @@ export const cssFlexboxSections: Section[] = [
           'Make a card grid with flex: 1 1 240px and a per-item minimum',
           'Pin a footer to the bottom of a full-height column with margin-top: auto',
         ],
+        quiz: {
+          id: 'quiz-css-l114',
+          title: 'Flexbox Layout Examples quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l114-q1',
+              type: 'identify-error',
+              prompt: 'This is meant to put a row of items on the left and a push-right button on the far right, but nothing changes. Why?',
+              code: '.toolbar {\n  justify-content: space-between;\n}',
+              options: [
+                '`space-between` only works on flex items, not on the container',
+                'The container is missing `display: flex`, so there is no flex context for `justify-content` to act on',
+                '`justify-content` was removed from the spec and is now `justify-items`',
+                'The children need `flex: 1` before `justify-content` has any effect',
+              ],
+              answer: 1,
+              explanation: 'Every distribution and alignment property in flexbox is inert unless the element is actually a flex container. Without `display: flex` the children are ordinary blocks and `justify-content` has nothing to distribute. This is the number one reason a flexbox rule appears to be ignored.',
+            },
+            {
+              id: 'quiz-css-l114-q2',
+              type: 'multiple-choice',
+              prompt: 'What does `place-items: center` on a flex container do?',
+              options: [
+                'It centres only along the main axis',
+                'It centres the child on both axes in one declaration',
+                'It pushes the child to the bottom of the container',
+                'It sets the container gap to zero',
+              ],
+              answer: 1,
+              explanation: '`place-items` is the shorthand for `align-items` and `justify-content`, so a single declaration handles the cross axis and the main axis at once.',
+            },
+            {
+              id: 'quiz-css-l114-q3',
+              type: 'multiple-choice',
+              prompt: 'In a `flex-direction: column` container, which property centres content vertically?',
+              options: [
+                '`align-items: center`',
+                '`text-align: center`',
+                '`vertical-align: middle`',
+                '`justify-content: center`',
+              ],
+              answer: 3,
+              explanation: 'A column makes the main axis vertical, and `justify-content` works along the main axis. `align-items` would centre horizontally in this container.',
+            },
+            {
+              id: 'quiz-css-l114-q4',
+              type: 'multiple-choice',
+              prompt: '`margin-top: auto` on a footer does not move it to the bottom. What is missing?',
+              options: [
+                'The column needs a definite height, such as `min-height: 100vh`',
+                'A `float: left` on the footer',
+                '`justify-content: flex-start` on the column',
+                'A `gap` on the container',
+              ],
+              answer: 0,
+              explanation: 'An auto margin can only absorb free space. Without a height taller than the content there is no space to absorb, so the footer sits right under the body.',
+            },
+            {
+              id: 'quiz-css-l114-q5',
+              type: 'multiple-choice',
+              prompt: 'In `flex: 1 1 240px`, what does the `240px` control?',
+              options: [
+                'The maximum width of the card',
+                'The gap between cards',
+                'The basis at which the card stops being useful, so it wraps below that width',
+                'The height of the card',
+              ],
+              answer: 2,
+              explanation: 'The basis is the width the card starts from. When the container cannot give a card that much room, the card moves to a new line, which is what makes the grid reflow without a media query.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1228,72 +1508,5 @@ export const cssFlexboxSections: Section[] = [
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s69',
-      title: 'CSS Flexbox quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s69-q1',
-          type: 'multiple-choice',
-          prompt: 'Which elements become flex items when you set `display: flex` on a parent?',
-          options: [
-            'The parent\'s direct children only',
-            'Every descendant of the parent, at every depth',
-            'Only the children that are block-level elements',
-            'Any child that has a width set on it',
-          ],
-          answer: 0,
-          explanation:
-            'Flex items are the direct children of the flex container. A grandchild lives inside a flex item and is laid out by its own parent\'s `display`, not by the outer flex context. This is why nesting a new `display: flex` deep inside a flex item starts a completely independent layout.',
-        },
-        {
-          id: 'quiz-css-s69-q2',
-          type: 'true-false',
-          prompt: 'With `flex-direction: column`, the main axis runs from top to bottom.',
-          answer: true,
-          explanation:
-            'Yes. `column` puts the main axis vertically and the cross axis horizontally, which means `justify-content` moves items up and down and `align-items` moves them left and right. Flip to `column-reverse` and the main axis runs bottom to top, so the same properties push items the other way.',
-        },
-        {
-          id: 'quiz-css-s69-q3',
-          type: 'blank',
-          prompt:
-            'Which property makes the main axis run horizontally from right to left instead of left to right?',
-          answers: ['flex-direction: row-reverse', 'row-reverse'],
-          explanation:
-            '`flex-direction: row-reverse` reverses the start and end of the main axis without changing the DOM order of the items. `justify-content` still distributes along the main axis, but `flex-start` now means the right edge - which is a frequent source of confusion.',
-        },
-        {
-          id: 'quiz-css-s69-q4',
-          type: 'multiple-choice',
-          prompt: 'Why is flexbox described as a one-dimensional layout model?',
-          options: [
-            'Because it only works in one browser dimension such as width',
-            'Because it arranges items along one axis at a time, and stacks them along the other axis separately',
-            'Because it can only ever produce a single row or a single column',
-            'Because it cannot be nested inside another flexbox',
-          ],
-          answer: 1,
-          explanation:
-            'Flexbox places items along the main axis first and then deals with the cross axis. It never tries to fill a two-dimensional area with tracked rows and columns, which is what CSS Grid is for. That single-axis focus is exactly why flexbox layouts are so predictable.',
-        },
-        {
-          id: 'quiz-css-s69-q5',
-          type: 'identify-error',
-          prompt: 'This is meant to put a row of items on the left and a push-right button on the far right, but nothing changes. Why?',
-          code: '.toolbar {\n  justify-content: space-between;\n}',
-          options: [
-            '`space-between` only works on flex items, not on the container',
-            'The container is missing `display: flex`, so there is no flex context for `justify-content` to act on',
-            '`justify-content` was removed from the spec and is now `justify-items`',
-            'The children need `flex: 1` before `justify-content` has any effect',
-          ],
-          answer: 1,
-          explanation:
-            'Every distribution and alignment property in flexbox is inert unless the element is actually a flex container. Without `display: flex` the children are ordinary blocks and `justify-content` has nothing to distribute. This is the number one reason a flexbox rule appears to be ignored.',
-        },
-      ],
-    },
   },
 ]

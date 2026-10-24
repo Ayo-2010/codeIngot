@@ -54,15 +54,15 @@ export const courseMeta: CourseMeta[] = [
               "Name the four things you will be able to do once you finish"
             ],
             "xp": 30,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l1",
+              "title": "How this course works quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s1",
-          "title": "Getting started check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Getting started"
       },
       {
@@ -81,7 +81,13 @@ export const courseMeta: CourseMeta[] = [
               "Explain why a document needs a doctype at all"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l2",
+              "title": "What HTML is quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "html-l3",
@@ -94,15 +100,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain what happens to markup you forget to close"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l3",
+              "title": "How a browser reads your markup quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s2",
-          "title": "HTML Introduction quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Getting started"
       },
       {
@@ -121,15 +127,15 @@ export const courseMeta: CourseMeta[] = [
               "Set up an editor so that unclosed tags are visible immediately"
             ],
             "xp": 25,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l4",
+              "title": "HTML Editors quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s3",
-          "title": "HTML Editors quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Getting started"
       },
       {
@@ -148,7 +154,13 @@ export const courseMeta: CourseMeta[] = [
               "Choose the right element for text that is not a paragraph"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l5",
+              "title": "The elements every document uses quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "html-l6",
@@ -161,15 +173,15 @@ export const courseMeta: CourseMeta[] = [
               "Recognise the difference between structural and presentational nesting"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l6",
+              "title": "Nesting and the shapes you will write most quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s4",
-          "title": "HTML Basic quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Getting started"
       },
       {
@@ -188,7 +200,13 @@ export const courseMeta: CourseMeta[] = [
               "Sort an unfamiliar element into a category you already know"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l7",
+              "title": "The element catalogue quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "html-l8",
@@ -201,15 +219,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain why a sectioning element changes the heading outline"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l8",
+              "title": "Grouping and sectioning quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s5",
-          "title": "HTML Elements quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Elements, attributes and text"
       },
       {
@@ -228,7 +246,13 @@ export const courseMeta: CourseMeta[] = [
               "Choose a sensible attribute for a job rather than inventing one"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l9",
+              "title": "Writing attributes quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "html-l10",
@@ -241,15 +265,15 @@ export const courseMeta: CourseMeta[] = [
               "Store and read a custom value with a data attribute"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l10",
+              "title": "Global, boolean and data attributes quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s6",
-          "title": "HTML Attributes quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Elements, attributes and text"
       },
       {
@@ -268,15 +292,15 @@ export const courseMeta: CourseMeta[] = [
               "Choose a level based on nesting depth rather than appearance"
             ],
             "xp": 30,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l11",
+              "title": "HTML Headings quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s7",
-          "title": "HTML Headings quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Elements, attributes and text"
       },
       {
@@ -295,15 +319,15 @@ export const courseMeta: CourseMeta[] = [
               "Choose an element for text that is not a paragraph of prose"
             ],
             "xp": 30,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l12",
+              "title": "HTML Paragraphs quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s8",
-          "title": "HTML Paragraphs quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Elements, attributes and text"
       },
       {
@@ -322,7 +346,13 @@ export const courseMeta: CourseMeta[] = [
               "Explain why b, i and u exist alongside the semantic elements"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l13",
+              "title": "Semantic formatting elements quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "html-l14",
@@ -335,15 +365,15 @@ export const courseMeta: CourseMeta[] = [
               "Identify the formatting element that cannot be replaced by CSS"
             ],
             "xp": 30,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l14",
+              "title": "When formatting is the wrong tool quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s9",
-          "title": "HTML Formatting quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Elements, attributes and text"
       },
       {
@@ -362,15 +392,15 @@ export const courseMeta: CourseMeta[] = [
               "Mark up code that must keep its exact spacing"
             ],
             "xp": 30,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l15",
+              "title": "HTML Quotation Elements quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s10",
-          "title": "HTML Quotation Elements quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Elements, attributes and text"
       },
       {
@@ -389,15 +419,15 @@ export const courseMeta: CourseMeta[] = [
               "Comment out a block of markup temporarily"
             ],
             "xp": 25,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l16",
+              "title": "HTML Comments quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s11",
-          "title": "HTML Comments quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Elements, attributes and text"
       },
       {
@@ -416,15 +446,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain why the font element and its color attribute were removed"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l17",
+              "title": "HTML Colors quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s12",
-          "title": "HTML Colors quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Colour"
       },
       {
@@ -443,15 +473,15 @@ export const courseMeta: CourseMeta[] = [
               "Predict what a colour looks like from its RGB values"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l18",
+              "title": "HTML Colors RGB quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s13",
-          "title": "HTML Colors RGB quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Colour"
       },
       {
@@ -470,15 +500,15 @@ export const courseMeta: CourseMeta[] = [
               "Add an alpha channel to a hex colour"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l19",
+              "title": "HTML Colors HEX quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s14",
-          "title": "HTML Colors HEX quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Colour"
       },
       {
@@ -497,15 +527,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain why HSL is easier to design in than RGB"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l20",
+              "title": "HTML Colors HSL quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s15",
-          "title": "HTML Colors HSL quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Colour"
       },
       {
@@ -524,7 +554,13 @@ export const courseMeta: CourseMeta[] = [
               "Describe the three levels of the cascade in order"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l21",
+              "title": "What is CSS quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "html-l22",
@@ -537,7 +573,13 @@ export const courseMeta: CourseMeta[] = [
               "Name the three situations where an inline style is the right choice"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l22",
+              "title": "Inline CSS quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "html-l23",
@@ -550,7 +592,13 @@ export const courseMeta: CourseMeta[] = [
               "Decide between internal and external for a given project"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l23",
+              "title": "Internal CSS quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "html-l24",
@@ -563,7 +611,13 @@ export const courseMeta: CourseMeta[] = [
               "Write a valid .css file with no HTML in it"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l24",
+              "title": "External CSS quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "html-l25",
@@ -576,7 +630,13 @@ export const courseMeta: CourseMeta[] = [
               "Choose a relative unit for text size rather than an absolute one"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l25",
+              "title": "CSS Colors, Fonts and Sizes quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "html-l26",
@@ -589,7 +649,13 @@ export const courseMeta: CourseMeta[] = [
               "Explain why margin sits outside the border and padding inside it"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l26",
+              "title": "CSS Border, Padding and Margin quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "html-l27",
@@ -602,15 +668,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain what a leading slash changes about the path"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l27",
+              "title": "Linking to External CSS quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s16",
-          "title": "HTML CSS quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Stylesheets, links and images"
       },
       {
@@ -629,15 +695,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain what target and rel do, and when each is required"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l28",
+              "title": "HTML Links quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s17",
-          "title": "HTML Links quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Stylesheets, links and images"
       },
       {
@@ -656,15 +722,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain the privacy reason :visited cannot be styled freely"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l29",
+              "title": "HTML Link Colors quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s18",
-          "title": "HTML Link Colors quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Stylesheets, links and images"
       },
       {
@@ -683,15 +749,15 @@ export const courseMeta: CourseMeta[] = [
               "Describe the difference between a bookmark target and a named anchor"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l30",
+              "title": "HTML Bookmarks quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s19",
-          "title": "HTML Bookmarks quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Stylesheets, links and images"
       },
       {
@@ -710,15 +776,15 @@ export const courseMeta: CourseMeta[] = [
               "Say what width and height do for layout stability"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l31",
+              "title": "HTML Images quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s20",
-          "title": "HTML Images quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Stylesheets, links and images"
       },
       {
@@ -737,15 +803,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain why a set of real links is almost always better"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l32",
+              "title": "HTML Image Map quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s21",
-          "title": "HTML Image Map quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Stylesheets, links and images"
       },
       {
@@ -764,15 +830,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain why a background image is the wrong choice for meaningful content"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l33",
+              "title": "HTML Background Images quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s22",
-          "title": "HTML Background Images quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Stylesheets, links and images"
       },
       {
@@ -791,15 +857,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain when a plain img with srcset is enough"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l34",
+              "title": "The Picture Element quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s23",
-          "title": "The Picture Element quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Stylesheets, links and images"
       },
       {
@@ -818,15 +884,15 @@ export const courseMeta: CourseMeta[] = [
               "Add a caption and describe the table for a screen reader"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l35",
+              "title": "HTML Tables quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s24",
-          "title": "HTML Tables quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Tables and lists"
       },
       {
@@ -845,15 +911,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain why navigation menus are lists"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l36",
+              "title": "HTML Lists quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s25",
-          "title": "HTML Lists quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Tables and lists"
       },
       {
@@ -872,15 +938,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain the difference between list-style and list-style-type"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l37",
+              "title": "HTML Unordered Lists quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s26",
-          "title": "HTML Unordered Lists quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Tables and lists"
       },
       {
@@ -899,15 +965,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain why a numbered list is a numbered list even when the numbers are hidden"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l38",
+              "title": "HTML Ordered Lists quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s27",
-          "title": "HTML Ordered Lists quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Tables and lists"
       },
       {
@@ -926,15 +992,15 @@ export const courseMeta: CourseMeta[] = [
               "List the CSS marker types and the practical reason to use them"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l39",
+              "title": "HTML Other Lists quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s28",
-          "title": "HTML Other Lists quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Tables and lists"
       },
       {
@@ -953,15 +1019,15 @@ export const courseMeta: CourseMeta[] = [
               "Say what happened to div and span in HTML5"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l40",
+              "title": "HTML Block and Inline quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s29",
-          "title": "HTML Block and Inline quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Blocks, classes and the document head"
       },
       {
@@ -980,15 +1046,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain specificity between a class and a tag selector"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l41",
+              "title": "HTML Classes quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s30",
-          "title": "HTML Classes quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Blocks, classes and the document head"
       },
       {
@@ -1007,15 +1073,15 @@ export const courseMeta: CourseMeta[] = [
               "Describe how an id beats any number of classes in specificity"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l42",
+              "title": "HTML Id quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s31",
-          "title": "HTML Id quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Blocks, classes and the document head"
       },
       {
@@ -1034,15 +1100,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain the risk of framing a page you do not control"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l43",
+              "title": "HTML Iframes quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s32",
-          "title": "HTML Iframes quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Blocks, classes and the document head"
       },
       {
@@ -1061,15 +1127,15 @@ export const courseMeta: CourseMeta[] = [
               "Use the noscript element for content that needs no script"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l44",
+              "title": "HTML JavaScript quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s33",
-          "title": "HTML JavaScript quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Blocks, classes and the document head"
       },
       {
@@ -1088,15 +1154,15 @@ export const courseMeta: CourseMeta[] = [
               "Choose between root-relative and relative for a given structure"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l45",
+              "title": "HTML File Paths quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s34",
-          "title": "HTML File Paths quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Blocks, classes and the document head"
       },
       {
@@ -1115,15 +1181,15 @@ export const courseMeta: CourseMeta[] = [
               "Say where a stylesheet link and an inline style belong"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l46",
+              "title": "HTML Head quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s35",
-          "title": "HTML Head quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Blocks, classes and the document head"
       },
       {
@@ -1142,15 +1208,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain what a CSS grid template does in plain language"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l47",
+              "title": "HTML Layout quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s36",
-          "title": "HTML Layout quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Blocks, classes and the document head"
       },
       {
@@ -1169,15 +1235,15 @@ export const courseMeta: CourseMeta[] = [
               "Describe how a fluid layout with breakpoints differs from a fixed one"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l48",
+              "title": "HTML Responsive quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s37",
-          "title": "HTML Responsive quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Blocks, classes and the document head"
       },
       {
@@ -1196,15 +1262,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain what a screen reader announces differently for each"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l49",
+              "title": "HTML Computercode quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s38",
-          "title": "HTML Computercode quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Semantics and characters"
       },
       {
@@ -1223,15 +1289,15 @@ export const courseMeta: CourseMeta[] = [
               "Describe how semantics affect SEO and styling"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l50",
+              "title": "HTML Semantics quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s39",
-          "title": "HTML Semantics quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Semantics and characters"
       },
       {
@@ -1250,15 +1316,15 @@ export const courseMeta: CourseMeta[] = [
               "Write a small document that follows a house style"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l51",
+              "title": "HTML Style Guide quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s40",
-          "title": "HTML Style Guide quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Semantics and characters"
       },
       {
@@ -1277,15 +1343,15 @@ export const courseMeta: CourseMeta[] = [
               "Choose between a named and a numeric reference"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l52",
+              "title": "HTML Entities quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s41",
-          "title": "HTML Entities quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Semantics and characters"
       },
       {
@@ -1304,15 +1370,15 @@ export const courseMeta: CourseMeta[] = [
               "Choose between a symbol, an image and an inline SVG for an icon"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l53",
+              "title": "HTML Symbols quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s42",
-          "title": "HTML Symbols quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Semantics and characters"
       },
       {
@@ -1331,15 +1397,15 @@ export const courseMeta: CourseMeta[] = [
               "Give a meaningful emoji an accessible name"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l54",
+              "title": "HTML Emojis quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s43",
-          "title": "HTML Emojis quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Semantics and characters"
       },
       {
@@ -1358,15 +1424,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain why a character set is not a font"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l55",
+              "title": "HTML Charset quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s44",
-          "title": "HTML Charset quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Semantics and characters"
       },
       {
@@ -1385,15 +1451,15 @@ export const courseMeta: CourseMeta[] = [
               "Say when the form urlencoded and multipart encodings apply"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l56",
+              "title": "HTML URL Encoding quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s45",
-          "title": "HTML URL Encoding quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Semantics and characters"
       },
       {
@@ -1412,15 +1478,15 @@ export const courseMeta: CourseMeta[] = [
               "Recognise the small number of XHTML habits still worth keeping"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l57",
+              "title": "HTML versus XHTML quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s46",
-          "title": "HTML versus XHTML quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Semantics and characters"
       },
       {
@@ -1439,15 +1505,15 @@ export const courseMeta: CourseMeta[] = [
               "Say what enctype multipart/form-data is for"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l58",
+              "title": "HTML Forms quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s47",
-          "title": "HTML Forms quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Forms"
       },
       {
@@ -1466,15 +1532,15 @@ export const courseMeta: CourseMeta[] = [
               "Describe how form submission works without JavaScript"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l59",
+              "title": "HTML Form Attributes quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s48",
-          "title": "HTML Form Attributes quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Forms"
       },
       {
@@ -1493,15 +1559,15 @@ export const courseMeta: CourseMeta[] = [
               "Choose between input and textarea for multi-line text"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l60",
+              "title": "HTML Form Elements quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s49",
-          "title": "HTML Form Elements quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Forms"
       },
       {
@@ -1520,15 +1586,15 @@ export const courseMeta: CourseMeta[] = [
               "Say why type=\"text\" is a legitimate choice as often as it is"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l61",
+              "title": "HTML Input Types quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s50",
-          "title": "HTML Input Types quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Forms"
       },
       {
@@ -1547,15 +1613,15 @@ export const courseMeta: CourseMeta[] = [
               "Write autocomplete tokens that help a password manager"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l62",
+              "title": "HTML Input Attributes quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s51",
-          "title": "HTML Input Attributes quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Forms"
       },
       {
@@ -1574,15 +1640,15 @@ export const courseMeta: CourseMeta[] = [
               "Say when a second submit button is the right design"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l63",
+              "title": "HTML Input Form Attributes quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s52",
-          "title": "HTML Input Form Attributes quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Forms"
       },
       {
@@ -1601,15 +1667,15 @@ export const courseMeta: CourseMeta[] = [
               "Size a canvas for a device pixel ratio without blurring it"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l64",
+              "title": "HTML Canvas quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s53",
-          "title": "HTML Canvas quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Graphics and media"
       },
       {
@@ -1628,15 +1694,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain what an SVG file offers that inline SVG does not, and the reverse"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l65",
+              "title": "HTML SVG quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s54",
-          "title": "HTML SVG quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Graphics and media"
       },
       {
@@ -1655,15 +1721,15 @@ export const courseMeta: CourseMeta[] = [
               "Say which formats work without a plugin"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l66",
+              "title": "HTML Media quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s55",
-          "title": "HTML Media quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Graphics and media"
       },
       {
@@ -1682,15 +1748,15 @@ export const courseMeta: CourseMeta[] = [
               "Add captions with a WebVTT track and cue file"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l67",
+              "title": "HTML Video quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s56",
-          "title": "HTML Video quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Graphics and media"
       },
       {
@@ -1709,15 +1775,15 @@ export const courseMeta: CourseMeta[] = [
               "Decide when audio belongs on a page at all"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l68",
+              "title": "HTML Audio quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s57",
-          "title": "HTML Audio quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Graphics and media"
       },
       {
@@ -1736,15 +1802,15 @@ export const courseMeta: CourseMeta[] = [
               "Choose the right element for PDF, video and interactive content"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l69",
+              "title": "HTML Plug-ins quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s58",
-          "title": "HTML Plug-ins quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Graphics and media"
       },
       {
@@ -1763,15 +1829,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain the privacy and performance cost of a third-party embed"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l70",
+              "title": "HTML YouTube quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s59",
-          "title": "HTML YouTube quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Graphics and media"
       },
       {
@@ -1790,15 +1856,15 @@ export const courseMeta: CourseMeta[] = [
               "Say why a page must never ask for location on load"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l71",
+              "title": "HTML Geolocation quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s60",
-          "title": "HTML Geolocation quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Browser APIs, accessibility and wrap-up"
       },
       {
@@ -1817,15 +1883,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain why a keyboard-accessible alternative is required alongside it"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l72",
+              "title": "HTML Drag and Drop quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s61",
-          "title": "HTML Drag and Drop quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Browser APIs, accessibility and wrap-up"
       },
       {
@@ -1844,15 +1910,15 @@ export const courseMeta: CourseMeta[] = [
               "Say why storage is a quota, not a database"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l73",
+              "title": "HTML Web Storage quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s62",
-          "title": "HTML Web Storage quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Browser APIs, accessibility and wrap-up"
       },
       {
@@ -1871,15 +1937,15 @@ export const courseMeta: CourseMeta[] = [
               "Decide whether a task belongs in a worker or on the main thread"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l74",
+              "title": "HTML Web Workers quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s63",
-          "title": "HTML Web Workers quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Browser APIs, accessibility and wrap-up"
       },
       {
@@ -1898,15 +1964,15 @@ export const courseMeta: CourseMeta[] = [
               "Decide between SSE and a WebSocket for a given requirement"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l75",
+              "title": "HTML Server Sent Events quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s64",
-          "title": "HTML Server Sent Events quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Browser APIs, accessibility and wrap-up"
       },
       {
@@ -1925,15 +1991,15 @@ export const courseMeta: CourseMeta[] = [
               "Check a page for the failures that matter before shipping it"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l76",
+              "title": "HTML Accessibility quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s65",
-          "title": "HTML Accessibility quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Browser APIs, accessibility and wrap-up"
       },
       {
@@ -1952,15 +2018,15 @@ export const courseMeta: CourseMeta[] = [
               "Know where to go next from here"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-html-l77",
+              "title": "HTML Summary quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-html-s66",
-          "title": "HTML Summary quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Browser APIs, accessibility and wrap-up"
       }
     ]
@@ -2015,15 +2081,15 @@ export const courseMeta: CourseMeta[] = [
               "Name the four things you will be able to do once you finish"
             ],
             "xp": 30,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l1",
+              "title": "How this course works quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s1",
-          "title": "Getting started check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Getting started"
       },
       {
@@ -2043,15 +2109,15 @@ export const courseMeta: CourseMeta[] = [
               "Name the three ways to attach a stylesheet and their trade-offs"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l2",
+              "title": "CSS Introduction quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s2",
-          "title": "CSS Introduction quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Getting started"
       },
       {
@@ -2071,15 +2137,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain what inheritance does and when it applies"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l3",
+              "title": "CSS Syntax quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s3",
-          "title": "CSS Syntax quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Getting started"
       },
       {
@@ -2099,15 +2165,15 @@ export const courseMeta: CourseMeta[] = [
               "Predict which of two competing rules wins and why"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l4",
+              "title": "CSS Selectors quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s4",
-          "title": "CSS Selectors quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Getting started"
       },
       {
@@ -2127,15 +2193,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain why a stylesheet in the head prevents a flash of unstyled content"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l5",
+              "title": "CSS How To quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s5",
-          "title": "CSS How To quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Getting started"
       },
       {
@@ -2155,15 +2221,15 @@ export const courseMeta: CourseMeta[] = [
               "Know when a comment is noise"
             ],
             "xp": 30,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l6",
+              "title": "CSS Comments quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s6",
-          "title": "CSS Comments quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Getting started"
       },
       {
@@ -2183,7 +2249,13 @@ export const courseMeta: CourseMeta[] = [
               "Choose a readable foreground colour against a given background"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l7",
+              "title": "Colors quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l8",
@@ -2197,7 +2269,13 @@ export const courseMeta: CourseMeta[] = [
               "Read an alpha value out of a computed style and know why it is not a clean decimal"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l8",
+              "title": "RGB quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l9",
@@ -2211,7 +2289,13 @@ export const courseMeta: CourseMeta[] = [
               "Explain why a hex value is unaffected by anything the user agent does"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l9",
+              "title": "HEX quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l10",
@@ -2225,15 +2309,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain why HSL scales better than hex for a palette or a dark mode"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l10",
+              "title": "HSL quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s7",
-          "title": "CSS Colors quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Colour and backgrounds"
       },
       {
@@ -2253,7 +2337,13 @@ export const courseMeta: CourseMeta[] = [
               "Explain why a default background is transparent rather than white"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l11",
+              "title": "Background Color quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l12",
@@ -2267,7 +2357,13 @@ export const courseMeta: CourseMeta[] = [
               "Choose between `cover` and `contain` and know what each does to the shape"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l12",
+              "title": "Background Image quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l13",
@@ -2281,7 +2377,13 @@ export const courseMeta: CourseMeta[] = [
               "Combine a repeat value with a size and a position to tile in one direction"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l13",
+              "title": "Background Repeat quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l14",
@@ -2295,7 +2397,13 @@ export const courseMeta: CourseMeta[] = [
               "Recognise the performance cost of `fixed` and when it is worth it"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l14",
+              "title": "Background Attachment quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l15",
@@ -2309,15 +2417,15 @@ export const courseMeta: CourseMeta[] = [
               "Know when the shorthand is the wrong tool and the longhands are better"
             ],
             "xp": 55,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l15",
+              "title": "Background Shorthand quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s8",
-          "title": "CSS Backgrounds quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Colour and backgrounds"
       },
       {
@@ -2336,7 +2444,13 @@ export const courseMeta: CourseMeta[] = [
               "Predict how a border changes the outer size of a fixed-width element"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l16",
+              "title": "Borders quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l17",
@@ -2349,7 +2463,13 @@ export const courseMeta: CourseMeta[] = [
               "Use the side longhands to change one edge only"
             ],
             "xp": 30,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l17",
+              "title": "Border Width quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l18",
@@ -2362,7 +2482,13 @@ export const courseMeta: CourseMeta[] = [
               "Use currentColor to make a border follow the text colour automatically"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l18",
+              "title": "Border Color quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l19",
@@ -2375,7 +2501,13 @@ export const courseMeta: CourseMeta[] = [
               "Apply border-inline-start so borders follow the writing direction"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l19",
+              "title": "Border Sides quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l20",
@@ -2388,7 +2520,13 @@ export const courseMeta: CourseMeta[] = [
               "Use the two-to-four value form to set different sides at once"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l20",
+              "title": "Border Shorthand quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l21",
@@ -2401,15 +2539,15 @@ export const courseMeta: CourseMeta[] = [
               "Use the two-value elliptical form and 50% to make a circle"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l21",
+              "title": "Rounded Borders quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s9",
-          "title": "CSS Borders quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "The box model"
       },
       {
@@ -2428,7 +2566,13 @@ export const courseMeta: CourseMeta[] = [
               "Use negative margins to overlap or pull an element outside its container"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l22",
+              "title": "Margins quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l23",
@@ -2441,15 +2585,15 @@ export const courseMeta: CourseMeta[] = [
               "Break a collapse with padding, a border or display: flow-root"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l23",
+              "title": "Margin Collapse quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s10",
-          "title": "CSS Margins quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "The box model"
       },
       {
@@ -2468,15 +2612,15 @@ export const courseMeta: CourseMeta[] = [
               "Choose whether to write a value or a percentage for a given side"
             ],
             "xp": 30,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l24",
+              "title": "Padding quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s11",
-          "title": "CSS Padding quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "The box model"
       },
       {
@@ -2495,15 +2639,15 @@ export const courseMeta: CourseMeta[] = [
               "State what box the `width` value sizes by default"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l25",
+              "title": "Height/Width quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s12",
-          "title": "CSS Height/Width quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "The box model"
       },
       {
@@ -2522,15 +2666,15 @@ export const courseMeta: CourseMeta[] = [
               "Apply the `box-sizing: border-box` reset and explain what it changes"
             ],
             "xp": 55,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l26",
+              "title": "Box Model quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s13",
-          "title": "CSS Box Model quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "The box model"
       },
       {
@@ -2550,7 +2694,13 @@ export const courseMeta: CourseMeta[] = [
               "Style a focus ring with `outline` and `:focus-visible`"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l27",
+              "title": "Outline quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l28",
@@ -2564,7 +2714,13 @@ export const courseMeta: CourseMeta[] = [
               "Combine `outline-width` with an explicit style so the width is visible"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l28",
+              "title": "Outline Width quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l29",
@@ -2578,7 +2734,13 @@ export const courseMeta: CourseMeta[] = [
               "Know the initial value of `outline-color` and why it surprises people"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l29",
+              "title": "Outline Color quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l30",
@@ -2592,7 +2754,13 @@ export const courseMeta: CourseMeta[] = [
               "Say what `outline: auto` does differently from a value you write yourself"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l30",
+              "title": "Outline Shorthand quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l31",
@@ -2606,15 +2774,15 @@ export const courseMeta: CourseMeta[] = [
               "Use an offset to keep a focus ring clear of a thick or rounded border"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l31",
+              "title": "Outline Offset quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s14",
-          "title": "CSS Outline quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Text and outlines"
       },
       {
@@ -2633,7 +2801,13 @@ export const courseMeta: CourseMeta[] = [
               "Override an inherited colour on a single child without touching the rest"
             ],
             "xp": 30,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l32",
+              "title": "Text Color quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l33",
@@ -2646,7 +2820,13 @@ export const courseMeta: CourseMeta[] = [
               "Use `start` and `end` so alignment follows writing direction"
             ],
             "xp": 32,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l33",
+              "title": "Text Alignment quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l34",
@@ -2659,7 +2839,13 @@ export const courseMeta: CourseMeta[] = [
               "Lift a decoration off the text with `text-underline-offset`"
             ],
             "xp": 36,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l34",
+              "title": "Text Decoration quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l35",
@@ -2672,7 +2858,13 @@ export const courseMeta: CourseMeta[] = [
               "Avoid transforming text that a screen reader or search engine must read correctly"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l35",
+              "title": "Text Transformation quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l36",
@@ -2685,7 +2877,13 @@ export const courseMeta: CourseMeta[] = [
               "Explain why a unitless `line-height` survives a font-size change"
             ],
             "xp": 44,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l36",
+              "title": "Text Spacing quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l37",
@@ -2698,15 +2896,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain what `filter: drop-shadow()` does differently from `text-shadow`"
             ],
             "xp": 48,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l37",
+              "title": "Text Shadow quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s15",
-          "title": "CSS Text quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Text and outlines"
       },
       {
@@ -2726,7 +2924,13 @@ export const courseMeta: CourseMeta[] = [
               "Explain why a stack always ends in a generic family"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l38",
+              "title": "Font Family quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l39",
@@ -2740,7 +2944,13 @@ export const courseMeta: CourseMeta[] = [
               "Spot the moment a page stops looking the same on every device"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l39",
+              "title": "Font Web Safe quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l40",
@@ -2754,7 +2964,13 @@ export const courseMeta: CourseMeta[] = [
               "Use size-adjust and ascent-override to reduce layout shift"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l40",
+              "title": "Font Fallbacks quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l41",
@@ -2768,7 +2984,13 @@ export const courseMeta: CourseMeta[] = [
               "Predict how a browser handles a weight a font does not provide"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l41",
+              "title": "Font Style quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l42",
@@ -2782,7 +3004,13 @@ export const courseMeta: CourseMeta[] = [
               "Set a type scale where every step relates to a root size"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l42",
+              "title": "Font Size quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l43",
@@ -2796,7 +3024,13 @@ export const courseMeta: CourseMeta[] = [
               "Request only the weights and subsets you actually use"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l43",
+              "title": "Font Google quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l44",
@@ -2810,7 +3044,13 @@ export const courseMeta: CourseMeta[] = [
               "Test a pairing at small sizes before committing to it"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l44",
+              "title": "Font Pairings quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l45",
@@ -2824,15 +3064,15 @@ export const courseMeta: CourseMeta[] = [
               "Predict what a shorthand does to properties declared earlier"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l45",
+              "title": "Font Shorthand quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s16",
-          "title": "CSS Fonts quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Typography, lists and links"
       },
       {
@@ -2852,15 +3092,15 @@ export const courseMeta: CourseMeta[] = [
               "Decide which technique suits a given project"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l46",
+              "title": "Icons quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s17",
-          "title": "CSS Icons quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Typography, lists and links"
       },
       {
@@ -2880,15 +3120,15 @@ export const courseMeta: CourseMeta[] = [
               "Decide when removing the underline needs a replacement affordance"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l47",
+              "title": "Links quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s18",
-          "title": "CSS Links quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Typography, lists and links"
       },
       {
@@ -2908,15 +3148,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain when `list-style: none` removes accessibility semantics and what to do instead"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l48",
+              "title": "Lists quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s19",
-          "title": "CSS Lists quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Typography, lists and links"
       },
       {
@@ -2936,7 +3176,13 @@ export const courseMeta: CourseMeta[] = [
               "Use border-spacing to control the gap in separate mode"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l49",
+              "title": "Table Borders quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l50",
@@ -2950,7 +3196,13 @@ export const courseMeta: CourseMeta[] = [
               "Choose fixed layout for tables whose content length is unpredictable"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l50",
+              "title": "Table Size quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l51",
@@ -2964,7 +3216,13 @@ export const courseMeta: CourseMeta[] = [
               "Give cells internal spacing with padding rather than margins"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l51",
+              "title": "Table Alignment quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l52",
@@ -2978,7 +3236,13 @@ export const courseMeta: CourseMeta[] = [
               "Diagnose a zebra stripe that is invisible because cells have their own background"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l52",
+              "title": "Table Style quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l53",
@@ -2992,15 +3256,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain why overflow on an ancestor breaks position: sticky"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l53",
+              "title": "Table Responsive quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s20",
-          "title": "CSS Tables quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Tables, display and flow"
       },
       {
@@ -3020,15 +3284,15 @@ export const courseMeta: CourseMeta[] = [
               "Remove an element from the layout and from the accessibility tree at the same time"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l54",
+              "title": "CSS Display quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s21",
-          "title": "CSS Display quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Tables, display and flow"
       },
       {
@@ -3048,15 +3312,15 @@ export const courseMeta: CourseMeta[] = [
               "Use min-content, max-content and fit-content to size to the content"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l55",
+              "title": "CSS Max-width quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s22",
-          "title": "CSS Max-width quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Tables, display and flow"
       },
       {
@@ -3076,15 +3340,15 @@ export const courseMeta: CourseMeta[] = [
               "Make a sticky header work by supplying a scroll container and an offset"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l56",
+              "title": "CSS Position quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s23",
-          "title": "CSS Position quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Tables, display and flow"
       },
       {
@@ -3104,15 +3368,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain why overflow: hidden is a problem for keyboard users and find the alternatives"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l57",
+              "title": "CSS Overflow quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s24",
-          "title": "CSS Overflow quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Tables, display and flow"
       },
       {
@@ -3132,7 +3396,13 @@ export const courseMeta: CourseMeta[] = [
               "Name the two modern layout systems that replace almost every float"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l58",
+              "title": "Float quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l59",
@@ -3146,7 +3416,13 @@ export const courseMeta: CourseMeta[] = [
               "Diagnose a collapsed parent by measuring it in the browser"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l59",
+              "title": "Clear quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l60",
@@ -3160,15 +3436,15 @@ export const courseMeta: CourseMeta[] = [
               "Say which flexbox pattern replaces each float example"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l60",
+              "title": "Float Examples quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s25",
-          "title": "CSS Float quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Tables, display and flow"
       },
       {
@@ -3188,15 +3464,15 @@ export const courseMeta: CourseMeta[] = [
               "Remove the whitespace gap between adjacent inline-blocks"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l61",
+              "title": "Inline-block quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s26",
-          "title": "CSS Inline-block quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Tables, display and flow"
       },
       {
@@ -3216,15 +3492,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain why `vertical-align` has no effect on a normal block element"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l62",
+              "title": "Align quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s27",
-          "title": "CSS Align quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Tables, display and flow"
       },
       {
@@ -3244,15 +3520,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain why a descendant selector is the slowest of the five"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l63",
+              "title": "Combinators quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s28",
-          "title": "CSS Combinators quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Selectors and component patterns"
       },
       {
@@ -3272,15 +3548,15 @@ export const courseMeta: CourseMeta[] = [
               "Use `:not()` and `:root` to write a rule with an exception or a global starting point"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l64",
+              "title": "Pseudo-class quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s29",
-          "title": "CSS Pseudo-class quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Selectors and component patterns"
       },
       {
@@ -3300,15 +3576,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain why generated content reaches assistive technology and how to keep it silent"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l65",
+              "title": "Pseudo-element quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s30",
-          "title": "CSS Pseudo-element quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Selectors and component patterns"
       },
       {
@@ -3328,15 +3604,15 @@ export const courseMeta: CourseMeta[] = [
               "Choose between `opacity` and a muted colour for a disabled control"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l66",
+              "title": "Opacity quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s31",
-          "title": "CSS Opacity quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Selectors and component patterns"
       },
       {
@@ -3355,7 +3631,13 @@ export const courseMeta: CourseMeta[] = [
               "Style list items as full-width rows without touching the markup"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l67",
+              "title": "Navbar quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l68",
@@ -3368,7 +3650,13 @@ export const courseMeta: CourseMeta[] = [
               "Style the current page so the user knows where they are"
             ],
             "xp": 38,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l68",
+              "title": "Vertical Navbar quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l69",
@@ -3381,15 +3669,15 @@ export const courseMeta: CourseMeta[] = [
               "Give every item equal width with `flex: 1`"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l69",
+              "title": "Horizontal Navbar quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s32",
-          "title": "CSS Navigation Bar quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Selectors and component patterns"
       },
       {
@@ -3408,15 +3696,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain why a hover-only menu is unusable on touch devices"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l70",
+              "title": "Dropdowns quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s33",
-          "title": "CSS Dropdowns quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Selectors and component patterns"
       },
       {
@@ -3435,15 +3723,15 @@ export const courseMeta: CourseMeta[] = [
               "Fill a fixed box without distorting using `object-fit: cover`"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l71",
+              "title": "Image Gallery quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s34",
-          "title": "CSS Image Gallery quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Selectors and component patterns"
       },
       {
@@ -3462,15 +3750,15 @@ export const courseMeta: CourseMeta[] = [
               "Point `background-image` at an inline SVG data URI"
             ],
             "xp": 48,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l72",
+              "title": "Image Sprites quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s35",
-          "title": "CSS Image Sprites quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Selectors and component patterns"
       },
       {
@@ -3490,15 +3778,15 @@ export const courseMeta: CourseMeta[] = [
               "Ignore letter case with the case-insensitivity flag"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l73",
+              "title": "Attr Selectors quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s36",
-          "title": "CSS Attr Selectors quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Selectors and component patterns"
       },
       {
@@ -3518,15 +3806,15 @@ export const courseMeta: CourseMeta[] = [
               "Keep a label associated with every control"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l74",
+              "title": "Forms quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s37",
-          "title": "CSS Forms quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Selectors and component patterns"
       },
       {
@@ -3546,15 +3834,15 @@ export const courseMeta: CourseMeta[] = [
               "Use counters() to join every level of a nested list into 1.1.2"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l75",
+              "title": "Counters quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s38",
-          "title": "CSS Counters quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Selectors and component patterns"
       },
       {
@@ -3574,15 +3862,15 @@ export const courseMeta: CourseMeta[] = [
               "Pick track sizes that keep the sidebar and content readable"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l76",
+              "title": "Website Layout quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s39",
-          "title": "CSS Website Layout quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "The cascade and advanced boxes"
       },
       {
@@ -3602,15 +3890,15 @@ export const courseMeta: CourseMeta[] = [
               "Say why `px` is not a physical unit and what that means for zoom"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l77",
+              "title": "Units quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s40",
-          "title": "CSS Units quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "The cascade and advanced boxes"
       },
       {
@@ -3630,15 +3918,15 @@ export const courseMeta: CourseMeta[] = [
               "Use `:is()` and predict which of its arguments sets the score"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l78",
+              "title": "Specificity quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s41",
-          "title": "CSS Specificity quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "The cascade and advanced boxes"
       },
       {
@@ -3658,15 +3946,15 @@ export const courseMeta: CourseMeta[] = [
               "Recognise `!important` in your own CSS as a selector that needs rewriting"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l79",
+              "title": "!important quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s42",
-          "title": "CSS !important quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "The cascade and advanced boxes"
       },
       {
@@ -3686,15 +3974,15 @@ export const courseMeta: CourseMeta[] = [
               "Clip overflowing children with `overflow: hidden`"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l80",
+              "title": "Rounded Corners quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s43",
-          "title": "CSS Rounded Corners quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "The cascade and advanced boxes"
       },
       {
@@ -3714,15 +4002,15 @@ export const courseMeta: CourseMeta[] = [
               "Predict the difference between `round` and `repeat` tiling"
             ],
             "xp": 48,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l81",
+              "title": "Border Images quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s44",
-          "title": "CSS Border Images quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "The cascade and advanced boxes"
       },
       {
@@ -3742,15 +4030,15 @@ export const courseMeta: CourseMeta[] = [
               "Set per-layer repeat and size with list-aware values"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l82",
+              "title": "Backgrounds quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s45",
-          "title": "CSS Backgrounds quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "The cascade and advanced boxes"
       },
       {
@@ -3770,15 +4058,15 @@ export const courseMeta: CourseMeta[] = [
               "Mix in `oklab` rather than `srgb` for a perceptually even result"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l83",
+              "title": "Colors quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s46",
-          "title": "CSS Colors quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "The cascade and advanced boxes"
       },
       {
@@ -3798,15 +4086,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain why `transparent` and a zero-alpha colour behave differently"
             ],
             "xp": 42,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l84",
+              "title": "Color Keywords quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s47",
-          "title": "CSS Color Keywords quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "The cascade and advanced boxes"
       },
       {
@@ -3828,7 +4116,13 @@ export const courseMeta: CourseMeta[] = [
               "Produce a repeating pattern with repeating-linear-gradient()"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l85",
+              "title": "CSS Linear Gradients quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l86",
@@ -3843,15 +4137,15 @@ export const courseMeta: CourseMeta[] = [
               "Combine a radial gradient with a linear one for a highlight over a base colour"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l86",
+              "title": "CSS Radial Gradients quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s48",
-          "title": "CSS Gradients quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Effects and motion"
       },
       {
@@ -3873,7 +4167,13 @@ export const courseMeta: CourseMeta[] = [
               "Predict how a shadow interacts with border-radius and with overflow"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l87",
+              "title": "CSS Box Shadow quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l88",
@@ -3887,15 +4187,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain when filter: drop-shadow beats both shadow properties"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l88",
+              "title": "CSS Text Shadow quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s49",
-          "title": "CSS Shadows quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Effects and motion"
       },
       {
@@ -3915,15 +4215,15 @@ export const courseMeta: CourseMeta[] = [
               "Truncate overflowing text with an ellipsis"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l89",
+              "title": "CSS Text Effects quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s50",
-          "title": "CSS Text Effects quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Effects and motion"
       },
       {
@@ -3943,15 +4243,15 @@ export const courseMeta: CourseMeta[] = [
               "Say when system-ui is the better answer than shipping a font file at all"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l90",
+              "title": "CSS Web Fonts quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s51",
-          "title": "CSS Web Fonts quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Effects and motion"
       },
       {
@@ -3971,15 +4271,15 @@ export const courseMeta: CourseMeta[] = [
               "Replace a margin or width hack with a transform and say why that is better"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l91",
+              "title": "CSS 2D Transforms quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s52",
-          "title": "CSS 2D Transforms quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Effects and motion"
       },
       {
@@ -3999,15 +4299,15 @@ export const courseMeta: CourseMeta[] = [
               "Use backface-visibility to hide a face once it has rotated out of view"
             ],
             "xp": 55,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l92",
+              "title": "CSS 3D Transforms quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s53",
-          "title": "CSS 3D Transforms quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Effects and motion"
       },
       {
@@ -4027,15 +4327,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain why a transition needs two states and never fires on page load"
             ],
             "xp": 55,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l93",
+              "title": "CSS Transitions quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s54",
-          "title": "CSS Transitions quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Effects and motion"
       },
       {
@@ -4055,15 +4355,15 @@ export const courseMeta: CourseMeta[] = [
               "Add a prefers-reduced-motion fallback for any movement you have authored"
             ],
             "xp": 60,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l94",
+              "title": "CSS Animations quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s55",
-          "title": "CSS Animations quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Effects and motion"
       },
       {
@@ -4083,15 +4383,15 @@ export const courseMeta: CourseMeta[] = [
               "Say when the Popover API is a better foundation than a hover-only rule"
             ],
             "xp": 55,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l95",
+              "title": "CSS Tooltips quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s56",
-          "title": "CSS Tooltips quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Effects and motion"
       },
       {
@@ -4111,15 +4411,15 @@ export const courseMeta: CourseMeta[] = [
               "Build the grey-until-hover pattern with a transition rather than a jump"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l96",
+              "title": "CSS Style Images quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s57",
-          "title": "CSS Style Images quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Images and UI details"
       },
       {
@@ -4139,15 +4439,15 @@ export const courseMeta: CourseMeta[] = [
               "Build the fallback with a duplicated element and scaleY(-1)"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l97",
+              "title": "CSS Image Reflection quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s58",
-          "title": "CSS Image Reflection quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Images and UI details"
       },
       {
@@ -4167,15 +4467,15 @@ export const courseMeta: CourseMeta[] = [
               "Combine object-fit with a fixed-height card and say what scale-down guarantees"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l98",
+              "title": "CSS object-fit quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s59",
-          "title": "CSS object-fit quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Images and UI details"
       },
       {
@@ -4195,15 +4495,15 @@ export const courseMeta: CourseMeta[] = [
               "Say how object-position relates to background-position"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l99",
+              "title": "CSS object-position quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s60",
-          "title": "CSS object-position quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Images and UI details"
       },
       {
@@ -4223,15 +4523,15 @@ export const courseMeta: CourseMeta[] = [
               "Make a button full width or auto width with the right property"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l100",
+              "title": "Buttons quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s61",
-          "title": "CSS Buttons quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Images and UI details"
       },
       {
@@ -4251,15 +4551,15 @@ export const courseMeta: CourseMeta[] = [
               "Mark the current page with aria-current and label the surrounding <nav>"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l101",
+              "title": "Pagination quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s62",
-          "title": "CSS Pagination quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Images and UI details"
       },
       {
@@ -4279,15 +4579,15 @@ export const courseMeta: CourseMeta[] = [
               "Stop a card breaking across columns with break-inside: avoid"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l102",
+              "title": "Multiple Columns quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s63",
-          "title": "CSS Multiple Columns quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Images and UI details"
       },
       {
@@ -4307,15 +4607,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain what appearance: none costs you in accessibility"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l103",
+              "title": "User Interface quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s64",
-          "title": "CSS User Interface quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Images and UI details"
       },
       {
@@ -4335,7 +4635,13 @@ export const courseMeta: CourseMeta[] = [
               "Explain why a missing custom property invalidates the declaration"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l104",
+              "title": "The var() Function quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l105",
@@ -4348,7 +4654,13 @@ export const courseMeta: CourseMeta[] = [
               "Build one component that reads correctly in three different themes"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l105",
+              "title": "Overriding Variables quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l106",
@@ -4362,7 +4674,13 @@ export const courseMeta: CourseMeta[] = [
               "Wire a theme toggle to a data attribute"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l106",
+              "title": "Variables and JavaScript quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l107",
@@ -4376,15 +4694,15 @@ export const courseMeta: CourseMeta[] = [
               "Choose the right workaround for a given situation"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l107",
+              "title": "Variables in Media Queries quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s65",
-          "title": "CSS Variables quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Variables and media queries"
       },
       {
@@ -4404,15 +4722,15 @@ export const courseMeta: CourseMeta[] = [
               "Recall the inheritance caveat and handle form controls"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l108",
+              "title": "Box Sizing quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s66",
-          "title": "CSS Box Sizing quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Variables and media queries"
       },
       {
@@ -4432,15 +4750,15 @@ export const courseMeta: CourseMeta[] = [
               "Use the modern range syntax and justify a content-driven breakpoint"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l109",
+              "title": "Media Queries quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s67",
-          "title": "CSS Media Queries quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Variables and media queries"
       },
       {
@@ -4460,15 +4778,15 @@ export const courseMeta: CourseMeta[] = [
               "Pick the right technique for a given reflow"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l110",
+              "title": "MQ Examples quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s68",
-          "title": "CSS MQ Examples quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Variables and media queries"
       },
       {
@@ -4488,7 +4806,13 @@ export const courseMeta: CourseMeta[] = [
               "Say why flexbox is a one-dimensional layout model"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l111",
+              "title": "CSS Flexbox quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l112",
@@ -4502,7 +4826,13 @@ export const courseMeta: CourseMeta[] = [
               "Space items with gap and explain why it beats margins for this job"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l112",
+              "title": "Flex Direction and Wrap quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l113",
@@ -4517,7 +4847,13 @@ export const courseMeta: CourseMeta[] = [
               "Reorder items with order and explain the accessibility cost"
             ],
             "xp": 55,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l113",
+              "title": "Flex Items quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "css-l114",
@@ -4532,15 +4868,15 @@ export const courseMeta: CourseMeta[] = [
               "Pin a footer to the bottom of a full-height column with margin-top: auto"
             ],
             "xp": 60,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l114",
+              "title": "Flexbox Layout Examples quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s69",
-          "title": "CSS Flexbox quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Modern layout: flexbox, responsive and grid"
       },
       {
@@ -4560,15 +4896,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain why design for the content beats design for named devices"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l115",
+              "title": "RWD Intro quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s70",
-          "title": "RWD Intro quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Modern layout: flexbox, responsive and grid"
       },
       {
@@ -4588,15 +4924,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain why blocking zoom is a WCAG failure"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l116",
+              "title": "RWD Viewport quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s71",
-          "title": "RWD Viewport quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Modern layout: flexbox, responsive and grid"
       },
       {
@@ -4616,15 +4952,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain why a grid can be responsive with no media query at all"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l117",
+              "title": "RWD Grid View quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s72",
-          "title": "RWD Grid View quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Modern layout: flexbox, responsive and grid"
       },
       {
@@ -4645,15 +4981,15 @@ export const courseMeta: CourseMeta[] = [
               "Name the breakpoint values used across a codebase and keep them consistent"
             ],
             "xp": 55,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l118",
+              "title": "RWD Media Queries quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s73",
-          "title": "RWD Media Queries quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Modern layout: flexbox, responsive and grid"
       },
       {
@@ -4674,15 +5010,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain the difference between resolution switching and art direction"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l119",
+              "title": "RWD Images quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s74",
-          "title": "RWD Images quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Modern layout: flexbox, responsive and grid"
       },
       {
@@ -4702,15 +5038,15 @@ export const courseMeta: CourseMeta[] = [
               "Crop a mis-shaped frame with object-fit: cover"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l120",
+              "title": "RWD Videos quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s75",
-          "title": "RWD Videos quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Modern layout: flexbox, responsive and grid"
       },
       {
@@ -4730,15 +5066,15 @@ export const courseMeta: CourseMeta[] = [
               "Build a small design token set with custom properties as the no-framework alternative"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l121",
+              "title": "RWD Frameworks quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s76",
-          "title": "RWD Frameworks quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Modern layout: flexbox, responsive and grid"
       },
       {
@@ -4759,15 +5095,15 @@ export const courseMeta: CourseMeta[] = [
               "Check a layout at 320px against a concrete list"
             ],
             "xp": 60,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l122",
+              "title": "RWD Templates quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s77",
-          "title": "RWD Templates quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Modern layout: flexbox, responsive and grid"
       },
       {
@@ -4787,15 +5123,15 @@ export const courseMeta: CourseMeta[] = [
               "Choose between grid and flexbox for a given layout"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l123",
+              "title": "Grid Intro quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s78",
-          "title": "Grid Intro quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Modern layout: flexbox, responsive and grid"
       },
       {
@@ -4815,15 +5151,15 @@ export const courseMeta: CourseMeta[] = [
               "Centre items in their cells with `align-items` and `justify-items`"
             ],
             "xp": 48,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l124",
+              "title": "Grid Container quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s79",
-          "title": "Grid Container quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Modern layout: flexbox, responsive and grid"
       },
       {
@@ -4843,15 +5179,15 @@ export const courseMeta: CourseMeta[] = [
               "Align one item inside its cell with `justify-self`, `align-self` and `place-self`"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-css-l125",
+              "title": "Grid Item quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-css-s80",
-          "title": "Grid Item quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Modern layout: flexbox, responsive and grid"
       }
     ]
@@ -4920,15 +5256,15 @@ export const courseMeta: CourseMeta[] = [
               "Use the console as your first debugging tool"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l1",
+              "title": "What JavaScript is and how it runs quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s1",
-          "title": "Getting started check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Getting started"
       },
       {
@@ -4947,15 +5283,15 @@ export const courseMeta: CourseMeta[] = [
               "Tell the language apart from the libraries built on it"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l2",
+              "title": "What JavaScript can do quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s2",
-          "title": "Introduction check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Getting started"
       },
       {
@@ -4974,15 +5310,15 @@ export const courseMeta: CourseMeta[] = [
               "Attach a listener to the document for code that must run after loading"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l3",
+              "title": "Where to put JavaScript quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s3",
-          "title": "Where To check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Getting started"
       },
       {
@@ -5001,15 +5337,15 @@ export const courseMeta: CourseMeta[] = [
               "Read a value back out of the DOM to confirm a change landed"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l4",
+              "title": "Displaying output quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s4",
-          "title": "Output check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Getting started"
       },
       {
@@ -5028,7 +5364,13 @@ export const courseMeta: CourseMeta[] = [
               "Tell a statement that runs from a function that only waits"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l5",
+              "title": "Statements and syntax quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "js-l6",
@@ -5041,15 +5383,15 @@ export const courseMeta: CourseMeta[] = [
               "Bisect a bug by commenting lines out, then delete the parking"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l6",
+              "title": "Comments quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s5",
-          "title": "Syntax and comments check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Getting started"
       },
       {
@@ -5068,7 +5410,13 @@ export const courseMeta: CourseMeta[] = [
               "Choose names that carry meaning instead of placeholders"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l7",
+              "title": "Variables and their names quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "js-l8",
@@ -5081,15 +5429,15 @@ export const courseMeta: CourseMeta[] = [
               "Avoid var and accidental globals"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l8",
+              "title": "let and const quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s6",
-          "title": "Variables check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Getting started"
       },
       {
@@ -5108,7 +5456,13 @@ export const courseMeta: CourseMeta[] = [
               "Avoid ++ on the same line that reads the value"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l9",
+              "title": "Arithmetic and assignment quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "js-l10",
@@ -5121,15 +5475,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain why assignment inside a condition is always true"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l10",
+              "title": "How operators combine quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s7",
-          "title": "Operators check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Values, types and operators"
       },
       {
@@ -5148,7 +5502,13 @@ export const courseMeta: CourseMeta[] = [
               "Tell undefined apart from null"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l11",
+              "title": "Values and types quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "js-l12",
@@ -5162,15 +5522,15 @@ export const courseMeta: CourseMeta[] = [
               "Use typeof to find out which type a value arrived as"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l12",
+              "title": "typeof and type conversion quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s8",
-          "title": "Data types check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Values, types and operators"
       },
       {
@@ -5189,15 +5549,15 @@ export const courseMeta: CourseMeta[] = [
               "Pick the form that fits the job"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l13",
+              "title": "Declaring and calling functions quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s9",
-          "title": "Functions check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Values, types and operators"
       },
       {
@@ -5216,7 +5576,13 @@ export const courseMeta: CourseMeta[] = [
               "Write a method that uses this, and list what an object contains"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l14",
+              "title": "Objects, properties and methods quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "js-l15",
@@ -5229,15 +5595,15 @@ export const courseMeta: CourseMeta[] = [
               "Reach for optional chaining and nullish coalescing on missing data"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l15",
+              "title": "Copying and transforming objects quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s10",
-          "title": "Objects check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Values, types and operators"
       },
       {
@@ -5257,15 +5623,15 @@ export const courseMeta: CourseMeta[] = [
               "Stop a form submitting or a link navigating with preventDefault"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l16",
+              "title": "Events and event handlers quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s11",
-          "title": "Events check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Values, types and operators"
       },
       {
@@ -5285,7 +5651,13 @@ export const courseMeta: CourseMeta[] = [
               "Explain why HTML is built with elements, not with string concatenation"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l17",
+              "title": "Strings and template literals quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "js-l18",
@@ -5300,15 +5672,15 @@ export const courseMeta: CourseMeta[] = [
               "Ask a yes-or-no question with includes and startsWith"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l18",
+              "title": "String methods and search quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s12",
-          "title": "Strings check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Values, types and operators"
       },
       {
@@ -5329,15 +5701,15 @@ export const courseMeta: CourseMeta[] = [
               "Turn text into a number without guessing"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l19",
+              "title": "Numbers and rounding quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s13",
-          "title": "Numbers check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Values, types and operators"
       },
       {
@@ -5356,7 +5728,13 @@ export const courseMeta: CourseMeta[] = [
               "Add and remove with push, pop, shift and unshift, and read with for…of"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l20",
+              "title": "Arrays and reading data quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "js-l21",
@@ -5369,15 +5747,15 @@ export const courseMeta: CourseMeta[] = [
               "Fold an array into one value with reduce, and explain why forEach returns nothing"
             ],
             "xp": 55,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l21",
+              "title": "Transforming arrays quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s14",
-          "title": "Arrays check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Arrays, dates and numbers"
       },
       {
@@ -5396,15 +5774,15 @@ export const courseMeta: CourseMeta[] = [
               "Sort without mutating using a spread copy or toSorted"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l22",
+              "title": "Sorting and immutability quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s15",
-          "title": "Array sort and iteration check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Arrays, dates and numbers"
       },
       {
@@ -5423,15 +5801,15 @@ export const courseMeta: CourseMeta[] = [
               "Read the same moment in local time and in UTC, and say when the two disagree"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l23",
+              "title": "Dates and time quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s16",
-          "title": "Dates check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Arrays, dates and numbers"
       },
       {
@@ -5450,15 +5828,15 @@ export const courseMeta: CourseMeta[] = [
               "Choose between the local getters and the getUTC… getters, and read getTimezoneOffset correctly"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l24",
+              "title": "Getting and setting date parts quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s17",
-          "title": "Date methods check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Arrays, dates and numbers"
       },
       {
@@ -5477,15 +5855,15 @@ export const courseMeta: CourseMeta[] = [
               "Take min, max and an average out of a list of any length"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l25",
+              "title": "Math quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s18",
-          "title": "Math check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Arrays, dates and numbers"
       },
       {
@@ -5504,15 +5882,15 @@ export const courseMeta: CourseMeta[] = [
               "Say when randomness is a bad idea in a user interface, and avoid bias when you sample"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l26",
+              "title": "Random numbers quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s19",
-          "title": "Random check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Arrays, dates and numbers"
       },
       {
@@ -5531,15 +5909,15 @@ export const courseMeta: CourseMeta[] = [
               "Use === true when a truthy value would be wrong, and know why Boolean is a function"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l27",
+              "title": "Booleans quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s20",
-          "title": "Booleans check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Arrays, dates and numbers"
       },
       {
@@ -5558,15 +5936,15 @@ export const courseMeta: CourseMeta[] = [
               "Combine tests with && and ||, and reach for ?? when 0 matters"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l28",
+              "title": "Comparison and logical operators quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s21",
-          "title": "Comparisons check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Control flow and errors"
       },
       {
@@ -5585,7 +5963,13 @@ export const courseMeta: CourseMeta[] = [
               "Combine conditions instead of nesting them"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l29",
+              "title": "if, else and the ternary quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "js-l30",
@@ -5598,15 +5982,15 @@ export const courseMeta: CourseMeta[] = [
               "Know when an if chain is the clearer choice"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l30",
+              "title": "switch quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s22",
-          "title": "Conditions check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Control flow and errors"
       },
       {
@@ -5625,15 +6009,15 @@ export const courseMeta: CourseMeta[] = [
               "Use break and continue to cut a loop short"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l31",
+              "title": "for and while quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s23",
-          "title": "Loops check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Control flow and errors"
       },
       {
@@ -5652,15 +6036,15 @@ export const courseMeta: CourseMeta[] = [
               "Get both value and index with entries()"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l32",
+              "title": "for…of, for…in and break quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s24",
-          "title": "Loop variants check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Control flow and errors"
       },
       {
@@ -5679,15 +6063,15 @@ export const courseMeta: CourseMeta[] = [
               "Use shifts to multiply and divide by powers of two, and read them correctly"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l33",
+              "title": "Bitwise operators quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s25",
-          "title": "Bitwise operators check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Control flow and errors"
       },
       {
@@ -5708,15 +6092,15 @@ export const courseMeta: CourseMeta[] = [
               "Recognise the point where split and trim are the better tool"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l34",
+              "title": "Regular expressions quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s26",
-          "title": "Regular expressions check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Control flow and errors"
       },
       {
@@ -5736,15 +6120,15 @@ export const courseMeta: CourseMeta[] = [
               "Use try, catch and finally for failures you cannot rule out"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l35",
+              "title": "Errors you will actually hit quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s27",
-          "title": "Errors check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Control flow and errors"
       },
       {
@@ -5763,15 +6147,15 @@ export const courseMeta: CourseMeta[] = [
               "Use a closure to keep state private to a function"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l36",
+              "title": "Scope and closures quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s28",
-          "title": "Scope check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Scope, this and classes"
       },
       {
@@ -5790,15 +6174,15 @@ export const courseMeta: CourseMeta[] = [
               "Find the temporal dead zone in a piece of code"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l37",
+              "title": "Hoisting quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s29",
-          "title": "Hoisting check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Scope, this and classes"
       },
       {
@@ -5817,15 +6201,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain why modules and class bodies are always strict"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l38",
+              "title": "Strict mode quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s30",
-          "title": "Strict mode check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Scope, this and classes"
       },
       {
@@ -5844,15 +6228,15 @@ export const courseMeta: CourseMeta[] = [
               "Fix a lost `this` with an arrow function or an explicit receiver"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l39",
+              "title": "The this keyword quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s31",
-          "title": "The this keyword check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Scope, this and classes"
       },
       {
@@ -5871,15 +6255,15 @@ export const courseMeta: CourseMeta[] = [
               "Choose between an arrow and a function for an object method"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l40",
+              "title": "Arrow functions quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s32",
-          "title": "Arrow functions check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Scope, this and classes"
       },
       {
@@ -5898,15 +6282,15 @@ export const courseMeta: CourseMeta[] = [
               "Use static members and # private fields, and say when a class earns its place"
             ],
             "xp": 55,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l41",
+              "title": "Classes, constructors and inheritance quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s33",
-          "title": "Classes check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Scope, this and classes"
       },
       {
@@ -5925,15 +6309,15 @@ export const courseMeta: CourseMeta[] = [
               "Say what JSON cannot represent, and why parsed data must be checked"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l42",
+              "title": "JSON basics quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s34",
-          "title": "JSON check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Scope, this and classes"
       },
       {
@@ -5954,15 +6338,15 @@ export const courseMeta: CourseMeta[] = [
               "Name values so a log line reads as a sentence"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l43",
+              "title": "Debugging and readable code quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s35",
-          "title": "Debugging check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Scope, this and classes"
       },
       {
@@ -5981,7 +6365,13 @@ export const courseMeta: CourseMeta[] = [
               "Give a function the smallest useful surface and return early"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l44",
+              "title": "Writing code others can read quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "js-l45",
@@ -5994,7 +6384,13 @@ export const courseMeta: CourseMeta[] = [
               "Fix a function without changing what the caller expects"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l45",
+              "title": "Common mistakes quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "js-l46",
@@ -6007,15 +6403,15 @@ export const courseMeta: CourseMeta[] = [
               "Measure before and after, with a tool that gives you numbers"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l46",
+              "title": "Performance habits quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s36",
-          "title": "Style guide check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Scope, this and classes"
       },
       {
@@ -6034,15 +6430,15 @@ export const courseMeta: CourseMeta[] = [
               "Tell the difference between a missing property and a property holding undefined"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l47",
+              "title": "Object definitions and properties quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s37",
-          "title": "Object definitions check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Objects, prototypes and closures"
       },
       {
@@ -6061,15 +6457,15 @@ export const courseMeta: CourseMeta[] = [
               "Choose between console.log, JSON.stringify, Object.entries and a table"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l48",
+              "title": "Object methods and display quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s38",
-          "title": "Object methods check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Objects, prototypes and closures"
       },
       {
@@ -6088,15 +6484,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain why a getter that writes its own property does not do what it looks like"
             ],
             "xp": 60,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l49",
+              "title": "Getters and setters quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s39",
-          "title": "Object accessors check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Objects, prototypes and closures"
       },
       {
@@ -6115,15 +6511,15 @@ export const courseMeta: CourseMeta[] = [
               "Check a constructed object with instanceof and Object.keys"
             ],
             "xp": 60,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l50",
+              "title": "Object constructors quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s40",
-          "title": "Object constructors check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Objects, prototypes and closures"
       },
       {
@@ -6142,15 +6538,15 @@ export const courseMeta: CourseMeta[] = [
               "Use Object.create to start an object from a specific prototype"
             ],
             "xp": 70,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l51",
+              "title": "Prototypes quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s41",
-          "title": "Prototypes check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Objects, prototypes and closures"
       },
       {
@@ -6169,15 +6565,15 @@ export const courseMeta: CourseMeta[] = [
               "Choose between Map and a plain object on the actual weakness of each"
             ],
             "xp": 60,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l52",
+              "title": "Map and Set quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s42",
-          "title": "Map and Set check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Objects, prototypes and closures"
       },
       {
@@ -6196,15 +6592,15 @@ export const courseMeta: CourseMeta[] = [
               "Recognise an immediately invoked function expression and what it is for"
             ],
             "xp": 60,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l53",
+              "title": "Function definitions and the function keyword quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s43",
-          "title": "Function definitions check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Objects, prototypes and closures"
       },
       {
@@ -6223,15 +6619,15 @@ export const courseMeta: CourseMeta[] = [
               "Collect any number of arguments with a rest parameter"
             ],
             "xp": 60,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l54",
+              "title": "Parameters and default values quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s44",
-          "title": "Function parameters check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Objects, prototypes and closures"
       },
       {
@@ -6250,7 +6646,13 @@ export const courseMeta: CourseMeta[] = [
               "Use an explicit receiver or an arrow function to keep `this`"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l55",
+              "title": "How functions are invoked quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "js-l56",
@@ -6263,15 +6665,15 @@ export const courseMeta: CourseMeta[] = [
               "Reuse one function across several unrelated objects"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l56",
+              "title": "call and apply quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s45",
-          "title": "Function invocation check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Objects, prototypes and closures"
       },
       {
@@ -6290,15 +6692,15 @@ export const courseMeta: CourseMeta[] = [
               "Name the leak you create when a closure captures a loop variable"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l57",
+              "title": "Function closures quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s46",
-          "title": "Function closures check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Objects, prototypes and closures"
       },
       {
@@ -6317,15 +6719,15 @@ export const courseMeta: CourseMeta[] = [
               "Avoid the two mistakes that break inheritance most often"
             ],
             "xp": 55,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l58",
+              "title": "Extending classes quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s47",
-          "title": "Class syntax check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Objects, prototypes and closures"
       },
       {
@@ -6344,15 +6746,15 @@ export const courseMeta: CourseMeta[] = [
               "Keep a constant next to the class that owns it"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l59",
+              "title": "Static methods quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s48",
-          "title": "Static methods check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Objects, prototypes and closures"
       },
       {
@@ -6371,15 +6773,15 @@ export const courseMeta: CourseMeta[] = [
               "Write a function that takes a callback and calls it exactly once"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l60",
+              "title": "Callbacks quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s49",
-          "title": "Callbacks check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Async and the DOM"
       },
       {
@@ -6400,15 +6802,15 @@ export const courseMeta: CourseMeta[] = [
               "Choose between Promise.all and Promise.allSettled"
             ],
             "xp": 55,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l61",
+              "title": "Callbacks and asynchronous code quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s50",
-          "title": "Asynchronous code check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Async and the DOM"
       },
       {
@@ -6428,15 +6830,15 @@ export const courseMeta: CourseMeta[] = [
               "Choose between Promise.all, allSettled, race and any"
             ],
             "xp": 60,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l62",
+              "title": "Promises quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s51",
-          "title": "Promises check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Async and the DOM"
       },
       {
@@ -6456,15 +6858,15 @@ export const courseMeta: CourseMeta[] = [
               "Handle failures with try/catch and keep cleanup in finally"
             ],
             "xp": 60,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l63",
+              "title": "Async and await quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s52",
-          "title": "Async and await check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Async and the DOM"
       },
       {
@@ -6484,15 +6886,15 @@ export const courseMeta: CourseMeta[] = [
               "Choose between textContent, innerHTML and attributes safely"
             ],
             "xp": 60,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l64",
+              "title": "The DOM and its methods quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s53",
-          "title": "DOM intro check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Async and the DOM"
       },
       {
@@ -6511,15 +6913,15 @@ export const courseMeta: CourseMeta[] = [
               "Create new elements with document.createElement and document.createTextNode"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l65",
+              "title": "The document object quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s54",
-          "title": "DOM document check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Async and the DOM"
       },
       {
@@ -6538,15 +6940,15 @@ export const courseMeta: CourseMeta[] = [
               "Keep data in a variable and re-render on every change"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l66",
+              "title": "Creating elements and rendering a list quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s55",
-          "title": "DOM elements check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Async and the DOM"
       },
       {
@@ -6565,15 +6967,15 @@ export const courseMeta: CourseMeta[] = [
               "Change text, attributes, classes and styles, and know why textContent is safer than innerHTML"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l67",
+              "title": "Reading and changing the page quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s56",
-          "title": "DOM HTML check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Async and the DOM"
       },
       {
@@ -6592,15 +6994,15 @@ export const courseMeta: CourseMeta[] = [
               "Handle form submit with preventDefault and stop the browser from navigating"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l68",
+              "title": "Form data and validation quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s57",
-          "title": "DOM forms check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Async and the DOM"
       },
       {
@@ -6619,15 +7021,15 @@ export const courseMeta: CourseMeta[] = [
               "Write CSS custom properties from JavaScript for values that belong in the stylesheet"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l69",
+              "title": "Changing styles with the DOM quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s58",
-          "title": "DOM CSS check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Async and the DOM"
       },
       {
@@ -6646,15 +7048,15 @@ export const courseMeta: CourseMeta[] = [
               "Chain animations with Promise-based finish and handle reduce-motion preference"
             ],
             "xp": 55,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l70",
+              "title": "Simple animations quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s59",
-          "title": "DOM animations check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Async and the DOM"
       },
       {
@@ -6674,7 +7076,13 @@ export const courseMeta: CourseMeta[] = [
               "Use checkValidity and reportValidity instead of inventing your own validation"
             ],
             "xp": 55,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l71",
+              "title": "Events and form submission quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "js-l72",
@@ -6688,15 +7096,15 @@ export const courseMeta: CourseMeta[] = [
               "Pick between input, change, keydown and submit for the job in front of you"
             ],
             "xp": 55,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l72",
+              "title": "Event listeners in practice quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s60",
-          "title": "DOM events check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "DOM events and the window"
       },
       {
@@ -6716,15 +7124,15 @@ export const courseMeta: CourseMeta[] = [
               "Build a breadcrumb by walking up from a leaf and reversing the result"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l73",
+              "title": "Navigating the DOM quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s61",
-          "title": "DOM navigation check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "DOM events and the window"
       },
       {
@@ -6744,15 +7152,15 @@ export const courseMeta: CourseMeta[] = [
               "Remove an element without losing the reference you need to remove it again"
             ],
             "xp": 55,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l74",
+              "title": "Creating and removing nodes quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s62",
-          "title": "DOM nodes check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "DOM events and the window"
       },
       {
@@ -6772,15 +7180,15 @@ export const courseMeta: CourseMeta[] = [
               "Re-query deliberately and say out loud when you mean to"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l75",
+              "title": "Node lists and live collections quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s63",
-          "title": "DOM collections check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "DOM events and the window"
       },
       {
@@ -6800,15 +7208,15 @@ export const courseMeta: CourseMeta[] = [
               "Reach for a scoped element instead of a global whenever one exists"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l76",
+              "title": "The window object quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s64",
-          "title": "The window object check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "DOM events and the window"
       },
       {
@@ -6828,15 +7236,15 @@ export const courseMeta: CourseMeta[] = [
               "Read the hash and the query string without parsing them by hand"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l77",
+              "title": "Screen and location quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s65",
-          "title": "Screen and location check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "DOM events and the window"
       },
       {
@@ -6856,15 +7264,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain why a real page load is still the wrong answer for a small view change"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l78",
+              "title": "History quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s66",
-          "title": "History check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Browser APIs and storage"
       },
       {
@@ -6883,15 +7291,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain why userAgent is a weak feature test and what to use instead"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l79",
+              "title": "Navigator quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s67",
-          "title": "Navigator check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Browser APIs and storage"
       },
       {
@@ -6911,15 +7319,15 @@ export const courseMeta: CourseMeta[] = [
               "Report the window and screen measurements that decide a popup size"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l80",
+              "title": "Popups quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s68",
-          "title": "Popups check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Browser APIs and storage"
       },
       {
@@ -6939,15 +7347,15 @@ export const courseMeta: CourseMeta[] = [
               "Cancel an animation with cancelAnimationFrame instead of leaving it running"
             ],
             "xp": 55,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l81",
+              "title": "Timing and animation frames quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s69",
-          "title": "Timing check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Browser APIs and storage"
       },
       {
@@ -6967,15 +7375,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain why anything sensitive belongs behind httpOnly instead"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l82",
+              "title": "Cookies quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s70",
-          "title": "Cookies check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Browser APIs and storage"
       },
       {
@@ -6996,15 +7404,15 @@ export const courseMeta: CourseMeta[] = [
               "Add your own rule with setCustomValidity and clear it afterwards"
             ],
             "xp": 65,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l83",
+              "title": "Web APIs, the History API and form validation quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s71",
-          "title": "Web APIs check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Browser APIs and storage"
       },
       {
@@ -7024,15 +7432,15 @@ export const courseMeta: CourseMeta[] = [
               "Namespace your keys and catch the quota error instead of losing the data"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l84",
+              "title": "localStorage and sessionStorage quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s72",
-          "title": "Web storage check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Browser APIs and storage"
       },
       {
@@ -7052,15 +7460,15 @@ export const courseMeta: CourseMeta[] = [
               "Describe what a worker has no access to"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l85",
+              "title": "Web workers quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s73",
-          "title": "Web workers check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Fetch, AJAX and workers"
       },
       {
@@ -7079,15 +7487,15 @@ export const courseMeta: CourseMeta[] = [
               "Send and parse JSON bodies with GET and POST"
             ],
             "xp": 55,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l86",
+              "title": "fetch and JSON over HTTP quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s74",
-          "title": "Fetch check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Fetch, AJAX and workers"
       },
       {
@@ -7106,15 +7514,15 @@ export const courseMeta: CourseMeta[] = [
               "Handle a refused permission request without breaking the page"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l87",
+              "title": "Geolocation quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s75",
-          "title": "Geolocation check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Fetch, AJAX and workers"
       },
       {
@@ -7133,7 +7541,13 @@ export const courseMeta: CourseMeta[] = [
               "Name the four parts of a request"
             ],
             "xp": 30,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l88",
+              "title": "What AJAX means quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "js-l89",
@@ -7146,7 +7560,13 @@ export const courseMeta: CourseMeta[] = [
               "Explain that responseText is only readable once the request is DONE"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l89",
+              "title": "The XMLHttpRequest object quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "js-l90",
@@ -7159,7 +7579,13 @@ export const courseMeta: CourseMeta[] = [
               "Serialise an object body and declare its Content-Type"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l90",
+              "title": "Sending an AJAX request quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "js-l91",
@@ -7172,15 +7598,15 @@ export const courseMeta: CourseMeta[] = [
               "Tell a 404 from a request that never completed"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l91",
+              "title": "Handling the response quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s76",
-          "title": "AJAX check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Fetch, AJAX and workers"
       },
       {
@@ -7199,7 +7625,13 @@ export const courseMeta: CourseMeta[] = [
               "Explain why JSON replaced XML as the format for AJAX responses"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l92",
+              "title": "Working with XML data quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "js-l93",
@@ -7212,15 +7644,15 @@ export const courseMeta: CourseMeta[] = [
               "Keep the request tied to what the user is looking at now"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l93",
+              "title": "AJAX in a real page quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s77",
-          "title": "AJAX applications check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Fetch, AJAX and workers"
       },
       {
@@ -7239,7 +7671,13 @@ export const courseMeta: CourseMeta[] = [
               "Spot the four punctuation mistakes that break a document"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l94",
+              "title": "JSON intro and syntax quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "js-l95",
@@ -7252,15 +7690,15 @@ export const courseMeta: CourseMeta[] = [
               "Handle the two traps: typeof null and numbers that arrive as strings"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l95",
+              "title": "JSON vs XML and data types quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s78",
-          "title": "JSON syntax check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "JSON, modules and the final project"
       },
       {
@@ -7279,7 +7717,13 @@ export const courseMeta: CourseMeta[] = [
               "Name what a round trip loses: functions, undefined, dates and NaN"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l96",
+              "title": "JSON.parse and JSON.stringify quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "js-l97",
@@ -7292,7 +7736,13 @@ export const courseMeta: CourseMeta[] = [
               "Default a missing key once instead of guarding it in four places"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l97",
+              "title": "JSON objects and arrays quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "js-l98",
@@ -7305,15 +7755,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain why a closing script tag inside embedded JSON breaks the page"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l98",
+              "title": "JSON in HTML quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s79",
-          "title": "JSON parsing check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "JSON, modules and the final project"
       },
       {
@@ -7332,15 +7782,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain why module code is deferred and runs in strict mode"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l99",
+              "title": "Modules quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s80",
-          "title": "Modules check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "JSON, modules and the final project"
       },
       {
@@ -7359,15 +7809,15 @@ export const courseMeta: CourseMeta[] = [
               "Drive an empty state from the same data as the list"
             ],
             "xp": 120,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-js-l100",
+              "title": "Build an interactive task tracker quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-js-s81",
-          "title": "Final project check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "JSON, modules and the final project"
       }
     ]
@@ -7420,7 +7870,13 @@ export const courseMeta: CourseMeta[] = [
               "Use document as the entry point for all DOM work"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-dom-l1",
+              "title": "What the DOM is quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "dom-l2",
@@ -7433,15 +7889,15 @@ export const courseMeta: CourseMeta[] = [
               "Choose the right selector for the job"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-dom-l2",
+              "title": "Selecting elements quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-dom-s1",
-          "title": "DOM Fundamentals quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "dom-s2",
@@ -7459,7 +7915,13 @@ export const courseMeta: CourseMeta[] = [
               "Walk between sibling elements with nextElementSibling and previousElementSibling"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-dom-l3",
+              "title": "Moving around the tree quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "dom-l4",
@@ -7472,15 +7934,15 @@ export const courseMeta: CourseMeta[] = [
               "Understand why node identity matters when the DOM changes"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-dom-l4",
+              "title": "Node relationships quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-dom-s2",
-          "title": "DOM Traversal quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "dom-s3",
@@ -7498,7 +7960,13 @@ export const courseMeta: CourseMeta[] = [
               "Build a small piece of UI from JavaScript without touching innerHTML"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-dom-l5",
+              "title": "Creating and inserting elements quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "dom-l6",
@@ -7511,15 +7979,15 @@ export const courseMeta: CourseMeta[] = [
               "Decide when innerHTML is acceptable and when it is not"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-dom-l6",
+              "title": "Modifying the DOM quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-dom-s3",
-          "title": "DOM Manipulation quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "dom-s4",
@@ -7537,7 +8005,13 @@ export const courseMeta: CourseMeta[] = [
               "Store custom values with data attributes"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-dom-l7",
+              "title": "Working with attributes quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "dom-l8",
@@ -7550,15 +8024,15 @@ export const courseMeta: CourseMeta[] = [
               "Use CSS custom properties to bridge JavaScript and the stylesheet"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-dom-l8",
+              "title": "Inline styles quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-dom-s4",
-          "title": "DOM Attributes and Styles quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "dom-s5",
@@ -7576,7 +8050,13 @@ export const courseMeta: CourseMeta[] = [
               "Explain when to call preventDefault and stopPropagation"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-dom-l9",
+              "title": "Event basics quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "dom-l10",
@@ -7589,15 +8069,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain when delegation is the right pattern"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-dom-l10",
+              "title": "Event delegation and custom events quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-dom-s5",
-          "title": "DOM Events quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "dom-s6",
@@ -7615,7 +8095,13 @@ export const courseMeta: CourseMeta[] = [
               "Understand the limitations of window.open in modern browsers"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-dom-l11",
+              "title": "The window object quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "dom-l12",
@@ -7628,15 +8114,15 @@ export const courseMeta: CourseMeta[] = [
               "Replace them with a custom modal when appropriate"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-dom-l12",
+              "title": "Browser dialogs quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-dom-s6",
-          "title": "Browser Object Model quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "dom-s7",
@@ -7654,7 +8140,13 @@ export const courseMeta: CourseMeta[] = [
               "Use reload to refresh the page"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-dom-l13",
+              "title": "window.location quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "dom-l14",
@@ -7667,15 +8159,15 @@ export const courseMeta: CourseMeta[] = [
               "Use replaceState to update the current entry"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-dom-l14",
+              "title": "window.history quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-dom-s7",
-          "title": "Location and Navigation quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "dom-s8",
@@ -7693,7 +8185,13 @@ export const courseMeta: CourseMeta[] = [
               "Serialize complex values with JSON"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-dom-l15",
+              "title": "localStorage and sessionStorage quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "dom-l16",
@@ -7706,15 +8204,15 @@ export const courseMeta: CourseMeta[] = [
               "Choose between localStorage and cookies for a given job"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-dom-l16",
+              "title": "Storage events and cookies quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-dom-s8",
-          "title": "Browser Storage quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "dom-s9",
@@ -7732,7 +8230,13 @@ export const courseMeta: CourseMeta[] = [
               "Handle network errors and non-ok responses"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-dom-l17",
+              "title": "Making requests with fetch quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "dom-l18",
@@ -7745,15 +8249,15 @@ export const courseMeta: CourseMeta[] = [
               "Distinguish network errors from HTTP error responses"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-dom-l18",
+              "title": "POST, headers, and error handling quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-dom-s9",
-          "title": "Fetch API quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "dom-s10",
@@ -7771,7 +8275,13 @@ export const courseMeta: CourseMeta[] = [
               "Explain why the API is gated behind a user gesture"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-dom-l19",
+              "title": "Geolocation API quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "dom-l20",
@@ -7784,15 +8294,15 @@ export const courseMeta: CourseMeta[] = [
               "Adapt the UI to prefers-color-scheme and prefers-reduced-motion"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-dom-l20",
+              "title": "Media queries in JavaScript quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-dom-s10",
-          "title": "Web APIs quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "dom-s11",
@@ -7810,7 +8320,13 @@ export const courseMeta: CourseMeta[] = [
               "Understand the difference between canvas and SVG"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-dom-l21",
+              "title": "Drawing with Canvas quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "dom-l22",
@@ -7823,15 +8339,15 @@ export const courseMeta: CourseMeta[] = [
               "Choose between SVG and Canvas for a given task"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-dom-l22",
+              "title": "Working with SVG quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-dom-s11",
-          "title": "Canvas and SVG quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "dom-s12",
@@ -7849,7 +8365,13 @@ export const courseMeta: CourseMeta[] = [
               "Know when to use fetch, XMLHttpRequest, or a library"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-dom-l23",
+              "title": "Choosing the right tool quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "dom-l24",
@@ -7862,15 +8384,15 @@ export const courseMeta: CourseMeta[] = [
               "Identify common memory leaks in DOM code"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-dom-l24",
+              "title": "Performance and best practices quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-dom-s12",
-          "title": "Summary quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       }
     ]
   },
@@ -7920,7 +8442,13 @@ export const courseMeta: CourseMeta[] = [
               "Describe the mobile-first approach to building layouts"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-rwd-l1",
+              "title": "What responsive design means quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "rwd-l2",
@@ -7933,15 +8461,15 @@ export const courseMeta: CourseMeta[] = [
               "Understand the impact of missing or incorrect viewport settings"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-rwd-l2",
+              "title": "The viewport meta tag quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-rwd-s1",
-          "title": "RWD Fundamentals quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "rwd-s2",
@@ -7959,7 +8487,13 @@ export const courseMeta: CourseMeta[] = [
               "Choose sensible breakpoints for common screen sizes"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-rwd-l3",
+              "title": "Media query syntax quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "rwd-l4",
@@ -7972,15 +8506,15 @@ export const courseMeta: CourseMeta[] = [
               "Keep the number of breakpoints manageable"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-rwd-l4",
+              "title": "Breakpoint strategy quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-rwd-s2",
-          "title": "Media Queries quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "rwd-s3",
@@ -7998,7 +8532,13 @@ export const courseMeta: CourseMeta[] = [
               "Explain why px is rarely the right choice for layout"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-rwd-l5",
+              "title": "Relative units quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "rwd-l6",
@@ -8011,15 +8551,15 @@ export const courseMeta: CourseMeta[] = [
               "Choose between picture, srcset and CSS for responsive images"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-rwd-l6",
+              "title": "Flexible images and media quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-rwd-s3",
-          "title": "Fluid Layouts quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "rwd-s4",
@@ -8037,7 +8577,13 @@ export const courseMeta: CourseMeta[] = [
               "Use vw units for proportional scaling"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-rwd-l7",
+              "title": "Scalable type quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "rwd-l8",
@@ -8050,15 +8596,15 @@ export const courseMeta: CourseMeta[] = [
               "Explain why long lines are hard to read"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-rwd-l8",
+              "title": "Line length and measure quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-rwd-s4",
-          "title": "Responsive Typography quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "rwd-s5",
@@ -8076,7 +8622,13 @@ export const courseMeta: CourseMeta[] = [
               "Use minmax to set flexible column sizes"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-rwd-l9",
+              "title": "Grid for page layout quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "rwd-l10",
@@ -8089,15 +8641,15 @@ export const courseMeta: CourseMeta[] = [
               "Build card grids that reflow automatically"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-rwd-l10",
+              "title": "Responsive grid patterns quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-rwd-s5",
-          "title": "CSS Grid for Layouts quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "rwd-s6",
@@ -8115,7 +8667,13 @@ export const courseMeta: CourseMeta[] = [
               "Apply progressive enhancement to navigation and content"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-rwd-l11",
+              "title": "The mobile-first approach quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "rwd-l12",
@@ -8128,15 +8686,15 @@ export const courseMeta: CourseMeta[] = [
               "Design navigation patterns that scale from mobile to desktop"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-rwd-l12",
+              "title": "Content priority quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-rwd-s6",
-          "title": "Mobile-First Design quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "rwd-s7",
@@ -8154,7 +8712,13 @@ export const courseMeta: CourseMeta[] = [
               "Use ARIA attributes for accessible navigation"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-rwd-l13",
+              "title": "The responsive nav pattern quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "rwd-l14",
@@ -8167,15 +8731,15 @@ export const courseMeta: CourseMeta[] = [
               "Support keyboard navigation with arrow keys"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-rwd-l14",
+              "title": "Navigation accessibility quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-rwd-s7",
-          "title": "Responsive Navigation quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "rwd-s8",
@@ -8193,7 +8757,13 @@ export const courseMeta: CourseMeta[] = [
               "Use the picture element for art direction"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-rwd-l15",
+              "title": "Responsive images and performance quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "rwd-l16",
@@ -8206,15 +8776,15 @@ export const courseMeta: CourseMeta[] = [
               "Subset fonts to reduce file size"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-rwd-l16",
+              "title": "Fonts and assets quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-rwd-s8",
-          "title": "Performance for Responsive Sites quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "rwd-s9",
@@ -8232,7 +8802,13 @@ export const courseMeta: CourseMeta[] = [
               "Build a responsive testing checklist"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-rwd-l17",
+              "title": "Device and browser testing quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "rwd-l18",
@@ -8245,15 +8821,15 @@ export const courseMeta: CourseMeta[] = [
               "Integrate responsive tests into CI"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-rwd-l18",
+              "title": "Automated responsive testing quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-rwd-s9",
-          "title": "Testing Responsive Designs quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "rwd-s10",
@@ -8271,7 +8847,13 @@ export const courseMeta: CourseMeta[] = [
               "Design a CTA that remains visible and tappable"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-rwd-l19",
+              "title": "Responsive landing page quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "rwd-l20",
@@ -8284,15 +8866,15 @@ export const courseMeta: CourseMeta[] = [
               "Use consistent spacing and typography for data density"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-rwd-l20",
+              "title": "Responsive dashboard quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-rwd-s10",
-          "title": "Real-World Responsive Patterns quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       }
     ]
   },
@@ -8343,7 +8925,13 @@ export const courseMeta: CourseMeta[] = [
               "Describe the problems version control solves"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-git-l1",
+              "title": "What is version control? quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "git-l2",
@@ -8356,15 +8944,15 @@ export const courseMeta: CourseMeta[] = [
               "Use git status and git log to inspect the repository"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-git-l2",
+              "title": "Git fundamentals quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-git-s1",
-          "title": "Introduction to Version Control quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "git-s2",
@@ -8382,7 +8970,13 @@ export const courseMeta: CourseMeta[] = [
               "List and inspect remotes"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-git-l3",
+              "title": "Clone and remote quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "git-l4",
@@ -8395,15 +8989,15 @@ export const courseMeta: CourseMeta[] = [
               "Push commits to the remote"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-git-l4",
+              "title": "Add, commit and push quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-git-s2",
-          "title": "Daily Git Workflow quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "git-s3",
@@ -8421,7 +9015,13 @@ export const courseMeta: CourseMeta[] = [
               "Understand that branches are just pointers"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-git-l5",
+              "title": "Create and switch quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "git-l6",
@@ -8434,15 +9034,15 @@ export const courseMeta: CourseMeta[] = [
               "Use feature branches for isolated work"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-git-l6",
+              "title": "Branching workflow quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-git-s3",
-          "title": "Branching quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "git-s4",
@@ -8460,7 +9060,13 @@ export const courseMeta: CourseMeta[] = [
               "Resolve a merge conflict"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-git-l7",
+              "title": "Merge and conflict resolution quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "git-l8",
@@ -8473,15 +9079,15 @@ export const courseMeta: CourseMeta[] = [
               "Use interactive rebase to clean up commits"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-git-l8",
+              "title": "Rebase quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-git-s4",
-          "title": "Merging and Rebasing quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "git-s5",
@@ -8499,7 +9105,13 @@ export const courseMeta: CourseMeta[] = [
               "Inspect remote branches"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-git-l9",
+              "title": "Pull and fetch quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "git-l10",
@@ -8512,15 +9124,15 @@ export const courseMeta: CourseMeta[] = [
               "Approve and merge a pull request"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-git-l10",
+              "title": "Pull requests and review quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-git-s5",
-          "title": "Collaborating with Remotes quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "git-s6",
@@ -8538,7 +9150,13 @@ export const courseMeta: CourseMeta[] = [
               "Understand the difference between restore and reset"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-git-l11",
+              "title": "Undo working tree changes quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "git-l12",
@@ -8551,15 +9169,15 @@ export const courseMeta: CourseMeta[] = [
               "Choose between revert and reset"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-git-l12",
+              "title": "Revert and reset quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-git-s6",
-          "title": "Undoing Changes quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "git-s7",
@@ -8577,7 +9195,13 @@ export const courseMeta: CourseMeta[] = [
               "Manage multiple stashes"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-git-l13",
+              "title": "git stash quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "git-l14",
@@ -8590,15 +9214,15 @@ export const courseMeta: CourseMeta[] = [
               "Recover a dropped stash or reset commit"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-git-l14",
+              "title": "Cleaning up history quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-git-s7",
-          "title": "Stashing and Cleanup quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "git-s8",
@@ -8616,7 +9240,13 @@ export const courseMeta: CourseMeta[] = [
               "Split work into logical commits"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-git-l15",
+              "title": "Commit hygiene quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "git-l16",
@@ -8629,15 +9259,15 @@ export const courseMeta: CourseMeta[] = [
               "Set up a pre-commit hook"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-git-l16",
+              "title": ".gitignore and hooks quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-git-s8",
-          "title": "Git Best Practices quiz",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       }
     ]
   },
@@ -8690,7 +9320,13 @@ export const courseMeta: CourseMeta[] = [
               "Name the three classes of bugs TypeScript prevents"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-ts-l1",
+              "title": "What TypeScript is and why it exists quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "ts-l2",
@@ -8703,7 +9339,13 @@ export const courseMeta: CourseMeta[] = [
               "Read compiler output and jump to the failing line"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-ts-l2",
+              "title": "How the compiler fits in your workflow quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "ts-l3",
@@ -8716,15 +9358,15 @@ export const courseMeta: CourseMeta[] = [
               "Distinguish a compile error from a runtime error"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-ts-l3",
+              "title": "Your first typed file quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-ts-s1",
-          "title": "Getting started check",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "ts-s2",
@@ -8742,7 +9384,13 @@ export const courseMeta: CourseMeta[] = [
               "Choose between const and let for narrower types"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-ts-l4",
+              "title": "Primitive types and inference quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "ts-l5",
@@ -8755,7 +9403,13 @@ export const courseMeta: CourseMeta[] = [
               "Use readonly to make arrays and tuples immutable"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-ts-l5",
+              "title": "Arrays, tuples and readonly quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "ts-l6",
@@ -8768,7 +9422,13 @@ export const courseMeta: CourseMeta[] = [
               "Distinguish excess property checks from structural typing"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-ts-l6",
+              "title": "Objects, optional properties and index signatures quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "ts-l7",
@@ -8781,15 +9441,15 @@ export const courseMeta: CourseMeta[] = [
               "Use a discriminant property for exhaustive narrowing"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-ts-l7",
+              "title": "Union and intersection types quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-ts-s2",
-          "title": "TypeScript Basics check",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "ts-s3",
@@ -8807,7 +9467,13 @@ export const courseMeta: CourseMeta[] = [
               "Type a rest parameter as an array"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-ts-l8",
+              "title": "Parameter and return types quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "ts-l9",
@@ -8820,7 +9486,13 @@ export const courseMeta: CourseMeta[] = [
               "Explain when void return is appropriate"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-ts-l9",
+              "title": "Function types and callbacks quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "ts-l10",
@@ -8833,15 +9505,15 @@ export const courseMeta: CourseMeta[] = [
               "Use bind or arrow functions to preserve this"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-ts-l10",
+              "title": "Overloads and this typing quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-ts-s3",
-          "title": "Functions check",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "ts-s4",
@@ -8859,7 +9531,13 @@ export const courseMeta: CourseMeta[] = [
               "List the features only type aliases have (unions, primitives)"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-ts-l11",
+              "title": "Interfaces vs type aliases quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "ts-l12",
@@ -8872,7 +9550,13 @@ export const courseMeta: CourseMeta[] = [
               "Explain when merging is useful (augmenting library types)"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-ts-l12",
+              "title": "Extending and merging interfaces quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "ts-l13",
@@ -8885,15 +9569,15 @@ export const courseMeta: CourseMeta[] = [
               "Use implements to catch missing members at compile time"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-ts-l13",
+              "title": "Implementing interfaces in classes quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-ts-s4",
-          "title": "Interfaces & Type Aliases check",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "ts-s5",
@@ -8911,7 +9595,13 @@ export const courseMeta: CourseMeta[] = [
               "Let TypeScript infer the type argument from the call"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-ts-l14",
+              "title": "Generic functions and type parameters quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "ts-l15",
@@ -8924,7 +9614,13 @@ export const courseMeta: CourseMeta[] = [
               "Provide a default so callers can omit the argument"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-ts-l15",
+              "title": "Generic interfaces and classes quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "ts-l16",
@@ -8937,15 +9633,15 @@ export const courseMeta: CourseMeta[] = [
               "Distribute a conditional type over a union"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-ts-l16",
+              "title": "Generic constraints and conditional types quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-ts-s5",
-          "title": "Generics check",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "ts-s6",
@@ -8963,7 +9659,13 @@ export const courseMeta: CourseMeta[] = [
               "Use Readonly<T> to freeze an object shape"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-ts-l17",
+              "title": "Partial, Required, Readonly quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "ts-l18",
@@ -8976,7 +9678,13 @@ export const courseMeta: CourseMeta[] = [
               "Use Record<K, V> for dictionary-like objects"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-ts-l18",
+              "title": "Pick, Omit, Record quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "ts-l19",
@@ -8989,15 +9697,15 @@ export const courseMeta: CourseMeta[] = [
               "Extract the return type of a function with ReturnType"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-ts-l19",
+              "title": "Exclude, Extract, NonNullable, ReturnType quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-ts-s6",
-          "title": "Utility Types check",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "ts-s7",
@@ -9015,7 +9723,13 @@ export const courseMeta: CourseMeta[] = [
               "Explain why this pattern scales to many variants"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-ts-l20",
+              "title": "Discriminated unions and exhaustive matching quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "ts-l21",
@@ -9028,7 +9742,13 @@ export const courseMeta: CourseMeta[] = [
               "Generate event handler names from event names"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-ts-l21",
+              "title": "Template literal types and key remapping quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "ts-l22",
@@ -9041,15 +9761,15 @@ export const courseMeta: CourseMeta[] = [
               "Extract array element types with infer"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-ts-l22",
+              "title": "The infer keyword and type inference in conditional types quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-ts-s7",
-          "title": "Advanced Types check",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "ts-s8",
@@ -9067,7 +9787,13 @@ export const courseMeta: CourseMeta[] = [
               "Explain the difference between import and require"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-ts-l23",
+              "title": "ES modules in TypeScript quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "ts-l24",
@@ -9080,7 +9806,13 @@ export const courseMeta: CourseMeta[] = [
               "Generate declarations with declaration: true"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-ts-l24",
+              "title": "Declaration files and declare quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "ts-l25",
@@ -9093,15 +9825,15 @@ export const courseMeta: CourseMeta[] = [
               "Verify the published types are consumable"
             ],
             "xp": 30,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-ts-l25",
+              "title": "Publishing a typed package quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-ts-s8",
-          "title": "Modules & Declarations check",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "ts-s9",
@@ -9119,7 +9851,13 @@ export const courseMeta: CourseMeta[] = [
               "Enable strict mode in a new project from day one"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-ts-l26",
+              "title": "strict and the flags it enables quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "ts-l27",
@@ -9132,7 +9870,13 @@ export const courseMeta: CourseMeta[] = [
               "Enable flags one by one as the codebase improves"
             ],
             "xp": 30,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-ts-l27",
+              "title": "Tuning strictness for migration quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "ts-l28",
@@ -9145,15 +9889,15 @@ export const courseMeta: CourseMeta[] = [
               "Structure a monorepo with shared type packages"
             ],
             "xp": 30,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-ts-l28",
+              "title": "Project references and incremental builds quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-ts-s9",
-          "title": "Configuration check",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "ts-s10",
@@ -9171,7 +9915,13 @@ export const courseMeta: CourseMeta[] = [
               "Configure strict mode and path aliases"
             ],
             "xp": 60,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-ts-l29",
+              "title": "Project setup and domain types quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "ts-l30",
@@ -9184,7 +9934,13 @@ export const courseMeta: CourseMeta[] = [
               "Use ReturnType<typeof reducer> for the state type"
             ],
             "xp": 60,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-ts-l30",
+              "title": "State management with type-safe reducers quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "ts-l31",
@@ -9197,7 +9953,13 @@ export const courseMeta: CourseMeta[] = [
               "Delegate events on a list with a single listener"
             ],
             "xp": 55,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-ts-l31",
+              "title": "DOM layer with typed event handlers quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "ts-l32",
@@ -9210,7 +9972,13 @@ export const courseMeta: CourseMeta[] = [
               "Compute filtered views without mutating state"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-ts-l32",
+              "title": "Persistence and filtering quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "ts-l33",
@@ -9223,15 +9991,15 @@ export const courseMeta: CourseMeta[] = [
               "Ensure accessibility with ARIA attributes"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-ts-l33",
+              "title": "Polish: drag-and-drop and keyboard shortcuts quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-ts-s10",
-          "title": "Typed Task Tracker check",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       }
     ]
   },
@@ -9291,7 +10059,13 @@ export const courseMeta: CourseMeta[] = [
               "Name the three principles of React design"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l1",
+              "title": "What React is and why it exists quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "react-l2",
@@ -9304,7 +10078,13 @@ export const courseMeta: CourseMeta[] = [
               "Run the dev server and open the browser"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l2",
+              "title": "Getting started with Vite quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "react-l3",
@@ -9317,7 +10097,13 @@ export const courseMeta: CourseMeta[] = [
               "Explain the difference between the source and the DOM"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l3",
+              "title": "Your first component quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "react-l35",
@@ -9331,7 +10117,13 @@ export const courseMeta: CourseMeta[] = [
               "Import and export modules with ESM syntax"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l35",
+              "title": "ES6 essentials for React quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "react-l36",
@@ -9345,15 +10137,15 @@ export const courseMeta: CourseMeta[] = [
               "Use the react-codemod script to automate large migrations"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l36",
+              "title": "Upgrading to modern React quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-react-s1",
-          "title": "Getting started check",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "react-s2",
@@ -9371,7 +10163,13 @@ export const courseMeta: CourseMeta[] = [
               "Return valid JSX from every code path"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l4",
+              "title": "Function components and JSX quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "react-l5",
@@ -9384,7 +10182,13 @@ export const courseMeta: CourseMeta[] = [
               "Apply conditional rendering with ternary and &&"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l5",
+              "title": "Composing and children prop quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "react-l6",
@@ -9397,7 +10201,13 @@ export const courseMeta: CourseMeta[] = [
               "Explain why using array index as key breaks reordering"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l6",
+              "title": "Lists and keys quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "react-l37",
@@ -9411,7 +10221,13 @@ export const courseMeta: CourseMeta[] = [
               "Explain why className is used instead of class"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l37",
+              "title": "JSX expressions and attributes quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "react-l38",
@@ -9425,7 +10241,13 @@ export const courseMeta: CourseMeta[] = [
               "Choose the right pattern for readability and accessibility"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l38",
+              "title": "Conditional rendering quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "react-l39",
@@ -9439,15 +10261,15 @@ export const courseMeta: CourseMeta[] = [
               "Understand why function components with hooks are preferred"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l39",
+              "title": "Class components quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-react-s2",
-          "title": "Components and Props check",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "react-s3",
@@ -9465,7 +10287,13 @@ export const courseMeta: CourseMeta[] = [
               "Never mutate state directly, always replace it"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l7",
+              "title": "useState hook quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "react-l8",
@@ -9478,7 +10306,13 @@ export const courseMeta: CourseMeta[] = [
               "Avoid stale closures with correct dependency arrays"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l8",
+              "title": "useEffect hook quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "react-l9",
@@ -9491,15 +10325,15 @@ export const courseMeta: CourseMeta[] = [
               "Recognize and fix invalid hook call warnings"
             ],
             "xp": 30,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l9",
+              "title": "Rules of hooks quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-react-s3",
-          "title": "State and Effects check",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "react-s4",
@@ -9517,7 +10351,13 @@ export const courseMeta: CourseMeta[] = [
               "Read the event target and its value"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l10",
+              "title": "Event handling quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "react-l11",
@@ -9530,7 +10370,13 @@ export const courseMeta: CourseMeta[] = [
               "Extract the current value from the event object"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l11",
+              "title": "Controlled components quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "react-l12",
@@ -9543,7 +10389,13 @@ export const courseMeta: CourseMeta[] = [
               "Show feedback for invalid fields"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l12",
+              "title": "Forms and validation quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "react-l40",
@@ -9557,7 +10409,13 @@ export const courseMeta: CourseMeta[] = [
               "Handle multi-select with an array of values"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l40",
+              "title": "Textarea and Select quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "react-l41",
@@ -9571,15 +10429,15 @@ export const courseMeta: CourseMeta[] = [
               "Use radio buttons for mutually exclusive choices"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l41",
+              "title": "Multiple inputs, Checkbox and Radio quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-react-s4",
-          "title": "Events and Forms check",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "react-s5",
@@ -9597,7 +10455,13 @@ export const courseMeta: CourseMeta[] = [
               "Consume context with useContext in any descendant"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l13",
+              "title": "useContext for shared state quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "react-l14",
@@ -9610,7 +10474,13 @@ export const courseMeta: CourseMeta[] = [
               "Explain when to use useReducer instead of useState"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l14",
+              "title": "useReducer for state logic quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "react-l15",
@@ -9623,7 +10493,13 @@ export const courseMeta: CourseMeta[] = [
               "Explain the dependency arrays for each hook"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l15",
+              "title": "useMemo and useCallback quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "react-l16",
@@ -9636,7 +10512,13 @@ export const courseMeta: CourseMeta[] = [
               "Focus an input programmatically on mount"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l16",
+              "title": "useRef for DOM access quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "react-l42",
@@ -9650,7 +10532,13 @@ export const courseMeta: CourseMeta[] = [
               "Distinguish between urgent and transition updates"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l42",
+              "title": "useTransition quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "react-l43",
@@ -9664,7 +10552,13 @@ export const courseMeta: CourseMeta[] = [
               "Use forwardRef with function components that use hooks"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l43",
+              "title": "forwardRef quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "react-l44",
@@ -9678,7 +10572,13 @@ export const courseMeta: CourseMeta[] = [
               "Return whatever state or functions the consuming component needs"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l44",
+              "title": "Custom Hooks quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "react-l45",
@@ -9692,15 +10592,15 @@ export const courseMeta: CourseMeta[] = [
               "Recognize HOC patterns in older codebases"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l45",
+              "title": "Higher-Order Components quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-react-s5",
-          "title": "Advanced Hooks check",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "react-s6",
@@ -9718,7 +10618,13 @@ export const courseMeta: CourseMeta[] = [
               "Navigate with Link and NavLink components"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l17",
+              "title": "React Router basics quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "react-l18",
@@ -9731,7 +10637,13 @@ export const courseMeta: CourseMeta[] = [
               "Use Outlet to render nested route content"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l18",
+              "title": "URL parameters and nested routes quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "react-l19",
@@ -9744,7 +10656,13 @@ export const courseMeta: CourseMeta[] = [
               "Combine route protection with lazy loading"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l19",
+              "title": "Protected and lazy routes quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "react-l46",
@@ -9758,7 +10676,13 @@ export const courseMeta: CourseMeta[] = [
               "Clean up the portal DOM node on unmount"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l46",
+              "title": "React Portals quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "react-l50",
@@ -9772,15 +10696,15 @@ export const courseMeta: CourseMeta[] = [
               "Use TransitionGroup to animate a list of items together"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l50",
+              "title": "React Transitions quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-react-s6",
-          "title": "Routing check",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "react-s7",
@@ -9798,7 +10722,13 @@ export const courseMeta: CourseMeta[] = [
               "Code-split by route for faster initial load"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l20",
+              "title": "Code splitting with Suspense quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "react-l21",
@@ -9811,7 +10741,13 @@ export const courseMeta: CourseMeta[] = [
               "Apply useCallback to functions passed to memoized children"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l21",
+              "title": "Memoization techniques quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "react-l22",
@@ -9824,7 +10760,13 @@ export const courseMeta: CourseMeta[] = [
               "Understand the relationship between props and re-renders"
             ],
             "xp": 30,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l22",
+              "title": "Measuring and debugging renders quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "react-l47",
@@ -9837,7 +10779,13 @@ export const courseMeta: CourseMeta[] = [
               "Choose between CSS files and inline styles based on reuse and dynamism"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l47",
+              "title": "CSS styling approaches quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "react-l48",
@@ -9850,7 +10798,13 @@ export const courseMeta: CourseMeta[] = [
               "Use the :global selector for styles that should not be scoped"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l48",
+              "title": "CSS Modules quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "react-l49",
@@ -9864,15 +10818,15 @@ export const courseMeta: CourseMeta[] = [
               "Compare runtime CSS-in-JS with build-time extraction"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l49",
+              "title": "CSS-in-JS and Sass quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-react-s7",
-          "title": "Performance check",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "react-s8",
@@ -9890,7 +10844,13 @@ export const courseMeta: CourseMeta[] = [
               "Configure jsdom for DOM simulation in tests"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l23",
+              "title": "Setting up Vitest and Testing Library quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "react-l24",
@@ -9903,7 +10863,13 @@ export const courseMeta: CourseMeta[] = [
               "Handle asynchronous behavior with waitFor and findBy"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l24",
+              "title": "Testing user interactions quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "react-l25",
@@ -9916,15 +10882,15 @@ export const courseMeta: CourseMeta[] = [
               "Test components that use async data and useEffect"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l25",
+              "title": "Mocking modules and type safety quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-react-s8",
-          "title": "Testing check",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       },
       {
         "id": "react-s9",
@@ -9942,7 +10908,13 @@ export const courseMeta: CourseMeta[] = [
               "Define protected routes for authenticated pages"
             ],
             "xp": 55,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l26",
+              "title": "Project scaffolding and routing quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "react-l27",
@@ -9955,7 +10927,13 @@ export const courseMeta: CourseMeta[] = [
               "Consume context in deeply nested components with no any"
             ],
             "xp": 55,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l27",
+              "title": "Typed state and context quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "react-l28",
@@ -9968,7 +10946,13 @@ export const courseMeta: CourseMeta[] = [
               "Cache responses in context with a typed Map"
             ],
             "xp": 55,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l28",
+              "title": "Data fetching with types quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "react-l29",
@@ -9981,7 +10965,13 @@ export const courseMeta: CourseMeta[] = [
               "Style with CSS modules or styled-components"
             ],
             "xp": 45,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l29",
+              "title": "Charts and visual components quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "react-l30",
@@ -9994,15 +10984,15 @@ export const courseMeta: CourseMeta[] = [
               "Build for production with Vite and verify the output"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-react-l30",
+              "title": "Testing and deployment quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
-        ],
-        "quiz": {
-          "id": "quiz-react-s9",
-          "title": "Dashboard Application check",
-          "passingScore": 60,
-          "questionCount": 5
-        }
+        ]
       }
     ]
   },
@@ -10054,7 +11044,13 @@ export const courseMeta: CourseMeta[] = [
               "Set up a dev server with livereload for fast iteration"
             ],
             "xp": 30,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-fp-l1",
+              "title": "Project planning and structure quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "fp-l2",
@@ -10067,15 +11063,15 @@ export const courseMeta: CourseMeta[] = [
               "Wire up interactivity with progressive enhancement"
             ],
             "xp": 50,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-fp-l2",
+              "title": "Building the first project from scratch quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-fp-s1",
-          "title": "Project foundations check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Foundations"
       },
       {
@@ -10094,7 +11090,13 @@ export const courseMeta: CourseMeta[] = [
               "Use relative units for scaling"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-fp-l3",
+              "title": "Mobile-first breakpoints quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "fp-l4",
@@ -10107,15 +11109,15 @@ export const courseMeta: CourseMeta[] = [
               "Use picture for art direction"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-fp-l4",
+              "title": "Images and media in responsive layouts quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-fp-s2",
-          "title": "Responsive Design check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Build skills"
       },
       {
@@ -10134,7 +11136,13 @@ export const courseMeta: CourseMeta[] = [
               "Label form controls correctly"
             ],
             "xp": 40,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-fp-l5",
+              "title": "Semantic HTML and ARIA quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "fp-l6",
@@ -10147,15 +11155,15 @@ export const courseMeta: CourseMeta[] = [
               "Trap focus in modal or dialog components"
             ],
             "xp": 35,
-            "exerciseCount": 1
+            "exerciseCount": 1,
+            "quiz": {
+              "id": "quiz-fp-l6",
+              "title": "Keyboard navigation and focus quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-fp-s3",
-          "title": "Accessibility check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Build skills"
       },
       {
@@ -10174,7 +11182,13 @@ export const courseMeta: CourseMeta[] = [
               "Choose the landmark elements the page needs before styling it"
             ],
             "xp": 40,
-            "exerciseCount": 0
+            "exerciseCount": 0,
+            "quiz": {
+              "id": "quiz-fp-l7",
+              "title": "Plan the profile page quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "fp-l8",
@@ -10187,15 +11201,15 @@ export const courseMeta: CourseMeta[] = [
               "Run the automated checks and the manual review before submitting"
             ],
             "xp": 50,
-            "exerciseCount": 0
+            "exerciseCount": 0,
+            "quiz": {
+              "id": "quiz-fp-l8",
+              "title": "Build and submit the profile page quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-fp-s4",
-          "title": "Profile page check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Capstone builds"
       },
       {
@@ -10214,7 +11228,13 @@ export const courseMeta: CourseMeta[] = [
               "Decide what the 720px breakpoint actually changes"
             ],
             "xp": 40,
-            "exerciseCount": 0
+            "exerciseCount": 0,
+            "quiz": {
+              "id": "quiz-fp-l9",
+              "title": "Plan the landing page quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "fp-l10",
@@ -10227,15 +11247,15 @@ export const courseMeta: CourseMeta[] = [
               "Check overflow, focus states and reduced motion before submitting"
             ],
             "xp": 50,
-            "exerciseCount": 0
+            "exerciseCount": 0,
+            "quiz": {
+              "id": "quiz-fp-l10",
+              "title": "Build and submit the landing page quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-fp-s5",
-          "title": "Responsive landing page check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Capstone builds"
       },
       {
@@ -10254,7 +11274,13 @@ export const courseMeta: CourseMeta[] = [
               "Write down the operator, decimal and clear edge cases as behaviour"
             ],
             "xp": 40,
-            "exerciseCount": 0
+            "exerciseCount": 0,
+            "quiz": {
+              "id": "quiz-fp-l11",
+              "title": "Plan the calculator quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "fp-l12",
@@ -10267,15 +11293,15 @@ export const courseMeta: CourseMeta[] = [
               "Guard division by zero, repeated operators and repeated decimals"
             ],
             "xp": 50,
-            "exerciseCount": 0
+            "exerciseCount": 0,
+            "quiz": {
+              "id": "quiz-fp-l12",
+              "title": "Build and submit the calculator quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-fp-s6",
-          "title": "Calculator check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Capstone builds"
       },
       {
@@ -10294,7 +11320,13 @@ export const courseMeta: CourseMeta[] = [
               "Derive the visible list and remaining count from state"
             ],
             "xp": 40,
-            "exerciseCount": 0
+            "exerciseCount": 0,
+            "quiz": {
+              "id": "quiz-fp-l13",
+              "title": "Plan the todo app quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "fp-l14",
@@ -10307,15 +11339,15 @@ export const courseMeta: CourseMeta[] = [
               "Wire add, toggle, delete and filter through one update path"
             ],
             "xp": 50,
-            "exerciseCount": 0
+            "exerciseCount": 0,
+            "quiz": {
+              "id": "quiz-fp-l14",
+              "title": "Build and submit the todo app quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-fp-s7",
-          "title": "Todo application check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Capstone builds"
       },
       {
@@ -10334,7 +11366,13 @@ export const courseMeta: CourseMeta[] = [
               "Plan the results screen as a review of every question, not just a score"
             ],
             "xp": 40,
-            "exerciseCount": 0
+            "exerciseCount": 0,
+            "quiz": {
+              "id": "quiz-fp-l15",
+              "title": "Plan the quiz app quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "fp-l16",
@@ -10347,15 +11385,15 @@ export const courseMeta: CourseMeta[] = [
               "Build the results review and a restart that resets state and DOM together"
             ],
             "xp": 50,
-            "exerciseCount": 0
+            "exerciseCount": 0,
+            "quiz": {
+              "id": "quiz-fp-l16",
+              "title": "Build and submit the quiz app quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-fp-s8",
-          "title": "Quiz application check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Capstone builds"
       },
       {
@@ -10374,7 +11412,13 @@ export const courseMeta: CourseMeta[] = [
               "Verify the deployed site in a private window and on a phone"
             ],
             "xp": 50,
-            "exerciseCount": 0
+            "exerciseCount": 0,
+            "quiz": {
+              "id": "quiz-fp-l17",
+              "title": "Deploy a static build quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           },
           {
             "id": "fp-l18",
@@ -10387,15 +11431,15 @@ export const courseMeta: CourseMeta[] = [
               "Present a project in two minutes without overclaiming"
             ],
             "xp": 40,
-            "exerciseCount": 0
+            "exerciseCount": 0,
+            "quiz": {
+              "id": "quiz-fp-l18",
+              "title": "Write the README and present the work quiz",
+              "passingScore": 60,
+              "questionCount": 5
+            }
           }
         ],
-        "quiz": {
-          "id": "quiz-fp-s9",
-          "title": "Ship and present check",
-          "passingScore": 60,
-          "questionCount": 5
-        },
         "chapter": "Ship it"
       }
     ]

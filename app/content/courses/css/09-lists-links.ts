@@ -18,6 +18,71 @@ export const cssListLinkSections: Section[] = [
           'Decide when removing the underline needs a replacement affordance',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-css-l47',
+          title: 'Links quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l47-q1',
+              type: 'multiple-choice',
+              prompt: 'Why must the `:visited` rule come after `:link` and `:hover`?',
+              options: [
+                'Because `:visited` only works on anchors with an `href`',
+                'Because they have equal specificity and the later rule wins',
+                'Because `:visited` has higher specificity than everything',
+                'Because browsers ignore `:visited` in the middle of a stylesheet',
+              ],
+              answer: 1,
+              explanation: '`a:link`, `a:visited` and `a:hover` all have the same specificity (0,1,1), so the last one in source order applies. Put `:visited` first and it never matches anything.',
+            },
+            {
+              id: 'quiz-css-l47-q2',
+              type: 'true-false',
+              prompt: 'You can safely set `a { outline: none; }` as long as the link still changes colour on hover.',
+              answer: false,
+              explanation: 'A hover style helps mouse users only. A keyboard user needs a focus indicator, and removing the outline without replacing it makes the page unusable by keyboard.',
+            },
+            {
+              id: 'quiz-css-l47-q3',
+              type: 'code-output',
+              prompt: 'What does this produce?',
+              code: 'a:focus-visible { outline: 2px dashed #111; }',
+              options: [
+                'A focus ring on every link, even after a mouse click',
+                'A focus ring only when the browser decides focus should be visible',
+                'A dashed border around every link at all times',
+                'Nothing — `:focus-visible` needs `:hover` first',
+              ],
+              answer: 1,
+              explanation: '`:focus-visible` matches only when the user is navigating by keyboard or another non-pointer means, which is exactly why it is the right choice over `:focus`.',
+            },
+            {
+              id: 'quiz-css-l47-q4',
+              type: 'multiple-choice',
+              prompt: 'A browser ignores your `:visited` rule. What is the most likely reason?',
+              options: [
+                '`:visited` is not a real pseudo-class',
+                'You wrote it after `a:link` so it is fine — check the selector instead',
+                'You changed `color` to a value the browser will not allow on visited links',
+                'The rule needs `!important`',
+              ],
+              answer: 2,
+              explanation: 'For privacy, browsers only permit a limited set of `:visited` colour changes. A colour the user never saw on an unvisited link is silently discarded.',
+            },
+            {
+              id: 'quiz-css-l47-q5',
+              type: 'blank',
+              prompt: 'Complete the sentence: colour alone must never be the only signal that a link is a link, which is why the ________ is the browser default.',
+              answers: [
+                'underline',
+                'underlining',
+                'text underline',
+              ],
+              explanation: 'The underline works regardless of colour perception. Removing it means providing another affordance — a thicker underline, a background, or a border.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -150,72 +215,6 @@ a:focus-visible {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s18',
-      title: 'CSS Links quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s18-q1',
-          type: 'multiple-choice',
-          prompt: 'Why must the `:visited` rule come after `:link` and `:hover`?',
-          options: [
-            'Because `:visited` only works on anchors with an `href`',
-            'Because they have equal specificity and the later rule wins',
-            'Because `:visited` has higher specificity than everything',
-            'Because browsers ignore `:visited` in the middle of a stylesheet',
-          ],
-          answer: 1,
-          explanation:
-            '`a:link`, `a:visited` and `a:hover` all have the same specificity (0,1,1), so the last one in source order applies. Put `:visited` first and it never matches anything.',
-        },
-        {
-          id: 'quiz-css-s18-q2',
-          type: 'true-false',
-          prompt: 'You can safely set `a { outline: none; }` as long as the link still changes colour on hover.',
-          answer: false,
-          explanation:
-            'A hover style helps mouse users only. A keyboard user needs a focus indicator, and removing the outline without replacing it makes the page unusable by keyboard.',
-        },
-        {
-          id: 'quiz-css-s18-q3',
-          type: 'code-output',
-          prompt: 'What does this produce?',
-          code: 'a:focus-visible { outline: 2px dashed #111; }',
-          options: [
-            'A focus ring on every link, even after a mouse click',
-            'A focus ring only when the browser decides focus should be visible',
-            'A dashed border around every link at all times',
-            'Nothing — `:focus-visible` needs `:hover` first',
-          ],
-          answer: 1,
-          explanation:
-            '`:focus-visible` matches only when the user is navigating by keyboard or another non-pointer means, which is exactly why it is the right choice over `:focus`.',
-        },
-        {
-          id: 'quiz-css-s18-q4',
-          type: 'multiple-choice',
-          prompt: 'A browser ignores your `:visited` rule. What is the most likely reason?',
-          options: [
-            '`:visited` is not a real pseudo-class',
-            'You wrote it after `a:link` so it is fine — check the selector instead',
-            'You changed `color` to a value the browser will not allow on visited links',
-            'The rule needs `!important`',
-          ],
-          answer: 2,
-          explanation:
-            'For privacy, browsers only permit a limited set of `:visited` colour changes. A colour the user never saw on an unvisited link is silently discarded.',
-        },
-        {
-          id: 'quiz-css-s18-q5',
-          type: 'blank',
-          prompt: 'Complete the sentence: colour alone must never be the only signal that a link is a link, which is why the ________ is the browser default.',
-          answers: ['underline', 'underlining', 'text underline'],
-          explanation:
-            'The underline works regardless of colour perception. Removing it means providing another affordance — a thicker underline, a background, or a border.',
-        },
-      ],
-    },
   },
   {
     id: 'css-s19',
@@ -234,6 +233,72 @@ a:focus-visible {
           'Explain when `list-style: none` removes accessibility semantics and what to do instead',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-css-l48',
+          title: 'Lists quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l48-q1',
+              type: 'multiple-choice',
+              prompt: 'What does `list-style-position: outside` do to wrapped text?',
+              options: [
+                'The marker hangs in the margin, so wrapped lines align with the item content',
+                'The marker moves inside, so wrapped lines start under the bullet',
+                'The wrapped text is hidden',
+                'The marker repeats on every line',
+              ],
+              answer: 0,
+              explanation: '`outside` is the default. The marker is placed outside the principal box, which is why a long item wraps to a clean edge aligned with the text.',
+            },
+            {
+              id: 'quiz-css-l48-q2',
+              type: 'true-false',
+              prompt: 'Setting `list-style: none` on a navigation list is always fine, because the links are still focusable.',
+              answer: false,
+              explanation: 'Some screen readers stop announcing list structure once `list-style: none` is applied. Keep the semantics by adding `role="list"`, or by wrapping the links in a `<nav>` with an accessible name.',
+            },
+            {
+              id: 'quiz-css-l48-q3',
+              type: 'code-output',
+              prompt: 'What marker does this produce?',
+              code: 'ul { list-style: square url(missing.png) inside; }',
+              options: [
+                'A green square image',
+                'A square bullet, positioned inside',
+                'No marker at all',
+                'A numbered list inside the items',
+              ],
+              answer: 1,
+              explanation: '`list-style` takes type, image and position. When the image fails to load, the marker falls back to `none` for the image part only, so the `square` type still applies.',
+            },
+            {
+              id: 'quiz-css-l48-q4',
+              type: 'identify-error',
+              prompt: 'This rule is meant to push the bullet further left. What is wrong with it?',
+              code: 'li::marker { position: absolute; left: -20px; }',
+              options: [
+                'The pseudo-element is misspelled',
+                'Layout properties such as position and left do not apply to a marker box',
+                'The selector must be `li > ::marker`',
+                'Marker styling must go in a media query',
+              ],
+              answer: 1,
+              explanation: '`::marker` accepts only colour, font, content and text properties. Layout properties are ignored, which is why a bullet cannot be positioned with CSS.',
+            },
+            {
+              id: 'quiz-css-l48-q5',
+              type: 'blank',
+              prompt: 'Complete the sentence: `list-style-type: none` is legitimate when the list is used purely for ________ and the bullets carried no meaning.',
+              answers: [
+                'layout',
+                'layout purposes',
+                'layout only',
+              ],
+              explanation: 'Using a `<ul>` as a layout device is fine — the semantics were never the point. Removing bullets from a real content or navigation list is the risky case.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -392,72 +457,5 @@ li::marker { color: #7c3aed; font-size: 1.1em; }`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s19',
-      title: 'CSS Lists quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s19-q1',
-          type: 'multiple-choice',
-          prompt: 'What does `list-style-position: outside` do to wrapped text?',
-          options: [
-            'The marker hangs in the margin, so wrapped lines align with the item content',
-            'The marker moves inside, so wrapped lines start under the bullet',
-            'The wrapped text is hidden',
-            'The marker repeats on every line',
-          ],
-          answer: 0,
-          explanation:
-            '`outside` is the default. The marker is placed outside the principal box, which is why a long item wraps to a clean edge aligned with the text.',
-        },
-        {
-          id: 'quiz-css-s19-q2',
-          type: 'true-false',
-          prompt: 'Setting `list-style: none` on a navigation list is always fine, because the links are still focusable.',
-          answer: false,
-          explanation:
-            'Some screen readers stop announcing list structure once `list-style: none` is applied. Keep the semantics by adding `role="list"`, or by wrapping the links in a `<nav>` with an accessible name.',
-        },
-        {
-          id: 'quiz-css-s19-q3',
-          type: 'code-output',
-          prompt: 'What marker does this produce?',
-          code: 'ul { list-style: square url(missing.png) inside; }',
-          options: [
-            'A green square image',
-            'A square bullet, positioned inside',
-            'No marker at all',
-            'A numbered list inside the items',
-          ],
-          answer: 1,
-          explanation:
-            '`list-style` takes type, image and position. When the image fails to load, the marker falls back to `none` for the image part only, so the `square` type still applies.',
-        },
-        {
-          id: 'quiz-css-s19-q4',
-          type: 'identify-error',
-          prompt: 'This rule is meant to push the bullet further left. What is wrong with it?',
-          code: 'li::marker { position: absolute; left: -20px; }',
-          options: [
-            'The pseudo-element is misspelled',
-            'Layout properties such as position and left do not apply to a marker box',
-            'The selector must be `li > ::marker`',
-            'Marker styling must go in a media query',
-          ],
-          answer: 1,
-          explanation:
-            '`::marker` accepts only colour, font, content and text properties. Layout properties are ignored, which is why a bullet cannot be positioned with CSS.',
-        },
-        {
-          id: 'quiz-css-s19-q5',
-          type: 'blank',
-          prompt: 'Complete the sentence: `list-style-type: none` is legitimate when the list is used purely for ________ and the bullets carried no meaning.',
-          answers: ['layout', 'layout purposes', 'layout only'],
-          explanation:
-            'Using a `<ul>` as a layout device is fine — the semantics were never the point. Removing bullets from a real content or navigation list is the risky case.',
-        },
-      ],
-    },
   },
 ]

@@ -20,6 +20,73 @@ export const cssFontSections: Section[] = [
           'Explain why a stack always ends in a generic family',
         ],
         xp: 35,
+        quiz: {
+          id: 'quiz-css-l38',
+          title: 'Font Family quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l38-q1',
+              type: 'identify-error',
+              prompt: 'Why does this rule not produce the font you intended?',
+              code: '.brand {\n  font-family: Trebuchet MS, sans-serif;\n}',
+              options: [
+                '`font-family` cannot be set on a class',
+                'The family name with a space must be quoted',
+                '`sans-serif` is not a valid family',
+                'The comma is not allowed',
+              ],
+              answer: 1,
+              explanation: 'Without quotes the browser reads `Trebuchet` and `MS` as two separate families. Write `"Trebuchet MS", sans-serif`.',
+            },
+            {
+              id: 'quiz-css-l38-q2',
+              type: 'multiple-choice',
+              prompt: 'Which list names the five generic font families every browser must provide?',
+              options: [
+                '`serif`, `sans-serif`, `monospace`, `cursive`, `fantasy`',
+                '`serif`, `sans-serif`, `monospace`, `display`, `script`',
+                '`roman`, `italic`, `bold`, `condensed`, `expanded`',
+                '`serif`, `sans-serif`, `monospace`, `handwriting`, `decorative`',
+              ],
+              answer: 0,
+              explanation: 'The five generic families are serif, sans-serif, monospace, cursive and fantasy. Each promises a shape rather than a specific installed typeface.',
+            },
+            {
+              id: 'quiz-css-l38-q3',
+              type: 'multiple-choice',
+              prompt: 'How does a browser choose from a comma-separated `font-family` stack?',
+              options: [
+                'It loads every family and blends them',
+                'It uses the first family from the left that is available',
+                'It uses the last family, since the rest are documentation',
+                'It picks the family with the shortest name',
+              ],
+              answer: 1,
+              explanation: 'The stack is an ordered preference list. The browser walks it from the left and stops at the first family it can actually render.',
+            },
+            {
+              id: 'quiz-css-l38-q4',
+              type: 'true-false',
+              prompt: '`font-family` is inherited, so one declaration on `body` can style the whole page.',
+              answer: true,
+              explanation: 'Because the property inherits, setting it once near the root gives every descendant a base family. Individual elements only need a rule when they should differ.',
+            },
+            {
+              id: 'quiz-css-l38-q5',
+              type: 'multiple-choice',
+              prompt: 'Which declaration writes a multi-word family name correctly?',
+              options: [
+                '`font-family: Times New Roman, Georgia, serif;`',
+                '`font-family: "Times New Roman", Georgia, serif;`',
+                '`font-family: Times "New Roman", Georgia, serif;`',
+                '`font-family: (Times New Roman), Georgia, serif;`',
+              ],
+              answer: 1,
+              explanation: 'A family name containing spaces must be quoted, or the browser reads each word as a separate family. The trailing generic still guarantees a serif fallback.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -201,6 +268,72 @@ export const cssFontSections: Section[] = [
           'Spot the moment a page stops looking the same on every device',
         ],
         xp: 35,
+        quiz: {
+          id: 'quiz-css-l39',
+          title: 'Font Web Safe quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l39-q1',
+              type: 'multiple-choice',
+              prompt: 'What is the purpose of listing several families in a `font-family` stack?',
+              options: [
+                'The browser loads every family and picks the prettiest',
+                'The browser uses the first available family and falls back to the next if it is missing',
+                'The browser mixes the families character by character',
+                'Only the last family is used; the earlier ones are documentation',
+              ],
+              answer: 1,
+              explanation: 'A font stack is an ordered preference list. The browser takes the first family it can render, which is why a generic family at the end guarantees a usable fallback.',
+            },
+            {
+              id: 'quiz-css-l39-q2',
+              type: 'multiple-choice',
+              prompt: 'What makes a font "web safe"?',
+              options: [
+                'It is hosted on a CDN with a long cache lifetime',
+                'It is already installed on nearly every operating system, so it needs no download',
+                'It has been licensed for use on the web',
+                'It is available in both WOFF and WOFF2 formats',
+              ],
+              answer: 1,
+              explanation: 'A web-safe font is one the operating system already has. That makes it free and instant, and it cannot fail to load, though it may differ slightly between platforms.',
+            },
+            {
+              id: 'quiz-css-l39-q3',
+              type: 'multiple-choice',
+              prompt: 'Which of these is a common web-safe monospace family?',
+              options: [
+                '`Georgia`',
+                '`"Courier New"`',
+                '`"Trebuchet MS"`',
+                '`Impact`',
+              ],
+              answer: 1,
+              explanation: '`"Courier New"` is the classic monospace family, alongside Consolas, Menlo and Monaco. Georgia and Trebuchet MS are proportional faces, and Impact is a display face.',
+            },
+            {
+              id: 'quiz-css-l39-q4',
+              type: 'multiple-choice',
+              prompt: 'What is the main trade-off of choosing web-safe fonts?',
+              options: [
+                'They require a network request but look identical everywhere',
+                'They are free and instant, but cap how distinctive a design can be and drift slightly between platforms',
+                'They are more legible but cannot be used for headings',
+                'They load faster but are unavailable on mobile devices',
+              ],
+              answer: 1,
+              explanation: 'Web-safe families cost nothing and cannot fail, but the set is small and the same name may map to a slightly different file on Windows, macOS and Linux.',
+            },
+            {
+              id: 'quiz-css-l39-q5',
+              type: 'true-false',
+              prompt: 'Georgia is the exact same font file on Windows, macOS and Linux.',
+              answer: false,
+              explanation: 'The name is shared, but the file behind it differs by platform. Headings can shift a little from device to device even when the stack resolves to Georgia.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -386,6 +519,78 @@ pre {
           'Use size-adjust and ascent-override to reduce layout shift',
         ],
         xp: 45,
+        quiz: {
+          id: 'quiz-css-l40',
+          title: 'Font Fallbacks quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l40-q1',
+              type: 'multiple-choice',
+              prompt: 'What is the last entry in a well-formed `font-family` stack?',
+              options: [
+                'The most fashionable family available',
+                'A generic family like `serif` or `sans-serif`',
+                'The family the designer preferred',
+                'Nothing — the stack may end anywhere',
+              ],
+              answer: 1,
+              explanation: 'A generic family is the one entry that cannot fail, because every browser ships one. It guarantees readable text no matter what is missing.',
+            },
+            {
+              id: 'quiz-css-l40-q2',
+              type: 'multiple-choice',
+              prompt: 'What does `font-display: block` do while a webfont is downloading?',
+              options: [
+                'Paints fallback text immediately and swaps later',
+                'Hides the text for up to about three seconds, then shows the fallback',
+                'Skips the webfont entirely on slow connections',
+                'Shows the real font only after the page finishes loading',
+              ],
+              answer: 1,
+              explanation: '`block` gives the font a short blocking period, leaving the reader with empty space, then falls back anyway. `swap` avoids that invisible-text gap.',
+            },
+            {
+              id: 'quiz-css-l40-q3',
+              type: 'multiple-choice',
+              prompt: 'How does the browser use the `src` list in an `@font-face` rule?',
+              options: [
+                'It downloads every format and lets the reader choose',
+                'It downloads the first format it supports, so the modern one should come first',
+                'It downloads only the last entry as the final fallback',
+                'It ignores `src` when a `font-family` name is present',
+              ],
+              answer: 1,
+              explanation: '`src` is a fallback list of file formats. The browser stops at the first format it can decode, which is why WOFF2 belongs at the front and an old format at the back.',
+            },
+            {
+              id: 'quiz-css-l40-q4',
+              type: 'multiple-choice',
+              prompt: 'What problem does `size-adjust` on a fallback `@font-face` solve?',
+              options: [
+                'It makes the fallback look identical to the webfont',
+                'It scales the fallback so its characters occupy about the same width, reducing layout shift',
+                'It downloads a larger font file for sharper rendering',
+                'It changes the weight of the real font',
+              ],
+              answer: 1,
+              explanation: 'The goal is matching metrics, not appearance. Adjusting the fallback\'s size and ascent keeps the line boxes stable when the real font swaps in.',
+            },
+            {
+              id: 'quiz-css-l40-q5',
+              type: 'multiple-choice',
+              prompt: 'What does the browser use when no family in a stack matches and there is no generic at the end?',
+              options: [
+                'It refuses to render the text',
+                'The first family in the stack, synthetically drawn',
+                'The nearest family by alphabetical order',
+                'The user agent default font',
+              ],
+              answer: 3,
+              explanation: 'After walking the list the browser still has to draw the text, so it falls back to its own default. That result is unpredictable, which is why a generic should always terminate the stack.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -575,6 +780,72 @@ pre {
           'Predict how a browser handles a weight a font does not provide',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-css-l41',
+          title: 'Font Style quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l41-q1',
+              type: 'multiple-choice',
+              prompt: 'Which `font-style` value uses a true italic design when the family provides one?',
+              options: [
+                'normal',
+                'italic',
+                'oblique',
+                'bold',
+              ],
+              answer: 1,
+              explanation: '`italic` asks for the family’s italic face. `oblique` slants the upright face, although browsers may use a true italic when one exists.',
+            },
+            {
+              id: 'quiz-css-l41-q2',
+              type: 'multiple-choice',
+              prompt: 'Which numeric weights do the keywords `normal` and `bold` correspond to?',
+              options: [
+                '`300` and `600`',
+                '`400` and `700`',
+                '`500` and `800`',
+                '`100` and `900`',
+              ],
+              answer: 1,
+              explanation: '`normal` is 400 and `bold` is 700. They are the only two weight keywords and act as aliases for those numbers.',
+            },
+            {
+              id: 'quiz-css-l41-q3',
+              type: 'multiple-choice',
+              prompt: 'What does a browser do when asked for a weight the family does not provide?',
+              options: [
+                'It refuses to render the text',
+                'It uses the nearest available weight, then may synthesise bold by smearing the outline',
+                'It switches to a different typeface automatically',
+                'It rounds the weight down to 400',
+              ],
+              answer: 1,
+              explanation: 'The browser looks for the closest face it has and, if the difference is large, fakes the weight. Synthetic bold works but never looks as good as a real cut.',
+            },
+            {
+              id: 'quiz-css-l41-q4',
+              type: 'multiple-choice',
+              prompt: 'What range of percentages does `font-stretch` accept?',
+              options: [
+                '`50%` to `200%`',
+                '`75%` to `125%`',
+                '`0%` to `100%`',
+                '`100%` to `900%`',
+              ],
+              answer: 0,
+              explanation: '`font-stretch` takes width keywords or a percentage from 50% to 200%. It only has an effect if the family actually ships those widths.',
+            },
+            {
+              id: 'quiz-css-l41-q5',
+              type: 'true-false',
+              prompt: '`transform: skewX(-10deg)` is a proper substitute for `font-style: italic`.',
+              answer: false,
+              explanation: 'A transform leans the rendered box without requesting an italic face, and it does not tell the accessibility tree anything. `font-style: italic` asks the font for a designed italic cut when one exists.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -770,6 +1041,72 @@ pre {
           'Set a type scale where every step relates to a root size',
         ],
         xp: 45,
+        quiz: {
+          id: 'quiz-css-l42',
+          title: 'Font Size quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l42-q1',
+              type: 'multiple-choice',
+              prompt: 'Which unit is safest for body text, and why?',
+              options: [
+                '`px`, because it is precise',
+                '`pt`, because it is the print standard',
+                '`rem`, because it follows the reader\'s font-size preference and never compounds',
+                '`vw`, because it fits the screen',
+              ],
+              answer: 2,
+              explanation: '`rem` scales with the root font size so browser zoom preferences are honoured, and measuring from the root means nested sizes do not multiply.',
+            },
+            {
+              id: 'quiz-css-l42-q2',
+              type: 'multiple-choice',
+              prompt: 'In `font-size`, what is `1em` relative to?',
+              options: [
+                'The root element\'s font size',
+                'The viewport width',
+                'The parent element\'s font size',
+                'The element\'s own line height',
+              ],
+              answer: 2,
+              explanation: '`em` measures from the parent\'s font size, which is why nested `em` sizes multiply. `rem` is the one that measures from the root.',
+            },
+            {
+              id: 'quiz-css-l42-q3',
+              type: 'multiple-choice',
+              prompt: 'Three nested elements each set `font-size: 1.2em`. Roughly how large is the innermost text compared with the base?',
+              options: [
+                '1.2 times',
+                '1.44 times',
+                '1.73 times',
+                '3.6 times',
+              ],
+              answer: 2,
+              explanation: 'Each level multiplies the one above, so the factor is 1.2 × 1.2 × 1.2, about 1.73. That compounding is the reason to use `rem` for structural sizes.',
+            },
+            {
+              id: 'quiz-css-l42-q4',
+              type: 'multiple-choice',
+              prompt: 'Why is `vw` a poor unit for body text?',
+              options: [
+                'It is not supported in modern browsers',
+                'It ignores the reader\'s font-size preference and can become very small on wide screens',
+                'It always makes text larger than `px`',
+                'It cannot be combined with `line-height`',
+              ],
+              answer: 1,
+              explanation: 'A viewport unit knows nothing about the reader\'s settings, and 1vw gets small relative to a wide screen. A `rem` minimum inside `clamp()` is a safer responsive choice.',
+            },
+            {
+              id: 'quiz-css-l42-q5',
+              type: 'true-false',
+              prompt: 'For `font-size`, `120%` behaves like `1.2em` because both are relative to the parent.',
+              answer: true,
+              explanation: 'Percentage font sizes resolve against the parent size, exactly as `em` does. Both therefore compound when nested, unlike `rem`.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -965,6 +1302,72 @@ small { font-size: 0.875rem; }
           'Request only the weights and subsets you actually use',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-css-l43',
+          title: 'Font Google quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l43-q1',
+              type: 'multiple-choice',
+              prompt: 'What does `display=swap` do in a Google Fonts URL?',
+              options: [
+                'Blocks painting until the font downloads',
+                'Shows a fallback face immediately, then swaps in the webfont when it arrives',
+                'Preloads every weight in the family',
+                'Disables browser caching for the font file',
+              ],
+              answer: 1,
+              explanation: '`font-display: swap` gives the reader text straight away in a fallback face. The webfont replaces it after loading, which avoids invisible text.',
+            },
+            {
+              id: 'quiz-css-l43-q2',
+              type: 'multiple-choice',
+              prompt: 'Why is a `link` element preferred over `@import` for a Google Font?',
+              options: [
+                '`@import` cannot load fonts from another origin',
+                '`@import` is discovered only after the stylesheet is downloaded and parsed, adding a round trip',
+                '`link` requests every weight automatically',
+                '`@import` does not support the `display=swap` parameter',
+              ],
+              answer: 1,
+              explanation: 'A `link` in the head is discovered while the page is parsed. An `@import` waits for its own stylesheet, so the font request starts later and the text waits longer.',
+            },
+            {
+              id: 'quiz-css-l43-q3',
+              type: 'multiple-choice',
+              prompt: 'What does `rel="preconnect"` do for a Google Font?',
+              options: [
+                'Opens the connection to the font host early, avoiding a fresh TCP and TLS handshake',
+                'Preloads the font file itself into the cache',
+                'Downloads every available weight in advance',
+                'Forces the font to render before the CSS arrives',
+              ],
+              answer: 0,
+              explanation: '`preconnect` sets up the connection before the stylesheet is requested. The font file then reuses it instead of paying for DNS, TCP and TLS again.',
+            },
+            {
+              id: 'quiz-css-l43-q4',
+              type: 'multiple-choice',
+              prompt: 'What is the cost of requesting `wght@100..900` from a non-variable Google family?',
+              options: [
+                'Nothing — Google serves one file for the whole range',
+                'It makes the text invisible until every weight arrives',
+                'It downloads a separate file for each weight, so request only the weights you use',
+                'It silently falls back to the regular weight',
+              ],
+              answer: 2,
+              explanation: 'A non-variable family has one file per weight, so a full range means many downloads. A variable family can cover the range from one file, but that is a property of the font.',
+            },
+            {
+              id: 'quiz-css-l43-q5',
+              type: 'true-false',
+              prompt: 'The `preconnect` to `fonts.gstatic.com` needs `crossorigin` because that request is a CORS fetch.',
+              answer: true,
+              explanation: 'Font files are fetched in CORS mode, so the connection hint must be marked the same way. Without `crossorigin` the browser opens a connection that the font request cannot reuse.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1168,6 +1571,72 @@ body {
           'Test a pairing at small sizes before committing to it',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-css-l44',
+          title: 'Font Pairings quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l44-q1',
+              type: 'multiple-choice',
+              prompt: 'Which heading/body pairing is most likely to stay readable and distinct?',
+              options: [
+                'Two similar geometric sans-serifs at nearly the same weight',
+                'A display serif for headings and a plain sans-serif for body text',
+                'Two script faces with decorative capitals',
+                'Three different decorative faces, one per heading level',
+              ],
+              answer: 1,
+              explanation: 'Different roles need visible contrast more than similarity. A display face for short headings and a quiet text face for long copy keeps both readable.',
+            },
+            {
+              id: 'quiz-css-l44-q2',
+              type: 'multiple-choice',
+              prompt: 'Why does matching x-height matter when pairing two families?',
+              options: [
+                'Families with very different x-heights look mismatched at the same nominal size',
+                'It determines whether the fonts can be downloaded together',
+                'It controls the line height automatically',
+                'It is the only way to make a serif and sans-serif pair',
+              ],
+              answer: 0,
+              explanation: 'The x-height decides how large lowercase text appears. Two families with very different x-heights read at different sizes even when both are set to the same font size.',
+            },
+            {
+              id: 'quiz-css-l44-q3',
+              type: 'multiple-choice',
+              prompt: 'How many families does the lesson recommend for a page?',
+              options: [
+                'One, always',
+                'Two, with a third usually reading as an accident',
+                'Three, one per heading level',
+                'As many as the design needs, with no limit',
+              ],
+              answer: 1,
+              explanation: 'Two roles, display and text, cover most pages. A third family tends to look like an accident rather than a deliberate choice, unless a superfamily supplies both cuts.',
+            },
+            {
+              id: 'quiz-css-l44-q4',
+              type: 'multiple-choice',
+              prompt: 'What paragraph line length does the lesson recommend for readable body text?',
+              options: [
+                '20 to 30 characters',
+                '45 to 75 characters',
+                '90 to 110 characters',
+                'Around 150 characters',
+              ],
+              answer: 2,
+              explanation: 'Roughly 45 to 75 characters per line keeps the eye moving comfortably. Past that, even a well-chosen typeface becomes hard to read.',
+            },
+            {
+              id: 'quiz-css-l44-q5',
+              type: 'true-false',
+              prompt: 'A single family can carry a whole hierarchy through size, weight and letter-spacing.',
+              answer: true,
+              explanation: 'The neutral pairing uses one family at several weights and sizes. That is why many interface designs ship with a single well-chosen typeface.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1365,6 +1834,73 @@ body {
           'Predict what a shorthand does to properties declared earlier',
         ],
         xp: 45,
+        quiz: {
+          id: 'quiz-css-l45',
+          title: 'Font Shorthand quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l45-q1',
+              type: 'true-false',
+              prompt: 'A `font` shorthand only sets the properties you write into it.',
+              answer: false,
+              explanation: 'It resets every font longhand to its initial value, including `font-size-adjust`, `font-weight` and `font-style`, whether or not you mention them.',
+            },
+            {
+              id: 'quiz-css-l45-q2',
+              type: 'code-output',
+              prompt: 'What does this set?',
+              code: '.lede {\n  font: italic 700 1.5rem/1.3 Georgia, serif;\n}',
+              options: [
+                'Italic, bold, 24px, 1.3 line height, Georgia or a serif fallback',
+                'Italic, bold, 24px, Georgia only — line height is not part of `font`',
+                'Only italic and the family; the rest is ignored',
+                'Nothing — `font` requires every slot to be filled',
+              ],
+              answer: 0,
+              explanation: '`1.5rem` is 24px at a 16px root, and the value after the slash sets line height. Every slot in the shorthand is optional except size and family.',
+            },
+            {
+              id: 'quiz-css-l45-q3',
+              type: 'multiple-choice',
+              prompt: 'Which two values are required in the `font` shorthand?',
+              options: [
+                '`font-style` and `font-weight`',
+                '`font-size` and `font-family`',
+                '`line-height` and `font-family`',
+                '`font-stretch` and `font-size`',
+              ],
+              answer: 1,
+              explanation: 'Only size and family are mandatory. Everything before the size is optional, and line height is optional after the slash, but the declaration is invalid without size and family.',
+            },
+            {
+              id: 'quiz-css-l45-q4',
+              type: 'multiple-choice',
+              prompt: 'Which declaration correctly sets a bold 1.5rem face with a 1.2 line height?',
+              options: [
+                '`font: 700 1.5rem / 1.2 system-ui, sans-serif;`',
+                '`font: 700 1.5rem/1.2 system-ui, sans-serif;`',
+                '`font: 1.2/1.5rem 700 system-ui, sans-serif;`',
+                '`font: 700 1.2/1.5rem system-ui, sans-serif;`',
+              ],
+              answer: 1,
+              explanation: 'The size comes first, then a slash and the line height with no spaces, then the family. Spaces around the slash, or swapping size and line height, make the declaration invalid.',
+            },
+            {
+              id: 'quiz-css-l45-q5',
+              type: 'multiple-choice',
+              prompt: 'Besides the obvious style, weight, size and family, which properties does the `font` shorthand reset?',
+              options: [
+                '`color` and `background-color`',
+                '`font-size-adjust`, `font-kerning` and `font-feature-settings`',
+                '`letter-spacing` and `word-spacing`',
+                '`text-align` and `line-height` only',
+              ],
+              answer: 1,
+              explanation: 'A `font` shorthand resets every font longhand to its initial value, including tuning properties such as `font-size-adjust` and `font-kerning`. Any earlier tuning is wiped even though it is not mentioned.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1539,83 +2075,6 @@ font: normal normal normal normal 16px/normal "Courier New", monospace;`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s16',
-      title: 'CSS Fonts quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s16-q1',
-          type: 'multiple-choice',
-          prompt: 'What is the last entry in a well-formed `font-family` stack?',
-          options: [
-            'The most fashionable family available',
-            'A generic family like `serif` or `sans-serif`',
-            'The family the designer preferred',
-            'Nothing — the stack may end anywhere',
-          ],
-          answer: 1,
-          explanation:
-            'A generic family is the one entry that cannot fail, because every browser ships one. It guarantees readable text no matter what is missing.',
-        },
-        {
-          id: 'quiz-css-s16-q2',
-          type: 'identify-error',
-          prompt: 'Why does this rule not produce the font you intended?',
-          code: `.brand {
-  font-family: Trebuchet MS, sans-serif;
-}`,
-          options: [
-            '`font-family` cannot be set on a class',
-            'The family name with a space must be quoted',
-            '`sans-serif` is not a valid family',
-            'The comma is not allowed',
-          ],
-          answer: 1,
-          explanation:
-            'Without quotes the browser reads `Trebuchet` and `MS` as two separate families. Write `"Trebuchet MS", sans-serif`.',
-        },
-        {
-          id: 'quiz-css-s16-q3',
-          type: 'multiple-choice',
-          prompt: 'Which unit is safest for body text, and why?',
-          options: [
-            '`px`, because it is precise',
-            '`pt`, because it is the print standard',
-            '`rem`, because it follows the reader\'s font-size preference and never compounds',
-            '`vw`, because it fits the screen',
-          ],
-          answer: 2,
-          explanation:
-            '`rem` scales with the root font size so browser zoom preferences are honoured, and measuring from the root means nested sizes do not multiply.',
-        },
-        {
-          id: 'quiz-css-s16-q4',
-          type: 'true-false',
-          prompt: 'A `font` shorthand only sets the properties you write into it.',
-          answer: false,
-          explanation:
-            'It resets every font longhand to its initial value, including `font-size-adjust`, `font-weight` and `font-style`, whether or not you mention them.',
-        },
-        {
-          id: 'quiz-css-s16-q5',
-          type: 'code-output',
-          prompt: 'What does this set?',
-          code: `.lede {
-  font: italic 700 1.5rem/1.3 Georgia, serif;
-}`,
-          options: [
-            'Italic, bold, 24px, 1.3 line height, Georgia or a serif fallback',
-            'Italic, bold, 24px, Georgia only — line height is not part of `font`',
-            'Only italic and the family; the rest is ignored',
-            'Nothing — `font` requires every slot to be filled',
-          ],
-          answer: 0,
-          explanation:
-            '`1.5rem` is 24px at a 16px root, and the value after the slash sets line height. Every slot in the shorthand is optional except size and family.',
-        },
-      ],
-    },
   },
   {
     id: 'css-s17',
@@ -1636,6 +2095,69 @@ font: normal normal normal normal 16px/normal "Courier New", monospace;`,
           'Decide which technique suits a given project',
         ],
         xp: 45,
+        quiz: {
+          id: 'quiz-css-l46',
+          title: 'Icons quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l46-q1',
+              type: 'multiple-choice',
+              prompt: 'Which attribute makes an SVG scalable with CSS `width` and `height`?',
+              options: [
+                '`class`',
+                '`viewBox`',
+                '`fill`',
+                '`href`',
+              ],
+              answer: 1,
+              explanation: '`viewBox` declares the coordinate system the artwork was drawn in, so the browser can map it onto any size you set. Without it, CSS sizing clips the icon instead of scaling it.',
+            },
+            {
+              id: 'quiz-css-l46-q2',
+              type: 'multiple-choice',
+              prompt: 'What does `stroke: currentColor` do?',
+              options: [
+                'Paints the icon a fixed brand colour',
+                'Makes the stroke take the computed value of the `color` property',
+                'Fills the shape with the text colour',
+                'Renders the icon in the browser default colour',
+              ],
+              answer: 1,
+              explanation: '`currentColor` resolves to the element\'s own computed `color`, so the icon follows the surrounding text and any hover or disabled state with no extra rules.',
+            },
+            {
+              id: 'quiz-css-l46-q3',
+              type: 'true-false',
+              prompt: 'An icon font is read aloud by screen readers as the letter it contains.',
+              answer: false,
+              explanation: 'The raw glyph is announced as noise, and many icon fonts ship private-use characters with no pronunciation at all. Always pair the font with `aria-hidden="true"` and a real text label.',
+            },
+            {
+              id: 'quiz-css-l46-q4',
+              type: 'identify-error',
+              prompt: 'Why does this icon stay the default colour when the link turns red on hover?',
+              code: 'a {\n  color: red;\n}\n\na .icon {\n  stroke: #29e2bd;\n  width: 20px;\n  height: 20px;\n}',
+              options: [
+                '`stroke` cannot be set on an SVG',
+                'The colour is hard-coded in CSS, so it cannot follow `color`',
+                '`width` and `height` are wrong',
+                'The rule needs `!important`',
+              ],
+              answer: 1,
+              explanation: 'A literal `#29e2bd` is fixed. Writing `stroke: currentColor` instead makes the stroke resolve from `color`, so it follows the link automatically.',
+            },
+            {
+              id: 'quiz-css-l46-q5',
+              type: 'blank',
+              prompt: 'Which SVG element contains one icon shape inside the document itself?',
+              answers: [
+                'svg',
+              ],
+              explanation: 'An inline `<svg>` element with its own `viewBox` and path markup needs no external request, which is why it renders instantly and never flashes.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1870,75 +2392,5 @@ font: normal normal normal normal 16px/normal "Courier New", monospace;`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s17',
-      title: 'CSS Icons quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s17-q1',
-          type: 'multiple-choice',
-          prompt: 'Which attribute makes an SVG scalable with CSS `width` and `height`?',
-          options: ['`class`', '`viewBox`', '`fill`', '`href`'],
-          answer: 1,
-          explanation:
-            '`viewBox` declares the coordinate system the artwork was drawn in, so the browser can map it onto any size you set. Without it, CSS sizing clips the icon instead of scaling it.',
-        },
-        {
-          id: 'quiz-css-s17-q2',
-          type: 'multiple-choice',
-          prompt: 'What does `stroke: currentColor` do?',
-          options: [
-            'Paints the icon a fixed brand colour',
-            'Makes the stroke take the computed value of the `color` property',
-            'Fills the shape with the text colour',
-            'Renders the icon in the browser default colour',
-          ],
-          answer: 1,
-          explanation:
-            '`currentColor` resolves to the element\'s own computed `color`, so the icon follows the surrounding text and any hover or disabled state with no extra rules.',
-        },
-        {
-          id: 'quiz-css-s17-q3',
-          type: 'true-false',
-          prompt: 'An icon font is read aloud by screen readers as the letter it contains.',
-          answer: false,
-          explanation:
-            'The raw glyph is announced as noise, and many icon fonts ship private-use characters with no pronunciation at all. Always pair the font with `aria-hidden="true"` and a real text label.',
-        },
-        {
-          id: 'quiz-css-s17-q4',
-          type: 'identify-error',
-          prompt: 'Why does this icon stay the default colour when the link turns red on hover?',
-          code: `a {
-  color: red;
-}
-
-a .icon {
-  stroke: #29e2bd;
-  width: 20px;
-  height: 20px;
-}`,
-          options: [
-            '`stroke` cannot be set on an SVG',
-            'The colour is hard-coded in CSS, so it cannot follow `color`',
-            '`width` and `height` are wrong',
-            'The rule needs `!important`',
-          ],
-          answer: 1,
-          explanation:
-            'A literal `#29e2bd` is fixed. Writing `stroke: currentColor` instead makes the stroke resolve from `color`, so it follows the link automatically.',
-        },
-        {
-          id: 'quiz-css-s17-q5',
-          type: 'blank',
-          prompt:
-            'Which SVG element contains one icon shape inside the document itself?',
-          answers: ['svg'],
-          explanation:
-            'An inline `<svg>` element with its own `viewBox` and path markup needs no external request, which is why it renders instantly and never flashes.',
-        },
-      ],
-    },
   },
 ]

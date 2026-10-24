@@ -18,6 +18,62 @@ export const cssTransformMotionSections: Section[] = [
           'Indent the first line of a paragraph',
           'Truncate overflowing text with an ellipsis',
         ],
+        quiz: {
+          id: 'quiz-css-l89',
+          title: 'CSS Text Effects quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l89-q1',
+              type: 'multiple-choice',
+              prompt: 'Which `text-transform` value uppercases the first letter of every word, including articles and prepositions?',
+              options: [
+                'uppercase',
+                'lowercase',
+                'capitalize',
+                'none',
+              ],
+              answer: 2,
+              explanation: '`capitalize` applies to every word boundary. It cannot distinguish "the" from "Title" — true title case requires JavaScript.',
+            },
+            {
+              id: 'quiz-css-l89-q2',
+              type: 'true-false',
+              prompt: 'Negative `letter-spacing` pulls characters closer together.',
+              answer: true,
+              explanation: 'A negative length value reduces the default spacing. Use sparingly — too negative makes text illegible.',
+            },
+            {
+              id: 'quiz-css-l89-q3',
+              type: 'multiple-choice',
+              prompt: 'What three declarations are required together for `text-overflow: ellipsis` to work?',
+              options: [
+                '`white-space: nowrap`, `overflow: hidden`, `text-overflow: ellipsis`',
+                '`width: 100%`, `overflow: auto`, `text-overflow: ellipsis`',
+                '`display: block`, `overflow: hidden`, `text-overflow: clip`',
+                '`white-space: pre`, `overflow: visible`, `text-overflow: ellipsis`',
+              ],
+              answer: 0,
+              explanation: 'The text must not wrap (`nowrap`), the overflow must be clipped (`hidden`), and then the ellipsis is inserted at the clip point. All three are mandatory.',
+            },
+            {
+              id: 'quiz-css-l89-q4',
+              type: 'blank',
+              prompt: 'Which property indents only the first formatted line of a block container?',
+              answers: [
+                'text-indent',
+              ],
+              explanation: '`text-indent` affects the first line only. Subsequent lines are unaffected. Use a length or percentage of the containing block width.',
+            },
+            {
+              id: 'quiz-css-l89-q5',
+              type: 'true-false',
+              prompt: '`text-transform: uppercase` changes the actual text content in the DOM, so copy/paste yields uppercase text.',
+              answer: false,
+              explanation: '`text-transform` is purely presentational. The DOM retains the original casing; copy/paste and find-in-page use the original text.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -207,55 +263,6 @@ export const cssTransformMotionSections: Section[] = [
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s50',
-      title: 'CSS Text Effects quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s50-q1',
-          type: 'multiple-choice',
-          prompt: 'Which `text-transform` value uppercases the first letter of every word, including articles and prepositions?',
-          options: ['uppercase', 'lowercase', 'capitalize', 'none'],
-          answer: 2,
-          explanation: '`capitalize` applies to every word boundary. It cannot distinguish "the" from "Title" — true title case requires JavaScript.',
-        },
-        {
-          id: 'quiz-css-s50-q2',
-          type: 'true-false',
-          prompt: 'Negative `letter-spacing` pulls characters closer together.',
-          answer: true,
-          explanation: 'A negative length value reduces the default spacing. Use sparingly — too negative makes text illegible.',
-        },
-        {
-          id: 'quiz-css-s50-q3',
-          type: 'multiple-choice',
-          prompt: 'What three declarations are required together for `text-overflow: ellipsis` to work?',
-          options: [
-            '`white-space: nowrap`, `overflow: hidden`, `text-overflow: ellipsis`',
-            '`width: 100%`, `overflow: auto`, `text-overflow: ellipsis`',
-            '`display: block`, `overflow: hidden`, `text-overflow: clip`',
-            '`white-space: pre`, `overflow: visible`, `text-overflow: ellipsis`',
-          ],
-          answer: 0,
-          explanation: 'The text must not wrap (`nowrap`), the overflow must be clipped (`hidden`), and then the ellipsis is inserted at the clip point. All three are mandatory.',
-        },
-        {
-          id: 'quiz-css-s50-q4',
-          type: 'blank',
-          prompt: 'Which property indents only the first formatted line of a block container?',
-          answers: ['text-indent'],
-          explanation: '`text-indent` affects the first line only. Subsequent lines are unaffected. Use a length or percentage of the containing block width.',
-        },
-        {
-          id: 'quiz-css-s50-q5',
-          type: 'true-false',
-          prompt: '`text-transform: uppercase` changes the actual text content in the DOM, so copy/paste yields uppercase text.',
-          answer: false,
-          explanation: '`text-transform` is purely presentational. The DOM retains the original casing; copy/paste and find-in-page use the original text.',
-        },
-      ],
-    },
   },
   {
     id: 'css-s51',
@@ -274,6 +281,69 @@ export const cssTransformMotionSections: Section[] = [
           'Explain the difference between font-display: swap and font-display: optional',
           'Say when system-ui is the better answer than shipping a font file at all',
         ],
+        quiz: {
+          id: 'quiz-css-l90',
+          title: 'CSS Web Fonts quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l90-q1',
+              type: 'multiple-choice',
+              prompt: 'You add a correct `@font-face` rule but the page still renders in the fallback. What is the most likely cause?',
+              options: [
+                'The file is in the wrong format',
+                'Nothing ever uses the `font-family` you declared on the face',
+                '`font-display` has to be set to `block`',
+                '`@font-face` only works inside a media query',
+              ],
+              answer: 1,
+              explanation: 'A face is only a registration. Nothing is downloaded until an element is rendered with that family name. The rule parsed fine, which is why there is no error anywhere.',
+            },
+            {
+              id: 'quiz-css-l90-q2',
+              type: 'true-false',
+              prompt: 'Naming a font family that was never declared causes an error or falls back to a default font for the whole page.',
+              answer: false,
+              explanation: 'An unknown family is silently skipped and the browser moves to the next name in the stack. That is exactly why the stack exists, and why a typo in one family name degrades quietly instead of breaking the page.',
+            },
+            {
+              id: 'quiz-css-l90-q3',
+              type: 'blank',
+              prompt: 'Which value of `font-display` means the browser will use the fallback for the whole page if the font is not ready almost immediately, and will never swap to it later?',
+              answers: [
+                'optional',
+              ],
+              explanation: '`optional` gives the font a very brief window and otherwise commits to the fallback for that page view. It is the choice when layout stability matters more than the exact typeface.',
+            },
+            {
+              id: 'quiz-css-l90-q4',
+              type: 'multiple-choice',
+              prompt: 'Why does `swap` sometimes make the whole page jump when the web font arrives?',
+              options: [
+                'The browser reflows because the fallback and the web font have different metrics',
+                '`swap` forces a reload once the font is cached',
+                'The font file is decoded twice',
+                'Only the first paragraph ever uses the custom font',
+              ],
+              answer: 0,
+              explanation: 'Line boxes are sized by the font in use at render time. When a wider or narrower face replaces the fallback, the height and wrapping of every line change, so everything below shifts. Matching the fallback metrics with `size-adjust` and the `ascent`/`descent` overrides removes most of the jump.',
+            },
+            {
+              id: 'quiz-css-l90-q5',
+              type: 'identify-error',
+              prompt: 'What is the mistake in this declaration?',
+              code: '@font-face {\n  font-family: Course Sans;\n  src: url("/fonts/course-sans.woff2");\n  font-weight: 400;\n}',
+              options: [
+                '`font-weight` cannot be set on a face',
+                'A multi-word `font-family` must be quoted, otherwise it is read as several separate family names',
+                '`src` needs a `format()` function',
+                'The file path has to be absolute from the site root without a leading slash',
+              ],
+              answer: 1,
+              explanation: 'An unquoted `Course Sans` is parsed as two family names, `Course` and `Sans`. The face then registers under the wrong name and nothing that references `Course Sans` will match. The same trap applies to any family name with a space.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -430,76 +500,6 @@ body {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s51',
-      title: 'CSS Web Fonts quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s51-q1',
-          type: 'multiple-choice',
-          prompt: 'You add a correct `@font-face` rule but the page still renders in the fallback. What is the most likely cause?',
-          options: [
-            'The file is in the wrong format',
-            'Nothing ever uses the `font-family` you declared on the face',
-            '`font-display` has to be set to `block`',
-            '`@font-face` only works inside a media query',
-          ],
-          answer: 1,
-          explanation:
-            'A face is only a registration. Nothing is downloaded until an element is rendered with that family name. The rule parsed fine, which is why there is no error anywhere.',
-        },
-        {
-          id: 'quiz-css-s51-q2',
-          type: 'true-false',
-          prompt: 'Naming a font family that was never declared causes an error or falls back to a default font for the whole page.',
-          answer: false,
-          explanation:
-            'An unknown family is silently skipped and the browser moves to the next name in the stack. That is exactly why the stack exists, and why a typo in one family name degrades quietly instead of breaking the page.',
-        },
-        {
-          id: 'quiz-css-s51-q3',
-          type: 'blank',
-          prompt: 'Which value of `font-display` means the browser will use the fallback for the whole page if the font is not ready almost immediately, and will never swap to it later?',
-          answers: ['optional'],
-          explanation:
-            '`optional` gives the font a very brief window and otherwise commits to the fallback for that page view. It is the choice when layout stability matters more than the exact typeface.',
-        },
-        {
-          id: 'quiz-css-s51-q4',
-          type: 'multiple-choice',
-          prompt: 'Why does `swap` sometimes make the whole page jump when the web font arrives?',
-          options: [
-            'The browser reflows because the fallback and the web font have different metrics',
-            '`swap` forces a reload once the font is cached',
-            'The font file is decoded twice',
-            'Only the first paragraph ever uses the custom font',
-          ],
-          answer: 0,
-          explanation:
-            'Line boxes are sized by the font in use at render time. When a wider or narrower face replaces the fallback, the height and wrapping of every line change, so everything below shifts. Matching the fallback metrics with `size-adjust` and the `ascent`/`descent` overrides removes most of the jump.',
-        },
-        {
-          id: 'quiz-css-s51-q5',
-          type: 'identify-error',
-          prompt: 'What is the mistake in this declaration?',
-          code: `@font-face {
-  font-family: Course Sans;
-  src: url("/fonts/course-sans.woff2");
-  font-weight: 400;
-}`,
-          options: [
-            '`font-weight` cannot be set on a face',
-            'A multi-word `font-family` must be quoted, otherwise it is read as several separate family names',
-            '`src` needs a `format()` function',
-            'The file path has to be absolute from the site root without a leading slash',
-          ],
-          answer: 1,
-          explanation:
-            'An unquoted `Course Sans` is parsed as two family names, `Course` and `Sans`. The face then registers under the wrong name and nothing that references `Course Sans` will match. The same trap applies to any family name with a space.',
-        },
-      ],
-    },
   },
   {
     id: 'css-s52',
@@ -518,6 +518,69 @@ body {
           'Explain why a transformed element still occupies its untransformed space',
           'Replace a margin or width hack with a transform and say why that is better',
         ],
+        quiz: {
+          id: 'quiz-css-l91',
+          title: 'CSS 2D Transforms quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l91-q1',
+              type: 'multiple-choice',
+              prompt: 'An element is `position: absolute` with `top: 0; left: 0` and you add `transform: translate(-50%, -50%)`. What does that centre it on?',
+              options: [
+                'The centre of its own containing block',
+                'The centre of the viewport',
+                'Its own top-left corner',
+                'The centre of its nearest positioned ancestor\'s padding box',
+              ],
+              answer: 0,
+              explanation: 'Percentages in `translate` resolve against the element\'s own size, so this pulls it up and left by half its width and height from its own top-left, which lands it in the middle of wherever it was placed. Pair it with `left: 50%; top: 50%` to centre on the containing block.',
+            },
+            {
+              id: 'quiz-css-l91-q2',
+              type: 'true-false',
+              prompt: 'Rotating an element with a transform makes the space it occupies in the layout grow to match its new shape.',
+              answer: false,
+              explanation: 'Layout keeps the original, untransformed box. That is why a rotated card can overlap its neighbours and why a transform cannot be used to make room. Anything that needs to affect layout must use a real layout property.',
+            },
+            {
+              id: 'quiz-css-l91-q3',
+              type: 'blank',
+              prompt: 'Which property decides the point a transform rotates and scales around?',
+              answers: [
+                'transform-origin',
+              ],
+              explanation: '`transform-origin` sets the pivot and defaults to the centre of the box. Setting it to a corner turns the same `rotate()` into a hinge or a door-swing, which is the whole trick behind many accordion and expander animations.',
+            },
+            {
+              id: 'quiz-css-l91-q4',
+              type: 'multiple-choice',
+              prompt: 'Which is the correct way to make an element a little wider without disturbing what is inside it?',
+              options: [
+                '`transform: scaleX(1.2)`, because scaling an axis does not move it',
+                '`transform: scaleX(1.2)`, because scaling happens from the transform origin',
+                '`width: 120%`, because transforms cannot change width',
+                '`skewX(1.2)`, which is the horizontal scale function',
+              ],
+              answer: 1,
+              explanation: 'Scale happens around the origin, so `scaleX` widens the box symmetrically about that point and the content inside is stretched along with it. If you need the content to stay undistorted while only the frame changes, you need a real layout property such as `width`, not a transform.',
+            },
+            {
+              id: 'quiz-css-l91-q5',
+              type: 'identify-error',
+              prompt: 'This is meant to centre a badge on the top-right corner of a card. What is wrong?',
+              code: '.badge {\n  position: absolute;\n  top: 0;\n  right: 0;\n  transform: translate(50%, -50%);\n}',
+              options: [
+                'Percentages in `translate` are not allowed',
+                'The sign is inverted, so it moves away from the corner it should sit on',
+                '`right: 0` cannot be combined with `top`',
+                'A transform needs a `transform-origin` to be applied',
+              ],
+              answer: 1,
+              explanation: 'With `top: 0; right: 0` the box\'s top-right corner is already at the corner, so it needs to move right and up by half its own size: `translate(50%, -50%)` would send it outward and down. As written the badge hangs off the card and below the top edge.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -685,77 +748,6 @@ transform: translate(-50%, -50%) rotate(45deg) scale(1.2);`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s52',
-      title: 'CSS 2D Transforms quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s52-q1',
-          type: 'multiple-choice',
-          prompt: 'An element is `position: absolute` with `top: 0; left: 0` and you add `transform: translate(-50%, -50%)`. What does that centre it on?',
-          options: [
-            'The centre of its own containing block',
-            'The centre of the viewport',
-            'Its own top-left corner',
-            'The centre of its nearest positioned ancestor\'s padding box',
-          ],
-          answer: 0,
-          explanation:
-            'Percentages in `translate` resolve against the element\'s own size, so this pulls it up and left by half its width and height from its own top-left, which lands it in the middle of wherever it was placed. Pair it with `left: 50%; top: 50%` to centre on the containing block.',
-        },
-        {
-          id: 'quiz-css-s52-q2',
-          type: 'true-false',
-          prompt: 'Rotating an element with a transform makes the space it occupies in the layout grow to match its new shape.',
-          answer: false,
-          explanation:
-            'Layout keeps the original, untransformed box. That is why a rotated card can overlap its neighbours and why a transform cannot be used to make room. Anything that needs to affect layout must use a real layout property.',
-        },
-        {
-          id: 'quiz-css-s52-q3',
-          type: 'blank',
-          prompt: 'Which property decides the point a transform rotates and scales around?',
-          answers: ['transform-origin'],
-          explanation:
-            '`transform-origin` sets the pivot and defaults to the centre of the box. Setting it to a corner turns the same `rotate()` into a hinge or a door-swing, which is the whole trick behind many accordion and expander animations.',
-        },
-        {
-          id: 'quiz-css-s52-q4',
-          type: 'multiple-choice',
-          prompt: 'Which is the correct way to make an element a little wider without disturbing what is inside it?',
-          options: [
-            '`transform: scaleX(1.2)`, because scaling an axis does not move it',
-            '`transform: scaleX(1.2)`, because scaling happens from the transform origin',
-            '`width: 120%`, because transforms cannot change width',
-            '`skewX(1.2)`, which is the horizontal scale function',
-          ],
-          answer: 1,
-          explanation:
-            'Scale happens around the origin, so `scaleX` widens the box symmetrically about that point and the content inside is stretched along with it. If you need the content to stay undistorted while only the frame changes, you need a real layout property such as `width`, not a transform.',
-        },
-        {
-          id: 'quiz-css-s52-q5',
-          type: 'identify-error',
-          prompt: 'This is meant to centre a badge on the top-right corner of a card. What is wrong?',
-          code: `.badge {
-  position: absolute;
-  top: 0;
-  right: 0;
-  transform: translate(50%, -50%);
-}`,
-          options: [
-            'Percentages in `translate` are not allowed',
-            'The sign is inverted, so it moves away from the corner it should sit on',
-            '`right: 0` cannot be combined with `top`',
-            'A transform needs a `transform-origin` to be applied',
-          ],
-          answer: 1,
-          explanation:
-            'With `top: 0; right: 0` the box\'s top-right corner is already at the corner, so it needs to move right and up by half its own size: `translate(50%, -50%)` would send it outward and down. As written the badge hangs off the card and below the top edge.',
-        },
-      ],
-    },
   },
   {
     id: 'css-s53',
@@ -774,6 +766,69 @@ transform: translate(-50%, -50%) rotate(45deg) scale(1.2);`,
           'Rotate on the x, y and z axes and predict which way each one turns',
           'Use backface-visibility to hide a face once it has rotated out of view',
         ],
+        quiz: {
+          id: 'quiz-css-l92',
+          title: 'CSS 3D Transforms quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l92-q1',
+              type: 'multiple-choice',
+              prompt: 'A child is rotated on the Y axis but appears completely flat, with no sense of depth. Which declaration is most likely missing from the parent?',
+              options: [
+                '`perspective`',
+                '`transform-style: preserve-3d`',
+                '`backface-visibility: hidden`',
+                '`perspective-origin: center`',
+              ],
+              answer: 1,
+              explanation: '`perspective` only affects the element it is set on. Without `transform-style: preserve-3d` on the parent, its children are flattened onto the parent\'s plane before painting, so their own 3D position is thrown away.',
+            },
+            {
+              id: 'quiz-css-l92-q2',
+              type: 'true-false',
+              prompt: 'An element with `perspective: 500px` and no transform of its own still looks different from one with no perspective at all.',
+              answer: false,
+              explanation: 'Perspective only changes how a 3D transformation is projected. With no transform there is nothing to project, so the box is drawn as an ordinary rectangle either way.',
+            },
+            {
+              id: 'quiz-css-l92-q3',
+              type: 'blank',
+              prompt: 'Which property hides an element once it has been rotated so that it faces away from the viewer?',
+              answers: [
+                'backface-visibility',
+              ],
+              explanation: '`backface-visibility: hidden` skips painting the element when its back is toward the viewer. Without it, a card flipped with `rotateY(180deg)` shows a mirrored copy of its own front instead of nothing.',
+            },
+            {
+              id: 'quiz-css-l92-q4',
+              type: 'multiple-choice',
+              prompt: 'How does `rotateY()` move an element compared with `rotateX()`?',
+              options: [
+                '`rotateY` tips it forward and back; `rotateX` swings it left and right',
+                '`rotateY` swings it left and right; `rotateX` tips it forward and back',
+                'They are identical, differing only in axis order',
+                '`rotateY` moves it along the Z axis; `rotateX` moves it along the Y axis',
+              ],
+              answer: 1,
+              explanation: 'Rotation happens around an axis, named for the axis that stays still. `rotateY` leaves the vertical axis fixed and swings the element left and right like a door; `rotateX` leaves the horizontal axis fixed and tips it toward or away from you.',
+            },
+            {
+              id: 'quiz-css-l92-q5',
+              type: 'identify-error',
+              prompt: 'This card flip has no visible effect. What is the mistake?',
+              code: '.stage {\n  overflow: hidden;\n}\n\n.card {\n  transform: rotateY(180deg);\n}\n\n.face {\n  backface-visibility: hidden;\n}',
+              options: [
+                '`backface-visibility` has to be set on the card, not on the faces',
+                '`overflow: hidden` on the ancestor flattens the 3D subtree, so the depth never renders',
+                'A rotation needs `transform-style: flat` to be visible',
+                'The rotation angle must be a `px` value',
+              ],
+              answer: 1,
+              explanation: 'An ancestor whose `overflow` is anything other than `visible` forces the subtree to be flattened, which cancels the 3D effect no matter what the card declares. Move the clipping inside the card, or drop it and clip the faces individually.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -953,82 +1008,6 @@ transform: translate(-50%, -50%) rotate(45deg) scale(1.2);`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s53',
-      title: 'CSS 3D Transforms quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s53-q1',
-          type: 'multiple-choice',
-          prompt: 'A child is rotated on the Y axis but appears completely flat, with no sense of depth. Which declaration is most likely missing from the parent?',
-          options: [
-            '`perspective`',
-            '`transform-style: preserve-3d`',
-            '`backface-visibility: hidden`',
-            '`perspective-origin: center`',
-          ],
-          answer: 1,
-          explanation:
-            '`perspective` only affects the element it is set on. Without `transform-style: preserve-3d` on the parent, its children are flattened onto the parent\'s plane before painting, so their own 3D position is thrown away.',
-        },
-        {
-          id: 'quiz-css-s53-q2',
-          type: 'true-false',
-          prompt: 'An element with `perspective: 500px` and no transform of its own still looks different from one with no perspective at all.',
-          answer: false,
-          explanation:
-            'Perspective only changes how a 3D transformation is projected. With no transform there is nothing to project, so the box is drawn as an ordinary rectangle either way.',
-        },
-        {
-          id: 'quiz-css-s53-q3',
-          type: 'blank',
-          prompt: 'Which property hides an element once it has been rotated so that it faces away from the viewer?',
-          answers: ['backface-visibility'],
-          explanation:
-            '`backface-visibility: hidden` skips painting the element when its back is toward the viewer. Without it, a card flipped with `rotateY(180deg)` shows a mirrored copy of its own front instead of nothing.',
-        },
-        {
-          id: 'quiz-css-s53-q4',
-          type: 'multiple-choice',
-          prompt: 'How does `rotateY()` move an element compared with `rotateX()`?',
-          options: [
-            '`rotateY` tips it forward and back; `rotateX` swings it left and right',
-            '`rotateY` swings it left and right; `rotateX` tips it forward and back',
-            'They are identical, differing only in axis order',
-            '`rotateY` moves it along the Z axis; `rotateX` moves it along the Y axis',
-          ],
-          answer: 1,
-          explanation:
-            'Rotation happens around an axis, named for the axis that stays still. `rotateY` leaves the vertical axis fixed and swings the element left and right like a door; `rotateX` leaves the horizontal axis fixed and tips it toward or away from you.',
-        },
-        {
-          id: 'quiz-css-s53-q5',
-          type: 'identify-error',
-          prompt: 'This card flip has no visible effect. What is the mistake?',
-          code: `.stage {
-  overflow: hidden;
-}
-
-.card {
-  transform: rotateY(180deg);
-}
-
-.face {
-  backface-visibility: hidden;
-}`,
-          options: [
-            '`backface-visibility` has to be set on the card, not on the faces',
-            '`overflow: hidden` on the ancestor flattens the 3D subtree, so the depth never renders',
-            'A rotation needs `transform-style: flat` to be visible',
-            'The rotation angle must be a `px` value',
-          ],
-          answer: 1,
-          explanation:
-            'An ancestor whose `overflow` is anything other than `visible` forces the subtree to be flattened, which cancels the 3D effect no matter what the card declares. Move the clipping inside the card, or drop it and clip the faces individually.',
-        },
-      ],
-    },
   },
   {
     id: 'css-s54',
@@ -1047,6 +1026,70 @@ transform: translate(-50%, -50%) rotate(45deg) scale(1.2);`,
           'Choose a timing function for the effect you want rather than the default',
           'Explain why a transition needs two states and never fires on page load',
         ],
+        quiz: {
+          id: 'quiz-css-l93',
+          title: 'CSS Transitions quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l93-q1',
+              type: 'multiple-choice',
+              prompt: 'A button has `transition: color 0.3s ease` on its base rule and changes colour on `:hover`. When the pointer arrives, the colour changes instantly. What is wrong?',
+              options: [
+                'Nothing, that is how transitions work',
+                'A transition must also be declared inside the `:hover` rule',
+                '`transition` was misspelled',
+                'The element needs `display: inline-block` to animate',
+              ],
+              answer: 0,
+              explanation: 'This is correct behaviour. A transition interpolates between two *computed* values, and it cannot animate from "no colour" to a colour. Declare the base colour explicitly, as the reset already does here, and only the `:hover` value differs.',
+            },
+            {
+              id: 'quiz-css-l93-q2',
+              type: 'true-false',
+              prompt: '`display` can be transitioned smoothly from `flex` to `block` with a 0.3 second duration.',
+              answer: false,
+              explanation: '`display` is a keyword rather than a computable number, so there is nothing to interpolate. The browser swaps it at the end of the duration instead of fading. Use opacity or the `@starting-style` and `transition-behavior: allow-discrete` pairing when you need a real fade on a discrete property.',
+            },
+            {
+              id: 'quiz-css-l93-q3',
+              type: 'blank',
+              prompt: 'Which timing function is the better default for interface feedback, because the change starts immediately and then settles?',
+              answers: [
+                'ease-out',
+                'easeout',
+              ],
+              explanation: '`ease-out` front-loads the movement, so the interface feels like it responded at once and then comes to rest. The default `ease` is symmetrical and feels slightly sluggish at the start.',
+            },
+            {
+              id: 'quiz-css-l93-q4',
+              type: 'multiple-choice',
+              prompt: 'What is the practical problem with `transition: all 0.3s`?',
+              options: [
+                'It is a syntax error and is ignored',
+                'It also animates properties you did not intend, including ones that force layout on every frame',
+                'It only works on transform and opacity',
+                'It disables transitions on child elements',
+              ],
+              answer: 1,
+              explanation: '`all` covers every animatable property, so a later change to `width`, `height` or `margin` gets animated too, forcing a reflow per frame. Naming the properties you mean is faster and predictable.',
+            },
+            {
+              id: 'quiz-css-l93-q5',
+              type: 'identify-error',
+              prompt: 'The colour is meant to ease in over 300ms, but it snaps. What is the error?',
+              code: '.badge {\n  background: #1d2531;\n}\n\n.badge:hover {\n  background: #29e2bd;\n  transition: background 300ms ease;\n}',
+              options: [
+                '`background` is not animatable, so use `background-color`',
+                'The duration should be written in seconds',
+                'The transition has to be declared before the hover rule',
+                'Hover does not trigger transitions on backgrounds',
+              ],
+              answer: 0,
+              explanation: 'Two things are wrong, but the first is the reason it snaps: `background` is a shorthand, and the transition is watching the shorthand rather than a specific longhand, which browsers handle inconsistently. Transition `background-color` and declare it on the base rule as well as in the hover state.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1217,79 +1260,6 @@ transition: transform 200ms ease-out, opacity 400ms linear 100ms;`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s54',
-      title: 'CSS Transitions quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s54-q1',
-          type: 'multiple-choice',
-          prompt: 'A button has `transition: color 0.3s ease` on its base rule and changes colour on `:hover`. When the pointer arrives, the colour changes instantly. What is wrong?',
-          options: [
-            'Nothing, that is how transitions work',
-            'A transition must also be declared inside the `:hover` rule',
-            '`transition` was misspelled',
-            'The element needs `display: inline-block` to animate',
-          ],
-          answer: 0,
-          explanation:
-            'This is correct behaviour. A transition interpolates between two *computed* values, and it cannot animate from "no colour" to a colour. Declare the base colour explicitly, as the reset already does here, and only the `:hover` value differs.',
-        },
-        {
-          id: 'quiz-css-s54-q2',
-          type: 'true-false',
-          prompt: '`display` can be transitioned smoothly from `flex` to `block` with a 0.3 second duration.',
-          answer: false,
-          explanation:
-            '`display` is a keyword rather than a computable number, so there is nothing to interpolate. The browser swaps it at the end of the duration instead of fading. Use opacity or the `@starting-style` and `transition-behavior: allow-discrete` pairing when you need a real fade on a discrete property.',
-        },
-        {
-          id: 'quiz-css-s54-q3',
-          type: 'blank',
-          prompt: 'Which timing function is the better default for interface feedback, because the change starts immediately and then settles?',
-          answers: ['ease-out', 'easeout'],
-          explanation:
-            '`ease-out` front-loads the movement, so the interface feels like it responded at once and then comes to rest. The default `ease` is symmetrical and feels slightly sluggish at the start.',
-        },
-        {
-          id: 'quiz-css-s54-q4',
-          type: 'multiple-choice',
-          prompt: 'What is the practical problem with `transition: all 0.3s`?',
-          options: [
-            'It is a syntax error and is ignored',
-            'It also animates properties you did not intend, including ones that force layout on every frame',
-            'It only works on transform and opacity',
-            'It disables transitions on child elements',
-          ],
-          answer: 1,
-          explanation:
-            '`all` covers every animatable property, so a later change to `width`, `height` or `margin` gets animated too, forcing a reflow per frame. Naming the properties you mean is faster and predictable.',
-        },
-        {
-          id: 'quiz-css-s54-q5',
-          type: 'identify-error',
-          prompt: 'The colour is meant to ease in over 300ms, but it snaps. What is the error?',
-          code: `.badge {
-  background: #1d2531;
-}
-
-.badge:hover {
-  background: #29e2bd;
-  transition: background 300ms ease;
-}`,
-          options: [
-            '`background` is not animatable, so use `background-color`',
-            'The duration should be written in seconds',
-            'The transition has to be declared before the hover rule',
-            'Hover does not trigger transitions on backgrounds',
-          ],
-          answer: 0,
-          explanation:
-            'Two things are wrong, but the first is the reason it snaps: `background` is a shorthand, and the transition is watching the shorthand rather than a specific longhand, which browsers handle inconsistently. Transition `background-color` and declare it on the base rule as well as in the hover state.',
-        },
-      ],
-    },
   },
   {
     id: 'css-s55',
@@ -1308,6 +1278,69 @@ transition: transform 200ms ease-out, opacity 400ms linear 100ms;`,
           'Say when a keyframe animation is the right tool instead of a transition',
           'Add a prefers-reduced-motion fallback for any movement you have authored',
         ],
+        quiz: {
+          id: 'quiz-css-l94',
+          title: 'CSS Animations quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l94-q1',
+              type: 'multiple-choice',
+              prompt: 'An element has `animation-name: pulse` on an element with `animation-duration` never set. What happens?',
+              options: [
+                'The animation runs once and stops',
+                'Nothing visible happens, because the duration defaults to 0s',
+                'The browser picks a reasonable default duration',
+                'The animation runs infinitely',
+              ],
+              answer: 1,
+              explanation: '`animation-duration` defaults to `0s`, so there is no time to interpolate over and the animation completes on the first frame. This is the most common reason a keyframe animation appears not to work.',
+            },
+            {
+              id: 'quiz-css-l94-q2',
+              type: 'true-false',
+              prompt: '`animation-fill-mode: forwards` keeps the element at the last keyframe after the animation has finished.',
+              answer: true,
+              explanation: '`forwards` applies the final keyframe\'s styles once the active period ends, so the element holds its end state. Use `none` (the default) if you want it to snap back to its own styles when the animation ends.',
+            },
+            {
+              id: 'quiz-css-l94-q3',
+              type: 'blank',
+              prompt: 'Which `animation-direction` value makes a looping animation play backwards on every second pass, so it does not snap back?',
+              answers: [
+                'alternate',
+              ],
+              explanation: '`alternate` reverses direction each iteration, so a pulse eases out and eases back rather than jumping to the start. `reverse` runs every iteration backwards, and `normal` snaps between the two ends.',
+            },
+            {
+              id: 'quiz-css-l94-q4',
+              type: 'multiple-choice',
+              prompt: 'Which is the correct rule for an infinite decorative loop?',
+              options: [
+                'Leave it as it is; the browser skips motion for users who asked for reduced motion',
+                'Wrap the animation in `@media (prefers-reduced-motion: reduce)` and set `animation: none`',
+                'Set `animation-duration: 1ms` instead',
+                'Add `pointer-events: none`',
+              ],
+              answer: 1,
+              explanation: 'Reduced motion is an operating system setting, and CSS exposes it as a media feature. Authoring the animation once and cancelling it inside the query keeps the decision in one place and means every animation in the codebase gets the same treatment.',
+            },
+            {
+              id: 'quiz-css-l94-q5',
+              type: 'identify-error',
+              prompt: 'This toast is supposed to slide in once and stay. It vanishes instead. Why?',
+              code: '@keyframes slide-in {\n  from { transform: translateX(-100%); }\n  to   { transform: translateX(0); }\n}\n\n.toast {\n  animation: slide-in 300ms ease-out;\n}',
+              options: [
+                '`translateX` cannot be used in a keyframe',
+                'Without `animation-fill-mode: forwards` the element returns to its own styles once the animation ends, which drops the transform',
+                'The duration is too short',
+                'Keyframes must be defined after the element that uses them',
+              ],
+              answer: 1,
+              explanation: 'The default `fill-mode` is `none`, so once the 300ms is over the animation stops contributing styles and the element goes back to whatever its own rules say, with no transform applied. Adding `forwards` keeps it at the last keyframe.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1539,79 +1572,6 @@ transition: transform 200ms ease-out, opacity 400ms linear 100ms;`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s55',
-      title: 'CSS Animations quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s55-q1',
-          type: 'multiple-choice',
-          prompt: 'An element has `animation-name: pulse` on an element with `animation-duration` never set. What happens?',
-          options: [
-            'The animation runs once and stops',
-            'Nothing visible happens, because the duration defaults to 0s',
-            'The browser picks a reasonable default duration',
-            'The animation runs infinitely',
-          ],
-          answer: 1,
-          explanation:
-            '`animation-duration` defaults to `0s`, so there is no time to interpolate over and the animation completes on the first frame. This is the most common reason a keyframe animation appears not to work.',
-        },
-        {
-          id: 'quiz-css-s55-q2',
-          type: 'true-false',
-          prompt: '`animation-fill-mode: forwards` keeps the element at the last keyframe after the animation has finished.',
-          answer: true,
-          explanation:
-            '`forwards` applies the final keyframe\'s styles once the active period ends, so the element holds its end state. Use `none` (the default) if you want it to snap back to its own styles when the animation ends.',
-        },
-        {
-          id: 'quiz-css-s55-q3',
-          type: 'blank',
-          prompt: 'Which `animation-direction` value makes a looping animation play backwards on every second pass, so it does not snap back?',
-          answers: ['alternate'],
-          explanation:
-            '`alternate` reverses direction each iteration, so a pulse eases out and eases back rather than jumping to the start. `reverse` runs every iteration backwards, and `normal` snaps between the two ends.',
-        },
-        {
-          id: 'quiz-css-s55-q4',
-          type: 'multiple-choice',
-          prompt: 'Which is the correct rule for an infinite decorative loop?',
-          options: [
-            'Leave it as it is; the browser skips motion for users who asked for reduced motion',
-            'Wrap the animation in `@media (prefers-reduced-motion: reduce)` and set `animation: none`',
-            'Set `animation-duration: 1ms` instead',
-            'Add `pointer-events: none`',
-          ],
-          answer: 1,
-          explanation:
-            'Reduced motion is an operating system setting, and CSS exposes it as a media feature. Authoring the animation once and cancelling it inside the query keeps the decision in one place and means every animation in the codebase gets the same treatment.',
-        },
-        {
-          id: 'quiz-css-s55-q5',
-          type: 'identify-error',
-          prompt: 'This toast is supposed to slide in once and stay. It vanishes instead. Why?',
-          code: `@keyframes slide-in {
-  from { transform: translateX(-100%); }
-  to   { transform: translateX(0); }
-}
-
-.toast {
-  animation: slide-in 300ms ease-out;
-}`,
-          options: [
-            '`translateX` cannot be used in a keyframe',
-            'Without `animation-fill-mode: forwards` the element returns to its own styles once the animation ends, which drops the transform',
-            'The duration is too short',
-            'Keyframes must be defined after the element that uses them',
-          ],
-          answer: 1,
-          explanation:
-            'The default `fill-mode` is `none`, so once the 300ms is over the animation stops contributing styles and the element goes back to whatever its own rules say, with no transform applied. Adding `forwards` keeps it at the last keyframe.',
-        },
-      ],
-    },
   },
   {
     id: 'css-s56',
@@ -1630,6 +1590,71 @@ transition: transform 200ms ease-out, opacity 400ms linear 100ms;`,
           'Explain what the native title attribute does well and where it falls short',
           'Say when the Popover API is a better foundation than a hover-only rule',
         ],
+        quiz: {
+          id: 'quiz-css-l95',
+          title: 'CSS Tooltips quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l95-q1',
+              type: 'multiple-choice',
+              prompt: 'A tooltip appears in the wrong place, far from its button. The bubble is `position: absolute` and the wrapper has no positioning. What is missing?',
+              options: [
+                'A `z-index` on the bubble',
+                '`position: relative` on the wrapper, so the bubble resolves against it',
+                'A width on the bubble',
+                '`overflow: visible` on the body',
+              ],
+              answer: 1,
+              explanation: 'An absolutely positioned element resolves against its nearest *positioned* ancestor. Without one it walks up to the initial containing block, which is why the bubble lands somewhere unrelated to its trigger.',
+            },
+            {
+              id: 'quiz-css-l95-q2',
+              type: 'true-false',
+              prompt: 'A tooltip hidden with only `opacity: 0` is still reachable by keyboard, because it is invisible.',
+              answer: false,
+              explanation: 'Opacity hides pixels, not elements. The element stays in the accessibility tree and still takes focus if it is focusable, so a screen reader can land on something the sighted user cannot see. Use `visibility: hidden` to remove it properly.',
+            },
+            {
+              id: 'quiz-css-l95-q3',
+              type: 'blank',
+              prompt: 'Which pseudo-class matches an element whenever anything inside it has focus, which is what a tooltip wrapper needs?',
+              answers: [
+                ':focus-within',
+                'focus-within',
+                ':focuswithin',
+              ],
+              explanation: '`:focus-within` matches the container rather than the focused element itself, so a wrapper holding a button picks it up as soon as the button is focused. `:focus-visible` matches only the focused element, which is useful for styling the trigger but not for the wrapper.',
+            },
+            {
+              id: 'quiz-css-l95-q4',
+              type: 'multiple-choice',
+              prompt: 'What does the native `title` attribute do that a CSS tooltip cannot easily do?',
+              options: [
+                'It can be styled with CSS',
+                'It can contain a link',
+                'Nothing much: the browser supplies the bubble for free, but it cannot be styled and does not appear on touch',
+                'It appears instantly on hover',
+              ],
+              answer: 2,
+              explanation: '`title` is the cheapest option and is a reasonable supplement, but it has a deliberate delay, cannot be styled, and is absent on touch devices. It is a fallback, not a design system.',
+            },
+            {
+              id: 'quiz-css-l95-q5',
+              type: 'identify-error',
+              prompt: 'Screen readers announce "Save, Saved to this device" as one label, and tapping the button sometimes does nothing. Why?',
+              code: '<button type="button" class="trigger">\n  Save\n  <span class="hint">Saved to this device</span>\n</button>',
+              options: [
+                'The hint needs a higher z-index',
+                'The hint is nested inside the button, so it joins the button\'s accessible name and swallows taps on it',
+                '`type="button"` prevents tooltips working',
+                'The hint must come before the label text',
+              ],
+              answer: 1,
+              explanation: 'Everything inside a button is part of its label for assistive technology, so the bubble gets announced as button text. It also sits inside the hit area. Make the bubble a sibling of the button inside a positioned wrapper.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1797,74 +1822,5 @@ transition: transform 200ms ease-out, opacity 400ms linear 100ms;`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s56',
-      title: 'CSS Tooltips quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s56-q1',
-          type: 'multiple-choice',
-          prompt: 'A tooltip appears in the wrong place, far from its button. The bubble is `position: absolute` and the wrapper has no positioning. What is missing?',
-          options: [
-            'A `z-index` on the bubble',
-            '`position: relative` on the wrapper, so the bubble resolves against it',
-            'A width on the bubble',
-            '`overflow: visible` on the body',
-          ],
-          answer: 1,
-          explanation:
-            'An absolutely positioned element resolves against its nearest *positioned* ancestor. Without one it walks up to the initial containing block, which is why the bubble lands somewhere unrelated to its trigger.',
-        },
-        {
-          id: 'quiz-css-s56-q2',
-          type: 'true-false',
-          prompt: 'A tooltip hidden with only `opacity: 0` is still reachable by keyboard, because it is invisible.',
-          answer: false,
-          explanation:
-            'Opacity hides pixels, not elements. The element stays in the accessibility tree and still takes focus if it is focusable, so a screen reader can land on something the sighted user cannot see. Use `visibility: hidden` to remove it properly.',
-        },
-        {
-          id: 'quiz-css-s56-q3',
-          type: 'blank',
-          prompt: 'Which pseudo-class matches an element whenever anything inside it has focus, which is what a tooltip wrapper needs?',
-          answers: [':focus-within', 'focus-within', ':focuswithin'],
-          explanation:
-            '`:focus-within` matches the container rather than the focused element itself, so a wrapper holding a button picks it up as soon as the button is focused. `:focus-visible` matches only the focused element, which is useful for styling the trigger but not for the wrapper.',
-        },
-        {
-          id: 'quiz-css-s56-q4',
-          type: 'multiple-choice',
-          prompt: 'What does the native `title` attribute do that a CSS tooltip cannot easily do?',
-          options: [
-            'It can be styled with CSS',
-            'It can contain a link',
-            'Nothing much: the browser supplies the bubble for free, but it cannot be styled and does not appear on touch',
-            'It appears instantly on hover',
-          ],
-          answer: 2,
-          explanation:
-            '`title` is the cheapest option and is a reasonable supplement, but it has a deliberate delay, cannot be styled, and is absent on touch devices. It is a fallback, not a design system.',
-        },
-        {
-          id: 'quiz-css-s56-q5',
-          type: 'identify-error',
-          prompt: 'Screen readers announce "Save, Saved to this device" as one label, and tapping the button sometimes does nothing. Why?',
-          code: `<button type="button" class="trigger">
-  Save
-  <span class="hint">Saved to this device</span>
-</button>`,
-          options: [
-            'The hint needs a higher z-index',
-            'The hint is nested inside the button, so it joins the button\'s accessible name and swallows taps on it',
-            '`type="button"` prevents tooltips working',
-            'The hint must come before the label text',
-          ],
-          answer: 1,
-          explanation:
-            'Everything inside a button is part of its label for assistive technology, so the bubble gets announced as button text. It also sits inside the hit area. Make the bubble a sibling of the button inside a positioned wrapper.',
-        },
-      ],
-    },
   },
 ]

@@ -17,6 +17,72 @@ export const htmlIntroSections: Section[] = [
           'Name the four things you will be able to do once you finish',
         ],
         xp: 30,
+        quiz: {
+          id: 'quiz-html-l1',
+          title: 'How this course works quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l1-q1',
+              type: 'multiple-choice',
+              prompt: 'What is HTML responsible for?',
+              options: [
+                'How a page looks and where things sit',
+                'What happens when someone clicks a button',
+                'The structure and meaning of the content',
+                'The requests a page makes to a server',
+              ],
+              answer: 2,
+              explanation: 'HTML is structure. Presentation belongs to CSS and behaviour belongs to JavaScript, and keeping the three apart is what makes each of them replaceable on its own.',
+            },
+            {
+              id: 'quiz-html-l1-q2',
+              type: 'true-false',
+              prompt: 'In the two cards at the top of this lesson, a browser would render the unlabelled version and the marked-up version almost identically.',
+              answer: true,
+              explanation: 'Visually they are nearly the same. The difference is in what the markup tells you, a search engine, and a screen reader about what those pieces are.',
+            },
+            {
+              id: 'quiz-html-l1-q3',
+              type: 'multiple-choice',
+              prompt: 'Which of these is NOT part of this course?',
+              options: [
+                'Forms and form accessibility',
+                'Semantic elements',
+                'Browser APIs such as web storage',
+                'Building a backend server in Node',
+              ],
+              answer: 3,
+              explanation: 'The course stops at the platform the browser gives you. Server-side work is a different subject with a different set of tools.',
+            },
+            {
+              id: 'quiz-html-l1-q4',
+              type: 'blank',
+              prompt: 'What is the first block of every lesson in this course?',
+              answers: [
+                'a live example',
+                'live example',
+                'demo',
+                'a live rendered example',
+                'live rendered example',
+              ],
+              explanation: 'Every lesson opens with a rendered example so you know what you are aiming at before you read any markup.',
+            },
+            {
+              id: 'quiz-html-l1-q5',
+              type: 'multiple-choice',
+              prompt: 'Why does the order of the course matter?',
+              options: [
+                'Because the later sections are more valuable',
+                'Because each section is only understandable once you have the one before it',
+                'Because the exercises build on each other',
+                'Because HTML cannot be learned out of order',
+              ],
+              answer: 1,
+              explanation: 'Attributes come before forms, and forms come before the accessibility rules written about them. Each section leans on the vocabulary the previous one introduced.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -163,72 +229,6 @@ export const htmlIntroSections: Section[] = [
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s1',
-      title: 'Getting started check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s1-q1',
-          type: 'multiple-choice',
-          prompt: 'What is HTML responsible for?',
-          options: [
-            'How a page looks and where things sit',
-            'What happens when someone clicks a button',
-            'The structure and meaning of the content',
-            'The requests a page makes to a server',
-          ],
-          answer: 2,
-          explanation:
-            'HTML is structure. Presentation belongs to CSS and behaviour belongs to JavaScript, and keeping the three apart is what makes each of them replaceable on its own.',
-        },
-        {
-          id: 'quiz-html-s1-q2',
-          type: 'true-false',
-          prompt:
-            'In the two cards at the top of this lesson, a browser would render the unlabelled version and the marked-up version almost identically.',
-          answer: true,
-          explanation:
-            'Visually they are nearly the same. The difference is in what the markup tells you, a search engine, and a screen reader about what those pieces are.',
-        },
-        {
-          id: 'quiz-html-s1-q3',
-          type: 'multiple-choice',
-          prompt: 'Which of these is NOT part of this course?',
-          options: [
-            'Forms and form accessibility',
-            'Semantic elements',
-            'Browser APIs such as web storage',
-            'Building a backend server in Node',
-          ],
-          answer: 3,
-          explanation:
-            'The course stops at the platform the browser gives you. Server-side work is a different subject with a different set of tools.',
-        },
-        {
-          id: 'quiz-html-s1-q4',
-          type: 'blank',
-          prompt: 'What is the first block of every lesson in this course?',
-          answers: ['a live example', 'live example', 'demo', 'a live rendered example', 'live rendered example'],
-          explanation:
-            'Every lesson opens with a rendered example so you know what you are aiming at before you read any markup.',
-        },
-        {
-          id: 'quiz-html-s1-q5',
-          type: 'multiple-choice',
-          prompt: 'Why does the order of the course matter?',
-          options: [
-            'Because the later sections are more valuable',
-            'Because each section is only understandable once you have the one before it',
-            'Because the exercises build on each other',
-            'Because HTML cannot be learned out of order',
-          ],
-          answer: 1,
-          explanation:
-            'Attributes come before forms, and forms come before the accessibility rules written about them. Each section leans on the vocabulary the previous one introduced.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s2',
@@ -246,6 +246,70 @@ export const htmlIntroSections: Section[] = [
           'Explain why a document needs a doctype at all',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-html-l2',
+          title: 'What HTML is quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l2-q1',
+              type: 'multiple-choice',
+              prompt: 'What are the two children of the root <html> element?',
+              options: [
+                '<header> and <footer>',
+                '<head> and <body>',
+                '<nav> and <main>',
+                '<title> and <meta>',
+              ],
+              answer: 1,
+              explanation: 'The root element has exactly two children: <head> for metadata about the page, and <body> for the content a visitor sees.',
+            },
+            {
+              id: 'quiz-html-l2-q2',
+              type: 'true-false',
+              prompt: 'The doctype declaration needs a matching closing tag.',
+              answer: false,
+              explanation: 'It is a single declaration on the first line, not an element. It has no closing tag and no attributes.',
+            },
+            {
+              id: 'quiz-html-l2-q3',
+              type: 'identify-error',
+              prompt: 'What is wrong with this markup?',
+              code: '<!DOCTYPE html>\n<html>\n<body>\n<p>Hello</p>\n</html>',
+              options: [
+                'Nothing is wrong',
+                'The <body> element is never closed',
+                'The <html> element is missing a lang attribute and a <head>',
+                'The paragraph should be a heading',
+              ],
+              answer: 2,
+              explanation: 'A complete document declares its language on the root and has a <head> with at least a title. The <body> here is closed correctly.',
+            },
+            {
+              id: 'quiz-html-l2-q4',
+              type: 'blank',
+              prompt: 'Which attribute on the root element tells the browser what language the text is written in?',
+              answers: [
+                'lang',
+                'language',
+              ],
+              explanation: '`lang="en"` on <html> drives screen reader voices, browser hyphenation and search relevance.',
+            },
+            {
+              id: 'quiz-html-l2-q5',
+              type: 'multiple-choice',
+              prompt: 'A page begins with no doctype. What is the browser most likely to do?',
+              options: [
+                'It refuses to render the page',
+                'It treats the page as XML and stops at the first error',
+                'It switches into quirks mode, where layout rules behave differently',
+                'It adds the doctype automatically and renders in standards mode',
+              ],
+              answer: 2,
+              explanation: 'A missing doctype makes the browser assume old, broken markup and enter quirks mode, where the box model and table sizing differ. The doctype opts the page into standards mode.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -378,6 +442,79 @@ a { color: #0f766e; }`,
           'Explain what happens to markup you forget to close',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-html-l3',
+          title: 'How a browser reads your markup quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l3-q1',
+              type: 'multiple-choice',
+              prompt: 'Why does the browser repair malformed markup instead of refusing to render it?',
+              options: [
+                'To make error messages easier to read',
+                'Because pages from the 1990s were badly broken and had to keep working',
+                'To make the page load faster',
+                'Because HTML is not a real specification',
+              ],
+              answer: 1,
+              explanation: 'Compatibility with genuinely broken 1990s markup is the whole reason the parser is so forgiving. The cost is that a missing tag can quietly relocate your content.',
+            },
+            {
+              id: 'quiz-html-l3-q2',
+              type: 'multiple-choice',
+              prompt: 'In what order does a browser turn a file into a painted page?',
+              options: [
+                'Paint pixels, parse characters, then decode bytes',
+                'Decode bytes into characters, parse them into a node tree, then work out what to paint',
+                'Parse bytes into pixels, then decode the nodes',
+                'Build the DOM from the stylesheet, then read the HTML',
+              ],
+              answer: 1,
+              explanation: 'The browser decodes the bytes to characters, parses those characters into the DOM, repairs what it must, and only then lays out and paints.',
+            },
+            {
+              id: 'quiz-html-l3-q3',
+              type: 'multiple-choice',
+              prompt: 'You inspect a table and see a <tbody> element that you never wrote. Why is it there?',
+              options: [
+                'Your editor inserted it when you saved the file',
+                'The browser cached an older version of the page',
+                'The parser inserted it while building the DOM, which is what the inspector shows',
+                'A script on the page created it',
+              ],
+              answer: 2,
+              explanation: 'The inspector shows the DOM after parsing, not your source. The HTML parser inserts implied elements such as <tbody> so the tree is well formed.',
+            },
+            {
+              id: 'quiz-html-l3-q4',
+              type: 'code-output',
+              prompt: 'What list does the browser build from this markup?',
+              code: '<ul>\n  <li>First\n  <li>Second\n</ul>',
+              options: [
+                'Two sibling list items, because the parser closes the first one when the second starts',
+                'One list item containing the text "First Second"',
+                'A list with no items, because both tags are malformed',
+                'Two separate lists, one per item',
+              ],
+              answer: 0,
+              explanation: 'An open <li> is closed automatically when the next <li> begins, so the source produces two siblings even though no </li> was written.',
+            },
+            {
+              id: 'quiz-html-l3-q5',
+              type: 'multiple-choice',
+              prompt: 'What does the parser do with a <p> element that appears inside a <ul>?',
+              options: [
+                'It leaves the paragraph inside the list',
+                'It moves the paragraph to the top of the page',
+                'It closes the list before the paragraph, so the paragraph becomes a sibling after it',
+                'It turns the paragraph into another list item',
+              ],
+              answer: 2,
+              explanation: 'A paragraph is not allowed as a child of a list, so the parser closes the <ul> and places the paragraph after it — a silent structural change.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -505,68 +642,6 @@ a { color: #0f766e; }`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s2',
-      title: 'HTML Introduction quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s2-q1',
-          type: 'multiple-choice',
-          prompt: 'What are the two children of the root <html> element?',
-          options: ['<header> and <footer>', '<head> and <body>', '<nav> and <main>', '<title> and <meta>'],
-          answer: 1,
-          explanation:
-            'The root element has exactly two children: <head> for metadata about the page, and <body> for the content a visitor sees.',
-        },
-        {
-          id: 'quiz-html-s2-q2',
-          type: 'true-false',
-          prompt: 'The doctype declaration needs a matching closing tag.',
-          answer: false,
-          explanation:
-            'It is a single declaration on the first line, not an element. It has no closing tag and no attributes.',
-        },
-        {
-          id: 'quiz-html-s2-q3',
-          type: 'identify-error',
-          prompt: 'What is wrong with this markup?',
-          code: '<!DOCTYPE html>\n<html>\n<body>\n<p>Hello</p>\n</html>',
-          options: [
-            'Nothing is wrong',
-            'The <body> element is never closed',
-            'The <html> element is missing a lang attribute and a <head>',
-            'The paragraph should be a heading',
-          ],
-          answer: 2,
-          explanation:
-            'A complete document declares its language on the root and has a <head> with at least a title. The <body> here is closed correctly.',
-        },
-        {
-          id: 'quiz-html-s2-q4',
-          type: 'blank',
-          prompt:
-            'Which attribute on the root element tells the browser what language the text is written in?',
-          answers: ['lang', 'language'],
-          explanation:
-            '`lang="en"` on <html> drives screen reader voices, browser hyphenation and search relevance.',
-        },
-        {
-          id: 'quiz-html-s2-q5',
-          type: 'multiple-choice',
-          prompt: 'Why does the browser repair malformed markup instead of refusing to render it?',
-          options: [
-            'To make error messages easier to read',
-            'Because pages from the 1990s were badly broken and had to keep working',
-            'To make the page load faster',
-            'Because HTML is not a real specification',
-          ],
-          answer: 1,
-          explanation:
-            'Compatibility with genuinely broken 1990s markup is the whole reason the parser is so forgiving. The cost is that a missing tag can quietly relocate your content.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s3',
@@ -584,6 +659,69 @@ a { color: #0f766e; }`,
           'Set up an editor so that unclosed tags are visible immediately',
         ],
         xp: 25,
+        quiz: {
+          id: 'quiz-html-l4',
+          title: 'HTML Editors quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l4-q1',
+              type: 'multiple-choice',
+              prompt: 'Which editor feature is the most valuable for writing HTML?',
+              options: [
+                'A colour theme',
+                'Error checking that runs as you type and on save',
+                'Automatic tag closing',
+                'Built-in file previews',
+              ],
+              answer: 1,
+              explanation: 'Structural mistakes are invisible in raw text. An error checker that flags an unclosed or mis-nested element is the feature that actually prevents bugs.',
+            },
+            {
+              id: 'quiz-html-l4-q2',
+              type: 'true-false',
+              prompt: 'Because an editor can close tags for you, you never need to look at the rendered result.',
+              answer: false,
+              explanation: 'Auto-closing can produce valid markup that is structured in a way you never intended. Rendering is the only way to know.',
+            },
+            {
+              id: 'quiz-html-l4-q3',
+              type: 'multiple-choice',
+              prompt: 'What does the Emmet abbreviation nav>ul>li*4 expand to?',
+              options: [
+                'A list with four items inside a list inside a nav',
+                'Four separate nav elements',
+                'A nav with four paragraphs',
+                'A nav with four classes named ul, li',
+              ],
+              answer: 0,
+              explanation: 'The > operator nests elements and the *N operator repeats the last one. Together they expand into a nested skeleton instantly.',
+            },
+            {
+              id: 'quiz-html-l4-q4',
+              type: 'blank',
+              prompt: 'Which element should you use for a block of navigation links, rather than a div with a class?',
+              answers: [
+                'nav',
+                '<nav>',
+              ],
+              explanation: '`<nav>` is a landmark. It tells assistive technology and browsers that this region is navigation, which is information a class name cannot carry.',
+            },
+            {
+              id: 'quiz-html-l4-q5',
+              type: 'multiple-choice',
+              prompt: 'Why is a word processor a bad choice for writing HTML?',
+              options: [
+                'It cannot save files with an .html extension',
+                'It adds its own markup, styles and invisible characters and reformats your code',
+                'It is too slow to type in',
+                'It does not support the HTML5 doctype',
+              ],
+              answer: 1,
+              explanation: 'Word processors are built to produce documents for other word processors. They insert their own styling and can silently reformat quotes, indentation and the doctype.',
+            },
+          ],
+        },
         content: [
       {
         type: 'text',
@@ -710,72 +848,6 @@ a { color: #0f766e; }`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s3',
-      title: 'HTML Editors quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s3-q1',
-          type: 'multiple-choice',
-          prompt: 'Which editor feature is the most valuable for writing HTML?',
-          options: [
-            'A colour theme',
-            'Error checking that runs as you type and on save',
-            'Automatic tag closing',
-            'Built-in file previews',
-          ],
-          answer: 1,
-          explanation:
-            'Structural mistakes are invisible in raw text. An error checker that flags an unclosed or mis-nested element is the feature that actually prevents bugs.',
-        },
-        {
-          id: 'quiz-html-s3-q2',
-          type: 'true-false',
-          prompt: 'Because an editor can close tags for you, you never need to look at the rendered result.',
-          answer: false,
-          explanation:
-            'Auto-closing can produce valid markup that is structured in a way you never intended. Rendering is the only way to know.',
-        },
-        {
-          id: 'quiz-html-s3-q3',
-          type: 'multiple-choice',
-          prompt: 'What does the Emmet abbreviation nav>ul>li*4 expand to?',
-          options: [
-            'A list with four items inside a list inside a nav',
-            'Four separate nav elements',
-            'A nav with four paragraphs',
-            'A nav with four classes named ul, li',
-          ],
-          answer: 0,
-          explanation:
-            'The > operator nests elements and the *N operator repeats the last one. Together they expand into a nested skeleton instantly.',
-        },
-        {
-          id: 'quiz-html-s3-q4',
-          type: 'blank',
-          prompt:
-            'Which element should you use for a block of navigation links, rather than a div with a class?',
-          answers: ['nav', '<nav>'],
-          explanation:
-            '`<nav>` is a landmark. It tells assistive technology and browsers that this region is navigation, which is information a class name cannot carry.',
-        },
-        {
-          id: 'quiz-html-s3-q5',
-          type: 'multiple-choice',
-          prompt: 'Why is a word processor a bad choice for writing HTML?',
-          options: [
-            'It cannot save files with an .html extension',
-            'It adds its own markup, styles and invisible characters and reformats your code',
-            'It is too slow to type in',
-            'It does not support the HTML5 doctype',
-          ],
-          answer: 1,
-          explanation:
-            'Word processors are built to produce documents for other word processors. They insert their own styling and can silently reformat quotes, indentation and the doctype.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s4',
@@ -793,6 +865,69 @@ a { color: #0f766e; }`,
           'Choose the right element for text that is not a paragraph',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-html-l5',
+          title: 'The elements every document uses quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l5-q1',
+              type: 'multiple-choice',
+              prompt: 'What does an h1 element mean?',
+              options: [
+                'The largest text on the page',
+                'The top level of the document outline',
+                'The page title shown in the browser tab',
+                'A heading that must appear once per section',
+              ],
+              answer: 1,
+              explanation: 'Heading levels describe a hierarchy, not a font size. The tab title is a separate thing, set with <title> in the head.',
+            },
+            {
+              id: 'quiz-html-l5-q2',
+              type: 'true-false',
+              prompt: 'It is fine to jump from an h2 straight to an h4 when the h3 would look too big.',
+              answer: false,
+              explanation: 'Levels are never chosen for size. A skipped level breaks the outline for screen reader users, who navigate by heading level.',
+            },
+            {
+              id: 'quiz-html-l5-q3',
+              type: 'multiple-choice',
+              prompt: 'Which element should wrap a date that the browser should understand as a date?',
+              options: [
+                '<span>',
+                '<p>',
+                '<time>',
+                '<small>',
+              ],
+              answer: 2,
+              explanation: '<time datetime="2026-03-01">1 March</time> carries a machine-readable value while showing human-readable text.',
+            },
+            {
+              id: 'quiz-html-l5-q4',
+              type: 'blank',
+              prompt: 'How many <main> elements should a page have?',
+              answers: [
+                'one',
+                '1',
+              ],
+              explanation: 'Exactly one. It marks the unique content of the page, and a second one would make the landmark ambiguous.',
+            },
+            {
+              id: 'quiz-html-l5-q5',
+              type: 'multiple-choice',
+              prompt: 'Which element should hold the visible caption for an image inside a <figure>?',
+              options: [
+                '<label>',
+                '<small>',
+                '<time>',
+                '<figcaption>',
+              ],
+              answer: 3,
+              explanation: 'A caption describes the figure it belongs to, and <figcaption> is the element that expresses that relationship. A label belongs to a form control and <time> marks a date.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -962,6 +1097,78 @@ a { color: #0f766e; }`,
           'Recognise the difference between structural and presentational nesting',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-html-l6',
+          title: 'Nesting and the shapes you will write most quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l6-q1',
+              type: 'multiple-choice',
+              prompt: 'Why is a wrapper div used purely to line two things up side by side a problem?',
+              options: [
+                'Divs cannot contain other elements',
+                'Browsers render them with a default margin',
+                'It carries no meaning and belongs in CSS instead',
+                'It breaks the heading outline',
+              ],
+              answer: 2,
+              explanation: 'A div with no meaning is structural noise. It makes the document harder to parse and tells nobody anything. Layout belongs in the stylesheet.',
+            },
+            {
+              id: 'quiz-html-l6-q2',
+              type: 'multiple-choice',
+              prompt: 'Why does the shared page skeleton put <script src="app.js"></script> at the end of the body?',
+              options: [
+                'Because scripts are ignored inside the head',
+                'Because the body is the only element that can contain a script',
+                'So the DOM exists before the script runs',
+                'To stop the script from being cached',
+              ],
+              answer: 2,
+              explanation: 'A script at the end of the body runs after the content above it has been parsed, so the elements it queries already exist.',
+            },
+            {
+              id: 'quiz-html-l6-q3',
+              type: 'multiple-choice',
+              prompt: 'An <article> contains its own <header>. What is that header the header of?',
+              options: [
+                'The article, because header and footer belong to the nearest sectioning ancestor',
+                'The page as a whole',
+                'The browser window',
+                'The first heading in the document',
+              ],
+              answer: 0,
+              explanation: 'header and footer scope to the nearest sectioning element, so one inside an article describes that article rather than the page.',
+            },
+            {
+              id: 'quiz-html-l6-q4',
+              type: 'multiple-choice',
+              prompt: 'A <ul> is nested inside an <li>. What does that nesting claim?',
+              options: [
+                'The inner list is a layout column',
+                'The inner items are subordinate to the item that contains them',
+                'The inner list is a mistake, since lists cannot nest',
+                'The inner items are more important than the outer ones',
+              ],
+              answer: 1,
+              explanation: 'Nesting is a statement about relationship, not position: the nested list says those items belong under the item that holds them.',
+            },
+            {
+              id: 'quiz-html-l6-q5',
+              type: 'multiple-choice',
+              prompt: 'A page has a main navigation and a separate footer navigation. How do you keep them distinguishable to assistive technology?',
+              options: [
+                'Give both the same class',
+                'Use a <div> for the second one',
+                'Give each one a different heading level',
+                'Give each <nav> its own aria-label',
+              ],
+              answer: 3,
+              explanation: 'When several landmarks of the same kind exist, an aria-label gives each one a name so a screen reader user can tell them apart.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1117,65 +1324,5 @@ ul ul { margin-top: 0.2rem; color: #475569; }`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s4',
-      title: 'HTML Basic quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s4-q1',
-          type: 'multiple-choice',
-          prompt: 'What does an h1 element mean?',
-          options: [
-            'The largest text on the page',
-            'The top level of the document outline',
-            'The page title shown in the browser tab',
-            'A heading that must appear once per section',
-          ],
-          answer: 1,
-          explanation:
-            'Heading levels describe a hierarchy, not a font size. The tab title is a separate thing, set with <title> in the head.',
-        },
-        {
-          id: 'quiz-html-s4-q2',
-          type: 'true-false',
-          prompt: 'It is fine to jump from an h2 straight to an h4 when the h3 would look too big.',
-          answer: false,
-          explanation:
-            'Levels are never chosen for size. A skipped level breaks the outline for screen reader users, who navigate by heading level.',
-        },
-        {
-          id: 'quiz-html-s4-q3',
-          type: 'multiple-choice',
-          prompt: 'Which element should wrap a date that the browser should understand as a date?',
-          options: ['<span>', '<p>', '<time>', '<small>'],
-          answer: 2,
-          explanation:
-            '<time datetime="2026-03-01">1 March</time> carries a machine-readable value while showing human-readable text.',
-        },
-        {
-          id: 'quiz-html-s4-q4',
-          type: 'blank',
-          prompt: 'How many <main> elements should a page have?',
-          answers: ['one', '1'],
-          explanation:
-            'Exactly one. It marks the unique content of the page, and a second one would make the landmark ambiguous.',
-        },
-        {
-          id: 'quiz-html-s4-q5',
-          type: 'multiple-choice',
-          prompt: 'Why is a wrapper div used purely to line two things up side by side a problem?',
-          options: [
-            'Divs cannot contain other elements',
-            'Browsers render them with a default margin',
-            'It carries no meaning and belongs in CSS instead',
-            'It breaks the heading outline',
-          ],
-          answer: 2,
-          explanation:
-            'A div with no meaning is structural noise. It makes the document harder to parse and tells nobody anything. Layout belongs in the stylesheet.',
-        },
-      ],
-    },
   },
 ]

@@ -18,6 +18,73 @@ export const cssVariableMediaSections: Section[] = [
           'Explain why a missing custom property invalidates the declaration',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-css-l104',
+          title: 'The var() Function quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l104-q1',
+              type: 'true-false',
+              prompt: 'If `var(--accent)` is used with no fallback and the variable is undefined, the declaration is discarded and the property falls back to its inherited or initial value.',
+              answer: true,
+              explanation: 'The declaration is invalid at computed-value time. It does not fall back to the previous declaration in the same rule.',
+            },
+            {
+              id: 'quiz-css-l104-q2',
+              type: 'code-output',
+              prompt: 'What colour is the text?',
+              code: ':root {\n  --ink: #123456;\n}\n.card {\n  color: var(--ink);\n  background: var(--missing, #eeeeee);\n}',
+              options: [
+                'Black, and a transparent background',
+                '#123456 text on a #eeeeee background',
+                'Inherited text colour on a #eeeeee background',
+                'Nothing — the rule is invalid because --missing is undefined',
+              ],
+              answer: 1,
+              explanation: 'The fallback argument supplies `#eeeeee` for the undefined variable, so both declarations are valid.',
+            },
+            {
+              id: 'quiz-css-l104-q3',
+              type: 'multiple-choice',
+              prompt: 'What does it mean that custom properties are untyped?',
+              options: [
+                'They can only hold colour values',
+                'They cannot be inherited',
+                'They must be declared with `var()`',
+                'The browser stores the text without checking it, so a typo simply defines a different variable',
+              ],
+              answer: 3,
+              explanation: 'A custom property stores a token sequence such as `"#29e2bd"` and the browser does not validate it, which is why a mistyped name is silently a new variable.',
+            },
+            {
+              id: 'quiz-css-l104-q4',
+              type: 'multiple-choice',
+              prompt: 'Where can a custom property declared on an element be read?',
+              options: [
+                'Only on the exact element where it is declared',
+                'On that element and all of its descendants',
+                'Only inside the same rule',
+                'Only on `:root`',
+              ],
+              answer: 1,
+              explanation: 'Custom properties inherit exactly like `color`, so a declaration on an ancestor is available to the whole subtree beneath it.',
+            },
+            {
+              id: 'quiz-css-l104-q5',
+              type: 'multiple-choice',
+              prompt: 'Why is `:root` a common place to declare variables?',
+              options: [
+                'It targets the `<html>` element, so the value reaches every element from one place',
+                'It is the only selector that accepts custom properties',
+                'It gives the variables priority over later overrides',
+                'It makes the variables read-only',
+              ],
+              answer: 0,
+              explanation: '`:root` is the `<html>` element, so declarations there are inherited by the entire document and there is exactly one place to look for the palette.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -184,6 +251,77 @@ export const cssVariableMediaSections: Section[] = [
           'Build one component that reads correctly in three different themes',
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-css-l105',
+          title: 'Overriding Variables quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l105-q1',
+              type: 'blank',
+              prompt: 'Complete the sentence: redefining a variable on an element re-themes that element and its ________.',
+              answers: [
+                'descendants',
+                'subtree',
+                'children',
+                'whole subtree',
+              ],
+              explanation: 'Custom properties inherit, so a redefinition applies to the entire subtree beneath it.',
+            },
+            {
+              id: 'quiz-css-l105-q2',
+              type: 'multiple-choice',
+              prompt: 'You set `--card-bg` on a `.theme-dark` element. Which elements pick it up?',
+              options: [
+                'Every element on the page',
+                'Its siblings',
+                'That element and its descendants only',
+                'Only elements with the `.card` class anywhere',
+              ],
+              answer: 2,
+              explanation: 'Variables follow the DOM tree rather than the selector, so the redefinition reaches the element itself and everything inside it, not its siblings.',
+            },
+            {
+              id: 'quiz-css-l105-q3',
+              type: 'multiple-choice',
+              prompt: '`.theme-dark { --card-bg: #14181d; }` is set while `--card-ink` stays on `:root`. What happens?',
+              options: [
+                'The background is overridden and the ink keeps inheriting from `:root`',
+                'The rule is ignored because it is partial',
+                'The ink becomes transparent',
+                'Both values reset to their initial values',
+              ],
+              answer: 0,
+              explanation: 'A redefinition can be partial: only the property named on the wrapper changes, and any variable it does not set continues to inherit from an ancestor.',
+            },
+            {
+              id: 'quiz-css-l105-q4',
+              type: 'multiple-choice',
+              prompt: 'Why is redefining variables better than a `.card.card--dark` rule?',
+              options: [
+                'Variables are faster to parse than classes',
+                'A class cannot change colours',
+                'Variables avoid the cascade entirely',
+                'The component rules stay in one place instead of being duplicated per theme and state',
+              ],
+              answer: 3,
+              explanation: 'A modifier class repeats every declaration for every theme, while variables leave one component rule and a short list of value overrides.',
+            },
+            {
+              id: 'quiz-css-l105-q5',
+              type: 'multiple-choice',
+              prompt: 'A theme should apply to one section of the page. Where does the wrapper with the redefined variables go?',
+              options: [
+                'Anywhere on the page, because variables are global',
+                'As an ancestor of exactly the content the theme should cover',
+                'Only on `body`',
+                'On each leaf element individually',
+              ],
+              answer: 1,
+              explanation: 'Inheritance means the theme covers the wrapper\'s subtree, so placing the wrapper around the section keeps the rest of the page on the default values.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -439,6 +577,79 @@ export const cssVariableMediaSections: Section[] = [
           'Wire a theme toggle to a data attribute',
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-css-l106',
+          title: 'Variables and JavaScript quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l106-q1',
+              type: 'identify-error',
+              prompt: 'Why does this theme switch not work?',
+              code: 'el.style.setProperty(\'--size\', 10)',
+              options: [
+                'setProperty is not a real DOM method',
+                'The property name must be camelCase',
+                'The value must be a string, so a bare number is rejected',
+                'Custom properties cannot be set from JavaScript',
+              ],
+              answer: 2,
+              explanation: 'Custom properties hold untyped strings, so `setProperty(\'--size\', 10)` does nothing. Write `\'10px\'` with the unit inside the string.',
+            },
+            {
+              id: 'quiz-css-l106-q2',
+              type: 'multiple-choice',
+              prompt: 'Why call `.trim()` on the result of `getPropertyValue(\'--accent\')`?',
+              options: [
+                'It converts the value to a number',
+                'The returned string usually has leading whitespace, which breaks comparisons',
+                'It resolves inherited variables',
+                'It strips the units from the value',
+              ],
+              answer: 1,
+              explanation: 'Most browsers return the computed custom property with leading whitespace, so trimming is what makes `===` comparisons against a palette entry work.',
+            },
+            {
+              id: 'quiz-css-l106-q3',
+              type: 'multiple-choice',
+              prompt: 'Why does `document.documentElement.style.getPropertyValue(\'--accent\')` sometimes return an empty string?',
+              options: [
+                'Chrome does not support custom properties',
+                'The document must be reloaded first',
+                'The variable name has to be camelCase',
+                'The variable was declared in a stylesheet, and inline style only exposes inline declarations',
+              ],
+              answer: 3,
+              explanation: 'The `style` object only reports inline declarations. Use `getComputedStyle(document.documentElement)` to read the value after the whole cascade.',
+            },
+            {
+              id: 'quiz-css-l106-q4',
+              type: 'multiple-choice',
+              prompt: 'What does `el.style.removeProperty(\'--accent\')` do?',
+              options: [
+                'It removes the inline value so the stylesheet value applies again',
+                'It deletes the variable from every stylesheet',
+                'It sets the value to `none`',
+                'It stops the variable from being inherited',
+              ],
+              answer: 0,
+              explanation: '`removeProperty` only removes the inline custom property; with no inline value left, the cascade falls back to whatever the stylesheet declared.',
+            },
+            {
+              id: 'quiz-css-l106-q5',
+              type: 'multiple-choice',
+              prompt: 'Which line switches the theme using a data attribute that CSS can match with `[data-theme="dark"]`?',
+              options: [
+                '`document.documentElement.classList = \'dark\'`',
+                '`document.body.theme = \'dark\'`',
+                '`document.documentElement.dataset.theme = \'dark\'`',
+                '`document.documentElement.style.theme = \'dark\'`',
+              ],
+              answer: 2,
+              explanation: 'The `dataset` API writes a real `data-theme` attribute, which is exactly what an attribute selector can target. Setting an arbitrary property does not create an attribute.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -641,6 +852,78 @@ document.documentElement.style.setProperty('--accent', '#b91c1c')`,
           'Choose the right workaround for a given situation',
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-css-l107',
+          title: 'Variables in Media Queries quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l107-q1',
+              type: 'multiple-choice',
+              prompt: 'How is a custom property declared?',
+              options: [
+                '$brand: red;',
+                '--brand: red;',
+                '@brand: red;',
+                'var(--brand): red;',
+              ],
+              answer: 1,
+              explanation: 'Custom properties are ordinary CSS properties whose names start with two dashes, and they are read back with `var()`.',
+            },
+            {
+              id: 'quiz-css-l107-q2',
+              type: 'multiple-choice',
+              prompt: 'Why can a custom property not be used in a media query condition?',
+              options: [
+                'Media queries only accept pixel values',
+                'Custom properties are not allowed outside declarations',
+                'Media queries run only on the server',
+                'The condition is evaluated before any element exists to resolve the variable against',
+              ],
+              answer: 3,
+              explanation: 'Custom properties are resolved per element at computed-value time, but the media query is evaluated before that and has no element to resolve against.',
+            },
+            {
+              id: 'quiz-css-l107-q3',
+              type: 'multiple-choice',
+              prompt: 'What happens to `@media (max-width: var(--breakpoint))` in browsers?',
+              options: [
+                'It treats the variable as `0px`',
+                'The condition is invalid, so the query never matches',
+                'It falls back to a default breakpoint',
+                'It works only in Firefox',
+              ],
+              answer: 1,
+              explanation: '`var()` in a condition makes the whole condition invalid rather than merely ignored, so the block behind it never applies.',
+            },
+            {
+              id: 'quiz-css-l107-q4',
+              type: 'multiple-choice',
+              prompt: 'What is the documented workaround for a variable-driven breakpoint?',
+              options: [
+                'Use `matchMedia` in JavaScript to set a data attribute that CSS selects on',
+                'Duplicate the media query once for every possible value',
+                'Put the variable inside `calc()` in the condition',
+                'Declare the variable inside the media block instead',
+              ],
+              answer: 0,
+              explanation: '`matchMedia` can read a breakpoint held in JavaScript and flip a data attribute, leaving CSS with a plain attribute selector that needs no `var()`.',
+            },
+            {
+              id: 'quiz-css-l107-q5',
+              type: 'multiple-choice',
+              prompt: 'Why call the `apply` function once at startup as well as on `change`?',
+              options: [
+                '`change` fires only after a click',
+                'The first call registers the listener',
+                '`change` only fires when the condition flips, so a page loaded narrow would otherwise start wrong',
+                '`matchMedia` needs two calls to initialise',
+              ],
+              answer: 2,
+              explanation: 'The `change` listener is silent until the query flips, so a page opened at a narrow width must be evaluated once on load to set the attribute correctly.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -813,63 +1096,6 @@ apply(mq.matches)`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s65',
-      title: 'CSS Variables quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s65-q1',
-          type: 'multiple-choice',
-          prompt: 'How is a custom property declared?',
-          options: ['$brand: red;', '--brand: red;', '@brand: red;', 'var(--brand): red;'],
-          answer: 1,
-          explanation: 'Custom properties are ordinary CSS properties whose names start with two dashes, and they are read back with `var()`.',
-        },
-        {
-          id: 'quiz-css-s65-q2',
-          type: 'true-false',
-          prompt: 'If `var(--accent)` is used with no fallback and the variable is undefined, the declaration is discarded and the property falls back to its inherited or initial value.',
-          answer: true,
-          explanation: 'The declaration is invalid at computed-value time. It does not fall back to the previous declaration in the same rule.',
-        },
-        {
-          id: 'quiz-css-s65-q3',
-          type: 'code-output',
-          prompt: 'What colour is the text?',
-          code: ':root {\n  --ink: #123456;\n}\n.card {\n  color: var(--ink);\n  background: var(--missing, #eeeeee);\n}',
-          options: [
-            'Black, and a transparent background',
-            '#123456 text on a #eeeeee background',
-            'Inherited text colour on a #eeeeee background',
-            'Nothing — the rule is invalid because --missing is undefined',
-          ],
-          answer: 1,
-          explanation: 'The fallback argument supplies `#eeeeee` for the undefined variable, so both declarations are valid.',
-        },
-        {
-          id: 'quiz-css-s65-q4',
-          type: 'blank',
-          prompt: 'Complete the sentence: redefining a variable on an element re-themes that element and its ________.',
-          answers: ['descendants', 'subtree', 'children', 'whole subtree'],
-          explanation: 'Custom properties inherit, so a redefinition applies to the entire subtree beneath it.',
-        },
-        {
-          id: 'quiz-css-s65-q5',
-          type: 'identify-error',
-          prompt: 'Why does this theme switch not work?',
-          code: "el.style.setProperty('--size', 10)",
-          options: [
-            'setProperty is not a real DOM method',
-            'The property name must be camelCase',
-            'The value must be a string, so a bare number is rejected',
-            'Custom properties cannot be set from JavaScript',
-          ],
-          answer: 2,
-          explanation: "Custom properties hold untyped strings, so `setProperty('--size', 10)` does nothing. Write `'10px'` with the unit inside the string.",
-        },
-      ],
-    },
   },
   {
     id: 'css-s66',
@@ -888,6 +1114,69 @@ apply(mq.matches)`,
           'Recall the inheritance caveat and handle form controls',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-css-l108',
+          title: 'Box Sizing quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l108-q1',
+              type: 'multiple-choice',
+              prompt: 'What is the default value of `box-sizing`?',
+              options: [
+                '`border-box`',
+                '`content-box`',
+                '`padding-box`',
+                '`margin-box`',
+              ],
+              answer: 1,
+              explanation: '`content-box` is the default, which is why `width` measures only the content and padding and border are added on top.',
+            },
+            {
+              id: 'quiz-css-l108-q2',
+              type: 'code-output',
+              prompt: 'How wide is the box, really?',
+              code: '.box {\n  width: 200px;\n  padding: 20px;\n  border: 5px solid black;\n  box-sizing: content-box;\n}',
+              options: [
+                '200px',
+                '240px',
+                '250px',
+                '190px',
+              ],
+              answer: 2,
+              explanation: 'Content-box makes `width` the content only, so the outer width is 200 + 20 + 20 + 5 + 5 = 250px.',
+            },
+            {
+              id: 'quiz-css-l108-q3',
+              type: 'true-false',
+              prompt: 'Adding padding to an element can make it wider than the width you declared.',
+              answer: true,
+              explanation: 'Only under `content-box`. That is precisely the surprise the `border-box` reset exists to remove.',
+            },
+            {
+              id: 'quiz-css-l108-q4',
+              type: 'blank',
+              prompt: 'Which single declaration, applied to the universal selector, makes declared widths include padding and border? Give the value only.',
+              answers: [
+                'border-box',
+              ],
+              explanation: '`* { box-sizing: border-box; }` is the reset nearly every project starts with.',
+            },
+            {
+              id: 'quiz-css-l108-q5',
+              type: 'multiple-choice',
+              prompt: 'Why is `*` alone not quite enough in the reset?',
+              options: [
+                'Because `*` has no specificity',
+                'Because generated content with `::before` and `::after` is a box too and needs it as well',
+                'Because `*` only matches elements, not pseudo-classes',
+                'Because `box-sizing` does not inherit',
+              ],
+              answer: 1,
+              explanation: '`::before` and `::after` generate boxes of their own, so the reset normally includes them explicitly.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1050,67 +1339,6 @@ apply(mq.matches)`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s66',
-      title: 'CSS Box Sizing quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s66-q1',
-          type: 'multiple-choice',
-          prompt: 'What is the default value of `box-sizing`?',
-          options: ['`border-box`', '`content-box`', '`padding-box`', '`margin-box`'],
-          answer: 1,
-          explanation:
-            '`content-box` is the default, which is why `width` measures only the content and padding and border are added on top.',
-        },
-        {
-          id: 'quiz-css-s66-q2',
-          type: 'code-output',
-          prompt: 'How wide is the box, really?',
-          code: `.box {
-  width: 200px;
-  padding: 20px;
-  border: 5px solid black;
-  box-sizing: content-box;
-}`,
-          options: ['200px', '240px', '250px', '190px'],
-          answer: 2,
-          explanation:
-            'Content-box makes `width` the content only, so the outer width is 200 + 20 + 20 + 5 + 5 = 250px.',
-        },
-        {
-          id: 'quiz-css-s66-q3',
-          type: 'true-false',
-          prompt: 'Adding padding to an element can make it wider than the width you declared.',
-          answer: true,
-          explanation:
-            'Only under `content-box`. That is precisely the surprise the `border-box` reset exists to remove.',
-        },
-        {
-          id: 'quiz-css-s66-q4',
-          type: 'blank',
-          prompt:
-            'Which single declaration, applied to the universal selector, makes declared widths include padding and border? Give the value only.',
-          answers: ['border-box'],
-          explanation: '`* { box-sizing: border-box; }` is the reset nearly every project starts with.',
-        },
-        {
-          id: 'quiz-css-s66-q5',
-          type: 'multiple-choice',
-          prompt: 'Why is `*` alone not quite enough in the reset?',
-          options: [
-            'Because `*` has no specificity',
-            'Because generated content with `::before` and `::after` is a box too and needs it as well',
-            'Because `*` only matches elements, not pseudo-classes',
-            'Because `box-sizing` does not inherit',
-          ],
-          answer: 1,
-          explanation:
-            '`::before` and `::after` generate boxes of their own, so the reset normally includes them explicitly.',
-        },
-      ],
-    },
   },
   {
     id: 'css-s67',
@@ -1129,6 +1357,69 @@ apply(mq.matches)`,
           'Use the modern range syntax and justify a content-driven breakpoint',
         ],
         xp: 45,
+        quiz: {
+          id: 'quiz-css-l109',
+          title: 'Media Queries quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l109-q1',
+              type: 'multiple-choice',
+              prompt: 'What does `@media (min-width: 48rem)` mean?',
+              options: [
+                'Apply only on screens narrower than 48rem',
+                'Apply when the viewport is at least 48rem wide',
+                'Apply only in portrait orientation',
+                'Apply on devices with a physical width of 48rem',
+              ],
+              answer: 1,
+              explanation: '`min-width` is inclusive of the value itself. It applies at 48rem and above, which is what makes it the mobile-first choice.',
+            },
+            {
+              id: 'quiz-css-l109-q2',
+              type: 'true-false',
+              prompt: 'Two stacked `max-width` queries can both match at the same viewport width.',
+              answer: true,
+              explanation: 'A viewport that is both 400px and 600px wide satisfies both conditions, so both blocks apply and you must resolve the conflict yourself.',
+            },
+            {
+              id: 'quiz-css-l109-q3',
+              type: 'blank',
+              prompt: 'Which media feature lets you respond to a user who has asked for less motion? Give the feature name only.',
+              answers: [
+                'prefers-reduced-motion',
+              ],
+              explanation: '`@media (prefers-reduced-motion: reduce)` is the standard way to respect that request and disable animation.',
+            },
+            {
+              id: 'quiz-css-l109-q4',
+              type: 'multiple-choice',
+              prompt: 'What is the best reason to add a breakpoint?',
+              options: [
+                'A popular device is exactly that wide',
+                'The layout visibly breaks at that width',
+                'A framework requires it',
+                'It has been in the design file since 2010',
+              ],
+              answer: 1,
+              explanation: 'Breakpoints should come from where your content stops working. Device widths are arbitrary and your content will change.',
+            },
+            {
+              id: 'quiz-css-l109-q5',
+              type: 'code-output',
+              prompt: 'How many columns does the row have on a narrow screen?',
+              code: '.row { display: grid; grid-template-columns: 1fr; }\n@media (min-width: 900px) {\n  .row { grid-template-columns: repeat(3, 1fr); }\n}',
+              options: [
+                '3',
+                '1',
+                '4',
+                '0',
+              ],
+              answer: 1,
+              explanation: 'Below the breakpoint only the base rule applies, so the row is a single column. Media query rules are additive, not replacements.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1276,71 +1567,6 @@ apply(mq.matches)`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s67',
-      title: 'CSS Media Queries quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s67-q1',
-          type: 'multiple-choice',
-          prompt: 'What does `@media (min-width: 48rem)` mean?',
-          options: [
-            'Apply only on screens narrower than 48rem',
-            'Apply when the viewport is at least 48rem wide',
-            'Apply only in portrait orientation',
-            'Apply on devices with a physical width of 48rem',
-          ],
-          answer: 1,
-          explanation:
-            '`min-width` is inclusive of the value itself. It applies at 48rem and above, which is what makes it the mobile-first choice.',
-        },
-        {
-          id: 'quiz-css-s67-q2',
-          type: 'true-false',
-          prompt: 'Two stacked `max-width` queries can both match at the same viewport width.',
-          answer: true,
-          explanation:
-            'A viewport that is both 400px and 600px wide satisfies both conditions, so both blocks apply and you must resolve the conflict yourself.',
-        },
-        {
-          id: 'quiz-css-s67-q3',
-          type: 'blank',
-          prompt:
-            'Which media feature lets you respond to a user who has asked for less motion? Give the feature name only.',
-          answers: ['prefers-reduced-motion'],
-          explanation:
-            '`@media (prefers-reduced-motion: reduce)` is the standard way to respect that request and disable animation.',
-        },
-        {
-          id: 'quiz-css-s67-q4',
-          type: 'multiple-choice',
-          prompt: 'What is the best reason to add a breakpoint?',
-          options: [
-            'A popular device is exactly that wide',
-            'The layout visibly breaks at that width',
-            'A framework requires it',
-            'It has been in the design file since 2010',
-          ],
-          answer: 1,
-          explanation:
-            'Breakpoints should come from where your content stops working. Device widths are arbitrary and your content will change.',
-        },
-        {
-          id: 'quiz-css-s67-q5',
-          type: 'code-output',
-          prompt: 'How many columns does the row have on a narrow screen?',
-          code: `.row { display: grid; grid-template-columns: 1fr; }
-@media (min-width: 900px) {
-  .row { grid-template-columns: repeat(3, 1fr); }
-}`,
-          options: ['3', '1', '4', '0'],
-          answer: 1,
-          explanation:
-            'Below the breakpoint only the base rule applies, so the row is a single column. Media query rules are additive, not replacements.',
-        },
-      ],
-    },
   },
   {
     id: 'css-s68',
@@ -1359,6 +1585,69 @@ apply(mq.matches)`,
           'Pick the right technique for a given reflow',
         ],
         xp: 45,
+        quiz: {
+          id: 'quiz-css-l110',
+          title: 'MQ Examples quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l110-q1',
+              type: 'multiple-choice',
+              prompt: 'Which of these reflows a grid with no media query at all?',
+              options: [
+                '`grid-template-columns: repeat(3, 1fr)`',
+                '`grid-template-columns: repeat(auto-fit, minmax(140px, 1fr))`',
+                '`grid-template-columns: 100% 100%`',
+                '`display: inline-grid`',
+              ],
+              answer: 1,
+              explanation: '`auto-fit` with `minmax()` creates as many tracks as fit and collapses the rest, so the grid adapts continuously.',
+            },
+            {
+              id: 'quiz-css-l110-q2',
+              type: 'code-output',
+              prompt: 'How wide is the heading at a viewport of 400px?',
+              code: 'h1 { font-size: clamp(2rem, 1rem + 4vw, 4rem); }',
+              options: [
+                '2rem',
+                '2.64rem',
+                '4rem',
+                '4vw',
+              ],
+              answer: 1,
+              explanation: 'The preferred value is 1rem + 4vw = 16px + 16px = 32px, which is 2rem. It sits between the bounds so it is used as is.',
+            },
+            {
+              id: 'quiz-css-l110-q3',
+              type: 'true-false',
+              prompt: '`clamp()` can only be used for font sizes.',
+              answer: false,
+              explanation: 'It works on any length: `width`, `padding`, `gap` and `border-radius` all accept it. Fluid spacing is often more useful than fluid type.',
+            },
+            {
+              id: 'quiz-css-l110-q4',
+              type: 'blank',
+              prompt: 'Which grid function creates as many columns as will fit, collapsing the leftovers? Give the function name only.',
+              answers: [
+                'auto-fit',
+              ],
+              explanation: '`auto-fit` collapses empty tracks so the remaining items stretch. `auto-fill` leaves the empty tracks in place instead.',
+            },
+            {
+              id: 'quiz-css-l110-q5',
+              type: 'multiple-choice',
+              prompt: 'What is the strongest argument for preferring `flex-wrap` over a media query?',
+              options: [
+                'It produces fewer bytes',
+                'Browsers render it faster',
+                'It needs no width in the stylesheet, so there is no breakpoint to maintain or get wrong',
+                'It works without JavaScript',
+              ],
+              answer: 2,
+              explanation: 'A query introduces a hard-coded width that must be revisited whenever the content changes. Wrapping has no such coupling.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1543,67 +1832,5 @@ apply(mq.matches)`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s68',
-      title: 'CSS MQ Examples quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s68-q1',
-          type: 'multiple-choice',
-          prompt: 'Which of these reflows a grid with no media query at all?',
-          options: [
-            '`grid-template-columns: repeat(3, 1fr)`',
-            '`grid-template-columns: repeat(auto-fit, minmax(140px, 1fr))`',
-            '`grid-template-columns: 100% 100%`',
-            '`display: inline-grid`',
-          ],
-          answer: 1,
-          explanation:
-            '`auto-fit` with `minmax()` creates as many tracks as fit and collapses the rest, so the grid adapts continuously.',
-        },
-        {
-          id: 'quiz-css-s68-q2',
-          type: 'code-output',
-          prompt: 'How wide is the heading at a viewport of 400px?',
-          code: `h1 { font-size: clamp(2rem, 1rem + 4vw, 4rem); }`,
-          options: ['2rem', '2.64rem', '4rem', '4vw'],
-          answer: 1,
-          explanation:
-            'The preferred value is 1rem + 4vw = 16px + 16px = 32px, which is 2rem. It sits between the bounds so it is used as is.',
-        },
-        {
-          id: 'quiz-css-s68-q3',
-          type: 'true-false',
-          prompt: '`clamp()` can only be used for font sizes.',
-          answer: false,
-          explanation:
-            'It works on any length: `width`, `padding`, `gap` and `border-radius` all accept it. Fluid spacing is often more useful than fluid type.',
-        },
-        {
-          id: 'quiz-css-s68-q4',
-          type: 'blank',
-          prompt:
-            'Which grid function creates as many columns as will fit, collapsing the leftovers? Give the function name only.',
-          answers: ['auto-fit'],
-          explanation:
-            '`auto-fit` collapses empty tracks so the remaining items stretch. `auto-fill` leaves the empty tracks in place instead.',
-        },
-        {
-          id: 'quiz-css-s68-q5',
-          type: 'multiple-choice',
-          prompt: 'What is the strongest argument for preferring `flex-wrap` over a media query?',
-          options: [
-            'It produces fewer bytes',
-            'Browsers render it faster',
-            'It needs no width in the stylesheet, so there is no breakpoint to maintain or get wrong',
-            'It works without JavaScript',
-          ],
-          answer: 2,
-          explanation:
-            'A query introduces a hard-coded width that must be revisited whenever the content changes. Wrapping has no such coupling.',
-        },
-      ],
-    },
   },
 ]

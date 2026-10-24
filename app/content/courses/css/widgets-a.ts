@@ -13,6 +13,72 @@ export const cssWidgetSectionsA: Section[] = [
         duration: 5,
         objectives: ['Build a bar from a `<nav>` landmark wrapping a list of links', 'Explain what `list-style: none` costs in semantics', 'Style list items as full-width rows without touching the markup'],
         xp: 35,
+        quiz: {
+          id: 'quiz-css-l67',
+          title: 'Navbar quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l67-q1',
+              type: 'multiple-choice',
+              prompt: 'What is lost when a navigation list is replaced with bare links inside a `<nav>`?',
+              options: [
+                'Nothing important, the links still work',
+                'The visual spacing between items',
+                'The item count and list semantics for assistive technology',
+                'The page title',
+              ],
+              answer: 2,
+              explanation: 'The list is how a screen reader knows how many navigation items exist. Without it the user hears a stream of links with no count and no boundaries.',
+            },
+            {
+              id: 'quiz-css-l67-q2',
+              type: 'true-false',
+              prompt: 'Setting `list-style: none` on a `<ul>` is safe in every browser because it is only a visual change.',
+              answer: false,
+              explanation: 'In Safari it also removes the list semantics. Add `role="list"` to the `<ul>` alongside `list-style: none`.',
+            },
+            {
+              id: 'quiz-css-l67-q3',
+              type: 'multiple-choice',
+              prompt: 'What does wrapping the links in `<nav>` provide?',
+              options: [
+                'Automatic horizontal layout for the links',
+                'A default border and background',
+                'A navigation landmark that assistive technology can jump to',
+                'Built-in keyboard shortcuts for each link',
+              ],
+              answer: 2,
+              explanation: '`<nav>` marks the region as a navigation landmark, which lets screen reader users jump straight to it instead of tabbing through the page.',
+            },
+            {
+              id: 'quiz-css-l67-q4',
+              type: 'multiple-choice',
+              prompt: 'In Safari, what does `list-style: none` do besides hiding the markers?',
+              options: [
+                'Nothing else; it is purely visual in every browser',
+                'It also removes the list semantics, which `role="list"` restores',
+                'It deletes the list items from the accessibility tree permanently',
+                'It converts the list into paragraphs',
+              ],
+              answer: 1,
+              explanation: 'Safari drops the list role when the markers are removed. Adding `role="list"` to the `<ul>` puts the item count back without changing the appearance.',
+            },
+            {
+              id: 'quiz-css-l67-q5',
+              type: 'multiple-choice',
+              prompt: 'Why set `display: block` on the navigation anchors?',
+              options: [
+                'The whole padded row becomes clickable instead of just the word',
+                'It removes the underline automatically',
+                'It opens the link in a new tab',
+                'It is required for `list-style` to work',
+              ],
+              answer: 0,
+              explanation: 'An anchor is inline by default, so only its text is clickable. `display: block` lets the padding grow the target across the whole row.',
+            },
+          ],
+        },
         content: [
           { type: 'text', id: 'c-l67-b1', body: 'A navigation bar is a list of links to the main parts of a site, wrapped in a `<nav>` element so the browser and assistive technology know what it is for.' },
           {
@@ -106,6 +172,79 @@ export const cssWidgetSectionsA: Section[] = [
         duration: 6,
         objectives: ['Stack a navigation list with `flex-direction: column`', 'Make each item fill the full width of the sidebar', 'Style the current page so the user knows where they are'],
         xp: 38,
+        quiz: {
+          id: 'quiz-css-l68',
+          title: 'Vertical Navbar quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l68-q1',
+              type: 'code-output',
+              prompt: 'What does this rule set?',
+              code: '.nav ul { display: flex; flex-direction: column; }',
+              options: [
+                'A vertical navigation list',
+                'A horizontal navigation list',
+                'The list disappears',
+                'The items are absolutely positioned',
+              ],
+              answer: 0,
+              explanation: 'A flex container with `flex-direction: column` stacks its children top to bottom, which is the vertical navbar layout.',
+            },
+            {
+              id: 'quiz-css-l68-q2',
+              type: 'multiple-choice',
+              prompt: 'Why does a vertical nav link need `width: 100%` or `display: block`?',
+              options: [
+                'Links default to `width: 0`',
+                'The list item ignores the anchor otherwise',
+                '`width` is required for `flex-direction: column`',
+                'An inline element only occupies the width of its text, leaving the row half empty',
+              ],
+              answer: 3,
+              explanation: 'An inline anchor is only as wide as its label, so the active background stops halfway across. Making it a block lets it fill the sidebar row.',
+            },
+            {
+              id: 'quiz-css-l68-q3',
+              type: 'multiple-choice',
+              prompt: 'What does `aria-current="page"` communicate?',
+              options: [
+                'That this link represents the page currently being viewed',
+                'That the link is disabled',
+                'That the link opens in a new tab',
+                'That the link is the first item in the list',
+              ],
+              answer: 0,
+              explanation: 'It is the semantic half of the active state: a colour change says nothing to a screen reader user, while `aria-current="page"` names the current page.',
+            },
+            {
+              id: 'quiz-css-l68-q4',
+              type: 'multiple-choice',
+              prompt: 'Why give the sidebar `<ul>` a fixed width such as `220px`?',
+              options: [
+                'Flexbox requires an explicit width on the container',
+                '`list-style: none` only works on a sized element',
+                'Otherwise the sidebar stretches across the whole page',
+                'It makes the links keyboard focusable',
+              ],
+              answer: 2,
+              explanation: 'A flex column is a block-level box, so without a width it fills its parent. The fixed width keeps it looking like a sidebar rather than a page-wide band.',
+            },
+            {
+              id: 'quiz-css-l68-q5',
+              type: 'multiple-choice',
+              prompt: 'Why add `border-left` to the active item as well as a background colour?',
+              options: [
+                'Borders load faster than backgrounds',
+                'It gives a second, non-colour signal for people with colour vision deficiency',
+                'It increases the clickable area of the link',
+                '`aria-current` requires a border to be announced',
+              ],
+              answer: 1,
+              explanation: 'A low-contrast background tint can be invisible to someone with colour vision deficiency, so the border provides a second cue that does not depend on colour.',
+            },
+          ],
+        },
         content: [
           { type: 'text', id: 'c-l68-b1', body: 'A vertical navbar is the same `<nav>` and list as before, with `display: flex` and `flex-direction: column` on the list so the rows stack instead of running across.' },
           {
@@ -171,6 +310,75 @@ export const cssWidgetSectionsA: Section[] = [
         duration: 6,
         objectives: ['Lay a navigation list out in a row with `flex-direction: row`', 'Space items with `gap` instead of margins', 'Give every item equal width with `flex: 1`'],
         xp: 40,
+        quiz: {
+          id: 'quiz-css-l69',
+          title: 'Horizontal Navbar quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l69-q1',
+              type: 'blank',
+              prompt: 'Complete the sentence: equal-width flex items need `flex: 1` on the list item so that the flex basis is ______.',
+              answers: [
+                '0',
+                'zero',
+              ],
+              explanation: '`flex: 1` expands to `flex-grow: 1; flex-shrink: 1; flex-basis: 0`, and a zero basis makes all cells identical instead of content-sized.',
+            },
+            {
+              id: 'quiz-css-l69-q2',
+              type: 'multiple-choice',
+              prompt: 'Which property adds space between flex items without leaking outside the container?',
+              options: [
+                'margin-right on every item',
+                'gap',
+                'padding on the container',
+                'text-indent',
+              ],
+              answer: 1,
+              explanation: '`gap` applies only between items, so the first and last edges stay flush with the container.',
+            },
+            {
+              id: 'quiz-css-l69-q3',
+              type: 'multiple-choice',
+              prompt: 'Which element should carry `flex: 1` in a horizontal nav?',
+              options: [
+                'The `<a>` element',
+                'The `<li>` element, because it is the flex child',
+                'The `<ul>` element',
+                'The `<nav>` element',
+              ],
+              answer: 1,
+              explanation: 'The list item is the flex child, so `flex: 1` belongs there. The anchor simply fills the width that the list item was given.',
+            },
+            {
+              id: 'quiz-css-l69-q4',
+              type: 'multiple-choice',
+              prompt: 'Four equal cells squeeze their labels on a phone. What does the lesson suggest there?',
+              options: [
+                'Keep `flex: 1` and shrink the font size',
+                'Remove the `gap`',
+                'Set `flex-shrink: 0` on every item',
+                'Use `flex: 1 1 auto`, or switch to a single column with a media query',
+              ],
+              answer: 3,
+              explanation: 'A `flex: 1 1 auto` basis lets each cell start at its content width, and a media query can drop the bar to one column when even that is too tight.',
+            },
+            {
+              id: 'quiz-css-l69-q5',
+              type: 'multiple-choice',
+              prompt: 'Which pair lets a navbar reflow onto more lines at narrow widths with no media query?',
+              options: [
+                '`flex-wrap: wrap` plus a `flex-basis` such as `120px` on the items',
+                '`flex-wrap: nowrap` plus `width: 100%`',
+                '`flex-direction: column` plus `height: 100vh`',
+                '`justify-content: space-between` plus `margin: 0`',
+              ],
+              answer: 0,
+              explanation: 'Wrapping is what moves items to a new line, and the pixel basis is the width below which an item stops being usable, so the reflow happens on its own.',
+            },
+          ],
+        },
         content: [
           { type: 'text', id: 'c-l69-b1', body: 'A horizontal navbar is the same markup again — the list is a flex row with a `gap` between items, and `flex: 1` so every cell is the same width.' },
           {
@@ -253,16 +461,6 @@ export const cssWidgetSectionsA: Section[] = [
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s32', title: 'CSS Navigation Bar quiz', passingScore: 60,
-      questions: [
-        { id: 'quiz-css-s32-q1', type: 'multiple-choice', prompt: 'What is lost when a navigation list is replaced with bare links inside a `<nav>`?', options: ['Nothing important, the links still work', 'The visual spacing between items', 'The item count and list semantics for assistive technology', 'The page title'], answer: 2, explanation: 'The list is how a screen reader knows how many navigation items exist. Without it the user hears a stream of links with no count and no boundaries.' },
-        { id: 'quiz-css-s32-q2', type: 'true-false', prompt: 'Setting `list-style: none` on a `<ul>` is safe in every browser because it is only a visual change.', answer: false, explanation: 'In Safari it also removes the list semantics. Add `role="list"` to the `<ul>` alongside `list-style: none`.' },
-        { id: 'quiz-css-s32-q3', type: 'code-output', prompt: 'What does this rule set?', code: '.nav ul { display: flex; flex-direction: column; }', options: ['A vertical navigation list', 'A horizontal navigation list', 'The list disappears', 'The items are absolutely positioned'], answer: 0, explanation: 'A flex container with `flex-direction: column` stacks its children top to bottom, which is the vertical navbar layout.' },
-        { id: 'quiz-css-s32-q4', type: 'blank', prompt: 'Complete the sentence: equal-width flex items need `flex: 1` on the list item so that the flex basis is ______.', answers: ['0', 'zero'], explanation: '`flex: 1` expands to `flex-grow: 1; flex-shrink: 1; flex-basis: 0`, and a zero basis makes all cells identical instead of content-sized.' },
-        { id: 'quiz-css-s32-q5', type: 'multiple-choice', prompt: 'Which property adds space between flex items without leaking outside the container?', options: ['margin-right on every item', 'gap', 'padding on the container', 'text-indent'], answer: 1, explanation: '`gap` applies only between items, so the first and last edges stay flush with the container.' },
-      ],
-    },
   },
   {
     id: 'css-s33',
@@ -276,6 +474,72 @@ export const cssWidgetSectionsA: Section[] = [
         duration: 7,
         objectives: ['Hide a submenu by default and reveal it with `:hover`', 'Open the same submenu on keyboard focus with `:focus-within`', 'Explain why a hover-only menu is unusable on touch devices'],
         xp: 45,
+        quiz: {
+          id: 'quiz-css-l70',
+          title: 'Dropdowns quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l70-q1',
+              type: 'multiple-choice',
+              prompt: 'Why is a `:hover`-only dropdown unusable on a phone?',
+              options: [
+                'Phones do not support `:hover`',
+                'There is no persistent hover state, so nothing opens reliably',
+                '`:hover` is too slow on mobile networks',
+                'It works, but the colours are wrong',
+              ],
+              answer: 1,
+              explanation: 'Touch devices fire hover events only as a side effect of tapping. The first tap usually registers as a click and navigates, so the submenu never appears.',
+            },
+            {
+              id: 'quiz-css-l70-q2',
+              type: 'true-false',
+              prompt: '`:focus-within` keeps a submenu open while a link inside it has keyboard focus.',
+              answer: true,
+              explanation: '`:focus-within` matches an element when it or any descendant holds focus, so tabbing into the submenu keeps the panel on screen.',
+            },
+            {
+              id: 'quiz-css-l70-q3',
+              type: 'code-output',
+              prompt: 'What does this set?',
+              code: '.sub { display: none; }\n.has-menu:hover .sub { display: block; }',
+              options: [
+                'The submenu is always visible',
+                'It appears while the parent item is hovered and is hidden otherwise',
+                'The submenu disappears on hover',
+                'The submenu becomes a flex row',
+              ],
+              answer: 1,
+              explanation: 'The first rule hides it by default; the second reverses that while the pointer is over the parent item.',
+            },
+            {
+              id: 'quiz-css-l70-q4',
+              type: 'blank',
+              prompt: 'Complete the sentence: an absolutely positioned submenu needs `position: relative` on its ________ so it anchors to that item instead of the page.',
+              answers: [
+                'parent',
+                'parent item',
+                'parent li',
+                'containing block',
+              ],
+              explanation: 'An absolutely positioned element is placed against its nearest positioned ancestor. Without one it falls back to the page.',
+            },
+            {
+              id: 'quiz-css-l70-q5',
+              type: 'multiple-choice',
+              prompt: 'Which property keeps an open submenu painted above the content that follows it?',
+              options: [
+                'float',
+                'z-index',
+                'order',
+                'overflow',
+              ],
+              answer: 1,
+              explanation: '`z-index` sets stacking order for positioned elements. `overflow` would do the opposite — it can clip the submenu.',
+            },
+          ],
+        },
         content: [
           { type: 'text', id: 'c-l70-b1', body: 'A CSS-only dropdown is a nested list hidden with `display: none` and revealed when the parent item is hovered — or focused, using `:focus-within`.' },
           {
@@ -388,16 +652,6 @@ export const cssWidgetSectionsA: Section[] = [
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s33', title: 'CSS Dropdowns quiz', passingScore: 60,
-      questions: [
-        { id: 'quiz-css-s33-q1', type: 'multiple-choice', prompt: 'Why is a `:hover`-only dropdown unusable on a phone?', options: ['Phones do not support `:hover`', 'There is no persistent hover state, so nothing opens reliably', '`:hover` is too slow on mobile networks', 'It works, but the colours are wrong'], answer: 1, explanation: 'Touch devices fire hover events only as a side effect of tapping. The first tap usually registers as a click and navigates, so the submenu never appears.' },
-        { id: 'quiz-css-s33-q2', type: 'true-false', prompt: '`:focus-within` keeps a submenu open while a link inside it has keyboard focus.', answer: true, explanation: '`:focus-within` matches an element when it or any descendant holds focus, so tabbing into the submenu keeps the panel on screen.' },
-        { id: 'quiz-css-s33-q3', type: 'code-output', prompt: 'What does this set?', code: '.sub { display: none; }\n.has-menu:hover .sub { display: block; }', options: ['The submenu is always visible', 'It appears while the parent item is hovered and is hidden otherwise', 'The submenu disappears on hover', 'The submenu becomes a flex row'], answer: 1, explanation: 'The first rule hides it by default; the second reverses that while the pointer is over the parent item.' },
-        { id: 'quiz-css-s33-q4', type: 'blank', prompt: 'Complete the sentence: an absolutely positioned submenu needs `position: relative` on its ________ so it anchors to that item instead of the page.', answers: ['parent', 'parent item', 'parent li', 'containing block'], explanation: 'An absolutely positioned element is placed against its nearest positioned ancestor. Without one it falls back to the page.' },
-        { id: 'quiz-css-s33-q5', type: 'multiple-choice', prompt: 'Which property keeps an open submenu painted above the content that follows it?', options: ['float', 'z-index', 'order', 'overflow'], answer: 1, explanation: '`z-index` sets stacking order for positioned elements. `overflow` would do the opposite — it can clip the submenu.' },
-      ],
-    },
   },
   {
     id: 'css-s34',
@@ -411,6 +665,70 @@ export const cssWidgetSectionsA: Section[] = [
         duration: 7,
         objectives: ['Lay tiles out in a responsive grid with `repeat(auto-fit, minmax(...))`', 'Force equal-height tiles with `aspect-ratio`', 'Fill a fixed box without distorting using `object-fit: cover`'],
         xp: 45,
+        quiz: {
+          id: 'quiz-css-l71',
+          title: 'Image Gallery quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l71-q1',
+              type: 'multiple-choice',
+              prompt: 'What does `object-fit: cover` do?',
+              options: [
+                'Stretches the image to fill the box, distorting it',
+                'Fills the box and crops whatever overflows',
+                'Fits the whole image inside the box, leaving gaps',
+                'Blurs the image to hide the edges',
+              ],
+              answer: 1,
+              explanation: '`cover` scales the image until it fills the box in both directions, then crops the overflow. Proportions are preserved.',
+            },
+            {
+              id: 'quiz-css-l71-q2',
+              type: 'true-false',
+              prompt: 'Setting `width` and `height` on an `<img>` always gives the box size you asked for without distorting the image.',
+              answer: false,
+              explanation: 'An `<img>` is a replaced element with its own proportions. Setting both dimensions distorts it unless you also set `object-fit`.',
+            },
+            {
+              id: 'quiz-css-l71-q3',
+              type: 'code-output',
+              prompt: 'What does this set?',
+              code: '.gallery { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }',
+              options: [
+                'Exactly three equal columns',
+                'As many columns as fit, each at least 140px and sharing the rest evenly',
+                'One column that is 140px wide',
+                'A fixed four-column grid',
+              ],
+              answer: 1,
+              explanation: '`auto-fit` collapses empty tracks and `1fr` splits the leftover space, so the grid reflows as the width changes — no media query needed.',
+            },
+            {
+              id: 'quiz-css-l71-q4',
+              type: 'blank',
+              prompt: 'Complete the sentence: to give a tile a fixed shape with nothing inside it, use the property ________.',
+              answers: [
+                'aspect-ratio',
+                'aspect ratio',
+              ],
+              explanation: '`aspect-ratio: 4 / 3` gives the box a height from its width, replacing the old `padding-top` percentage spacer.',
+            },
+            {
+              id: 'quiz-css-l71-q5',
+              type: 'multiple-choice',
+              prompt: 'Which elements does `object-fit` apply to?',
+              options: [
+                'Any element with children',
+                'Every element that has a background',
+                'Replaced elements such as `<img>`, `<video>` and `<canvas>`',
+                'Only `<img>` elements',
+              ],
+              answer: 2,
+              explanation: '`object-fit` controls how a replaced element fills its content box. It has no effect on ordinary elements such as a `<div>`.',
+            },
+          ],
+        },
         content: [
           { type: 'text', id: 'c-l71-b1', body: 'An image gallery is a grid of tiles where every image is cropped to the same shape so the rows line up, whatever the original proportions were.' },
           {
@@ -493,16 +811,6 @@ export const cssWidgetSectionsA: Section[] = [
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s34', title: 'CSS Image Gallery quiz', passingScore: 60,
-      questions: [
-        { id: 'quiz-css-s34-q1', type: 'multiple-choice', prompt: 'What does `object-fit: cover` do?', options: ['Stretches the image to fill the box, distorting it', 'Fills the box and crops whatever overflows', 'Fits the whole image inside the box, leaving gaps', 'Blurs the image to hide the edges'], answer: 1, explanation: '`cover` scales the image until it fills the box in both directions, then crops the overflow. Proportions are preserved.' },
-        { id: 'quiz-css-s34-q2', type: 'true-false', prompt: 'Setting `width` and `height` on an `<img>` always gives the box size you asked for without distorting the image.', answer: false, explanation: 'An `<img>` is a replaced element with its own proportions. Setting both dimensions distorts it unless you also set `object-fit`.' },
-        { id: 'quiz-css-s34-q3', type: 'code-output', prompt: 'What does this set?', code: '.gallery { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }', options: ['Exactly three equal columns', 'As many columns as fit, each at least 140px and sharing the rest evenly', 'One column that is 140px wide', 'A fixed four-column grid'], answer: 1, explanation: '`auto-fit` collapses empty tracks and `1fr` splits the leftover space, so the grid reflows as the width changes — no media query needed.' },
-        { id: 'quiz-css-s34-q4', type: 'blank', prompt: 'Complete the sentence: to give a tile a fixed shape with nothing inside it, use the property ________.', answers: ['aspect-ratio', 'aspect ratio'], explanation: '`aspect-ratio: 4 / 3` gives the box a height from its width, replacing the old `padding-top` percentage spacer.' },
-        { id: 'quiz-css-s34-q5', type: 'multiple-choice', prompt: 'Which elements does `object-fit` apply to?', options: ['Any element with children', 'Every element that has a background', 'Replaced elements such as `<img>`, `<video>` and `<canvas>`', 'Only `<img>` elements'], answer: 2, explanation: '`object-fit` controls how a replaced element fills its content box. It has no effect on ordinary elements such as a `<div>`.' },
-      ],
-    },
   },
   {
     id: 'css-s35',
@@ -516,6 +824,69 @@ export const cssWidgetSectionsA: Section[] = [
         duration: 7,
         objectives: ['Explain what an image sprite is and why it saves requests', 'Select one region of a sprite with `background-position`', 'Point `background-image` at an inline SVG data URI'],
         xp: 48,
+        quiz: {
+          id: 'quiz-css-l72',
+          title: 'Image Sprites quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l72-q1',
+              type: 'multiple-choice',
+              prompt: 'What is an image sprite?',
+              options: [
+                'A decorative background added behind text',
+                'One image containing many icons, with a window onto it for each use',
+                'A CSS animation that cycles through frames',
+                'A sprite sheet format for 3D game engines',
+              ],
+              answer: 1,
+              explanation: 'A sprite packs many small graphics into a single file. Each element shows one cell by setting its own box size and sliding the image with `background-position`.',
+            },
+            {
+              id: 'quiz-css-l72-q2',
+              type: 'true-false',
+              prompt: 'Sprites are still the fastest way to load many small icons on any modern site.',
+              answer: false,
+              explanation: 'Browsers cache and pipeline requests well. Sprites trade flexibility for a request count that matters less now, and they invite positioning errors.',
+            },
+            {
+              id: 'quiz-css-l72-q3',
+              type: 'code-output',
+              prompt: 'A sprite has 24px cells. What does this show?',
+              code: '.i { width: 24px; height: 24px; background-position: -48px 0; }',
+              options: [
+                'The first cell in the row',
+                'The third cell in the row',
+                'The second row, first column',
+                'Nothing, negative offsets are invalid',
+              ],
+              answer: 1,
+              explanation: 'The offsets give the top-left of the visible window in sprite coordinates: x = -48 is 48px into the row, which is the third 24px cell.',
+            },
+            {
+              id: 'quiz-css-l72-q4',
+              type: 'blank',
+              prompt: 'Complete the sentence: to stop the sprite tiling when the element is larger than one cell, set `background-repeat: ________`.',
+              answers: [
+                'no-repeat',
+              ],
+              explanation: '`no-repeat` draws the image once at its positioned spot instead of repeating it across the element.',
+            },
+            {
+              id: 'quiz-css-l72-q5',
+              type: 'multiple-choice',
+              prompt: 'Why is an inline SVG data URI a good sprite source for a self-contained demo?',
+              options: [
+                'Data URIs are compressed by the browser',
+                'It needs no network request and no extra file, so the technique is shown offline',
+                'Data URIs load faster than any file',
+                'It makes `background-position` move the icons for you',
+              ],
+              answer: 1,
+              explanation: 'A data URI lives in the stylesheet itself, so there is nothing to fetch. The positioning technique is identical to one using a real sprite file.',
+            },
+          ],
+        },
         content: [
           { type: 'text', id: 'c-l72-b1', body: 'An image sprite is a single image containing many small graphics laid out in a row or grid. Each icon is shown by giving an element a small box and sliding the sprite behind it with `background-position`.' },
           {
@@ -593,15 +964,5 @@ export const cssWidgetSectionsA: Section[] = [
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s35', title: 'CSS Image Sprites quiz', passingScore: 60,
-      questions: [
-        { id: 'quiz-css-s35-q1', type: 'multiple-choice', prompt: 'What is an image sprite?', options: ['A decorative background added behind text', 'One image containing many icons, with a window onto it for each use', 'A CSS animation that cycles through frames', 'A sprite sheet format for 3D game engines'], answer: 1, explanation: 'A sprite packs many small graphics into a single file. Each element shows one cell by setting its own box size and sliding the image with `background-position`.' },
-        { id: 'quiz-css-s35-q2', type: 'true-false', prompt: 'Sprites are still the fastest way to load many small icons on any modern site.', answer: false, explanation: 'Browsers cache and pipeline requests well. Sprites trade flexibility for a request count that matters less now, and they invite positioning errors.' },
-        { id: 'quiz-css-s35-q3', type: 'code-output', prompt: 'A sprite has 24px cells. What does this show?', code: '.i { width: 24px; height: 24px; background-position: -48px 0; }', options: ['The first cell in the row', 'The third cell in the row', 'The second row, first column', 'Nothing, negative offsets are invalid'], answer: 1, explanation: 'The offsets give the top-left of the visible window in sprite coordinates: x = -48 is 48px into the row, which is the third 24px cell.' },
-        { id: 'quiz-css-s35-q4', type: 'blank', prompt: 'Complete the sentence: to stop the sprite tiling when the element is larger than one cell, set `background-repeat: ________`.', answers: ['no-repeat'], explanation: '`no-repeat` draws the image once at its positioned spot instead of repeating it across the element.' },
-        { id: 'quiz-css-s35-q5', type: 'multiple-choice', prompt: 'Why is an inline SVG data URI a good sprite source for a self-contained demo?', options: ['Data URIs are compressed by the browser', 'It needs no network request and no extra file, so the technique is shown offline', 'Data URIs load faster than any file', 'It makes `background-position` move the icons for you'], answer: 1, explanation: 'A data URI lives in the stylesheet itself, so there is nothing to fetch. The positioning technique is identical to one using a real sprite file.' },
-      ],
-    },
   },
 ]

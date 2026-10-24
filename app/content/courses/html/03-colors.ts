@@ -17,6 +17,71 @@ export const htmlColorSections: Section[] = [
           'Explain why the font element and its color attribute were removed',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-html-l17',
+          title: 'HTML Colors quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l17-q1',
+              type: 'multiple-choice',
+              prompt: 'Where should a colour be set in a modern project?',
+              options: [
+                'In a style attribute on the element',
+                'In the stylesheet, targeted by a class or selector',
+                'In a font element with a color attribute',
+                'In an inline style block in the body',
+              ],
+              answer: 1,
+              explanation: 'Colour is presentation, so it belongs in CSS. A stylesheet lets you change every instance at once, which an inline style cannot.',
+            },
+            {
+              id: 'quiz-html-l17-q2',
+              type: 'true-false',
+              prompt: 'The font element and its color attribute are still part of the HTML specification.',
+              answer: false,
+              explanation: 'They were deprecated and have since been removed. A parser may still handle them for backwards compatibility, but you should not write them.',
+            },
+            {
+              id: 'quiz-html-l17-q3',
+              type: 'multiple-choice',
+              prompt: 'Which of these is one of the original sixteen HTML colour names?',
+              options: [
+                'charcoal',
+                'teal',
+                'crimson',
+                'turquoise',
+              ],
+              answer: 1,
+              explanation: 'The sixteen are black, silver, gray, white, maroon, red, purple, fuchsia, green, lime, olive, yellow, navy, blue, teal and aqua.',
+            },
+            {
+              id: 'quiz-html-l17-q4',
+              type: 'blank',
+              prompt: 'How many colour keywords did HTML originally define so that a page was readable with no stylesheet?',
+              answers: [
+                '16',
+                'sixteen',
+                '16 named colours',
+                'sixteen named colours',
+              ],
+              explanation: 'Sixteen was chosen as the smallest set that could produce a readable page in both light and dark without any CSS at all.',
+            },
+            {
+              id: 'quiz-html-l17-q5',
+              type: 'multiple-choice',
+              prompt: 'What is the risk of choosing an accent colour first and setting the text colour afterwards?',
+              options: [
+                'The accent may be a colour keyword CSS does not recognise',
+                'The text may end up with too little contrast against its background',
+                'The colour will not render on older browsers',
+                'The stylesheet will be ignored',
+              ],
+              answer: 1,
+              explanation: 'Contrast is a property of the pair, not of either colour alone. Pick the background and text together, then choose an accent that works against both.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -153,66 +218,6 @@ export const htmlColorSections: Section[] = [
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s12',
-      title: 'HTML Colors quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s12-q1',
-          type: 'multiple-choice',
-          prompt: 'Where should a colour be set in a modern project?',
-          options: [
-            'In a style attribute on the element',
-            'In the stylesheet, targeted by a class or selector',
-            'In a font element with a color attribute',
-            'In an inline style block in the body',
-          ],
-          answer: 1,
-          explanation:
-            'Colour is presentation, so it belongs in CSS. A stylesheet lets you change every instance at once, which an inline style cannot.',
-        },
-        {
-          id: 'quiz-html-s12-q2',
-          type: 'true-false',
-          prompt: 'The font element and its color attribute are still part of the HTML specification.',
-          answer: false,
-          explanation:
-            'They were deprecated and have since been removed. A parser may still handle them for backwards compatibility, but you should not write them.',
-        },
-        {
-          id: 'quiz-html-s12-q3',
-          type: 'multiple-choice',
-          prompt: 'Which of these is one of the original sixteen HTML colour names?',
-          options: ['charcoal', 'teal', 'crimson', 'turquoise'],
-          answer: 1,
-          explanation:
-            'The sixteen are black, silver, gray, white, maroon, red, purple, fuchsia, green, lime, olive, yellow, navy, blue, teal and aqua.',
-        },
-        {
-          id: 'quiz-html-s12-q4',
-          type: 'blank',
-          prompt: 'How many colour keywords did HTML originally define so that a page was readable with no stylesheet?',
-          answers: ['16', 'sixteen', '16 named colours', 'sixteen named colours'],
-          explanation:
-            'Sixteen was chosen as the smallest set that could produce a readable page in both light and dark without any CSS at all.',
-        },
-        {
-          id: 'quiz-html-s12-q5',
-          type: 'multiple-choice',
-          prompt: 'What is the risk of choosing an accent colour first and setting the text colour afterwards?',
-          options: [
-            'The accent may be a colour keyword CSS does not recognise',
-            'The text may end up with too little contrast against its background',
-            'The colour will not render on older browsers',
-            'The stylesheet will be ignored',
-          ],
-          answer: 1,
-          explanation:
-            'Contrast is a property of the pair, not of either colour alone. Pick the background and text together, then choose an accent that works against both.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s13',
@@ -230,6 +235,71 @@ export const htmlColorSections: Section[] = [
           'Predict what a colour looks like from its RGB values',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-html-l18',
+          title: 'HTML Colors RGB quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l18-q1',
+              type: 'multiple-choice',
+              prompt: 'In rgb(0, 128, 128), what does the 0 in the first position mean?',
+              options: [
+                'The colour is fully transparent',
+                'The red channel is off',
+                'The colour is black',
+                'The value is invalid',
+              ],
+              answer: 1,
+              explanation: 'The three numbers are red, green and blue in that order, each from 0 to 255. A zero means that channel contributes nothing.',
+            },
+            {
+              id: 'quiz-html-l18-q2',
+              type: 'true-false',
+              prompt: 'RGB is a subtractive system, the way paint mixes.',
+              answer: false,
+              explanation: 'RGB is additive: it models light, so adding channels makes things brighter. Paint is subtractive, which is why mixing paints gets darker and light gets brighter.',
+            },
+            {
+              id: 'quiz-html-l18-q3',
+              type: 'multiple-choice',
+              prompt: 'Which is the modern way to write a colour with 50% alpha?',
+              options: [
+                'rgb(40, 90, 140, 0.5)',
+                'rgb(40 90 140 / 50%)',
+                'rgba(40, 90, 140, 0.5)',
+                'rgb(40 90 140 0.5)',
+              ],
+              answer: 1,
+              explanation: 'The modern form separates the alpha with a slash and accepts a percentage. The rgba() function exists only for backwards compatibility.',
+            },
+            {
+              id: 'quiz-html-l18-q4',
+              type: 'blank',
+              prompt: 'What is white in RGB notation?',
+              answers: [
+                'rgb(255, 255, 255)',
+                'rgb(255 255 255)',
+                '255,255,255',
+                '255 255 255',
+              ],
+              explanation: 'All three channels at full intensity. Black is all three at zero.',
+            },
+            {
+              id: 'quiz-html-l18-q5',
+              type: 'multiple-choice',
+              prompt: 'Why is applying alpha to text usually a mistake?',
+              options: [
+                'Browsers do not support alpha on the color property',
+                'It reduces contrast against whatever is behind the text, so readability depends on the background',
+                'It makes the text unselectable',
+                'It breaks the cascade',
+              ],
+              answer: 1,
+              explanation: 'Contrast is a property of the pair. Translucent text can be perfectly legible on a flat background and unreadable over an image, on the same page.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -335,134 +405,132 @@ rgb(40 90 140 / 0.5)      modern, with alpha as a number`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s13',
-      title: 'HTML Colors RGB quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s13-q1',
-          type: 'multiple-choice',
-          prompt: 'In rgb(0, 128, 128), what does the 0 in the first position mean?',
-          options: [
-            'The colour is fully transparent',
-            'The red channel is off',
-            'The colour is black',
-            'The value is invalid',
-          ],
-          answer: 1,
-          explanation:
-            'The three numbers are red, green and blue in that order, each from 0 to 255. A zero means that channel contributes nothing.',
-        },
-        {
-          id: 'quiz-html-s13-q2',
-          type: 'true-false',
-          prompt: 'RGB is a subtractive system, the way paint mixes.',
-          answer: false,
-          explanation:
-            'RGB is additive: it models light, so adding channels makes things brighter. Paint is subtractive, which is why mixing paints gets darker and light gets brighter.',
-        },
-        {
-          id: 'quiz-html-s13-q3',
-          type: 'multiple-choice',
-          prompt: 'Which is the modern way to write a colour with 50% alpha?',
-          options: [
-            'rgb(40, 90, 140, 0.5)',
-            'rgb(40 90 140 / 50%)',
-            'rgba(40, 90, 140, 0.5)',
-            'rgb(40 90 140 0.5)',
-          ],
-          answer: 1,
-          explanation:
-            'The modern form separates the alpha with a slash and accepts a percentage. The rgba() function exists only for backwards compatibility.',
-        },
-        {
-          id: 'quiz-html-s13-q4',
-          type: 'blank',
-          prompt: 'What is white in RGB notation?',
-          answers: ['rgb(255, 255, 255)', 'rgb(255 255 255)', '255,255,255', '255 255 255'],
-          explanation:
-            'All three channels at full intensity. Black is all three at zero.',
-        },
-        {
-          id: 'quiz-html-s13-q5',
-          type: 'multiple-choice',
-          prompt: 'Why is applying alpha to text usually a mistake?',
-          options: [
-            'Browsers do not support alpha on the color property',
-            'It reduces contrast against whatever is behind the text, so readability depends on the background',
-            'It makes the text unselectable',
-            'It breaks the cascade',
-          ],
-          answer: 1,
-          explanation:
-            'Contrast is a property of the pair. Translucent text can be perfectly legible on a flat background and unreadable over an image, on the same page.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s14',
     title: 'HTML Colors HEX',
     description: 'Hex notation, the shorthand form, and alpha in hex.',
     lessons: [
-      {
-        id: 'html-l19',
-        title: 'HTML Colors HEX',
-        description: 'Hexadecimal colour values, the three-digit shorthand, and the alpha channel in hex.',
-        duration: 5,
-    objectives: [
-      'Write any colour in hex and convert between hex and RGB',
-      'Use the three-digit shorthand correctly',
-      'Add an alpha channel to a hex colour',
-    ],
-    xp: 35,
-    content: [
-      {
-        type: 'text',
-            id: 'c-l19-b1',
-            body: 'Hex is the same three channels as RGB, written as two hexadecimal digits each and prefixed with a hash. Each digit runs from 0 to F, where F is 15, so a pair of digits covers 0 to 255 — exactly the range RGB uses. `#1E88E5` is the same colour as `rgb(30, 136, 229)`.',
-          },
+    {
+      id: 'html-l19',
+      title: 'HTML Colors HEX',
+      description: 'Hexadecimal colour values, the three-digit shorthand, and the alpha channel in hex.',
+      duration: 5,
+      objectives: [
+        'Write any colour in hex and convert between hex and RGB',
+        'Use the three-digit shorthand correctly',
+        'Add an alpha channel to a hex colour',
+        ],
+      xp: 35,
+      quiz: {
+        id: 'quiz-html-l19',
+        title: 'HTML Colors HEX quiz',
+        passingScore: 60,
+        questions: [
           {
-            type: 'demo',
-            id: 'c-l19-d1',
-            title: 'Hex, and the same colour in every notation',
-            body: 'The same teal written four ways. They are indistinguishable in the browser, and the hex form is the one almost every design tool hands you.',
-            html: `<div class="row">
+            id: 'quiz-html-l19-q1',
+            type: 'multiple-choice',
+            prompt: 'What does #1E8 expand to in the shorthand form?',
+            options: [
+              '#1EE888',
+              '#11EE88',
+              '#1E1188',
+              '#111EEE',
+              ],
+            answer: 1,
+            explanation: 'Each shorthand digit is doubled: 1 becomes 11, E becomes EE, and 8 becomes 88.',
+            },
+          {
+            id: 'quiz-html-l19-q2',
+            type: 'true-false',
+            prompt: 'Any six-digit hex colour can be shortened to three digits.',
+            answer: false,
+            explanation: 'Only when both digits of every pair are identical. #1E88E5 cannot be shortened because 1E and 88 are not doubles.',
+            },
+          {
+            id: 'quiz-html-l19-q3',
+            type: 'multiple-choice',
+            prompt: 'What is the eight-digit hex form used for?',
+            options: [
+              'Defining an eight-colour palette',
+              'Adding an alpha channel',
+              'Specifying a colour space',
+              'Naming a CSS custom property',
+              ],
+            answer: 1,
+            explanation: 'The last two digits of #RRGGBBAA are alpha, where FF is fully opaque and 80 is roughly half.',
+            },
+          {
+            id: 'quiz-html-l19-q4',
+            type: 'blank',
+            prompt: 'What is the hex value for teal, which is rgb(0, 128, 128)?',
+            answers: [
+              '#008080',
+              '008080',
+              ],
+            explanation: 'Zero is 00, and 128 in hexadecimal is 80.',
+            },
+          {
+            id: 'quiz-html-l19-q5',
+            type: 'multiple-choice',
+            prompt: 'What happens to a declaration written as 008080 with no hash?',
+            options: [
+              'The browser guesses the colour',
+              'The declaration is invalid and dropped',
+              'It is treated as an unknown property',
+              'It defaults to black',
+              ],
+            answer: 1,
+            explanation: 'The hash is part of the notation. Without it the value is not a colour and the whole declaration is discarded.',
+            },
+          ],
+        },
+      content: [
+        {
+          type: 'text',
+          id: 'c-l19-b1',
+          body: 'Hex is the same three channels as RGB, written as two hexadecimal digits each and prefixed with a hash. Each digit runs from 0 to F, where F is 15, so a pair of digits covers 0 to 255 — exactly the range RGB uses. `#1E88E5` is the same colour as `rgb(30, 136, 229)`.',
+          },
+        {
+          type: 'demo',
+          id: 'c-l19-d1',
+          title: 'Hex, and the same colour in every notation',
+          body: 'The same teal written four ways. They are indistinguishable in the browser, and the hex form is the one almost every design tool hands you.',
+          html: `<div class="row">
   <div class="card" style="background: #008080; color: white;">#008080</div>
   <div class="card" style="background: rgb(0 128 128); color: white;">rgb(0 128 128)</div>
   <div class="card" style="background: teal; color: white;">teal</div>
   <div class="card" style="background: #00808080; color: white;">#00808080</div>
 </div>`,
-            css: `body { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 14px; }
+          css: `body { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 14px; }
 .row { display: flex; gap: 0.75rem; }
 .card { flex: 1; padding: 1.5rem 0.75rem; border-radius: 8px; text-align: center; }`,
-            height: 120,
-          },
-          {
-            type: 'heading',
-            id: 'c-l19-h1',
-            level: 3,
-            body: 'Shorthand and alpha',
-          },
-          {
-            type: 'list',
-            id: 'c-l19-l1',
-            style: 'bullet',
-            items: [
-              '**Six digits** is the full form: `#RRGGBB`, two per channel.',
-              '**Three digits** is shorthand: `#RGB`, one per channel, each digit doubled. `#1E8` means `#11EE88`.',
-              '**Eight digits** adds alpha: `#RRGGBBAA`. `#00808080` is teal at roughly 50% alpha.',
-              '**Four digits** is shorthand with alpha: `#RGBA`.',
-              '**The hash is required.** Without it the value is invalid and the declaration is dropped.',
-            ],
-          },
-          {
-            type: 'code',
-            id: 'c-l19-c1',
-            language: 'plaintext',
-            title: 'Converting by hand',
-            code: `Teal is rgb(0, 128, 128).
+    height: 120,
+    },
+  {
+    type: 'heading',
+    id: 'c-l19-h1',
+    level: 3,
+    body: 'Shorthand and alpha',
+    },
+  {
+    type: 'list',
+    id: 'c-l19-l1',
+    style: 'bullet',
+    items: [
+      '**Six digits** is the full form: `#RRGGBB`, two per channel.',
+      '**Three digits** is shorthand: `#RGB`, one per channel, each digit doubled. `#1E8` means `#11EE88`.',
+      '**Eight digits** adds alpha: `#RRGGBBAA`. `#00808080` is teal at roughly 50% alpha.',
+      '**Four digits** is shorthand with alpha: `#RGBA`.',
+      '**The hash is required.** Without it the value is invalid and the declaration is dropped.',
+      ],
+    },
+  {
+    type: 'code',
+    id: 'c-l19-c1',
+    language: 'plaintext',
+    title: 'Converting by hand',
+    code: `Teal is rgb(0, 128, 128).
 
   0   -> 00
   128 -> 80        (128 in hex is 80, because 8*16 + 0 = 128)
@@ -474,118 +542,59 @@ Shorthand only works when both digits of a pair are identical:
 
   #008080  ->  #080    (00 -> 0, 80 -> 88, 80 -> 88)
   #1E88E5  ->  no shorthand, because 1E and 88 are not doubles`,
+    },
+  {
+    type: 'tip',
+    id: 'c-l19-t1',
+    title: 'Lowercase is the convention',
+    body: '`#1e88e5` and `#1E88E5` are identical. Every design tool and every minifier outputs lowercase, so match it and your diffs stay clean.',
+    },
+  {
+    type: 'exercise',
+    id: 'c-l19-x1',
+    exercise: {
+      id: 'ex-l19',
+      instructions:
+      'Set the badge background using a three-digit hex shorthand. The target colour is rgb(255, 0, 0), which shortens to #f00.',
+      languages: ['html', 'css'],
+      starterCode: {
+        html: '<span class="badge">New</span>\n',
+        css: '.badge {\n  display: inline-block;\n  padding: 0.2rem 0.6rem;\n  border-radius: 999px;\n  color: white;\n}\n',
+        },
+      tests: [
+        {
+          id: 'ex-l19-t1',
+          label: 'The badge background is pure red',
+          body: 'return getComputedStyle(document.querySelector(".badge")).backgroundColor === "rgb(255, 0, 0)"',
           },
-          {
-            type: 'tip',
-            id: 'c-l19-t1',
-            title: 'Lowercase is the convention',
-            body: '`#1e88e5` and `#1E88E5` are identical. Every design tool and every minifier outputs lowercase, so match it and your diffs stay clean.',
+        {
+          id: 'ex-l19-t2',
+          label: 'The value used is a three-digit hex shorthand',
+          body:
+          'const css = Array.from(document.styleSheets).map(s => { try { return Array.from(s.cssRules).map(r => r.cssText).join(" ") } catch { return "" } }).join(" "); return /#[0-9a-fA-F]{3}\\b/.test(css)',
           },
-          {
-            type: 'exercise',
-            id: 'c-l19-x1',
-            exercise: {
-              id: 'ex-l19',
-              instructions:
-                'Set the badge background using a three-digit hex shorthand. The target colour is rgb(255, 0, 0), which shortens to #f00.',
-              languages: ['html', 'css'],
-              starterCode: {
-                html: '<span class="badge">New</span>\n',
-                css: '.badge {\n  display: inline-block;\n  padding: 0.2rem 0.6rem;\n  border-radius: 999px;\n  color: white;\n}\n',
-              },
-              tests: [
-                {
-                  id: 'ex-l19-t1',
-                  label: 'The badge background is pure red',
-                  body: 'return getComputedStyle(document.querySelector(".badge")).backgroundColor === "rgb(255, 0, 0)"',
-                },
-                {
-                  id: 'ex-l19-t2',
-                  label: 'The value used is a three-digit hex shorthand',
-                  body:
-                    'const css = Array.from(document.styleSheets).map(s => { try { return Array.from(s.cssRules).map(r => r.cssText).join(" ") } catch { return "" } }).join(" "); return /#[0-9a-fA-F]{3}\\b/.test(css)',
-                },
-                {
-                  id: 'ex-l19-t3',
-                  label: 'The badge is still an inline-block pill',
-                  body: 'return getComputedStyle(document.querySelector(".badge")).display === "inline-block"',
-                },
-              ],
-              hints: [
-                'Pure red is `#ff0000`, and both channel pairs are doubles, so it shortens.',
-                'The shorthand is `#f00` — three digits, not six.',
-              ],
-              solution: {
-                html: '<span class="badge">New</span>\n',
-                css:
-                  '.badge {\n  display: inline-block;\n  padding: 0.2rem 0.6rem;\n  border-radius: 999px;\n  color: white;\n  background: #f00;\n}\n',
-              },
-              testNotes:
-                'The second test inspects the stylesheet text for a three-digit hex, so #ff0000 would render identically and still fail.',
-            },
+        {
+          id: 'ex-l19-t3',
+          label: 'The badge is still an inline-block pill',
+          body: 'return getComputedStyle(document.querySelector(".badge")).display === "inline-block"',
           },
         ],
+      hints: [
+        'Pure red is `#ff0000`, and both channel pairs are doubles, so it shortens.',
+        'The shorthand is `#f00` — three digits, not six.',
+        ],
+      solution: {
+        html: '<span class="badge">New</span>\n',
+        css:
+        '.badge {\n  display: inline-block;\n  padding: 0.2rem 0.6rem;\n  border-radius: 999px;\n  color: white;\n  background: #f00;\n}\n',
+        },
+      testNotes:
+      'The second test inspects the stylesheet text for a three-digit hex, so #ff0000 would render identically and still fail.',
       },
-    ],
-    quiz: {
-      id: 'quiz-html-s14',
-      title: 'HTML Colors HEX quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s14-q1',
-          type: 'multiple-choice',
-          prompt: 'What does #1E8 expand to in the shorthand form?',
-          options: ['#1EE888', '#11EE88', '#1E1188', '#111EEE'],
-          answer: 1,
-          explanation:
-            'Each shorthand digit is doubled: 1 becomes 11, E becomes EE, and 8 becomes 88.',
-        },
-        {
-          id: 'quiz-html-s14-q2',
-          type: 'true-false',
-          prompt: 'Any six-digit hex colour can be shortened to three digits.',
-          answer: false,
-          explanation:
-            'Only when both digits of every pair are identical. #1E88E5 cannot be shortened because 1E and 88 are not doubles.',
-        },
-        {
-          id: 'quiz-html-s14-q3',
-          type: 'multiple-choice',
-          prompt: 'What is the eight-digit hex form used for?',
-          options: [
-            'Defining an eight-colour palette',
-            'Adding an alpha channel',
-            'Specifying a colour space',
-            'Naming a CSS custom property',
-          ],
-          answer: 1,
-          explanation:
-            'The last two digits of #RRGGBBAA are alpha, where FF is fully opaque and 80 is roughly half.',
-        },
-        {
-          id: 'quiz-html-s14-q4',
-          type: 'blank',
-          prompt: 'What is the hex value for teal, which is rgb(0, 128, 128)?',
-          answers: ['#008080', '008080'],
-          explanation: 'Zero is 00, and 128 in hexadecimal is 80.',
-        },
-        {
-          id: 'quiz-html-s14-q5',
-          type: 'multiple-choice',
-          prompt: 'What happens to a declaration written as 008080 with no hash?',
-          options: [
-            'The browser guesses the colour',
-            'The declaration is invalid and dropped',
-            'It is treated as an unknown property',
-            'It defaults to black',
-          ],
-          answer: 1,
-          explanation:
-            'The hash is part of the notation. Without it the value is not a colour and the whole declaration is discarded.',
-        },
-      ],
     },
+  ],
+},
+    ],
   },
   {
     id: 'html-s15',
@@ -603,6 +612,73 @@ Shorthand only works when both digits of a pair are identical:
           'Explain why HSL is easier to design in than RGB',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-html-l20',
+          title: 'HTML Colors HSL quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l20-q1',
+              type: 'multiple-choice',
+              prompt: 'In hsl(174, 60%, 50%), what does 50% refer to?',
+              options: [
+                'The hue',
+                'The saturation',
+                'The lightness',
+                'The opacity',
+              ],
+              answer: 2,
+              explanation: 'Hue is 174, saturation is 60%, and the final percentage is lightness. 50% lightness is the fully saturated version of that hue.',
+            },
+            {
+              id: 'quiz-html-l20-q2',
+              type: 'true-false',
+              prompt: 'A colour with 0% saturation is a grey.',
+              answer: true,
+              explanation: 'With no saturation there is no hue to show, so the colour is a neutral grey of whatever lightness is set.',
+            },
+            {
+              id: 'quiz-html-l20-q3',
+              type: 'multiple-choice',
+              prompt: 'What is the main practical advantage of designing in HSL rather than RGB?',
+              options: [
+                'It renders faster in the browser',
+                'One component can be varied without disturbing the other two, so ramps are one number per step',
+                'It produces a wider range of colours',
+                'It is supported by more browsers',
+              ],
+              answer: 1,
+              explanation: 'Hue, saturation and lightness are independent, which is what makes a tints-and-shades ramp a single adjustable value.',
+            },
+            {
+              id: 'quiz-html-l20-q4',
+              type: 'blank',
+              prompt: 'What hue, in degrees, is pure red?',
+              answers: [
+                '0',
+                '0deg',
+                '360',
+                '360deg',
+                '0 degrees',
+                '360 degrees',
+              ],
+              explanation: 'The wheel starts at red and closes on itself, so 0deg and 360deg are the same colour.',
+            },
+            {
+              id: 'quiz-html-l20-q5',
+              type: 'multiple-choice',
+              prompt: 'Why should you still check contrast when building a palette in HSL?',
+              options: [
+                'HSL is not supported in older browsers',
+                'Equal steps in lightness do not look equally different to the eye',
+                'HSL changes hue when lightness changes',
+                'Contrast cannot be expressed in HSL',
+              ],
+              answer: 1,
+              explanation: 'HSL is not perceptually even: yellow at 50% looks much lighter than blue at 50%. Trust a contrast checker, not the numbers.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -735,65 +811,5 @@ With a CSS custom property, the whole ramp comes from one number:
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s15',
-      title: 'HTML Colors HSL quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s15-q1',
-          type: 'multiple-choice',
-          prompt: 'In hsl(174, 60%, 50%), what does 50% refer to?',
-          options: ['The hue', 'The saturation', 'The lightness', 'The opacity'],
-          answer: 2,
-          explanation:
-            'Hue is 174, saturation is 60%, and the final percentage is lightness. 50% lightness is the fully saturated version of that hue.',
-        },
-        {
-          id: 'quiz-html-s15-q2',
-          type: 'true-false',
-          prompt: 'A colour with 0% saturation is a grey.',
-          answer: true,
-          explanation:
-            'With no saturation there is no hue to show, so the colour is a neutral grey of whatever lightness is set.',
-        },
-        {
-          id: 'quiz-html-s15-q3',
-          type: 'multiple-choice',
-          prompt: 'What is the main practical advantage of designing in HSL rather than RGB?',
-          options: [
-            'It renders faster in the browser',
-            'One component can be varied without disturbing the other two, so ramps are one number per step',
-            'It produces a wider range of colours',
-            'It is supported by more browsers',
-          ],
-          answer: 1,
-          explanation:
-            'Hue, saturation and lightness are independent, which is what makes a tints-and-shades ramp a single adjustable value.',
-        },
-        {
-          id: 'quiz-html-s15-q4',
-          type: 'blank',
-          prompt: 'What hue, in degrees, is pure red?',
-          answers: ['0', '0deg', '360', '360deg', '0 degrees', '360 degrees'],
-          explanation:
-            'The wheel starts at red and closes on itself, so 0deg and 360deg are the same colour.',
-        },
-        {
-          id: 'quiz-html-s15-q5',
-          type: 'multiple-choice',
-          prompt: 'Why should you still check contrast when building a palette in HSL?',
-          options: [
-            'HSL is not supported in older browsers',
-            'Equal steps in lightness do not look equally different to the eye',
-            'HSL changes hue when lightness changes',
-            'Contrast cannot be expressed in HSL',
-          ],
-          answer: 1,
-          explanation:
-            'HSL is not perceptually even: yellow at 50% looks much lighter than blue at 50%. Trust a contrast checker, not the numbers.',
-        },
-      ],
-    },
   },
 ]

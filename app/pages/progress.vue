@@ -117,7 +117,7 @@
     <section class="mt-6 rounded-2xl border border-ink-600 bg-ink-900 p-5">
       <h2 class="text-base font-semibold text-mist-50">Quiz scores</h2>
       <p v-if="quizRows.length === 0" class="mt-3 text-sm text-muted">
-        No quizzes taken yet. Every section ends with one.
+        No quizzes taken yet. Every lesson has one.
       </p>
       <ul v-else class="mt-3 space-y-2">
         <li v-for="row in quizRows" :key="row.id" class="flex items-center gap-3">
@@ -244,15 +244,16 @@ const quizRows = computed(() => {
   const rows: { id: string; title: string; score: number; passingScore: number }[] = []
   for (const course of courses as CourseMeta[]) {
     for (const section of course.sections) {
-      if (!section.quiz) continue
-      const score = progress.value.quizScores[section.quiz.id]
-      if (score === undefined) continue
-      rows.push({
-        id: section.quiz.id,
-        title: `${course.shortTitle} · ${section.quiz.title}`,
-        score,
-        passingScore: section.quiz.passingScore,
-      })
+      for (const lesson of section.lessons) {
+        const score = progress.value.quizScores[lesson.quiz.id]
+        if (score === undefined) continue
+        rows.push({
+          id: lesson.quiz.id,
+          title: `${course.shortTitle} · ${lesson.quiz.title}`,
+          score,
+          passingScore: lesson.quiz.passingScore,
+        })
+      }
     }
   }
   return rows

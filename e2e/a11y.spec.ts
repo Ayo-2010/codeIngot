@@ -23,7 +23,7 @@ const routes = [
   ['capstone course', '/courses/frontend-projects'],
   ['lesson', '/learn/html-fundamentals/html-l1'],
   ['capstone lesson', '/learn/frontend-projects/fp-l7'],
-  ['quiz', '/learn/html-fundamentals/quiz/quiz-html-s1'],
+  ['quiz', '/learn/html-fundamentals/quiz/quiz-html-l1'],
   ['progress', '/progress'],
   ['reference', '/reference/html'],
 ] as const

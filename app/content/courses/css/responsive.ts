@@ -20,6 +20,70 @@ export const cssResponsiveSections: Section[] = [
           'Explain what a breakpoint is actually a measurement of',
           'Explain why design for the content beats design for named devices',
         ],
+        quiz: {
+          id: 'quiz-css-l115',
+          title: 'RWD Intro quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l115-q1',
+              type: 'multiple-choice',
+              prompt: 'What is the difference between a fluid layout and a responsive one?',
+              options: [
+                'Fluid uses percentages, responsive uses pixels',
+                'Fluid stretches smoothly at every width; responsive additionally changes structure at defined widths',
+                'Fluid supports touch input, responsive supports a mouse',
+                'Fluid loads faster, responsive loads slower',
+              ],
+              answer: 1,
+              explanation: 'Fluid describes stretching: one design, sized in percentages, which has to work at every width and therefore is always designed for the worst case. Responsive means the structure itself changes - columns become rows, sidebars move - so each size range gets a layout that is actually comfortable.',
+            },
+            {
+              id: 'quiz-css-l115-q2',
+              type: 'true-false',
+              prompt: 'A layout should have a breakpoint at 768px because that is the width of a common tablet.',
+              answer: false,
+              explanation: 'A breakpoint is a measurement of your content, not a device. You should add one at the width where your own layout breaks - a column too narrow to read, a line of text too short - and device lists go stale immediately and miss split-screen windows, browser sidebars and foldables.',
+            },
+            {
+              id: 'quiz-css-l115-q3',
+              type: 'blank',
+              prompt: 'Name the three historical approaches to sizing a layout, from the oldest to the newest.',
+              answers: [
+                'fixed, fluid, responsive',
+                'fixed, fluid, responsive design',
+              ],
+              explanation: 'Fixed used only pixels and had one design. Fluid replaced widths with percentages so the layout stretched. Responsive added structural change at defined widths on top of a fluid base, which is why it won: it can have many designs instead of one compromise.',
+            },
+            {
+              id: 'quiz-css-l115-q4',
+              type: 'identify-error',
+              prompt: 'Which part of this approach is the problem?',
+              code: '.card {\n  width: 60%;\n  min-width: 420px;\n}',
+              options: [
+                'The percentage width should be `max-width` instead',
+                'The `min-width` floor makes the layout stop reflowing below 420px',
+                '`width` and `min-width` cannot be combined on one element',
+                'The value should be expressed in rem rather than px',
+              ],
+              answer: 1,
+              explanation: 'The card is fluid in the strict sense - its width is a percentage - but the `min-width` gives it a floor below which it cannot shrink, and the text spills out. Fluid stretching only works if nothing is pinned.',
+            },
+            {
+              id: 'quiz-css-l115-q5',
+              type: 'multiple-choice',
+              prompt: 'Why did responsive design displace fluid design?',
+              options: [
+                'Fluid layouts were slower to render on mobile',
+                'Fluid layouts required JavaScript to resize',
+                'A fluid layout has one design that must survive every width, so it is always designed for the narrowest case',
+                'Fluid layouts could not be combined with web fonts',
+              ],
+              answer: 2,
+              explanation: 'A single fluid design must work at 320px and at 2560px at the same time, so it is permanently compromised at one end. Responsive designs can have several designs, each comfortable in its own range, which is better for the reader and barely more work for the author.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -188,75 +252,6 @@ export const cssResponsiveSections: Section[] = [
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s70',
-      title: 'RWD Intro quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s70-q1',
-          type: 'multiple-choice',
-          prompt:
-            'What is the difference between a fluid layout and a responsive one?',
-          options: [
-            'Fluid uses percentages, responsive uses pixels',
-            'Fluid stretches smoothly at every width; responsive additionally changes structure at defined widths',
-            'Fluid supports touch input, responsive supports a mouse',
-            'Fluid loads faster, responsive loads slower',
-          ],
-          answer: 1,
-          explanation:
-            'Fluid describes stretching: one design, sized in percentages, which has to work at every width and therefore is always designed for the worst case. Responsive means the structure itself changes - columns become rows, sidebars move - so each size range gets a layout that is actually comfortable.',
-        },
-        {
-          id: 'quiz-css-s70-q2',
-          type: 'true-false',
-          prompt:
-            'A layout should have a breakpoint at 768px because that is the width of a common tablet.',
-          answer: false,
-          explanation:
-            'A breakpoint is a measurement of your content, not a device. You should add one at the width where your own layout breaks - a column too narrow to read, a line of text too short - and device lists go stale immediately and miss split-screen windows, browser sidebars and foldables.',
-        },
-        {
-          id: 'quiz-css-s70-q3',
-          type: 'blank',
-          prompt:
-            'Name the three historical approaches to sizing a layout, from the oldest to the newest.',
-          answers: ['fixed, fluid, responsive', 'fixed, fluid, responsive design'],
-          explanation:
-            'Fixed used only pixels and had one design. Fluid replaced widths with percentages so the layout stretched. Responsive added structural change at defined widths on top of a fluid base, which is why it won: it can have many designs instead of one compromise.',
-        },
-        {
-          id: 'quiz-css-s70-q4',
-          type: 'identify-error',
-          prompt: 'Which part of this approach is the problem?',
-          code: `.card {\n  width: 60%;\n  min-width: 420px;\n}`,
-          options: [
-            'The percentage width should be `max-width` instead',
-            'The `min-width` floor makes the layout stop reflowing below 420px',
-            '`width` and `min-width` cannot be combined on one element',
-            'The value should be expressed in rem rather than px',
-          ],
-          answer: 1,
-          explanation:
-            'The card is fluid in the strict sense - its width is a percentage - but the `min-width` gives it a floor below which it cannot shrink, and the text spills out. Fluid stretching only works if nothing is pinned.',
-        },
-        {
-          id: 'quiz-css-s70-q5',
-          type: 'multiple-choice',
-          prompt: 'Why did responsive design displace fluid design?',
-          options: [
-            'Fluid layouts were slower to render on mobile',
-            'Fluid layouts required JavaScript to resize',
-            'A fluid layout has one design that must survive every width, so it is always designed for the narrowest case',
-            'Fluid layouts could not be combined with web fonts',
-          ],
-          answer: 2,
-          explanation:
-            'A single fluid design must work at 320px and at 2560px at the same time, so it is permanently compromised at one end. Responsive designs can have several designs, each comfortable in its own range, which is better for the reader and barely more work for the author.',
-        },
-      ],
-    },
   },
   {
     id: 'css-s71',
@@ -277,6 +272,70 @@ export const cssResponsiveSections: Section[] = [
           'Explain initial-scale and why user-scalable=no is not a valid option',
           'Explain why blocking zoom is a WCAG failure',
         ],
+        quiz: {
+          id: 'quiz-css-l116',
+          title: 'RWD Viewport quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l116-q1',
+              type: 'multiple-choice',
+              prompt: 'What happens on a phone when a page has no viewport meta tag?',
+              options: [
+                'The page renders at the device width in CSS pixels',
+                'The browser uses a virtual viewport of roughly 980px and scales the rendered page down to fit the screen',
+                'The browser renders the page in a desktop layout mode with a scrollbar',
+                'The page falls back to a server-side mobile site',
+              ],
+              answer: 1,
+              explanation: 'Without `width=device-width`, mobile browsers assume a wide legacy screen of about 980px and then scale everything down to fit the physical screen. The result is a desktop design rendered as a small unreadable page - which is exactly why a correct CSS layout still fails on a phone without this tag.',
+            },
+            {
+              id: 'quiz-css-l116-q2',
+              type: 'true-false',
+              prompt: 'Adding `user-scalable=no` to the viewport tag is an acceptable way to stop a page zooming when a user taps a plain div.',
+              answer: false,
+              explanation: 'It blocks pinch zoom, which is the primary magnification tool for low-vision readers, and it fails WCAG 1.4.4. The real fix is semantic: make the control a `<button>` or an `<a>`, and the browser stops treating the tap as a zoom gesture.',
+            },
+            {
+              id: 'quiz-css-l116-q3',
+              type: 'blank',
+              prompt: 'Which single attribute makes the layout viewport equal to the physical screen width in CSS pixels?',
+              answers: [
+                'width=device-width',
+                'device-width',
+              ],
+              explanation: '`width=device-width` in the tag\'s `content` sets the layout viewport to the device width. Paired with `initial-scale=1` it gives one CSS pixel per device pixel, so media queries see the real screen width.',
+            },
+            {
+              id: 'quiz-css-l116-q4',
+              type: 'identify-error',
+              prompt: 'Which part of this viewport tag is wrong?',
+              code: '<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1">',
+              options: [
+                '`width=device-width` should be `width=screen-width`',
+                '`initial-scale=1` should be `initial-scale=100`',
+                '`user-scalable=no` and `maximum-scale=1` disable pinch zoom, which fails WCAG 1.4.4',
+                'The `name` should be `viewport` in capitals',
+              ],
+              answer: 2,
+              explanation: 'The first two settings are correct and standard. The last two block the user from magnifying the page, which is an accessibility failure - WCAG 1.4.4 requires text to be scalable to 200% without loss of content or function.',
+            },
+            {
+              id: 'quiz-css-l116-q5',
+              type: 'multiple-choice',
+              prompt: 'What does `viewport-fit=cover` do, and what does it oblige you to handle?',
+              options: [
+                'It forces the page into landscape; you then need a landscape media query',
+                'It extends the layout into the notch and rounded corners, so you must pad with `env(safe-area-inset-*)`',
+                'It fixes the viewport at 375px; you then need `initial-scale`',
+                'It disables the browser UI; you then need `user-scalable=no`',
+              ],
+              answer: 1,
+              explanation: '`viewport-fit=cover` lets the background and content extend under the notch and rounded corners. Everything you do not want hidden there has to be padded away from the edges with the `safe-area-inset-*` environment values.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -520,73 +579,6 @@ export const cssResponsiveSections: Section[] = [
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s71',
-      title: 'RWD Viewport quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s71-q1',
-          type: 'multiple-choice',
-          prompt: 'What happens on a phone when a page has no viewport meta tag?',
-          options: [
-            'The page renders at the device width in CSS pixels',
-            'The browser uses a virtual viewport of roughly 980px and scales the rendered page down to fit the screen',
-            'The browser renders the page in a desktop layout mode with a scrollbar',
-            'The page falls back to a server-side mobile site',
-          ],
-          answer: 1,
-          explanation:
-            'Without `width=device-width`, mobile browsers assume a wide legacy screen of about 980px and then scale everything down to fit the physical screen. The result is a desktop design rendered as a small unreadable page - which is exactly why a correct CSS layout still fails on a phone without this tag.',
-        },
-        {
-          id: 'quiz-css-s71-q2',
-          type: 'true-false',
-          prompt: 'Adding `user-scalable=no` to the viewport tag is an acceptable way to stop a page zooming when a user taps a plain div.',
-          answer: false,
-          explanation:
-            'It blocks pinch zoom, which is the primary magnification tool for low-vision readers, and it fails WCAG 1.4.4. The real fix is semantic: make the control a `<button>` or an `<a>`, and the browser stops treating the tap as a zoom gesture.',
-        },
-        {
-          id: 'quiz-css-s71-q3',
-          type: 'blank',
-          prompt:
-            'Which single attribute makes the layout viewport equal to the physical screen width in CSS pixels?',
-          answers: ['width=device-width', 'device-width'],
-          explanation:
-            '`width=device-width` in the tag\'s `content` sets the layout viewport to the device width. Paired with `initial-scale=1` it gives one CSS pixel per device pixel, so media queries see the real screen width.',
-        },
-        {
-          id: 'quiz-css-s71-q4',
-          type: 'identify-error',
-          prompt: 'Which part of this viewport tag is wrong?',
-          code: `<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1">`,
-          options: [
-            '`width=device-width` should be `width=screen-width`',
-            '`initial-scale=1` should be `initial-scale=100`',
-            '`user-scalable=no` and `maximum-scale=1` disable pinch zoom, which fails WCAG 1.4.4',
-            'The `name` should be `viewport` in capitals',
-          ],
-          answer: 2,
-          explanation:
-            'The first two settings are correct and standard. The last two block the user from magnifying the page, which is an accessibility failure - WCAG 1.4.4 requires text to be scalable to 200% without loss of content or function.',
-        },
-        {
-          id: 'quiz-css-s71-q5',
-          type: 'multiple-choice',
-          prompt: 'What does `viewport-fit=cover` do, and what does it oblige you to handle?',
-          options: [
-            'It forces the page into landscape; you then need a landscape media query',
-            'It extends the layout into the notch and rounded corners, so you must pad with `env(safe-area-inset-*)`',
-            'It fixes the viewport at 375px; you then need `initial-scale`',
-            'It disables the browser UI; you then need `user-scalable=no`',
-          ],
-          answer: 1,
-          explanation:
-            '`viewport-fit=cover` lets the background and content extend under the notch and rounded corners. Everything you do not want hidden there has to be padded away from the edges with the `safe-area-inset-*` environment values.',
-        },
-      ],
-    },
   },
   {
     id: 'css-s72',
@@ -607,6 +599,69 @@ export const cssResponsiveSections: Section[] = [
           'Predict how auto-fit and auto-fill differ when there are more tracks than items',
           'Explain why a grid can be responsive with no media query at all',
         ],
+        quiz: {
+          id: 'quiz-css-l117',
+          title: 'RWD Grid View quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l117-q1',
+              type: 'multiple-choice',
+              prompt: 'A grid has four items and `repeat(auto-fit, minmax(9rem, 1fr))` resolves to five tracks. What happens to the fifth track?',
+              options: [
+                'It is kept at zero width and the four items stay at their computed size',
+                'It is collapsed, and the four items each grow to an equal share of the full row',
+                'The fourth item wraps onto a second row',
+                'The grid drops from five tracks back to four',
+              ],
+              answer: 1,
+              explanation: 'That is exactly what `auto-fit` does: tracks that end up with no item in them are collapsed to zero, and the remaining tracks - each defined as `minmax(9rem, 1fr)` - grow to take the freed space. Using `auto-fill` instead would keep the empty track and leave a visible gap.',
+            },
+            {
+              id: 'quiz-css-l117-q2',
+              type: 'true-false',
+              prompt: 'In `minmax(18rem, 1fr)`, the `18rem` sets the narrowest a track may become before the grid drops a column.',
+              answer: true,
+              explanation: '`minmax()` sets a floor and a ceiling for each track. Once the container is too narrow to give every track its `18rem` floor, the grid resolves to one fewer track. That floor is the real breakpoint - the width at which your layout changes shape - and you should choose it from what the content needs.',
+            },
+            {
+              id: 'quiz-css-l117-q3',
+              type: 'blank',
+              prompt: 'Which keyword in `repeat(?, minmax(18rem, 1fr))` makes the grid collapse tracks that contain no items?',
+              answers: [
+                'auto-fit',
+              ],
+              explanation: '`auto-fit` collapses empty tracks so the remaining ones fill the row. `auto-fill` keeps the empty tracks, which preserves the track rhythm but leaves a gap at the end of a partially filled row.',
+            },
+            {
+              id: 'quiz-css-l117-q4',
+              type: 'identify-error',
+              prompt: 'Why does this grid look wrong?',
+              code: '.cards {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));\n}\n.cards li:last-child {\n  grid-column: 1 / -1;\n}',
+              options: [
+                '`grid-column` cannot be used on a list item',
+                'The last item is forced full width and destroys the responsive behaviour it was meant to complete',
+                '`minmax()` needs a `px` minimum rather than a `rem` one',
+                '`auto-fit` requires the container to have an explicit width',
+              ],
+              answer: 1,
+              explanation: 'Forcing the final child to span `1 / -1` makes it the full container width at every viewport size, which is precisely the horizontal-stretch problem responsive layout exists to prevent. `auto-fit` already handles this - and the override wins over it, because it is a later, more specific rule.',
+            },
+            {
+              id: 'quiz-css-l117-q5',
+              type: 'multiple-choice',
+              prompt: 'Why can a CSS Grid card layout be fully responsive with no media queries?',
+              options: [
+                'Grid ignores the container width and always uses fixed track sizes',
+                'The browser recomputes the number of `auto-fit` tracks every time the container resizes, using the `minmax()` floor as the breakpoint',
+                'Media queries are applied automatically inside grid track lists',
+                '`1fr` makes each track scale proportionally to the font size',
+              ],
+              answer: 1,
+              explanation: 'Track sizing is a live calculation. As the container narrows, tracks that cannot hold their `minmax()` minimum drop out, and `auto-fit` collapses the empties - so the layout reflows continuously with no breakpoints written anywhere. `1fr` means an equal share of the leftover space, nothing to do with font size.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -810,76 +865,6 @@ export const cssResponsiveSections: Section[] = [
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s72',
-      title: 'RWD Grid View quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s72-q1',
-          type: 'multiple-choice',
-          prompt:
-            'A grid has four items and `repeat(auto-fit, minmax(9rem, 1fr))` resolves to five tracks. What happens to the fifth track?',
-          options: [
-            'It is kept at zero width and the four items stay at their computed size',
-            'It is collapsed, and the four items each grow to an equal share of the full row',
-            'The fourth item wraps onto a second row',
-            'The grid drops from five tracks back to four',
-          ],
-          answer: 1,
-          explanation:
-            'That is exactly what `auto-fit` does: tracks that end up with no item in them are collapsed to zero, and the remaining tracks - each defined as `minmax(9rem, 1fr)` - grow to take the freed space. Using `auto-fill` instead would keep the empty track and leave a visible gap.',
-        },
-        {
-          id: 'quiz-css-s72-q2',
-          type: 'true-false',
-          prompt:
-            'In `minmax(18rem, 1fr)`, the `18rem` sets the narrowest a track may become before the grid drops a column.',
-          answer: true,
-          explanation:
-            '`minmax()` sets a floor and a ceiling for each track. Once the container is too narrow to give every track its `18rem` floor, the grid resolves to one fewer track. That floor is the real breakpoint - the width at which your layout changes shape - and you should choose it from what the content needs.',
-        },
-        {
-          id: 'quiz-css-s72-q3',
-          type: 'blank',
-          prompt:
-            'Which keyword in `repeat(?, minmax(18rem, 1fr))` makes the grid collapse tracks that contain no items?',
-          answers: ['auto-fit'],
-          explanation:
-            '`auto-fit` collapses empty tracks so the remaining ones fill the row. `auto-fill` keeps the empty tracks, which preserves the track rhythm but leaves a gap at the end of a partially filled row.',
-        },
-        {
-          id: 'quiz-css-s72-q4',
-          type: 'identify-error',
-          prompt: 'Why does this grid look wrong?',
-          code: `.cards {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));\n}\n.cards li:last-child {\n  grid-column: 1 / -1;\n}`,
-          options: [
-            '`grid-column` cannot be used on a list item',
-            'The last item is forced full width and destroys the responsive behaviour it was meant to complete',
-            '`minmax()` needs a `px` minimum rather than a `rem` one',
-            '`auto-fit` requires the container to have an explicit width',
-          ],
-          answer: 1,
-          explanation:
-            'Forcing the final child to span `1 / -1` makes it the full container width at every viewport size, which is precisely the horizontal-stretch problem responsive layout exists to prevent. `auto-fit` already handles this - and the override wins over it, because it is a later, more specific rule.',
-        },
-        {
-          id: 'quiz-css-s72-q5',
-          type: 'multiple-choice',
-          prompt:
-            'Why can a CSS Grid card layout be fully responsive with no media queries?',
-          options: [
-            'Grid ignores the container width and always uses fixed track sizes',
-            'The browser recomputes the number of `auto-fit` tracks every time the container resizes, using the `minmax()` floor as the breakpoint',
-            'Media queries are applied automatically inside grid track lists',
-            '`1fr` makes each track scale proportionally to the font size',
-          ],
-          answer: 1,
-          explanation:
-            'Track sizing is a live calculation. As the container narrows, tracks that cannot hold their `minmax()` minimum drop out, and `auto-fit` collapses the empties - so the layout reflows continuously with no breakpoints written anywhere. `1fr` means an equal share of the leftover space, nothing to do with font size.',
-        },
-      ],
-    },
   },
   {
     id: 'css-s73',
@@ -901,6 +886,69 @@ export const cssResponsiveSections: Section[] = [
           'Combine conditions with and, with a comma, and with the not keyword',
           'Name the breakpoint values used across a codebase and keep them consistent',
         ],
+        quiz: {
+          id: 'quiz-css-l118',
+          title: 'RWD Media Queries quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l118-q1',
+              type: 'multiple-choice',
+              prompt: 'What is the difference between a media type and a media feature?',
+              options: [
+                'Types are obsolete; features are the modern replacement',
+                'The type describes the kind of output (screen, print); the feature describes a property of it (width, orientation)',
+                'Features only work inside `not` queries',
+                'A query can have either one or several types, never features',
+              ],
+              answer: 1,
+              explanation: 'The media type answers "what kind of output": `screen`, `print`, `speech`. The media feature answers "what about it": `width`, `min-width`, `orientation`, `prefers-color-scheme`. `screen` is the default type, which is why `@media (min-width: 48rem)` is shorthand for the `screen and ...` form.',
+            },
+            {
+              id: 'quiz-css-l118-q2',
+              type: 'true-false',
+              prompt: 'Writing media queries with `min-width` instead of `max-width` makes the stylesheet mobile first, which is generally the better default.',
+              answer: true,
+              explanation: 'With `min-width` the base rules describe the narrow layout and each query adds to it. Nothing has to be reversed or undone, no query contradicts another, and a size in between the breakpoints can still be designed cleanly rather than only patched.',
+            },
+            {
+              id: 'quiz-css-l118-q3',
+              type: 'blank',
+              prompt: 'Which single property contains both `screen` and the width test in the rule `@media screen and (min-width: 48rem)`?',
+              answers: [
+                'and',
+              ],
+              explanation: '`and` joins two conditions that must both hold. A comma would be a logical OR (the rule would apply on wide screens *or* on paper), and `not` negates the entire query rather than joining anything.',
+            },
+            {
+              id: 'quiz-css-l118-q4',
+              type: 'multiple-choice',
+              prompt: 'Which query matches only between 640px and 1024px, and is written most clearly?',
+              options: [
+                '@media (max-width: 640px) and (min-width: 1024px)',
+                '@media (40rem <= width < 64rem)',
+                '@media (width >= 40rem) and (width < 64rem)',
+                '@media not (width >= 64rem) and (width >= 40rem)',
+              ],
+              answer: 1,
+              explanation: 'The modern range syntax expresses an interval in one readable comparison. The first option can never be true because no width is simultaneously at most 640px and at least 1024px. The range syntax is supported across all current browsers and removes the need to stack two queries.',
+            },
+            {
+              id: 'quiz-css-l118-q5',
+              type: 'identify-error',
+              prompt: 'Why does this comment mislead the next developer?',
+              code: '/* tablet layout */\n@media (max-width: 768px) {\n  .nav { display: flex; }\n}',
+              options: [
+                'Media queries cannot use `max-width`',
+                'The query is named after a device rather than after what the layout does, and device widths go stale immediately',
+                '`display: flex` is not supported inside a media query',
+                'The comment should be above the rule, not inside it',
+              ],
+              answer: 1,
+              explanation: '768px is a hardware guess that says nothing about the design, and it is wrong for a 700px desktop window, a split-screen tablet and a foldable alike. Name the breakpoint after the behaviour - "navigation becomes a single row" - because that is still true after the devices change.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1116,74 +1164,6 @@ export const cssResponsiveSections: Section[] = [
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s73',
-      title: 'RWD Media Queries quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s73-q1',
-          type: 'multiple-choice',
-          prompt: 'What is the difference between a media type and a media feature?',
-          options: [
-            'Types are obsolete; features are the modern replacement',
-            'The type describes the kind of output (screen, print); the feature describes a property of it (width, orientation)',
-            'Features only work inside `not` queries',
-            'A query can have either one or several types, never features',
-          ],
-          answer: 1,
-          explanation:
-            'The media type answers "what kind of output": `screen`, `print`, `speech`. The media feature answers "what about it": `width`, `min-width`, `orientation`, `prefers-color-scheme`. `screen` is the default type, which is why `@media (min-width: 48rem)` is shorthand for the `screen and ...` form.',
-        },
-        {
-          id: 'quiz-css-s73-q2',
-          type: 'true-false',
-          prompt:
-            'Writing media queries with `min-width` instead of `max-width` makes the stylesheet mobile first, which is generally the better default.',
-          answer: true,
-          explanation:
-            'With `min-width` the base rules describe the narrow layout and each query adds to it. Nothing has to be reversed or undone, no query contradicts another, and a size in between the breakpoints can still be designed cleanly rather than only patched.',
-        },
-        {
-          id: 'quiz-css-s73-q3',
-          type: 'blank',
-          prompt:
-            'Which single property contains both `screen` and the width test in the rule `@media screen and (min-width: 48rem)`?',
-          answers: ['and'],
-          explanation:
-            '`and` joins two conditions that must both hold. A comma would be a logical OR (the rule would apply on wide screens *or* on paper), and `not` negates the entire query rather than joining anything.',
-        },
-        {
-          id: 'quiz-css-s73-q4',
-          type: 'multiple-choice',
-          prompt: 'Which query matches only between 640px and 1024px, and is written most clearly?',
-          options: [
-            '@media (max-width: 640px) and (min-width: 1024px)',
-            '@media (40rem <= width < 64rem)',
-            '@media (width >= 40rem) and (width < 64rem)',
-            '@media not (width >= 64rem) and (width >= 40rem)',
-          ],
-          answer: 1,
-          explanation:
-            'The modern range syntax expresses an interval in one readable comparison. The first option can never be true because no width is simultaneously at most 640px and at least 1024px. The range syntax is supported across all current browsers and removes the need to stack two queries.',
-        },
-        {
-          id: 'quiz-css-s73-q5',
-          type: 'identify-error',
-          prompt: 'Why does this comment mislead the next developer?',
-          code: `/* tablet layout */\n@media (max-width: 768px) {\n  .nav { display: flex; }\n}`,
-          options: [
-            'Media queries cannot use `max-width`',
-            'The query is named after a device rather than after what the layout does, and device widths go stale immediately',
-            '`display: flex` is not supported inside a media query',
-            'The comment should be above the rule, not inside it',
-          ],
-          answer: 1,
-          explanation:
-            '768px is a hardware guess that says nothing about the design, and it is wrong for a 700px desktop window, a split-screen tablet and a foldable alike. Name the breakpoint after the behaviour - "navigation becomes a single row" - because that is still true after the devices change.',
-        },
-      ],
-    },
   },
   {
     id: 'css-s74',
@@ -1205,6 +1185,70 @@ export const cssResponsiveSections: Section[] = [
           'Use the picture element for art direction, with media and type',
           'Explain the difference between resolution switching and art direction',
         ],
+        quiz: {
+          id: 'quiz-css-l119',
+          title: 'RWD Images quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l119-q1',
+              type: 'multiple-choice',
+              prompt: 'Why does `height: auto` have to accompany `max-width: 100%` on an image?',
+              options: [
+                'Because `height: auto` is what makes the image scale at all',
+                'Because without it the browser honours the height attribute and the scaled image is squashed',
+                'Because `max-width` is ignored on replaced elements without it',
+                'Because it removes the need for the width and height attributes',
+              ],
+              answer: 1,
+              explanation: 'The browser reads the `height` attribute as a real height, so capping the width alone gives you a 260x173 box with 16:9 content stretched into it. `height: auto` makes the height derive from the width, which is what preserves the ratio.',
+            },
+            {
+              id: 'quiz-css-l119-q2',
+              type: 'true-false',
+              prompt: 'Setting `sizes` correctly is optional, because the browser falls back to assuming the image fills the whole viewport.',
+              answer: false,
+              explanation: 'The browser does fall back to 100vw, and that is exactly the problem: an image that renders 260px wide is treated as needing a full-width candidate, so phones download the large file. `sizes` is a media query list describing the real rendered width, and it is what makes `srcset` worthwhile.',
+            },
+            {
+              id: 'quiz-css-l119-q3',
+              type: 'blank',
+              prompt: 'Which HTML element lets you serve a different crop of the same photograph on narrow screens?',
+              answers: [
+                'picture',
+                '<picture>',
+              ],
+              explanation: '`picture` wraps a set of `source` elements chosen by `media` or `type`, plus a mandatory `img` fallback that carries `alt`, `width` and `height`. It is the tool for art direction - different compositions per screen - whereas `srcset` on its own only switches resolution.',
+            },
+            {
+              id: 'quiz-css-l119-q4',
+              type: 'identify-error',
+              prompt: 'What is wrong with this markup?',
+              code: '<picture>\n  <source srcset="hero.avif" type="image/avif">\n  <img src="hero.jpg" width="1600" height="900">\n</picture>',
+              options: [
+                'Nothing: this is a correct AVIF fallback chain',
+                'The type attribute must come before srcset',
+                'The img needs loading="lazy" to be valid',
+                'picture cannot contain a source without a media attribute',
+              ],
+              answer: 0,
+              explanation: 'This is correct. The browser takes the first `source` whose `type` it supports, so an AVIF-capable browser gets the smaller file and everything else falls through to the `img`. Note what is missing though: the `alt` attribute, which is required.',
+            },
+            {
+              id: 'quiz-css-l119-q5',
+              type: 'multiple-choice',
+              prompt: 'Your page jumps as images load, shifting the text down. Which change fixes that most directly?',
+              options: [
+                'Add `loading="lazy"` to every image',
+                'Add width and height attributes so the browser can reserve the box',
+                'Set `width: 100%` on all images',
+                'Convert the images to SVG',
+              ],
+              answer: 1,
+              explanation: 'With `width` and `height` attributes the browser knows the aspect ratio before the file arrives, so it reserves the right height and nothing moves. `loading="lazy"` helps initial load performance but does nothing about the shift for images already in view.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1427,76 +1471,6 @@ svg {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s74',
-      title: 'RWD Images quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s74-q1',
-          type: 'multiple-choice',
-          prompt:
-            'Why does `height: auto` have to accompany `max-width: 100%` on an image?',
-          options: [
-            'Because `height: auto` is what makes the image scale at all',
-            'Because without it the browser honours the height attribute and the scaled image is squashed',
-            'Because `max-width` is ignored on replaced elements without it',
-            'Because it removes the need for the width and height attributes',
-          ],
-          answer: 1,
-          explanation:
-            'The browser reads the `height` attribute as a real height, so capping the width alone gives you a 260x173 box with 16:9 content stretched into it. `height: auto` makes the height derive from the width, which is what preserves the ratio.',
-        },
-        {
-          id: 'quiz-css-s74-q2',
-          type: 'true-false',
-          prompt:
-            'Setting `sizes` correctly is optional, because the browser falls back to assuming the image fills the whole viewport.',
-          answer: false,
-          explanation:
-            'The browser does fall back to 100vw, and that is exactly the problem: an image that renders 260px wide is treated as needing a full-width candidate, so phones download the large file. `sizes` is a media query list describing the real rendered width, and it is what makes `srcset` worthwhile.',
-        },
-        {
-          id: 'quiz-css-s74-q3',
-          type: 'blank',
-          prompt:
-            'Which HTML element lets you serve a different crop of the same photograph on narrow screens?',
-          answers: ['picture', '<picture>'],
-          explanation:
-            '`picture` wraps a set of `source` elements chosen by `media` or `type`, plus a mandatory `img` fallback that carries `alt`, `width` and `height`. It is the tool for art direction - different compositions per screen - whereas `srcset` on its own only switches resolution.',
-        },
-        {
-          id: 'quiz-css-s74-q4',
-          type: 'identify-error',
-          prompt: 'What is wrong with this markup?',
-          code: `<picture>\n  <source srcset="hero.avif" type="image/avif">\n  <img src="hero.jpg" width="1600" height="900">\n</picture>`,
-          options: [
-            'Nothing: this is a correct AVIF fallback chain',
-            'The type attribute must come before srcset',
-            'The img needs loading="lazy" to be valid',
-            'picture cannot contain a source without a media attribute',
-          ],
-          answer: 0,
-          explanation:
-            'This is correct. The browser takes the first `source` whose `type` it supports, so an AVIF-capable browser gets the smaller file and everything else falls through to the `img`. Note what is missing though: the `alt` attribute, which is required.',
-        },
-        {
-          id: 'quiz-css-s74-q5',
-          type: 'multiple-choice',
-          prompt:
-            'Your page jumps as images load, shifting the text down. Which change fixes that most directly?',
-          options: [
-            'Add `loading="lazy"` to every image',
-            'Add width and height attributes so the browser can reserve the box',
-            'Set `width: 100%` on all images',
-            'Convert the images to SVG',
-          ],
-          answer: 1,
-          explanation:
-            'With `width` and `height` attributes the browser knows the aspect ratio before the file arrives, so it reserves the right height and nothing moves. `loading="lazy"` helps initial load performance but does nothing about the shift for images already in view.',
-        },
-      ],
-    },
   },
   {
     id: 'css-s75',
@@ -1517,6 +1491,70 @@ svg {
           'Use the aspect-ratio property instead, and know when the hack is still required',
           'Crop a mis-shaped frame with object-fit: cover',
         ],
+        quiz: {
+          id: 'quiz-css-l120',
+          title: 'RWD Videos quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l120-q1',
+              type: 'multiple-choice',
+              prompt: 'Why does the padding-top trick work for a 16:9 embed?',
+              options: [
+                'Percentage padding resolves against the containing block width, and 56.25% of the width is 9/16 of it',
+                'Padding forces the browser to read the video file and measure it first',
+                'An iframe has no intrinsic size, so the browser guesses one',
+                'Padding-top overrides the width attribute on the iframe',
+              ],
+              answer: 0,
+              explanation: 'Percentage padding is always resolved against the containing block *width*. A wrapper 640px wide gets 360px of top padding from `56.25%`, which is exactly the height a 640x360 video needs. Setting the wrapper height to 0 leaves that padding as the only contribution.',
+            },
+            {
+              id: 'quiz-css-l120-q2',
+              type: 'true-false',
+              prompt: 'An iframe has an intrinsic aspect ratio, so it needs no wrapper element at all if you set `width: 100%`.',
+              answer: false,
+              explanation: 'An iframe has no intrinsic ratio - it does not know what aspect it should be - so `width: 100%` gives you a 300px-tall letterbox of arbitrary height. That is why it needs a sized wrapper. Replaced elements such as `<img>` and `<video>` *do* know their ratio, which is why `max-width: 100%; height: auto` is enough for those.',
+            },
+            {
+              id: 'quiz-css-l120-q3',
+              type: 'blank',
+              prompt: 'What percentage `padding-top` gives a wrapper a 16:9 shape?',
+              answers: [
+                '56.25%',
+                '56.25',
+              ],
+              explanation: '9/16 = 0.5625. Write the division in a comment next to the number - 4:3 is 75%, 1:1 is 100% - because nobody remembers these without checking.',
+            },
+            {
+              id: 'quiz-css-l120-q4',
+              type: 'identify-error',
+              prompt: 'What is wrong with this wrapper?',
+              code: '.ratio {\n  position: relative;\n  padding-top: 56.25%;\n}\n.ratio iframe {\n  width: 100%;\n  height: 320px;\n  border: 0;\n}',
+              options: [
+                'The padding percentage is wrong for 16:9',
+                'The wrapper is missing height: 0, and the iframe is not absolutely positioned, so it stacks after the padding and doubles the height',
+                'A percentage padding-top is only valid on positioned elements',
+                'The iframe needs `aspect-ratio` rather than a fixed height',
+              ],
+              answer: 1,
+              explanation: 'The hack needs both halves: `height: 0` so only the padding contributes to the wrapper height, and `position: absolute; inset: 0` on the child so it fills that padding instead of adding its own height underneath it. Modern CSS does all of this with `aspect-ratio: 16 / 9` on the wrapper plus `height: 100%` on the child.',
+            },
+            {
+              id: 'quiz-css-l120-q5',
+              type: 'multiple-choice',
+              prompt: 'Your card grid has fixed-ratio boxes and the images inside look squashed. What fixes it?',
+              options: [
+                'Add `object-fit: contain` to the images',
+                'Set an explicit size or aspect-ratio on the image as well as `object-fit: cover`',
+                'Add `width: auto` to the images',
+                'Remove the width and height attributes from the img',
+              ],
+              answer: 1,
+              explanation: '`object-fit` only does anything once the element has a box that differs from the source ratio. With `width: 100%` and no height the image already matches its content, so `cover` silently does nothing. Give the image an `aspect-ratio` or height, then `object-fit: cover` fills the box and crops the overflow.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1742,74 +1780,6 @@ svg {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s75',
-      title: 'RWD Videos quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s75-q1',
-          type: 'multiple-choice',
-          prompt: 'Why does the padding-top trick work for a 16:9 embed?',
-          options: [
-            'Percentage padding resolves against the containing block width, and 56.25% of the width is 9/16 of it',
-            'Padding forces the browser to read the video file and measure it first',
-            'An iframe has no intrinsic size, so the browser guesses one',
-            'Padding-top overrides the width attribute on the iframe',
-          ],
-          answer: 0,
-          explanation:
-            'Percentage padding is always resolved against the containing block *width*. A wrapper 640px wide gets 360px of top padding from `56.25%`, which is exactly the height a 640x360 video needs. Setting the wrapper height to 0 leaves that padding as the only contribution.',
-        },
-        {
-          id: 'quiz-css-s75-q2',
-          type: 'true-false',
-          prompt:
-            'An iframe has an intrinsic aspect ratio, so it needs no wrapper element at all if you set `width: 100%`.',
-          answer: false,
-          explanation:
-            'An iframe has no intrinsic ratio - it does not know what aspect it should be - so `width: 100%` gives you a 300px-tall letterbox of arbitrary height. That is why it needs a sized wrapper. Replaced elements such as `<img>` and `<video>` *do* know their ratio, which is why `max-width: 100%; height: auto` is enough for those.',
-        },
-        {
-          id: 'quiz-css-s75-q3',
-          type: 'blank',
-          prompt:
-            'What percentage `padding-top` gives a wrapper a 16:9 shape?',
-          answers: ['56.25%', '56.25'],
-          explanation:
-            '9/16 = 0.5625. Write the division in a comment next to the number - 4:3 is 75%, 1:1 is 100% - because nobody remembers these without checking.',
-        },
-        {
-          id: 'quiz-css-s75-q4',
-          type: 'identify-error',
-          prompt: 'What is wrong with this wrapper?',
-          code: `.ratio {\n  position: relative;\n  padding-top: 56.25%;\n}\n.ratio iframe {\n  width: 100%;\n  height: 320px;\n  border: 0;\n}`,
-          options: [
-            'The padding percentage is wrong for 16:9',
-            'The wrapper is missing height: 0, and the iframe is not absolutely positioned, so it stacks after the padding and doubles the height',
-            'A percentage padding-top is only valid on positioned elements',
-            'The iframe needs `aspect-ratio` rather than a fixed height',
-          ],
-          answer: 1,
-          explanation:
-            'The hack needs both halves: `height: 0` so only the padding contributes to the wrapper height, and `position: absolute; inset: 0` on the child so it fills that padding instead of adding its own height underneath it. Modern CSS does all of this with `aspect-ratio: 16 / 9` on the wrapper plus `height: 100%` on the child.',
-        },
-        {
-          id: 'quiz-css-s75-q5',
-          type: 'multiple-choice',
-          prompt: 'Your card grid has fixed-ratio boxes and the images inside look squashed. What fixes it?',
-          options: [
-            'Add `object-fit: contain` to the images',
-            'Set an explicit size or aspect-ratio on the image as well as `object-fit: cover`',
-            'Add `width: auto` to the images',
-            'Remove the width and height attributes from the img',
-          ],
-          answer: 1,
-          explanation:
-            '`object-fit` only does anything once the element has a box that differs from the source ratio. With `width: 100%` and no height the image already matches its content, so `cover` silently does nothing. Give the image an `aspect-ratio` or height, then `object-fit: cover` fills the box and crops the overflow.',
-        },
-      ],
-    },
   },
   {
     id: 'css-s76',
@@ -1830,6 +1800,72 @@ svg {
           'Decide when a framework helps and when it is overhead',
           'Build a small design token set with custom properties as the no-framework alternative',
         ],
+        quiz: {
+          id: 'quiz-css-l121',
+          title: 'RWD Frameworks quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l121-q1',
+              type: 'multiple-choice',
+              prompt: 'What are the three things a CSS framework actually provides?',
+              options: [
+                'A grid, a breakpoint set, and a set of defaults',
+                'A preprocessor, a bundler and a component compiler',
+                'Accessibility testing, browser support and a CDN',
+                'A design file export, a token sync and a documentation site',
+              ],
+              answer: 0,
+              explanation: 'Every CSS framework is those three parts. Today the grid is the weakest of them, because `repeat(auto-fit, minmax(16rem, 1fr))` does the same job in one line with no library. The breakpoint set is worth having for consistency, and the defaults are where the real value and the real weight both live.',
+            },
+            {
+              id: 'quiz-css-l121-q2',
+              type: 'true-false',
+              prompt: 'Tailwind is best described as a grid framework with a twelve-column grid and breakpoints at 576px, 768px and 992px.',
+              answer: false,
+              explanation: 'That is Bootstrap\'s breakpoint scale. Tailwind has no grid component of its own; its responsive story is breakpoint-prefixed utility classes at 640, 768, 1024, 1280 and 1536px. Its real contribution to responsive work is a constrained *scale* of values, so nobody invents a new spacing step per component.',
+            },
+            {
+              id: 'quiz-css-l121-q3',
+              type: 'blank',
+              prompt: 'Name the one part of a CSS framework that has genuinely become less valuable since CSS Grid shipped.',
+              answers: [
+                'the grid',
+                'grid',
+                'the grid component',
+                'grid system',
+              ],
+              explanation: 'A twelve-column grid with breakpoint helpers used to be the reason to install anything at all. `repeat(auto-fit, minmax(18rem, 1fr))` covers most of it with one declaration and no library, which is why every modern framework has quietly dropped or de-emphasised its own grid.',
+            },
+            {
+              id: 'quiz-css-l121-q4',
+              type: 'multiple-choice',
+              prompt: 'Which is the strongest argument for owning a small token set instead of adopting a framework?',
+              options: [
+                'It renders faster, because there is less CSS to parse',
+                'Nothing has to be upgraded or overridden, and the markup stays readable HTML',
+                'Frameworks do not work on narrow screens',
+                'Custom properties are the only way to use media queries',
+              ],
+              answer: 1,
+              explanation: 'A framework ships decisions made for you, and every one you disagree with becomes CSS you have to fight, plus a class of markup that is not really HTML. A token layer you own has no upgrade path and no specificity wars. The speed argument is weak - both ship far more CSS than a small site needs.',
+            },
+            {
+              id: 'quiz-css-l121-q5',
+              type: 'identify-error',
+              prompt: 'Which of these is not a reason to avoid a framework on a long-lived project?',
+              code: '.card {\n  padding: 1.5rem;\n  border-radius: 0.5rem;\n  background: #fff;\n}\n/* the framework also styles .card */',
+              options: [
+                'Every default is a decision made for you, so disagreeing with one means fighting it',
+                'Utility classes make the markup harder to read and review than a named rule',
+                'Frameworks cannot be used without a build step',
+                'The whole component set ships whether or not you use it',
+              ],
+              answer: 2,
+              explanation: 'Frameworks work perfectly well from a plain stylesheet - Bootstrap and Foundation are built that way. The other three are genuine costs: defaults you must accept or override, a class of markup that is harder to review, and bundle weight for components you never render.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -2073,75 +2109,6 @@ svg {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s76',
-      title: 'RWD Frameworks quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s76-q1',
-          type: 'multiple-choice',
-          prompt: 'What are the three things a CSS framework actually provides?',
-          options: [
-            'A grid, a breakpoint set, and a set of defaults',
-            'A preprocessor, a bundler and a component compiler',
-            'Accessibility testing, browser support and a CDN',
-            'A design file export, a token sync and a documentation site',
-          ],
-          answer: 0,
-          explanation:
-            'Every CSS framework is those three parts. Today the grid is the weakest of them, because `repeat(auto-fit, minmax(16rem, 1fr))` does the same job in one line with no library. The breakpoint set is worth having for consistency, and the defaults are where the real value and the real weight both live.',
-        },
-        {
-          id: 'quiz-css-s76-q2',
-          type: 'true-false',
-          prompt:
-            'Tailwind is best described as a grid framework with a twelve-column grid and breakpoints at 576px, 768px and 992px.',
-          answer: false,
-          explanation:
-            'That is Bootstrap\'s breakpoint scale. Tailwind has no grid component of its own; its responsive story is breakpoint-prefixed utility classes at 640, 768, 1024, 1280 and 1536px. Its real contribution to responsive work is a constrained *scale* of values, so nobody invents a new spacing step per component.',
-        },
-        {
-          id: 'quiz-css-s76-q3',
-          type: 'blank',
-          prompt:
-            'Name the one part of a CSS framework that has genuinely become less valuable since CSS Grid shipped.',
-          answers: ['the grid', 'grid', 'the grid component', 'grid system'],
-          explanation:
-            'A twelve-column grid with breakpoint helpers used to be the reason to install anything at all. `repeat(auto-fit, minmax(18rem, 1fr))` covers most of it with one declaration and no library, which is why every modern framework has quietly dropped or de-emphasised its own grid.',
-        },
-        {
-          id: 'quiz-css-s76-q4',
-          type: 'multiple-choice',
-          prompt:
-            'Which is the strongest argument for owning a small token set instead of adopting a framework?',
-          options: [
-            'It renders faster, because there is less CSS to parse',
-            'Nothing has to be upgraded or overridden, and the markup stays readable HTML',
-            'Frameworks do not work on narrow screens',
-            'Custom properties are the only way to use media queries',
-          ],
-          answer: 1,
-          explanation:
-            'A framework ships decisions made for you, and every one you disagree with becomes CSS you have to fight, plus a class of markup that is not really HTML. A token layer you own has no upgrade path and no specificity wars. The speed argument is weak - both ship far more CSS than a small site needs.',
-        },
-        {
-          id: 'quiz-css-s76-q5',
-          type: 'identify-error',
-          prompt: 'Which of these is not a reason to avoid a framework on a long-lived project?',
-          code: `.card {\n  padding: 1.5rem;\n  border-radius: 0.5rem;\n  background: #fff;\n}\n/* the framework also styles .card */`,
-          options: [
-            'Every default is a decision made for you, so disagreeing with one means fighting it',
-            'Utility classes make the markup harder to read and review than a named rule',
-            'Frameworks cannot be used without a build step',
-            'The whole component set ships whether or not you use it',
-          ],
-          answer: 2,
-          explanation:
-            'Frameworks work perfectly well from a plain stylesheet - Bootstrap and Foundation are built that way. The other three are genuine costs: defaults you must accept or override, a class of markup that is harder to review, and bundle weight for components you never render.',
-        },
-      ],
-    },
   },
   {
     id: 'css-s77',
@@ -2163,6 +2130,72 @@ svg {
           'Explain the mobile first build order',
           'Check a layout at 320px against a concrete list',
         ],
+        quiz: {
+          id: 'quiz-css-l122',
+          title: 'RWD Templates quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l122-q1',
+              type: 'multiple-choice',
+              prompt: 'What does `width: min(100% - 2rem, 72rem)` give you on a container?',
+              options: [
+                'A fixed 72rem width on large screens that stops being fluid above that',
+                'The smaller of the parent width minus the gutter, and 72rem - so it never overflows its parent and never grows unbounded',
+                'A width that follows the viewport exactly, ignoring the parent',
+                'An automatic fallback to 72rem if 100% is unsupported',
+              ],
+              answer: 1,
+              explanation: '`min()` takes the smaller of its arguments, so the container is always `100% - 2rem` wide or less, and never more than 72rem. Add `margin-inline: auto` and it centres itself. That is a complete responsive container in one declaration.',
+            },
+            {
+              id: 'quiz-css-l122-q2',
+              type: 'true-false',
+              prompt: 'Because a modern layout can use `clamp()`, `min()` and `auto-fit` grids, media queries are no longer needed for responsive design.',
+              answer: false,
+              explanation: 'They are needed whenever the *structure* has to change - a navigation becoming a menu, a table becoming cards, a form going from two columns to one. They are simply no longer needed for sizing, spacing and column count, which is where most of the old boilerplate went.',
+            },
+            {
+              id: 'quiz-css-l122-q3',
+              type: 'blank',
+              prompt: 'In `minmax(min(9rem, 100%), 1fr)`, what does the inner `min()` protect against?',
+              answers: [
+                'a floor wider than a narrow screen',
+                'track floor wider than the container',
+                'overflow',
+                'a min-width that is too large on narrow screens',
+              ],
+              explanation: 'A plain `9rem` floor is 144px, which is fine on a desktop and too wide on a 320px screen once the gutters are subtracted - the grid overflows. Wrapping the floor in `min(9rem, 100%)` means the track is never asked to be wider than its container, so the pattern is safe at every width.',
+            },
+            {
+              id: 'quiz-css-l122-q4',
+              type: 'identify-error',
+              prompt: 'Which one of these is not part of the mobile first build order?',
+              code: '1. viewport meta tag\n2. fluid foundations: min() container, clamp() type\n3. auto-fit grids and wrapping flex rows\n4. base rules for the 1280px desktop design\n5. structural breakpoints with min-width',
+              options: [
+                'Step 1 - the viewport tag must come after the CSS',
+                'Step 2 - the container should use max-width, not min()',
+                'Step 4 - you write the narrow layout as the unqueried base, not the desktop one',
+                'Step 5 - breakpoints should use max-width in a mobile first build',
+              ],
+              answer: 2,
+              explanation: 'Mobile first means the 320px layout is the unqueried base and each query adds as space appears, so nothing has to be reversed or undone. Step 4 has it backwards, which turns the build into a sequence of corrections rather than a series of additions.',
+            },
+            {
+              id: 'quiz-css-l122-q5',
+              type: 'multiple-choice',
+              prompt: 'Which problem on the 320px checklist is not a fluid-sizing problem?',
+              options: [
+                'The page scrolls sideways because of a fixed-width element',
+                'Body text runs to 900 characters per line on a wide monitor',
+                'A heading stays at the same pixel size on a phone and a 27-inch monitor',
+                'A tap target is 20 by 20 CSS pixels and hard to hit',
+              ],
+              answer: 3,
+              explanation: 'Tap target size is a design decision, not a sizing one - nothing about `clamp()` or `min()` makes a small target larger. WCAG 2.2 asks for at least 24 by 24 CSS pixels, and 44 by 44 is the comfortable target, including the gaps between adjacent controls.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -2567,78 +2600,5 @@ svg {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s77',
-      title: 'RWD Templates quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s77-q1',
-          type: 'multiple-choice',
-          prompt: 'What does `width: min(100% - 2rem, 72rem)` give you on a container?',
-          options: [
-            'A fixed 72rem width on large screens that stops being fluid above that',
-            'The smaller of the parent width minus the gutter, and 72rem - so it never overflows its parent and never grows unbounded',
-            'A width that follows the viewport exactly, ignoring the parent',
-            'An automatic fallback to 72rem if 100% is unsupported',
-          ],
-          answer: 1,
-          explanation:
-            '`min()` takes the smaller of its arguments, so the container is always `100% - 2rem` wide or less, and never more than 72rem. Add `margin-inline: auto` and it centres itself. That is a complete responsive container in one declaration.',
-        },
-        {
-          id: 'quiz-css-s77-q2',
-          type: 'true-false',
-          prompt:
-            'Because a modern layout can use `clamp()`, `min()` and `auto-fit` grids, media queries are no longer needed for responsive design.',
-          answer: false,
-          explanation:
-            'They are needed whenever the *structure* has to change - a navigation becoming a menu, a table becoming cards, a form going from two columns to one. They are simply no longer needed for sizing, spacing and column count, which is where most of the old boilerplate went.',
-        },
-        {
-          id: 'quiz-css-s77-q3',
-          type: 'blank',
-          prompt:
-            'In `minmax(min(9rem, 100%), 1fr)`, what does the inner `min()` protect against?',
-          answers: [
-            'a floor wider than a narrow screen',
-            'track floor wider than the container',
-            'overflow',
-            'a min-width that is too large on narrow screens',
-          ],
-          explanation:
-            'A plain `9rem` floor is 144px, which is fine on a desktop and too wide on a 320px screen once the gutters are subtracted - the grid overflows. Wrapping the floor in `min(9rem, 100%)` means the track is never asked to be wider than its container, so the pattern is safe at every width.',
-        },
-        {
-          id: 'quiz-css-s77-q4',
-          type: 'identify-error',
-          prompt: 'Which one of these is not part of the mobile first build order?',
-          code: `1. viewport meta tag\n2. fluid foundations: min() container, clamp() type\n3. auto-fit grids and wrapping flex rows\n4. base rules for the 1280px desktop design\n5. structural breakpoints with min-width`,
-          options: [
-            'Step 1 - the viewport tag must come after the CSS',
-            'Step 2 - the container should use max-width, not min()',
-            'Step 4 - you write the narrow layout as the unqueried base, not the desktop one',
-            'Step 5 - breakpoints should use max-width in a mobile first build',
-          ],
-          answer: 2,
-          explanation:
-            'Mobile first means the 320px layout is the unqueried base and each query adds as space appears, so nothing has to be reversed or undone. Step 4 has it backwards, which turns the build into a sequence of corrections rather than a series of additions.',
-        },
-        {
-          id: 'quiz-css-s77-q5',
-          type: 'multiple-choice',
-          prompt: 'Which problem on the 320px checklist is not a fluid-sizing problem?',
-          options: [
-            'The page scrolls sideways because of a fixed-width element',
-            'Body text runs to 900 characters per line on a wide monitor',
-            'A heading stays at the same pixel size on a phone and a 27-inch monitor',
-            'A tap target is 20 by 20 CSS pixels and hard to hit',
-          ],
-          answer: 3,
-          explanation:
-            'Tap target size is a design decision, not a sizing one - nothing about `clamp()` or `min()` makes a small target larger. WCAG 2.2 asks for at least 24 by 24 CSS pixels, and 44 by 44 is the comfortable target, including the gaps between adjacent controls.',
-        },
-      ],
-    },
   },
 ]

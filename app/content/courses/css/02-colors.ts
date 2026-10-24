@@ -31,6 +31,72 @@ export const cssColorsSections: Section[] = [
           'Choose a readable foreground colour against a given background',
         ],
         xp: 35,
+        quiz: {
+          id: 'quiz-css-l7',
+          title: 'Colors quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l7-q1',
+              type: 'multiple-choice',
+              prompt: 'What is `#0a0` the same colour as?',
+              options: [
+                '`#000a00`',
+                '`#00aa00`',
+                '`#0a0a0a`',
+                '`rgb(0, 170, 0)` is a different colour',
+              ],
+              answer: 1,
+              explanation: 'The three-digit form doubles each digit, so `#0a0` expands to `#00aa00`. It is also `rgb(0, 170, 0)`, so the last option describes the same colour.',
+            },
+            {
+              id: 'quiz-css-l7-q2',
+              type: 'multiple-choice',
+              prompt: 'Which property controls the colour of the text inside an element and is inherited by its children?',
+              options: [
+                '`background-color`',
+                '`color`',
+                '`border-color`',
+                '`outline-color`',
+              ],
+              answer: 1,
+              explanation: '`color` sets the text and icon colour and inherits down the tree, which is why one declaration on a container can recolour everything inside it.',
+            },
+            {
+              id: 'quiz-css-l7-q3',
+              type: 'multiple-choice',
+              prompt: 'Which hex value is the same colour as `hsl(180, 100%, 25%)`?',
+              options: [
+                '`#008080`',
+                '`#00ffff`',
+                '`#0f0`',
+                '`#0080ff`',
+              ],
+              answer: 0,
+              explanation: 'Hue 180 is teal, and 100% saturation at 25% lightness gives the channels 0, 128 and 128. Written in hex, that is `#008080`.',
+            },
+            {
+              id: 'quiz-css-l7-q4',
+              type: 'multiple-choice',
+              prompt: 'A panel has `background-color: #e0fff7`. Which text colour is most readable on it?',
+              options: [
+                '`#ffffff`',
+                '`#e0fff7`',
+                '`#0b0d10`',
+                '`#7fffd4`',
+              ],
+              answer: 2,
+              explanation: 'A pale mint background needs a dark foreground. The three light options sit too close in luminance to the background to be readable.',
+            },
+            {
+              id: 'quiz-css-l7-q5',
+              type: 'true-false',
+              prompt: 'A colour written with `hsl()` is rejected by `border-color`; only `rgb()` works there.',
+              answer: false,
+              explanation: 'Every property that accepts a colour accepts all four notations. The notation is not tied to the property, only to how readable you find it.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -228,6 +294,74 @@ export const cssColorsSections: Section[] = [
           'Read an alpha value out of a computed style and know why it is not a clean decimal',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-css-l8',
+          title: 'RGB quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l8-q1',
+              type: 'code-output',
+              prompt: 'What does `rgba(0, 128, 128, 0.5)` paint over an orange box?',
+              code: '.panel {\n  background-color: rgba(0, 128, 128, 0.5);\n}',
+              options: [
+                'A paler teal, half blended toward white',
+                'A translucent teal, with the orange showing through',
+                'A fully transparent box with an orange tint',
+                'Teal at 50% brightness',
+              ],
+              answer: 1,
+              explanation: 'Alpha changes opacity, not brightness or hue. The result is the teal blended per pixel with whatever was already painted underneath.',
+            },
+            {
+              id: 'quiz-css-l8-q2',
+              type: 'multiple-choice',
+              prompt: 'In `rgba(0, 128, 128, 0.5)`, what does the fourth value control?',
+              options: [
+                'How much of the colour is visible versus what is behind it',
+                'The brightness of the teal',
+                'The hue of the colour',
+                'The width of the element',
+              ],
+              answer: 0,
+              explanation: 'Alpha is opacity, from 0 to 1. It changes how much of the painted backdrop shows through, not the hue or brightness of the colour.',
+            },
+            {
+              id: 'quiz-css-l8-q3',
+              type: 'multiple-choice',
+              prompt: '`getComputedStyle` reports `rgba(0, 128, 128, 0.5)` with an alpha of `0.502`. Why is it not exactly `0.5`?',
+              options: [
+                'The browser adds 0.002 to every alpha for anti-aliasing',
+                'Alpha is stored as an 8-bit channel, and 128/255 is not exactly 0.5',
+                'CSS rounds every alpha up to three decimal places',
+                'The alpha was inherited from the parent element',
+              ],
+              answer: 1,
+              explanation: 'The alpha channel has 256 levels like the colour channels, so 0.5 is stored as 128/255, which is about 0.502. That is why alpha comparisons should use a range.',
+            },
+            {
+              id: 'quiz-css-l8-q4',
+              type: 'code-output',
+              prompt: 'A panel sits over an orange backdrop. What does the panel look like?',
+              code: '.backdrop {\n  background-color: rgb(255, 140, 60);\n}\n.panel {\n  background-color: rgba(255, 255, 255, 0.5);\n}',
+              options: [
+                'Solid white, hiding the orange',
+                'A pale orange, because half the white blends with the backdrop',
+                'The same orange, unchanged',
+                'Fully transparent, showing only orange',
+              ],
+              answer: 1,
+              explanation: 'Half-opaque white blends per pixel with the orange beneath, producing a pale orange rather than solid white.',
+            },
+            {
+              id: 'quiz-css-l8-q5',
+              type: 'true-false',
+              prompt: 'You can predict the contrast of text coloured `rgba(0, 0, 0, 0.4)` without knowing what is behind it.',
+              answer: false,
+              explanation: 'The final colour depends on the backdrop, so the contrast is unknown until the background is known. Alpha suits surfaces and shadows better than body text.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -430,6 +564,79 @@ export const cssColorsSections: Section[] = [
           'Explain why a hex value is unaffected by anything the user agent does',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-css-l9',
+          title: 'HEX quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l9-q1',
+              type: 'multiple-choice',
+              prompt: 'Why is HSL usually the better notation inside a design system?',
+              options: [
+                'It is shorter to type than hex',
+                'It converts to hex without loss, so it is faster to paint',
+                'A whole palette can be derived from one hue by moving lightness and saturation',
+                'It is the only notation that supports transparency',
+              ],
+              answer: 2,
+              explanation: 'HSL exposes the axes a designer already thinks in. A tint, a shade and a dark-mode variant can all be computed from a single hue, instead of being hand-picked one by one.',
+            },
+            {
+              id: 'quiz-css-l9-q2',
+              type: 'multiple-choice',
+              prompt: 'Which `rgb()` value does `#008080` represent?',
+              options: [
+                '`rgb(0, 128, 128)`',
+                '`rgb(0, 8, 8)`',
+                '`rgb(128, 128, 0)`',
+                '`rgb(0, 80, 80)`',
+              ],
+              answer: 0,
+              explanation: 'Each hex pair is one byte in decimal, so `00` is 0 and `80` is 128. The value is therefore `rgb(0, 128, 128)`.',
+            },
+            {
+              id: 'quiz-css-l9-q3',
+              type: 'multiple-choice',
+              prompt: 'What does the final pair in `#00aa0080` control?',
+              options: [
+                'The blue channel',
+                'The alpha, at roughly 50% opacity',
+                'The green channel at half strength',
+                'A separate border colour',
+              ],
+              answer: 1,
+              explanation: 'In the eight-digit form the last two digits are an alpha pair. `80` is 128 out of 255, which is about half opacity.',
+            },
+            {
+              id: 'quiz-css-l9-q4',
+              type: 'identify-error',
+              prompt: 'Why does this swatch show no green?',
+              code: '.swatch {\n  background-color: #00a00;\n}',
+              options: [
+                'Five hex digits is not a valid hex colour, so the declaration is dropped',
+                '`#00a00` is valid but equals black',
+                'Green requires the `rgb()` notation',
+                'The value is missing its alpha pair',
+              ],
+              answer: 0,
+              explanation: 'Hex only accepts three, six or eight digits. A five-digit value fails to parse, and the browser silently discards the declaration.',
+            },
+            {
+              id: 'quiz-css-l9-q5',
+              type: 'multiple-choice',
+              prompt: 'Why do design systems often store colours in hex even though HSL is easier to reason about?',
+              options: [
+                'Hex is the only notation that supports transparency',
+                'Design tools and colour pickers emit hex, so tokens import with no conversion',
+                'Hex values are painted faster by the browser',
+                'Hex is the only notation allowed in CSS variables',
+              ],
+              answer: 1,
+              explanation: 'Figma, Photoshop and browser pickers hand you hex, so a token file can mirror the design file directly. The browser converts every notation to the same internal colour anyway.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -610,6 +817,63 @@ export const cssColorsSections: Section[] = [
           'Explain why HSL scales better than hex for a palette or a dark mode',
         ],
         xp: 45,
+        quiz: {
+          id: 'quiz-css-l10',
+          title: 'HSL quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l10-q1',
+              type: 'true-false',
+              prompt: 'Alpha in `rgba()` changes the brightness of the colour.',
+              answer: false,
+              explanation: 'Alpha only controls opacity. To change brightness in HSL you move the lightness, and in hex you change the channel values.',
+            },
+            {
+              id: 'quiz-css-l10-q2',
+              type: 'blank',
+              prompt: 'In `hsl(210, 80%, 30%)`, which value is the percentage that controls how vivid the colour is? Give the property name, saturation or lightness.',
+              answers: [
+                'saturation',
+                'the saturation',
+                'sat',
+              ],
+              explanation: 'Saturation controls vividness and lightness controls brightness. The first value in each is the hue angle.',
+            },
+            {
+              id: 'quiz-css-l10-q3',
+              type: 'true-false',
+              prompt: '`hsl(480, 100%, 50%)` describes the same hue as `hsl(120, 100%, 50%)`.',
+              answer: true,
+              explanation: 'Hue is an angle and wraps at 360 degrees, so 480 is 120 plus a full turn and lands on the same hue.',
+            },
+            {
+              id: 'quiz-css-l10-q4',
+              type: 'multiple-choice',
+              prompt: 'Starting from `hsl(210, 80%, 30%)`, how do you make a paler tint of the same blue?',
+              options: [
+                'Raise the lightness percentage',
+                'Raise the saturation percentage',
+                'Lower the hue angle',
+                'Add an alpha value below 1',
+              ],
+              answer: 0,
+              explanation: 'Lightness moves a colour toward white, so a higher lightness is a tint. Saturation changes vividness, and alpha makes the colour see-through rather than pale.',
+            },
+            {
+              id: 'quiz-css-l10-q5',
+              type: 'blank',
+              prompt: 'What saturation value turns any hue into pure grey?',
+              answers: [
+                '0%',
+                '0',
+                'zero',
+                '0 percent',
+              ],
+              explanation: 'Saturation is the amount of colour. At 0% no hue remains, so only the lightness shows and the result is grey.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -791,70 +1055,6 @@ export const cssColorsSections: Section[] = [
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s7',
-      title: 'CSS Colors quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s7-q1',
-          type: 'multiple-choice',
-          prompt: 'What is `#0a0` the same colour as?',
-          options: ['`#000a00`', '`#00aa00`', '`#0a0a0a`', '`rgb(0, 170, 0)` is a different colour'],
-          answer: 1,
-          explanation:
-            'The three-digit form doubles each digit, so `#0a0` expands to `#00aa00`. It is also `rgb(0, 170, 0)`, so the last option describes the same colour.',
-        },
-        {
-          id: 'quiz-css-s7-q2',
-          type: 'code-output',
-          prompt: 'What does `rgba(0, 128, 128, 0.5)` paint over an orange box?',
-          code: `.panel {
-  background-color: rgba(0, 128, 128, 0.5);
-}`,
-          options: [
-            'A paler teal, half blended toward white',
-            'A translucent teal, with the orange showing through',
-            'A fully transparent box with an orange tint',
-            'Teal at 50% brightness',
-          ],
-          answer: 1,
-          explanation:
-            'Alpha changes opacity, not brightness or hue. The result is the teal blended per pixel with whatever was already painted underneath.',
-        },
-        {
-          id: 'quiz-css-s7-q3',
-          type: 'true-false',
-          prompt: 'Alpha in `rgba()` changes the brightness of the colour.',
-          answer: false,
-          explanation:
-            'Alpha only controls opacity. To change brightness in HSL you move the lightness, and in hex you change the channel values.',
-        },
-        {
-          id: 'quiz-css-s7-q4',
-          type: 'blank',
-          prompt:
-            'In `hsl(210, 80%, 30%)`, which value is the percentage that controls how vivid the colour is? Give the property name, saturation or lightness.',
-          answers: ['saturation', 'the saturation', 'sat'],
-          explanation:
-            'Saturation controls vividness and lightness controls brightness. The first value in each is the hue angle.',
-        },
-        {
-          id: 'quiz-css-s7-q5',
-          type: 'multiple-choice',
-          prompt: 'Why is HSL usually the better notation inside a design system?',
-          options: [
-            'It is shorter to type than hex',
-            'It converts to hex without loss, so it is faster to paint',
-            'A whole palette can be derived from one hue by moving lightness and saturation',
-            'It is the only notation that supports transparency',
-          ],
-          answer: 2,
-          explanation:
-            'HSL exposes the axes a designer already thinks in. A tint, a shade and a dark-mode variant can all be computed from a single hue, instead of being hand-picked one by one.',
-        },
-      ],
-    },
   },
   {
     id: 'css-s8',
@@ -875,6 +1075,72 @@ export const cssColorsSections: Section[] = [
           'Explain why a default background is transparent rather than white',
         ],
         xp: 35,
+        quiz: {
+          id: 'quiz-css-l11',
+          title: 'Background Color quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l11-q1',
+              type: 'multiple-choice',
+              prompt: 'Which parts of an element does `background-color` paint?',
+              options: [
+                'The margin and the padding',
+                'The content, the padding and under the border',
+                'The content area only',
+                'The whole viewport behind the element',
+              ],
+              answer: 1,
+              explanation: 'A background fills the padding box and paints under the border, stopping at the border edge. It never paints into the margin.',
+            },
+            {
+              id: 'quiz-css-l11-q2',
+              type: 'multiple-choice',
+              prompt: 'What is the initial value of `background-color` on every element?',
+              options: [
+                '`white`',
+                '`transparent`',
+                '`currentColor`',
+                '`inherit`',
+              ],
+              answer: 1,
+              explanation: 'Transparent is the initial value, so an element with no declaration shows whatever is painted behind it rather than a white box.',
+            },
+            {
+              id: 'quiz-css-l11-q3',
+              type: 'true-false',
+              prompt: '`background-color` is inherited, so setting it on a parent gives every child the same background.',
+              answer: false,
+              explanation: 'Background colour is not inherited. Each child stays transparent until it gets its own declaration, which lets the parent colour show through.',
+            },
+            {
+              id: 'quiz-css-l11-q4',
+              type: 'multiple-choice',
+              prompt: 'A short page with `body { background-color: teal; }` still shows white below the content. Why?',
+              options: [
+                'The body background only paints the body box, not the rest of the viewport',
+                'Teal is not a valid background colour',
+                'The html element overrides body backgrounds with white',
+                'Backgrounds never paint below the fold',
+              ],
+              answer: 0,
+              explanation: 'The root element background propagates to the canvas, but a background on body paints only the body box. Styling `html` or giving the page height avoids the strip.',
+            },
+            {
+              id: 'quiz-css-l11-q5',
+              type: 'multiple-choice',
+              prompt: 'A button inside a teal bar must show the bar through it. Which declaration is the explicit override?',
+              options: [
+                '`background-color: inherit`',
+                '`background-color: transparent`',
+                '`background-color: white`',
+                '`background-color: currentColor`',
+              ],
+              answer: 1,
+              explanation: '`transparent` is the keyword for a fully see-through background. `inherit` would copy the teal from the bar and hide it instead.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1038,6 +1304,71 @@ export const cssColorsSections: Section[] = [
           'Choose between `cover` and `contain` and know what each does to the shape',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-css-l12',
+          title: 'Background Image quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l12-q1',
+              type: 'true-false',
+              prompt: 'Setting `background: teal` on an element also clears any background image already set on it.',
+              answer: true,
+              explanation: 'A shorthand only sets the properties it names, and any background property it covers that you leave out goes back to its initial value. Omitting the image clears it, and omitting the colour clears the colour.',
+            },
+            {
+              id: 'quiz-css-l12-q2',
+              type: 'multiple-choice',
+              prompt: 'A hero photo must fill its box with no empty space, cropping if necessary. Which `background-size` should you use?',
+              options: [
+                '`auto`',
+                '`contain`',
+                '`cover`',
+                '`100% 100%`',
+              ],
+              answer: 2,
+              explanation: '`cover` scales until both dimensions are covered and crops the overflow. `contain` would leave empty space, and `100% 100%` would distort the photo.',
+            },
+            {
+              id: 'quiz-css-l12-q3',
+              type: 'multiple-choice',
+              prompt: 'Which value can be used directly as a `background-image` without downloading a file?',
+              options: [
+                '`linear-gradient(90deg, teal, blue)`',
+                '`background-color: teal`',
+                '`repeat-x`',
+                '`url()` with no path',
+              ],
+              answer: 0,
+              explanation: 'A gradient is an image the browser generates from CSS. It behaves like any other background image and needs no network request.',
+            },
+            {
+              id: 'quiz-css-l12-q4',
+              type: 'blank',
+              prompt: 'What is the default value of `background-position`?',
+              answers: [
+                '0% 0%',
+                '0 0',
+                'top left',
+                'left top',
+              ],
+              explanation: 'The image starts at the top-left corner by default, which is why a single non-repeating image appears there unless you move it.',
+            },
+            {
+              id: 'quiz-css-l12-q5',
+              type: 'multiple-choice',
+              prompt: 'Why should an informative chart not be set as a CSS `background-image`?',
+              options: [
+                'Background images cannot be sized',
+                'It is decorative: screen readers cannot read it and it disappears in forced-colours mode',
+                'Background images are always tiled',
+                'It would block the page from loading',
+              ],
+              answer: 1,
+              explanation: 'A background image is painting, not content. Informative imagery belongs in an `img` element or inline SVG so assistive technology can handle it.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1233,6 +1564,78 @@ export const cssColorsSections: Section[] = [
           'Combine a repeat value with a size and a position to tile in one direction',
         ],
         xp: 45,
+        quiz: {
+          id: 'quiz-css-l13',
+          title: 'Background Repeat quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l13-q1',
+              type: 'multiple-choice',
+              prompt: 'What does `background-repeat: space` do that `round` does not?',
+              options: [
+                'It clips the tile at the edge',
+                'It keeps the tiles at their original size and spreads the leftover into the gaps',
+                'It scales the image down to fit a whole number of tiles',
+                'It stops tiling entirely',
+              ],
+              answer: 1,
+              explanation: '`space` never resizes anything — it distributes the leftover space between tiles. `round` is the one that scales the image so whole tiles fit.',
+            },
+            {
+              id: 'quiz-css-l13-q2',
+              type: 'multiple-choice',
+              prompt: 'What is the initial value of `background-repeat`?',
+              options: [
+                '`no-repeat`',
+                '`repeat-x`',
+                '`repeat`',
+                '`space`',
+              ],
+              answer: 2,
+              explanation: '`repeat` is the default, which is why a small image tiles in both directions unless you opt out.',
+            },
+            {
+              id: 'quiz-css-l13-q3',
+              type: 'multiple-choice',
+              prompt: 'Which value tiles an image left to right only?',
+              options: [
+                '`repeat`',
+                '`repeat-x`',
+                '`repeat-y`',
+                '`round`',
+              ],
+              answer: 1,
+              explanation: '`repeat-x` repeats along the horizontal axis and leaves the vertical axis alone. `repeat-y` is the vertical counterpart.',
+            },
+            {
+              id: 'quiz-css-l13-q4',
+              type: 'multiple-choice',
+              prompt: 'With `background-repeat: no-repeat`, what happens to the leftover space in the box?',
+              options: [
+                'It is filled with a stretched copy of the image',
+                'It is filled with a blurred copy',
+                'The image is scaled up to cover the box',
+                'It is left empty, showing what is behind the image',
+              ],
+              answer: 3,
+              explanation: '`no-repeat` draws the image once at its position and stops. Any area it does not cover keeps the background colour or shows what is behind the element.',
+            },
+            {
+              id: 'quiz-css-l13-q5',
+              type: 'multiple-choice',
+              prompt: 'Why is a large tiled photograph a performance problem?',
+              options: [
+                'The browser re-downloads the image for every tile',
+                'The file size grows with each repeat',
+                'The browser must paint every copy of the tile, which is costly over a large area',
+                'Tiled images cannot be hardware accelerated',
+              ],
+              answer: 2,
+              explanation: 'Each copy is a paint operation, and many copies over a large area cost frames during scrolling. Tiling suits small flat patterns, not photographs.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1444,6 +1847,72 @@ export const cssColorsSections: Section[] = [
           'Recognise the performance cost of `fixed` and when it is worth it',
         ],
         xp: 45,
+        quiz: {
+          id: 'quiz-css-l14',
+          title: 'Background Attachment quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l14-q1',
+              type: 'multiple-choice',
+              prompt: 'Why is `background-attachment: fixed` a performance risk?',
+              options: [
+                'It is not supported in any mobile browser',
+                'The background must be realigned to the viewport on every scroll frame, forcing a repaint of that area',
+                'It disables hardware acceleration on the whole page',
+                'It requires the image to be re-downloaded while scrolling',
+              ],
+              answer: 1,
+              explanation: 'The background cannot be painted once and cached, so scrolling repaints it each frame. A fixed gradient over a small area is usually fine; a fixed photograph over a large area is not.',
+            },
+            {
+              id: 'quiz-css-l14-q2',
+              type: 'multiple-choice',
+              prompt: 'What is the default value of `background-attachment`?',
+              options: [
+                '`fixed`',
+                '`local`',
+                '`scroll`',
+                '`viewport`',
+              ],
+              answer: 2,
+              explanation: '`scroll` is the default: the background is fixed to the element and moves with the page, which is the behaviour most people expect.',
+            },
+            {
+              id: 'quiz-css-l14-q3',
+              type: 'multiple-choice',
+              prompt: 'Which value attaches the background to the element own scroll box, so it moves when the element scrolls internally?',
+              options: [
+                '`scroll`',
+                '`fixed`',
+                '`local`',
+                '`static`',
+              ],
+              answer: 2,
+              explanation: '`local` is tied to the element scrolling box, which makes it the right choice for a code block or modal body with `overflow: auto`.',
+            },
+            {
+              id: 'quiz-css-l14-q4',
+              type: 'true-false',
+              prompt: 'On an element that does not scroll internally, `scroll` and `local` produce the same result.',
+              answer: true,
+              explanation: 'The two only diverge when the element has its own scroll container. Without one there is no separate scroll box for `local` to attach to.',
+            },
+            {
+              id: 'quiz-css-l14-q5',
+              type: 'multiple-choice',
+              prompt: 'Which is the most defensible use of `background-attachment: fixed`?',
+              options: [
+                'A full-screen photograph',
+                'A small gradient wash behind a hero',
+                'A large repeating tile pattern',
+                'A long scrolling image gallery',
+              ],
+              answer: 1,
+              explanation: 'A fixed gradient over a small area is cheap because there is little to repaint. A fixed photograph over a large area forces that area to repaint on every scroll frame.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1632,6 +2101,73 @@ export const cssColorsSections: Section[] = [
           'Know when the shorthand is the wrong tool and the longhands are better',
         ],
         xp: 55,
+        quiz: {
+          id: 'quiz-css-l15',
+          title: 'Background Shorthand quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l15-q1',
+              type: 'identify-error',
+              prompt: 'This declaration sets no background at all. Why?',
+              code: '.card {\n  background: #29e2bd url("tile.svg") no-repeat center 40px 40px;\n}',
+              options: [
+                'A colour is not allowed in a `background` shorthand',
+                'The size has to be separated from the position with a slash',
+                '`no-repeat` must come after the position',
+                'A `url()` cannot be combined with a colour',
+              ],
+              answer: 1,
+              explanation: 'Position and size form one unit, written `position / size`. Without the slash the parser cannot tell which value is which, so it discards the whole declaration with no error.',
+            },
+            {
+              id: 'quiz-css-l15-q2',
+              type: 'multiple-choice',
+              prompt: 'Which is the canonical `background` shorthand order?',
+              options: [
+                'colour, image, repeat, attachment, position / size',
+                'image, colour, position, repeat, size / attachment',
+                'position / size, colour, image, repeat, attachment',
+                'repeat, colour, attachment, image, size / position',
+              ],
+              answer: 0,
+              explanation: 'Colour, image, repeat, attachment, then position with the size after a slash. Other orders may parse in places, but this one is unambiguous.',
+            },
+            {
+              id: 'quiz-css-l15-q3',
+              type: 'multiple-choice',
+              prompt: 'In a multi-layer `background` shorthand, where may the colour go?',
+              options: [
+                'In any layer',
+                'Only in the first layer',
+                'Only in the final, bottom-most layer',
+                'It cannot be combined with images',
+              ],
+              answer: 2,
+              explanation: 'A colour is only valid in the last layer, the one with no image in front of it. Putting it earlier makes the whole shorthand invalid.',
+            },
+            {
+              id: 'quiz-css-l15-q4',
+              type: 'true-false',
+              prompt: 'In a comma-separated background list, the first layer is the one closest to the content.',
+              answer: true,
+              explanation: 'Layers paint with the first on top and the last at the bottom, so the first image is the one the content sits against.',
+            },
+            {
+              id: 'quiz-css-l15-q5',
+              type: 'multiple-choice',
+              prompt: 'You need to change only the position of an existing image and keep every other background decision intact. Why are longhands usually safer?',
+              options: [
+                'Longhands are the only properties that support images',
+                'A shorthand resets every background property it covers, so you must restate the ones you want to keep',
+                'Longhands are painted in a different order',
+                'Shorthands cannot set a background colour',
+              ],
+              answer: 1,
+              explanation: 'The shorthand is all-or-nothing: omitted sub-properties return to their initial values. A longhand changes one thing and leaves the rest alone.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1875,79 +2411,5 @@ background: teal url("tile.svg") no-repeat fixed center / 60px 60px;
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s8',
-      title: 'CSS Backgrounds quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s8-q1',
-          type: 'multiple-choice',
-          prompt: 'Which parts of an element does `background-color` paint?',
-          options: [
-            'The margin and the padding',
-            'The content, the padding and under the border',
-            'The content area only',
-            'The whole viewport behind the element',
-          ],
-          answer: 1,
-          explanation:
-            'A background fills the padding box and paints under the border, stopping at the border edge. It never paints into the margin.',
-        },
-        {
-          id: 'quiz-css-s8-q2',
-          type: 'multiple-choice',
-          prompt: 'What does `background-repeat: space` do that `round` does not?',
-          options: [
-            'It clips the tile at the edge',
-            'It keeps the tiles at their original size and spreads the leftover into the gaps',
-            'It scales the image down to fit a whole number of tiles',
-            'It stops tiling entirely',
-          ],
-          answer: 1,
-          explanation:
-            '`space` never resizes anything — it distributes the leftover space between tiles. `round` is the one that scales the image so whole tiles fit.',
-        },
-        {
-          id: 'quiz-css-s8-q3',
-          type: 'identify-error',
-          prompt: 'This declaration sets no background at all. Why?',
-          code: `.card {
-  background: #29e2bd url("tile.svg") no-repeat center 40px 40px;
-}`,
-          options: [
-            'A colour is not allowed in a `background` shorthand',
-            'The size has to be separated from the position with a slash',
-            '`no-repeat` must come after the position',
-            'A `url()` cannot be combined with a colour',
-          ],
-          answer: 1,
-          explanation:
-            'Position and size form one unit, written `position / size`. Without the slash the parser cannot tell which value is which, so it discards the whole declaration with no error.',
-        },
-        {
-          id: 'quiz-css-s8-q4',
-          type: 'true-false',
-          prompt: 'Setting `background: teal` on an element also clears any background image already set on it.',
-          answer: true,
-          explanation:
-            'A shorthand only sets the properties it names, and any background property it covers that you leave out goes back to its initial value. Omitting the image clears it, and omitting the colour clears the colour.',
-        },
-        {
-          id: 'quiz-css-s8-q5',
-          type: 'multiple-choice',
-          prompt: 'Why is `background-attachment: fixed` a performance risk?',
-          options: [
-            'It is not supported in any mobile browser',
-            'The background must be realigned to the viewport on every scroll frame, forcing a repaint of that area',
-            'It disables hardware acceleration on the whole page',
-            'It requires the image to be re-downloaded while scrolling',
-          ],
-          answer: 1,
-          explanation:
-            'The background cannot be painted once and cached, so scrolling repaints it each frame. A fixed gradient over a small area is usually fine; a fixed photograph over a large area is not.',
-        },
-      ],
-    },
   },
 ]

@@ -17,6 +17,73 @@ export const jsJsonProjectSections: Section[] = [
           'Spot the four punctuation mistakes that break a document',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-js-l94',
+          title: 'JSON intro and syntax quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l94-q1',
+              type: 'multiple-choice',
+              prompt: 'Which of these four is a valid JSON document?',
+              options: [
+                '{ name: \'Ada\' }',
+                '{ \'name\': \'Ada\' }',
+                '{ "name": "Ada" }',
+                '{ "name": "Ada", }',
+              ],
+              answer: 2,
+              explanation: 'Only the third obeys all three rules: double quotes on the key, double quotes on the text value, no trailing comma. The first has an unquoted key and single quotes, the second uses single quotes, and the fourth has a comma after the last pair.',
+            },
+            {
+              id: 'quiz-js-l94-q2',
+              type: 'true-false',
+              prompt: 'JSON allows comments, so a line starting with // inside a document is ignored when it is parsed.',
+              answer: false,
+              explanation: 'There is no comment syntax in JSON at all. A // line is a parse error, and that is why config files that ship as JSON with comments in them fail in production but work on your machine, where a different file was used.',
+            },
+            {
+              id: 'quiz-js-l94-q3',
+              type: 'blank',
+              prompt: 'Which method turns a JavaScript value into JSON text?',
+              answers: [
+                'json.stringify',
+                'stringify',
+                'json.stringify()',
+                'stringify()',
+                'json . stringify',
+              ],
+              explanation: '`JSON.stringify` is the outbound half of the bridge: values in, a string out. The `JSON` part is the object that owns the method, so the full name is `JSON.stringify`, not a bare `stringify`.',
+            },
+            {
+              id: 'quiz-js-l94-q4',
+              type: 'identify-error',
+              prompt: 'What stops this document from parsing?',
+              code: 'const text = \'{"total": 9.50,}\'\nconst order = JSON.parse(text)',
+              options: [
+                'Nothing — JavaScript objects allow a trailing comma',
+                'The trailing comma before the closing brace',
+                'total is not a valid key name',
+                '9.50 has too many decimal places for JSON',
+              ],
+              answer: 1,
+              explanation: 'JSON has no trailing commas anywhere, and a parser stops at the comma it cannot use. This is the most common copy-paste failure, because JavaScript object literals accept the very same thing and nothing warns you until the parse.',
+            },
+            {
+              id: 'quiz-js-l94-q5',
+              type: 'multiple-choice',
+              prompt: 'Which of these values is not allowed in a JSON document?',
+              options: [
+                '`null`',
+                '`NaN`',
+                '`true`',
+                '`-3.5`',
+              ],
+              answer: 1,
+              explanation: 'JSON has six types, and `NaN` is not one of them: a number must be written as digits, so `NaN` and `Infinity` have no valid form. Booleans are lowercase and `null` is a type of its own.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -171,6 +238,80 @@ console.log(data.title)`,
           'Handle the two traps: typeof null and numbers that arrive as strings',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-js-l95',
+          title: 'JSON vs XML and data types quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l95-q1',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'const text = \'{"total": 9.50}\'\nconst data = JSON.parse(text)\nconsole.log(typeof data.total)',
+              options: [
+                'number',
+                'string',
+                'object',
+                'NaN',
+              ],
+              answer: 0,
+              explanation: 'The value is unquoted, so JSON reads it as a number and parse produces a JavaScript number. Had the document said "9.50" with quotes, the answer would be string and any arithmetic on it would concatenate instead.',
+            },
+            {
+              id: 'quiz-js-l95-q2',
+              type: 'multiple-choice',
+              prompt: 'Which feature does XML allow that JSON does not?',
+              options: [
+                'Nested values',
+                'Arrays of items',
+                'Comments and attributes',
+                'Numbers with decimal points',
+              ],
+              answer: 2,
+              explanation: 'XML has comments, attributes and namespaces; JSON has none of the three, which is part of why its grammar stays small. Nesting, lists and decimals all exist in both formats.',
+            },
+            {
+              id: 'quiz-js-l95-q3',
+              type: 'multiple-choice',
+              prompt: 'Which list is exactly the six JSON types?',
+              options: [
+                'string, number, boolean, null, object, array',
+                'string, number, boolean, undefined, object, array',
+                'string, integer, float, boolean, null, object',
+                'text, number, boolean, null, map, list',
+              ],
+              answer: 0,
+              explanation: 'JSON can write a string, a number, a boolean, `null`, an object and an array — nothing else. There is no `undefined`, no separate integer type, and no `Map` or `Set`.',
+            },
+            {
+              id: 'quiz-js-l95-q4',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'const parsed = JSON.parse(\'null\')\nconsole.log(typeof parsed, Array.isArray(JSON.parse(\'[]\')))',
+              options: [
+                'object true',
+                'null true',
+                'object false',
+                'null false',
+              ],
+              answer: 0,
+              explanation: '`typeof null` is `"object"` — a bug kept from 1995 — so `typeof` cannot tell null from an object. `Array.isArray` is the check that actually identifies an array.',
+            },
+            {
+              id: 'quiz-js-l95-q5',
+              type: 'multiple-choice',
+              prompt: 'A parsed field holds the string `"31"`. What does `person.hours + 1` produce?',
+              options: [
+                '`32`',
+                '`"311"`',
+                '`NaN`',
+                'It throws a TypeError',
+              ],
+              answer: 1,
+              explanation: 'The `+` operator concatenates as soon as either side is a string, so the result is text and nothing reports an error. Check with `typeof` or convert with `Number(...)` at the edge.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -330,71 +471,6 @@ return describe(null) === 'null'
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s78',
-      title: 'JSON syntax check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s78-q1',
-          type: 'multiple-choice',
-          prompt: 'Which of these four is a valid JSON document?',
-          options: [
-            "{ name: 'Ada' }",
-            "{ 'name': 'Ada' }",
-            '{ "name": "Ada" }',
-            '{ "name": "Ada", }',
-          ],
-          answer: 2,
-          explanation:
-            'Only the third obeys all three rules: double quotes on the key, double quotes on the text value, no trailing comma. The first has an unquoted key and single quotes, the second uses single quotes, and the fourth has a comma after the last pair.',
-        },
-        {
-          id: 'quiz-js-s78-q2',
-          type: 'true-false',
-          prompt: 'JSON allows comments, so a line starting with // inside a document is ignored when it is parsed.',
-          answer: false,
-          explanation:
-            'There is no comment syntax in JSON at all. A // line is a parse error, and that is why config files that ship as JSON with comments in them fail in production but work on your machine, where a different file was used.',
-        },
-        {
-          id: 'quiz-js-s78-q3',
-          type: 'blank',
-          prompt: 'Which method turns a JavaScript value into JSON text?',
-          answers: ['json.stringify', 'stringify', 'json.stringify()', 'stringify()', 'json . stringify'],
-          explanation:
-            '`JSON.stringify` is the outbound half of the bridge: values in, a string out. The `JSON` part is the object that owns the method, so the full name is `JSON.stringify`, not a bare `stringify`.',
-        },
-        {
-          id: 'quiz-js-s78-q4',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `const text = '{"total": 9.50}'
-const data = JSON.parse(text)
-console.log(typeof data.total)`,
-          options: ['number', 'string', 'object', 'NaN'],
-          answer: 0,
-          explanation:
-            'The value is unquoted, so JSON reads it as a number and parse produces a JavaScript number. Had the document said "9.50" with quotes, the answer would be string and any arithmetic on it would concatenate instead.',
-        },
-        {
-          id: 'quiz-js-s78-q5',
-          type: 'identify-error',
-          prompt: 'What stops this document from parsing?',
-          code: `const text = '{"total": 9.50,}'
-const order = JSON.parse(text)`,
-          options: [
-            'Nothing — JavaScript objects allow a trailing comma',
-            'The trailing comma before the closing brace',
-            'total is not a valid key name',
-            '9.50 has too many decimal places for JSON',
-          ],
-          answer: 1,
-          explanation:
-            'JSON has no trailing commas anywhere, and a parser stops at the comma it cannot use. This is the most common copy-paste failure, because JavaScript object literals accept the very same thing and nothing warns you until the parse.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s79',
@@ -412,6 +488,73 @@ const order = JSON.parse(text)`,
           'Name what a round trip loses: functions, undefined, dates and NaN',
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-js-l96',
+          title: 'JSON.parse and JSON.stringify quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l96-q1',
+              type: 'multiple-choice',
+              prompt: 'What happens when you pass text that is not valid JSON to JSON.parse?',
+              options: [
+                'It returns null and carries on',
+                'It returns an object built from whatever it could read',
+                'It raises a SyntaxError that you can catch, and nothing after the call runs',
+                'It returns undefined',
+              ],
+              answer: 2,
+              explanation: 'The parser stops at the first thing it cannot read and throws, so every line after that call is dead code unless you wrap it. This is why text from a file, a form field or a response body always goes inside a try/catch.',
+            },
+            {
+              id: 'quiz-js-l96-q2',
+              type: 'true-false',
+              prompt: 'After a parse and stringify round trip, a Date is still a Date.',
+              answer: false,
+              explanation: 'JSON has no date type, so stringify writes it as a UTC text timestamp and parse gives that text back as a string. `new Date(text)` is the repair, and you have to do it yourself every time.',
+            },
+            {
+              id: 'quiz-js-l96-q3',
+              type: 'multiple-choice',
+              prompt: 'What does `JSON.stringify(user, [\'name\'])` return?',
+              options: [
+                'The whole user, indented',
+                'JSON text containing only the `name` key',
+                'The value of `name` alone, with no braces',
+                '`undefined`, because the second argument must be a function',
+              ],
+              answer: 1,
+              explanation: 'An array as the second argument is a filter: only the named keys are written. A function in that position is called per key instead, and the third argument is the one that controls indentation.',
+            },
+            {
+              id: 'quiz-js-l96-q4',
+              type: 'code-output',
+              prompt: 'What is logged?',
+              code: 'console.log(JSON.stringify({ id: 7, run: function () {} }))',
+              options: [
+                '{"id":7}',
+                '{"id":7,"run":null}',
+                '{"id":7,"run":"function"}',
+                'It throws, because a function cannot be serialised',
+              ],
+              answer: 0,
+              explanation: 'A function has no JSON form, so `stringify` drops the property silently rather than failing or writing `null`. That is why a round trip can come back missing methods you expected to keep.',
+            },
+            {
+              id: 'quiz-js-l96-q5',
+              type: 'multiple-choice',
+              prompt: 'What does `JSON.stringify(NaN)` return?',
+              options: [
+                '`"NaN"`',
+                '`undefined`',
+                '`null`',
+                'It throws a TypeError',
+              ],
+              answer: 2,
+              explanation: 'JSON cannot write `NaN` or `Infinity`, so `stringify` substitutes `null` instead of producing invalid text. The value changes type silently, which is easy to miss until something does arithmetic on it.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -607,6 +750,81 @@ console.log(roundTrip({ name: 'Ada', active: true, tags: ['a', 'b'] }))`,
           'Default a missing key once instead of guarding it in four places',
         ],
         xp: 45,
+        quiz: {
+          id: 'quiz-js-l97',
+          title: 'JSON objects and arrays quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l97-q1',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'const text = \'{"tags":["a","b"]}\'\nconst data = JSON.parse(text)\nconsole.log(data.tags.length, typeof data.tags[0])',
+              options: [
+                '2 string',
+                '2 object',
+                '1 string',
+                'undefined undefined',
+              ],
+              answer: 0,
+              explanation: 'The array has two entries, so the length is 2, and each entry is a JSON string, so typeof reports "string". If it printed "object" you would be looking at a nested object rather than an array of names.',
+            },
+            {
+              id: 'quiz-js-l97-q2',
+              type: 'code-output',
+              prompt: 'What is logged?',
+              code: 'const data = JSON.parse(\'{"people":[{"name":"Ada","done":true},{"name":"Bo","done":false}]}\')\nconst left = data.people.filter(function (person) { return !person.done })\nconsole.log(left.map(function (person) { return person.name }).join(\',\'))',
+              options: [
+                'Ada',
+                'Bo',
+                'Ada,Bo',
+                'Bo,Ada',
+              ],
+              answer: 1,
+              explanation: '`filter` keeps only the person whose `done` is false — Bo — and `map` then extracts that person\'s name. The order follows the document, so Ada is filtered out before the map runs.',
+            },
+            {
+              id: 'quiz-js-l97-q3',
+              type: 'multiple-choice',
+              prompt: '`data.people` might be missing from the document. Which read is safe when it is?',
+              options: [
+                '`data.people[0].name`',
+                '`data.people.length`',
+                '`(data.people ?? []).length`',
+                '`data.people.first().name`',
+              ],
+              answer: 2,
+              explanation: 'Both `data.people[0]` and `.length` throw when `people` is `undefined`, because they read a property of nothing. `?? []` supplies an empty array, so `.length` is simply 0.',
+            },
+            {
+              id: 'quiz-js-l97-q4',
+              type: 'code-output',
+              prompt: 'What is logged?',
+              code: 'const rows = [{ hours: 2 }, { hours: 3 }, { hours: 4 }]\nconst total = rows.reduce(function (sum, row) { return sum + row.hours }, 0)\nconsole.log(total)',
+              options: [
+                '0',
+                '234',
+                'undefined',
+                '9',
+              ],
+              answer: 3,
+              explanation: '`reduce` carries the accumulating `sum` from one element to the next, starting at 0, and adds each `hours` value. Without the `0` seed the first object would become the accumulator and the result would be nonsense.',
+            },
+            {
+              id: 'quiz-js-l97-q5',
+              type: 'multiple-choice',
+              prompt: 'Where should you supply a default for a key that might be missing?',
+              options: [
+                'At every place that reads it, to be safe',
+                'Once, where the data enters your code',
+                'In the JSON text, before parsing it',
+                'Never — a missing key always throws, so no default helps',
+              ],
+              answer: 1,
+              explanation: 'Deciding the empty case once at the boundary means every later read can assume the shape is there. Repeating the guard in four places is four chances to forget one.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -776,6 +994,79 @@ console.log(open.join(', '))`,
           'Explain why a closing script tag inside embedded JSON breaks the page',
         ],
         xp: 45,
+        quiz: {
+          id: 'quiz-js-l98',
+          title: 'JSON in HTML quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l98-q1',
+              type: 'blank',
+              prompt: 'Which response method is JSON.parse in disguise?',
+              answers: [
+                'response.json',
+                'json',
+                'response.json()',
+                'r.json()',
+                'response . json',
+              ],
+              explanation: '`response.json()` reads the body as text and parses it. That is also why it throws on an HTML error page, and why checking `response.ok` first is not optional.',
+            },
+            {
+              id: 'quiz-js-l98-q2',
+              type: 'identify-error',
+              prompt: 'What is wrong with this line?',
+              code: 'const island = document.querySelector(\'#site-data\')\nconst tags = island.textContent.tags.join(\', \')\nconsole.log(tags)',
+              options: [
+                'textContent is a string, so it has no tags property to join',
+                'The script tag must be type="text/javascript" to be readable',
+                'join only works on arrays of numbers',
+                'querySelector cannot reach a script element',
+              ],
+              answer: 0,
+              explanation: 'The text inside the script tag is characters, so you have to parse it before reading properties: `JSON.parse(island.textContent).tags`. Skipping the parse gives a TypeError about reading a property of undefined.',
+            },
+            {
+              id: 'quiz-js-l98-q3',
+              type: 'multiple-choice',
+              prompt: 'Which `type` on a script tag makes the browser treat its contents as JSON data instead of code?',
+              options: [
+                '`type="text/javascript"`',
+                '`type="application/json"`',
+                '`type="text/json-script"`',
+                '`type="application/javascript"`',
+              ],
+              answer: 1,
+              explanation: 'A non-JavaScript type keeps the browser from executing the contents, so the JSON can sit there untouched until your code parses it. The same JSON inside a plain script tag is a syntax error the moment the page loads.',
+            },
+            {
+              id: 'quiz-js-l98-q4',
+              type: 'multiple-choice',
+              prompt: 'A JSON string inside a data island contains the characters `</script>`. What happens?',
+              options: [
+                '`JSON.parse` rejects the document',
+                'The browser escapes the sequence automatically',
+                'The script element ends early, so the rest of the JSON lands in the page',
+                'The page fails to load entirely',
+              ],
+              answer: 2,
+              explanation: 'A script element runs until the first closing tag it sees, whether or not that text was meant as data. Escape the slash as `<\\/script>` — JSON reads that as a plain slash — so the element is not cut short.',
+            },
+            {
+              id: 'quiz-js-l98-q5',
+              type: 'multiple-choice',
+              prompt: '`fetch` succeeds, but the server returns an HTML login page and `await response.json()` throws a SyntaxError about `<`. What is the better approach?',
+              options: [
+                'Retry the call in a loop until it parses',
+                'Read `response.text()`, check `response.ok` and the content type, then parse',
+                'Call `response.json()` twice, because the first call only reads the headers',
+                'Repeat the request with `mode: "no-cors"`',
+              ],
+              answer: 1,
+              explanation: 'The parser is failing on markup, which tells you nothing about why the page arrived. Checking `ok` and the content type first, and keeping the text, preserves the real error message instead of replacing it with a parse error.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -959,72 +1250,6 @@ data.site.tags.forEach(function (tag) {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s79',
-      title: 'JSON parsing check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s79-q1',
-          type: 'multiple-choice',
-          prompt: 'What happens when you pass text that is not valid JSON to JSON.parse?',
-          options: [
-            'It returns null and carries on',
-            'It returns an object built from whatever it could read',
-            'It raises a SyntaxError that you can catch, and nothing after the call runs',
-            'It returns undefined',
-          ],
-          answer: 2,
-          explanation:
-            'The parser stops at the first thing it cannot read and throws, so every line after that call is dead code unless you wrap it. This is why text from a file, a form field or a response body always goes inside a try/catch.',
-        },
-        {
-          id: 'quiz-js-s79-q2',
-          type: 'true-false',
-          prompt: 'After a parse and stringify round trip, a Date is still a Date.',
-          answer: false,
-          explanation:
-            'JSON has no date type, so stringify writes it as a UTC text timestamp and parse gives that text back as a string. `new Date(text)` is the repair, and you have to do it yourself every time.',
-        },
-        {
-          id: 'quiz-js-s79-q3',
-          type: 'blank',
-          prompt: 'Which response method is JSON.parse in disguise?',
-          answers: ['response.json', 'json', 'response.json()', 'r.json()', 'response . json'],
-          explanation:
-            '`response.json()` reads the body as text and parses it. That is also why it throws on an HTML error page, and why checking `response.ok` first is not optional.',
-        },
-        {
-          id: 'quiz-js-s79-q4',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `const text = '{"tags":["a","b"]}'
-const data = JSON.parse(text)
-console.log(data.tags.length, typeof data.tags[0])`,
-          options: ['2 string', '2 object', '1 string', 'undefined undefined'],
-          answer: 0,
-          explanation:
-            'The array has two entries, so the length is 2, and each entry is a JSON string, so typeof reports "string". If it printed "object" you would be looking at a nested object rather than an array of names.',
-        },
-        {
-          id: 'quiz-js-s79-q5',
-          type: 'identify-error',
-          prompt: 'What is wrong with this line?',
-          code: `const island = document.querySelector('#site-data')
-const tags = island.textContent.tags.join(', ')
-console.log(tags)`,
-          options: [
-            'textContent is a string, so it has no tags property to join',
-            'The script tag must be type="text/javascript" to be readable',
-            'join only works on arrays of numbers',
-            'querySelector cannot reach a script element',
-          ],
-          answer: 0,
-          explanation:
-            'The text inside the script tag is characters, so you have to parse it before reading properties: `JSON.parse(island.textContent).tags`. Skipping the parse gives a TypeError about reading a property of undefined.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s80',
@@ -1042,6 +1267,70 @@ console.log(tags)`,
           'Explain why module code is deferred and runs in strict mode',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-js-l99',
+          title: 'Modules quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l99-q1',
+              type: 'multiple-choice',
+              prompt: 'What does type="module" do to a script file?',
+              options: [
+                'It downloads the file before the rest of the page so it runs first',
+                'It gives the file its own scope, runs it in strict mode and defers it until the document is parsed',
+                'It turns the file into a library that other pages can use',
+                'It runs the file once for the page and once for every importer',
+              ],
+              answer: 1,
+              explanation: 'Three effects in one attribute: private top-level scope, strict mode, and deferred execution. Deferring is why module code can query elements at the top level without a load handler. It does not run first — that would be the opposite of what defer means.',
+            },
+            {
+              id: 'quiz-js-l99-q2',
+              type: 'true-false',
+              prompt: 'Two module files can share a value by both declaring it with var at the top level.',
+              answer: false,
+              explanation: 'Each module has its own scope, so the two declarations are unrelated and nothing is shared. Sharing happens through an export on one side and an import on the other, which makes it visible in the source instead of depending on load order.',
+            },
+            {
+              id: 'quiz-js-l99-q3',
+              type: 'blank',
+              prompt: 'Which keyword publishes a named value from a module so another file can import it?',
+              answers: [
+                'export',
+              ],
+              explanation: '`export` marks what the outside world may use, `import` asks for it by name. Naming your public surface is what makes a module readable: the reader of an import statement sees exactly what the file offers.',
+            },
+            {
+              id: 'quiz-js-l99-q4',
+              type: 'code-output',
+              prompt: 'Two modules as written here. What does main.js print?',
+              code: '// counter.js\nexport let count = 0\nexport function increment() { count += 1 }\n\n// main.js\nimport { count, increment } from \'./counter.js\'\nincrement()\nconsole.log(count)',
+              options: [
+                '0',
+                '1',
+                'undefined',
+                '2',
+              ],
+              answer: 1,
+              explanation: 'An imported binding is a live view of the exporting module, not a copy taken at import time. The increment changes count in counter.js, and the log reads the new value: 1. Copying the value instead would print 0.',
+            },
+            {
+              id: 'quiz-js-l99-q5',
+              type: 'identify-error',
+              prompt: 'What is wrong with this import?',
+              code: '// utils.js\nexport function greet(name) { return \'Hi, \' + name }\n\n// main.js\nimport greet from \'./utils.js\'\nconsole.log(greet(\'Ada\'))',
+              options: [
+                'Nothing is wrong, this is the usual form',
+                'utils.js has no default export, so greet is undefined here — it needs a named import',
+                'The path must drop the .js extension',
+                'greet has to be called before it is imported',
+              ],
+              answer: 1,
+              explanation: 'A default import without braces expects a default export, and utils.js only has a named one. `import { greet } from "./utils.js"` is the fix, and the failure is loud rather than silent, which is exactly why named exports are the safer default.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1220,80 +1509,6 @@ console.log(messageUtils.greet('Bo'))`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s80',
-      title: 'Modules check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s80-q1',
-          type: 'multiple-choice',
-          prompt: 'What does type="module" do to a script file?',
-          options: [
-            'It downloads the file before the rest of the page so it runs first',
-            'It gives the file its own scope, runs it in strict mode and defers it until the document is parsed',
-            'It turns the file into a library that other pages can use',
-            'It runs the file once for the page and once for every importer',
-          ],
-          answer: 1,
-          explanation:
-            'Three effects in one attribute: private top-level scope, strict mode, and deferred execution. Deferring is why module code can query elements at the top level without a load handler. It does not run first — that would be the opposite of what defer means.',
-        },
-        {
-          id: 'quiz-js-s80-q2',
-          type: 'true-false',
-          prompt: 'Two module files can share a value by both declaring it with var at the top level.',
-          answer: false,
-          explanation:
-            'Each module has its own scope, so the two declarations are unrelated and nothing is shared. Sharing happens through an export on one side and an import on the other, which makes it visible in the source instead of depending on load order.',
-        },
-        {
-          id: 'quiz-js-s80-q3',
-          type: 'blank',
-          prompt: 'Which keyword publishes a named value from a module so another file can import it?',
-          answers: ['export'],
-          explanation:
-            '`export` marks what the outside world may use, `import` asks for it by name. Naming your public surface is what makes a module readable: the reader of an import statement sees exactly what the file offers.',
-        },
-        {
-          id: 'quiz-js-s80-q4',
-          type: 'code-output',
-          prompt: 'Two modules as written here. What does main.js print?',
-          code: `// counter.js
-export let count = 0
-export function increment() { count += 1 }
-
-// main.js
-import { count, increment } from './counter.js'
-increment()
-console.log(count)`,
-          options: ['0', '1', 'undefined', '2'],
-          answer: 1,
-          explanation:
-            'An imported binding is a live view of the exporting module, not a copy taken at import time. The increment changes count in counter.js, and the log reads the new value: 1. Copying the value instead would print 0.',
-        },
-        {
-          id: 'quiz-js-s80-q5',
-          type: 'identify-error',
-          prompt: 'What is wrong with this import?',
-          code: `// utils.js
-export function greet(name) { return 'Hi, ' + name }
-
-// main.js
-import greet from './utils.js'
-console.log(greet('Ada'))`,
-          options: [
-            'Nothing is wrong, this is the usual form',
-            'utils.js has no default export, so greet is undefined here — it needs a named import',
-            'The path must drop the .js extension',
-            'greet has to be called before it is imported',
-          ],
-          answer: 1,
-          explanation:
-            'A default import without braces expects a default export, and utils.js only has a named one. `import { greet } from "./utils.js"` is the fix, and the failure is loud rather than silent, which is exactly why named exports are the safer default.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s81',
@@ -1311,6 +1526,73 @@ console.log(greet('Ada'))`,
           'Drive an empty state from the same data as the list',
         ],
         xp: 120,
+        quiz: {
+          id: 'quiz-js-l100',
+          title: 'Build an interactive task tracker quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l100-q1',
+              type: 'multiple-choice',
+              prompt: 'Where should the task list live so the count and the empty message stay in step with it?',
+              options: [
+                'In the DOM, read back out of it whenever you need the data',
+                'In one array that every handler updates before calling render()',
+                'In a cookie, so it survives a refresh',
+                'In a separate function for each action, each with its own copy',
+              ],
+              answer: 1,
+              explanation: 'One array, one render function. The page is drawn from the data and never edited directly, so the list, the count and the empty message can never disagree with each other or with the state.',
+            },
+            {
+              id: 'quiz-js-l100-q2',
+              type: 'true-false',
+              prompt: 'Rebuilding the whole list on every change is wasteful at any size.',
+              answer: false,
+              explanation: 'For a list of tens or hundreds of rows, emptying and rebuilding is instant, and it removes the whole category of bug where the page and the data drift apart. Patching individual rows is the optimisation you reach for only when you have measured a real problem.',
+            },
+            {
+              id: 'quiz-js-l100-q3',
+              type: 'blank',
+              prompt: 'Which method call empties an element so it can be re-rendered?',
+              answers: [
+                'replacechildren',
+                'replacechildren()',
+                '.replacechildren()',
+                'element.replacechildren',
+              ],
+              explanation: 'Calling it with no arguments removes every child in one step, which is exactly what render() needs before appending the rows it has just built.',
+            },
+            {
+              id: 'quiz-js-l100-q4',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'let tasks = [{ text: \'Walk\', done: false }]\ntasks.push({ text: \'Read\', done: false })\nconsole.log(tasks.length, tasks[1].text)',
+              options: [
+                '2 Read',
+                '1 Read',
+                '2 undefined',
+                '0 Read',
+              ],
+              answer: 0,
+              explanation: 'push appends, so the array holds two tasks and index 1 is the one just added. This is the shape the submit handler produces: the new task is always the last element, which is why the render loop reads the index rather than capturing a task object.',
+            },
+            {
+              id: 'quiz-js-l100-q5',
+              type: 'identify-error',
+              prompt: 'Clicking Add twice leaves two copies of every task on the page. What is missing?',
+              code: 'function render() {\n  const list = document.querySelector(\'#task-list\')\n  tasks.forEach(function (task) {\n    const item = document.createElement(\'li\')\n    item.textContent = task.text\n    list.appendChild(item)\n  })\n}',
+              options: [
+                'The push has to happen outside the forEach',
+                'The list is never emptied, so each render appends a second copy of every row',
+                'appendChild cannot be called inside forEach',
+                'render has to be declared before tasks',
+              ],
+              answer: 1,
+              explanation: 'The first line inside render must be `list.replaceChildren()`. Without it the loop adds the whole array to whatever is already there, and the visible list grows every time while the data stays correct — the drift that rebuilding from scratch exists to prevent.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1735,76 +2017,5 @@ clearButton.addEventListener('click', function () {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s81',
-      title: 'Final project check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s81-q1',
-          type: 'multiple-choice',
-          prompt: 'Where should the task list live so the count and the empty message stay in step with it?',
-          options: [
-            'In the DOM, read back out of it whenever you need the data',
-            'In one array that every handler updates before calling render()',
-            'In a cookie, so it survives a refresh',
-            'In a separate function for each action, each with its own copy',
-          ],
-          answer: 1,
-          explanation:
-            'One array, one render function. The page is drawn from the data and never edited directly, so the list, the count and the empty message can never disagree with each other or with the state.',
-        },
-        {
-          id: 'quiz-js-s81-q2',
-          type: 'true-false',
-          prompt: 'Rebuilding the whole list on every change is wasteful at any size.',
-          answer: false,
-          explanation:
-            'For a list of tens or hundreds of rows, emptying and rebuilding is instant, and it removes the whole category of bug where the page and the data drift apart. Patching individual rows is the optimisation you reach for only when you have measured a real problem.',
-        },
-        {
-          id: 'quiz-js-s81-q3',
-          type: 'blank',
-          prompt: 'Which method call empties an element so it can be re-rendered?',
-          answers: ['replacechildren', 'replacechildren()', '.replacechildren()', 'element.replacechildren'],
-          explanation:
-            'Calling it with no arguments removes every child in one step, which is exactly what render() needs before appending the rows it has just built.',
-        },
-        {
-          id: 'quiz-js-s81-q4',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `let tasks = [{ text: 'Walk', done: false }]
-tasks.push({ text: 'Read', done: false })
-console.log(tasks.length, tasks[1].text)`,
-          options: ['2 Read', '1 Read', '2 undefined', '0 Read'],
-          answer: 0,
-          explanation:
-            'push appends, so the array holds two tasks and index 1 is the one just added. This is the shape the submit handler produces: the new task is always the last element, which is why the render loop reads the index rather than capturing a task object.',
-        },
-        {
-          id: 'quiz-js-s81-q5',
-          type: 'identify-error',
-          prompt: 'Clicking Add twice leaves two copies of every task on the page. What is missing?',
-          code: `function render() {
-  const list = document.querySelector('#task-list')
-  tasks.forEach(function (task) {
-    const item = document.createElement('li')
-    item.textContent = task.text
-    list.appendChild(item)
-  })
-}`,
-          options: [
-            'The push has to happen outside the forEach',
-            'The list is never emptied, so each render appends a second copy of every row',
-            'appendChild cannot be called inside forEach',
-            'render has to be declared before tasks',
-          ],
-          answer: 1,
-          explanation:
-            'The first line inside render must be `list.replaceChildren()`. Without it the loop adds the whole array to whatever is already there, and the visible list grows every time while the data stays correct — the drift that rebuilding from scratch exists to prevent.',
-        },
-      ],
-    },
   },
 ]

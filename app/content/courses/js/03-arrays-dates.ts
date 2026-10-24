@@ -20,6 +20,81 @@ export const jsArraysDatesSections: Section[] = [
           'Add and remove with push, pop, shift and unshift, and read with for…of',
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-js-l20',
+          title: 'Arrays and reading data quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l20-q1',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'const cars = [\'Saab\', \'Volvo\', \'BMW\']\ncars.push(\'Audi\')\nconsole.log(cars[cars.length - 1], cars[-1])',
+              options: [
+                'Audi undefined',
+                'Audi Audi',
+                'undefined Audi',
+                'BMW undefined',
+              ],
+              answer: 0,
+              explanation: 'The last item sits at `length - 1`, so after the push that is the Audi. `cars[-1]` is undefined because indexes count from zero and from the start — there is no index -1, and a negative property lookup is just a missing property rather than an error.',
+            },
+            {
+              id: 'quiz-js-l20-q2',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'const items = [1, 2, 3]\nitems.shift()\nitems.unshift(0)\nconsole.log(items)',
+              options: [
+                '[0, 1, 2, 3]',
+                '[0, 2, 3]',
+                '[2, 3, 0]',
+                '[1, 2, 3]',
+              ],
+              answer: 1,
+              explanation: '`shift` removes the first item, leaving `[2, 3]`, and `unshift(0)` adds 0 at the front. The removed 1 is gone, so the result is `[0, 2, 3]`.',
+            },
+            {
+              id: 'quiz-js-l20-q3',
+              type: 'multiple-choice',
+              prompt: 'Which method removes the last item from an array and returns it?',
+              options: [
+                '`push()`',
+                '`pop()`',
+                '`shift()`',
+                '`unshift()`',
+              ],
+              answer: 1,
+              explanation: '`pop` removes and returns the final item. `push` adds at the end, while `shift` and `unshift` work at the front, where every remaining index has to be renumbered.',
+            },
+            {
+              id: 'quiz-js-l20-q4',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'const out = []\nfor (const [i, name] of [\'Ada\', \'Bo\'].entries()) {\n  out.push(i + 1 + \'. \' + name)\n}\nconsole.log(out.join(\' | \'))',
+              options: [
+                '1. Ada | 2. Bo',
+                '0. Ada | 1. Bo',
+                'Ada | Bo',
+                '1. Ada | 1. Bo',
+              ],
+              answer: 0,
+              explanation: '`entries()` yields an `[index, value]` pair for each item, and the destructuring splits it apart. Adding 1 to the zero-based index turns the display into 1 and 2.',
+            },
+            {
+              id: 'quiz-js-l20-q5',
+              type: 'multiple-choice',
+              prompt: 'Why can `unshift` be much slower than `push` on a long array?',
+              options: [
+                'It copies the array into a string first',
+                'It must renumber every existing item to keep the indexes gapless',
+                'It always sorts the array afterwards',
+                'It creates a new array instead of changing the original',
+              ],
+              answer: 1,
+              explanation: 'Adding at the front shifts every remaining element one position along so the indexes stay continuous, which costs time proportional to the length. `push` appends without moving anything.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -231,6 +306,73 @@ for (const [i, name] of queue.entries()) {
           'Fold an array into one value with reduce, and explain why forEach returns nothing',
         ],
         xp: 55,
+        quiz: {
+          id: 'quiz-js-l21',
+          title: 'Transforming arrays quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l21-q1',
+              type: 'multiple-choice',
+              prompt: 'What does `const a = [1, 2, 3]; a.forEach((n) => n * 2)` return?',
+              options: [
+                'A new array [2, 4, 6]',
+                '[2, 4, 6], and a is left unchanged',
+                'undefined — forEach runs the function for its side effects and discards the return values',
+                'undefined, and a becomes [2, 4, 6]',
+              ],
+              answer: 2,
+              explanation: 'forEach returns undefined by design: it exists for side effects like writing to the page. `map` is the one that collects the return values into a new array. If you are about to use a forEach result, you wanted a map.',
+            },
+            {
+              id: 'quiz-js-l21-q2',
+              type: 'true-false',
+              prompt: '`forEach` returns a new array containing whatever the callback returned for each item.',
+              answer: false,
+              explanation: 'It returns undefined and throws the callback results away. The method that collects those results into a new array is `map`. Writing a forEach and then using its value is the single most common reason people reach for map instead.',
+            },
+            {
+              id: 'quiz-js-l21-q3',
+              type: 'identify-error',
+              prompt: 'What is wrong with this snippet?',
+              code: 'const names = [\'Ada\', \'Bo\']\nconst initials = names.forEach(function (n) {\n  return n[0]\n})\nconsole.log(initials.length)',
+              options: [
+                'n[0] cannot be used inside a callback',
+                'forEach returns undefined, so initials.length cannot be read',
+                'The callback needs to be an arrow function',
+                'Nothing — this collects the first letter of each name',
+              ],
+              answer: 1,
+              explanation: 'forEach discards every return value and gives back undefined, so reading `.length` on the result fails. `names.map((n) => n[0])` is what collects the first letter of each name, and it returns ["A", "B"].',
+            },
+            {
+              id: 'quiz-js-l21-q4',
+              type: 'blank',
+              prompt: 'Which array method returns a new array holding only the items that pass the test, so the result may be shorter than the original?',
+              answers: [
+                'filter',
+                '.filter',
+                'filter()',
+                'array.filter',
+              ],
+              explanation: '`filter` keeps the items its callback accepts and drops the rest. `map` transforms items one for one, so it always returns the same length, and `reduce` folds the array down to a single value. When the output has to be an array and its length may shrink, that is `filter`.',
+            },
+            {
+              id: 'quiz-js-l21-q5',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'const scores = [42, 91, 68]\nconsole.log(scores.some((n) => n > 80), scores.find((n) => n > 60))',
+              options: [
+                'true 68',
+                'true 91',
+                'false 91',
+                'true undefined',
+              ],
+              answer: 1,
+              explanation: '`some` asks whether at least one item passes and returns a boolean, so it reports true. `find` returns the first item that passes — 91 comes before 68 in the array, so it stops there.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -471,80 +613,6 @@ console.log(squared)`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s14',
-      title: 'Arrays check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s14-q1',
-          type: 'multiple-choice',
-          prompt: 'What does `const a = [1, 2, 3]; a.forEach((n) => n * 2)` return?',
-          options: [
-            'A new array [2, 4, 6]',
-            '[2, 4, 6], and a is left unchanged',
-            'undefined — forEach runs the function for its side effects and discards the return values',
-            'undefined, and a becomes [2, 4, 6]',
-          ],
-          answer: 2,
-          explanation:
-            'forEach returns undefined by design: it exists for side effects like writing to the page. `map` is the one that collects the return values into a new array. If you are about to use a forEach result, you wanted a map.',
-        },
-        {
-          id: 'quiz-js-s14-q2',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `const cars = ['Saab', 'Volvo', 'BMW']
-cars.push('Audi')
-console.log(cars[cars.length - 1], cars[-1])`,
-          options: [
-            'Audi undefined',
-            'Audi Audi',
-            'undefined Audi',
-            'BMW undefined',
-          ],
-          answer: 0,
-          explanation:
-            'The last item sits at `length - 1`, so after the push that is the Audi. `cars[-1]` is undefined because indexes count from zero and from the start — there is no index -1, and a negative property lookup is just a missing property rather than an error.',
-        },
-        {
-          id: 'quiz-js-s14-q3',
-          type: 'true-false',
-          prompt: '`forEach` returns a new array containing whatever the callback returned for each item.',
-          answer: false,
-          explanation:
-            'It returns undefined and throws the callback results away. The method that collects those results into a new array is `map`. Writing a forEach and then using its value is the single most common reason people reach for map instead.',
-        },
-        {
-          id: 'quiz-js-s14-q4',
-          type: 'identify-error',
-          prompt: 'What is wrong with this snippet?',
-          code: `const names = ['Ada', 'Bo']
-const initials = names.forEach(function (n) {
-  return n[0]
-})
-console.log(initials.length)`,
-          options: [
-            'n[0] cannot be used inside a callback',
-            'forEach returns undefined, so initials.length cannot be read',
-            'The callback needs to be an arrow function',
-            'Nothing — this collects the first letter of each name',
-          ],
-          answer: 1,
-          explanation:
-            'forEach discards every return value and gives back undefined, so reading `.length` on the result fails. `names.map((n) => n[0])` is what collects the first letter of each name, and it returns ["A", "B"].',
-        },
-        {
-          id: 'quiz-js-s14-q5',
-          type: 'blank',
-          prompt:
-            'Which array method returns a new array holding only the items that pass the test, so the result may be shorter than the original?',
-          answers: ['filter', '.filter', 'filter()', 'array.filter'],
-          explanation:
-            '`filter` keeps the items its callback accepts and drops the rest. `map` transforms items one for one, so it always returns the same length, and `reduce` folds the array down to a single value. When the output has to be an array and its length may shrink, that is `filter`.',
-        },
-      ],
-    },
   },
 
   /* ---------------------------------- js-s15 --------------------------------- */
@@ -566,6 +634,73 @@ console.log(initials.length)`,
           'Sort without mutating using a spread copy or toSorted',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-js-l22',
+          title: 'Sorting and immutability quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l22-q1',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'const points = [40, 100, 1, 25, 10]\nconsole.log(points.sort().join(\',\'))',
+              options: [
+                '1,10,25,40,100',
+                '1,10,100,25,40',
+                '1,10,25,100,40',
+                '1,25,10,40,100',
+              ],
+              answer: 1,
+              explanation: 'Without a comparator, sort compares the values as strings. "2" comes before "4", so 25 lands before 40. Adding the comparator `(a, b) => a - b` gives 1, 10, 25, 40, 100.',
+            },
+            {
+              id: 'quiz-js-l22-q2',
+              type: 'true-false',
+              prompt: '`sort()` returns a new sorted array and leaves the original in its original order.',
+              answer: false,
+              explanation: 'sort reorders the array it is called on, in place, and returns that same array. To keep the original intact, sort a copy: `[...points].sort((a, b) => a - b)`, or use `toSorted` where it is available.',
+            },
+            {
+              id: 'quiz-js-l22-q3',
+              type: 'multiple-choice',
+              prompt: 'A comparator passed to `sort` must return what?',
+              options: [
+                'true if a should come first, false otherwise',
+                '-1, 0 or 1',
+                'A negative number, zero, or a positive number',
+                'The two items, in the order you want them',
+              ],
+              answer: 2,
+              explanation: 'The contract is only about sign: negative puts a first, positive puts b first, zero means equal as far as ordering goes. sort works out the sequence itself. `a - b` happens to give exactly that for numbers, which is why it is the form you see everywhere.',
+            },
+            {
+              id: 'quiz-js-l22-q4',
+              type: 'identify-error',
+              prompt: 'What is wrong with this snippet?',
+              code: 'const scores = [38, 72, 45, 91]\nconst top = scores.sort(function (a, b) { return b.score - a.score })\nconsole.log(scores[0])',
+              options: [
+                'The comparator is written backwards — it should be a - b',
+                'The items are numbers, so there is nothing to compare and a comparator cannot work',
+                'The comparator should compare a.length - b.length',
+                'Nothing is wrong — this sorts the numbers from highest to lowest',
+              ],
+              answer: 1,
+              explanation: 'The comparator reads a `.score` property that plain numbers do not have, so `a.score - b.score` is NaN. NaN is not meaningfully negative, zero or positive, so the resulting order is undefined. Compare numbers with `a - b`; compare objects by the property you care about, `a.age - b.age`.',
+            },
+            {
+              id: 'quiz-js-l22-q5',
+              type: 'blank',
+              prompt: 'Fill in the comparator that sorts numbers from lowest to highest.',
+              code: 'const n = [40, 1, 25]\nn.sort((a, b) => ___)',
+              answers: [
+                'a - b',
+                'a-b',
+                'a  -  b',
+              ],
+              explanation: 'Subtracting the two values produces a negative number when a is smaller, zero when they are equal, and a positive number when a is larger — exactly the contract sort expects. Swapping to `b - a` gives the descending order instead.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -741,73 +876,6 @@ console.log(ranked)`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s15',
-      title: 'Array sort and iteration check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s15-q1',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `const points = [40, 100, 1, 25, 10]
-console.log(points.sort().join(','))`,
-          options: ['1,10,25,40,100', '1,10,100,25,40', '1,10,25,100,40', '1,25,10,40,100'],
-          answer: 1,
-          explanation:
-            'Without a comparator, sort compares the values as strings. "2" comes before "4", so 25 lands before 40. Adding the comparator `(a, b) => a - b` gives 1, 10, 25, 40, 100.',
-        },
-        {
-          id: 'quiz-js-s15-q2',
-          type: 'true-false',
-          prompt: '`sort()` returns a new sorted array and leaves the original in its original order.',
-          answer: false,
-          explanation:
-            'sort reorders the array it is called on, in place, and returns that same array. To keep the original intact, sort a copy: `[...points].sort((a, b) => a - b)`, or use `toSorted` where it is available.',
-        },
-        {
-          id: 'quiz-js-s15-q3',
-          type: 'multiple-choice',
-          prompt: 'A comparator passed to `sort` must return what?',
-          options: [
-            'true if a should come first, false otherwise',
-            '-1, 0 or 1',
-            'A negative number, zero, or a positive number',
-            'The two items, in the order you want them',
-          ],
-          answer: 2,
-          explanation:
-            'The contract is only about sign: negative puts a first, positive puts b first, zero means equal as far as ordering goes. sort works out the sequence itself. `a - b` happens to give exactly that for numbers, which is why it is the form you see everywhere.',
-        },
-        {
-          id: 'quiz-js-s15-q4',
-          type: 'identify-error',
-          prompt: 'What is wrong with this snippet?',
-          code: `const scores = [38, 72, 45, 91]
-const top = scores.sort(function (a, b) { return b.score - a.score })
-console.log(scores[0])`,
-          options: [
-            'The comparator is written backwards — it should be a - b',
-            'The items are numbers, so there is nothing to compare and a comparator cannot work',
-            'The comparator should compare a.length - b.length',
-            'Nothing is wrong — this sorts the numbers from highest to lowest',
-          ],
-          answer: 1,
-          explanation:
-            'The comparator reads a `.score` property that plain numbers do not have, so `a.score - b.score` is NaN. NaN is not meaningfully negative, zero or positive, so the resulting order is undefined. Compare numbers with `a - b`; compare objects by the property you care about, `a.age - b.age`.',
-        },
-        {
-          id: 'quiz-js-s15-q5',
-          type: 'blank',
-          prompt: 'Fill in the comparator that sorts numbers from lowest to highest.',
-          code: `const n = [40, 1, 25]
-n.sort((a, b) => ___)`,
-          answers: ['a - b', 'a-b', 'a  -  b'],
-          explanation:
-            'Subtracting the two values produces a negative number when a is smaller, zero when they are equal, and a positive number when a is larger — exactly the contract sort expects. Swapping to `b - a` gives the descending order instead.',
-        },
-      ],
-    },
   },
 
   /* ---------------------------------- js-s16 --------------------------------- */
@@ -829,6 +897,73 @@ n.sort((a, b) => ___)`,
           'Read the same moment in local time and in UTC, and say when the two disagree',
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-js-l23',
+          title: 'Dates and time quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l23-q1',
+              type: 'multiple-choice',
+              prompt: 'What does a Date object actually store?',
+              options: [
+                'A year, a month, a day, an hour, a minute and a second, as six separate fields',
+                'A single number: the milliseconds elapsed since 1 January 1970, midnight UTC',
+                'A formatted string such as "2026-03-09T14:05:00.000Z"',
+                'A reference to the moment the object was created, so it updates like a clock',
+              ],
+              answer: 1,
+              explanation: 'Everything you read off a Date — getFullYear, getMonth, getHours — is calculated from that one number. That is why two Dates can be subtracted directly, and why a Date is a fixed instant rather than a running clock: it does not tick, and the demo has to re-create it to keep moving.',
+            },
+            {
+              id: 'quiz-js-l23-q2',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'const a = new Date(2026, 0, 15)\nconsole.log(a.getMonth())',
+              options: [
+                '1',
+                '0',
+                'January',
+                '15',
+              ],
+              answer: 1,
+              explanation: 'Months are 0-based when you construct and read them, so January is 0 and December is 11. Only `getFullYear` and `getDate` count the way you expect. The offset appears because months were once indexed from an array, and the array starts at zero.',
+            },
+            {
+              id: 'quiz-js-l23-q3',
+              type: 'true-false',
+              prompt: '`new Date(\'2026-01-15\')` and `new Date(\'15/01/2026\')` reliably mean the same instant on every machine.',
+              answer: false,
+              explanation: 'The YYYY-MM-DD form is read as UTC midnight, while day-first forms are read as local midnight. In any timezone behind UTC those land on different days, and the day-first form is an engine detail rather than part of the specification. Build from numbers when the exact instant matters.',
+            },
+            {
+              id: 'quiz-js-l23-q4',
+              type: 'identify-error',
+              prompt: 'What is wrong with this code?',
+              code: 'const sale = new Date(\'2026-02-30\')\nconsole.log(sale.getMonth(), sale.getDate())',
+              options: [
+                'getMonth cannot be called on a Date',
+                'The impossible date is silently rolled over, so this is 1 March, not 30 February',
+                'Dates must be created with the new keyword or they do not exist',
+                'The format is wrong — it must be written as 30/02/2026',
+              ],
+              answer: 1,
+              explanation: 'A Date has no way to be the thirtieth of February, so the constructor normalises it to 1 March. No error, no warning, and a log line that looks like a perfectly ordinary date. If the input can be wrong, validate the day against the month before constructing the Date.',
+            },
+            {
+              id: 'quiz-js-l23-q5',
+              type: 'blank',
+              prompt: 'Which method returns the number of milliseconds since 1 January 1970, with no Date object involved?',
+              answers: [
+                'Date.now()',
+                'Date.now',
+                'date.now()',
+                'Date.now()()',
+              ],
+              explanation: '`Date.now()` gives the epoch milliseconds directly, which is cheaper than building a Date and reading getTime(). It is also how you time a piece of code: read it before and after, and subtract.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1003,71 +1138,6 @@ console.log(daysBetween('2026-02-01', '2026-03-01'))`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s16',
-      title: 'Dates check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s16-q1',
-          type: 'multiple-choice',
-          prompt: 'What does a Date object actually store?',
-          options: [
-            'A year, a month, a day, an hour, a minute and a second, as six separate fields',
-            'A single number: the milliseconds elapsed since 1 January 1970, midnight UTC',
-            'A formatted string such as "2026-03-09T14:05:00.000Z"',
-            'A reference to the moment the object was created, so it updates like a clock',
-          ],
-          answer: 1,
-          explanation:
-            'Everything you read off a Date — getFullYear, getMonth, getHours — is calculated from that one number. That is why two Dates can be subtracted directly, and why a Date is a fixed instant rather than a running clock: it does not tick, and the demo has to re-create it to keep moving.',
-        },
-        {
-          id: 'quiz-js-s16-q2',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `const a = new Date(2026, 0, 15)
-console.log(a.getMonth())`,
-          options: ['1', '0', 'January', '15'],
-          answer: 1,
-          explanation:
-            'Months are 0-based when you construct and read them, so January is 0 and December is 11. Only `getFullYear` and `getDate` count the way you expect. The offset appears because months were once indexed from an array, and the array starts at zero.',
-        },
-        {
-          id: 'quiz-js-s16-q3',
-          type: 'true-false',
-          prompt: '`new Date(\'2026-01-15\')` and `new Date(\'15/01/2026\')` reliably mean the same instant on every machine.',
-          answer: false,
-          explanation:
-            'The YYYY-MM-DD form is read as UTC midnight, while day-first forms are read as local midnight. In any timezone behind UTC those land on different days, and the day-first form is an engine detail rather than part of the specification. Build from numbers when the exact instant matters.',
-        },
-        {
-          id: 'quiz-js-s16-q4',
-          type: 'identify-error',
-          prompt: 'What is wrong with this code?',
-          code: `const sale = new Date('2026-02-30')
-console.log(sale.getMonth(), sale.getDate())`,
-          options: [
-            'getMonth cannot be called on a Date',
-            'The impossible date is silently rolled over, so this is 1 March, not 30 February',
-            'Dates must be created with the new keyword or they do not exist',
-            'The format is wrong — it must be written as 30/02/2026',
-          ],
-          answer: 1,
-          explanation:
-            'A Date has no way to be the thirtieth of February, so the constructor normalises it to 1 March. No error, no warning, and a log line that looks like a perfectly ordinary date. If the input can be wrong, validate the day against the month before constructing the Date.',
-        },
-        {
-          id: 'quiz-js-s16-q5',
-          type: 'blank',
-          prompt:
-            'Which method returns the number of milliseconds since 1 January 1970, with no Date object involved?',
-          answers: ['Date.now()', 'Date.now', 'date.now()', 'Date.now()()'],
-          explanation:
-            '`Date.now()` gives the epoch milliseconds directly, which is cheaper than building a Date and reading getTime(). It is also how you time a piece of code: read it before and after, and subtract.',
-        },
-      ],
-    },
   },
 
   /* ---------------------------------- js-s17 --------------------------------- */
@@ -1089,6 +1159,73 @@ console.log(sale.getMonth(), sale.getDate())`,
           'Choose between the local getters and the getUTC… getters, and read getTimezoneOffset correctly',
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-js-l24',
+          title: 'Getting and setting date parts quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l24-q1',
+              type: 'multiple-choice',
+              prompt: 'What does `new Date(2026, 0, 15).getMonth()` return, and what is that month?',
+              options: [
+                '0 — January',
+                '1 — January',
+                '0 — February',
+                '15 — March',
+              ],
+              answer: 0,
+              explanation: 'Months are numbered 0 to 11, so 0 is January and 11 is December. The same convention applies to `setMonth`, so the number you read is the number you write — the +1 conversion only belongs in display code.',
+            },
+            {
+              id: 'quiz-js-l24-q2',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'const d = new Date(2026, 2, 9, 14, 5)\nd.setMonth(12)\nconsole.log(d.getMonth(), d.getDate())',
+              options: [
+                '12 9',
+                '0 9',
+                '1 9',
+                '11 9',
+              ],
+              answer: 1,
+              explanation: 'Setters roll over rather than refuse: month 12 is January of the following year, and getMonth reports it as 0. The day of the month survives, because only the month was changed. This is the behaviour to remember before using setMonth to hold "the last day of a month".',
+            },
+            {
+              id: 'quiz-js-l24-q3',
+              type: 'true-false',
+              prompt: '`getDate()` returns the day of the week, and `getDay()` returns the day of the month.',
+              answer: false,
+              explanation: 'It is the other way round. `getDate` is the day of the month, `getDay` is the day of the week numbered 0 to 6 with Sunday first. Pairing getDay with a names array means that array has to start with Sunday, or every label is a day out.',
+            },
+            {
+              id: 'quiz-js-l24-q4',
+              type: 'identify-error',
+              prompt: 'What is wrong with this code?',
+              code: 'function label(d) {\n  const days = [\'Mon\', \'Tue\', \'Wed\', \'Thu\', \'Fri\', \'Sat\', \'Sun\']\n  return days[d.getDay()]\n}',
+              options: [
+                'getDay cannot be used inside a function',
+                'The names array starts at Monday but getDay counts Sunday as 0, so every label is a day out',
+                'days[d.getDay()] returns undefined because the index is a string',
+                'getDay only works on a Date created from a string',
+              ],
+              answer: 1,
+              explanation: '`getDay` is 0 for Sunday, so the array must be ["Sun", "Mon", …]. A one-day shift is the exact failure this causes, and it is easy to miss because every label is still a real weekday.',
+            },
+            {
+              id: 'quiz-js-l24-q5',
+              type: 'blank',
+              prompt: 'Fill in the method that tells you how many minutes this machine\'s clock is behind UTC.',
+              answers: [
+                'getTimezoneOffset',
+                '.getTimezoneOffset()',
+                'gettimezoneoffset',
+                'getTimezoneOffset()',
+              ],
+              explanation: '`getTimezoneOffset()` returns local time minus UTC in minutes, so UTC+1 gives -60. The sign is the part people get wrong: the answer is how far *behind* UTC you are, not your offset from it.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1274,69 +1411,6 @@ console.log(formatDate(new Date('2026-03-09T14:05:00')))`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s17',
-      title: 'Date methods check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s17-q1',
-          type: 'multiple-choice',
-          prompt: 'What does `new Date(2026, 0, 15).getMonth()` return, and what is that month?',
-          options: ['0 — January', '1 — January', '0 — February', '15 — March'],
-          answer: 0,
-          explanation:
-            'Months are numbered 0 to 11, so 0 is January and 11 is December. The same convention applies to `setMonth`, so the number you read is the number you write — the +1 conversion only belongs in display code.',
-        },
-        {
-          id: 'quiz-js-s17-q2',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `const d = new Date(2026, 2, 9, 14, 5)
-d.setMonth(12)
-console.log(d.getMonth(), d.getDate())`,
-          options: ['12 9', '0 9', '1 9', '11 9'],
-          answer: 1,
-          explanation:
-            'Setters roll over rather than refuse: month 12 is January of the following year, and getMonth reports it as 0. The day of the month survives, because only the month was changed. This is the behaviour to remember before using setMonth to hold "the last day of a month".',
-        },
-        {
-          id: 'quiz-js-s17-q3',
-          type: 'true-false',
-          prompt: '`getDate()` returns the day of the week, and `getDay()` returns the day of the month.',
-          answer: false,
-          explanation:
-            'It is the other way round. `getDate` is the day of the month, `getDay` is the day of the week numbered 0 to 6 with Sunday first. Pairing getDay with a names array means that array has to start with Sunday, or every label is a day out.',
-        },
-        {
-          id: 'quiz-js-s17-q4',
-          type: 'identify-error',
-          prompt: 'What is wrong with this code?',
-          code: `function label(d) {
-  const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-  return days[d.getDay()]
-}`,
-          options: [
-            'getDay cannot be used inside a function',
-            'The names array starts at Monday but getDay counts Sunday as 0, so every label is a day out',
-            'days[d.getDay()] returns undefined because the index is a string',
-            'getDay only works on a Date created from a string',
-          ],
-          answer: 1,
-          explanation:
-            '`getDay` is 0 for Sunday, so the array must be ["Sun", "Mon", …]. A one-day shift is the exact failure this causes, and it is easy to miss because every label is still a real weekday.',
-        },
-        {
-          id: 'quiz-js-s17-q5',
-          type: 'blank',
-          prompt:
-            'Fill in the method that tells you how many minutes this machine\'s clock is behind UTC.',
-          answers: ['getTimezoneOffset', '.getTimezoneOffset()', 'gettimezoneoffset', 'getTimezoneOffset()'],
-          explanation:
-            '`getTimezoneOffset()` returns local time minus UTC in minutes, so UTC+1 gives -60. The sign is the part people get wrong: the answer is how far *behind* UTC you are, not your offset from it.',
-        },
-      ],
-    },
   },
 
   /* ---------------------------------- js-s18 --------------------------------- */
@@ -1358,6 +1432,73 @@ console.log(d.getMonth(), d.getDate())`,
           'Take min, max and an average out of a list of any length',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-js-l25',
+          title: 'Math quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l25-q1',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'console.log(Math.floor(-4.2), Math.trunc(-4.2))',
+              options: [
+                '-4 -4',
+                '-5 -4',
+                '-4 -5',
+                '-5 -5',
+              ],
+              answer: 1,
+              explanation: '`floor` moves toward negative infinity, so -4.2 becomes -5. `trunc` throws the fraction away and keeps the sign, giving -4. On positive numbers the two are identical, which is exactly why the difference goes unnoticed until a negative value appears.',
+            },
+            {
+              id: 'quiz-js-l25-q2',
+              type: 'multiple-choice',
+              prompt: 'What does `Math.sqrt(-1)` give back?',
+              options: [
+                'It throws a RangeError, because a negative number has no square root',
+                'NaN, with no error and no warning',
+                '0, because the square root of nothing is nothing',
+                '-1',
+              ],
+              answer: 1,
+              explanation: 'Math answers out-of-domain questions with NaN rather than throwing, so the failure appears later as a display reading NaN or a total that is not a number. A negative argument is usually a sign error upstream, and Math.abs before the call is often the real fix.',
+            },
+            {
+              id: 'quiz-js-l25-q3',
+              type: 'true-false',
+              prompt: '`Math.max(someArray)` returns the largest number in the array.',
+              answer: false,
+              explanation: 'Math.max only takes numbers, so an array argument gives NaN. The array has to be spread into the call: `Math.max(...someArray)`. And for a very long array the spread can exceed the argument limit, which is when a reduce is the safer tool.',
+            },
+            {
+              id: 'quiz-js-l25-q4',
+              type: 'identify-error',
+              prompt: 'What is wrong with this code?',
+              code: 'const page = current / perPage\nconst lastPage = Math.floor(page + 1)',
+              options: [
+                'Math.floor does not accept a second argument',
+                'Adding 1 before flooring inflates the result — a page count is already whole, so floor it on its own',
+                'page counts cannot be computed with division',
+                'Nothing — this is the correct way to count pages',
+              ],
+              answer: 1,
+              explanation: 'If the division is exact, 10 becomes 11. The usual reason to reach for floor is the opposite situation: a ratio that must not round up. If you want to round a fraction up to the next whole page, that is Math.ceil(page) and nothing added.',
+            },
+            {
+              id: 'quiz-js-l25-q5',
+              type: 'blank',
+              prompt: 'Which Math function gives the distance of a number from zero, so the sign disappears?',
+              answers: [
+                'Math.abs',
+                'abs',
+                'Math.abs()',
+                'math.abs',
+              ],
+              explanation: '`Math.abs(-4.7)` is 4.7. It is the function you want whenever a value may be either direction — a difference, a delta, an offset — because squaring or negating it by hand is where sign errors creep in.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1559,69 +1700,6 @@ console.log(stats([12, 7, 25, 9]))`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s18',
-      title: 'Math check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s18-q1',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `console.log(Math.floor(-4.2), Math.trunc(-4.2))`,
-          options: ['-4 -4', '-5 -4', '-4 -5', '-5 -5'],
-          answer: 1,
-          explanation:
-            '`floor` moves toward negative infinity, so -4.2 becomes -5. `trunc` throws the fraction away and keeps the sign, giving -4. On positive numbers the two are identical, which is exactly why the difference goes unnoticed until a negative value appears.',
-        },
-        {
-          id: 'quiz-js-s18-q2',
-          type: 'multiple-choice',
-          prompt: 'What does `Math.sqrt(-1)` give back?',
-          options: [
-            'It throws a RangeError, because a negative number has no square root',
-            'NaN, with no error and no warning',
-            '0, because the square root of nothing is nothing',
-            '-1',
-          ],
-          answer: 1,
-          explanation:
-            'Math answers out-of-domain questions with NaN rather than throwing, so the failure appears later as a display reading NaN or a total that is not a number. A negative argument is usually a sign error upstream, and Math.abs before the call is often the real fix.',
-        },
-        {
-          id: 'quiz-js-s18-q3',
-          type: 'true-false',
-          prompt: '`Math.max(someArray)` returns the largest number in the array.',
-          answer: false,
-          explanation:
-            'Math.max only takes numbers, so an array argument gives NaN. The array has to be spread into the call: `Math.max(...someArray)`. And for a very long array the spread can exceed the argument limit, which is when a reduce is the safer tool.',
-        },
-        {
-          id: 'quiz-js-s18-q4',
-          type: 'identify-error',
-          prompt: 'What is wrong with this code?',
-          code: `const page = current / perPage
-const lastPage = Math.floor(page + 1)`,
-          options: [
-            'Math.floor does not accept a second argument',
-            'Adding 1 before flooring inflates the result — a page count is already whole, so floor it on its own',
-            'page counts cannot be computed with division',
-            'Nothing — this is the correct way to count pages',
-          ],
-          answer: 1,
-          explanation:
-            'If the division is exact, 10 becomes 11. The usual reason to reach for floor is the opposite situation: a ratio that must not round up. If you want to round a fraction up to the next whole page, that is Math.ceil(page) and nothing added.',
-        },
-        {
-          id: 'quiz-js-s18-q5',
-          type: 'blank',
-          prompt: 'Which Math function gives the distance of a number from zero, so the sign disappears?',
-          answers: ['Math.abs', 'abs', 'Math.abs()', 'math.abs'],
-          explanation:
-            '`Math.abs(-4.7)` is 4.7. It is the function you want whenever a value may be either direction — a difference, a delta, an offset — because squaring or negating it by hand is where sign errors creep in.',
-        },
-      ],
-    },
   },
 
   /* ---------------------------------- js-s19 --------------------------------- */
@@ -1643,6 +1721,73 @@ const lastPage = Math.floor(page + 1)`,
           'Say when randomness is a bad idea in a user interface, and avoid bias when you sample',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-js-l26',
+          title: 'Random numbers quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l26-q1',
+              type: 'code-output',
+              prompt: 'Which expression can never return 10?',
+              code: 'Math.floor(Math.random() * 10) + 1',
+              options: [
+                'All of them can return 10',
+                'Math.floor(Math.random() * 10) — its highest value is 9',
+                'Math.ceil(Math.random() * 10) + 1 — its lowest value is 1',
+                'Math.floor(Math.random() * 11) + 1 — its highest value is 10',
+              ],
+              answer: 1,
+              explanation: 'The multiplier is the number of possible values, not the highest one. `* 10` gives ten values, 0 to 9, so 10 is not among them. To reach 10 you need `* 11 + 1`, or `* 10 + 1` for 1 to 10 inclusive.',
+            },
+            {
+              id: 'quiz-js-l26-q2',
+              type: 'true-false',
+              prompt: 'Math.random() can return 1, but never returns 0.',
+              answer: false,
+              explanation: 'It is the other way round: 0 is possible and 1 is not, so the range is 0 <= n < 1. That is why a whole number from 0 to 9 is `Math.floor(Math.random() * 10)`, and why 0 to 100 inclusive needs `* 101`.',
+            },
+            {
+              id: 'quiz-js-l26-q3',
+              type: 'blank',
+              prompt: 'To pick one item at random from an array called `options`, which length do you multiply by?',
+              answers: [
+                'options.length',
+                'length',
+                'options.length()',
+                'the length of the array',
+              ],
+              explanation: 'The array length is the number of possible items, which is the same "multiply by how many there are" rule as any other range. The classic slip is multiplying by `length - 1`, which makes the last item impossible to pick.',
+            },
+            {
+              id: 'quiz-js-l26-q4',
+              type: 'multiple-choice',
+              prompt: 'What is wrong with picking a random item by rerolling until the result is new?',
+              options: [
+                'Nothing — it is the standard way to avoid duplicates',
+                'It is biased: later options become more likely than earlier ones',
+                'It is slower than indexing into the array',
+                'Math.random cannot be called more than once a second',
+              ],
+              answer: 1,
+              explanation: 'Every reroll is another chance for the earlier items, so the last value in a set ends up more likely than the first. Pick from the array of remaining items instead. The same trap applies to rerolling until a "good" score: you have built a generator that only produces good scores.',
+            },
+            {
+              id: 'quiz-js-l26-q5',
+              type: 'identify-error',
+              prompt: 'What is wrong with this code?',
+              code: 'function showBanner() {\n  const tip = tips[Math.floor(Math.random() * (tips.length - 1))]\n  render(tip)\n}',
+              options: [
+                'Math.floor cannot be used inside a function',
+                'tips.length - 1 makes the last tip impossible to ever be chosen',
+                'Math.random has to be stored in a variable first',
+                'Nothing — this picks an item at random correctly',
+              ],
+              answer: 1,
+              explanation: 'The multiplier is the number of possible items, which is the full length. Subtracting one drops the final element, so it never appears no matter how many times the page is reloaded. The version with `tips.length` gives every item the same chance.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1831,77 +1976,6 @@ for (let i = 0; i < 5; i++) {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s19',
-      title: 'Random check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s19-q1',
-          type: 'code-output',
-          prompt: 'Which expression can never return 10?',
-          code: `Math.floor(Math.random() * 10) + 1`,
-          options: [
-            'All of them can return 10',
-            'Math.floor(Math.random() * 10) — its highest value is 9',
-            'Math.ceil(Math.random() * 10) + 1 — its lowest value is 1',
-            'Math.floor(Math.random() * 11) + 1 — its highest value is 10',
-          ],
-          answer: 1,
-          explanation:
-            'The multiplier is the number of possible values, not the highest one. `* 10` gives ten values, 0 to 9, so 10 is not among them. To reach 10 you need `* 11 + 1`, or `* 10 + 1` for 1 to 10 inclusive.',
-        },
-        {
-          id: 'quiz-js-s19-q2',
-          type: 'true-false',
-          prompt: 'Math.random() can return 1, but never returns 0.',
-          answer: false,
-          explanation:
-            'It is the other way round: 0 is possible and 1 is not, so the range is 0 <= n < 1. That is why a whole number from 0 to 9 is `Math.floor(Math.random() * 10)`, and why 0 to 100 inclusive needs `* 101`.',
-        },
-        {
-          id: 'quiz-js-s19-q3',
-          type: 'blank',
-          prompt:
-            'To pick one item at random from an array called `options`, which length do you multiply by?',
-          answers: ['options.length', 'length', 'options.length()', 'the length of the array'],
-          explanation:
-            'The array length is the number of possible items, which is the same "multiply by how many there are" rule as any other range. The classic slip is multiplying by `length - 1`, which makes the last item impossible to pick.',
-        },
-        {
-          id: 'quiz-js-s19-q4',
-          type: 'multiple-choice',
-          prompt: 'What is wrong with picking a random item by rerolling until the result is new?',
-          options: [
-            'Nothing — it is the standard way to avoid duplicates',
-            'It is biased: later options become more likely than earlier ones',
-            'It is slower than indexing into the array',
-            'Math.random cannot be called more than once a second',
-          ],
-          answer: 1,
-          explanation:
-            'Every reroll is another chance for the earlier items, so the last value in a set ends up more likely than the first. Pick from the array of remaining items instead. The same trap applies to rerolling until a "good" score: you have built a generator that only produces good scores.',
-        },
-        {
-          id: 'quiz-js-s19-q5',
-          type: 'identify-error',
-          prompt: 'What is wrong with this code?',
-          code: `function showBanner() {
-  const tip = tips[Math.floor(Math.random() * (tips.length - 1))]
-  render(tip)
-}`,
-          options: [
-            'Math.floor cannot be used inside a function',
-            'tips.length - 1 makes the last tip impossible to ever be chosen',
-            'Math.random has to be stored in a variable first',
-            'Nothing — this picks an item at random correctly',
-          ],
-          answer: 1,
-          explanation:
-            'The multiplier is the number of possible items, which is the full length. Subtracting one drops the final element, so it never appears no matter how many times the page is reloaded. The version with `tips.length` gives every item the same chance.',
-        },
-      ],
-    },
   },
 
   /* ---------------------------------- js-s20 --------------------------------- */
@@ -1923,6 +1997,72 @@ for (let i = 0; i < 5; i++) {
           'Use === true when a truthy value would be wrong, and know why Boolean is a function',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-js-l27',
+          title: 'Booleans quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l27-q1',
+              type: 'multiple-choice',
+              prompt: 'Which of these is **not** falsy?',
+              options: [
+                '0',
+                '\'\'',
+                '[]',
+                '0n',
+              ],
+              answer: 2,
+              explanation: 'The falsy six are false, 0, 0n, "", null, undefined and NaN. An empty array is an object, and every object is truthy — which is why `if (list)` and `if (list.length)` are not the same test.',
+            },
+            {
+              id: 'quiz-js-l27-q2',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'const input = \'0\'\nif (input) {\n  console.log(\'submitted\')\n}',
+              options: [
+                'Nothing — 0 is falsy',
+                'submitted, because the string "0" is non-empty and therefore truthy',
+                'Nothing — strings are never truthy',
+                'It logs 0',
+              ],
+              answer: 1,
+              explanation: 'A form field gives you a string, and a non-empty string is truthy whatever the characters are. The same applies to the word "false". This is why field checks state what they mean: `input.value !== \'\'` or `Number(input.value) > 0`.',
+            },
+            {
+              id: 'quiz-js-l27-q3',
+              type: 'true-false',
+              prompt: '`!!value` is a reliable way to turn any value into a boolean.',
+              answer: true,
+              explanation: 'Two negations in a row cancel out, so the result is the boolean that value converts to — which is exactly what `Boolean(value)` does. It is the shorter form, and it is the one that reads as "force this to a boolean" once you know what a single `!` does.',
+            },
+            {
+              id: 'quiz-js-l27-q4',
+              type: 'identify-error',
+              prompt: 'What is wrong with this code?',
+              code: 'const disabled = new Boolean(false)\nif (disabled) {\n  button.removeAttribute(\'disabled\')\n}',
+              options: [
+                'new Boolean is not a real constructor',
+                'The object wrapper is truthy even though it holds false, so the block always runs',
+                'removeAttribute needs a second argument',
+                'Nothing — this correctly checks for false',
+              ],
+              answer: 1,
+              explanation: '`new Boolean(false)` is an object, and every object is truthy, so the condition cannot be false. `true` and `false` are the values you want; `Boolean(x)` is the function that converts. An object wrapping a boolean is one of the few genuinely confusing cases in the language.',
+            },
+            {
+              id: 'quiz-js-l27-q5',
+              type: 'blank',
+              prompt: 'What is the name of the conversion rule that decides whether a value counts as true in a condition?',
+              answers: [
+                'truthiness',
+                'truthy',
+                'truthiness',
+              ],
+              explanation: 'Truthiness is the rule, and it has a short list of falsy values: false, 0, 0n, the empty string, null, undefined and NaN. Everything else passes a condition, including empty arrays, empty objects and the string "0" — which is why a check on a form field should say what it means rather than rely on the default.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -2096,74 +2236,5 @@ console.log(isFilled('Ada'), isFilled('   '), isFilled(''), isFilled(null))`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s20',
-      title: 'Booleans check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s20-q1',
-          type: 'multiple-choice',
-          prompt: 'Which of these is **not** falsy?',
-          options: ['0', "''", '[]', '0n'],
-          answer: 2,
-          explanation:
-            'The falsy six are false, 0, 0n, "", null, undefined and NaN. An empty array is an object, and every object is truthy — which is why `if (list)` and `if (list.length)` are not the same test.',
-        },
-        {
-          id: 'quiz-js-s20-q2',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `const input = '0'
-if (input) {
-  console.log('submitted')
-}`,
-          options: [
-            'Nothing — 0 is falsy',
-            'submitted, because the string "0" is non-empty and therefore truthy',
-            'Nothing — strings are never truthy',
-            'It logs 0',
-          ],
-          answer: 1,
-          explanation:
-            'A form field gives you a string, and a non-empty string is truthy whatever the characters are. The same applies to the word "false". This is why field checks state what they mean: `input.value !== \'\'` or `Number(input.value) > 0`.',
-        },
-        {
-          id: 'quiz-js-s20-q3',
-          type: 'true-false',
-          prompt: '`!!value` is a reliable way to turn any value into a boolean.',
-          answer: true,
-          explanation:
-            'Two negations in a row cancel out, so the result is the boolean that value converts to — which is exactly what `Boolean(value)` does. It is the shorter form, and it is the one that reads as "force this to a boolean" once you know what a single `!` does.',
-        },
-        {
-          id: 'quiz-js-s20-q4',
-          type: 'identify-error',
-          prompt: 'What is wrong with this code?',
-          code: `const disabled = new Boolean(false)
-if (disabled) {
-  button.removeAttribute('disabled')
-}`,
-          options: [
-            'new Boolean is not a real constructor',
-            'The object wrapper is truthy even though it holds false, so the block always runs',
-            'removeAttribute needs a second argument',
-            'Nothing — this correctly checks for false',
-          ],
-          answer: 1,
-          explanation:
-            '`new Boolean(false)` is an object, and every object is truthy, so the condition cannot be false. `true` and `false` are the values you want; `Boolean(x)` is the function that converts. An object wrapping a boolean is one of the few genuinely confusing cases in the language.',
-        },
-        {
-          id: 'quiz-js-s20-q5',
-          type: 'blank',
-          prompt:
-            'What is the name of the conversion rule that decides whether a value counts as true in a condition?',
-          answers: ['truthiness', 'truthy', 'truthiness'],
-          explanation:
-            'Truthiness is the rule, and it has a short list of falsy values: false, 0, 0n, the empty string, null, undefined and NaN. Everything else passes a condition, including empty arrays, empty objects and the string "0" — which is why a check on a form field should say what it means rather than rely on the default.',
-        },
-      ],
-    },
   },
 ]

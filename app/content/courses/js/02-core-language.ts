@@ -20,6 +20,82 @@ export const jsCoreLanguageSections: Section[] = [
           'Avoid ++ on the same line that reads the value',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-js-l9',
+          title: 'Arithmetic and assignment quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l9-q1',
+              type: 'identify-error',
+              prompt: 'What is wrong with this code?',
+              code: 'let total = 0\nif (total = 10) {\n  console.log(\'over budget\')\n}',
+              options: [
+                '`=` assigns and then hands back 10, which is truthy, so the branch always runs — the test wants `===`',
+                '`total` must be declared with `var` before it can be compared',
+                'An `if` cannot contain an assignment at all',
+                'Nothing — this correctly tests whether total equals 10',
+              ],
+              answer: 0,
+              explanation: 'Assignment is an expression that produces the assigned value, so this sets `total` to 10 and tests a truthy number. It never fails loudly. Use `total === 10` for the comparison and keep the assignment on its own line.',
+            },
+            {
+              id: 'quiz-js-l9-q2',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'console.log(7 % 3)\nconsole.log(7 / 2)',
+              options: [
+                '1 3',
+                '2 3.5',
+                '1 3.5',
+                '3 1',
+              ],
+              answer: 2,
+              explanation: '`%` gives the remainder after division, so 7 divided by 3 leaves 1. `/` is ordinary division and keeps the fraction, so 7 / 2 is 3.5.',
+            },
+            {
+              id: 'quiz-js-l9-q3',
+              type: 'multiple-choice',
+              prompt: '`total %= 4` is shorthand for which assignment?',
+              options: [
+                '`total = 4 % total`',
+                '`total = total % 4`',
+                '`total = total / 4`',
+                '`total = total - 4`',
+              ],
+              answer: 1,
+              explanation: 'A compound assignment applies the operator to the current value and stores the result back in the same name. So `%=` is `total = total % 4`, keeping the remainder.',
+            },
+            {
+              id: 'quiz-js-l9-q4',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'let count = 1\nconsole.log(count++)\nconsole.log(count)',
+              options: [
+                '1 2',
+                '2 2',
+                '2 1',
+                '1 1',
+              ],
+              answer: 0,
+              explanation: 'Postfix `count++` hands back the old value and then increments, so the first log shows 1. By the next line the variable has become 2. Prefix `++count` would print 2 first.',
+            },
+            {
+              id: 'quiz-js-l9-q5',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'console.log(\'Total: \' + 3 + 5)',
+              options: [
+                '"Total: 8"',
+                '"Total: 35"',
+                '"Total: 3 5"',
+                'NaN',
+              ],
+              answer: 1,
+              explanation: 'With a string on the left, `+` concatenates, and it works left to right: the string and 3 join into "Total: 3", then 5 joins onto that. Parenthesise `(3 + 5)` if you want the sum first.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -248,6 +324,71 @@ console.log(quantity % 2)`,
           'Explain why assignment inside a condition is always true'
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-js-l10',
+          title: 'How operators combine quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l10-q1',
+              type: 'multiple-choice',
+              prompt: 'Why is `2 + 3 * 4` equal to 14 and not 20?',
+              options: [
+                'Multiplication has higher precedence, so it is applied first and the addition happens afterwards',
+                'JavaScript always evaluates the leftmost operator first',
+                'Addition is only applied to whole numbers',
+                'The expression is evaluated bottom-up as a rule',
+              ],
+              answer: 0,
+              explanation: 'Precedence groups operators into levels and the tighter level runs first. `*` sits above `+`, so you get `2 + (3 * 4)` = 14. Parentheses are the only way to ask for the other order.',
+            },
+            {
+              id: 'quiz-js-l10-q2',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'console.log(2 ** 3 ** 2)\nconsole.log(10 - 3 + 2)',
+              options: [
+                '64 5',
+                '512 9',
+                '512 5',
+                '64 9',
+              ],
+              answer: 1,
+              explanation: '`**` is right-associative, so it means `2 ** (3 ** 2)` = 512. `+` and `-` share a level and run left to right, so `10 - 3 + 2` is `(10 - 3) + 2` = 9, not 5.',
+            },
+            {
+              id: 'quiz-js-l10-q3',
+              type: 'true-false',
+              prompt: 'Subtraction has higher precedence than addition, so `10 - 3 + 2` is 5.',
+              answer: false,
+              explanation: 'They sit at the same level of the precedence table. When two operators tie, the leftmost runs first, which gives 9. Only parentheses can change it.',
+            },
+            {
+              id: 'quiz-js-l10-q4',
+              type: 'blank',
+              prompt: 'Which operator has the lowest precedence of all, so `a = b + 1` assigns the sum rather than assigning 1 first?',
+              answers: [
+                '=',
+                'assignment',
+                'equals',
+              ],
+              explanation: 'Assignment is looser than every arithmetic, comparison and logical operator, so the whole right-hand side is evaluated first and then stored. That is also why `a = b = 5` works: assignments associate right to left.',
+            },
+            {
+              id: 'quiz-js-l10-q5',
+              type: 'multiple-choice',
+              prompt: 'Why does `true || false && false` evaluate to `true`?',
+              options: [
+                '`||` runs before `&&` because it is written first',
+                '`&&` binds tighter than `||`, so it is evaluated as `true || (false && false)`',
+                'Operators on the right are always evaluated first',
+                '`false && false` throws, and the error is ignored',
+              ],
+              answer: 1,
+              explanation: '`&&` has higher precedence than `||`, so the conjunction is grouped first and evaluates to false. The expression is then `true || false`, which is true. Adding parentheses makes that grouping visible.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -468,72 +609,6 @@ console.log('1' + 2 * 3)`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s7',
-      title: 'Operators check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s7-q1',
-          type: 'multiple-choice',
-          prompt: 'Why is `2 + 3 * 4` equal to 14 and not 20?',
-          options: [
-            'Multiplication has higher precedence, so it is applied first and the addition happens afterwards',
-            'JavaScript always evaluates the leftmost operator first',
-            'Addition is only applied to whole numbers',
-            'The expression is evaluated bottom-up as a rule',
-          ],
-          answer: 0,
-          explanation:
-            'Precedence groups operators into levels and the tighter level runs first. `*` sits above `+`, so you get `2 + (3 * 4)` = 14. Parentheses are the only way to ask for the other order.',
-        },
-        {
-          id: 'quiz-js-s7-q2',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `console.log(2 ** 3 ** 2)
-console.log(10 - 3 + 2)`,
-          options: ['64 5', '512 9', '512 5', '64 9'],
-          answer: 1,
-          explanation:
-            '`**` is right-associative, so it means `2 ** (3 ** 2)` = 512. `+` and `-` share a level and run left to right, so `10 - 3 + 2` is `(10 - 3) + 2` = 9, not 5.',
-        },
-        {
-          id: 'quiz-js-s7-q3',
-          type: 'true-false',
-          prompt: 'Subtraction has higher precedence than addition, so `10 - 3 + 2` is 5.',
-          answer: false,
-          explanation:
-            'They sit at the same level of the precedence table. When two operators tie, the leftmost runs first, which gives 9. Only parentheses can change it.',
-        },
-        {
-          id: 'quiz-js-s7-q4',
-          type: 'blank',
-          prompt: 'Which operator has the lowest precedence of all, so `a = b + 1` assigns the sum rather than assigning 1 first?',
-          answers: ['=', 'assignment', 'equals'],
-          explanation:
-            'Assignment is looser than every arithmetic, comparison and logical operator, so the whole right-hand side is evaluated first and then stored. That is also why `a = b = 5` works: assignments associate right to left.',
-        },
-        {
-          id: 'quiz-js-s7-q5',
-          type: 'identify-error',
-          prompt: 'What is wrong with this code?',
-          code: `let total = 0
-if (total = 10) {
-  console.log('over budget')
-}`,
-          options: [
-            '`=` assigns and then hands back 10, which is truthy, so the branch always runs — the test wants `===`',
-            '`total` must be declared with `var` before it can be compared',
-            'An `if` cannot contain an assignment at all',
-            'Nothing — this correctly tests whether total equals 10',
-          ],
-          answer: 0,
-          explanation:
-            'Assignment is an expression that produces the assigned value, so this sets `total` to 10 and tests a truthy number. It never fails loudly. Use `total === 10` for the comparison and keep the assignment on its own line.',
-        },
-      ],
-    },
   },
 
   /* ------------------------------------------------------------------ */
@@ -555,6 +630,79 @@ if (total = 10) {
           'Tell undefined apart from null',
         ],
         xp: 45,
+        quiz: {
+          id: 'quiz-js-l11',
+          title: 'Values and types quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l11-q1',
+              type: 'multiple-choice',
+              prompt: 'What does `typeof null` return?',
+              options: [
+                '"object"',
+                '"null"',
+                '"undefined"',
+                '"nothing"',
+              ],
+              answer: 0,
+              explanation: 'It returns "object" — a bug from the very first version of the language that had to be kept because old programs depended on it. Never use the type to test for null; compare the value with `value === null`.',
+            },
+            {
+              id: 'quiz-js-l11-q2',
+              type: 'multiple-choice',
+              prompt: 'Which of these values is one of the seven primitive types?',
+              options: [
+                '`[1, 2]`',
+                '`{ id: 1 }`',
+                '`Symbol(\'id\')`',
+                '`new Date()`',
+              ],
+              answer: 2,
+              explanation: 'The primitives are string, number, boolean, null, undefined, symbol and bigint. Arrays, plain objects and dates are all objects, even though `typeof` reports the first two as "object".',
+            },
+            {
+              id: 'quiz-js-l11-q3',
+              type: 'multiple-choice',
+              prompt: 'What does `typeof missingName` return when `missingName` was never declared?',
+              options: [
+                'It throws a ReferenceError',
+                '"undefined"',
+                '"null"',
+                '"unknown"',
+              ],
+              answer: 1,
+              explanation: '`typeof` is the one operator that tolerates an undeclared name, which makes it a safe existence check. Reading the name itself, as in `console.log(missingName)`, would throw.',
+            },
+            {
+              id: 'quiz-js-l11-q4',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'let a\nconst obj = {}\nconsole.log(a, obj.missing, null)',
+              options: [
+                'undefined undefined null',
+                'null undefined undefined',
+                'undefined null null',
+                'It throws on obj.missing',
+              ],
+              answer: 0,
+              explanation: 'A declared variable with no value and a missing object key both produce `undefined`. `null` is a value you wrote yourself, so it prints as null and is not replaced.',
+            },
+            {
+              id: 'quiz-js-l11-q5',
+              type: 'multiple-choice',
+              prompt: 'Which statement about `null` and `undefined` matches the lesson?',
+              options: [
+                '`null` is what JavaScript gives a variable that was never assigned',
+                '`undefined` is a value you type to mark a deliberate empty slot',
+                '`undefined` arrives when nothing assigned a value; `null` is a deliberate choice you write',
+                'They are the same value and can be compared with `typeof`',
+              ],
+              answer: 2,
+              explanation: 'JavaScript supplies `undefined` for an unassigned variable, a missing key or a missing argument. `null` only appears when the code explicitly writes it to mean "intentionally nothing here".',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -756,6 +904,71 @@ console.log(describe(42))`,
           'Use typeof to find out which type a value arrived as',
         ],
         xp: 45,
+        quiz: {
+          id: 'quiz-js-l12',
+          title: 'typeof and type conversion quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l12-q1',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'console.log(typeof [])\nconsole.log(typeof NaN)\nconsole.log(typeof (() => 1))',
+              options: [
+                '"object" "object" "function"',
+                '"array" "number" "function"',
+                '"object" "number" "function"',
+                '"object" "NaN" "arrow"',
+              ],
+              answer: 2,
+              explanation: 'Arrays are objects, which is why `typeof []` is "object". NaN really is a number — just not a valid one — so use `Number.isNaN` to detect it. A function reports "function" whether it was written with the keyword or as an arrow.',
+            },
+            {
+              id: 'quiz-js-l12-q2',
+              type: 'true-false',
+              prompt: 'A number typed into an input field arrives in your code as a string.',
+              answer: true,
+              explanation: 'Every field value is text, including digits. That is why `qty * 4` happens to work — `*` coerces — while `qty + 4` quietly joins the characters instead. Convert on purpose with `Number(value)` before you add.',
+            },
+            {
+              id: 'quiz-js-l12-q3',
+              type: 'blank',
+              prompt: 'Which function converts text to a number, giving `NaN` when the whole string is not a number?',
+              answers: [
+                'number',
+                'number()',
+              ],
+              explanation: '`Number("12abc")` is NaN, because it converts the whole thing or fails. `parseInt("12abc", 10)` returns 12, quietly believing it succeeded — use it only when the number really is the start of a longer string.',
+            },
+            {
+              id: 'quiz-js-l12-q4',
+              type: 'identify-error',
+              prompt: 'What is wrong with this code?',
+              code: 'const qty = document.querySelector(\'#qty\').value\nconst total = qty + 4\ndocument.querySelector(\'#out\').textContent = \'total: \' + total',
+              options: [
+                'qty is a string, so + joins characters and the total reads 64 instead of 40 — convert with Number(qty)',
+                'textContent cannot be given a concatenated string',
+                'querySelector must be called with a class rather than an id',
+                'Nothing — this adds the quantity correctly',
+              ],
+              answer: 0,
+              explanation: 'A field value is the string "6", and a string on either side of `+` turns the whole expression into concatenation. Write `Number(qty) + 4` so the arithmetic happens in numbers, then let the `+` in the sentence do the joining.',
+            },
+            {
+              id: 'quiz-js-l12-q5',
+              type: 'multiple-choice',
+              prompt: 'Which value is truthy?',
+              options: [
+                '`0`',
+                '`\'\'`',
+                '`\'0\'`',
+                '`NaN`',
+              ],
+              answer: 2,
+              explanation: 'The string "0" contains a character, so it is not on the falsy list and counts as true. That is why `if (value)` passes for a field holding "0", and why `value === \'\'` is the reliable empty check.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -953,72 +1166,6 @@ console.log(raw + 8)`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s8',
-      title: 'Data types check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s8-q1',
-          type: 'multiple-choice',
-          prompt: 'What does `typeof null` return?',
-          options: ['"object"', '"null"', '"undefined"', '"nothing"'],
-          answer: 0,
-          explanation:
-            'It returns "object" — a bug from the very first version of the language that had to be kept because old programs depended on it. Never use the type to test for null; compare the value with `value === null`.',
-        },
-        {
-          id: 'quiz-js-s8-q2',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `console.log(typeof [])
-console.log(typeof NaN)
-console.log(typeof (() => 1))`,
-          options: [
-            '"object" "object" "function"',
-            '"array" "number" "function"',
-            '"object" "number" "function"',
-            '"object" "NaN" "arrow"',
-          ],
-          answer: 2,
-          explanation:
-            'Arrays are objects, which is why `typeof []` is "object". NaN really is a number — just not a valid one — so use `Number.isNaN` to detect it. A function reports "function" whether it was written with the keyword or as an arrow.',
-        },
-        {
-          id: 'quiz-js-s8-q3',
-          type: 'true-false',
-          prompt: 'A number typed into an input field arrives in your code as a string.',
-          answer: true,
-          explanation:
-            'Every field value is text, including digits. That is why `qty * 4` happens to work — `*` coerces — while `qty + 4` quietly joins the characters instead. Convert on purpose with `Number(value)` before you add.',
-        },
-        {
-          id: 'quiz-js-s8-q4',
-          type: 'blank',
-          prompt: 'Which function converts text to a number, giving `NaN` when the whole string is not a number?',
-          answers: ['number', 'number()'],
-          explanation:
-            '`Number("12abc")` is NaN, because it converts the whole thing or fails. `parseInt("12abc", 10)` returns 12, quietly believing it succeeded — use it only when the number really is the start of a longer string.',
-        },
-        {
-          id: 'quiz-js-s8-q5',
-          type: 'identify-error',
-          prompt: 'What is wrong with this code?',
-          code: `const qty = document.querySelector('#qty').value
-const total = qty + 4
-document.querySelector('#out').textContent = 'total: ' + total`,
-          options: [
-            'qty is a string, so + joins characters and the total reads 64 instead of 40 — convert with Number(qty)',
-            'textContent cannot be given a concatenated string',
-            'querySelector must be called with a class rather than an id',
-            'Nothing — this adds the quantity correctly',
-          ],
-          answer: 0,
-          explanation:
-            'A field value is the string "6", and a string on either side of `+` turns the whole expression into concatenation. Write `Number(qty) + 4` so the arithmetic happens in numbers, then let the `+` in the sentence do the joining.',
-        },
-      ],
-    },
   },
 
   /* ------------------------------------------------------------------ */
@@ -1040,6 +1187,72 @@ document.querySelector('#out').textContent = 'total: ' + total`,
           'Pick the form that fits the job',
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-js-l13',
+          title: 'Declaring and calling functions quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l13-q1',
+              type: 'multiple-choice',
+              prompt: 'What does a function return when it finishes without an explicit `return`?',
+              options: [
+                'null',
+                'undefined',
+                '0',
+                'An empty string',
+              ],
+              answer: 1,
+              explanation: 'Falling off the end gives `undefined`, which is different from returning `0` or `""`. That is why a default parameter rescues a missing argument — `undefined` is exactly the value that triggers a default.',
+            },
+            {
+              id: 'quiz-js-l13-q2',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'const double = function (n) {\n  return n * 2\n}\nconsole.log(typeof double, double(4))',
+              options: [
+                '"number" 8',
+                '"function" 8',
+                '"function" undefined',
+                '"number" "8"',
+              ],
+              answer: 1,
+              explanation: 'A function expression is still a function value, so `typeof` reports "function" — and the parentheses in `double(4)` are what run it. Without them you would be logging the function itself.',
+            },
+            {
+              id: 'quiz-js-l13-q3',
+              type: 'true-false',
+              prompt: 'A function declaration can be called from a line above the declaration itself.',
+              answer: true,
+              explanation: 'Declarations are hoisted with their bodies attached, so the name exists from the top of the scope. A `const double = function...` in the same position would not: the name is reserved but empty until the assignment runs, which is the temporal dead zone.',
+            },
+            {
+              id: 'quiz-js-l13-q4',
+              type: 'blank',
+              prompt: 'Which keyword introduces a named function that is available from the top of its scope?',
+              answers: [
+                'function',
+                'function keyword',
+                'fn',
+              ],
+              explanation: '`function add() {}` is a declaration, and declarations are hoisted. Anything assigned to a `const` — including a function expression and every arrow — is only usable after that line has run.',
+            },
+            {
+              id: 'quiz-js-l13-q5',
+              type: 'identify-error',
+              prompt: 'What is wrong with this code?',
+              code: 'const area = (w, h) => {\n  return w * h\n}\ndocument.querySelector(\'#out\').addEventListener(\'click\', area)',
+              options: [
+                'The handler is passed as a value rather than called, so clicking gives you the function instead of an area — wrap it: () => area(3, 4)',
+                'Arrow functions cannot be used as event handlers',
+                'addEventListener needs the handler to be an expression, not a declaration',
+                'Nothing — this computes an area on every click',
+              ],
+              answer: 0,
+              explanation: 'Handing `area` to `addEventListener` is correct — the browser calls it with the event object, which then becomes `w`. The mistake is expecting it to receive the dimensions. Wrap it in an arrow that supplies the arguments: `addEventListener("click", () => area(3, 4))`.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1214,69 +1427,6 @@ return isEven(0) === true && isEven(-3) === false
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s9',
-      title: 'Functions check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s9-q1',
-          type: 'multiple-choice',
-          prompt: 'What does a function return when it finishes without an explicit `return`?',
-          options: ['null', 'undefined', '0', 'An empty string'],
-          answer: 1,
-          explanation:
-            'Falling off the end gives `undefined`, which is different from returning `0` or `""`. That is why a default parameter rescues a missing argument — `undefined` is exactly the value that triggers a default.',
-        },
-        {
-          id: 'quiz-js-s9-q2',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `const double = function (n) {
-  return n * 2
-}
-console.log(typeof double, double(4))`,
-          options: ['"number" 8', '"function" 8', '"function" undefined', '"number" "8"'],
-          answer: 1,
-          explanation:
-            'A function expression is still a function value, so `typeof` reports "function" — and the parentheses in `double(4)` are what run it. Without them you would be logging the function itself.',
-        },
-        {
-          id: 'quiz-js-s9-q3',
-          type: 'true-false',
-          prompt: 'A function declaration can be called from a line above the declaration itself.',
-          answer: true,
-          explanation:
-            'Declarations are hoisted with their bodies attached, so the name exists from the top of the scope. A `const double = function...` in the same position would not: the name is reserved but empty until the assignment runs, which is the temporal dead zone.',
-        },
-        {
-          id: 'quiz-js-s9-q4',
-          type: 'blank',
-          prompt: 'Which keyword introduces a named function that is available from the top of its scope?',
-          answers: ['function', 'function keyword', 'fn'],
-          explanation:
-            '`function add() {}` is a declaration, and declarations are hoisted. Anything assigned to a `const` — including a function expression and every arrow — is only usable after that line has run.',
-        },
-        {
-          id: 'quiz-js-s9-q5',
-          type: 'identify-error',
-          prompt: 'What is wrong with this code?',
-          code: `const area = (w, h) => {
-  return w * h
-}
-document.querySelector('#out').addEventListener('click', area)`,
-          options: [
-            'The handler is passed as a value rather than called, so clicking gives you the function instead of an area — wrap it: () => area(3, 4)',
-            'Arrow functions cannot be used as event handlers',
-            'addEventListener needs the handler to be an expression, not a declaration',
-            'Nothing — this computes an area on every click',
-          ],
-          answer: 0,
-          explanation:
-            'Handing `area` to `addEventListener` is correct — the browser calls it with the event object, which then becomes `w`. The mistake is expecting it to receive the dimensions. Wrap it in an arrow that supplies the arguments: `addEventListener("click", () => area(3, 4))`.',
-        },
-      ],
-    },
   },
 
   /* ------------------------------------------------------------------ */
@@ -1298,6 +1448,80 @@ document.querySelector('#out').addEventListener('click', area)`,
           'Write a method that uses this, and list what an object contains',
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-js-l14',
+          title: 'Objects, properties and methods quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l14-q1',
+              type: 'multiple-choice',
+              prompt: 'Which line reads the "theme-color" property out of this object?',
+              code: 'const settings = { \'theme-color\': \'dark\' }\nconst key = \'theme-color\'',
+              options: [
+                'settings.key',
+                'settings[\'key\']',
+                'settings[key]',
+                'None of them work, because the name contains a dash',
+              ],
+              answer: 2,
+              explanation: '`settings[key]` looks up whatever string the variable holds, so it finds the property. The other two ask for a property literally called "key", which does not exist — and the dash is a second reason dot access could never work here.',
+            },
+            {
+              id: 'quiz-js-l14-q2',
+              type: 'blank',
+              prompt: 'Which method gives you an array of an object\'s own key names?',
+              answers: [
+                'object.keys',
+                'objectkeys',
+                'keys',
+                'object.keys()',
+              ],
+              explanation: '`Object.keys(obj)` returns the names, `Object.values(obj)` the values, and `Object.entries(obj)` the pairs. `for…in` walks inherited keys too, which is why the Object methods are the better default.',
+            },
+            {
+              id: 'quiz-js-l14-q3',
+              type: 'identify-error',
+              prompt: 'What is wrong with this code?',
+              code: 'const cart = {\n  items: [\'Tea\'],\n  count() {\n    return this.items.length\n  },\n}\nconst { count } = cart\nconsole.log(count())',
+              options: [
+                'Pulling count off the object loses `this`, so the call throws — call it as cart.count()',
+                'Destructuring cannot read a method',
+                'count is a reserved word',
+                'Nothing — it returns 1',
+              ],
+              answer: 0,
+              explanation: 'The destructured `count` is a bare function reference with no object attached, so `this` inside it is not the cart and `this.items` fails. Keep the call on the object, or bind it explicitly.',
+            },
+            {
+              id: 'quiz-js-l14-q4',
+              type: 'identify-error',
+              prompt: 'Why does this throw?',
+              code: 'const cart = {\n  items: [\'Tea\', \'Coffee\'],\n  count: () => this.items.length,\n}\nconsole.log(cart.count())',
+              options: [
+                '`items` is not an array',
+                'An arrow function has no `this` of its own, so `this.items` is not the cart',
+                'A method cannot be written as a property',
+                '`count` conflicts with `Array.prototype.length`',
+              ],
+              answer: 1,
+              explanation: 'An arrow captures `this` from the surrounding scope instead of receiving the object it is called on, so it never sees `cart.items`. A normal method, such as `count() { return this.items.length }`, gets the cart as its receiver.',
+            },
+            {
+              id: 'quiz-js-l14-q5',
+              type: 'multiple-choice',
+              prompt: 'What does `Object.entries(product)` return?',
+              options: [
+                'An array of the object\'s key names',
+                'An array of the object\'s values',
+                'An array of `[key, value]` pairs',
+                'A single string joining keys and values',
+              ],
+              answer: 2,
+              explanation: '`Object.keys` gives names, `Object.values` gives values, and `Object.entries` gives one two-item array per property. That shape lets you destructure `[key, value]` while looping.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1519,6 +1743,69 @@ console.log(cart.label())`,
           'Reach for optional chaining and nullish coalescing on missing data',
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-js-l15',
+          title: 'Copying and transforming objects quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l15-q1',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'const base = { theme: \'dark\' }\nconst copy = { ...base, theme: \'light\' }\nconsole.log(base.theme, copy.theme)',
+              options: [
+                'light light',
+                'dark light',
+                'dark dark',
+                'light dark',
+              ],
+              answer: 1,
+              explanation: 'The spread builds a new object, so the later `theme` overrides only the copy. `base` still points at the original object with its original value — that is the whole reason to copy before changing.',
+            },
+            {
+              id: 'quiz-js-l15-q2',
+              type: 'true-false',
+              prompt: '`const { a } = obj` creates a copy of `obj` that is safe to change.',
+              answer: false,
+              explanation: 'It creates two new variables holding the values that were inside. The object is not copied and nothing is isolated — if `a` is itself an object, both names now point at the same one.',
+            },
+            {
+              id: 'quiz-js-l15-q3',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'const user = { name: \'Ada\' }\nconst { name: displayName, role = \'guest\' } = user\nconsole.log(displayName, role)',
+              options: [
+                'Ada guest',
+                'Ada undefined',
+                'name guest',
+                'undefined guest',
+              ],
+              answer: 0,
+              explanation: '`name: displayName` renames the extracted value to `displayName`, while `role = \'guest\'` supplies the default because `user` has no role. So the log is `Ada guest`.',
+            },
+            {
+              id: 'quiz-js-l15-q4',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'const user = { name: \'Ada\', points: 0 }\nconsole.log(user.address?.city ?? \'Unknown\')\nconsole.log(user.points ?? 10)',
+              options: [
+                'Unknown 0',
+                'Unknown 10',
+                'undefined 0',
+                'undefined 10',
+              ],
+              answer: 0,
+              explanation: '`?.` stops at the missing `address` and yields undefined instead of throwing, and `??` replaces only null or undefined. `points` is 0, which is a real value, so the default does not apply.',
+            },
+            {
+              id: 'quiz-js-l15-q5',
+              type: 'true-false',
+              prompt: '`const copy = { ...user }` makes a deep copy, so changing `copy.prefs.theme` leaves `user.prefs.theme` unchanged.',
+              answer: false,
+              explanation: 'A spread copy is one level deep: the new object gets the same nested `prefs` reference. Mutating that nested object is visible through both names; spread each level if you need real isolation.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1715,79 +2002,6 @@ console.log(email)`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s10',
-      title: 'Objects check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s10-q1',
-          type: 'multiple-choice',
-          prompt: 'Which line reads the "theme-color" property out of this object?',
-          code: `const settings = { 'theme-color': 'dark' }
-const key = 'theme-color'`,
-          options: [
-            'settings.key',
-            "settings['key']",
-            'settings[key]',
-            'None of them work, because the name contains a dash',
-          ],
-          answer: 2,
-          explanation:
-            '`settings[key]` looks up whatever string the variable holds, so it finds the property. The other two ask for a property literally called "key", which does not exist — and the dash is a second reason dot access could never work here.',
-        },
-        {
-          id: 'quiz-js-s10-q2',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `const base = { theme: 'dark' }
-const copy = { ...base, theme: 'light' }
-console.log(base.theme, copy.theme)`,
-          options: ['light light', 'dark light', 'dark dark', 'light dark'],
-          answer: 1,
-          explanation:
-            'The spread builds a new object, so the later `theme` overrides only the copy. `base` still points at the original object with its original value — that is the whole reason to copy before changing.',
-        },
-        {
-          id: 'quiz-js-s10-q3',
-          type: 'true-false',
-          prompt: '`const { a } = obj` creates a copy of `obj` that is safe to change.',
-          answer: false,
-          explanation:
-            'It creates two new variables holding the values that were inside. The object is not copied and nothing is isolated — if `a` is itself an object, both names now point at the same one.',
-        },
-        {
-          id: 'quiz-js-s10-q4',
-          type: 'blank',
-          prompt: 'Which method gives you an array of an object\'s own key names?',
-          answers: ['object.keys', 'objectkeys', 'keys', 'object.keys()'],
-          explanation:
-            '`Object.keys(obj)` returns the names, `Object.values(obj)` the values, and `Object.entries(obj)` the pairs. `for…in` walks inherited keys too, which is why the Object methods are the better default.',
-        },
-        {
-          id: 'quiz-js-s10-q5',
-          type: 'identify-error',
-          prompt: 'What is wrong with this code?',
-          code: `const cart = {
-  items: ['Tea'],
-  count() {
-    return this.items.length
-  },
-}
-const { count } = cart
-console.log(count())`,
-          options: [
-            'Pulling count off the object loses `this`, so the call throws — call it as cart.count()',
-            'Destructuring cannot read a method',
-            'count is a reserved word',
-            'Nothing — it returns 1',
-          ],
-          answer: 0,
-          explanation:
-            'The destructured `count` is a bare function reference with no object attached, so `this` inside it is not the cart and `this.items` fails. Keep the call on the object, or bind it explicitly.',
-        },
-      ],
-    },
   },
 
   /* ------------------------------------------------------------------ */
@@ -1810,6 +2024,72 @@ console.log(count())`,
           'Stop a form submitting or a link navigating with preventDefault',
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-js-l16',
+          title: 'Events and event handlers quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l16-q1',
+              type: 'multiple-choice',
+              prompt: 'What does the browser pass to your handler function?',
+              options: [
+                'One object describing the event, with things like type, target and key on it',
+                'Nothing — handlers are always called with no arguments',
+                'A string with the name of the event',
+                'The element the listener is attached to, and nothing else',
+              ],
+              answer: 0,
+              explanation: 'Every handler is called with a single event object. It carries the name (`type`), the element the event started on (`target`), the element you listened on (`currentTarget`), plus event-specific details such as `key` or the field `value`.',
+            },
+            {
+              id: 'quiz-js-l16-q2',
+              type: 'code-output',
+              prompt: 'A link has a click listener that calls `event.preventDefault()`. What happens when it is clicked?',
+              code: 'link.addEventListener(\'click\', function (event) {\n  event.preventDefault()\n  console.log(\'handled\')\n})',
+              options: [
+                'It logs handled and the browser does not follow the link',
+                'It throws a ReferenceError, because event is not defined',
+                'It follows the link, and only the first click is prevented',
+                'The listener is removed and nothing runs',
+              ],
+              answer: 0,
+              explanation: '`preventDefault` cancels the browser default — here, the navigation — and the event continues to be dispatched normally. Without that line the page would navigate away and the log would never be seen.',
+            },
+            {
+              id: 'quiz-js-l16-q3',
+              type: 'true-false',
+              prompt: 'An anonymous handler passed to addEventListener cannot be removed later with removeEventListener.',
+              answer: true,
+              explanation: 'Removal compares by identity, and nothing holds a reference to an anonymous function, so no later call can match it. Give the handler a name and store it, or use the `{ once: true }` option when you only ever want one run.',
+            },
+            {
+              id: 'quiz-js-l16-q4',
+              type: 'blank',
+              prompt: 'Which method on the event object stops the browser from following its default action, such as a form submitting?',
+              answers: [
+                'preventdefault',
+                'event.preventdefault()',
+                'event.preventdefault',
+              ],
+              explanation: '`event.preventDefault()` cancels the default behaviour and nothing else. `stopPropagation` is a different job: it stops the event travelling further up the tree, which matters when you are using delegation.',
+            },
+            {
+              id: 'quiz-js-l16-q5',
+              type: 'identify-error',
+              prompt: 'What is wrong with this code?',
+              code: 'button.addEventListener(\'click\', () => {\n  count += 1\n})\nbutton.addEventListener(\'click\', () => {\n  count += 1\n})',
+              options: [
+                'Two different anonymous functions are registered, so the handler runs twice per click — reuse one named function',
+                'A button can only have one listener, so this is a syntax error',
+                'The arrow function is missing a return value',
+                'Nothing — every listener on an element fires once per event',
+              ],
+              answer: 0,
+              explanation: 'Each call registers its own function, and both fire on the same click, so the count jumps by two. That is how `addEventListener` differs from `onclick =`, which replaces. Pass one named handler, or remove the old one before adding the new.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -2038,81 +2318,6 @@ button.addEventListener('click', function () {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s11',
-      title: 'Events check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s11-q1',
-          type: 'multiple-choice',
-          prompt: 'What does the browser pass to your handler function?',
-          options: [
-            'One object describing the event, with things like type, target and key on it',
-            'Nothing — handlers are always called with no arguments',
-            'A string with the name of the event',
-            'The element the listener is attached to, and nothing else',
-          ],
-          answer: 0,
-          explanation:
-            'Every handler is called with a single event object. It carries the name (`type`), the element the event started on (`target`), the element you listened on (`currentTarget`), plus event-specific details such as `key` or the field `value`.',
-        },
-        {
-          id: 'quiz-js-s11-q2',
-          type: 'code-output',
-          prompt: 'A link has a click listener that calls `event.preventDefault()`. What happens when it is clicked?',
-          code: `link.addEventListener('click', function (event) {
-  event.preventDefault()
-  console.log('handled')
-})`,
-          options: [
-            'It logs handled and the browser does not follow the link',
-            'It throws a ReferenceError, because event is not defined',
-            'It follows the link, and only the first click is prevented',
-            'The listener is removed and nothing runs',
-          ],
-          answer: 0,
-          explanation:
-            '`preventDefault` cancels the browser default — here, the navigation — and the event continues to be dispatched normally. Without that line the page would navigate away and the log would never be seen.',
-        },
-        {
-          id: 'quiz-js-s11-q3',
-          type: 'true-false',
-          prompt: 'An anonymous handler passed to addEventListener cannot be removed later with removeEventListener.',
-          answer: true,
-          explanation:
-            'Removal compares by identity, and nothing holds a reference to an anonymous function, so no later call can match it. Give the handler a name and store it, or use the `{ once: true }` option when you only ever want one run.',
-        },
-        {
-          id: 'quiz-js-s11-q4',
-          type: 'blank',
-          prompt: 'Which method on the event object stops the browser from following its default action, such as a form submitting?',
-          answers: ['preventdefault', 'event.preventdefault()', 'event.preventdefault'],
-          explanation:
-            '`event.preventDefault()` cancels the default behaviour and nothing else. `stopPropagation` is a different job: it stops the event travelling further up the tree, which matters when you are using delegation.',
-        },
-        {
-          id: 'quiz-js-s11-q5',
-          type: 'identify-error',
-          prompt: 'What is wrong with this code?',
-          code: `button.addEventListener('click', () => {
-  count += 1
-})
-button.addEventListener('click', () => {
-  count += 1
-})`,
-          options: [
-            'Two different anonymous functions are registered, so the handler runs twice per click — reuse one named function',
-            'A button can only have one listener, so this is a syntax error',
-            'The arrow function is missing a return value',
-            'Nothing — every listener on an element fires once per event',
-          ],
-          answer: 0,
-          explanation:
-            'Each call registers its own function, and both fire on the same click, so the count jumps by two. That is how `addEventListener` differs from `onclick =`, which replaces. Pass one named handler, or remove the old one before adding the new.',
-        },
-      ],
-    },
   },
 
   /* ------------------------------------------------------------------ */
@@ -2137,6 +2342,75 @@ button.addEventListener('click', () => {
           'Explain why HTML is built with elements, not with string concatenation',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-js-l17',
+          title: 'Strings and template literals quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l17-q1',
+              type: 'multiple-choice',
+              prompt: 'What happens when you run `const s = "abc"; s[0] = "z";`?',
+              options: [
+                'The string becomes "zbc"',
+                'It throws a TypeError because strings are read-only',
+                'Nothing — strings are immutable, so the assignment is ignored',
+                'The string becomes "abc" and a new variable holds "z"',
+              ],
+              answer: 2,
+              explanation: 'Strings are immutable. Assigning to an index is ignored in sloppy code and an error in strict mode — either way it never edits the text. Every string method returns a new string instead.',
+            },
+            {
+              id: 'quiz-js-l17-q2',
+              type: 'true-false',
+              prompt: 'Template literals can span several lines, and anything can go inside `${...}`.',
+              answer: true,
+              explanation: 'A template literal holds real newlines, so a sentence can be typed as it reads. Inside `${...}` you can put a whole expression, not just a name — `${(price * 1.2).toFixed(2)}` is legal.',
+            },
+            {
+              id: 'quiz-js-l17-q3',
+              type: 'identify-error',
+              prompt: 'What is wrong with this snippet?',
+              code: 'const name = getUserTypedName()\nlist.innerHTML = `<li>${name}</li>`',
+              options: [
+                'The template literal syntax is invalid inside innerHTML',
+                'Anything a person typed is inserted as markup, so a name containing a tag changes the page',
+                'innerHTML cannot be used with a template literal at all',
+                'The dollar-brace should be a plus sign',
+              ],
+              answer: 1,
+              explanation: 'The syntax is fine; the danger is that the value is inserted as markup rather than as text. Build an element and assign to `textContent` instead — text set that way is displayed as characters and can never become a tag.',
+            },
+            {
+              id: 'quiz-js-l17-q4',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'const city = \'Lisbon\'\nconsole.log(city.length, city[city.length - 1])',
+              options: [
+                '6 n',
+                '7 n',
+                '6 L',
+                '6 undefined',
+              ],
+              answer: 0,
+              explanation: '`length` counts the six characters, and indexes start at 0, so the last character is at `length - 1`: the `n`. `city[6]` would be undefined because there is no seventh character.',
+            },
+            {
+              id: 'quiz-js-l17-q5',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'const city = \'Lisbon\'\nconst loud = city.toUpperCase()\nconsole.log(city, loud)',
+              options: [
+                'LISBON LISBON',
+                'Lisbon LISBON',
+                'Lisbon Lisbon',
+                'LISBON Lisbon',
+              ],
+              answer: 1,
+              explanation: 'Strings are immutable, and `toUpperCase` returns a new string rather than editing the original. The variable `loud` receives the new value while `city` keeps its original characters.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -2361,6 +2635,81 @@ console.log(greet('Ada'))`,
           'Ask a yes-or-no question with includes and startsWith',
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-js-l18',
+          title: 'String methods and search quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l18-q1',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'const fruit = \'banana\'\nconsole.log(fruit.slice(-3), fruit.slice(1, 3))',
+              options: [
+                '"ana" "ana"',
+                '"nan" "an"',
+                '"ban" "ba"',
+                '"banana" "ban"',
+                'It throws',
+              ],
+              answer: 0,
+              explanation: 'A negative index counts back from the end, so slice(-3) is the tail, "ana". The second argument is the position to stop before, so slice(1, 3) gives "an" plus "a" — "ana".',
+            },
+            {
+              id: 'quiz-js-l18-q2',
+              type: 'blank',
+              prompt: 'Which method replaces **every** occurrence of a substring, rather than only the first?',
+              answers: [
+                'replaceall',
+                'replace all',
+                'replaceAll',
+              ],
+              explanation: '`replace` changes the first match and returns a new string; `replaceAll` changes all of them. `replace(" ", "-")` on "a-b-c" leaves you with "a+b-c", which is the bug you meet the first time you try to normalise a sentence.',
+            },
+            {
+              id: 'quiz-js-l18-q3',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'const raw = \'  Ada  \'\nconsole.log(raw.length, raw.trim().length)',
+              options: [
+                '3 3',
+                '7 3',
+                '7 7',
+                '5 3',
+              ],
+              answer: 1,
+              explanation: '`length` counts every character, including the four spaces, so the raw string is 7 long. `trim()` removes leading and trailing whitespace and returns a new 3-character string.',
+            },
+            {
+              id: 'quiz-js-l18-q4',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'console.log(\'a,b,c\'.split(\',\').join(\' - \'))',
+              options: [
+                'a - b - c',
+                'a,b,c',
+                'a - b - c -',
+                'a-b-c',
+              ],
+              answer: 0,
+              explanation: '`split(\',\')` turns the text into `[\'a\', \'b\', \'c\']`, and `join(\' - \')` puts the separator between items. No separator appears at either end, which is why the result has exactly three parts.',
+            },
+            {
+              id: 'quiz-js-l18-q5',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'console.log(\'banana\'.indexOf(\'nan\'), \'banana\'.includes(\'z\'))',
+              options: [
+                '2 false',
+                '3 false',
+                '2 true',
+                '-1 false',
+              ],
+              answer: 0,
+              explanation: '`indexOf` returns the zero-based position of the first match, so "nan" starts at index 2. `includes` returns a boolean, and there is no "z", so it reports false.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -2584,70 +2933,6 @@ console.log(slugify('  Hello Brave New World  '))`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s12',
-      title: 'Strings check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s12-q1',
-          type: 'multiple-choice',
-          prompt: 'What happens when you run `const s = "abc"; s[0] = "z";`?',
-          options: [
-            'The string becomes "zbc"',
-            'It throws a TypeError because strings are read-only',
-            'Nothing — strings are immutable, so the assignment is ignored',
-            'The string becomes "abc" and a new variable holds "z"',
-          ],
-          answer: 2,
-          explanation:
-            'Strings are immutable. Assigning to an index is ignored in sloppy code and an error in strict mode — either way it never edits the text. Every string method returns a new string instead.',
-        },
-        {
-          id: 'quiz-js-s12-q2',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `const fruit = 'banana'
-console.log(fruit.slice(-3), fruit.slice(1, 3))`,
-          options: ['"ana" "ana"', '"nan" "an"', '"ban" "ba"', '"banana" "ban"', 'It throws'],
-          answer: 0,
-          explanation:
-            'A negative index counts back from the end, so slice(-3) is the tail, "ana". The second argument is the position to stop before, so slice(1, 3) gives "an" plus "a" — "ana".',
-        },
-        {
-          id: 'quiz-js-s12-q3',
-          type: 'true-false',
-          prompt: 'Template literals can span several lines, and anything can go inside `${...}`.',
-          answer: true,
-          explanation:
-            'A template literal holds real newlines, so a sentence can be typed as it reads. Inside `${...}` you can put a whole expression, not just a name — `${(price * 1.2).toFixed(2)}` is legal.',
-        },
-        {
-          id: 'quiz-js-s12-q4',
-          type: 'blank',
-          prompt: 'Which method replaces **every** occurrence of a substring, rather than only the first?',
-          answers: ['replaceall', 'replace all', 'replaceAll'],
-          explanation:
-            '`replace` changes the first match and returns a new string; `replaceAll` changes all of them. `replace(" ", "-")` on "a-b-c" leaves you with "a+b-c", which is the bug you meet the first time you try to normalise a sentence.',
-        },
-        {
-          id: 'quiz-js-s12-q5',
-          type: 'identify-error',
-          prompt: 'What is wrong with this snippet?',
-          code: `const name = getUserTypedName()
-list.innerHTML = \`<li>\${name}</li>\``,
-          options: [
-            'The template literal syntax is invalid inside innerHTML',
-            'Anything a person typed is inserted as markup, so a name containing a tag changes the page',
-            'innerHTML cannot be used with a template literal at all',
-            'The dollar-brace should be a plus sign',
-          ],
-          answer: 1,
-          explanation:
-            'The syntax is fine; the danger is that the value is inserted as markup rather than as text. Build an element and assign to `textContent` instead — text set that way is displayed as characters and can never become a tag.',
-        },
-      ],
-    },
   },
 
   /* ------------------------------------------------------------------ */
@@ -2672,6 +2957,74 @@ list.innerHTML = \`<li>\${name}</li>\``,
           'Turn text into a number without guessing',
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-js-l19',
+          title: 'Numbers and rounding quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l19-q1',
+              type: 'multiple-choice',
+              prompt: 'Why does `0.1 + 0.2 === 0.3` evaluate to `false`?',
+              options: [
+                'Because JavaScript compares decimals with a tolerance of zero',
+                'Because both sides are stored as binary approximations and the stored value of the sum is not identical to the stored value of 0.3',
+                'Because `===` refuses to compare two numbers that both have decimal points',
+                'Because `+` on decimals produces a string in JavaScript',
+              ],
+              answer: 1,
+              explanation: 'One tenth has no exact binary representation, so it is stored as the nearest available approximation. Adding two approximations leaves a result that differs in the seventeenth decimal place. `===` is reporting this truthfully — the fix is to round to the precision you mean before comparing.',
+            },
+            {
+              id: 'quiz-js-l19-q2',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'console.log(Math.floor(-4.2), Math.round(-4.2))',
+              options: [
+                '-4 -4',
+                '-5 -4',
+                '-4 -5',
+                '-5 -5',
+                'NaN NaN',
+              ],
+              answer: 1,
+              explanation: '`floor` moves toward negative infinity, so -4.2 becomes -5. `round` moves toward the nearest whole number, and -4.2 is nearer to -4. If you wanted the fraction simply thrown away regardless of direction, that is `trunc(-4.2)`, which gives -4.',
+            },
+            {
+              id: 'quiz-js-l19-q3',
+              type: 'true-false',
+              prompt: '`(9.656).toFixed(2)` returns the number 9.66, so you can keep calculating with it.',
+              answer: false,
+              explanation: 'It returns the string "9.66". You cannot have a number with a variable number of decimal places, so the result is text. Use `Math.round(x * 100) / 100` when you need a number you can keep working with.',
+            },
+            {
+              id: 'quiz-js-l19-q4',
+              type: 'blank',
+              prompt: 'Which method tells you whether a value is `NaN`?',
+              answers: [
+                'number.isnan',
+                'numberisnan',
+                'isnan',
+                'number.isnan()',
+              ],
+              explanation: '`Number.isNaN(value)` is the honest test. `typeof NaN` says "number", and `NaN === NaN` is false, so no equality comparison can ever find it.',
+            },
+            {
+              id: 'quiz-js-l19-q5',
+              type: 'identify-error',
+              prompt: 'What is wrong with this code?',
+              code: 'const cents = 0.1 + 0.2\nif (cents === 0.3) {\n  console.log(\'price matches\')\n}',
+              options: [
+                '`cents` is a bad name for a number',
+                'The comparison uses `===` on two computed decimals, so it is false even when the price is right',
+                'Decimal literals need a leading zero',
+                'Nothing — this is the recommended way to compare prices',
+              ],
+              answer: 1,
+              explanation: 'The sum is 0.30000000000000004, so the branch never runs and no error is reported. Compare rounded values (`Math.round(cents * 100) === 30`), compare a tolerance (`Math.abs(cents - 0.3) < 0.001`), or store money as whole pence so the question never arises.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -2911,70 +3264,5 @@ console.log(totalCents)`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s13',
-      title: 'Numbers check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s13-q1',
-          type: 'multiple-choice',
-          prompt: 'Why does `0.1 + 0.2 === 0.3` evaluate to `false`?',
-          options: [
-            'Because JavaScript compares decimals with a tolerance of zero',
-            'Because both sides are stored as binary approximations and the stored value of the sum is not identical to the stored value of 0.3',
-            'Because `===` refuses to compare two numbers that both have decimal points',
-            'Because `+` on decimals produces a string in JavaScript',
-          ],
-          answer: 1,
-          explanation:
-            'One tenth has no exact binary representation, so it is stored as the nearest available approximation. Adding two approximations leaves a result that differs in the seventeenth decimal place. `===` is reporting this truthfully — the fix is to round to the precision you mean before comparing.',
-        },
-        {
-          id: 'quiz-js-s13-q2',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `console.log(Math.floor(-4.2), Math.round(-4.2))`,
-          options: ['-4 -4', '-5 -4', '-4 -5', '-5 -5', 'NaN NaN'],
-          answer: 1,
-          explanation:
-            '`floor` moves toward negative infinity, so -4.2 becomes -5. `round` moves toward the nearest whole number, and -4.2 is nearer to -4. If you wanted the fraction simply thrown away regardless of direction, that is `trunc(-4.2)`, which gives -4.',
-        },
-        {
-          id: 'quiz-js-s13-q3',
-          type: 'true-false',
-          prompt: '`(9.656).toFixed(2)` returns the number 9.66, so you can keep calculating with it.',
-          answer: false,
-          explanation:
-            'It returns the string "9.66". You cannot have a number with a variable number of decimal places, so the result is text. Use `Math.round(x * 100) / 100` when you need a number you can keep working with.',
-        },
-        {
-          id: 'quiz-js-s13-q4',
-          type: 'blank',
-          prompt: 'Which method tells you whether a value is `NaN`?',
-          answers: ['number.isnan', 'numberisnan', 'isnan', 'number.isnan()'],
-          explanation:
-            '`Number.isNaN(value)` is the honest test. `typeof NaN` says "number", and `NaN === NaN` is false, so no equality comparison can ever find it.',
-        },
-        {
-          id: 'quiz-js-s13-q5',
-          type: 'identify-error',
-          prompt: 'What is wrong with this code?',
-          code: `const cents = 0.1 + 0.2
-if (cents === 0.3) {
-  console.log('price matches')
-}`,
-          options: [
-            '`cents` is a bad name for a number',
-            'The comparison uses `===` on two computed decimals, so it is false even when the price is right',
-            'Decimal literals need a leading zero',
-            'Nothing — this is the recommended way to compare prices',
-          ],
-          answer: 1,
-          explanation:
-            'The sum is 0.30000000000000004, so the branch never runs and no error is reported. Compare rounded values (`Math.round(cents * 100) === 30`), compare a tolerance (`Math.abs(cents - 0.3) < 0.001`), or store money as whole pence so the question never arises.',
-        },
-      ],
-    },
   },
 ]

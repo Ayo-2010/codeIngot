@@ -49,8 +49,8 @@ export interface FlatLesson extends CourseLessonMeta {
  * A contiguous run of sections presented as one chapter.
  *
  * The three original courses were authored as one section per lesson; grouping
- * them at the point of display keeps every section (and its quiz) intact while
- * giving the catalogue and sidebar a readable outline.
+ * them at the point of display keeps every section intact while giving the
+ * catalogue and sidebar a readable outline.
  */
 export interface CourseChapter {
   id: string
@@ -95,7 +95,8 @@ for (const course of allCourses) {
   courseLessonTotals[course.slug] = index
 }
 
-// Lazy loaders for reference corpora — each language loads on first use.
+/**
+ * Lazy loaders for reference corpora — each language loads on first use.
 const htmlRefPromise = import('~/content/reference/html').then((m) => ({
   tags: m.htmlTags,
   categories: m.htmlTagCategories,
@@ -224,31 +225,39 @@ export function courseChapters(course: CourseMeta): CourseChapter[] {
   return chapters
 }
 
-/** Finds a quiz summary by its own id, across every course. */
+/** Finds a lesson quiz summary by its own id, across every course. */
 export function findQuiz(quizId: string): QuizSummary | undefined {
   for (const course of allCourses) {
     for (const section of course.sections) {
-      if (section.quiz?.id === quizId) return section.quiz
+      for (const lesson of section.lessons) {
+        if (lesson.quiz.id === quizId) return lesson.quiz
+      }
     }
   }
   return undefined
 }
 
-/** Loads the questions for one quiz from the section that owns it. */
-export async function loadQuiz(courseSlug: string, quizId: string): Promise<Quiz | undefined> {
-  const summary = getQuizSection(courseSlug, quizId)
-  if (!summary) return undefined
-  const section = await loadSection(summary.id)
-  return section?.quiz
-}
-
-export function getQuizSection(courseSlug: string, quizId: string) {
+/** The lesson and section a quiz belongs to. */
+export function getQuizTarget(courseSlug: string, quizId: string) {
   const course = courseBySlug.get(courseSlug)
   if (!course) return undefined
   for (const section of course.sections) {
-    if (section.quiz?.id === quizId) return section
+    for (let lessonIndex = 0; lessonIndex < section.lessons.length; lessonIndex += 1) {
+      const lesson = section.lessons[lessonIndex]!
+      if (lesson.quiz.id === quizId) {
+        return { section, lesson, lessonIndex, quiz: lesson.quiz }
+      }
+    }
   }
   return undefined
+}
+
+/** Loads the quiz that belongs to one lesson. */
+export async function loadQuiz(courseSlug: string, quizId: string): Promise<Quiz | undefined> {
+  const target = getQuizTarget(courseSlug, quizId)
+  if (!target) return undefined
+  const section = await loadSection(target.section.id)
+  return section?.lessons.find((lesson) => lesson.id === target.lesson.id)?.quiz
 }
 
 export function getLessonById(lessonId: string) {
@@ -576,11 +585,11 @@ export function courseStats(course: CourseMeta): CourseStats {
   let minutes = 0
   let quizzes = 0
   for (const section of course.sections) {
-    if (section.quiz) quizzes += 1
     for (const lesson of section.lessons) {
       lessons += 1
       minutes += lesson.duration
       if (lesson.exerciseCount > 0) challenges += 1
+      if (lesson.quiz) quizzes += 1
     }
   }
   return { lessons, challenges, quizzes, projects: course.projects.length, minutes }

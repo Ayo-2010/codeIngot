@@ -18,6 +18,75 @@ export const frontendProjectsLandingSections: Section[] = [
           'Decide what the 720px breakpoint actually changes',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-fp-l9',
+          title: 'Plan the landing page quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-fp-l9-q1',
+              type: 'blank',
+              prompt: 'The CSS at-rule used to apply styles at a viewport width is ___.',
+              answers: [
+                '@media',
+                'media',
+              ],
+              explanation: '@media wraps rules that only apply when the condition, such as min-width, matches.',
+            },
+            {
+              id: 'quiz-fp-l9-q2',
+              type: 'multiple-choice',
+              prompt: 'Why should the navigation link to `#features`, `#pricing` and `#start` instead of `href="#"`?',
+              options: [
+                'Hash links make the page load faster',
+                '`href="#"` is invalid HTML',
+                'It stops the CSS grid from collapsing',
+                'Real section ids make the navigation usable before any JavaScript exists',
+              ],
+              answer: 3,
+              explanation: 'Linking to ids that exist turns the navigation into working in-page anchors with no script. `href="#"` scrolls to nowhere and gives no destination to anyone using a keyboard or a screen reader.',
+            },
+            {
+              id: 'quiz-fp-l9-q3',
+              type: 'multiple-choice',
+              prompt: 'What should the base stylesheet describe before any media query is written?',
+              options: [
+                'The single-column narrow layout',
+                'The desktop three-column layout',
+                'A layout chosen by JavaScript after load',
+                'The print layout only',
+              ],
+              answer: 0,
+              explanation: 'The unqualified rules are what a phone receives, so they must be the complete narrow design. The media query then adds columns and spacing for wider screens instead of undoing a desktop layout.',
+            },
+            {
+              id: 'quiz-fp-l9-q4',
+              type: 'multiple-choice',
+              prompt: 'At the 720px breakpoint, what does the landing page lesson change?',
+              options: [
+                'The colours and fonts',
+                'Every rule, rewritten for desktop',
+                'The HTML structure',
+                'Only the grid column counts for features and pricing',
+              ],
+              answer: 3,
+              explanation: 'Keeping the breakpoint to column changes makes the wide layout easy to reason about, because everything else already works. A breakpoint that rewrites unrelated rules is a sign the base layout was wrong.',
+            },
+            {
+              id: 'quiz-fp-l9-q5',
+              type: 'multiple-choice',
+              prompt: 'At the default root font size, 45rem equals which width?',
+              options: [
+                '450px',
+                '720px',
+                '4500px',
+                '768px',
+              ],
+              answer: 1,
+              explanation: 'One rem is the root font size, normally 16px, so 45 × 16 = 720px. Using rem means the breakpoint follows the reader who has enlarged their default text size.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -149,6 +218,73 @@ export const frontendProjectsLandingSections: Section[] = [
           'Check overflow, focus states and reduced motion before submitting',
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-fp-l10',
+          title: 'Build and submit the landing page quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-fp-l10-q1',
+              type: 'multiple-choice',
+              prompt: 'What does mobile-first mean in practice?',
+              options: [
+                'The base styles describe the narrow layout, and wider layouts are added with min-width queries',
+                'The page is designed at 1440px and then shrunk with max-width queries',
+                'The page hides content on phones',
+                'JavaScript chooses the layout after the page loads',
+              ],
+              answer: 0,
+              explanation: 'The unqualified rules are the narrow layout. Add a min-width breakpoint only when the content needs more room.',
+            },
+            {
+              id: 'quiz-fp-l10-q2',
+              type: 'true-false',
+              prompt: 'A responsive page needs a breakpoint for every popular phone size.',
+              answer: false,
+              explanation: 'Breakpoints belong where the content breaks, not where a particular device happens to sit. One well-chosen breakpoint is often enough.',
+            },
+            {
+              id: 'quiz-fp-l10-q3',
+              type: 'multiple-choice',
+              prompt: 'Why wrap the content in a max-width container?',
+              options: [
+                'To stop images from loading',
+                'To keep line length readable on very wide screens',
+                'To replace CSS grid',
+                'To make the page scroll horizontally',
+              ],
+              answer: 1,
+              explanation: 'A maximum width keeps text lines from becoming too long to read comfortably while still allowing the layout to shrink on small screens.',
+            },
+            {
+              id: 'quiz-fp-l10-q4',
+              type: 'identify-error',
+              prompt: 'Why does this hero overflow on a phone?',
+              code: '.hero {\n  height: 600px;\n  padding: 4rem 2rem;\n}\n.hero img {\n  width: 1200px;\n}',
+              options: [
+                'Grid is missing',
+                'The fixed height and 1200px image cannot shrink to the viewport',
+                'The padding uses rem instead of px',
+                'The hero needs a media query inside the image',
+              ],
+              answer: 1,
+              explanation: 'A fixed image width wider than the viewport causes horizontal overflow, and a fixed height cannot accommodate wrapped content. Use max-width: 100% and let the height follow the content.',
+            },
+            {
+              id: 'quiz-fp-l10-q5',
+              type: 'multiple-choice',
+              prompt: 'What does `width: min(100% - 2.5rem, 72rem)` do for the container?',
+              options: [
+                'Always uses 72rem, even on a phone',
+                'Uses the larger of the two values',
+                'Switches to 100% only below 720px',
+                'Uses the smaller of the available width minus margins and 72rem',
+              ],
+              answer: 3,
+              explanation: 'min() picks the tighter value, so the container shrinks on a narrow screen and stops growing at 72rem. One declaration handles both cases without a media query.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -295,70 +431,5 @@ button:focus-visible {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-fp-s5',
-      title: 'Responsive landing page check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-fp-s5-q1',
-          type: 'multiple-choice',
-          prompt: 'What does mobile-first mean in practice?',
-          options: [
-            'The base styles describe the narrow layout, and wider layouts are added with min-width queries',
-            'The page is designed at 1440px and then shrunk with max-width queries',
-            'The page hides content on phones',
-            'JavaScript chooses the layout after the page loads',
-          ],
-          answer: 0,
-          explanation:
-            'The unqualified rules are the narrow layout. Add a min-width breakpoint only when the content needs more room.',
-        },
-        {
-          id: 'quiz-fp-s5-q2',
-          type: 'true-false',
-          prompt: 'A responsive page needs a breakpoint for every popular phone size.',
-          answer: false,
-          explanation:
-            'Breakpoints belong where the content breaks, not where a particular device happens to sit. One well-chosen breakpoint is often enough.',
-        },
-        {
-          id: 'quiz-fp-s5-q3',
-          type: 'multiple-choice',
-          prompt: 'Why wrap the content in a max-width container?',
-          options: [
-            'To stop images from loading',
-            'To keep line length readable on very wide screens',
-            'To replace CSS grid',
-            'To make the page scroll horizontally',
-          ],
-          answer: 1,
-          explanation:
-            'A maximum width keeps text lines from becoming too long to read comfortably while still allowing the layout to shrink on small screens.',
-        },
-        {
-          id: 'quiz-fp-s5-q4',
-          type: 'blank',
-          prompt: 'The CSS at-rule used to apply styles at a viewport width is ___.',
-          answers: ['@media', 'media'],
-          explanation: '@media wraps rules that only apply when the condition, such as min-width, matches.',
-        },
-        {
-          id: 'quiz-fp-s5-q5',
-          type: 'identify-error',
-          prompt: 'Why does this hero overflow on a phone?',
-          code: '.hero {\n  height: 600px;\n  padding: 4rem 2rem;\n}\n.hero img {\n  width: 1200px;\n}',
-          options: [
-            'Grid is missing',
-            'The fixed height and 1200px image cannot shrink to the viewport',
-            'The padding uses rem instead of px',
-            'The hero needs a media query inside the image',
-          ],
-          answer: 1,
-          explanation:
-            'A fixed image width wider than the viewport causes horizontal overflow, and a fixed height cannot accommodate wrapped content. Use max-width: 100% and let the height follow the content.',
-        },
-      ],
-    },
   },
 ]

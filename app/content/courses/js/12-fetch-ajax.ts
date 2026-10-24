@@ -18,6 +18,69 @@ export const jsFetchAjaxSections: Section[] = [
           'Describe what a worker has no access to'
         ],
         xp: 45,
+        quiz: {
+          id: 'quiz-js-l85',
+          title: 'Web workers quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l85-q1',
+              type: 'multiple-choice',
+              prompt: 'A page freezes while a large loop runs. What is happening?',
+              options: [
+                'The loop has an infinite recursion and the browser has stopped responding',
+                'The loop occupies the only JavaScript thread, so queued events cannot be handled',
+                'The garbage collector has run out of memory',
+                'The loop is waiting on a network response that never arrives',
+              ],
+              answer: 1,
+              explanation: 'A page has one main thread and one task queue. A synchronous loop is one task that does not yield, so the click or keypress events arriving during it wait their turn. That is the freeze, and it is why the fix is either to yield with setTimeout or requestAnimationFrame, or to move the loop to a worker thread.',
+            },
+            {
+              id: 'quiz-js-l85-q2',
+              type: 'true-false',
+              prompt: 'A web worker script can read and modify elements in the page with `document.querySelector`.',
+              answer: false,
+              explanation: 'There is no `document` in a worker. It runs on a separate thread with its own global scope, and its only way back to the page is postMessage, which the main thread receives through onmessage and acts on. Attempting to touch the DOM from a worker is a ReferenceError, not a subtle bug.',
+            },
+            {
+              id: 'quiz-js-l85-q3',
+              type: 'blank',
+              prompt: 'Which method sends data from a worker thread back to the page?',
+              answers: [
+                'postmessage',
+              ],
+              explanation: '`self.postMessage(value)` inside the worker is the return channel, and it mirrors `worker.postMessage(value)` in the other direction. Data crosses as a structured clone, so functions and DOM nodes are refused at the call rather than arriving broken.',
+            },
+            {
+              id: 'quiz-js-l85-q4',
+              type: 'identify-error',
+              prompt: 'This worker is supposed to paint a progress bar. What is wrong?',
+              code: 'const worker = new Worker(\'worker.js\')\nworker.onmessage = function (event) {\n  document.getElementById(\'bar\').style.width = event.data + \'%\'\n}',
+              options: [
+                'postMessage should be called with an object rather than a number',
+                'onmessage must be assigned before the Worker is constructed',
+                'Nothing is wrong: a worker script runs on the same thread as the page',
+              ],
+              answer: 0,
+              explanation: 'Nothing here is wrong at all - this is the correct shape for updating the page from a worker. The worker does the calculation, posts a number back, and the onmessage handler on the main thread is what touches the DOM. Contrast it with a worker that reaches for document itself, which fails immediately.',
+            },
+            {
+              id: 'quiz-js-l85-q5',
+              type: 'code-output',
+              prompt: 'The main thread runs the first snippet. What does it print?',
+              code: '// w.js\nself.onmessage = function (event) {\n  self.postMessage(event.data * 2)\n}\n\n// main.js\nconst w = new Worker(\'w.js\')\nw.onmessage = function (event) {\n  console.log(event.data)\n}\nw.postMessage(7)',
+              options: [
+                '7',
+                '14',
+                'undefined',
+                'It prints nothing',
+              ],
+              answer: 1,
+              explanation: 'The message arrives with data 7, the worker doubles it and posts 14 back, and the main thread logs it. The result is asynchronous: the console line appears after postMessage returns, never before it, which is why nothing in main.js needs to wait for a worker to be ready.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -283,80 +346,6 @@ console.log(splitWork(10, 3))
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s73',
-      title: 'Web workers check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s73-q1',
-          type: 'multiple-choice',
-          prompt: 'A page freezes while a large loop runs. What is happening?',
-          options: [
-            'The loop has an infinite recursion and the browser has stopped responding',
-            'The loop occupies the only JavaScript thread, so queued events cannot be handled',
-            'The garbage collector has run out of memory',
-            'The loop is waiting on a network response that never arrives'
-          ],
-          answer: 1,
-          explanation:
-            'A page has one main thread and one task queue. A synchronous loop is one task that does not yield, so the click or keypress events arriving during it wait their turn. That is the freeze, and it is why the fix is either to yield with setTimeout or requestAnimationFrame, or to move the loop to a worker thread.',
-        },
-        {
-          id: 'quiz-js-s73-q2',
-          type: 'true-false',
-          prompt: 'A web worker script can read and modify elements in the page with `document.querySelector`.',
-          answer: false,
-          explanation:
-            'There is no `document` in a worker. It runs on a separate thread with its own global scope, and its only way back to the page is postMessage, which the main thread receives through onmessage and acts on. Attempting to touch the DOM from a worker is a ReferenceError, not a subtle bug.',
-        },
-        {
-          id: 'quiz-js-s73-q3',
-          type: 'blank',
-          prompt: 'Which method sends data from a worker thread back to the page?',
-          answers: ['postmessage'],
-          explanation:
-            '`self.postMessage(value)` inside the worker is the return channel, and it mirrors `worker.postMessage(value)` in the other direction. Data crosses as a structured clone, so functions and DOM nodes are refused at the call rather than arriving broken.',
-        },
-        {
-          id: 'quiz-js-s73-q4',
-          type: 'identify-error',
-          prompt: 'This worker is supposed to paint a progress bar. What is wrong?',
-          code: `const worker = new Worker('worker.js')
-worker.onmessage = function (event) {
-  document.getElementById('bar').style.width = event.data + '%'
-}`,
-          options: [
-            'postMessage should be called with an object rather than a number',
-            'onmessage must be assigned before the Worker is constructed',
-            'Nothing is wrong: a worker script runs on the same thread as the page'
-          ],
-          answer: 0,
-          explanation:
-            'Nothing here is wrong at all - this is the correct shape for updating the page from a worker. The worker does the calculation, posts a number back, and the onmessage handler on the main thread is what touches the DOM. Contrast it with a worker that reaches for document itself, which fails immediately.',
-        },
-        {
-          id: 'quiz-js-s73-q5',
-          type: 'code-output',
-          prompt: 'The main thread runs the first snippet. What does it print?',
-          code: `// w.js
-self.onmessage = function (event) {
-  self.postMessage(event.data * 2)
-}
-
-// main.js
-const w = new Worker('w.js')
-w.onmessage = function (event) {
-  console.log(event.data)
-}
-w.postMessage(7)`,
-          options: ['7', '14', 'undefined', 'It prints nothing'],
-          answer: 1,
-          explanation:
-            'The message arrives with data 7, the worker doubles it and posts 14 back, and the main thread logs it. The result is asynchronous: the console line appears after postMessage returns, never before it, which is why nothing in main.js needs to wait for a worker to be ready.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s74',
@@ -374,6 +363,73 @@ w.postMessage(7)`,
           'Send and parse JSON bodies with GET and POST'
         ],
         xp: 55,
+        quiz: {
+          id: 'quiz-js-l86',
+          title: 'fetch and JSON over HTTP quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l86-q1',
+              type: 'multiple-choice',
+              prompt: 'What does `await fetch(url)` give you?',
+              options: [
+                'The parsed body as a plain object',
+                'A promise for the response, whose body still needs .json() or .text()',
+                'A string of the response body',
+                'Nothing, until you call a second function',
+              ],
+              answer: 1,
+              explanation: 'fetch resolves with a Response: the envelope carrying status, headers and a body you have not read yet. Reading the body is a separate promise from .json(), .text() or .blob(), which is why a full request needs two awaits and why `await fetch(url)` followed by a direct property access usually gives you undefined.',
+            },
+            {
+              id: 'quiz-js-l86-q2',
+              type: 'true-false',
+              prompt: 'A 404 response makes the promise returned by `fetch` reject, so a `catch` block will run.',
+              answer: false,
+              explanation: 'The promise resolves. As far as the network is concerned the request succeeded - something answered. That is exactly why `response.ok` exists and has to be checked by hand: without it you call .json() on an error page and the message you get is about unexpected tokens rather than about the missing record.',
+            },
+            {
+              id: 'quiz-js-l86-q3',
+              type: 'blank',
+              prompt: 'Which property tells you whether the HTTP status was a success?',
+              answers: [
+                'response.ok',
+                'ok',
+                'response.ok',
+                'response.ok',
+              ],
+              explanation: '`response.ok` is true for statuses in the 200 to 299 range and false for everything else, including 3xx after no redirect and every 4xx and 5xx. Checking it immediately after the await is the single habit that separates a readable error message from a confusing parse failure.',
+            },
+            {
+              id: 'quiz-js-l86-q4',
+              type: 'identify-error',
+              prompt: 'This POST always fails on the server. Why?',
+              code: 'await fetch(\'/api/posts\', {\n  method: \'POST\',\n  body: { title: \'New post\' }\n})',
+              options: [
+                'method must be lowercase to be accepted',
+                'The body is an object, so it arrives as "[object Object]", and the Content-Type header that says how to read it is missing',
+                'fetch cannot be called without a second argument',
+                'A POST request must use response.text() instead of response.json()',
+              ],
+              answer: 1,
+              explanation: 'The body option takes a string, so an object is coerced to "[object Object]" before it leaves. And without `Content-Type: application/json` the server has no instruction for how to read what arrived. Both fixes are the same line: `body: JSON.stringify(newPost)` with the header alongside it.',
+            },
+            {
+              id: 'quiz-js-l86-q5',
+              type: 'code-output',
+              prompt: 'The server answers with status 404 and an HTML error page. What is logged?',
+              code: 'try {\n  const response = await fetch(\'/api/posts/999\')\n  const posts = await response.json()\n  console.log(posts.length)\n} catch (error) {\n  console.log(\'failed\')\n}',
+              options: [
+                '0',
+                'failed',
+                'undefined',
+                'A SyntaxError object',
+              ],
+              answer: 3,
+              explanation: 'The 404 resolves rather than rejecting, so the catch never runs and the code goes on to parse an HTML error page as JSON. The rejection happens inside response.json(), which produces a SyntaxError about unexpected tokens - an accurate message about the wrong thing. Checking response.ok first would have turned this into a clear "HTTP 404".',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -683,82 +739,6 @@ getTodos().then(function (todos) {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s74',
-      title: 'Fetch check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s74-q1',
-          type: 'multiple-choice',
-          prompt: 'What does `await fetch(url)` give you?',
-          options: [
-            'The parsed body as a plain object',
-            'A promise for the response, whose body still needs .json() or .text()',
-            'A string of the response body',
-            'Nothing, until you call a second function'
-          ],
-          answer: 1,
-          explanation:
-            'fetch resolves with a Response: the envelope carrying status, headers and a body you have not read yet. Reading the body is a separate promise from .json(), .text() or .blob(), which is why a full request needs two awaits and why `await fetch(url)` followed by a direct property access usually gives you undefined.',
-        },
-        {
-          id: 'quiz-js-s74-q2',
-          type: 'true-false',
-          prompt: 'A 404 response makes the promise returned by `fetch` reject, so a `catch` block will run.',
-          answer: false,
-          explanation:
-            'The promise resolves. As far as the network is concerned the request succeeded - something answered. That is exactly why `response.ok` exists and has to be checked by hand: without it you call .json() on an error page and the message you get is about unexpected tokens rather than about the missing record.',
-        },
-        {
-          id: 'quiz-js-s74-q3',
-          type: 'blank',
-          prompt: 'Which property tells you whether the HTTP status was a success?',
-          answers: ['response.ok', 'ok', 'response.ok', 'response.ok'],
-          explanation:
-            '`response.ok` is true for statuses in the 200 to 299 range and false for everything else, including 3xx after no redirect and every 4xx and 5xx. Checking it immediately after the await is the single habit that separates a readable error message from a confusing parse failure.',
-        },
-        {
-          id: 'quiz-js-s74-q4',
-          type: 'identify-error',
-          prompt: 'This POST always fails on the server. Why?',
-          code: `await fetch('/api/posts', {
-  method: 'POST',
-  body: { title: 'New post' }
-})`,
-          options: [
-            'method must be lowercase to be accepted',
-            'The body is an object, so it arrives as "[object Object]", and the Content-Type header that says how to read it is missing',
-            'fetch cannot be called without a second argument',
-            'A POST request must use response.text() instead of response.json()'
-          ],
-          answer: 1,
-          explanation:
-            'The body option takes a string, so an object is coerced to "[object Object]" before it leaves. And without `Content-Type: application/json` the server has no instruction for how to read what arrived. Both fixes are the same line: `body: JSON.stringify(newPost)` with the header alongside it.',
-        },
-        {
-          id: 'quiz-js-s74-q5',
-          type: 'code-output',
-          prompt: 'The server answers with status 404 and an HTML error page. What is logged?',
-          code: `try {
-  const response = await fetch('/api/posts/999')
-  const posts = await response.json()
-  console.log(posts.length)
-} catch (error) {
-  console.log('failed')
-}`,
-          options: [
-            '0',
-            'failed',
-            'undefined',
-            'A SyntaxError object'
-          ],
-          answer: 3,
-          explanation:
-            'The 404 resolves rather than rejecting, so the catch never runs and the code goes on to parse an HTML error page as JSON. The rejection happens inside response.json(), which produces a SyntaxError about unexpected tokens - an accurate message about the wrong thing. Checking response.ok first would have turned this into a clear "HTTP 404".',
-        },
-      ],
-    },
   },
   {
     id: 'js-s75',
@@ -776,6 +756,72 @@ getTodos().then(function (todos) {
           'Handle a refused permission request without breaking the page'
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-js-l87',
+          title: 'Geolocation quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l87-q1',
+              type: 'multiple-choice',
+              prompt: 'A visitor clicks your button and refuses the location prompt. What happens with `getCurrentPosition(success)`?',
+              options: [
+                'The success callback runs with coordinates of 0, 0',
+                'The promise rejects, so a .catch block runs',
+                'Neither callback runs and nothing is reported, because no error callback was supplied',
+                'The browser throws a ReferenceError inside your page',
+              ],
+              answer: 2,
+              explanation: 'getCurrentPosition is callback based, not promise based, and a refusal is delivered to the second argument. Leave that argument out and the refusal goes nowhere: no error, no log, and a feature that silently never appears. Always supply both callbacks, and check error.code when the reason matters to the user.',
+            },
+            {
+              id: 'quiz-js-l87-q2',
+              type: 'true-false',
+              prompt: 'The geolocation API is available to pages served over plain `http://` as well as `https://`.',
+              answer: false,
+              explanation: 'It requires a secure origin: HTTPS, with `http://localhost` allowed so development still works. On any other http page `navigator.geolocation` is undefined and the property access itself throws, which reads as a code bug but is really the browser refusing to expose a sensitive API over a channel anyone on the network can read.',
+            },
+            {
+              id: 'quiz-js-l87-q3',
+              type: 'blank',
+              prompt: 'In the position object, which field gives the radius in metres of the circle around the reported point?',
+              answers: [
+                'accuracy',
+                'coords.accuracy',
+                'coords.accuracy',
+              ],
+              explanation: '`coords.accuracy` is a radius in metres, not a per-axis error. It tells you how much to trust the fix: sorting places by a 50 metre difference in a reading accurate to 2000 metres is ordering noise.',
+            },
+            {
+              id: 'quiz-js-l87-q4',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'const pos = { latitude: -33.87, longitude: 151.21 }\nconsole.log(pos.latitude >= 0 ? \'north\' : \'south\')',
+              options: [
+                'north',
+                'south',
+                'east',
+                'It throws',
+              ],
+              answer: 1,
+              explanation: 'Latitude is negative south of the equator, so the test is false and the else branch runs. The same convention applies to longitude: positive is east of the prime meridian. Reading a position as `latitude, longitude` in that order, with north and east positive, is the convention every mapping API uses.',
+            },
+            {
+              id: 'quiz-js-l87-q5',
+              type: 'identify-error',
+              prompt: 'This feature never shows anything on any browser, and nothing appears in the console. What is the likely cause?',
+              code: 'navigator.geolocation.getCurrentPosition(function (position) {\n  document.getElementById(\'here\').textContent = position.coords.latitude\n})',
+              options: [
+                'The success callback must be declared with the async keyword',
+                'document is not available inside a geolocation callback',
+                'The second, error callback is missing, so a refusal is reported nowhere',
+                'textContent cannot be set to a number',
+              ],
+              answer: 2,
+              explanation: 'A refusal is delivered to the error callback, and there is none here, so the user declining produces complete silence - which is exactly the symptom described. The page being served over plain http, so geolocation is undefined, is the other candidate worth checking; it usually throws rather than failing silently.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1015,71 +1061,6 @@ console.log(describePosition({ latitude: 51.5, longitude: -0.12 }))
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s75',
-      title: 'Geolocation check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s75-q1',
-          type: 'multiple-choice',
-          prompt: 'A visitor clicks your button and refuses the location prompt. What happens with `getCurrentPosition(success)`?',
-          options: [
-            'The success callback runs with coordinates of 0, 0',
-            'The promise rejects, so a .catch block runs',
-            'Neither callback runs and nothing is reported, because no error callback was supplied',
-            'The browser throws a ReferenceError inside your page'
-          ],
-          answer: 2,
-          explanation:
-            'getCurrentPosition is callback based, not promise based, and a refusal is delivered to the second argument. Leave that argument out and the refusal goes nowhere: no error, no log, and a feature that silently never appears. Always supply both callbacks, and check error.code when the reason matters to the user.',
-        },
-        {
-          id: 'quiz-js-s75-q2',
-          type: 'true-false',
-          prompt: 'The geolocation API is available to pages served over plain `http://` as well as `https://`.',
-          answer: false,
-          explanation:
-            'It requires a secure origin: HTTPS, with `http://localhost` allowed so development still works. On any other http page `navigator.geolocation` is undefined and the property access itself throws, which reads as a code bug but is really the browser refusing to expose a sensitive API over a channel anyone on the network can read.',
-        },
-        {
-          id: 'quiz-js-s75-q3',
-          type: 'blank',
-          prompt: 'In the position object, which field gives the radius in metres of the circle around the reported point?',
-          answers: ['accuracy', 'coords.accuracy', 'coords.accuracy'],
-          explanation:
-            '`coords.accuracy` is a radius in metres, not a per-axis error. It tells you how much to trust the fix: sorting places by a 50 metre difference in a reading accurate to 2000 metres is ordering noise.',
-        },
-        {
-          id: 'quiz-js-s75-q4',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `const pos = { latitude: -33.87, longitude: 151.21 }
-console.log(pos.latitude >= 0 ? 'north' : 'south')`,
-          options: ['north', 'south', 'east', 'It throws'],
-          answer: 1,
-          explanation:
-            'Latitude is negative south of the equator, so the test is false and the else branch runs. The same convention applies to longitude: positive is east of the prime meridian. Reading a position as `latitude, longitude` in that order, with north and east positive, is the convention every mapping API uses.',
-        },
-        {
-          id: 'quiz-js-s75-q5',
-          type: 'identify-error',
-          prompt: 'This feature never shows anything on any browser, and nothing appears in the console. What is the likely cause?',
-          code: `navigator.geolocation.getCurrentPosition(function (position) {
-  document.getElementById('here').textContent = position.coords.latitude
-})`,
-          options: [
-            'The success callback must be declared with the async keyword',
-            'document is not available inside a geolocation callback',
-            'The second, error callback is missing, so a refusal is reported nowhere',
-            'textContent cannot be set to a number'
-          ],
-          answer: 2,
-          explanation:
-            'A refusal is delivered to the error callback, and there is none here, so the user declining produces complete silence - which is exactly the symptom described. The page being served over plain http, so geolocation is undefined, is the other candidate worth checking; it usually throws rather than failing silently.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s76',
@@ -1097,6 +1078,72 @@ console.log(pos.latitude >= 0 ? 'north' : 'south')`,
           'Name the four parts of a request'
         ],
         xp: 30,
+        quiz: {
+          id: 'quiz-js-l88',
+          title: 'What AJAX means quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l88-q1',
+              type: 'multiple-choice',
+              prompt: 'What does AJAX mean today, given that almost nobody transfers XML any more?',
+              options: [
+                'A markup format for describing a request and a response together',
+                'Talking to a server in the background and updating part of the page in place',
+                'The specific XMLHttpRequest API, and nothing else',
+                'A way of compressing page data before it is sent',
+              ],
+              answer: 1,
+              explanation: 'The X in the original name came from XML documents, and the technique outlived the format. What survived is the idea: a request runs alongside the page, and only the region that needs new data is rebuilt. You can do it with fetch, with XMLHttpRequest, or with a library wrapping either.',
+            },
+            {
+              id: 'quiz-js-l88-q2',
+              type: 'multiple-choice',
+              prompt: 'Which list names the four parts that describe a request?',
+              options: [
+                'Method, URL, headers, body',
+                'Status, headers, body, cookies',
+                'Method, port, protocol, encoding',
+                'URL, form, callback, response',
+              ],
+              answer: 0,
+              explanation: 'A request is a method, a URL, optional headers and an optional body. Status belongs to the response, not the request, which is why a list built from it cannot be right.',
+            },
+            {
+              id: 'quiz-js-l88-q3',
+              type: 'multiple-choice',
+              prompt: 'What is lost when a link causes a full page navigation instead of an in-place update?',
+              options: [
+                'Only the open network connection to the server',
+                'Scroll position, typed form values and open menus, because the document is thrown away',
+                'Nothing, because the browser restores all of it automatically',
+                'The browser cache, which then has to be rebuilt from scratch',
+              ],
+              answer: 1,
+              explanation: 'A normal navigation replaces the whole document, so every piece of state the user built up on the page goes with it. Keeping the document and swapping one container is exactly what AJAX is for.',
+            },
+            {
+              id: 'quiz-js-l88-q4',
+              type: 'multiple-choice',
+              prompt: 'Which method is the right one for creating a new record on the server?',
+              options: [
+                '`GET`',
+                '`POST`',
+                '`DELETE`',
+                '`HEAD`',
+              ],
+              answer: 1,
+              explanation: '`GET` reads, `POST` creates, `PUT` and `PATCH` change, and `DELETE` removes. Sending a body with `GET` is the common mistake, because `GET` is not meant to carry one.',
+            },
+            {
+              id: 'quiz-js-l88-q5',
+              type: 'true-false',
+              prompt: 'A request URL that starts with `/` is same-origin, while a full `https://` address to another host is subject to CORS.',
+              answer: true,
+              explanation: 'A leading slash resolves against the page\'s own origin, so no cross-origin permission is involved. A full address on another host is a different origin, and the browser enforces CORS on the response.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1297,6 +1344,77 @@ console.log(describeRequest({ method: 'GET', url: '/api/posts' }))
           'Explain that responseText is only readable once the request is DONE'
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-js-l89',
+          title: 'The XMLHttpRequest object quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l89-q1',
+              type: 'blank',
+              prompt: 'Which numeric `readyState` value means the request has finished and the response is complete?',
+              answers: [
+                '4',
+                '4 (done)',
+                'done',
+              ],
+              explanation: 'It is 4, and the named constant is XMLHttpRequest.DONE. The full ladder is 0 UNOPENED, 1 OPENED, 2 HEADERS_RECEIVED, 3 LOADING, 4 DONE. Using the constant instead of the number means nobody has to remember which is which.',
+            },
+            {
+              id: 'quiz-js-l89-q2',
+              type: 'multiple-choice',
+              prompt: '`xhr.readyState` is 2. What has happened so far?',
+              options: [
+                'Nothing — the object was only constructed',
+                '`open` has been called, but nothing has been sent',
+                '`send` has been called and the response headers have arrived',
+                'The response body has arrived in full',
+              ],
+              answer: 2,
+              explanation: 'State 2 is HEADERS_RECEIVED: the request is away and the server\'s status and headers are in, but the body has not arrived. State 1 is the one that only means `open` was called.',
+            },
+            {
+              id: 'quiz-js-l89-q3',
+              type: 'multiple-choice',
+              prompt: 'Immediately after `send()` returns, before any of the body has arrived, what is `xhr.responseText`?',
+              options: [
+                'The first part of the body, ready to parse',
+                'The complete body, as soon as `send` returns',
+                '`null`',
+                'An empty string',
+              ],
+              answer: 3,
+              explanation: '`responseText` is filled in as the body arrives and is only complete at state 4. Reading it earlier gives an empty or truncated string, which is why JSON parsing belongs behind a DONE check.',
+            },
+            {
+              id: 'quiz-js-l89-q4',
+              type: 'multiple-choice',
+              prompt: 'The server answers with a `500`. Which handler fires on the request object?',
+              options: [
+                '`onerror`, because a 500 is a failure',
+                '`onload`, because a response did arrive — its status is simply 500',
+                'Neither, because the request is treated as failed at the network level',
+                'Both `onload` and `onerror`',
+              ],
+              answer: 1,
+              explanation: '`onerror` means no response arrived at all. A 500 is a perfectly real response, so it goes to `onload`, and checking `xhr.status` inside that handler is what tells you it failed.',
+            },
+            {
+              id: 'quiz-js-l89-q5',
+              type: 'code-output',
+              prompt: 'What is logged?',
+              code: 'const xhr = new XMLHttpRequest()\nconsole.log(xhr.readyState)',
+              options: [
+                '0',
+                '1',
+                '2',
+                '4',
+              ],
+              answer: 0,
+              explanation: 'A newly constructed request is UNSENT, state 0, because `open` has not named a request yet. State 1 arrives with `open` and state 2 with `send`.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1550,6 +1668,80 @@ console.log(xhr.readyState)
           'Serialise an object body and declare its Content-Type'
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-js-l90',
+          title: 'Sending an AJAX request quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l90-q1',
+              type: 'code-output',
+              prompt: 'What is logged?',
+              code: 'const xhr = new XMLHttpRequest()\nxhr.open(\'GET\', \'/api/posts\')\nconsole.log(xhr.readyState, xhr.sent)',
+              options: [
+                '1 false',
+                '0 false',
+                '4 true',
+                'It throws, because open needs a callback',
+              ],
+              answer: 0,
+              explanation: 'open names the request and moves the object to OPENED, so readyState is 1, and nothing has gone over the wire yet, so sent is false. Calling open with a method and a URL is enough; the third argument is only for asynchronous behaviour and defaults to true.',
+            },
+            {
+              id: 'quiz-js-l90-q2',
+              type: 'multiple-choice',
+              prompt: 'What reaches the server when you call `xhr.send({ title: \'New post\' })`?',
+              options: [
+                'The string `[object Object]`',
+                'The JSON text `{"title":"New post"}`',
+                'A key/value form body',
+                'Nothing — `send` rejects an object argument',
+              ],
+              answer: 0,
+              explanation: 'The body is always text on the wire, so an object is converted with its default `toString`, which is `[object Object]`. `JSON.stringify` first is what turns the data into something a server can read.',
+            },
+            {
+              id: 'quiz-js-l90-q3',
+              type: 'identify-error',
+              prompt: 'This throws an `InvalidStateError`. Why?',
+              code: 'const xhr = new XMLHttpRequest()\nxhr.open(\'POST\', \'/api/posts\')\nxhr.send(JSON.stringify(payload))\nxhr.setRequestHeader(\'Content-Type\', \'application/json\')',
+              options: [
+                '`open` must come after `send`',
+                '`setRequestHeader` throws once the request has been sent, so it must come before `send`',
+                '`JSON.stringify` cannot be passed directly to `send`',
+                'The header name should be written `contentType`',
+              ],
+              answer: 1,
+              explanation: 'Once the request is away its headers are final, so `setRequestHeader` throws rather than silently doing nothing. Every header goes between `open` and `send`.',
+            },
+            {
+              id: 'quiz-js-l90-q4',
+              type: 'multiple-choice',
+              prompt: 'Which header tells the server that the body is JSON text?',
+              options: [
+                '`Accept: application/json`',
+                '`Content-Encoding: json`',
+                '`Type: application/json`',
+                '`Content-Type: application/json`',
+              ],
+              answer: 3,
+              explanation: '`Content-Type` describes what you are sending; `Accept` describes what you can receive. A server without the content type has no instruction for reading the body and may reject it outright.',
+            },
+            {
+              id: 'quiz-js-l90-q5',
+              type: 'multiple-choice',
+              prompt: 'What does `send()` return, and when does the response become available?',
+              options: [
+                'It returns the response body, which you can assign to a variable',
+                'It returns a promise that resolves with the parsed JSON',
+                'It returns `undefined`; the response arrives later through `onload` or `onreadystatechange`',
+                'It blocks until the response arrives, then returns the status code',
+              ],
+              answer: 2,
+              explanation: '`send` starts the request and immediately hands control back, so anything written after it runs before the response exists. That is why an AJAX helper that returns straight after `send` returns `undefined`.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1788,6 +1980,73 @@ console.log(buildRequest({ url: '/api/posts', body: { title: 'New post' } }))
           'Tell a 404 from a request that never completed'
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-js-l91',
+          title: 'Handling the response quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l91-q1',
+              type: 'true-false',
+              prompt: 'Reading `xhr.responseText` as soon as `readyState` is 3 is safe, because the body is nearly all there by then.',
+              answer: false,
+              explanation: 'State 3 means the body is still arriving, so the text you read is truncated. Parsing it gives a confusing "Unexpected end of JSON input" that disappears on a fast connection, which is what makes it such a bad bug. Only state 4, DONE, means the response is complete.',
+            },
+            {
+              id: 'quiz-js-l91-q2',
+              type: 'identify-error',
+              prompt: 'On a fast machine this works. On a slow connection it throws "Unexpected end of JSON input". Why?',
+              code: 'xhr.onreadystatechange = function () {\n  if (xhr.readyState === 3) {\n    render(JSON.parse(xhr.responseText))\n  }\n}',
+              options: [
+                'JSON.parse cannot be used inside an event handler',
+                'readyState 3 means the body is still arriving, so the text is incomplete',
+                'readyState 3 means the request failed, so the text is an error page',
+                'render must be called after send, not before',
+              ],
+              answer: 1,
+              explanation: 'State 3 is LOADING. Whatever has arrived so far is in responseText, and it grows as the rest comes in. Gate on state 4 instead, or use onload, which fires only once the body is complete.',
+            },
+            {
+              id: 'quiz-js-l91-q3',
+              type: 'multiple-choice',
+              prompt: '`xhr.readyState` is 4 and `xhr.status` is 0. What does that mean?',
+              options: [
+                'The server returned an empty document',
+                'The request never reached a server: offline, DNS failure or blocked',
+                'The server rejected the request with a status-0 error',
+                'The response is still loading',
+              ],
+              answer: 1,
+              explanation: 'No server opinion exists at status 0, so there is no response to report on. Treating it as "HTTP 0" hides the actual cause, which is the network or the browser blocking the request.',
+            },
+            {
+              id: 'quiz-js-l91-q4',
+              type: 'multiple-choice',
+              prompt: 'A `404` and a `500` are both failures. What is the useful difference between them?',
+              options: [
+                '404 is temporary, while 500 is permanent',
+                '404 means the server is down, while 500 means the URL is wrong',
+                '4xx means the request itself was wrong, 5xx means the server failed while handling it',
+                'There is no difference; both should be reported the same way',
+              ],
+              answer: 2,
+              explanation: 'The hundreds digit says whose problem it is: a 4xx points at the request you sent, a 5xx at the server. Telling the user which one happened saves them checking their own input for nothing.',
+            },
+            {
+              id: 'quiz-js-l91-q5',
+              type: 'multiple-choice',
+              prompt: 'A `204 No Content` response arrives. Why does `JSON.parse(xhr.responseText)` throw?',
+              options: [
+                'Because the body is empty, and the empty string is not valid JSON',
+                'Because 204 is an error status',
+                'Because `responseText` is `null` for a 204 response',
+                'Because a 204 response must be read with `responseXML`',
+              ],
+              answer: 0,
+              explanation: 'A 204 is a success with no body, so `responseText` is `""` and the parser has nothing to read. Check for blank text before parsing, or a perfectly successful request looks broken.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1973,79 +2232,6 @@ console.log(interpretResponse({ readyState: 4, status: 200, responseText: '{"ok"
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s76',
-      title: 'AJAX check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s76-q1',
-          type: 'multiple-choice',
-          prompt: 'What does AJAX mean today, given that almost nobody transfers XML any more?',
-          options: [
-            'A markup format for describing a request and a response together',
-            'Talking to a server in the background and updating part of the page in place',
-            'The specific XMLHttpRequest API, and nothing else',
-            'A way of compressing page data before it is sent'
-          ],
-          answer: 1,
-          explanation:
-            'The X in the original name came from XML documents, and the technique outlived the format. What survived is the idea: a request runs alongside the page, and only the region that needs new data is rebuilt. You can do it with fetch, with XMLHttpRequest, or with a library wrapping either.',
-        },
-        {
-          id: 'quiz-js-s76-q2',
-          type: 'true-false',
-          prompt: 'Reading `xhr.responseText` as soon as `readyState` is 3 is safe, because the body is nearly all there by then.',
-          answer: false,
-          explanation:
-            'State 3 means the body is still arriving, so the text you read is truncated. Parsing it gives a confusing "Unexpected end of JSON input" that disappears on a fast connection, which is what makes it such a bad bug. Only state 4, DONE, means the response is complete.',
-        },
-        {
-          id: 'quiz-js-s76-q3',
-          type: 'blank',
-          prompt: 'Which numeric `readyState` value means the request has finished and the response is complete?',
-          answers: ['4', '4 (done)', 'done'],
-          explanation:
-            'It is 4, and the named constant is XMLHttpRequest.DONE. The full ladder is 0 UNOPENED, 1 OPENED, 2 HEADERS_RECEIVED, 3 LOADING, 4 DONE. Using the constant instead of the number means nobody has to remember which is which.',
-        },
-        {
-          id: 'quiz-js-s76-q4',
-          type: 'identify-error',
-          prompt: 'On a fast machine this works. On a slow connection it throws "Unexpected end of JSON input". Why?',
-          code: `xhr.onreadystatechange = function () {
-  if (xhr.readyState === 3) {
-    render(JSON.parse(xhr.responseText))
-  }
-}`,
-          options: [
-            'JSON.parse cannot be used inside an event handler',
-            'readyState 3 means the body is still arriving, so the text is incomplete',
-            'readyState 3 means the request failed, so the text is an error page',
-            'render must be called after send, not before'
-          ],
-          answer: 1,
-          explanation:
-            'State 3 is LOADING. Whatever has arrived so far is in responseText, and it grows as the rest comes in. Gate on state 4 instead, or use onload, which fires only once the body is complete.',
-        },
-        {
-          id: 'quiz-js-s76-q5',
-          type: 'code-output',
-          prompt: 'What is logged?',
-          code: `const xhr = new XMLHttpRequest()
-xhr.open('GET', '/api/posts')
-console.log(xhr.readyState, xhr.sent)`,
-          options: [
-            '1 false',
-            '0 false',
-            '4 true',
-            'It throws, because open needs a callback'
-          ],
-          answer: 0,
-          explanation:
-            'open names the request and moves the object to OPENED, so readyState is 1, and nothing has gone over the wire yet, so sent is false. Calling open with a method and a URL is enough; the third argument is only for asynchronous behaviour and defaults to true.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s77',
@@ -2063,6 +2249,77 @@ console.log(xhr.readyState, xhr.sent)`,
           'Explain why JSON replaced XML as the format for AJAX responses'
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-js-l92',
+          title: 'Working with XML data quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l92-q1',
+              type: 'multiple-choice',
+              prompt: 'Why did JSON replace XML as the format for most AJAX responses?',
+              options: [
+                'JSON is smaller, so responses arrive faster',
+                'JSON.parse produces objects you can use immediately, with no node walking or namespace rules',
+                'XML cannot be sent over HTTP',
+                'Browsers refuse to parse XML for security reasons',
+              ],
+              answer: 1,
+              explanation: 'JSON is a subset of JavaScript syntax, so a parsed response is already an object with properties you can read. XML needs a parser, a walk and an escape for every special character in a value. XML survives where a document rather than a record is the point: feeds, sitemaps, SVG.',
+            },
+            {
+              id: 'quiz-js-l92-q2',
+              type: 'blank',
+              prompt: 'Which built-in object parses an XML string into a document, with no library?',
+              answers: [
+                'domparser',
+                'new domparser()',
+              ],
+              explanation: '`new DOMParser().parseFromString(text, "application/xml")` is the whole story. Pass the XML content type, not text/html, or the browser will accept broken input and hand you a document built out of guesses instead of reporting a parsererror.',
+            },
+            {
+              id: 'quiz-js-l92-q3',
+              type: 'code-output',
+              prompt: 'What does this log?',
+              code: 'const doc = new DOMParser().parseFromString(\'<a><b>one</b></a>\', \'application/xml\')\nconsole.log(doc.getElementsByTagName(\'b\')[0].textContent)',
+              options: [
+                'one',
+                '<b>one</b>',
+                'undefined',
+                'It throws, because an XML node has no textContent',
+              ],
+              answer: 0,
+              explanation: 'The live list from getElementsByTagName holds the one matching element, and its textContent is the text inside it. Note that there is no innerText on an XML node - there is no layout - and that the same method returns every matching element at any depth, so nested tags come back together.',
+            },
+            {
+              id: 'quiz-js-l92-q4',
+              type: 'identify-error',
+              prompt: 'Typing quickly in a search box sometimes shows results for a word the box no longer contains. Why?',
+              code: 'search.addEventListener(\'input\', function () {\n  fetch(\'/api/search?q=\' + search.value)\n    .then(function (r) { return r.json() })\n    .then(function (data) {\n      container.innerHTML = \'\'\n      data.forEach(function (item) {\n        container.innerHTML += \'<li>\' + item.title + \'</li>\'\n      })\n    })\n})',
+              options: [
+                'The listener fires twice per keystroke on some browsers',
+                'fetch does not send the value of the input when it is read in the handler',
+                'Responses can arrive out of order, so a slow earlier request overwrites the newer result',
+                'innerHTML cannot be assigned inside a then block',
+              ],
+              answer: 2,
+              explanation: 'Nothing orders the responses, so a slow request started two keystrokes ago can land after the newest one and overwrite it. Number the requests and drop any answer that is not the latest, or abort the previous request. The string-building on the last line is a second problem: it re-parses the whole list on every item and would execute markup that came from the server.',
+            },
+            {
+              id: 'quiz-js-l92-q5',
+              type: 'multiple-choice',
+              prompt: 'Malformed XML does not throw. How do you find out that the parse failed?',
+              options: [
+                'Check `doc.getElementsByTagName("parsererror").length`',
+                'Wrap the parse in `try`/`catch`, because it throws a SyntaxError',
+                'Check `doc.readyState`, which is 4 when parsing failed',
+                'Read `doc.status`, which is 0 for a broken document',
+              ],
+              answer: 0,
+              explanation: 'The parser returns a document containing a `parsererror` element instead of throwing. Without that check you walk the tree, find no items, and conclude the feed was empty — a wrong answer that looks correct.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -2265,6 +2522,72 @@ console.log(parseTitles('<posts><post><title>First</title></post></posts>'))
           'Keep the request tied to what the user is looking at now'
         ],
         xp: 45,
+        quiz: {
+          id: 'quiz-js-l93',
+          title: 'AJAX in a real page quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l93-q1',
+              type: 'true-false',
+              prompt: 'Setting `container.innerHTML = ""` and then appending new items is a safe way to update part of a page in place.',
+              answer: true,
+              explanation: 'As long as the container element itself is kept, the listeners attached to it survive and the rest of the page is untouched. What destroys listeners is replacing the container element itself, or assigning to document.body.innerHTML, which throws away the whole page you were trying to update.',
+            },
+            {
+              id: 'quiz-js-l93-q2',
+              type: 'multiple-choice',
+              prompt: 'Which three states should an in-place update be able to show?',
+              options: [
+                'Loading, loaded and failed',
+                'Loading, loaded and cached',
+                'Requested, received and rendered',
+                'Empty, full and disabled',
+              ],
+              answer: 0,
+              explanation: 'A page that only renders the success case looks frozen while a request is in flight and lies when it fails. Saying "loading" and "could not load" is what makes the page tell the truth about itself.',
+            },
+            {
+              id: 'quiz-js-l93-q3',
+              type: 'multiple-choice',
+              prompt: 'Two searches are in flight. The older, slower one returns last and overwrites the newer results. What is the standard fix?',
+              options: [
+                'Delay the newer request with `setTimeout` so it always wins',
+                'Number each request and ignore any answer that is not the latest, or abort the previous one',
+                'Switch to `XMLHttpRequest`, which returns responses in order',
+                'Read the input value again when the response arrives',
+              ],
+              answer: 1,
+              explanation: 'Nothing orders responses, so the page has to decide which answer still matters. A counter compared against the latest request number, or an `AbortController` that cancels the previous one, does that.',
+            },
+            {
+              id: 'quiz-js-l93-q4',
+              type: 'multiple-choice',
+              prompt: 'What does setting `aria-busy="true"` on the results container do?',
+              options: [
+                'It blocks clicks until the request finishes',
+                'It shows a spinner automatically',
+                'It tells assistive technology that the region is being updated',
+                'It prevents the container from being re-rendered',
+              ],
+              answer: 2,
+              explanation: '`aria-busy` is a signal to screen readers that the region is mid-update, so they can wait for a settled version. It changes no behaviour and draws nothing on screen.',
+            },
+            {
+              id: 'quiz-js-l93-q5',
+              type: 'multiple-choice',
+              prompt: 'Why build elements and set `textContent`, rather than assigning HTML built from the server\'s data?',
+              options: [
+                'Because `innerHTML` is slower in every browser',
+                'Because `textContent` supports formatting that `innerHTML` does not',
+                'Because `innerHTML` cannot be assigned more than once',
+                'Because a value from the data can inject markup, and rebuilding the string re-parses the whole list each time',
+              ],
+              answer: 3,
+              explanation: '`textContent` treats the data as text, so a title containing markup cannot become live HTML. It also avoids reassigning `innerHTML` inside the loop, which re-parses the entire list for every item.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -2529,77 +2852,5 @@ console.log(renderPosts([{ title: 'First' }, { title: 'Second' }]))
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s77',
-      title: 'AJAX applications check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s77-q1',
-          type: 'multiple-choice',
-          prompt: 'Why did JSON replace XML as the format for most AJAX responses?',
-          options: [
-            'JSON is smaller, so responses arrive faster',
-            'JSON.parse produces objects you can use immediately, with no node walking or namespace rules',
-            'XML cannot be sent over HTTP',
-            'Browsers refuse to parse XML for security reasons'
-          ],
-          answer: 1,
-          explanation:
-            'JSON is a subset of JavaScript syntax, so a parsed response is already an object with properties you can read. XML needs a parser, a walk and an escape for every special character in a value. XML survives where a document rather than a record is the point: feeds, sitemaps, SVG.',
-        },
-        {
-          id: 'quiz-js-s77-q2',
-          type: 'true-false',
-          prompt: 'Setting `container.innerHTML = ""` and then appending new items is a safe way to update part of a page in place.',
-          answer: true,
-          explanation:
-            'As long as the container element itself is kept, the listeners attached to it survive and the rest of the page is untouched. What destroys listeners is replacing the container element itself, or assigning to document.body.innerHTML, which throws away the whole page you were trying to update.',
-        },
-        {
-          id: 'quiz-js-s77-q3',
-          type: 'blank',
-          prompt: 'Which built-in object parses an XML string into a document, with no library?',
-          answers: ['domparser', 'new domparser()'],
-          explanation:
-            '`new DOMParser().parseFromString(text, "application/xml")` is the whole story. Pass the XML content type, not text/html, or the browser will accept broken input and hand you a document built out of guesses instead of reporting a parsererror.',
-        },
-        {
-          id: 'quiz-js-s77-q4',
-          type: 'code-output',
-          prompt: 'What does this log?',
-          code: `const doc = new DOMParser().parseFromString('<a><b>one</b></a>', 'application/xml')
-console.log(doc.getElementsByTagName('b')[0].textContent)`,
-          options: ['one', '<b>one</b>', 'undefined', 'It throws, because an XML node has no textContent'],
-          answer: 0,
-          explanation:
-            'The live list from getElementsByTagName holds the one matching element, and its textContent is the text inside it. Note that there is no innerText on an XML node - there is no layout - and that the same method returns every matching element at any depth, so nested tags come back together.',
-        },
-        {
-          id: 'quiz-js-s77-q5',
-          type: 'identify-error',
-          prompt: 'Typing quickly in a search box sometimes shows results for a word the box no longer contains. Why?',
-          code: `search.addEventListener('input', function () {
-  fetch('/api/search?q=' + search.value)
-    .then(function (r) { return r.json() })
-    .then(function (data) {
-      container.innerHTML = ''
-      data.forEach(function (item) {
-        container.innerHTML += '<li>' + item.title + '</li>'
-      })
-    })
-})`,
-          options: [
-            'The listener fires twice per keystroke on some browsers',
-            'fetch does not send the value of the input when it is read in the handler',
-            'Responses can arrive out of order, so a slow earlier request overwrites the newer result',
-            'innerHTML cannot be assigned inside a then block'
-          ],
-          answer: 2,
-          explanation:
-            'Nothing orders the responses, so a slow request started two keystrokes ago can land after the newest one and overwrite it. Number the requests and drop any answer that is not the latest, or abort the previous request. The string-building on the last line is a second problem: it re-parses the whole list on every item and would execute markup that came from the server.',
-        },
-      ],
-    },
   },
 ]

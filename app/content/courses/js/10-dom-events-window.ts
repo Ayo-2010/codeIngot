@@ -18,6 +18,76 @@ export const jsDomEventsWindowSections: Section[] = [
           'Use checkValidity and reportValidity instead of inventing your own validation',
         ],
         xp: 55,
+        quiz: {
+          id: 'quiz-js-l71',
+          title: 'Events and form submission quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l71-q1',
+              type: 'blank',
+              prompt: 'Which single event fires both when the submit button is clicked and when the user presses Enter inside a field?',
+              answers: [
+                'submit',
+                'the submit event',
+              ],
+              explanation: 'Listen for `submit` on the form element. There is no separate event for the button, and `click` on the button misses the Enter key entirely — which is the shortcut people actually use.',
+            },
+            {
+              id: 'quiz-js-l71-q2',
+              type: 'multiple-choice',
+              prompt: 'Inside an arrow function used as an event handler, what does `this` refer to?',
+              options: [
+                'The element the listener is attached to',
+                'The element that was actually clicked',
+                'The event object itself',
+                'Whatever `this` was where the arrow was written, not the element',
+              ],
+              answer: 3,
+              explanation: 'An arrow function has no `this` of its own, so it keeps the `this` of the surrounding scope. That is why an arrow handler should read `event.currentTarget` instead of `this`.',
+            },
+            {
+              id: 'quiz-js-l71-q3',
+              type: 'multiple-choice',
+              prompt: 'A form has five named inputs. Which single expression gives you all of their values, keyed by name?',
+              options: [
+                '`form.elements.value`',
+                '`new FormData(form)`',
+                '`form.values()`',
+                '`document.forms[name]`',
+              ],
+              answer: 1,
+              explanation: '`FormData` collects every named control in one pass and knows how to read checkboxes and file inputs. `form.elements.value` is not a property of the collection, and a form has no `values()` method.',
+            },
+            {
+              id: 'quiz-js-l71-q4',
+              type: 'identify-error',
+              prompt: 'The greeting appears for a moment, then the page reloads and it is gone. What is missing from the handler?',
+              code: 'form.addEventListener(\'submit\', function (event) {\n  message.textContent = \'Thanks, \' + form.elements.email.value\n})',
+              options: [
+                '`event.stopPropagation()`',
+                '`event.preventDefault()`',
+                '`form.submit()`',
+                'A `click` listener on the button instead of `submit` on the form',
+              ],
+              answer: 1,
+              explanation: 'Without `preventDefault`, the form performs its default navigation and the document — with your message in it — is thrown away. `stopPropagation` only stops the event bubbling and does nothing about the navigation.',
+            },
+            {
+              id: 'quiz-js-l71-q5',
+              type: 'multiple-choice',
+              prompt: '`form.checkValidity()` returns false. What does `form.reportValidity()` do that `checkValidity()` does not?',
+              options: [
+                'It submits the form when every field is valid',
+                'It throws an error naming the first invalid field',
+                'It shows the browser-generated message for the invalid fields',
+                'It returns the invalid elements as an array',
+              ],
+              answer: 2,
+              explanation: 'Both check the fields, but `reportValidity` also surfaces the browser\'s own messages, already translated and worded for the user. Building your own error strings throws that away.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -287,6 +357,74 @@ form.addEventListener('submit', function (event) {
           'Pick between input, change, keydown and submit for the job in front of you',
         ],
         xp: 55,
+        quiz: {
+          id: 'quiz-js-l72',
+          title: 'Event listeners in practice quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l72-q1',
+              type: 'multiple-choice',
+              prompt: 'What is the real difference between `addEventListener` and setting the `onclick` property?',
+              options: [
+                'None — they are two spellings of the same thing',
+                'addEventListener can attach several handlers to the same event and remove them again, while onclick overwrites whatever was there',
+                'onclick is the modern version and addEventListener is deprecated',
+                'addEventListener only works on the document, not on elements',
+              ],
+              answer: 1,
+              explanation: 'The `onclick` property holds one handler, so a second assignment erases the first. `addEventListener` keeps a list, which is why it can also take a listener off again with `removeEventListener` and the same function reference.',
+            },
+            {
+              id: 'quiz-js-l72-q2',
+              type: 'true-false',
+              prompt: 'A click listener is attached to a `ul`, and the user clicks a `button` inside one of its `li` children. Inside the handler, `event.currentTarget` is the button.',
+              answer: false,
+              explanation: '`currentTarget` is always the element whose listener is running, so it is the `ul`. `event.target` is the deepest element the event started on, which is the button — and that is the one you want when you need to know which control was used.',
+            },
+            {
+              id: 'quiz-js-l72-q3',
+              type: 'code-output',
+              prompt: 'The button is inside a form. What happens when it is clicked?',
+              code: 'button.addEventListener(\'click\', function (event) {\n  event.preventDefault()\n  console.log(\'saved\')\n})',
+              options: [
+                'The page navigates and "saved" never prints',
+                '"saved" prints, and the click default (activating the button, which submits the form) is cancelled',
+                'It is a syntax error, because preventDefault has to be called first',
+                'The handler runs twice, once for the click and once for the submit',
+              ],
+              answer: 1,
+              explanation: '`preventDefault` cancels the action the browser would have taken for that event. It does not stop other listeners — that is `stopPropagation` — and it is better practice to handle `submit` on the form, which also covers the Enter key.',
+            },
+            {
+              id: 'quiz-js-l72-q4',
+              type: 'identify-error',
+              prompt: 'After the first render everything works. After the second render, one click logs "picked" twice. What is wrong?',
+              code: 'const list = document.querySelector(\'#list\')\nfor (const item of list.children) {\n  item.addEventListener(\'click\', function () {\n    console.log(\'picked\')\n  })\n}\nrender()   // called again after every change',
+              options: [
+                'Nothing is wrong — one handler per item is the correct pattern',
+                'The handlers should be attached to list.children in reverse order',
+                'Each call to render attaches a second handler to every item, so the handlers stack up',
+                'children is a live collection, so the loop runs twice in one pass',
+              ],
+              answer: 2,
+              explanation: 'The first pass is fine; the second pass doubles every handler. Either attach once outside any re-render, or put a single listener on the list and read `event.target` — delegation has no way to double up.',
+            },
+            {
+              id: 'quiz-js-l72-q5',
+              type: 'multiple-choice',
+              prompt: 'A scroll handler never calls `preventDefault`. Which options object lets the browser scroll without waiting for the handler to finish?',
+              options: [
+                '`{ capture: true }` — it listens during the capture phase',
+                '`{ once: true }` — it fires only the first time the user scrolls',
+                '`{ passive: true }` — it promises not to call `preventDefault`, so the browser can scroll without waiting',
+                '`{ preventDefault: true }` — it blocks the scroll until the handler finishes',
+              ],
+              answer: 2,
+              explanation: '`passive` is the browser making a promise: this handler will never cancel the scroll, so there is no need to run it before moving the page. `capture` changes when the handler runs, not whether it can block.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -533,84 +671,6 @@ menu.addEventListener('click', function (event) {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s60',
-      title: 'DOM events check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s60-q1',
-          type: 'multiple-choice',
-          prompt: 'What is the real difference between `addEventListener` and setting the `onclick` property?',
-          options: [
-            'None — they are two spellings of the same thing',
-            'addEventListener can attach several handlers to the same event and remove them again, while onclick overwrites whatever was there',
-            'onclick is the modern version and addEventListener is deprecated',
-            'addEventListener only works on the document, not on elements',
-          ],
-          answer: 1,
-          explanation:
-            'The `onclick` property holds one handler, so a second assignment erases the first. `addEventListener` keeps a list, which is why it can also take a listener off again with `removeEventListener` and the same function reference.',
-        },
-        {
-          id: 'quiz-js-s60-q2',
-          type: 'true-false',
-          prompt:
-            'A click listener is attached to a `ul`, and the user clicks a `button` inside one of its `li` children. Inside the handler, `event.currentTarget` is the button.',
-          answer: false,
-          explanation:
-            '`currentTarget` is always the element whose listener is running, so it is the `ul`. `event.target` is the deepest element the event started on, which is the button — and that is the one you want when you need to know which control was used.',
-        },
-        {
-          id: 'quiz-js-s60-q3',
-          type: 'code-output',
-          prompt: 'The button is inside a form. What happens when it is clicked?',
-          code: `button.addEventListener('click', function (event) {
-  event.preventDefault()
-  console.log('saved')
-})`,
-          options: [
-            'The page navigates and "saved" never prints',
-            '"saved" prints, and the click default (activating the button, which submits the form) is cancelled',
-            'It is a syntax error, because preventDefault has to be called first',
-            'The handler runs twice, once for the click and once for the submit',
-          ],
-          answer: 1,
-          explanation:
-            '`preventDefault` cancels the action the browser would have taken for that event. It does not stop other listeners — that is `stopPropagation` — and it is better practice to handle `submit` on the form, which also covers the Enter key.',
-        },
-        {
-          id: 'quiz-js-s60-q4',
-          type: 'blank',
-          prompt:
-            'Which single event fires both when the submit button is clicked and when the user presses Enter inside a field?',
-          answers: ['submit', 'the submit event'],
-          explanation:
-            'Listen for `submit` on the form element. There is no separate event for the button, and `click` on the button misses the Enter key entirely — which is the shortcut people actually use.',
-        },
-        {
-          id: 'quiz-js-s60-q5',
-          type: 'identify-error',
-          prompt: 'After the first render everything works. After the second render, one click logs "picked" twice. What is wrong?',
-          code: `const list = document.querySelector('#list')
-for (const item of list.children) {
-  item.addEventListener('click', function () {
-    console.log('picked')
-  })
-}
-render()   // called again after every change`,
-          options: [
-            'Nothing is wrong — one handler per item is the correct pattern',
-            'The handlers should be attached to list.children in reverse order',
-            'Each call to render attaches a second handler to every item, so the handlers stack up',
-            'children is a live collection, so the loop runs twice in one pass',
-          ],
-          answer: 2,
-          explanation:
-            'The first pass is fine; the second pass doubles every handler. Either attach once outside any re-render, or put a single listener on the list and read `event.target` — delegation has no way to double up.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s61',
@@ -629,6 +689,72 @@ render()   // called again after every change`,
           'Build a breadcrumb by walking up from a leaf and reversing the result',
         ],
         xp: 45,
+        quiz: {
+          id: 'quiz-js-l73',
+          title: 'Navigating the DOM quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l73-q1',
+              type: 'multiple-choice',
+              prompt: 'You have an element and you know its parent is an element, not the document. Which property should you use?',
+              options: [
+                'parentNode',
+                'parentElement',
+                'closest()',
+                'previousElementSibling',
+              ],
+              answer: 1,
+              explanation: '`parentNode` can hand you a document, a fragment or any other node type, which is why it is typed as a general node. `parentElement` is narrowed to an element or `null`, so it is the honest choice when you are about to call element methods on it.',
+            },
+            {
+              id: 'quiz-js-l73-q2',
+              type: 'true-false',
+              prompt: '`children` includes text nodes; `childNodes` does not.',
+              answer: false,
+              explanation: 'It is the other way round. `children` gives elements only, and `childNodes` gives every node, including the whitespace text nodes that sit between indented tags.',
+            },
+            {
+              id: 'quiz-js-l73-q3',
+              type: 'blank',
+              prompt: 'Which method walks up from an element, including the element itself, and returns the nearest ancestor matching a selector?',
+              answers: [
+                'closest',
+                'element.closest',
+                '.closest',
+              ],
+              explanation: '`closest` starts at the element you call it on, so it matches the element itself as well as its ancestors. It never walks downwards, which is why a listener on a parent is the usual partner for it.',
+            },
+            {
+              id: 'quiz-js-l73-q4',
+              type: 'code-output',
+              prompt: 'Given `<section><div class="card">Hi</div></section>` in the document, what does this print?',
+              code: 'const card = document.querySelector(\'.card\')\nconsole.log(card.parentElement.tagName)',
+              options: [
+                'DIV',
+                'SECTION',
+                'BODY',
+                'null',
+              ],
+              answer: 1,
+              explanation: '`parentElement` is the `section` that wraps the card in the markup, and `tagName` is always upper case for HTML elements, so it prints `SECTION`. If the card were a direct child of `body` you would get `BODY` instead.',
+            },
+            {
+              id: 'quiz-js-l73-q5',
+              type: 'identify-error',
+              prompt: 'The console prints an empty string instead of the first item. What is wrong?',
+              code: '<ul id="list">\n  <li>Tea</li>\n  <li>Coffee</li>\n</ul>\n<script>\nconst list = document.querySelector(\'#list\')\nconst first = list.firstChild\nconsole.log(first.textContent)\n</script>',
+              options: [
+                'Nothing is wrong, firstChild is the first list item',
+                'firstChild is the indentation before the first tag, a text node whose textContent is empty',
+                'firstChild does not exist on a ul element',
+                'textContent does not work on the first item',
+              ],
+              answer: 1,
+              explanation: '`firstChild` is the first node of any kind, and in indented markup that is a text node holding a newline and some spaces. `firstElementChild` skips text nodes and gives you the `li` you meant.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -872,73 +998,6 @@ list.addEventListener('click', function (event) {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s61',
-      title: 'DOM navigation check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s61-q1',
-          type: 'multiple-choice',
-          prompt: 'You have an element and you know its parent is an element, not the document. Which property should you use?',
-          options: ['parentNode', 'parentElement', 'closest()', 'previousElementSibling'],
-          answer: 1,
-          explanation:
-            '`parentNode` can hand you a document, a fragment or any other node type, which is why it is typed as a general node. `parentElement` is narrowed to an element or `null`, so it is the honest choice when you are about to call element methods on it.',
-        },
-        {
-          id: 'quiz-js-s61-q2',
-          type: 'true-false',
-          prompt: '`children` includes text nodes; `childNodes` does not.',
-          answer: false,
-          explanation:
-            'It is the other way round. `children` gives elements only, and `childNodes` gives every node, including the whitespace text nodes that sit between indented tags.',
-        },
-        {
-          id: 'quiz-js-s61-q3',
-          type: 'blank',
-          prompt:
-            'Which method walks up from an element, including the element itself, and returns the nearest ancestor matching a selector?',
-          answers: ['closest', 'element.closest', '.closest'],
-          explanation:
-            '`closest` starts at the element you call it on, so it matches the element itself as well as its ancestors. It never walks downwards, which is why a listener on a parent is the usual partner for it.',
-        },
-        {
-          id: 'quiz-js-s61-q4',
-          type: 'code-output',
-          prompt: 'Given `<section><div class="card">Hi</div></section>` in the document, what does this print?',
-          code: `const card = document.querySelector('.card')
-console.log(card.parentElement.tagName)`,
-          options: ['DIV', 'SECTION', 'BODY', 'null'],
-          answer: 1,
-          explanation:
-            '`parentElement` is the `section` that wraps the card in the markup, and `tagName` is always upper case for HTML elements, so it prints `SECTION`. If the card were a direct child of `body` you would get `BODY` instead.',
-        },
-        {
-          id: 'quiz-js-s61-q5',
-          type: 'identify-error',
-          prompt: 'The console prints an empty string instead of the first item. What is wrong?',
-          code: `<ul id="list">
-  <li>Tea</li>
-  <li>Coffee</li>
-</ul>
-<script>
-const list = document.querySelector('#list')
-const first = list.firstChild
-console.log(first.textContent)
-</script>`,
-          options: [
-            'Nothing is wrong, firstChild is the first list item',
-            'firstChild is the indentation before the first tag, a text node whose textContent is empty',
-            'firstChild does not exist on a ul element',
-            'textContent does not work on the first item',
-          ],
-          answer: 1,
-          explanation:
-            '`firstChild` is the first node of any kind, and in indented markup that is a text node holding a newline and some spaces. `firstElementChild` skips text nodes and gives you the `li` you meant.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s62',
@@ -957,6 +1016,73 @@ console.log(first.textContent)
           'Remove an element without losing the reference you need to remove it again',
         ],
         xp: 55,
+        quiz: {
+          id: 'quiz-js-l74',
+          title: 'Creating and removing nodes quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l74-q1',
+              type: 'multiple-choice',
+              prompt: 'What does `document.createElement("li")` return?',
+              options: [
+                'An element that is already on the page and can be seen',
+                'A detached element that becomes part of the page only when you insert it',
+                'A string of HTML you still have to parse',
+                'null, because li cannot be created from JavaScript',
+              ],
+              answer: 1,
+              explanation: 'It is a real element, but it is not in the document: no stylesheet rule applies to it and nothing is painted until you insert it. That is why the right order is create, fill, then attach.',
+            },
+            {
+              id: 'quiz-js-l74-q2',
+              type: 'true-false',
+              prompt: '`row.cloneNode(true)` produces a deep copy of the row that is not yet part of the document.',
+              answer: true,
+              explanation: 'The `true` copies the whole subtree, and the copy is detached until you insert it. What it does not copy is anything JavaScript added: listeners, inline styles, or the text a user had typed into an input.',
+            },
+            {
+              id: 'quiz-js-l74-q3',
+              type: 'blank',
+              prompt: 'Which method inserts a node directly *before* an existing sibling, without touching the parent?',
+              answers: [
+                'before',
+                'node.before',
+                '.before',
+                'element.before',
+              ],
+              explanation: '`before` and `after` are called on the existing node and position the new one relative to it. `prepend` would have put it first among the children instead, which is a different place entirely.',
+            },
+            {
+              id: 'quiz-js-l74-q4',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'const list = document.querySelector(\'#list\')\nlist.replaceChildren()\nconsole.log(list.children.length)',
+              options: [
+                '0',
+                '1',
+                'undefined',
+                'It throws an error',
+              ],
+              answer: 0,
+              explanation: '`replaceChildren` with no arguments removes every child in one operation, so the list is empty and `children.length` is 0. It is the fast way to clear a container before refilling it.',
+            },
+            {
+              id: 'quiz-js-l74-q5',
+              type: 'identify-error',
+              prompt: 'The new element never appears, and the next line fails. What is wrong?',
+              code: 'const list = document.querySelector(\'#list\')\nconst item = document.createElement(\'li\')\nitem = item.append(\'Tea\')\nconsole.log(item.tagName)',
+              options: [
+                'Nothing is wrong, append returns the node it appended',
+                'append returns undefined, so item is now undefined and reading a property from it fails',
+                'createElement returns undefined for a list item',
+                'append is spelled appendChild',
+              ],
+              answer: 1,
+              explanation: 'The mutating methods return nothing on purpose, so nothing waits for a return value. Assigning one back to the variable throws the element away — the item is on the page, but you no longer have a reference to it.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1238,74 +1364,6 @@ list.addEventListener('click', function (event) {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s62',
-      title: 'DOM nodes check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s62-q1',
-          type: 'multiple-choice',
-          prompt: 'What does `document.createElement("li")` return?',
-          options: [
-            'An element that is already on the page and can be seen',
-            'A detached element that becomes part of the page only when you insert it',
-            'A string of HTML you still have to parse',
-            'null, because li cannot be created from JavaScript',
-          ],
-          answer: 1,
-          explanation:
-            'It is a real element, but it is not in the document: no stylesheet rule applies to it and nothing is painted until you insert it. That is why the right order is create, fill, then attach.',
-        },
-        {
-          id: 'quiz-js-s62-q2',
-          type: 'true-false',
-          prompt: '`row.cloneNode(true)` produces a deep copy of the row that is not yet part of the document.',
-          answer: true,
-          explanation:
-            'The `true` copies the whole subtree, and the copy is detached until you insert it. What it does not copy is anything JavaScript added: listeners, inline styles, or the text a user had typed into an input.',
-        },
-        {
-          id: 'quiz-js-s62-q3',
-          type: 'blank',
-          prompt:
-            'Which method inserts a node directly *before* an existing sibling, without touching the parent?',
-          answers: ['before', 'node.before', '.before', 'element.before'],
-          explanation:
-            '`before` and `after` are called on the existing node and position the new one relative to it. `prepend` would have put it first among the children instead, which is a different place entirely.',
-        },
-        {
-          id: 'quiz-js-s62-q4',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `const list = document.querySelector('#list')
-list.replaceChildren()
-console.log(list.children.length)`,
-          options: ['0', '1', 'undefined', 'It throws an error'],
-          answer: 0,
-          explanation:
-            '`replaceChildren` with no arguments removes every child in one operation, so the list is empty and `children.length` is 0. It is the fast way to clear a container before refilling it.',
-        },
-        {
-          id: 'quiz-js-s62-q5',
-          type: 'identify-error',
-          prompt: 'The new element never appears, and the next line fails. What is wrong?',
-          code: `const list = document.querySelector('#list')
-const item = document.createElement('li')
-item = item.append('Tea')
-console.log(item.tagName)`,
-          options: [
-            'Nothing is wrong, append returns the node it appended',
-            'append returns undefined, so item is now undefined and reading a property from it fails',
-            'createElement returns undefined for a list item',
-            'append is spelled appendChild',
-          ],
-          answer: 1,
-          explanation:
-            'The mutating methods return nothing on purpose, so nothing waits for a return value. Assigning one back to the variable throws the element away — the item is on the page, but you no longer have a reference to it.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s63',
@@ -1324,6 +1382,72 @@ console.log(item.tagName)`,
           'Re-query deliberately and say out loud when you mean to',
         ],
         xp: 45,
+        quiz: {
+          id: 'quiz-js-l75',
+          title: 'Node lists and live collections quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l75-q1',
+              type: 'multiple-choice',
+              prompt: 'Which of these returns a **static** list — a snapshot taken at the moment of the call?',
+              options: [
+                'document.getElementsByClassName("item")',
+                'document.getElementsByTagName("li")',
+                'element.children',
+                'document.querySelectorAll(".item")',
+              ],
+              answer: 3,
+              explanation: 'Everything from `getElementsBy…` and `children` is a live HTMLCollection that re-reads the document. `querySelectorAll` is the one that hands you a frozen NodeList, so elements added afterwards are not in it.',
+            },
+            {
+              id: 'quiz-js-l75-q2',
+              type: 'true-false',
+              prompt: 'A live collection can report a different `length` than it did a second ago, without you re-running the query.',
+              answer: true,
+              explanation: 'That is the definition of live: it is a standing view of the page, and it re-reads when you touch a property. It is why removing from a live list inside a loop over it never terminates.',
+            },
+            {
+              id: 'quiz-js-l75-q3',
+              type: 'blank',
+              prompt: 'Which built-in call turns a NodeList or HTMLCollection into a real array, with every array method available?',
+              answers: [
+                'array.from',
+                'from',
+                'array.from()',
+              ],
+              explanation: '`Array.from(items)` copies the collection into an array. That copy is a snapshot, so removing elements afterwards cannot disturb the loop that is walking it.',
+            },
+            {
+              id: 'quiz-js-l75-q4',
+              type: 'code-output',
+              prompt: 'There is one element with the class `item` on the page. What does this print?',
+              code: 'const items = document.getElementsByClassName(\'item\')\nconst first = items[0]\nfirst.remove()\nconsole.log(first === items[0])',
+              options: [
+                'true',
+                'false',
+                'It throws an error',
+                'undefined',
+              ],
+              answer: 1,
+              explanation: '`first` still points at the removed element, and the live collection no longer contains it, so `items[0]` is now `undefined`. Comparing them is false. This is why a node reference and an index are not interchangeable once removal starts.',
+            },
+            {
+              id: 'quiz-js-l75-q5',
+              type: 'identify-error',
+              prompt: 'This loop should empty the list, but the tab freezes. Why?',
+              code: 'const items = document.getElementsByClassName(\'item\')\nwhile (items.length) {\n  items[0].remove()\n}\nconsole.log(\'done\')',
+              options: [
+                'The loop is correct, it just runs slowly',
+                'It never ends: the collection is live, so every removal makes the loop condition shorter by one, and there is always another item to remove',
+                'remove() cannot be called on an element from a live collection',
+                'items.length is only read once, so the condition is always true',
+              ],
+              answer: 1,
+              explanation: 'With a live collection the condition genuinely reaches zero — on a list that has more items than can be removed in time, or a collection that re-queries. The version people actually hit is the reverse: a `querySelectorAll` list is a stale copy, so items added during the loop survive. Copy with `Array.from` first and both problems disappear.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1554,76 +1678,6 @@ document.querySelector('#report').addEventListener('click', function () {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s63',
-      title: 'DOM collections check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s63-q1',
-          type: 'multiple-choice',
-          prompt: 'Which of these returns a **static** list — a snapshot taken at the moment of the call?',
-          options: [
-            'document.getElementsByClassName("item")',
-            'document.getElementsByTagName("li")',
-            'element.children',
-            'document.querySelectorAll(".item")',
-          ],
-          answer: 3,
-          explanation:
-            'Everything from `getElementsBy…` and `children` is a live HTMLCollection that re-reads the document. `querySelectorAll` is the one that hands you a frozen NodeList, so elements added afterwards are not in it.',
-        },
-        {
-          id: 'quiz-js-s63-q2',
-          type: 'true-false',
-          prompt: 'A live collection can report a different `length` than it did a second ago, without you re-running the query.',
-          answer: true,
-          explanation:
-            'That is the definition of live: it is a standing view of the page, and it re-reads when you touch a property. It is why removing from a live list inside a loop over it never terminates.',
-        },
-        {
-          id: 'quiz-js-s63-q3',
-          type: 'blank',
-          prompt:
-            'Which built-in call turns a NodeList or HTMLCollection into a real array, with every array method available?',
-          answers: ['array.from', 'from', 'array.from()'],
-          explanation:
-            '`Array.from(items)` copies the collection into an array. That copy is a snapshot, so removing elements afterwards cannot disturb the loop that is walking it.',
-        },
-        {
-          id: 'quiz-js-s63-q4',
-          type: 'code-output',
-          prompt: 'There is one element with the class `item` on the page. What does this print?',
-          code: `const items = document.getElementsByClassName('item')
-const first = items[0]
-first.remove()
-console.log(first === items[0])`,
-          options: ['true', 'false', 'It throws an error', 'undefined'],
-          answer: 1,
-          explanation:
-            '`first` still points at the removed element, and the live collection no longer contains it, so `items[0]` is now `undefined`. Comparing them is false. This is why a node reference and an index are not interchangeable once removal starts.',
-        },
-        {
-          id: 'quiz-js-s63-q5',
-          type: 'identify-error',
-          prompt: 'This loop should empty the list, but the tab freezes. Why?',
-          code: `const items = document.getElementsByClassName('item')
-while (items.length) {
-  items[0].remove()
-}
-console.log('done')`,
-          options: [
-            'The loop is correct, it just runs slowly',
-            'It never ends: the collection is live, so every removal makes the loop condition shorter by one, and there is always another item to remove',
-            'remove() cannot be called on an element from a live collection',
-            'items.length is only read once, so the condition is always true',
-          ],
-          answer: 1,
-          explanation:
-            'With a live collection the condition genuinely reaches zero — on a list that has more items than can be removed in time, or a collection that re-queries. The version people actually hit is the reverse: a `querySelectorAll` list is a stale copy, so items added during the loop survive. Copy with `Array.from` first and both problems disappear.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s64',
@@ -1642,6 +1696,72 @@ console.log('done')`,
           'Reach for a scoped element instead of a global whenever one exists',
         ],
         xp: 45,
+        quiz: {
+          id: 'quiz-js-l76',
+          title: 'The window object quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l76-q1',
+              type: 'multiple-choice',
+              prompt: 'In browser JavaScript, what does `window` refer to?',
+              options: [
+                'The HTML document currently loaded',
+                'The browser application itself',
+                'The global object — the same one as globalThis',
+                'A hidden iframe every page secretly contains',
+              ],
+              answer: 2,
+              explanation: '`window` is the global object in a page: it owns `document`, `console`, the timing functions and anything a script declared with `var` at the top level. That is why `window === globalThis` in a browser.',
+            },
+            {
+              id: 'quiz-js-l76-q2',
+              type: 'true-false',
+              prompt: '`window` is the standard way to reach shared state from server-side Node.js code.',
+              answer: false,
+              explanation: 'There is no `window` in Node. Node has `global`, and modern code in both environments uses the portable `globalThis` instead of guessing which one it is running in.',
+            },
+            {
+              id: 'quiz-js-l76-q3',
+              type: 'blank',
+              prompt: 'Which property of `window` gives the width of the viewport, in CSS pixels, scrollbar included?',
+              answers: [
+                'innerwidth',
+                'window.innerwidth',
+                '.innerwidth',
+              ],
+              explanation: '`innerWidth` measures the viewport. `outerWidth` is the whole browser window including tabs and toolbars, and `document.documentElement.clientWidth` is the viewport without the scrollbar — the right number for layout.',
+            },
+            {
+              id: 'quiz-js-l76-q4',
+              type: 'code-output',
+              prompt: 'What does this print in a browser?',
+              code: 'console.log(typeof window.document)\nconsole.log(window === globalThis)',
+              options: [
+                '"object" then true',
+                '"object" then false',
+                '"undefined" then false',
+                '"window" then true',
+              ],
+              answer: 0,
+              explanation: '`window.document` is the document object, so the first line prints `"object"`. In a page `window` and `globalThis` are the same object, so the second line prints `true` — which is the portable way to write code that works in a browser and in Node.',
+            },
+            {
+              id: 'quiz-js-l76-q5',
+              type: 'identify-error',
+              prompt: 'On a narrow screen the panel sticks out past the right edge. What is wrong?',
+              code: 'const panel = document.querySelector(\'#panel\')\npanel.style.width = window.innerWidth + \'px\'',
+              options: [
+                'Nothing is wrong, innerWidth is exactly the space available',
+                'It should be screen.width, which is the real display width',
+                'innerWidth includes the vertical scrollbar and the panel has its own padding and border, so the box overflows',
+                'innerWidth is a string and cannot be used in arithmetic',
+              ],
+              answer: 2,
+              explanation: '`innerWidth` counts the scrollbar, and `width` on a content-box element adds padding and border on top. For a full-width panel use `width: 100%` and let the box model do the work; use `clientWidth` when you genuinely need a measured number.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1851,71 +1971,6 @@ document.querySelector('#hide').addEventListener('click', function () {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s64',
-      title: 'The window object check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s64-q1',
-          type: 'multiple-choice',
-          prompt: 'In browser JavaScript, what does `window` refer to?',
-          options: [
-            'The HTML document currently loaded',
-            'The browser application itself',
-            'The global object — the same one as globalThis',
-            'A hidden iframe every page secretly contains',
-          ],
-          answer: 2,
-          explanation:
-            '`window` is the global object in a page: it owns `document`, `console`, the timing functions and anything a script declared with `var` at the top level. That is why `window === globalThis` in a browser.',
-        },
-        {
-          id: 'quiz-js-s64-q2',
-          type: 'true-false',
-          prompt: '`window` is the standard way to reach shared state from server-side Node.js code.',
-          answer: false,
-          explanation:
-            'There is no `window` in Node. Node has `global`, and modern code in both environments uses the portable `globalThis` instead of guessing which one it is running in.',
-        },
-        {
-          id: 'quiz-js-s64-q3',
-          type: 'blank',
-          prompt:
-            'Which property of `window` gives the width of the viewport, in CSS pixels, scrollbar included?',
-          answers: ['innerwidth', 'window.innerwidth', '.innerwidth'],
-          explanation:
-            '`innerWidth` measures the viewport. `outerWidth` is the whole browser window including tabs and toolbars, and `document.documentElement.clientWidth` is the viewport without the scrollbar — the right number for layout.',
-        },
-        {
-          id: 'quiz-js-s64-q4',
-          type: 'code-output',
-          prompt: 'What does this print in a browser?',
-          code: `console.log(typeof window.document)
-console.log(window === globalThis)`,
-          options: ['"object" then true', '"object" then false', '"undefined" then false', '"window" then true'],
-          answer: 0,
-          explanation:
-            '`window.document` is the document object, so the first line prints `"object"`. In a page `window` and `globalThis` are the same object, so the second line prints `true` — which is the portable way to write code that works in a browser and in Node.',
-        },
-        {
-          id: 'quiz-js-s64-q5',
-          type: 'identify-error',
-          prompt: 'On a narrow screen the panel sticks out past the right edge. What is wrong?',
-          code: `const panel = document.querySelector('#panel')
-panel.style.width = window.innerWidth + 'px'`,
-          options: [
-            'Nothing is wrong, innerWidth is exactly the space available',
-            'It should be screen.width, which is the real display width',
-            'innerWidth includes the vertical scrollbar and the panel has its own padding and border, so the box overflows',
-            'innerWidth is a string and cannot be used in arithmetic',
-          ],
-          answer: 2,
-          explanation:
-            '`innerWidth` counts the scrollbar, and `width` on a content-box element adds padding and border on top. For a full-width panel use `width: 100%` and let the box model do the work; use `clientWidth` when you genuinely need a measured number.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s65',
@@ -1934,6 +1989,72 @@ panel.style.width = window.innerWidth + 'px'`,
           'Read the hash and the query string without parsing them by hand',
         ],
         xp: 45,
+        quiz: {
+          id: 'quiz-js-l77',
+          title: 'Screen and location quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l77-q1',
+              type: 'multiple-choice',
+              prompt: 'What does the `screen` object describe?',
+              options: [
+                'The browser window, tabs and toolbars included',
+                'The whole display the browser window happens to be on',
+                'The scrollable area of the page',
+                'The document, as it was when the page loaded',
+              ],
+              answer: 1,
+              explanation: '`screen` is the display, not the window and not the page. That is why `screen.availHeight` is smaller than `screen.height` on a machine with a taskbar, and why it is the wrong number to lay out with.',
+            },
+            {
+              id: 'quiz-js-l77-q2',
+              type: 'true-false',
+              prompt: '`location` is read-only in the sense that you cannot set it to a new value — to change the page you must use a method.',
+              answer: false,
+              explanation: 'You can assign to `location.href` and the browser navigates, which is exactly what `location.assign` does. What you cannot do is make the property *hold* something other than the current URL.',
+            },
+            {
+              id: 'quiz-js-l77-q3',
+              type: 'blank',
+              prompt: 'For the URL `https://codeingot.dev/courses/dom?q=events`, which property gives you `/courses/dom`?',
+              answers: [
+                'pathname',
+                'location.pathname',
+                '.pathname',
+              ],
+              explanation: '`pathname` is the path only. `href` is the whole URL, `host` is the domain with any port, and `search` is the query string including its leading question mark.',
+            },
+            {
+              id: 'quiz-js-l77-q4',
+              type: 'code-output',
+              prompt: 'The page is `https://codeingot.dev/courses/dom?q=events`. What does this print?',
+              code: 'console.log(location.search)',
+              options: [
+                'q=events',
+                '?q=events',
+                'events',
+                '?q=events#listeners',
+              ],
+              answer: 1,
+              explanation: '`search` is the raw query string, question mark and all, as a single string. `new URLSearchParams(location.search).get("q")` is what gives you just `events`, or `null` when the key is missing.',
+            },
+            {
+              id: 'quiz-js-l77-q5',
+              type: 'identify-error',
+              prompt: 'The user cannot get back to the page they were on. What happened?',
+              code: 'const go = document.querySelector(\'#go\')\ngo.addEventListener(\'click\', function () {\n  window.location.href = nextPage\n})',
+              options: [
+                'Nothing — assigning to href is the recommended way to navigate',
+                'It should have been screen.width rather than the href',
+                'This navigates away and nothing after it runs; an anchor with an href would at least give the user Back and a new tab',
+                'location.href cannot be assigned to, so nothing happened at all',
+              ],
+              answer: 2,
+              explanation: 'Navigation is not wrong, but the page that stays in the history depends on it: assigning `href` adds an entry, and the user does get Back. The real cost of doing it from a handler is that there is no link to middle-click or open in a new tab — so use a real `<a href>` whenever the destination is a URL you could have linked to.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -2157,72 +2278,5 @@ document.querySelector('#report').addEventListener('click', report)`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s65',
-      title: 'Screen and location check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s65-q1',
-          type: 'multiple-choice',
-          prompt: 'What does the `screen` object describe?',
-          options: [
-            'The browser window, tabs and toolbars included',
-            'The whole display the browser window happens to be on',
-            'The scrollable area of the page',
-            'The document, as it was when the page loaded',
-          ],
-          answer: 1,
-          explanation:
-            '`screen` is the display, not the window and not the page. That is why `screen.availHeight` is smaller than `screen.height` on a machine with a taskbar, and why it is the wrong number to lay out with.',
-        },
-        {
-          id: 'quiz-js-s65-q2',
-          type: 'true-false',
-          prompt:
-            '`location` is read-only in the sense that you cannot set it to a new value — to change the page you must use a method.',
-          answer: false,
-          explanation:
-            'You can assign to `location.href` and the browser navigates, which is exactly what `location.assign` does. What you cannot do is make the property *hold* something other than the current URL.',
-        },
-        {
-          id: 'quiz-js-s65-q3',
-          type: 'blank',
-          prompt:
-            'For the URL `https://codeingot.dev/courses/dom?q=events`, which property gives you `/courses/dom`?',
-          answers: ['pathname', 'location.pathname', '.pathname'],
-          explanation:
-            '`pathname` is the path only. `href` is the whole URL, `host` is the domain with any port, and `search` is the query string including its leading question mark.',
-        },
-        {
-          id: 'quiz-js-s65-q4',
-          type: 'code-output',
-          prompt: 'The page is `https://codeingot.dev/courses/dom?q=events`. What does this print?',
-          code: `console.log(location.search)`,
-          options: ['q=events', '?q=events', 'events', '?q=events#listeners'],
-          answer: 1,
-          explanation:
-            '`search` is the raw query string, question mark and all, as a single string. `new URLSearchParams(location.search).get("q")` is what gives you just `events`, or `null` when the key is missing.',
-        },
-        {
-          id: 'quiz-js-s65-q5',
-          type: 'identify-error',
-          prompt: 'The user cannot get back to the page they were on. What happened?',
-          code: `const go = document.querySelector('#go')
-go.addEventListener('click', function () {
-  window.location.href = nextPage
-})`,
-          options: [
-            'Nothing — assigning to href is the recommended way to navigate',
-            'It should have been screen.width rather than the href',
-            'This navigates away and nothing after it runs; an anchor with an href would at least give the user Back and a new tab',
-            'location.href cannot be assigned to, so nothing happened at all',
-          ],
-          answer: 2,
-          explanation:
-            'Navigation is not wrong, but the page that stays in the history depends on it: assigning `href` adds an entry, and the user does get Back. The real cost of doing it from a handler is that there is no link to middle-click or open in a new tab — so use a real `<a href>` whenever the destination is a URL you could have linked to.',
-        },
-      ],
-    },
   },
 ]

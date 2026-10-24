@@ -17,6 +17,72 @@ export const jsFlowErrorsSections: Section[] = [
           'Combine tests with && and ||, and reach for ?? when 0 matters',
         ],
         xp: 45,
+        quiz: {
+          id: 'quiz-js-l28',
+          title: 'Comparison and logical operators quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l28-q1',
+              type: 'multiple-choice',
+              prompt: 'Why is `==` avoided in favour of `===`?',
+              options: [
+                '`===` runs faster',
+                '`==` converts types before comparing, so `0 == "0"` and `"" == 0` are true',
+                '`==` only works on numbers',
+                '`==` cannot be used inside an `if`',
+              ],
+              answer: 1,
+              explanation: 'Loose equality coerces one side to the other type using a set of rules that are hard to remember. Strict equality asks two simple questions - same type, same value - and that is the entire rule.',
+            },
+            {
+              id: 'quiz-js-l28-q2',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'const n = 3\nconsole.log(n == \'3\', n === \'3\')',
+              options: [
+                'true true',
+                'true false',
+                'false false',
+                'false true',
+              ],
+              answer: 1,
+              explanation: 'Loose equality coerces the string to a number, so `==` gives true. Strict equality also compares types, and a number is not a string, so `===` gives false.',
+            },
+            {
+              id: 'quiz-js-l28-q3',
+              type: 'true-false',
+              prompt: 'A count of `0` will survive `count || 10`.',
+              answer: false,
+              explanation: '`0` is falsy, so `||` treats it as missing and hands back the right-hand side. `count ?? 10` is the form that keeps a real zero, because `??` only falls back for `null` and `undefined`.',
+            },
+            {
+              id: 'quiz-js-l28-q4',
+              type: 'blank',
+              prompt: 'Which operator gives the value only when it is `null` or `undefined`?',
+              answers: [
+                '??',
+                'nullish coalescing',
+                'nullish coalescing operator',
+              ],
+              explanation: '`??` is nullish coalescing: it returns the left side unless it is `null` or `undefined`, then returns the right. `||` fills in for every falsy value, which is why a real `0` or an empty string gets replaced.',
+            },
+            {
+              id: 'quiz-js-l28-q5',
+              type: 'identify-error',
+              prompt: 'What is wrong with this code?',
+              code: 'const items = getItems()\nif (items.length > 0 && items[0].name) {\n  show(items)\n}',
+              options: [
+                'Nothing - the guard looks fine',
+                '`&&` cannot be used with `>`',
+                'If `items` is undefined or null the left side throws before `&&` ever gets a chance to short-circuit',
+                '`items[0].name` must be compared with `===`',
+              ],
+              answer: 2,
+              explanation: 'Short-circuiting only protects the code on the **right** of `&&`. `items.length` is evaluated first, so an absent `items` throws there. Write the risky check first: `if (items && items.length > 0 && items[0].name)`.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -276,72 +342,6 @@ console.log(canEnter(20, false))`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s21',
-      title: 'Comparisons check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s21-q1',
-          type: 'multiple-choice',
-          prompt: 'Why is `==` avoided in favour of `===`?',
-          options: [
-            '`===` runs faster',
-            '`==` converts types before comparing, so `0 == "0"` and `"" == 0` are true',
-            '`==` only works on numbers',
-            '`==` cannot be used inside an `if`',
-          ],
-          answer: 1,
-          explanation:
-            'Loose equality coerces one side to the other type using a set of rules that are hard to remember. Strict equality asks two simple questions - same type, same value - and that is the entire rule.',
-        },
-        {
-          id: 'quiz-js-s21-q2',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `const n = 3
-console.log(n == '3', n === '3')`,
-          options: ['true true', 'true false', 'false false', 'false true'],
-          answer: 1,
-          explanation:
-            'Loose equality coerces the string to a number, so `==` gives true. Strict equality also compares types, and a number is not a string, so `===` gives false.',
-        },
-        {
-          id: 'quiz-js-s21-q3',
-          type: 'true-false',
-          prompt: 'A count of `0` will survive `count || 10`.',
-          answer: false,
-          explanation:
-            '`0` is falsy, so `||` treats it as missing and hands back the right-hand side. `count ?? 10` is the form that keeps a real zero, because `??` only falls back for `null` and `undefined`.',
-        },
-        {
-          id: 'quiz-js-s21-q4',
-          type: 'blank',
-          prompt: 'Which operator gives the value only when it is `null` or `undefined`?',
-          answers: ['??', 'nullish coalescing', 'nullish coalescing operator'],
-          explanation:
-            '`??` is nullish coalescing: it returns the left side unless it is `null` or `undefined`, then returns the right. `||` fills in for every falsy value, which is why a real `0` or an empty string gets replaced.',
-        },
-        {
-          id: 'quiz-js-s21-q5',
-          type: 'identify-error',
-          prompt: 'What is wrong with this code?',
-          code: `const items = getItems()
-if (items.length > 0 && items[0].name) {
-  show(items)
-}`,
-          options: [
-            'Nothing - the guard looks fine',
-            '`&&` cannot be used with `>`',
-            'If `items` is undefined or null the left side throws before `&&` ever gets a chance to short-circuit',
-            '`items[0].name` must be compared with `===`',
-          ],
-          answer: 2,
-          explanation:
-            'Short-circuiting only protects the code on the **right** of `&&`. `items.length` is evaluated first, so an absent `items` throws there. Write the risky check first: `if (items && items.length > 0 && items[0].name)`.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s22',
@@ -359,6 +359,81 @@ if (items.length > 0 && items[0].name) {
           'Combine conditions instead of nesting them'
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-js-l29',
+          title: 'if, else and the ternary quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l29-q1',
+              type: 'multiple-choice',
+              prompt: 'In a chain of `if / else if / else`, how many branches run for one execution?',
+              options: [
+                'All of them, top to bottom',
+                'Only the first one that matches, plus its `else`',
+                'Exactly one',
+                'Every branch whose condition is truthy',
+              ],
+              answer: 2,
+              explanation: 'Exactly one branch runs. JavaScript checks the conditions in order and stops at the first match, so a chain is not a set of independent tests. This is why the widest range has to be written first - a narrower test placed above it swallows every value it should have let through.',
+            },
+            {
+              id: 'quiz-js-l29-q2',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'const n = 0\nconsole.log(n ? \'yes\' : \'no\')',
+              options: [
+                'yes',
+                'no',
+                '0',
+                'undefined',
+              ],
+              answer: 1,
+              explanation: '`0` is falsy, so the condition fails and the ternary takes the second branch. This is the trap with a ternary: the left side is a truthiness test, not a comparison, so `count > 0` is the safer way to ask "is there anything here?" than `count` alone.',
+            },
+            {
+              id: 'quiz-js-l29-q3',
+              type: 'identify-error',
+              prompt: 'What is wrong with this code?',
+              code: 'function grade(score) {\n  if (score > 70) {\n    return \'Passed\'\n  } else if (score > 90) {\n    return \'Distinction\'\n  } else {\n    return \'Failed\'\n  }\n}',
+              options: [
+                'The two branches should be joined with `&&`',
+                'The branches are in the wrong order, so a score of 95 returns "Passed" instead of "Distinction"',
+                '`return` needs to come after the `else if`',
+                'Nothing is wrong - this handles every score',
+              ],
+              answer: 1,
+              explanation: 'A chain stops at its first match. A score of 95 satisfies `score > 70`, so the function returns "Passed" and the `score > 90` branch is never reached - it is dead code. Range checks must be written widest first, which here means putting `score > 90` above `score > 70`.',
+            },
+            {
+              id: 'quiz-js-l29-q4',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'const list = []\nconsole.log(list ? \'yes\' : \'no\')',
+              options: [
+                'yes',
+                'no',
+                'undefined',
+                '0',
+              ],
+              answer: 0,
+              explanation: 'An empty array is an object, and every object is truthy in a condition. To ask whether it has items, test `list.length` instead — that is `0` and therefore falsy.',
+            },
+            {
+              id: 'quiz-js-l29-q5',
+              type: 'multiple-choice',
+              prompt: 'Why is `if (user && user.age >= 18)` safe when `user` is `undefined`?',
+              options: [
+                '`&&` converts the whole condition to a boolean before reading `age`',
+                '`&&` short-circuits, so `user.age` is not evaluated when `user` is falsy',
+                'JavaScript skips any property access on undefined automatically',
+                'The second comparison is moved into a `try` block',
+              ],
+              answer: 1,
+              explanation: '`&&` evaluates left to right and stops at the first falsy operand. When `user` is undefined, the right-hand side never runs, so the property access cannot throw — the same reason the flat form is safer than nesting.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -632,6 +707,69 @@ console.log(describeTemperature(20))`,
           'Know when an if chain is the clearer choice'
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-js-l30',
+          title: 'switch quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l30-q1',
+              type: 'true-false',
+              prompt: 'A `switch` compares its cases with `==`, so `switch ("0")` matches `case 0:`.',
+              answer: false,
+              explanation: 'Cases are compared with `===`, which never coerces types, so the string `"0"` does not match the number `0`. Values coming from form inputs arrive as strings, which is why you convert with `Number()` before the `switch` rather than inside it.',
+            },
+            {
+              id: 'quiz-js-l30-q2',
+              type: 'blank',
+              prompt: 'Which keyword ends a `case` block so the next one does not run?',
+              answers: [
+                'break',
+              ],
+              explanation: '`break` leaves the `switch` immediately. Without it JavaScript keeps falling into the following blocks, which is sometimes what you want - stacking `case 3:` and `case 4:` above one block is exactly that - but usually it is a missing keyword rather than a design.',
+            },
+            {
+              id: 'quiz-js-l30-q3',
+              type: 'multiple-choice',
+              prompt: 'Which lines does this code print?',
+              code: 'switch (2) {\n  case 1:\n    console.log(\'one\')\n  case 2:\n    console.log(\'two\')\n  case 3:\n    console.log(\'three\')\n    break\n  default:\n    console.log(\'other\')\n}',
+              options: [
+                '`two` only',
+                '`two` then `three`',
+                '`one`, `two`, then `three`',
+                '`two`, `three`, then `other`',
+              ],
+              answer: 1,
+              explanation: 'Case 2 matches and runs, but without a `break` the switch falls through into case 3 as well. The `break` in case 3 finally stops it, so both "two" and "three" print.',
+            },
+            {
+              id: 'quiz-js-l30-q4',
+              type: 'multiple-choice',
+              prompt: 'When is an `if` chain clearly better than a `switch`?',
+              options: [
+                'When every branch compares the same value against a fixed list',
+                'When the branches test ranges or combine several conditions',
+                'When there are more than three branches',
+                'When the value comes from an input field',
+              ],
+              answer: 1,
+              explanation: 'A `switch` can only ask whether one expression equals a case label exactly. Ranges, method calls and compound conditions cannot be expressed as case labels, so they belong in `if`.',
+            },
+            {
+              id: 'quiz-js-l30-q5',
+              type: 'multiple-choice',
+              prompt: 'What happens if no `case` matches and the `switch` has no `default`?',
+              options: [
+                'The first case runs',
+                'The last case runs',
+                'Nothing inside the switch runs and execution continues after it',
+                'It throws a SyntaxError',
+              ],
+              answer: 2,
+              explanation: '`default` is the only branch that runs when nothing matches. Without it the switch simply performs no branch and the next statement after the block executes.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -898,77 +1036,6 @@ console.log(transitName('bus'))`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s22',
-      title: 'Conditions check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s22-q1',
-          type: 'multiple-choice',
-          prompt: 'In a chain of `if / else if / else`, how many branches run for one execution?',
-          options: [
-            'All of them, top to bottom',
-            'Only the first one that matches, plus its `else`',
-            'Exactly one',
-            'Every branch whose condition is truthy'
-          ],
-          answer: 2,
-          explanation:
-            'Exactly one branch runs. JavaScript checks the conditions in order and stops at the first match, so a chain is not a set of independent tests. This is why the widest range has to be written first - a narrower test placed above it swallows every value it should have let through.',
-        },
-        {
-          id: 'quiz-js-s22-q2',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `const n = 0
-console.log(n ? 'yes' : 'no')`,
-          options: ['yes', 'no', '0', 'undefined'],
-          answer: 1,
-          explanation:
-            '`0` is falsy, so the condition fails and the ternary takes the second branch. This is the trap with a ternary: the left side is a truthiness test, not a comparison, so `count > 0` is the safer way to ask "is there anything here?" than `count` alone.',
-        },
-        {
-          id: 'quiz-js-s22-q3',
-          type: 'true-false',
-          prompt: 'A `switch` compares its cases with `==`, so `switch ("0")` matches `case 0:`.',
-          answer: false,
-          explanation:
-            'Cases are compared with `===`, which never coerces types, so the string `"0"` does not match the number `0`. Values coming from form inputs arrive as strings, which is why you convert with `Number()` before the `switch` rather than inside it.',
-        },
-        {
-          id: 'quiz-js-s22-q4',
-          type: 'identify-error',
-          prompt: 'What is wrong with this code?',
-          code: `function grade(score) {
-  if (score > 70) {
-    return 'Passed'
-  } else if (score > 90) {
-    return 'Distinction'
-  } else {
-    return 'Failed'
-  }
-}`,
-          options: [
-            'The two branches should be joined with `&&`',
-            'The branches are in the wrong order, so a score of 95 returns "Passed" instead of "Distinction"',
-            '`return` needs to come after the `else if`',
-            'Nothing is wrong - this handles every score'
-          ],
-          answer: 1,
-          explanation:
-            'A chain stops at its first match. A score of 95 satisfies `score > 70`, so the function returns "Passed" and the `score > 90` branch is never reached - it is dead code. Range checks must be written widest first, which here means putting `score > 90` above `score > 70`.',
-        },
-        {
-          id: 'quiz-js-s22-q5',
-          type: 'blank',
-          prompt: 'Which keyword ends a `case` block so the next one does not run?',
-          answers: ['break'],
-          explanation:
-            '`break` leaves the `switch` immediately. Without it JavaScript keeps falling into the following blocks, which is sometimes what you want - stacking `case 3:` and `case 4:` above one block is exactly that - but usually it is a missing keyword rather than a design.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s23',
@@ -986,6 +1053,70 @@ console.log(n ? 'yes' : 'no')`,
           'Use break and continue to cut a loop short'
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-js-l31',
+          title: 'for and while quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l31-q1',
+              type: 'multiple-choice',
+              prompt: 'In `for (let i = 0; i < 5; i++)`, which part runs once before the loop body?',
+              options: [
+                '`i < 5`',
+                '`i++`',
+                '`let i = 0`',
+                'All three, once each',
+              ],
+              answer: 2,
+              explanation: 'The initialiser runs exactly once. The condition is checked before every turn, including the first, and the update runs after every turn. That is why `for (let i = 0; i > 5; i++)` never runs its body at all - the condition is already false when it is first checked.',
+            },
+            {
+              id: 'quiz-js-l31-q2',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'for (let i = 0; i < 5; i++) {\n  if (i === 2) continue\n  if (i === 4) break\n  console.log(i)\n}',
+              options: [
+                '0 1 2 3',
+                '0 1 3',
+                '0 1 3 4',
+                '0 1 2',
+              ],
+              answer: 1,
+              explanation: '`continue` skips the rest of the turn for i = 2, so 2 is never printed, but the loop carries on. `break` ends the loop entirely at i = 4, so 4 is never reached. The output is 0 1 3.',
+            },
+            {
+              id: 'quiz-js-l31-q3',
+              type: 'true-false',
+              prompt: 'A `do...while` loop with a condition that is already false still runs its body once.',
+              answer: true,
+              explanation: 'That is the difference from a plain `while`: the body runs first and the condition is asked afterwards. It is the right shape for work that must happen at least once before you know whether to keep going, and the wrong shape for anything else, because the extra pass is easy to forget.',
+            },
+            {
+              id: 'quiz-js-l31-q4',
+              type: 'identify-error',
+              prompt: 'What is wrong with this code?',
+              code: 'let i = 0\nwhile (i > 0) {\n  console.log(i)\n  i = i + 1\n}',
+              options: [
+                '`while` cannot be used with a number',
+                'The comparison is backwards - the body increments `i` but the loop only runs while `i` is greater than 0, so it never stops',
+                '`i` needs to be declared with `const`',
+                'Nothing is wrong',
+              ],
+              answer: 1,
+              explanation: 'The body only ever increases `i`, but the condition asks for it to be above 0, which starts true and gets more true. The condition should be `while (i < 5)` or similar. Check every loop condition against what the body does to the counter - that single test catches most runaway loops.',
+            },
+            {
+              id: 'quiz-js-l31-q5',
+              type: 'blank',
+              prompt: 'Which keyword skips the rest of the current turn of a loop and moves on to the next one?',
+              answers: [
+                'continue',
+              ],
+              explanation: '`continue` jumps to the next iteration, leaving the rest of the current body unexecuted. `break` is the one that leaves the loop entirely. Both can also be used inside a `switch`, where `break` is what stops a `case` falling into the next.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1235,71 +1366,6 @@ console.log(sumUpTo(5))`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s23',
-      title: 'Loops check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s23-q1',
-          type: 'multiple-choice',
-          prompt: 'In `for (let i = 0; i < 5; i++)`, which part runs once before the loop body?',
-          options: ['`i < 5`', '`i++`', '`let i = 0`', 'All three, once each'],
-          answer: 2,
-          explanation:
-            'The initialiser runs exactly once. The condition is checked before every turn, including the first, and the update runs after every turn. That is why `for (let i = 0; i > 5; i++)` never runs its body at all - the condition is already false when it is first checked.',
-        },
-        {
-          id: 'quiz-js-s23-q2',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `for (let i = 0; i < 5; i++) {
-  if (i === 2) continue
-  if (i === 4) break
-  console.log(i)
-}`,
-          options: ['0 1 2 3', '0 1 3', '0 1 3 4', '0 1 2'],
-          answer: 1,
-          explanation:
-            '`continue` skips the rest of the turn for i = 2, so 2 is never printed, but the loop carries on. `break` ends the loop entirely at i = 4, so 4 is never reached. The output is 0 1 3.',
-        },
-        {
-          id: 'quiz-js-s23-q3',
-          type: 'true-false',
-          prompt: 'A `do...while` loop with a condition that is already false still runs its body once.',
-          answer: true,
-          explanation:
-            'That is the difference from a plain `while`: the body runs first and the condition is asked afterwards. It is the right shape for work that must happen at least once before you know whether to keep going, and the wrong shape for anything else, because the extra pass is easy to forget.',
-        },
-        {
-          id: 'quiz-js-s23-q4',
-          type: 'identify-error',
-          prompt: 'What is wrong with this code?',
-          code: `let i = 0
-while (i > 0) {
-  console.log(i)
-  i = i + 1
-}`,
-          options: [
-            '`while` cannot be used with a number',
-            'The comparison is backwards - the body increments `i` but the loop only runs while `i` is greater than 0, so it never stops',
-            '`i` needs to be declared with `const`',
-            'Nothing is wrong'
-          ],
-          answer: 1,
-          explanation:
-            'The body only ever increases `i`, but the condition asks for it to be above 0, which starts true and gets more true. The condition should be `while (i < 5)` or similar. Check every loop condition against what the body does to the counter - that single test catches most runaway loops.',
-        },
-        {
-          id: 'quiz-js-s23-q5',
-          type: 'blank',
-          prompt: 'Which keyword skips the rest of the current turn of a loop and moves on to the next one?',
-          answers: ['continue'],
-          explanation:
-            '`continue` jumps to the next iteration, leaving the rest of the current body unexecuted. `break` is the one that leaves the loop entirely. Both can also be used inside a `switch`, where `break` is what stops a `case` falling into the next.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s24',
@@ -1317,6 +1383,73 @@ while (i > 0) {
           'Get both value and index with entries()'
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-js-l32',
+          title: 'for…of, for…in and break quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l32-q1',
+              type: 'multiple-choice',
+              prompt: 'What does `for (const key in person)` give you?',
+              options: [
+                'Each value of the object, in order',
+                'Each key of the object, and you look the value up with `person[key]`',
+                'Each key and value as a pair',
+                'Each own method of the object',
+              ],
+              answer: 1,
+              explanation: '`for…in` yields names, never values. The name comes from the object\'s shape, so the value has to be fetched by key. For key and value pairs together, `Object.entries(person)` with destructuring is the form you want.',
+            },
+            {
+              id: 'quiz-js-l32-q2',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'for (const [i, word] of [\'a\', \'b\', \'c\'].entries()) {\n  if (word === \'b\') continue\n  console.log(i, word)\n}',
+              options: [
+                '0 a 2 c',
+                '0 a 1 b 2 c',
+                '0 a 1 c',
+                'a b c',
+              ],
+              answer: 0,
+              explanation: '`entries()` pairs each index with its value, and `continue` skips the rest of the turn for "b" - so its index never prints either. Output is `0 a` then `2 c`.',
+            },
+            {
+              id: 'quiz-js-l32-q3',
+              type: 'true-false',
+              prompt: '`for…in` over an array is a safe substitute for `for…of`.',
+              answer: false,
+              explanation: 'On an array, `for…in` gives you the string index keys `"0"`, `"1"`, `"2"` rather than the values, in an order the language does not promise, and it walks any extra property a library added. For arrays use `for…of`, `entries()` or an array method.',
+            },
+            {
+              id: 'quiz-js-l32-q4',
+              type: 'identify-error',
+              prompt: 'What is wrong with this code?',
+              code: 'const items = [\'a\', \'b\']\nfor (const i in items) {\n  console.log(items[i].toUpperCase())\n}',
+              options: [
+                '`for…in` cannot be used with `const`',
+                'Nothing is wrong',
+                '`for…in` hands back index keys as strings, so `items[i]` still happens to work but the loop reads like a bug and any extra array property would be walked too',
+                '`toUpperCase` must be called with parentheses omitted',
+              ],
+              answer: 2,
+              explanation: 'This particular code happens to work because `items["0"]` resolves the same as `items[0]`. That is exactly why the mistake survives: nothing tells you it is wrong until a library attaches a property to the array and the loop walks it too. Reach for `for…of`.',
+            },
+            {
+              id: 'quiz-js-l32-q5',
+              type: 'blank',
+              prompt: 'Which method gives you each index paired with its value, ready to destructure?',
+              answers: [
+                'entries()',
+                'entries',
+                '.entries()',
+                'array.entries()',
+              ],
+              explanation: '`items.entries()` yields `[index, value]` pairs, so `for (const [i, item] of items.entries())` gives you both names at once. It replaces the manual counter that otherwise creeps into a `for…of` loop.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1557,74 +1690,6 @@ console.log(countByLength(['a', 'bb', 'cc', 'd']))`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s24',
-      title: 'Loop variants check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s24-q1',
-          type: 'multiple-choice',
-          prompt: 'What does `for (const key in person)` give you?',
-          options: [
-            'Each value of the object, in order',
-            'Each key of the object, and you look the value up with `person[key]`',
-            'Each key and value as a pair',
-            'Each own method of the object'
-          ],
-          answer: 1,
-          explanation:
-            '`for…in` yields names, never values. The name comes from the object\'s shape, so the value has to be fetched by key. For key and value pairs together, `Object.entries(person)` with destructuring is the form you want.',
-        },
-        {
-          id: 'quiz-js-s24-q2',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `for (const [i, word] of ['a', 'b', 'c'].entries()) {
-  if (word === 'b') continue
-  console.log(i, word)
-}`,
-          options: ['0 a 2 c', '0 a 1 b 2 c', '0 a 1 c', 'a b c'],
-          answer: 0,
-          explanation:
-            '`entries()` pairs each index with its value, and `continue` skips the rest of the turn for "b" - so its index never prints either. Output is `0 a` then `2 c`.',
-        },
-        {
-          id: 'quiz-js-s24-q3',
-          type: 'true-false',
-          prompt: '`for…in` over an array is a safe substitute for `for…of`.',
-          answer: false,
-          explanation:
-            'On an array, `for…in` gives you the string index keys `"0"`, `"1"`, `"2"` rather than the values, in an order the language does not promise, and it walks any extra property a library added. For arrays use `for…of`, `entries()` or an array method.',
-        },
-        {
-          id: 'quiz-js-s24-q4',
-          type: 'identify-error',
-          prompt: 'What is wrong with this code?',
-          code: `const items = ['a', 'b']
-for (const i in items) {
-  console.log(items[i].toUpperCase())
-}`,
-          options: [
-            '`for…in` cannot be used with `const`',
-            'Nothing is wrong',
-            '`for…in` hands back index keys as strings, so `items[i]` still happens to work but the loop reads like a bug and any extra array property would be walked too',
-            '`toUpperCase` must be called with parentheses omitted'
-          ],
-          answer: 2,
-          explanation:
-            'This particular code happens to work because `items["0"]` resolves the same as `items[0]`. That is exactly why the mistake survives: nothing tells you it is wrong until a library attaches a property to the array and the loop walks it too. Reach for `for…of`.',
-        },
-        {
-          id: 'quiz-js-s24-q5',
-          type: 'blank',
-          prompt: 'Which method gives you each index paired with its value, ready to destructure?',
-          answers: ['entries()', 'entries', '.entries()', 'array.entries()'],
-          explanation:
-            '`items.entries()` yields `[index, value]` pairs, so `for (const [i, item] of items.entries())` gives you both names at once. It replaces the manual counter that otherwise creeps into a `for…of` loop.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s25',
@@ -1642,6 +1707,73 @@ for (const i in items) {
           'Use shifts to multiply and divide by powers of two, and read them correctly'
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-js-l33',
+          title: 'Bitwise operators quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l33-q1',
+              type: 'multiple-choice',
+              prompt: 'Why is `1000000000 | 1` a bad idea?',
+              options: [
+                '`|` only works on strings',
+                'Bitwise operators convert their operands to 32-bit integers first, so the high digits are discarded and the result is 1',
+                '`|` cannot be used with a literal',
+                'It is a syntax error above 1000',
+              ],
+              answer: 1,
+              explanation: 'Bitwise operators coerce to 32-bit signed integers before doing any work. `1000000000` does not fit in 32 bits, so what arrives is only its low digits. Use `+` for arithmetic on large numbers, or `BigInt` when you genuinely need more than 32 bits.',
+            },
+            {
+              id: 'quiz-js-l33-q2',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'const flags = 0\nflags |= 2\nflags |= 4\nconsole.log(flags, (flags & 2) > 0)',
+              options: [
+                '4 false',
+                '6 true',
+                '6 false',
+                '2 true',
+              ],
+              answer: 1,
+              explanation: '`|=` adds each flag without touching the bits already set, so 2 then 4 gives 6. `6 & 2` is 2, which is greater than 0, so the flag is on.',
+            },
+            {
+              id: 'quiz-js-l33-q3',
+              type: 'true-false',
+              prompt: '`n >> 2` sets `n` to the number 2.',
+              answer: false,
+              explanation: 'The 2 is the distance every bit moves, not the result. `40 >> 2` is 10, because each step right divides by two. `n >> 0` is the no-op that makes this easy to check.',
+            },
+            {
+              id: 'quiz-js-l33-q4',
+              type: 'identify-error',
+              prompt: 'What is wrong with this code?',
+              code: 'const READ = 1\nconst WRITE = 2\nlet flags = READ\nflags = flags + WRITE\nconsole.log(hasFlag(flags, WRITE))',
+              options: [
+                '`flags` must be declared with `let` at the top, not reassigned',
+                'Adding instead of OR-ing is fine here, so nothing is wrong',
+                'Adding carries between flags, so the two numbers stop being independent flags and one bit read can be set by accident',
+                '`WRITE` has to be a number above 2',
+              ],
+              answer: 2,
+              explanation: 'Flags are safe because each one is a separate bit and `|` only ever sets a bit. `+` is arithmetic: it carries, so 1 + 2 + 4 = 7 which happens to look fine, but 1 + 2 = 3 sets bits 1 and 2 at once and reading either flag reports both. Reach for `|=`.',
+            },
+            {
+              id: 'quiz-js-l33-q5',
+              type: 'blank',
+              prompt: 'Which method turns a number into its binary digits as a string?',
+              answers: [
+                'toString(2)',
+                'toString2',
+                '.toString(2)',
+                'toString with radix 2',
+              ],
+              explanation: '`n.toString(2)` gives the bits as a string, and `parseInt(text, 2)` turns them back. Every bitwise operator is easier to check once you can see the binary, because each one then reads as "keep this column" or "flip this column".',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1940,75 +2072,6 @@ console.log(countFlags(setFlag(setFlag(0, 2), 4)))`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s25',
-      title: 'Bitwise operators check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s25-q1',
-          type: 'multiple-choice',
-          prompt: 'Why is `1000000000 | 1` a bad idea?',
-          options: [
-            '`|` only works on strings',
-            'Bitwise operators convert their operands to 32-bit integers first, so the high digits are discarded and the result is 1',
-            '`|` cannot be used with a literal',
-            'It is a syntax error above 1000'
-          ],
-          answer: 1,
-          explanation:
-            'Bitwise operators coerce to 32-bit signed integers before doing any work. `1000000000` does not fit in 32 bits, so what arrives is only its low digits. Use `+` for arithmetic on large numbers, or `BigInt` when you genuinely need more than 32 bits.',
-        },
-        {
-          id: 'quiz-js-s25-q2',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `const flags = 0
-flags |= 2
-flags |= 4
-console.log(flags, (flags & 2) > 0)`,
-          options: ['4 false', '6 true', '6 false', '2 true'],
-          answer: 1,
-          explanation:
-            '`|=` adds each flag without touching the bits already set, so 2 then 4 gives 6. `6 & 2` is 2, which is greater than 0, so the flag is on.',
-        },
-        {
-          id: 'quiz-js-s25-q3',
-          type: 'true-false',
-          prompt: '`n >> 2` sets `n` to the number 2.',
-          answer: false,
-          explanation:
-            'The 2 is the distance every bit moves, not the result. `40 >> 2` is 10, because each step right divides by two. `n >> 0` is the no-op that makes this easy to check.',
-        },
-        {
-          id: 'quiz-js-s25-q4',
-          type: 'identify-error',
-          prompt: 'What is wrong with this code?',
-          code: `const READ = 1
-const WRITE = 2
-let flags = READ
-flags = flags + WRITE
-console.log(hasFlag(flags, WRITE))`,
-          options: [
-            '`flags` must be declared with `let` at the top, not reassigned',
-            'Adding instead of OR-ing is fine here, so nothing is wrong',
-            'Adding carries between flags, so the two numbers stop being independent flags and one bit read can be set by accident',
-            '`WRITE` has to be a number above 2'
-          ],
-          answer: 2,
-          explanation:
-            'Flags are safe because each one is a separate bit and `|` only ever sets a bit. `+` is arithmetic: it carries, so 1 + 2 + 4 = 7 which happens to look fine, but 1 + 2 = 3 sets bits 1 and 2 at once and reading either flag reports both. Reach for `|=`.',
-        },
-        {
-          id: 'quiz-js-s25-q5',
-          type: 'blank',
-          prompt: 'Which method turns a number into its binary digits as a string?',
-          answers: ['toString(2)', 'toString2', '.toString(2)', 'toString with radix 2'],
-          explanation:
-            '`n.toString(2)` gives the bits as a string, and `parseInt(text, 2)` turns them back. Every bitwise operator is easier to check once you can see the binary, because each one then reads as "keep this column" or "flip this column".',
-        },
-      ],
-    },
   },
   {
     id: 'js-s26',
@@ -2028,6 +2091,75 @@ console.log(hasFlag(flags, WRITE))`,
           'Recognise the point where split and trim are the better tool'
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-js-l34',
+          title: 'Regular expressions quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l34-q1',
+              type: 'multiple-choice',
+              prompt: 'Why does `isHexColor("#zzz#fff")` return false with a properly anchored pattern, but true without the anchors?',
+              options: [
+                'Anchors make the pattern faster',
+                '`^` and `$` require the whole string to be the shape, so an unrelated match inside a longer string is not enough',
+                'Anchors add the `i` flag automatically',
+                'Without anchors the pattern throws',
+              ],
+              answer: 1,
+              explanation: 'A pattern without `^` and `$` is a search: it succeeds on finding the shape anywhere. A pattern with them is a full-string check. Validation is a full-string question, so validation patterns need anchors.',
+            },
+            {
+              id: 'quiz-js-l34-q2',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'const s = \'a  b   c\'\nconsole.log(s.replace(/\\s+/, \'-\'))\nconsole.log(s.replace(/\\s+/g, \'-\'))',
+              options: [
+                'a-b-c then a-b-c',
+                'a-b-c then a-b-c with all gaps',
+                'a  b-c  then a-b-c',
+                'a  b   c then a  b   c',
+              ],
+              answer: 2,
+              explanation: 'Without `g`, `replace` changes the first match only, so the second gap survives. With `g` every run of whitespace is replaced, which is why "clean this whole string" almost always needs the global flag.',
+            },
+            {
+              id: 'quiz-js-l34-q3',
+              type: 'true-false',
+              prompt: 'The `g` flag makes `test` check the whole string from start to finish each time.',
+              answer: false,
+              explanation: 'Without `g`, `test` looks for the first match anywhere. With `g`, a pattern object remembers where it last stopped, so calling `test` twice on the *same* pattern object can give different answers. Put patterns in a named `const` without `g`, or build a fresh one, to avoid it.',
+            },
+            {
+              id: 'quiz-js-l34-q4',
+              type: 'identify-error',
+              prompt: 'What is wrong with this validation?',
+              code: 'function isHex(value) {\n  return /#?[0-9a-f]{3,6}/i.test(value)\n}\n\nconsole.log(isHex(\'#fff\'))    // true, by luck\nconsole.log(isHex(\'#fff and more text\'))',
+              options: [
+                'Nothing is wrong, so both lines print true',
+                'There are no anchors and the `#` is optional, so the second line matches anyway - a search rather than a shape check',
+                'The `i` flag cannot be combined with `{3,6}`',
+                '`test` needs a number, not a string',
+              ],
+              answer: 1,
+              explanation: 'Without `^` and `$` the pattern is a search, so it finds three to six hex characters anywhere in the string and says yes. With the hash optional it also accepts bare `fff`. Validation wants `^#([0-9a-f]{3}|[0-9a-f]{6})$`, which is what the exercise builds.',
+            },
+            {
+              id: 'quiz-js-l34-q5',
+              type: 'blank',
+              prompt: 'Which method returns the first match together with its captured groups?',
+              answers: [
+                'match()',
+                'match',
+                '.match()',
+                'string.match()',
+                'exec()',
+                '.exec()',
+              ],
+              explanation: '`str.match(pattern)` gives the first match, its index, and any groups after it. Without `g` that is what you get; with `g` you get a flat array of matches and no groups. `matchAll` walks every match while keeping the groups.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -2251,75 +2383,6 @@ console.log(normaliseHex('#ABC'))`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s26',
-      title: 'Regular expressions check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s26-q1',
-          type: 'multiple-choice',
-          prompt: 'Why does `isHexColor("#zzz#fff")` return false with a properly anchored pattern, but true without the anchors?',
-          options: [
-            'Anchors make the pattern faster',
-            '`^` and `$` require the whole string to be the shape, so an unrelated match inside a longer string is not enough',
-            'Anchors add the `i` flag automatically',
-            'Without anchors the pattern throws'
-          ],
-          answer: 1,
-          explanation:
-            'A pattern without `^` and `$` is a search: it succeeds on finding the shape anywhere. A pattern with them is a full-string check. Validation is a full-string question, so validation patterns need anchors.',
-        },
-        {
-          id: 'quiz-js-s26-q2',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `const s = 'a  b   c'
-console.log(s.replace(/\\s+/, '-'))
-console.log(s.replace(/\\s+/g, '-'))`,
-          options: ['a-b-c then a-b-c', 'a-b-c then a-b-c with all gaps', 'a  b-c  then a-b-c', 'a  b   c then a  b   c'],
-          answer: 2,
-          explanation:
-            'Without `g`, `replace` changes the first match only, so the second gap survives. With `g` every run of whitespace is replaced, which is why "clean this whole string" almost always needs the global flag.',
-        },
-        {
-          id: 'quiz-js-s26-q3',
-          type: 'true-false',
-          prompt: 'The `g` flag makes `test` check the whole string from start to finish each time.',
-          answer: false,
-          explanation:
-            'Without `g`, `test` looks for the first match anywhere. With `g`, a pattern object remembers where it last stopped, so calling `test` twice on the *same* pattern object can give different answers. Put patterns in a named `const` without `g`, or build a fresh one, to avoid it.',
-        },
-        {
-          id: 'quiz-js-s26-q4',
-          type: 'identify-error',
-          prompt: 'What is wrong with this validation?',
-          code: `function isHex(value) {
-  return /#?[0-9a-f]{3,6}/i.test(value)
-}
-
-console.log(isHex('#fff'))    // true, by luck
-console.log(isHex('#fff and more text'))`,
-          options: [
-            'Nothing is wrong, so both lines print true',
-            'There are no anchors and the `#` is optional, so the second line matches anyway - a search rather than a shape check',
-            'The `i` flag cannot be combined with `{3,6}`',
-            '`test` needs a number, not a string'
-          ],
-          answer: 1,
-          explanation:
-            'Without `^` and `$` the pattern is a search, so it finds three to six hex characters anywhere in the string and says yes. With the hash optional it also accepts bare `fff`. Validation wants `^#([0-9a-f]{3}|[0-9a-f]{6})$`, which is what the exercise builds.',
-        },
-        {
-          id: 'quiz-js-s26-q5',
-          type: 'blank',
-          prompt: 'Which method returns the first match together with its captured groups?',
-          answers: ['match()', 'match', '.match()', 'string.match()', 'exec()', '.exec()'],
-          explanation:
-            '`str.match(pattern)` gives the first match, its index, and any groups after it. Without `g` that is what you get; with `g` you get a flat array of matches and no groups. `matchAll` walks every match while keeping the groups.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s27',
@@ -2338,6 +2401,72 @@ console.log(isHex('#fff and more text'))`,
           'Guard against `null` and `undefined` before reading a property',
           'Use try, catch and finally for failures you cannot rule out'
         ],
+        quiz: {
+          id: 'quiz-js-l35',
+          title: 'Errors you will actually hit quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l35-q1',
+              type: 'multiple-choice',
+              prompt: 'Where do you start reading a stack trace?',
+              options: [
+                'At the bottom, because that is where the program started',
+                'At the first line for what went wrong, then the first frame in a file you recognise for where',
+                'At the frame with the longest file path',
+                'Anywhere, since every frame says the same thing',
+              ],
+              answer: 1,
+              explanation: 'The first line names the failure and the operation that caused it. The frames below are the call chain printed from the inside out, so the first frame in a file you know is your code, and reading further up tells you how the call reached you.',
+            },
+            {
+              id: 'quiz-js-l35-q2',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'function getUser(id) {\n  return null\n}\n\nconst user = getUser(\'ada\')\nconsole.log(user?.name)',
+              options: [
+                'Ada',
+                'undefined',
+                'null',
+                'It throws',
+              ],
+              answer: 1,
+              explanation: 'The optional chaining `?.` stops the property read as soon as the left side is `null` or `undefined`, and the whole expression evaluates to `undefined` rather than throwing. Add `?? \'Unknown\'` when you want a usable value instead.',
+            },
+            {
+              id: 'quiz-js-l35-q3',
+              type: 'true-false',
+              prompt: 'A `finally` block runs even when the `try` block already returned a value.',
+              answer: true,
+              explanation: '`finally` runs on every path out of a `try` - after a normal return, after the `catch` handled something, and after a re-throw. That is exactly why cleanup belongs there rather than at the end of the function, where an early return would skip it.',
+            },
+            {
+              id: 'quiz-js-l35-q4',
+              type: 'identify-error',
+              prompt: 'What is wrong with this code?',
+              code: 'function loadSettings(text) {\n  try {\n    return JSON.parse(text)\n  } catch (error) {\n  }\n}',
+              options: [
+                'Nothing is wrong - an empty catch is valid',
+                'A `catch` must return or re-throw, so this one swallows the failure and the caller cannot tell a real value from a failure',
+                '`JSON.parse` needs a second argument inside `try`',
+                'The `catch` parameter must be named `e`, not `error`',
+              ],
+              answer: 1,
+              explanation: 'A `catch` block that does nothing logs nothing and returns nothing, so the caller gets `undefined` and invents its own theory about why. Either recover - log with enough context and return a fallback the caller can use - or re-throw so the caller decides. If the only thing that fits in the block is a comment, delete the `try`.',
+            },
+            {
+              id: 'quiz-js-l35-q5',
+              type: 'blank',
+              prompt: 'Which property holds the human-readable text of a thrown Error?',
+              answers: [
+                'message',
+                'error.message',
+                '.message',
+              ],
+              explanation: '`error.message` is the text you wrote when you threw, and it is what a browser prints on the first line of the stack. `error.name` is the class, and `error instanceof TypeError` tells a caller which kind of mistake it was.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -2554,77 +2683,5 @@ console.log(parseJsonOrExplain('{ not json'))`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s27',
-      title: 'Errors check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s27-q1',
-          type: 'multiple-choice',
-          prompt: 'Where do you start reading a stack trace?',
-          options: [
-            'At the bottom, because that is where the program started',
-            'At the first line for what went wrong, then the first frame in a file you recognise for where',
-            'At the frame with the longest file path',
-            'Anywhere, since every frame says the same thing'
-          ],
-          answer: 1,
-          explanation:
-            'The first line names the failure and the operation that caused it. The frames below are the call chain printed from the inside out, so the first frame in a file you know is your code, and reading further up tells you how the call reached you.',
-        },
-        {
-          id: 'quiz-js-s27-q2',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `function getUser(id) {
-  return null
-}
-
-const user = getUser('ada')
-console.log(user?.name)`,
-          options: ['Ada', 'undefined', 'null', 'It throws'],
-          answer: 1,
-          explanation:
-            'The optional chaining `?.` stops the property read as soon as the left side is `null` or `undefined`, and the whole expression evaluates to `undefined` rather than throwing. Add `?? \'Unknown\'` when you want a usable value instead.',
-        },
-        {
-          id: 'quiz-js-s27-q3',
-          type: 'true-false',
-          prompt: 'A `finally` block runs even when the `try` block already returned a value.',
-          answer: true,
-          explanation:
-            '`finally` runs on every path out of a `try` - after a normal return, after the `catch` handled something, and after a re-throw. That is exactly why cleanup belongs there rather than at the end of the function, where an early return would skip it.',
-        },
-        {
-          id: 'quiz-js-s27-q4',
-          type: 'identify-error',
-          prompt: 'What is wrong with this code?',
-          code: `function loadSettings(text) {
-  try {
-    return JSON.parse(text)
-  } catch (error) {
-  }
-}`,
-          options: [
-            'Nothing is wrong - an empty catch is valid',
-            'A `catch` must return or re-throw, so this one swallows the failure and the caller cannot tell a real value from a failure',
-            '`JSON.parse` needs a second argument inside `try`',
-            'The `catch` parameter must be named `e`, not `error`'
-          ],
-          answer: 1,
-          explanation:
-            'A `catch` block that does nothing logs nothing and returns nothing, so the caller gets `undefined` and invents its own theory about why. Either recover - log with enough context and return a fallback the caller can use - or re-throw so the caller decides. If the only thing that fits in the block is a comment, delete the `try`.',
-        },
-        {
-          id: 'quiz-js-s27-q5',
-          type: 'blank',
-          prompt: 'Which property holds the human-readable text of a thrown Error?',
-          answers: ['message', 'error.message', '.message'],
-          explanation:
-            '`error.message` is the text you wrote when you threw, and it is what a browser prints on the first line of the stack. `error.name` is the class, and `error instanceof TypeError` tells a caller which kind of mistake it was.',
-        },
-      ],
-    },
   },
 ]

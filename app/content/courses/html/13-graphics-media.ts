@@ -17,6 +17,70 @@ export const htmlGraphicsSections: Section[] = [
           'Size a canvas for a device pixel ratio without blurring it',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-html-l64',
+          title: 'HTML Canvas quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l64-q1',
+              type: 'multiple-choice',
+              prompt: 'What happens when you set the width or height attribute of a canvas?',
+              options: [
+                'Nothing',
+                'The canvas is resized and everything drawn on it is cleared',
+                'Only the visible part is cleared',
+                'The context is recreated',
+              ],
+              answer: 1,
+              explanation: 'Resizing replaces the drawing buffer, so any transform you had set is also gone.',
+            },
+            {
+              id: 'quiz-html-l64-q2',
+              type: 'true-false',
+              prompt: 'Content inside the canvas tags is read by a screen reader as a description of the drawing.',
+              answer: false,
+              explanation: 'It is a fallback for browsers that cannot render canvas. A text alternative has to be provided separately.',
+            },
+            {
+              id: 'quiz-html-l64-q3',
+              type: 'multiple-choice',
+              prompt: 'Why scale the drawing buffer by the device pixel ratio?',
+              options: [
+                'To make the canvas larger on the page',
+                'So the drawing uses as many physical pixels as the screen has, and is not blurry',
+                'To reduce memory use',
+                'To make animations smoother',
+              ],
+              answer: 1,
+              explanation: 'A buffer sized in CSS pixels is stretched across more physical pixels on a retina display, which is what produces the blur.',
+            },
+            {
+              id: 'quiz-html-l64-q4',
+              type: 'blank',
+              prompt: 'Which pair of methods saves and restores the canvas drawing state?',
+              answers: [
+                'save and restore',
+                'ctx.save() and ctx.restore()',
+                'save/restore',
+              ],
+              explanation: 'They push and pop fillStyle, lineWidth, font, transform and the clipping region together.',
+            },
+            {
+              id: 'quiz-html-l64-q5',
+              type: 'multiple-choice',
+              prompt: 'When is SVG a better choice than canvas?',
+              options: [
+                'For thousands of moving sprites',
+                'For a chart or icon that should scale, be styled by CSS, and be inspectable',
+                'For anything drawn per frame',
+                'Never — canvas is always more modern',
+              ],
+              answer: 1,
+              explanation: 'SVG keeps every shape as an element. Canvas has no object model, no CSS and no accessibility.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -181,71 +245,6 @@ ctx.restore();      // restores the transform, fillStyle, lineWidth and more`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s53',
-      title: 'HTML Canvas quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s53-q1',
-          type: 'multiple-choice',
-          prompt: 'What happens when you set the width or height attribute of a canvas?',
-          options: [
-            'Nothing',
-            'The canvas is resized and everything drawn on it is cleared',
-            'Only the visible part is cleared',
-            'The context is recreated',
-          ],
-          answer: 1,
-          explanation:
-            'Resizing replaces the drawing buffer, so any transform you had set is also gone.',
-        },
-        {
-          id: 'quiz-html-s53-q2',
-          type: 'true-false',
-          prompt: 'Content inside the canvas tags is read by a screen reader as a description of the drawing.',
-          answer: false,
-          explanation:
-            'It is a fallback for browsers that cannot render canvas. A text alternative has to be provided separately.',
-        },
-        {
-          id: 'quiz-html-s53-q3',
-          type: 'multiple-choice',
-          prompt: 'Why scale the drawing buffer by the device pixel ratio?',
-          options: [
-            'To make the canvas larger on the page',
-            'So the drawing uses as many physical pixels as the screen has, and is not blurry',
-            'To reduce memory use',
-            'To make animations smoother',
-          ],
-          answer: 1,
-          explanation:
-            'A buffer sized in CSS pixels is stretched across more physical pixels on a retina display, which is what produces the blur.',
-        },
-        {
-          id: 'quiz-html-s53-q4',
-          type: 'blank',
-          prompt: 'Which pair of methods saves and restores the canvas drawing state?',
-          answers: ['save and restore', 'ctx.save() and ctx.restore()', 'save/restore'],
-          explanation:
-            'They push and pop fillStyle, lineWidth, font, transform and the clipping region together.',
-        },
-        {
-          id: 'quiz-html-s53-q5',
-          type: 'multiple-choice',
-          prompt: 'When is SVG a better choice than canvas?',
-          options: [
-            'For thousands of moving sprites',
-            'For a chart or icon that should scale, be styled by CSS, and be inspectable',
-            'For anything drawn per frame',
-            'Never — canvas is always more modern',
-          ],
-          answer: 1,
-          explanation:
-            'SVG keeps every shape as an element. Canvas has no object model, no CSS and no accessibility.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s54',
@@ -263,6 +262,70 @@ ctx.restore();      // restores the transform, fillStyle, lineWidth and more`,
           'Explain what an SVG file offers that inline SVG does not, and the reverse',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-html-l65',
+          title: 'HTML SVG quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l65-q1',
+              type: 'multiple-choice',
+              prompt: 'What does the viewBox attribute do?',
+              options: [
+                'Sets the size the SVG renders at',
+                'Declares the internal coordinate system, which is what makes the drawing scale',
+                'Sets the background colour',
+                'Defines an animation',
+              ],
+              answer: 1,
+              explanation: 'viewBox maps the internal coordinates onto whatever size the element ends up, which is what makes an SVG resolution independent.',
+            },
+            {
+              id: 'quiz-html-l65-q2',
+              type: 'true-false',
+              prompt: 'Filling a shape with currentColor makes it inherit the CSS color of its parent.',
+              answer: true,
+              explanation: 'That is the standard way to build an icon that works on a light and a dark background without a second file.',
+            },
+            {
+              id: 'quiz-html-l65-q3',
+              type: 'multiple-choice',
+              prompt: 'How do you hide a decorative inline SVG from assistive technology?',
+              options: [
+                'Give it an empty aria-label',
+                'aria-hidden="true" and focusable="false"',
+                'Set display: none',
+                'Remove its role',
+              ],
+              answer: 1,
+              explanation: 'aria-hidden removes it from the accessibility tree, and focusable="false" stops older engines making it focusable.',
+            },
+            {
+              id: 'quiz-html-l65-q4',
+              type: 'blank',
+              prompt: 'Which element draws an arbitrary shape from path data?',
+              answers: [
+                'path',
+                '<path>',
+                'the path element',
+              ],
+              explanation: 'path is the general-purpose shape; the others are shortcuts for common geometry.',
+            },
+            {
+              id: 'quiz-html-l65-q5',
+              type: 'multiple-choice',
+              prompt: 'Which is an advantage of an SVG file over inline SVG?',
+              options: [
+                'It can be styled by the page CSS',
+                'It can be cached and reused without repeating the markup',
+                'It inherits currentColor',
+                'It can be animated with CSS',
+              ],
+              answer: 1,
+              explanation: 'An SVG file is a separate resource, so it caches. The other three are all things only inline SVG can do.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -414,70 +477,6 @@ ctx.restore();      // restores the transform, fillStyle, lineWidth and more`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s54',
-      title: 'HTML SVG quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s54-q1',
-          type: 'multiple-choice',
-          prompt: 'What does the viewBox attribute do?',
-          options: [
-            'Sets the size the SVG renders at',
-            'Declares the internal coordinate system, which is what makes the drawing scale',
-            'Sets the background colour',
-            'Defines an animation',
-          ],
-          answer: 1,
-          explanation:
-            'viewBox maps the internal coordinates onto whatever size the element ends up, which is what makes an SVG resolution independent.',
-        },
-        {
-          id: 'quiz-html-s54-q2',
-          type: 'true-false',
-          prompt: 'Filling a shape with currentColor makes it inherit the CSS color of its parent.',
-          answer: true,
-          explanation:
-            'That is the standard way to build an icon that works on a light and a dark background without a second file.',
-        },
-        {
-          id: 'quiz-html-s54-q3',
-          type: 'multiple-choice',
-          prompt: 'How do you hide a decorative inline SVG from assistive technology?',
-          options: [
-            'Give it an empty aria-label',
-            'aria-hidden="true" and focusable="false"',
-            'Set display: none',
-            'Remove its role',
-          ],
-          answer: 1,
-          explanation:
-            'aria-hidden removes it from the accessibility tree, and focusable="false" stops older engines making it focusable.',
-        },
-        {
-          id: 'quiz-html-s54-q4',
-          type: 'blank',
-          prompt: 'Which element draws an arbitrary shape from path data?',
-          answers: ['path', '<path>', 'the path element'],
-          explanation: 'path is the general-purpose shape; the others are shortcuts for common geometry.',
-        },
-        {
-          id: 'quiz-html-s54-q5',
-          type: 'multiple-choice',
-          prompt: 'Which is an advantage of an SVG file over inline SVG?',
-          options: [
-            'It can be styled by the page CSS',
-            'It can be cached and reused without repeating the markup',
-            'It inherits currentColor',
-            'It can be animated with CSS',
-          ],
-          answer: 1,
-          explanation:
-            'An SVG file is a separate resource, so it caches. The other three are all things only inline SVG can do.',
-        },
-      ],
-    },
   },
 ]
 
@@ -498,6 +497,69 @@ export const htmlMediaSections: Section[] = [
           'Say which formats work without a plugin',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-html-l66',
+          title: 'HTML Media quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l66-q1',
+              type: 'multiple-choice',
+              prompt: 'What happens to a video element without the controls attribute?',
+              options: [
+                'It plays automatically',
+                'It has no interface, which makes it unusable and sometimes unplayable',
+                'It plays muted',
+                'It loads the poster instead',
+              ],
+              answer: 1,
+              explanation: 'The controls attribute provides the entire player interface. Without it the user has no way to act.',
+            },
+            {
+              id: 'quiz-html-l66-q2',
+              type: 'true-false',
+              prompt: 'A browser will autoplay a video with sound.',
+              answer: false,
+              explanation: 'Autoplay is only permitted for muted video without an audio track, and only if the user has not disabled it.',
+            },
+            {
+              id: 'quiz-html-l66-q3',
+              type: 'multiple-choice',
+              prompt: 'Which formats play without a plugin?',
+              options: [
+                'Only MP4',
+                'MP4 and WebM for video; MP3, WAV and Ogg for audio',
+                'AVI and MOV only',
+                'Any format, the browser downloads a codec',
+              ],
+              answer: 1,
+              explanation: 'These are the formats browsers ship decoders for. Anything else needs a plugin or transcoding.',
+            },
+            {
+              id: 'quiz-html-l66-q4',
+              type: 'blank',
+              prompt: 'Which attribute shows a still frame before playback starts?',
+              answers: [
+                'poster',
+                'poster=',
+              ],
+              explanation: 'The poster is replaced by the first frame as soon as playback begins.',
+            },
+            {
+              id: 'quiz-html-l66-q5',
+              type: 'multiple-choice',
+              prompt: 'Why offer more than one source?',
+              options: [
+                'To increase the file size',
+                'So the browser can pick a format it can decode',
+                'Because one source is invalid',
+                'To enable autoplay',
+              ],
+              answer: 1,
+              explanation: 'The browser walks the sources in order and takes the first type it says it can display.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -628,70 +690,6 @@ audio { margin-top: 0.75rem; width: 100%; }`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s55',
-      title: 'HTML Media quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s55-q1',
-          type: 'multiple-choice',
-          prompt: 'What happens to a video element without the controls attribute?',
-          options: [
-            'It plays automatically',
-            'It has no interface, which makes it unusable and sometimes unplayable',
-            'It plays muted',
-            'It loads the poster instead',
-          ],
-          answer: 1,
-          explanation:
-            'The controls attribute provides the entire player interface. Without it the user has no way to act.',
-        },
-        {
-          id: 'quiz-html-s55-q2',
-          type: 'true-false',
-          prompt: 'A browser will autoplay a video with sound.',
-          answer: false,
-          explanation:
-            'Autoplay is only permitted for muted video without an audio track, and only if the user has not disabled it.',
-        },
-        {
-          id: 'quiz-html-s55-q3',
-          type: 'multiple-choice',
-          prompt: 'Which formats play without a plugin?',
-          options: [
-            'Only MP4',
-            'MP4 and WebM for video; MP3, WAV and Ogg for audio',
-            'AVI and MOV only',
-            'Any format, the browser downloads a codec',
-          ],
-          answer: 1,
-          explanation:
-            'These are the formats browsers ship decoders for. Anything else needs a plugin or transcoding.',
-        },
-        {
-          id: 'quiz-html-s55-q4',
-          type: 'blank',
-          prompt: 'Which attribute shows a still frame before playback starts?',
-          answers: ['poster', 'poster='],
-          explanation: 'The poster is replaced by the first frame as soon as playback begins.',
-        },
-        {
-          id: 'quiz-html-s55-q5',
-          type: 'multiple-choice',
-          prompt: 'Why offer more than one source?',
-          options: [
-            'To increase the file size',
-            'So the browser can pick a format it can decode',
-            'Because one source is invalid',
-            'To enable autoplay',
-          ],
-          answer: 1,
-          explanation:
-            'The browser walks the sources in order and takes the first type it says it can display.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s56',
@@ -709,6 +707,69 @@ audio { margin-top: 0.75rem; width: 100%; }`,
           'Add captions with a WebVTT track and cue file',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-html-l67',
+          title: 'HTML Video quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l67-q1',
+              type: 'multiple-choice',
+              prompt: 'When does the duration property become known?',
+              options: [
+                'Immediately, as soon as the element exists',
+                'After the loadedmetadata event fires',
+                'After the ended event',
+                'After the canplay event',
+              ],
+              answer: 1,
+              explanation: 'Before loadedmetadata the duration is NaN, which is why seeking code has to wait for that event.',
+            },
+            {
+              id: 'quiz-html-l67-q2',
+              type: 'true-false',
+              prompt: 'A custom player gives the user everything the native control does.',
+              answer: false,
+              explanation: 'The native control has keyboard shortcuts, Picture-in-Picture, AirPlay, captions and a screen reader mode. Rebuilding all of it is a large project.',
+            },
+            {
+              id: 'quiz-html-l67-q3',
+              type: 'multiple-choice',
+              prompt: 'What file format do caption tracks use?',
+              options: [
+                'SRT',
+                'WebVTT, with a .vtt extension',
+                'VTT',
+                'XML only',
+              ],
+              answer: 1,
+              explanation: 'WebVTT is the format browsers parse. An SRT file has to be converted.',
+            },
+            {
+              id: 'quiz-html-l67-q4',
+              type: 'blank',
+              prompt: 'Which property is written to move the playhead?',
+              answers: [
+                'currentTime',
+                'video.currentTime',
+              ],
+              explanation: 'Setting currentTime seeks. Reading it gives the current position in seconds.',
+            },
+            {
+              id: 'quiz-html-l67-q5',
+              type: 'multiple-choice',
+              prompt: 'How often does the timeupdate event fire?',
+              options: [
+                'On every frame',
+                'Roughly four times a second',
+                'Once at the start',
+                'Only when playback ends',
+              ],
+              answer: 1,
+              explanation: 'That is enough for a progress bar and not enough for a scrubbing preview, which needs its own calculation.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -893,66 +954,6 @@ Spoken by the narrator. Do not overlap with the music bed.`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s56',
-      title: 'HTML Video quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s56-q1',
-          type: 'multiple-choice',
-          prompt: 'When does the duration property become known?',
-          options: [
-            'Immediately, as soon as the element exists',
-            'After the loadedmetadata event fires',
-            'After the ended event',
-            'After the canplay event',
-          ],
-          answer: 1,
-          explanation:
-            'Before loadedmetadata the duration is NaN, which is why seeking code has to wait for that event.',
-        },
-        {
-          id: 'quiz-html-s56-q2',
-          type: 'true-false',
-          prompt: 'A custom player gives the user everything the native control does.',
-          answer: false,
-          explanation:
-            'The native control has keyboard shortcuts, Picture-in-Picture, AirPlay, captions and a screen reader mode. Rebuilding all of it is a large project.',
-        },
-        {
-          id: 'quiz-html-s56-q3',
-          type: 'multiple-choice',
-          prompt: 'What file format do caption tracks use?',
-          options: ['SRT', 'WebVTT, with a .vtt extension', 'VTT', 'XML only'],
-          answer: 1,
-          explanation:
-            'WebVTT is the format browsers parse. An SRT file has to be converted.',
-        },
-        {
-          id: 'quiz-html-s56-q4',
-          type: 'blank',
-          prompt: 'Which property is written to move the playhead?',
-          answers: ['currentTime', 'video.currentTime'],
-          explanation:
-            'Setting currentTime seeks. Reading it gives the current position in seconds.',
-        },
-        {
-          id: 'quiz-html-s56-q5',
-          type: 'multiple-choice',
-          prompt: 'How often does the timeupdate event fire?',
-          options: [
-            'On every frame',
-            'Roughly four times a second',
-            'Once at the start',
-            'Only when playback ends',
-          ],
-          answer: 1,
-          explanation:
-            'That is enough for a progress bar and not enough for a scrubbing preview, which needs its own calculation.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s57',
@@ -970,6 +971,70 @@ Spoken by the narrator. Do not overlap with the music bed.`,
           'Decide when audio belongs on a page at all',
         ],
         xp: 35,
+        quiz: {
+          id: 'quiz-html-l68',
+          title: 'HTML Audio quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l68-q1',
+              type: 'multiple-choice',
+              prompt: 'Which audio format is most efficient at a given quality?',
+              options: [
+                'MP3',
+                'Opus',
+                'WAV',
+                'AIFF',
+              ],
+              answer: 1,
+              explanation: 'Opus is roughly twice as efficient as MP3 at the same quality, and is supported by every current browser.',
+            },
+            {
+              id: 'quiz-html-l68-q2',
+              type: 'true-false',
+              prompt: 'An audio player with no transcript is a complete alternative to the written version.',
+              answer: false,
+              explanation: 'It excludes Deaf and hard-of-hearing users, and anyone who cannot turn sound on. The transcript is the accessible version.',
+            },
+            {
+              id: 'quiz-html-l68-q3',
+              type: 'multiple-choice',
+              prompt: 'What does preload="none" do?',
+              options: [
+                'Prevents the file being downloaded until the user presses play',
+                'Prevents the file being played',
+                'Hides the controls',
+                'Compresses the file',
+              ],
+              answer: 0,
+              explanation: 'It saves the bandwidth and the surprise cost of a page that downloads audio nobody plays.',
+            },
+            {
+              id: 'quiz-html-l68-q4',
+              type: 'blank',
+              prompt: 'What happens if the promise returned by play() rejects?',
+              answers: [
+                'Autoplay was blocked',
+                'autoplay is blocked',
+                'playback was blocked',
+              ],
+              explanation: 'A browser refuses to start audio without a user gesture, and the rejection is how you find out.',
+            },
+            {
+              id: 'quiz-html-l68-q5',
+              type: 'multiple-choice',
+              prompt: 'Which element is right for a long transcript beside a player?',
+              options: [
+                'A div with an onclick handler',
+                'A details element with a summary',
+                'A hidden paragraph',
+                'The alt attribute of the audio element',
+              ],
+              answer: 1,
+              explanation: 'details and summary work without JavaScript, are keyboard accessible, and are announced as a disclosure.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1119,66 +1184,6 @@ details p { margin: 0.5rem 0; }`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s57',
-      title: 'HTML Audio quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s57-q1',
-          type: 'multiple-choice',
-          prompt: 'Which audio format is most efficient at a given quality?',
-          options: ['MP3', 'Opus', 'WAV', 'AIFF'],
-          answer: 1,
-          explanation:
-            'Opus is roughly twice as efficient as MP3 at the same quality, and is supported by every current browser.',
-        },
-        {
-          id: 'quiz-html-s57-q2',
-          type: 'true-false',
-          prompt: 'An audio player with no transcript is a complete alternative to the written version.',
-          answer: false,
-          explanation:
-            'It excludes Deaf and hard-of-hearing users, and anyone who cannot turn sound on. The transcript is the accessible version.',
-        },
-        {
-          id: 'quiz-html-s57-q3',
-          type: 'multiple-choice',
-          prompt: 'What does preload="none" do?',
-          options: [
-            'Prevents the file being downloaded until the user presses play',
-            'Prevents the file being played',
-            'Hides the controls',
-            'Compresses the file',
-          ],
-          answer: 0,
-          explanation:
-            'It saves the bandwidth and the surprise cost of a page that downloads audio nobody plays.',
-        },
-        {
-          id: 'quiz-html-s57-q4',
-          type: 'blank',
-          prompt: 'What happens if the promise returned by play() rejects?',
-          answers: ['Autoplay was blocked', 'autoplay is blocked', 'playback was blocked'],
-          explanation:
-            'A browser refuses to start audio without a user gesture, and the rejection is how you find out.',
-        },
-        {
-          id: 'quiz-html-s57-q5',
-          type: 'multiple-choice',
-          prompt: 'Which element is right for a long transcript beside a player?',
-          options: [
-            'A div with an onclick handler',
-            'A details element with a summary',
-            'A hidden paragraph',
-            'The alt attribute of the audio element',
-          ],
-          answer: 1,
-          explanation:
-            'details and summary work without JavaScript, are keyboard accessible, and are announced as a disclosure.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s58',
@@ -1196,6 +1201,69 @@ details p { margin: 0.5rem 0; }`,
           'Choose the right element for PDF, video and interactive content',
         ],
         xp: 35,
+        quiz: {
+          id: 'quiz-html-l69',
+          title: 'HTML Plug-ins quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l69-q1',
+              type: 'multiple-choice',
+              prompt: 'What is the object element used for today?',
+              options: [
+                'Running Flash content',
+                'Embedding an external resource, rarely the right answer since the browser does most of it natively',
+                'Playing audio',
+                'Drawing graphics',
+              ],
+              answer: 1,
+              explanation: 'Video, audio, PDF, SVG and canvas all have native elements, so almost nothing needs a plug-in embed.',
+            },
+            {
+              id: 'quiz-html-l69-q2',
+              type: 'true-false',
+              prompt: 'Embedding a PDF in an object is usually better than linking to it.',
+              answer: false,
+              explanation: 'An embed takes away the viewer the user has chosen and guesses a size. A link respects their setup and works on a phone.',
+            },
+            {
+              id: 'quiz-html-l69-q3',
+              type: 'multiple-choice',
+              prompt: 'Which element can hold fallback content?',
+              options: [
+                'embed',
+                'object',
+                'Both',
+                'Neither',
+              ],
+              answer: 2,
+              explanation: 'Both hold fallback content, though the fallback is a required child of object and cannot be a child of embed.',
+            },
+            {
+              id: 'quiz-html-l69-q4',
+              type: 'blank',
+              prompt: 'Which element was removed from HTML entirely?',
+              answers: [
+                'applet',
+                '<applet>',
+              ],
+              explanation: 'applet was for Java, which no browser runs any more.',
+            },
+            {
+              id: 'quiz-html-l69-q5',
+              type: 'multiple-choice',
+              prompt: 'Why are plug-ins a security concern?',
+              options: [
+                'They are slow',
+                'They run with the permissions of the machine rather than the page',
+                'They cannot be styled',
+                'They require a licence',
+              ],
+              answer: 1,
+              explanation: 'That level of privilege is why they were removed for security history, and why a prompt to install one is a malware route.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1336,65 +1404,6 @@ a { color: #1d4ed8; }`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s58',
-      title: 'HTML Plug-ins quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s58-q1',
-          type: 'multiple-choice',
-          prompt: 'What is the object element used for today?',
-          options: [
-            'Running Flash content',
-            'Embedding an external resource, rarely the right answer since the browser does most of it natively',
-            'Playing audio',
-            'Drawing graphics',
-          ],
-          answer: 1,
-          explanation:
-            'Video, audio, PDF, SVG and canvas all have native elements, so almost nothing needs a plug-in embed.',
-        },
-        {
-          id: 'quiz-html-s58-q2',
-          type: 'true-false',
-          prompt: 'Embedding a PDF in an object is usually better than linking to it.',
-          answer: false,
-          explanation:
-            'An embed takes away the viewer the user has chosen and guesses a size. A link respects their setup and works on a phone.',
-        },
-        {
-          id: 'quiz-html-s58-q3',
-          type: 'multiple-choice',
-          prompt: 'Which element can hold fallback content?',
-          options: ['embed', 'object', 'Both', 'Neither'],
-          answer: 2,
-          explanation:
-            'Both hold fallback content, though the fallback is a required child of object and cannot be a child of embed.',
-        },
-        {
-          id: 'quiz-html-s58-q4',
-          type: 'blank',
-          prompt: 'Which element was removed from HTML entirely?',
-          answers: ['applet', '<applet>'],
-          explanation: 'applet was for Java, which no browser runs any more.',
-        },
-        {
-          id: 'quiz-html-s58-q5',
-          type: 'multiple-choice',
-          prompt: 'Why are plug-ins a security concern?',
-          options: [
-            'They are slow',
-            'They run with the permissions of the machine rather than the page',
-            'They cannot be styled',
-            'They require a licence',
-          ],
-          answer: 1,
-          explanation:
-            'That level of privilege is why they were removed for security history, and why a prompt to install one is a malware route.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s59',
@@ -1412,6 +1421,69 @@ a { color: #1d4ed8; }`,
           'Explain the privacy and performance cost of a third-party embed',
         ],
         xp: 35,
+        quiz: {
+          id: 'quiz-html-l70',
+          title: 'HTML YouTube quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l70-q1',
+              type: 'multiple-choice',
+              prompt: 'Which hostname defers YouTube cookies until the video is played?',
+              options: [
+                'youtube.com',
+                'youtube-nocookie.com',
+                'youtu.be',
+                'googlevideo.com',
+              ],
+              answer: 1,
+              explanation: 'The nocookie host does not set cookies on load, which is a meaningful privacy improvement on a page you do not own.',
+            },
+            {
+              id: 'quiz-html-l70-q2',
+              type: 'true-false',
+              prompt: 'A YouTube embed needs a title attribute to be usable with a screen reader.',
+              answer: true,
+              explanation: 'Without one the frame is announced as just "frame", and the user has no idea what is in it.',
+            },
+            {
+              id: 'quiz-html-l70-q3',
+              type: 'multiple-choice',
+              prompt: 'What does the start parameter do?',
+              options: [
+                'Starts playback automatically',
+                'Begins the video at a given number of seconds',
+                'Sets the player width',
+                'Enables captions',
+              ],
+              answer: 1,
+              explanation: 'start=90 opens the player at the ninety second mark.',
+            },
+            {
+              id: 'quiz-html-l70-q4',
+              type: 'blank',
+              prompt: 'Which iframe attribute stops the embed loading until it is near the viewport?',
+              answers: [
+                'loading',
+                'loading="lazy"',
+              ],
+              explanation: 'loading="lazy" defers the third-party code as well as the image.',
+            },
+            {
+              id: 'quiz-html-l70-q5',
+              type: 'multiple-choice',
+              prompt: 'What is the lightest way to link to a video that illustrates a paragraph?',
+              options: [
+                'An iframe embed',
+                'A poster image linking to the video',
+                'An embed element',
+                'A video element pointing at YouTube',
+              ],
+              answer: 1,
+              explanation: 'A poster image loads in a few kilobytes and no third-party code, at the cost of one click.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1566,63 +1638,5 @@ youtube-nocookie.com/embed/ID  sets them only when the user plays
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s59',
-      title: 'HTML YouTube quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s59-q1',
-          type: 'multiple-choice',
-          prompt: 'Which hostname defers YouTube cookies until the video is played?',
-          options: ['youtube.com', 'youtube-nocookie.com', 'youtu.be', 'googlevideo.com'],
-          answer: 1,
-          explanation:
-            'The nocookie host does not set cookies on load, which is a meaningful privacy improvement on a page you do not own.',
-        },
-        {
-          id: 'quiz-html-s59-q2',
-          type: 'true-false',
-          prompt: 'A YouTube embed needs a title attribute to be usable with a screen reader.',
-          answer: true,
-          explanation:
-            'Without one the frame is announced as just "frame", and the user has no idea what is in it.',
-        },
-        {
-          id: 'quiz-html-s59-q3',
-          type: 'multiple-choice',
-          prompt: 'What does the start parameter do?',
-          options: [
-            'Starts playback automatically',
-            'Begins the video at a given number of seconds',
-            'Sets the player width',
-            'Enables captions',
-          ],
-          answer: 1,
-          explanation: 'start=90 opens the player at the ninety second mark.',
-        },
-        {
-          id: 'quiz-html-s59-q4',
-          type: 'blank',
-          prompt: 'Which iframe attribute stops the embed loading until it is near the viewport?',
-          answers: ['loading', 'loading="lazy"'],
-          explanation: 'loading="lazy" defers the third-party code as well as the image.',
-        },
-        {
-          id: 'quiz-html-s59-q5',
-          type: 'multiple-choice',
-          prompt: 'What is the lightest way to link to a video that illustrates a paragraph?',
-          options: [
-            'An iframe embed',
-            'A poster image linking to the video',
-            'An embed element',
-            'A video element pointing at YouTube',
-          ],
-          answer: 1,
-          explanation:
-            'A poster image loads in a few kilobytes and no third-party code, at the cost of one click.',
-        },
-      ],
-    },
   },
 ]

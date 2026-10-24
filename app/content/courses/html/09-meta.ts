@@ -17,6 +17,69 @@ export const htmlMetaSections: Section[] = [
           'Use the noscript element for content that needs no script',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-html-l44',
+          title: 'HTML JavaScript quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l44-q1',
+              type: 'multiple-choice',
+              prompt: 'What does a script in the head with no attributes do to parsing?',
+              options: [
+                'Nothing, parsing continues in parallel',
+                'It blocks the parser until the script has been fetched and run',
+                'It runs after the page has loaded',
+                'It runs before the head is closed',
+              ],
+              answer: 1,
+              explanation: 'A plain script is parser-blocking, which is the reason defer exists.',
+            },
+            {
+              id: 'quiz-html-l44-q2',
+              type: 'true-false',
+              prompt: 'defer scripts execute in the order they appear in the document.',
+              answer: true,
+              explanation: 'Deferred scripts download in parallel but execute in document order, after parsing has finished.',
+            },
+            {
+              id: 'quiz-html-l44-q3',
+              type: 'multiple-choice',
+              prompt: 'Which attribute is right for an independent third-party tag that does not care when it runs?',
+              options: [
+                'defer',
+                'async',
+                'blocking',
+                'type="module"',
+              ],
+              answer: 1,
+              explanation: 'async executes as soon as the file arrives, with no ordering guarantee — which is fine for a self-contained tag.',
+            },
+            {
+              id: 'quiz-html-l44-q4',
+              type: 'blank',
+              prompt: 'Which element holds content shown when scripting is unavailable?',
+              answers: [
+                'noscript',
+                '<noscript>',
+              ],
+              explanation: 'The browser renders its contents only when scripting is off.',
+            },
+            {
+              id: 'quiz-html-l44-q5',
+              type: 'multiple-choice',
+              prompt: 'What does defer do on an inline script with no src?',
+              options: [
+                'Defers it until after parsing',
+                'Nothing — there is nothing to download, so it runs where it appears',
+                'Throws an error',
+                'Converts it to a module',
+              ],
+              answer: 1,
+              explanation: 'Deferral is about download timing. An inline script has no fetch step, so the attribute has no effect.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -157,65 +220,6 @@ button { padding: 0.4rem 0.75rem; border-radius: 6px; border: 1px solid #cbd5e1;
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s33',
-      title: 'HTML JavaScript quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s33-q1',
-          type: 'multiple-choice',
-          prompt: 'What does a script in the head with no attributes do to parsing?',
-          options: [
-            'Nothing, parsing continues in parallel',
-            'It blocks the parser until the script has been fetched and run',
-            'It runs after the page has loaded',
-            'It runs before the head is closed',
-          ],
-          answer: 1,
-          explanation:
-            'A plain script is parser-blocking, which is the reason defer exists.',
-        },
-        {
-          id: 'quiz-html-s33-q2',
-          type: 'true-false',
-          prompt: 'defer scripts execute in the order they appear in the document.',
-          answer: true,
-          explanation:
-            'Deferred scripts download in parallel but execute in document order, after parsing has finished.',
-        },
-        {
-          id: 'quiz-html-s33-q3',
-          type: 'multiple-choice',
-          prompt: 'Which attribute is right for an independent third-party tag that does not care when it runs?',
-          options: ['defer', 'async', 'blocking', 'type="module"'],
-          answer: 1,
-          explanation:
-            'async executes as soon as the file arrives, with no ordering guarantee — which is fine for a self-contained tag.',
-        },
-        {
-          id: 'quiz-html-s33-q4',
-          type: 'blank',
-          prompt: 'Which element holds content shown when scripting is unavailable?',
-          answers: ['noscript', '<noscript>'],
-          explanation: 'The browser renders its contents only when scripting is off.',
-        },
-        {
-          id: 'quiz-html-s33-q5',
-          type: 'multiple-choice',
-          prompt: 'What does defer do on an inline script with no src?',
-          options: [
-            'Defers it until after parsing',
-            'Nothing — there is nothing to download, so it runs where it appears',
-            'Throws an error',
-            'Converts it to a module',
-          ],
-          answer: 1,
-          explanation:
-            'Deferral is about download timing. An inline script has no fetch step, so the attribute has no effect.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s34',
@@ -233,6 +237,70 @@ button { padding: 0.4rem 0.75rem; border-radius: 6px; border: 1px solid #cbd5e1;
           'Choose between root-relative and relative for a given structure',
         ],
         xp: 35,
+        quiz: {
+          id: 'quiz-html-l45',
+          title: 'HTML File Paths quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l45-q1',
+              type: 'multiple-choice',
+              prompt: 'What does ../styles/site.css resolve against?',
+              options: [
+                'The site root',
+                'The folder one level above the current page, then into styles',
+                'The domain root',
+                'Nothing, it is malformed',
+              ],
+              answer: 1,
+              explanation: 'Each ../ steps up one directory from the folder holding the current page.',
+            },
+            {
+              id: 'quiz-html-l45-q2',
+              type: 'true-false',
+              prompt: 'A path that works when a file is opened locally will always work on a server.',
+              answer: false,
+              explanation: 'A file URL has a drive letter and an http URL has a host. Relative paths resolve differently in each.',
+            },
+            {
+              id: 'quiz-html-l45-q3',
+              type: 'multiple-choice',
+              prompt: 'Why might a path 404 on a Linux server after working on a Mac?',
+              options: [
+                'Linux is slower',
+                'The server is case-sensitive and the path case does not match the file',
+                'Linux does not serve images',
+                'The browser is different',
+              ],
+              answer: 1,
+              explanation: 'macOS and Windows filesystems are case-insensitive by default; Linux is not.',
+            },
+            {
+              id: 'quiz-html-l45-q4',
+              type: 'blank',
+              prompt: 'Which element changes the base that relative paths resolve against?',
+              answers: [
+                'base',
+                '<base>',
+                'base element',
+              ],
+              explanation: 'A base href makes every relative path on the page resolve against that URL.',
+            },
+            {
+              id: 'quiz-html-l45-q5',
+              type: 'multiple-choice',
+              prompt: 'Which form of path is most stable across a multi-page site?',
+              options: [
+                'document-relative, such as style.css',
+                'root-relative, such as /css/site.css',
+                'parent-relative, such as ../css/site.css',
+                'a filesystem path',
+              ],
+              answer: 1,
+              explanation: 'A leading slash anchors resolution at the site root, so it behaves the same from any folder depth.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -356,69 +424,6 @@ button { padding: 0.4rem 0.75rem; border-radius: 6px; border: 1px solid #cbd5e1;
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s34',
-      title: 'HTML File Paths quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s34-q1',
-          type: 'multiple-choice',
-          prompt: 'What does ../styles/site.css resolve against?',
-          options: [
-            'The site root',
-            'The folder one level above the current page, then into styles',
-            'The domain root',
-            'Nothing, it is malformed',
-          ],
-          answer: 1,
-          explanation:
-            'Each ../ steps up one directory from the folder holding the current page.',
-        },
-        {
-          id: 'quiz-html-s34-q2',
-          type: 'true-false',
-          prompt: 'A path that works when a file is opened locally will always work on a server.',
-          answer: false,
-          explanation:
-            'A file URL has a drive letter and an http URL has a host. Relative paths resolve differently in each.',
-        },
-        {
-          id: 'quiz-html-s34-q3',
-          type: 'multiple-choice',
-          prompt: 'Why might a path 404 on a Linux server after working on a Mac?',
-          options: [
-            'Linux is slower',
-            'The server is case-sensitive and the path case does not match the file',
-            'Linux does not serve images',
-            'The browser is different',
-          ],
-          answer: 1,
-          explanation: 'macOS and Windows filesystems are case-insensitive by default; Linux is not.',
-        },
-        {
-          id: 'quiz-html-s34-q4',
-          type: 'blank',
-          prompt: 'Which element changes the base that relative paths resolve against?',
-          answers: ['base', '<base>', 'base element'],
-          explanation: 'A base href makes every relative path on the page resolve against that URL.',
-        },
-        {
-          id: 'quiz-html-s34-q5',
-          type: 'multiple-choice',
-          prompt: 'Which form of path is most stable across a multi-page site?',
-          options: [
-            'document-relative, such as style.css',
-            'root-relative, such as /css/site.css',
-            'parent-relative, such as ../css/site.css',
-            'a filesystem path',
-          ],
-          answer: 1,
-          explanation:
-            'A leading slash anchors resolution at the site root, so it behaves the same from any folder depth.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s35',
@@ -436,6 +441,69 @@ button { padding: 0.4rem 0.75rem; border-radius: 6px; border: 1px solid #cbd5e1;
           'Say where a stylesheet link and an inline style belong',
         ],
         xp: 35,
+        quiz: {
+          id: 'quiz-html-l46',
+          title: 'HTML Head quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l46-q1',
+              type: 'multiple-choice',
+              prompt: 'Where does the page title text belong?',
+              options: [
+                'In an h1 in the body',
+                'In a title element in the head',
+                'In a meta name="title" element',
+                'Anywhere, it makes no difference',
+              ],
+              answer: 1,
+              explanation: 'The title element goes in the head and names the document. The h1 names the content on the page, which is a different thing.',
+            },
+            {
+              id: 'quiz-html-l46-q2',
+              type: 'true-false',
+              prompt: 'The meta description is a ranking factor for search engines.',
+              answer: false,
+              explanation: 'It is used as the snippet in results and by social cards, but it does not affect ranking.',
+            },
+            {
+              id: 'quiz-html-l46-q3',
+              type: 'multiple-choice',
+              prompt: 'What happens on mobile without a viewport meta?',
+              options: [
+                'The page is unstyled',
+                'The browser assumes a desktop-width page and scales it down',
+                'The page loads at double size',
+                'Nothing changes',
+              ],
+              answer: 1,
+              explanation: 'Without width=device-width the layout viewport is assumed to be about 980px wide, so everything appears zoomed out.',
+            },
+            {
+              id: 'quiz-html-l46-q4',
+              type: 'blank',
+              prompt: 'Which attribute must appear on the first meta element in the head?',
+              answers: [
+                'charset',
+                'charset="utf-8"',
+              ],
+              explanation: 'The browser has to know the encoding before it has read much of the document.',
+            },
+            {
+              id: 'quiz-html-l46-q5',
+              type: 'multiple-choice',
+              prompt: 'Which of these is document setting rather than metadata?',
+              options: [
+                'meta name="description"',
+                'meta name="viewport"',
+                'meta name="author"',
+                'meta name="keywords"',
+              ],
+              answer: 1,
+              explanation: 'The viewport configures the browser layout. The others describe the document for something outside it.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -541,70 +609,6 @@ button { padding: 0.4rem 0.75rem; border-radius: 6px; border: 1px solid #cbd5e1;
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s35',
-      title: 'HTML Head quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s35-q1',
-          type: 'multiple-choice',
-          prompt: 'Where does the page title text belong?',
-          options: [
-            'In an h1 in the body',
-            'In a title element in the head',
-            'In a meta name="title" element',
-            'Anywhere, it makes no difference',
-          ],
-          answer: 1,
-          explanation:
-            'The title element goes in the head and names the document. The h1 names the content on the page, which is a different thing.',
-        },
-        {
-          id: 'quiz-html-s35-q2',
-          type: 'true-false',
-          prompt: 'The meta description is a ranking factor for search engines.',
-          answer: false,
-          explanation:
-            'It is used as the snippet in results and by social cards, but it does not affect ranking.',
-        },
-        {
-          id: 'quiz-html-s35-q3',
-          type: 'multiple-choice',
-          prompt: 'What happens on mobile without a viewport meta?',
-          options: [
-            'The page is unstyled',
-            'The browser assumes a desktop-width page and scales it down',
-            'The page loads at double size',
-            'Nothing changes',
-          ],
-          answer: 1,
-          explanation:
-            'Without width=device-width the layout viewport is assumed to be about 980px wide, so everything appears zoomed out.',
-        },
-        {
-          id: 'quiz-html-s35-q4',
-          type: 'blank',
-          prompt: 'Which attribute must appear on the first meta element in the head?',
-          answers: ['charset', 'charset="utf-8"'],
-          explanation: 'The browser has to know the encoding before it has read much of the document.',
-        },
-        {
-          id: 'quiz-html-s35-q5',
-          type: 'multiple-choice',
-          prompt: 'Which of these is document setting rather than metadata?',
-          options: [
-            'meta name="description"',
-            'meta name="viewport"',
-            'meta name="author"',
-            'meta name="keywords"',
-          ],
-          answer: 1,
-          explanation:
-            'The viewport configures the browser layout. The others describe the document for something outside it.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s36',
@@ -622,6 +626,69 @@ button { padding: 0.4rem 0.75rem; border-radius: 6px; border: 1px solid #cbd5e1;
           'Explain what a CSS grid template does in plain language',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-html-l47',
+          title: 'HTML Layout quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l47-q1',
+              type: 'multiple-choice',
+              prompt: 'How many main elements may a document contain?',
+              options: [
+                'As many as you like',
+                'Exactly one',
+                'One per section',
+                'None, it is deprecated',
+              ],
+              answer: 1,
+              explanation: 'There must be exactly one main, and it holds the primary content, excluding the header, nav, aside and footer.',
+            },
+            {
+              id: 'quiz-html-l47-q2',
+              type: 'true-false',
+              prompt: 'A table is a reasonable way to build a two-column page layout.',
+              answer: false,
+              explanation: 'Grid or flex do the same job with cleaner markup. A table announces cell positions and makes the reading order a guess.',
+            },
+            {
+              id: 'quiz-html-l47-q3',
+              type: 'multiple-choice',
+              prompt: 'What does minmax(0, 1fr) solve?',
+              options: [
+                'A track that refuses to shrink below its content and pushes the layout wider than the page',
+                'Missing grid gaps',
+                'Unsupported browsers',
+                'Alignment of items',
+              ],
+              answer: 0,
+              explanation: 'The default minimum is auto, which will not shrink. Setting it to zero lets the track shrink as needed.',
+            },
+            {
+              id: 'quiz-html-l47-q4',
+              type: 'blank',
+              prompt: 'Which element contains the primary content of a document?',
+              answers: [
+                'main',
+                '<main>',
+              ],
+              explanation: 'main holds the primary content, and there is exactly one per document.',
+            },
+            {
+              id: 'quiz-html-l47-q5',
+              type: 'multiple-choice',
+              prompt: 'What is the difference between section and article?',
+              options: [
+                'They are interchangeable',
+                'article is for theming, section is for grouping',
+                'article is self-contained content that makes sense on its own; section is a thematic grouping of a page',
+                'section is self-contained, article is a grouping',
+              ],
+              answer: 2,
+              explanation: 'An article could be syndicated on its own. A section is a labelled division of the page it lives in.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -801,65 +868,6 @@ footer  { grid-area: footer; background: #f1f5f9; }`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s36',
-      title: 'HTML Layout quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s36-q1',
-          type: 'multiple-choice',
-          prompt: 'How many main elements may a document contain?',
-          options: ['As many as you like', 'Exactly one', 'One per section', 'None, it is deprecated'],
-          answer: 1,
-          explanation:
-            'There must be exactly one main, and it holds the primary content, excluding the header, nav, aside and footer.',
-        },
-        {
-          id: 'quiz-html-s36-q2',
-          type: 'true-false',
-          prompt: 'A table is a reasonable way to build a two-column page layout.',
-          answer: false,
-          explanation:
-            'Grid or flex do the same job with cleaner markup. A table announces cell positions and makes the reading order a guess.',
-        },
-        {
-          id: 'quiz-html-s36-q3',
-          type: 'multiple-choice',
-          prompt: 'What does minmax(0, 1fr) solve?',
-          options: [
-            'A track that refuses to shrink below its content and pushes the layout wider than the page',
-            'Missing grid gaps',
-            'Unsupported browsers',
-            'Alignment of items',
-          ],
-          answer: 0,
-          explanation:
-            'The default minimum is auto, which will not shrink. Setting it to zero lets the track shrink as needed.',
-        },
-        {
-          id: 'quiz-html-s36-q4',
-          type: 'blank',
-          prompt: 'Which element contains the primary content of a document?',
-          answers: ['main', '<main>'],
-          explanation: 'main holds the primary content, and there is exactly one per document.',
-        },
-        {
-          id: 'quiz-html-s36-q5',
-          type: 'multiple-choice',
-          prompt: 'What is the difference between section and article?',
-          options: [
-            'They are interchangeable',
-            'article is for theming, section is for grouping',
-            'article is self-contained content that makes sense on its own; section is a thematic grouping of a page',
-            'section is self-contained, article is a grouping',
-          ],
-          answer: 2,
-          explanation:
-            'An article could be syndicated on its own. A section is a labelled division of the page it lives in.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s37',
@@ -877,6 +885,70 @@ footer  { grid-area: footer; background: #f1f5f9; }`,
           'Describe how a fluid layout with breakpoints differs from a fixed one',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-html-l48',
+          title: 'HTML Responsive quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l48-q1',
+              type: 'multiple-choice',
+              prompt: 'What does the viewport meta tag do?',
+              options: [
+                'Makes the page fill the screen height',
+                'Tells the browser how wide the device is, so it does not assume a desktop-width page',
+                'Hides the browser chrome',
+                'Enables dark mode',
+              ],
+              answer: 1,
+              explanation: 'Without it mobile browsers assume about 980px and scale the page down, so everything looks zoomed out.',
+            },
+            {
+              id: 'quiz-html-l48-q2',
+              type: 'true-false',
+              prompt: 'Setting user-scalable=no on the viewport meta is good practice.',
+              answer: false,
+              explanation: 'It blocks pinch-zoom, which breaks the page for anyone who needs to magnify it. It is a WCAG failure.',
+            },
+            {
+              id: 'quiz-html-l48-q3',
+              type: 'multiple-choice',
+              prompt: 'Which unit is relative to the root font size?',
+              options: [
+                'em',
+                'rem',
+                '%',
+                'ex',
+              ],
+              answer: 1,
+              explanation: 'rem is relative to the root element font size, which makes it the right default for type.',
+            },
+            {
+              id: 'quiz-html-l48-q4',
+              type: 'blank',
+              prompt: 'Which grid value creates as many columns as will fit?',
+              answers: [
+                'auto-fit',
+                'repeat(auto-fit, minmax(220px, 1fr))',
+                'auto-fit',
+              ],
+              explanation: 'auto-fit collapses empty tracks, so the columns stretch to fill the row as the count changes.',
+            },
+            {
+              id: 'quiz-html-l48-q5',
+              type: 'multiple-choice',
+              prompt: 'Why build a fluid layout before adding breakpoints?',
+              options: [
+                'Media queries are being deprecated',
+                'It needs far fewer breakpoints and degrades better at widths you did not design for',
+                'Fluid layouts load faster',
+                'Breakpoints only work with grid',
+              ],
+              answer: 1,
+              explanation: 'A layout that reflows at every width leaves media queries to express genuine arrangement changes rather than every adjustment.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1038,64 +1110,5 @@ footer  { grid-area: footer; background: #f1f5f9; }`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s37',
-      title: 'HTML Responsive quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s37-q1',
-          type: 'multiple-choice',
-          prompt: 'What does the viewport meta tag do?',
-          options: [
-            'Makes the page fill the screen height',
-            'Tells the browser how wide the device is, so it does not assume a desktop-width page',
-            'Hides the browser chrome',
-            'Enables dark mode',
-          ],
-          answer: 1,
-          explanation:
-            'Without it mobile browsers assume about 980px and scale the page down, so everything looks zoomed out.',
-        },
-        {
-          id: 'quiz-html-s37-q2',
-          type: 'true-false',
-          prompt: 'Setting user-scalable=no on the viewport meta is good practice.',
-          answer: false,
-          explanation:
-            'It blocks pinch-zoom, which breaks the page for anyone who needs to magnify it. It is a WCAG failure.',
-        },
-        {
-          id: 'quiz-html-s37-q3',
-          type: 'multiple-choice',
-          prompt: 'Which unit is relative to the root font size?',
-          options: ['em', 'rem', '%', 'ex'],
-          answer: 1,
-          explanation: 'rem is relative to the root element font size, which makes it the right default for type.',
-        },
-        {
-          id: 'quiz-html-s37-q4',
-          type: 'blank',
-          prompt: 'Which grid value creates as many columns as will fit?',
-          answers: ['auto-fit', 'repeat(auto-fit, minmax(220px, 1fr))', 'auto-fit'],
-          explanation:
-            'auto-fit collapses empty tracks, so the columns stretch to fill the row as the count changes.',
-        },
-        {
-          id: 'quiz-html-s37-q5',
-          type: 'multiple-choice',
-          prompt: 'Why build a fluid layout before adding breakpoints?',
-          options: [
-            'Media queries are being deprecated',
-            'It needs far fewer breakpoints and degrades better at widths you did not design for',
-            'Fluid layouts load faster',
-            'Breakpoints only work with grid',
-          ],
-          answer: 1,
-          explanation:
-            'A layout that reflows at every width leaves media queries to express genuine arrangement changes rather than every adjustment.',
-        },
-      ],
-    },
   },
 ]

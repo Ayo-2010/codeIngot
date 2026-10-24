@@ -18,6 +18,71 @@ export const cssAdvancedBoxSections: Section[] = [
           'Clip overflowing children with `overflow: hidden`',
         ],
         xp: 45,
+        quiz: {
+          id: 'quiz-css-l80',
+          title: 'Rounded Corners quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l80-q1',
+              type: 'multiple-choice',
+              prompt: 'In `border-radius: 20px / 40px`, what is 40px?',
+              options: [
+                'The horizontal radius',
+                'The vertical radius of the ellipse',
+                'The corner size in both directions',
+                'The border width',
+              ],
+              answer: 1,
+              explanation: 'Everything before the slash is the horizontal radius and everything after it is the vertical radius.',
+            },
+            {
+              id: 'quiz-css-l80-q2',
+              type: 'true-false',
+              prompt: 'A child element automatically inherits the rounded corners of its parent.',
+              answer: false,
+              explanation: '`border-radius` clips only the element it is set on. Children are clipped only by the parent\'s `overflow: hidden`.',
+            },
+            {
+              id: 'quiz-css-l80-q3',
+              type: 'code-output',
+              prompt: 'What shape does this produce on a 100px square box?',
+              code: '.box { border-radius: 50%; }',
+              options: [
+                'A square with slightly soft corners',
+                'A circle',
+                'A pill shape',
+                'Nothing, percentages are not valid radii',
+              ],
+              answer: 1,
+              explanation: 'A percentage radius resolves against the box width, so 50% of 100px is 50px on both axes — exactly half, which is a full circle.',
+            },
+            {
+              id: 'quiz-css-l80-q4',
+              type: 'blank',
+              prompt: 'Complete the sentence: when two radii on a corner add up to more than the box measures, the browser ________ them proportionally.',
+              answers: [
+                'scales',
+                'scaling',
+                'scale',
+              ],
+              explanation: 'The overlap rule scales the radii down by a shared factor so the corner still fits inside the box.',
+            },
+            {
+              id: 'quiz-css-l80-q5',
+              type: 'multiple-choice',
+              prompt: 'Which rule makes a rounded parent clip its children?',
+              options: [
+                'border-style: hidden',
+                'overflow: hidden',
+                'clip-radius: true',
+                'box-clip: border-box',
+              ],
+              answer: 1,
+              explanation: '`overflow: hidden` establishes the clip region that the parent\'s radius then applies to.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -114,18 +179,6 @@ export const cssAdvancedBoxSections: Section[] = [
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s43',
-      title: 'CSS Rounded Corners quiz',
-      passingScore: 60,
-      questions: [
-        { id: 'quiz-css-s43-q1', type: 'multiple-choice', prompt: 'In `border-radius: 20px / 40px`, what is 40px?', options: ['The horizontal radius', 'The vertical radius of the ellipse', 'The corner size in both directions', 'The border width'], answer: 1, explanation: 'Everything before the slash is the horizontal radius and everything after it is the vertical radius.' },
-        { id: 'quiz-css-s43-q2', type: 'true-false', prompt: 'A child element automatically inherits the rounded corners of its parent.', answer: false, explanation: '`border-radius` clips only the element it is set on. Children are clipped only by the parent\'s `overflow: hidden`.' },
-        { id: 'quiz-css-s43-q3', type: 'code-output', prompt: 'What shape does this produce on a 100px square box?', code: '.box { border-radius: 50%; }', options: ['A square with slightly soft corners', 'A circle', 'A pill shape', 'Nothing, percentages are not valid radii'], answer: 1, explanation: 'A percentage radius resolves against the box width, so 50% of 100px is 50px on both axes — exactly half, which is a full circle.' },
-        { id: 'quiz-css-s43-q4', type: 'blank', prompt: 'Complete the sentence: when two radii on a corner add up to more than the box measures, the browser ________ them proportionally.', answers: ['scales', 'scaling', 'scale'], explanation: 'The overlap rule scales the radii down by a shared factor so the corner still fits inside the box.' },
-        { id: 'quiz-css-s43-q5', type: 'multiple-choice', prompt: 'Which rule makes a rounded parent clip its children?', options: ['border-style: hidden', 'overflow: hidden', 'clip-radius: true', 'box-clip: border-box'], answer: 1, explanation: '`overflow: hidden` establishes the clip region that the parent\'s radius then applies to.' },
-      ],
-    },
   },
   {
     id: 'css-s44',
@@ -144,6 +197,70 @@ export const cssAdvancedBoxSections: Section[] = [
           'Predict the difference between `round` and `repeat` tiling',
         ],
         xp: 48,
+        quiz: {
+          id: 'quiz-css-l81',
+          title: 'Border Images quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l81-q1',
+              type: 'multiple-choice',
+              prompt: 'How many regions does `border-image-slice` cut a source image into?',
+              options: [
+                '4',
+                '6',
+                '8',
+                '9',
+              ],
+              answer: 3,
+              explanation: 'Nine: four corners, four edges and a centre. The centre is only used when the middle slice is stretched.',
+            },
+            {
+              id: 'quiz-css-l81-q2',
+              type: 'true-false',
+              prompt: '`border-image` needs a real image file to work.',
+              answer: false,
+              explanation: 'Any paintable image counts, including `linear-gradient` and `repeating-linear-gradient`.',
+            },
+            {
+              id: 'quiz-css-l81-q3',
+              type: 'code-output',
+              prompt: 'What is missing from this rule?',
+              code: '.box {\n  border-image-slice: 16;\n  border-image-repeat: round;\n}',
+              options: [
+                'Nothing, it is valid',
+                'The slice needs a unit',
+                'A `border-image-source`',
+                '`round` is not a valid value',
+              ],
+              answer: 2,
+              explanation: 'Without a source there is nothing to slice. You also normally set a `border-width` so there is space to draw in.',
+            },
+            {
+              id: 'quiz-css-l81-q4',
+              type: 'blank',
+              prompt: 'Complete the sentence: `border-image-repeat: round` keeps whole tiles and adjusts them to ________ the available space.',
+              answers: [
+                'fit',
+                'fill',
+              ],
+              explanation: '`round` divides the edge into a whole number of tiles, adjusting their size slightly so nothing is clipped.',
+            },
+            {
+              id: 'quiz-css-l81-q5',
+              type: 'multiple-choice',
+              prompt: 'What does `border-image-outset` do?',
+              options: [
+                'Moves the border outward without affecting layout',
+                'Makes the border thicker',
+                'Adds space inside the border',
+                'Repeats the image more often',
+              ],
+              answer: 0,
+              explanation: 'Outset draws the border further from the padding edge. It is a painting offset, not a layout one.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -246,18 +363,6 @@ export const cssAdvancedBoxSections: Section[] = [
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s44',
-      title: 'CSS Border Images quiz',
-      passingScore: 60,
-      questions: [
-        { id: 'quiz-css-s44-q1', type: 'multiple-choice', prompt: 'How many regions does `border-image-slice` cut a source image into?', options: ['4', '6', '8', '9'], answer: 3, explanation: 'Nine: four corners, four edges and a centre. The centre is only used when the middle slice is stretched.' },
-        { id: 'quiz-css-s44-q2', type: 'true-false', prompt: '`border-image` needs a real image file to work.', answer: false, explanation: 'Any paintable image counts, including `linear-gradient` and `repeating-linear-gradient`.' },
-        { id: 'quiz-css-s44-q3', type: 'code-output', prompt: 'What is missing from this rule?', code: '.box {\n  border-image-slice: 16;\n  border-image-repeat: round;\n}', options: ['Nothing, it is valid', 'The slice needs a unit', 'A `border-image-source`', '`round` is not a valid value'], answer: 2, explanation: 'Without a source there is nothing to slice. You also normally set a `border-width` so there is space to draw in.' },
-        { id: 'quiz-css-s44-q4', type: 'blank', prompt: 'Complete the sentence: `border-image-repeat: round` keeps whole tiles and adjusts them to ________ the available space.', answers: ['fit', 'fill'], explanation: '`round` divides the edge into a whole number of tiles, adjusting their size slightly so nothing is clipped.' },
-        { id: 'quiz-css-s44-q5', type: 'multiple-choice', prompt: 'What does `border-image-outset` do?', options: ['Moves the border outward without affecting layout', 'Makes the border thicker', 'Adds space inside the border', 'Repeats the image more often'], answer: 0, explanation: 'Outset draws the border further from the padding edge. It is a painting offset, not a layout one.' },
-      ],
-    },
   },
   {
     id: 'css-s45',
@@ -276,6 +381,72 @@ export const cssAdvancedBoxSections: Section[] = [
           'Set per-layer repeat and size with list-aware values',
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-css-l82',
+          title: 'Backgrounds quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l82-q1',
+              type: 'multiple-choice',
+              prompt: 'With three background layers, which one paints on top?',
+              options: [
+                'The last one in the list',
+                'The first one in the list',
+                'Whichever has the largest background-size',
+                'The order does not matter',
+              ],
+              answer: 1,
+              explanation: 'Layers paint in list order with the first on top — the opposite of how you read the CSS aloud.',
+            },
+            {
+              id: 'quiz-css-l82-q2',
+              type: 'true-false',
+              prompt: 'The slash in `center / cover` separates position from size.',
+              answer: true,
+              explanation: 'Everything before the slash positions the image, everything after it scales it.',
+            },
+            {
+              id: 'quiz-css-l82-q3',
+              type: 'code-output',
+              prompt: 'How many layers does this declare?',
+              code: '.box {\n  background-image: linear-gradient(red, blue), linear-gradient(green, yellow);\n}',
+              options: [
+                '1',
+                '2',
+                '3',
+                '4',
+              ],
+              answer: 1,
+              explanation: 'One layer per comma-separated value, so there are two.',
+            },
+            {
+              id: 'quiz-css-l82-q4',
+              type: 'blank',
+              prompt: 'Complete the sentence: with three layers but only one value in `background-position`, the other two layers fall back to ________.',
+              answers: [
+                '0% 0%',
+                '0 0',
+                'top left',
+              ],
+              explanation: 'Value lists are never distributed across layers. Anything omitted resets to the initial value.',
+            },
+            {
+              id: 'quiz-css-l82-q5',
+              type: 'identify-error',
+              prompt: 'The photo is meant to sit behind a dark scrim so white text stays readable, but the scrim hides the photo completely. What is wrong?',
+              code: '.card {\n  background-image: linear-gradient(rgb(0 0 0 / 0.6), rgb(0 0 0 / 0.6)), url(\'/hero.jpg\');\n  background-size: cover;\n}',
+              options: [
+                'Nothing, the gradient is already behind the image',
+                'The first layer paints on top, so the gradient has to be listed after the url()',
+                '`background-image` cannot combine gradients and urls',
+                'The url() has to be written in a separate declaration',
+              ],
+              answer: 1,
+              explanation: 'Layer order runs the opposite way to how the declaration reads: the first comma-separated value is painted on top of the second. So a scrim belongs last. This is the single most common layer-order bug, and it is why the first question in this set asks about it at all.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -377,18 +548,6 @@ export const cssAdvancedBoxSections: Section[] = [
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s45',
-      title: 'CSS Backgrounds quiz',
-      passingScore: 60,
-      questions: [
-        { id: 'quiz-css-s45-q1', type: 'multiple-choice', prompt: 'With three background layers, which one paints on top?', options: ['The last one in the list', 'The first one in the list', 'Whichever has the largest background-size', 'The order does not matter'], answer: 1, explanation: 'Layers paint in list order with the first on top — the opposite of how you read the CSS aloud.' },
-        { id: 'quiz-css-s45-q2', type: 'true-false', prompt: 'The slash in `center / cover` separates position from size.', answer: true, explanation: 'Everything before the slash positions the image, everything after it scales it.' },
-        { id: 'quiz-css-s45-q3', type: 'code-output', prompt: 'How many layers does this declare?', code: '.box {\n  background-image: linear-gradient(red, blue), linear-gradient(green, yellow);\n}', options: ['1', '2', '3', '4'], answer: 1, explanation: 'One layer per comma-separated value, so there are two.' },
-        { id: 'quiz-css-s45-q4', type: 'blank', prompt: 'Complete the sentence: with three layers but only one value in `background-position`, the other two layers fall back to ________.', answers: ['0% 0%', '0 0', 'top left'], explanation: 'Value lists are never distributed across layers. Anything omitted resets to the initial value.' },
-        { id: 'quiz-css-s45-q5', type: 'identify-error', prompt: 'The photo is meant to sit behind a dark scrim so white text stays readable, but the scrim hides the photo completely. What is wrong?', code: ".card {\n  background-image: linear-gradient(rgb(0 0 0 / 0.6), rgb(0 0 0 / 0.6)), url('/hero.jpg');\n  background-size: cover;\n}", options: ['Nothing, the gradient is already behind the image', 'The first layer paints on top, so the gradient has to be listed after the url()', '`background-image` cannot combine gradients and urls', 'The url() has to be written in a separate declaration'], answer: 1, explanation: 'Layer order runs the opposite way to how the declaration reads: the first comma-separated value is painted on top of the second. So a scrim belongs last. This is the single most common layer-order bug, and it is why the first question in this set asks about it at all.' },
-      ],
-    },
   },
   {
     id: 'css-s46',
@@ -407,6 +566,70 @@ export const cssAdvancedBoxSections: Section[] = [
           'Mix in `oklab` rather than `srgb` for a perceptually even result',
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-css-l83',
+          title: 'Colors quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l83-q1',
+              type: 'multiple-choice',
+              prompt: 'In `color-mix(in oklab, teal, black 30%)`, how much black is in the result?',
+              options: [
+                '30%',
+                '70%',
+                '50%',
+                '15%',
+              ],
+              answer: 0,
+              explanation: 'The percentage always describes the second colour, whichever order they are listed in.',
+            },
+            {
+              id: 'quiz-css-l83-q2',
+              type: 'true-false',
+              prompt: '`light-dark()` responds to the theme even if nothing declares `color-scheme`.',
+              answer: false,
+              explanation: 'It falls back to the light value. You need `color-scheme: light dark` for it to actually respond.',
+            },
+            {
+              id: 'quiz-css-l83-q3',
+              type: 'code-output',
+              prompt: 'What does this produce?',
+              code: '.a { color-scheme: light dark; }\n.b { color: light-dark(#111, #eee); }',
+              options: [
+                'Always #111',
+                'Always #eee',
+                '#111 in a light scheme, #eee in a dark one',
+                'An invalid value, discarded',
+              ],
+              answer: 2,
+              explanation: '`light-dark()` takes the first value for light and the second for dark, based on the computed `color-scheme`.',
+            },
+            {
+              id: 'quiz-css-l83-q4',
+              type: 'blank',
+              prompt: 'Complete the sentence: relative colour syntax, like `rgb(from ... r g b)`, is best described as ________-edge today.',
+              answers: [
+                'cutting',
+                'bleeding',
+              ],
+              explanation: 'It is shipping, but support is narrower than `color-mix()` and `light-dark()`, so keep a static fallback declaration.',
+            },
+            {
+              id: 'quiz-css-l83-q5',
+              type: 'multiple-choice',
+              prompt: 'Why is `oklab` a better mix space than `srgb`?',
+              options: [
+                'It is faster to compute',
+                'It mixes in a perceptually even space, so a 50% mix looks like a 50% mix',
+                'It supports more colour formats',
+                'It is the only one available',
+              ],
+              answer: 1,
+              explanation: 'Averaging raw sRGB channels does not match perceived lightness, which is why `srgb` mixes go muddy through the middle.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -519,18 +742,6 @@ export const cssAdvancedBoxSections: Section[] = [
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s46',
-      title: 'CSS Colors quiz',
-      passingScore: 60,
-      questions: [
-        { id: 'quiz-css-s46-q1', type: 'multiple-choice', prompt: 'In `color-mix(in oklab, teal, black 30%)`, how much black is in the result?', options: ['30%', '70%', '50%', '15%'], answer: 0, explanation: 'The percentage always describes the second colour, whichever order they are listed in.' },
-        { id: 'quiz-css-s46-q2', type: 'true-false', prompt: '`light-dark()` responds to the theme even if nothing declares `color-scheme`.', answer: false, explanation: 'It falls back to the light value. You need `color-scheme: light dark` for it to actually respond.' },
-        { id: 'quiz-css-s46-q3', type: 'code-output', prompt: 'What does this produce?', code: '.a { color-scheme: light dark; }\n.b { color: light-dark(#111, #eee); }', options: ['Always #111', 'Always #eee', '#111 in a light scheme, #eee in a dark one', 'An invalid value, discarded'], answer: 2, explanation: '`light-dark()` takes the first value for light and the second for dark, based on the computed `color-scheme`.' },
-        { id: 'quiz-css-s46-q4', type: 'blank', prompt: 'Complete the sentence: relative colour syntax, like `rgb(from ... r g b)`, is best described as ________-edge today.', answers: ['cutting', 'bleeding'], explanation: 'It is shipping, but support is narrower than `color-mix()` and `light-dark()`, so keep a static fallback declaration.' },
-        { id: 'quiz-css-s46-q5', type: 'multiple-choice', prompt: 'Why is `oklab` a better mix space than `srgb`?', options: ['It is faster to compute', 'It mixes in a perceptually even space, so a 50% mix looks like a 50% mix', 'It supports more colour formats', 'It is the only one available'], answer: 1, explanation: 'Averaging raw sRGB channels does not match perceived lightness, which is why `srgb` mixes go muddy through the middle.' },
-      ],
-    },
   },
   {
     id: 'css-s47',
@@ -549,6 +760,69 @@ export const cssAdvancedBoxSections: Section[] = [
           'Explain why `transparent` and a zero-alpha colour behave differently',
         ],
         xp: 42,
+        quiz: {
+          id: 'quiz-css-l84',
+          title: 'Color Keywords quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l84-q1',
+              type: 'multiple-choice',
+              prompt: 'What does `currentColor` resolve to?',
+              options: [
+                'The colour of the nearest parent element',
+                'The element\'s own computed `color` value',
+                'Black',
+                'The value of `border-color`',
+              ],
+              answer: 1,
+              explanation: 'It resolves to whatever `color` has computed to on that element, which for a pseudo-element is the originating element\'s value.',
+            },
+            {
+              id: 'quiz-css-l84-q2',
+              type: 'true-false',
+              prompt: '`transparent` is the same as not setting a background at all.',
+              answer: false,
+              explanation: '`transparent` is `rgba(0, 0, 0, 0)` — a real colour with zero alpha, with a computed value that affects transitions.',
+            },
+            {
+              id: 'quiz-css-l84-q3',
+              type: 'code-output',
+              prompt: 'A button fades from `transparent` to `white`. What does it pass through?',
+              code: '.btn { background: transparent; }\n.btn:hover { background: white; }',
+              options: [
+                'White',
+                'Black, then grey',
+                'Nothing, it just appears',
+                'A teal tint',
+              ],
+              answer: 1,
+              explanation: 'The browser interpolates from transparent black, so the RGB channels climb from 0 through grey to white.',
+            },
+            {
+              id: 'quiz-css-l84-q4',
+              type: 'blank',
+              prompt: 'Complete the sentence: the system colour keyword for the default button surface is ________.',
+              answers: [
+                'ButtonFace',
+              ],
+              explanation: '`ButtonFace` and `ButtonText` follow the operating system theme, which is what makes a custom button look native.',
+            },
+            {
+              id: 'quiz-css-l84-q5',
+              type: 'multiple-choice',
+              prompt: 'Why use `currentColor` for a border instead of repeating the hex code?',
+              options: [
+                'It renders faster',
+                'One value drives the text, the border and any pseudo-elements together',
+                'Hex codes are invalid in `border-color`',
+                'It removes the need for a `border-style`',
+              ],
+              answer: 1,
+              explanation: 'Change `color` once and everything painted with the keyword follows — including SVG strokes and pseudo-elements.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -653,17 +927,5 @@ export const cssAdvancedBoxSections: Section[] = [
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s47',
-      title: 'CSS Color Keywords quiz',
-      passingScore: 60,
-      questions: [
-        { id: 'quiz-css-s47-q1', type: 'multiple-choice', prompt: 'What does `currentColor` resolve to?', options: ['The colour of the nearest parent element', 'The element\'s own computed `color` value', 'Black', 'The value of `border-color`'], answer: 1, explanation: 'It resolves to whatever `color` has computed to on that element, which for a pseudo-element is the originating element\'s value.' },
-        { id: 'quiz-css-s47-q2', type: 'true-false', prompt: '`transparent` is the same as not setting a background at all.', answer: false, explanation: '`transparent` is `rgba(0, 0, 0, 0)` — a real colour with zero alpha, with a computed value that affects transitions.' },
-        { id: 'quiz-css-s47-q3', type: 'code-output', prompt: 'A button fades from `transparent` to `white`. What does it pass through?', code: '.btn { background: transparent; }\n.btn:hover { background: white; }', options: ['White', 'Black, then grey', 'Nothing, it just appears', 'A teal tint'], answer: 1, explanation: 'The browser interpolates from transparent black, so the RGB channels climb from 0 through grey to white.' },
-        { id: 'quiz-css-s47-q4', type: 'blank', prompt: 'Complete the sentence: the system colour keyword for the default button surface is ________.', answers: ['ButtonFace'], explanation: '`ButtonFace` and `ButtonText` follow the operating system theme, which is what makes a custom button look native.' },
-        { id: 'quiz-css-s47-q5', type: 'multiple-choice', prompt: 'Why use `currentColor` for a border instead of repeating the hex code?', options: ['It renders faster', 'One value drives the text, the border and any pseudo-elements together', 'Hex codes are invalid in `border-color`', 'It removes the need for a `border-style`'], answer: 1, explanation: 'Change `color` once and everything painted with the keyword follows — including SVG strokes and pseudo-elements.' },
-      ],
-    },
   },
 ]

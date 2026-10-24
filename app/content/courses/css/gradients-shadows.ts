@@ -20,6 +20,73 @@ export const cssGradientShadowSections: Section[] = [
           'Fade to nothing with the transparent keyword instead of guessing an rgb value',
           'Produce a repeating pattern with repeating-linear-gradient()',
         ],
+        quiz: {
+          id: 'quiz-css-l85',
+          title: 'CSS Linear Gradients quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l85-q1',
+              type: 'multiple-choice',
+              prompt: 'Which value produces a hard edge with no blending at all between two colours?',
+              options: [
+                '`linear-gradient(to right, #29e2bd, #1f6feb)`',
+                '`linear-gradient(to right, #29e2bd 50%, #1f6feb 50%)`',
+                '`linear-gradient(to right, #29e2bd 0%, #1f6feb 100%)`',
+                '`linear-gradient(to right, transparent, #1f6feb)`',
+              ],
+              answer: 1,
+              explanation: 'A hard edge comes from giving both stops the same position. With both at 50% the transition has zero width, so the change happens on a single line. Stops at different positions always leave room for the blend between them.',
+            },
+            {
+              id: 'quiz-css-l85-q2',
+              type: 'true-false',
+              prompt: 'Setting `background-color: linear-gradient(to right, red, blue);` gives you a working gradient.',
+              answer: false,
+              explanation: 'A gradient is an image value, so it belongs in `background-image`. `background-color` only accepts a colour, so that declaration is invalid and is discarded outright.',
+            },
+            {
+              id: 'quiz-css-l85-q3',
+              type: 'identify-error',
+              prompt: 'This gradient renders nothing at all. Why?',
+              code: '.card {\n  background-image: linear-gradient(to right, #29e2bd 80%, #1f6feb 20%);\n}',
+              options: [
+                '`background-image` cannot hold a gradient function',
+                'The colour stops are out of order, so the whole declaration is invalid',
+                'A gradient needs at least three stops to render',
+                'The direction keyword must come last, after the stops',
+              ],
+              answer: 1,
+              explanation: 'Stops must be written in ascending order. With 80% before 20% the declaration fails to parse and is dropped, which looks exactly like the gradient not working. Always order stops from smallest position to largest.',
+            },
+            {
+              id: 'quiz-css-l85-q4',
+              type: 'multiple-choice',
+              prompt: 'What is the default direction of `linear-gradient()` when none is written?',
+              options: [
+                '`to right`',
+                '`to top`',
+                '`to bottom`',
+                '45 degrees',
+              ],
+              answer: 2,
+              explanation: 'A gradient with no direction runs from top to bottom. That surprise is why the lesson recommends always stating the direction explicitly.',
+            },
+            {
+              id: 'quiz-css-l85-q5',
+              type: 'multiple-choice',
+              prompt: 'A light gradient fades out on a white card and looks muddy at the end. What should it fade to?',
+              options: [
+                '`transparent`, because it always matches whatever is behind',
+                '`rgba(255, 255, 255, 0)`, the same light colour at zero alpha',
+                '`#ffffff`, so it matches the card',
+                '`rgba(0, 0, 0, 0)`, because it is the most neutral value',
+              ],
+              answer: 1,
+              explanation: '`transparent` is `rgba(0, 0, 0, 0)`, so browsers fade toward black and light colours go grey. Writing the same colour with zero alpha keeps the fade clean.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -336,6 +403,76 @@ export const cssGradientShadowSections: Section[] = [
           'Move the centre with a background-position value',
           'Combine a radial gradient with a linear one for a highlight over a base colour',
         ],
+        quiz: {
+          id: 'quiz-css-l86',
+          title: 'CSS Radial Gradients quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l86-q1',
+              type: 'multiple-choice',
+              prompt: 'A `radial-gradient(circle, ...)` on a wide 400px by 120px box leaves plain background on the left and right edges. What is the fix?',
+              options: [
+                'Add a second radial gradient covering the sides',
+                'Use `ellipse` instead of `circle`, or size the circle with `farthest-side`',
+                'Move the gradient centre to the middle with `at 50% 50%` - the centre is already there',
+                'Swap the two colour stops',
+              ],
+              answer: 1,
+              explanation: 'A circle has equal radii on both axes, so on a wide box it stops at the nearest vertical edge. `ellipse` stretches to fill the box, and `circle farthest-side` stretches only along the longer axis. The centre position and the stop order have nothing to do with the leftover edges.',
+            },
+            {
+              id: 'quiz-css-l86-q2',
+              type: 'blank',
+              prompt: 'Which keyword places the centre of a radial gradient at a specific point, and what is the full syntax for putting it at the centre of the element?',
+              answers: [
+                'at',
+                'at center',
+                'radial-gradient(circle at center, red, blue)',
+              ],
+              explanation: 'The `at` keyword introduces the position, which is written before the colour stops and after any shape or size. It uses the same syntax as `background-position`: `radial-gradient(circle at 20% 10%, red, blue)` moves the centre a fifth of the way across and a tenth of the way down.',
+            },
+            {
+              id: 'quiz-css-l86-q3',
+              type: 'multiple-choice',
+              prompt: 'What is the default shape of `radial-gradient()`?',
+              options: [
+                '`ellipse`',
+                '`circle`',
+                '`square`',
+                '`closest-side`',
+              ],
+              answer: 0,
+              explanation: 'The default is `ellipse`, which is why a radial gradient usually fills a rectangular box without bare edges. `circle` has to be requested.',
+            },
+            {
+              id: 'quiz-css-l86-q4',
+              type: 'multiple-choice',
+              prompt: 'What is the default size keyword for a radial gradient?',
+              options: [
+                '`closest-side`',
+                '`farthest-side`',
+                '`closest-corner`',
+                '`farthest-corner`',
+              ],
+              answer: 3,
+              explanation: '`farthest-corner` is the default, so the last stop reaches the corner furthest from the centre and the gradient always covers the element.',
+            },
+            {
+              id: 'quiz-css-l86-q5',
+              type: 'multiple-choice',
+              prompt: 'Which radial gradient is invalid?',
+              options: [
+                '`radial-gradient(circle 60px, red, blue)`',
+                '`radial-gradient(circle 60px 40px, red, blue)`',
+                '`radial-gradient(80px 40px, red, blue)`',
+                '`radial-gradient(ellipse closest-side, red, blue)`',
+              ],
+              answer: 1,
+              explanation: 'A circle takes a single radius, so two lengths after the `circle` keyword are invalid. Drop the keyword for an ellipse, as in `radial-gradient(80px 40px, ...)`.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -562,76 +699,6 @@ export const cssGradientShadowSections: Section[] = [
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s48',
-      title: 'CSS Gradients quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s48-q1',
-          type: 'multiple-choice',
-          prompt:
-            'Which value produces a hard edge with no blending at all between two colours?',
-          options: [
-            '`linear-gradient(to right, #29e2bd, #1f6feb)`',
-            '`linear-gradient(to right, #29e2bd 50%, #1f6feb 50%)`',
-            '`linear-gradient(to right, #29e2bd 0%, #1f6feb 100%)`',
-            '`linear-gradient(to right, transparent, #1f6feb)`',
-          ],
-          answer: 1,
-          explanation:
-            'A hard edge comes from giving both stops the same position. With both at 50% the transition has zero width, so the change happens on a single line. Stops at different positions always leave room for the blend between them.',
-        },
-        {
-          id: 'quiz-css-s48-q2',
-          type: 'true-false',
-          prompt:
-            'Setting `background-color: linear-gradient(to right, red, blue);` gives you a working gradient.',
-          answer: false,
-          explanation:
-            'A gradient is an image value, so it belongs in `background-image`. `background-color` only accepts a colour, so that declaration is invalid and is discarded outright.',
-        },
-        {
-          id: 'quiz-css-s48-q3',
-          type: 'multiple-choice',
-          prompt:
-            'A `radial-gradient(circle, ...)` on a wide 400px by 120px box leaves plain background on the left and right edges. What is the fix?',
-          options: [
-            'Add a second radial gradient covering the sides',
-            'Use `ellipse` instead of `circle`, or size the circle with `farthest-side`',
-            'Move the gradient centre to the middle with `at 50% 50%` - the centre is already there',
-            'Swap the two colour stops',
-          ],
-          answer: 1,
-          explanation:
-            'A circle has equal radii on both axes, so on a wide box it stops at the nearest vertical edge. `ellipse` stretches to fill the box, and `circle farthest-side` stretches only along the longer axis. The centre position and the stop order have nothing to do with the leftover edges.',
-        },
-        {
-          id: 'quiz-css-s48-q4',
-          type: 'blank',
-          prompt:
-            'Which keyword places the centre of a radial gradient at a specific point, and what is the full syntax for putting it at the centre of the element?',
-          answers: ['at', 'at center', 'radial-gradient(circle at center, red, blue)'],
-          explanation:
-            'The `at` keyword introduces the position, which is written before the colour stops and after any shape or size. It uses the same syntax as `background-position`: `radial-gradient(circle at 20% 10%, red, blue)` moves the centre a fifth of the way across and a tenth of the way down.',
-        },
-        {
-          id: 'quiz-css-s48-q5',
-          type: 'identify-error',
-          prompt: 'This gradient renders nothing at all. Why?',
-          code: '.card {\n  background-image: linear-gradient(to right, #29e2bd 80%, #1f6feb 20%);\n}',
-          options: [
-            '`background-image` cannot hold a gradient function',
-            'The colour stops are out of order, so the whole declaration is invalid',
-            'A gradient needs at least three stops to render',
-            'The direction keyword must come last, after the stops',
-          ],
-          answer: 1,
-          explanation:
-            'Stops must be written in ascending order. With 80% before 20% the declaration fails to parse and is dropped, which looks exactly like the gradient not working. Always order stops from smallest position to largest.',
-        },
-      ],
-    },
   },
   {
     id: 'css-s49',
@@ -652,6 +719,71 @@ export const cssGradientShadowSections: Section[] = [
           'Stack several comma-separated shadows and say which one paints on top',
           'Predict how a shadow interacts with border-radius and with overflow',
         ],
+        quiz: {
+          id: 'quiz-css-l87',
+          title: 'CSS Box Shadow quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l87-q1',
+              type: 'multiple-choice',
+              prompt: 'Which shadow declaration produces a hard-edged shadow with no softness at all?',
+              options: [
+                '`box-shadow: 4px 4px 8px #000`',
+                '`box-shadow: 4px 4px #000`',
+                '`box-shadow: 4px 4px 0 8px #000`',
+                '`box-shadow: inset 4px 4px #000`',
+              ],
+              answer: 1,
+              explanation: 'The blur radius is optional, so omitting it leaves the shadow as a crisp silhouette offset from the box. Writing `0` for the blur gives the same result. Option one has an 8px blur and is soft; option three puts 8px in the spread slot, so it grows the shadow instead of blurring it.',
+            },
+            {
+              id: 'quiz-css-l87-q2',
+              type: 'true-false',
+              prompt: 'In a comma-separated list of box-shadows, the last shadow listed paints on top of the earlier ones.',
+              answer: false,
+              explanation: 'It is the other way round: the first shadow in the list paints on top. That matches the background layer convention only by accident, so put your tight contact shadow first and the wide ambient shadow after it.',
+            },
+            {
+              id: 'quiz-css-l87-q3',
+              type: 'blank',
+              prompt: 'In `box-shadow: 2px 0 8px -4px rgba(0,0,0,.4)`, what is the `-4px` value called?',
+              answers: [
+                'spread',
+                'spread radius',
+                'spread-radius',
+              ],
+              explanation: 'The order is x-offset, y-offset, blur radius, spread radius, then colour. The blur softens the shadow, while the spread grows or shrinks its shape before the blur is applied, and a negative spread pulls it in so it hugs the element.',
+            },
+            {
+              id: 'quiz-css-l87-q4',
+              type: 'identify-error',
+              prompt: 'This is meant to give the button a shadow pressed into its top edge. What is wrong?',
+              code: '.btn {\n  box-shadow: 4px 4px 8px inset #000;\n}',
+              options: [
+                'The colour must be written before the lengths',
+                '`inset` must come before the offsets, not after them',
+                'Spread is not allowed on a box shadow',
+                'An inset shadow cannot have a blur radius',
+              ],
+              answer: 1,
+              explanation: '`inset` is a keyword and belongs at the start of the value, before any lengths. Written after the lengths the whole declaration is invalid, so the button renders with no shadow at all. An inset shadow can absolutely have a blur radius.',
+            },
+            {
+              id: 'quiz-css-l87-q5',
+              type: 'multiple-choice',
+              prompt: 'A rounded card\'s shadow is cut off along one side. What is the most likely cause?',
+              options: [
+                'The blur radius is too large',
+                'An ancestor has `overflow: hidden` and clips the shadow',
+                'The spread is negative',
+                'The shadow colour has no alpha',
+              ],
+              answer: 1,
+              explanation: 'A shadow is painted outside the border box but is still clipped by an ancestor with `overflow: hidden`, so the clipping box is the problem rather than the shadow.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -893,6 +1025,78 @@ export const cssGradientShadowSections: Section[] = [
           'Stack several text-shadows and say which one paints on top',
           'Explain when filter: drop-shadow beats both shadow properties',
         ],
+        quiz: {
+          id: 'quiz-css-l88',
+          title: 'CSS Text Shadow quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l88-q1',
+              type: 'multiple-choice',
+              prompt: 'You need a shadow behind a triangle made with `clip-path`. `box-shadow` draws a square. What should you use instead?',
+              options: [
+                'A `box-shadow` with a larger blur radius',
+                '`filter: drop-shadow(4px 4px 2px #000)`',
+                'A second element behind the shape with a background',
+                '`text-shadow` on the shape',
+              ],
+              answer: 1,
+              explanation: '`box-shadow` is derived from the border box, so it can only ever be rectangular. `filter: drop-shadow()` works from the rendered pixels and therefore follows the clipped triangle exactly. The trade-off is that a filter creates a stacking context and a containing block.',
+            },
+            {
+              id: 'quiz-css-l88-q2',
+              type: 'multiple-choice',
+              prompt: 'Which value does `text-shadow` NOT accept?',
+              options: [
+                'x-offset',
+                'y-offset',
+                'spread',
+                'blur radius',
+              ],
+              answer: 2,
+              explanation: '`text-shadow` takes offsets, an optional blur and a colour. It has no spread and no `inset`, because a glyph has no box edge to grow from or paint inside.',
+            },
+            {
+              id: 'quiz-css-l88-q3',
+              type: 'multiple-choice',
+              prompt: 'How does `text-shadow` apply to multi-line text?',
+              options: [
+                'To every line, each offset from its own position',
+                'Only to the first line of the element',
+                'Once around the whole text block, like a box',
+                'Only to the last line',
+              ],
+              answer: 0,
+              explanation: 'The shadow is generated per line of text, so each line casts its own copy rather than one rectangle forming behind the block.',
+            },
+            {
+              id: 'quiz-css-l88-q4',
+              type: 'multiple-choice',
+              prompt: 'Which declaration produces a glow around the glyphs?',
+              options: [
+                '`text-shadow: 2px 2px 0 red`',
+                '`text-shadow: 0 0 12px red`',
+                '`text-shadow: inset 0 0 12px red`',
+                '`box-shadow: 0 0 12px red`',
+              ],
+              answer: 1,
+              explanation: 'A zero offset on both axes with a large blur spreads the shadow evenly around each glyph, which reads as a glow rather than a directional shadow.',
+            },
+            {
+              id: 'quiz-css-l88-q5',
+              type: 'multiple-choice',
+              prompt: 'Why does the lesson warn against a blurred `text-shadow` on body copy?',
+              options: [
+                'It disables text selection',
+                'It stops the text from wrapping',
+                'It makes the font size smaller',
+                'It lowers contrast exactly where the eye is trying to read',
+              ],
+              answer: 3,
+              explanation: 'A blur behind small text reduces contrast at the letterforms themselves. Shadows are for headings, buttons and large display type, not paragraphs.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1133,73 +1337,5 @@ export const cssGradientShadowSections: Section[] = [
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s49',
-      title: 'CSS Shadows quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s49-q1',
-          type: 'multiple-choice',
-          prompt: 'Which shadow declaration produces a hard-edged shadow with no softness at all?',
-          options: [
-            '`box-shadow: 4px 4px 8px #000`',
-            '`box-shadow: 4px 4px #000`',
-            '`box-shadow: 4px 4px 0 8px #000`',
-            '`box-shadow: inset 4px 4px #000`',
-          ],
-          answer: 1,
-          explanation:
-            'The blur radius is optional, so omitting it leaves the shadow as a crisp silhouette offset from the box. Writing `0` for the blur gives the same result. Option one has an 8px blur and is soft; option three puts 8px in the spread slot, so it grows the shadow instead of blurring it.',
-        },
-        {
-          id: 'quiz-css-s49-q2',
-          type: 'true-false',
-          prompt: 'In a comma-separated list of box-shadows, the last shadow listed paints on top of the earlier ones.',
-          answer: false,
-          explanation:
-            'It is the other way round: the first shadow in the list paints on top. That matches the background layer convention only by accident, so put your tight contact shadow first and the wide ambient shadow after it.',
-        },
-        {
-          id: 'quiz-css-s49-q3',
-          type: 'multiple-choice',
-          prompt:
-            'You need a shadow behind a triangle made with `clip-path`. `box-shadow` draws a square. What should you use instead?',
-          options: [
-            'A `box-shadow` with a larger blur radius',
-            '`filter: drop-shadow(4px 4px 2px #000)`',
-            'A second element behind the shape with a background',
-            '`text-shadow` on the shape',
-          ],
-          answer: 1,
-          explanation:
-            '`box-shadow` is derived from the border box, so it can only ever be rectangular. `filter: drop-shadow()` works from the rendered pixels and therefore follows the clipped triangle exactly. The trade-off is that a filter creates a stacking context and a containing block.',
-        },
-        {
-          id: 'quiz-css-s49-q4',
-          type: 'blank',
-          prompt:
-            'In `box-shadow: 2px 0 8px -4px rgba(0,0,0,.4)`, what is the `-4px` value called?',
-          answers: ['spread', 'spread radius', 'spread-radius'],
-          explanation:
-            'The order is x-offset, y-offset, blur radius, spread radius, then colour. The blur softens the shadow, while the spread grows or shrinks its shape before the blur is applied, and a negative spread pulls it in so it hugs the element.',
-        },
-        {
-          id: 'quiz-css-s49-q5',
-          type: 'identify-error',
-          prompt: 'This is meant to give the button a shadow pressed into its top edge. What is wrong?',
-          code: '.btn {\n  box-shadow: 4px 4px 8px inset #000;\n}',
-          options: [
-            'The colour must be written before the lengths',
-            '`inset` must come before the offsets, not after them',
-            'Spread is not allowed on a box shadow',
-            'An inset shadow cannot have a blur radius',
-          ],
-          answer: 1,
-          explanation:
-            '`inset` is a keyword and belongs at the start of the value, before any lengths. Written after the lengths the whole declaration is invalid, so the button renders with no shadow at all. An inset shadow can absolutely have a blur radius.',
-        },
-      ],
-    },
   },
 ]

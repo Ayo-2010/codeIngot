@@ -17,6 +17,69 @@ export const htmlSemanticsSections: Section[] = [
           'Explain what a screen reader announces differently for each',
         ],
         xp: 35,
+        quiz: {
+          id: 'quiz-html-l49',
+          title: 'HTML Computercode quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l49-q1',
+              type: 'multiple-choice',
+              prompt: 'Which element marks text the user types, such as a key?',
+              options: [
+                'code',
+                'kbd',
+                'samp',
+                'var',
+              ],
+              answer: 1,
+              explanation: 'kbd is for keyboard input, which a screen reader announces distinctly.',
+            },
+            {
+              id: 'quiz-html-l49-q2',
+              type: 'multiple-choice',
+              prompt: 'What is the difference between code and samp?',
+              options: [
+                'They are identical',
+                'code is the source you wrote, samp is the output the program produced',
+                'code is inline and samp is a block',
+                'samp is deprecated',
+              ],
+              answer: 1,
+              explanation: 'One is the program text, the other is what it printed.',
+            },
+            {
+              id: 'quiz-html-l49-q3',
+              type: 'true-false',
+              prompt: 'A code block should be written as pre containing a code element.',
+              answer: true,
+              explanation: 'pre preserves the whitespace and code tells assistive technology the content is source code.',
+            },
+            {
+              id: 'quiz-html-l49-q4',
+              type: 'blank',
+              prompt: 'Which element preserves whitespace and line breaks?',
+              answers: [
+                'pre',
+                '<pre>',
+              ],
+              explanation: 'That is the sole purpose of the pre element.',
+            },
+            {
+              id: 'quiz-html-l49-q5',
+              type: 'multiple-choice',
+              prompt: 'Why must angle brackets inside a code block be escaped?',
+              options: [
+                'For readability',
+                'Otherwise the browser parses them as real elements instead of text',
+                'Because pre cannot contain them',
+                'To satisfy the validator',
+              ],
+              answer: 1,
+              explanation: 'A literal <div> in a pre is an element. Writing &lt;div&gt; makes the browser show the characters.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -166,63 +229,6 @@ Pass the <var>userId</var> to <code>getUser()</code>.
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s38',
-      title: 'HTML Computercode quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s38-q1',
-          type: 'multiple-choice',
-          prompt: 'Which element marks text the user types, such as a key?',
-          options: ['code', 'kbd', 'samp', 'var'],
-          answer: 1,
-          explanation: 'kbd is for keyboard input, which a screen reader announces distinctly.',
-        },
-        {
-          id: 'quiz-html-s38-q2',
-          type: 'multiple-choice',
-          prompt: 'What is the difference between code and samp?',
-          options: [
-            'They are identical',
-            'code is the source you wrote, samp is the output the program produced',
-            'code is inline and samp is a block',
-            'samp is deprecated',
-          ],
-          answer: 1,
-          explanation: 'One is the program text, the other is what it printed.',
-        },
-        {
-          id: 'quiz-html-s38-q3',
-          type: 'true-false',
-          prompt: 'A code block should be written as pre containing a code element.',
-          answer: true,
-          explanation:
-            'pre preserves the whitespace and code tells assistive technology the content is source code.',
-        },
-        {
-          id: 'quiz-html-s38-q4',
-          type: 'blank',
-          prompt: 'Which element preserves whitespace and line breaks?',
-          answers: ['pre', '<pre>'],
-          explanation: 'That is the sole purpose of the pre element.',
-        },
-        {
-          id: 'quiz-html-s38-q5',
-          type: 'multiple-choice',
-          prompt: 'Why must angle brackets inside a code block be escaped?',
-          options: [
-            'For readability',
-            'Otherwise the browser parses them as real elements instead of text',
-            'Because pre cannot contain them',
-            'To satisfy the validator',
-          ],
-          answer: 1,
-          explanation:
-            'A literal <div> in a pre is an element. Writing &lt;div&gt; makes the browser show the characters.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s39',
@@ -240,6 +246,69 @@ Pass the <var>userId</var> to <code>getUser()</code>.
           'Describe how semantics affect SEO and styling',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-html-l50',
+          title: 'HTML Semantics quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l50-q1',
+              type: 'multiple-choice',
+              prompt: 'What does a real button element give you that a styled div does not?',
+              options: [
+                'A different appearance',
+                'Focusability, Enter and Space activation, and a click event',
+                'Automatic styling',
+                'Nothing, a div is equivalent',
+              ],
+              answer: 1,
+              explanation: 'The keyboard and focus behaviour is part of the element, not something you rebuild with attributes.',
+            },
+            {
+              id: 'quiz-html-l50-q2',
+              type: 'true-false',
+              prompt: 'Heading levels should be chosen by how important the text looks.',
+              answer: false,
+              explanation: 'They describe depth in the content structure. Choose the level by nesting and style by class.',
+            },
+            {
+              id: 'quiz-html-l50-q3',
+              type: 'multiple-choice',
+              prompt: 'What is the first rule of ARIA?',
+              options: [
+                'Always add a role to every element',
+                'Do not use ARIA when a native element will do',
+                'ARIA roles must be on the body',
+                'ARIA is required for accessibility',
+              ],
+              answer: 1,
+              explanation: 'A role on a div adds the announcement but not the behaviour. Use the native element first.',
+            },
+            {
+              id: 'quiz-html-l50-q4',
+              type: 'blank',
+              prompt: 'Which element marks a block of major navigation links?',
+              answers: [
+                'nav',
+                '<nav>',
+              ],
+              explanation: 'nav is a landmark, announced by screen readers as a navigation region.',
+            },
+            {
+              id: 'quiz-html-l50-q5',
+              type: 'multiple-choice',
+              prompt: 'A stylesheet has a rule for .header. What does that suggest?',
+              options: [
+                'The CSS is wrong',
+                'The markup may be missing a header element and using a div instead',
+                'header cannot be styled',
+                'Nothing, class selectors are fine',
+              ],
+              answer: 1,
+              explanation: 'A selector named for a region is often the CSS reconstructing semantics the markup should have carried.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -406,70 +475,6 @@ button { padding: 0.4rem 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px;
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s39',
-      title: 'HTML Semantics quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s39-q1',
-          type: 'multiple-choice',
-          prompt: 'What does a real button element give you that a styled div does not?',
-          options: [
-            'A different appearance',
-            'Focusability, Enter and Space activation, and a click event',
-            'Automatic styling',
-            'Nothing, a div is equivalent',
-          ],
-          answer: 1,
-          explanation:
-            'The keyboard and focus behaviour is part of the element, not something you rebuild with attributes.',
-        },
-        {
-          id: 'quiz-html-s39-q2',
-          type: 'true-false',
-          prompt: 'Heading levels should be chosen by how important the text looks.',
-          answer: false,
-          explanation:
-            'They describe depth in the content structure. Choose the level by nesting and style by class.',
-        },
-        {
-          id: 'quiz-html-s39-q3',
-          type: 'multiple-choice',
-          prompt: 'What is the first rule of ARIA?',
-          options: [
-            'Always add a role to every element',
-            'Do not use ARIA when a native element will do',
-            'ARIA roles must be on the body',
-            'ARIA is required for accessibility',
-          ],
-          answer: 1,
-          explanation:
-            'A role on a div adds the announcement but not the behaviour. Use the native element first.',
-        },
-        {
-          id: 'quiz-html-s39-q4',
-          type: 'blank',
-          prompt: 'Which element marks a block of major navigation links?',
-          answers: ['nav', '<nav>'],
-          explanation: 'nav is a landmark, announced by screen readers as a navigation region.',
-        },
-        {
-          id: 'quiz-html-s39-q5',
-          type: 'multiple-choice',
-          prompt: 'A stylesheet has a rule for .header. What does that suggest?',
-          options: [
-            'The CSS is wrong',
-            'The markup may be missing a header element and using a div instead',
-            'header cannot be styled',
-            'Nothing, class selectors are fine',
-          ],
-          answer: 1,
-          explanation:
-            'A selector named for a region is often the CSS reconstructing semantics the markup should have carried.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s40',
@@ -487,6 +492,70 @@ button { padding: 0.4rem 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px;
           'Write a small document that follows a house style',
         ],
         xp: 35,
+        quiz: {
+          id: 'quiz-html-l51',
+          title: 'HTML Style Guide quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l51-q1',
+              type: 'multiple-choice',
+              prompt: 'Why should tag names be lower case?',
+              options: [
+                'It saves bytes',
+                'It is required for CSS to work',
+                'HTML is case-insensitive but XML is not, and mixed case breaks in a case-sensitive context',
+                'Browsers do not accept upper case',
+              ],
+              answer: 2,
+              explanation: 'Upper case still renders, but it is wrong in XML and confusing when the markup moves into a stricter pipeline.',
+            },
+            {
+              id: 'quiz-html-l51-q2',
+              type: 'true-false',
+              prompt: 'An attribute value can be left unquoted when it contains no spaces.',
+              answer: false,
+              explanation: 'It can parse, but the convention is to always quote. An empty attribute still needs quotes: class="".',
+            },
+            {
+              id: 'quiz-html-l51-q3',
+              type: 'multiple-choice',
+              prompt: 'Which is a void element with no closing tag?',
+              options: [
+                'div',
+                'span',
+                'img',
+                'p',
+              ],
+              answer: 2,
+              explanation: 'img, br, hr, input, meta and link are void; they have no content and no end tag.',
+            },
+            {
+              id: 'quiz-html-l51-q4',
+              type: 'blank',
+              prompt: 'How is a boolean attribute such as disabled correctly written?',
+              answers: [
+                'disabled',
+                'disabled',
+                '<input disabled>',
+              ],
+              explanation: 'Boolean attributes are present or absent. Writing disabled="false" still disables it.',
+            },
+            {
+              id: 'quiz-html-l51-q5',
+              type: 'multiple-choice',
+              prompt: 'What is the best way to enforce indentation style?',
+              options: [
+                'A code review checklist',
+                'A formatter run on save',
+                'A comment at the top of the file',
+                'Nothing, it is a matter of taste',
+              ],
+              answer: 1,
+              explanation: 'A tool removes the whole class of discussion and leaves review time for decisions that need judgement.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -652,63 +721,5 @@ button { padding: 0.4rem 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px;
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s40',
-      title: 'HTML Style Guide quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s40-q1',
-          type: 'multiple-choice',
-          prompt: 'Why should tag names be lower case?',
-          options: [
-            'It saves bytes',
-            'It is required for CSS to work',
-            'HTML is case-insensitive but XML is not, and mixed case breaks in a case-sensitive context',
-            'Browsers do not accept upper case',
-          ],
-          answer: 2,
-          explanation:
-            'Upper case still renders, but it is wrong in XML and confusing when the markup moves into a stricter pipeline.',
-        },
-        {
-          id: 'quiz-html-s40-q2',
-          type: 'true-false',
-          prompt: 'An attribute value can be left unquoted when it contains no spaces.',
-          answer: false,
-          explanation:
-            'It can parse, but the convention is to always quote. An empty attribute still needs quotes: class="".',
-        },
-        {
-          id: 'quiz-html-s40-q3',
-          type: 'multiple-choice',
-          prompt: 'Which is a void element with no closing tag?',
-          options: ['div', 'span', 'img', 'p'],
-          answer: 2,
-          explanation: 'img, br, hr, input, meta and link are void; they have no content and no end tag.',
-        },
-        {
-          id: 'quiz-html-s40-q4',
-          type: 'blank',
-          prompt: 'How is a boolean attribute such as disabled correctly written?',
-          answers: ['disabled', 'disabled', '<input disabled>'],
-          explanation: 'Boolean attributes are present or absent. Writing disabled="false" still disables it.',
-        },
-        {
-          id: 'quiz-html-s40-q5',
-          type: 'multiple-choice',
-          prompt: 'What is the best way to enforce indentation style?',
-          options: [
-            'A code review checklist',
-            'A formatter run on save',
-            'A comment at the top of the file',
-            'Nothing, it is a matter of taste',
-          ],
-          answer: 1,
-          explanation:
-            'A tool removes the whole class of discussion and leaves review time for decisions that need judgement.',
-        },
-      ],
-    },
   },
 ]

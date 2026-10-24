@@ -18,6 +18,74 @@ export const jsFunctionsClassesSections: Section[] = [
           'Use an explicit receiver or an arrow function to keep `this`',
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-js-l55',
+          title: 'How functions are invoked quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l55-q1',
+              type: 'multiple-choice',
+              prompt: 'What is `this` inside `function f() { return this }` when called as `f()` in a module?',
+              options: [
+                'The global object',
+                '`undefined`',
+                'The module object',
+                'The function itself',
+              ],
+              answer: 1,
+              explanation: 'A plain call has no receiver, and inside a module the code is strict by definition, so `this` is `undefined`. It is the global object only in sloppy mode, which is why the same code behaves differently in a script tag and in a module.',
+            },
+            {
+              id: 'quiz-js-l55-q2',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'function add(a, b) {\n  return a + b\n}\nconsole.log(add(2, 3, 4, 5))',
+              options: [
+                '14',
+                '5',
+                'NaN',
+                'undefined',
+              ],
+              answer: 1,
+              explanation: 'A function only names the parameters it declares, and extra arguments are silently ignored. `a` and `b` receive 2 and 3, so the result is 5.',
+            },
+            {
+              id: 'quiz-js-l55-q3',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'function compute() {\n  const result = 2 + 2\n}\nconsole.log(compute())',
+              options: [
+                '4',
+                'undefined',
+                'NaN',
+                'It throws because `result` is unused',
+              ],
+              answer: 1,
+              explanation: 'The function computes 4 but never returns it, so the call produces `undefined`. A missing `return` fails silently, which is why the result looks like a broken calculation.',
+            },
+            {
+              id: 'quiz-js-l55-q4',
+              type: 'multiple-choice',
+              prompt: 'Which call gives the function a receiver equal to `app`?',
+              options: [
+                '`app.tick()`',
+                '`const f = app.tick; f()`',
+                '`tick()`',
+                '`tick.call(undefined)`',
+              ],
+              answer: 0,
+              explanation: 'The receiver is the value immediately to the left of the call. `app.tick()` supplies `app`; the other forms call a bare function, so `this` is undefined in a module.',
+            },
+            {
+              id: 'quiz-js-l55-q5',
+              type: 'true-false',
+              prompt: 'An arrow function used as a callback receives its own `this` from the call site, just like a normal function.',
+              answer: false,
+              explanation: 'An arrow has no `this` binding of its own; it captures `this` from the scope where it was written. That is why wrapping a method call in an arrow keeps the surrounding object.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -253,6 +321,71 @@ console.log('hit: ' + hit)`,
           'Reuse one function across several unrelated objects',
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-js-l56',
+          title: 'call and apply quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l56-q1',
+              type: 'code-output',
+              prompt: 'What does this log?',
+              code: 'const obj = {\n  name: \'obj\',\n  show() { return this === obj },\n}\nconst loose = obj.show\nconsole.log(loose())',
+              options: [
+                '`true`',
+                '`false`',
+                '`undefined`',
+                'It throws',
+              ],
+              answer: 1,
+              explanation: 'Assigning `obj.show` to a new variable copies the function, not its receiver. There is nothing to the left of the call, so `this` is `undefined` and the comparison is false. Use `obj.show.bind(obj)` if the receiver matters.',
+            },
+            {
+              id: 'quiz-js-l56-q2',
+              type: 'true-false',
+              prompt: '`call` and `apply` modify the original function so that later calls use the receiver you passed.',
+              answer: false,
+              explanation: 'They invoke the function immediately and return a result. The function object is untouched, which is exactly what lets you reuse one function across many receivers.',
+            },
+            {
+              id: 'quiz-js-l56-q3',
+              type: 'blank',
+              prompt: 'Which method returns a new function with `this` permanently attached, for handing to an event listener?',
+              answers: [
+                'bind',
+              ],
+              explanation: '`bind` defers. `call` and `apply` run the function now, which is no use when something else decides when to invoke the callback.',
+            },
+            {
+              id: 'quiz-js-l56-q4',
+              type: 'identify-error',
+              prompt: 'Why does this handler lose access to the object?',
+              code: 'const app = {\n  count: 0,\n  tick() { this.count += 1 },\n}\nsetInterval(app.tick, 1000)',
+              options: [
+                '`setInterval` is not a real function',
+                'The handler is passed as a bare function, so the receiver is never supplied',
+                '`this.count += 1` is not valid syntax',
+                'The interval is too short',
+              ],
+              answer: 1,
+              explanation: 'The object is not passed to `setInterval`, only the function. When the timer fires, there is nothing to the left of the call, so `this` is undefined. Write `setInterval(app.tick.bind(app), 1000)` or `setInterval(() => app.tick(), 1000)`.',
+            },
+            {
+              id: 'quiz-js-l56-q5',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'function sum(a, b) {\n  return this.base + a + b\n}\nconsole.log(sum.apply({ base: 10 }, [2, 3]))',
+              options: [
+                '15',
+                '6',
+                '10',
+                'undefined',
+              ],
+              answer: 0,
+              explanation: '`apply` calls the function immediately with the first argument as `this` and the second as an array of arguments. Here `this.base` is 10, and 2 and 3 are spread into `a` and `b`, giving 15.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -445,72 +578,6 @@ console.log(out.join(' '))`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s45',
-      title: 'Function invocation check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s45-q1',
-          type: 'multiple-choice',
-          prompt: 'What is `this` inside `function f() { return this }` when called as `f()` in a module?',
-          options: ['The global object', '`undefined`', 'The module object', 'The function itself'],
-          answer: 1,
-          explanation:
-            'A plain call has no receiver, and inside a module the code is strict by definition, so `this` is `undefined`. It is the global object only in sloppy mode, which is why the same code behaves differently in a script tag and in a module.',
-        },
-        {
-          id: 'quiz-js-s45-q2',
-          type: 'code-output',
-          prompt: 'What does this log?',
-          code: `const obj = {
-  name: 'obj',
-  show() { return this === obj },
-}
-const loose = obj.show
-console.log(loose())`,
-          options: ['`true`', '`false`', '`undefined`', 'It throws'],
-          answer: 1,
-          explanation:
-            'Assigning `obj.show` to a new variable copies the function, not its receiver. There is nothing to the left of the call, so `this` is `undefined` and the comparison is false. Use `obj.show.bind(obj)` if the receiver matters.',
-        },
-        {
-          id: 'quiz-js-s45-q3',
-          type: 'true-false',
-          prompt: '`call` and `apply` modify the original function so that later calls use the receiver you passed.',
-          answer: false,
-          explanation:
-            'They invoke the function immediately and return a result. The function object is untouched, which is exactly what lets you reuse one function across many receivers.',
-        },
-        {
-          id: 'quiz-js-s45-q4',
-          type: 'blank',
-          prompt: 'Which method returns a new function with `this` permanently attached, for handing to an event listener?',
-          answers: ['bind'],
-          explanation:
-            '`bind` defers. `call` and `apply` run the function now, which is no use when something else decides when to invoke the callback.',
-        },
-        {
-          id: 'quiz-js-s45-q5',
-          type: 'identify-error',
-          prompt: 'Why does this handler lose access to the object?',
-          code: `const app = {
-  count: 0,
-  tick() { this.count += 1 },
-}
-setInterval(app.tick, 1000)`,
-          options: [
-            '`setInterval` is not a real function',
-            'The handler is passed as a bare function, so the receiver is never supplied',
-            '`this.count += 1` is not valid syntax',
-            'The interval is too short',
-          ],
-          answer: 1,
-          explanation:
-            'The object is not passed to `setInterval`, only the function. When the timer fires, there is nothing to the left of the call, so `this` is undefined. Write `setInterval(app.tick.bind(app), 1000)` or `setInterval(() => app.tick(), 1000)`.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s46',
@@ -529,6 +596,70 @@ setInterval(app.tick, 1000)`,
           'Name the leak you create when a closure captures a loop variable',
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-js-l57',
+          title: 'Function closures quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l57-q1',
+              type: 'multiple-choice',
+              prompt: 'In one sentence, what is a closure?',
+              options: [
+                'A function bundled with its own copy of every global variable',
+                'A function that keeps a live reference to the variables in the scope where it was written',
+                'A function that cannot be called more than once',
+                'The memory freed when a function returns',
+              ],
+              answer: 1,
+              explanation: 'It is a live reference, not a copy. That distinction is why a closure sees the current value of a variable rather than the value at the moment it was created, and why two closures from the same outer call can hold completely different values.',
+            },
+            {
+              id: 'quiz-js-l57-q2',
+              type: 'code-output',
+              prompt: 'What does this log?',
+              code: 'function outer() {\n  let n = 0\n  return () => ++n\n}\nconst a = outer()\nconst b = outer()\na(); a(); b();\nconsole.log(a(), b())',
+              options: [
+                '`3 2`',
+                '`2 2`',
+                '`3 1`',
+                '`1 1`',
+              ],
+              answer: 2,
+              explanation: 'Each call to `outer` creates a fresh `n`. `a` has been incremented twice and the `a()` in the log makes three, while `b` was incremented once and its `b()` makes two.',
+            },
+            {
+              id: 'quiz-js-l57-q3',
+              type: 'true-false',
+              prompt: 'A closure takes a snapshot of the values of the variables it uses when it is created.',
+              answer: false,
+              explanation: 'It holds a reference to the variable, not a copy of its value. If the variable changes afterwards, the closure reads the new value.',
+            },
+            {
+              id: 'quiz-js-l57-q4',
+              type: 'blank',
+              prompt: 'Which keyword gives each loop iteration its own binding, so closures created in the loop do not all share one counter?',
+              answers: [
+                'let',
+              ],
+              explanation: '`let` in a loop head is re-bound on every iteration, so each callback closes over a different variable. `var` is function-scoped, so all of them share one binding and every callback reports the final value.',
+            },
+            {
+              id: 'quiz-js-l57-q5',
+              type: 'identify-error',
+              prompt: 'What is wrong with this module?',
+              code: 'let items = []\nexport function all() {\n  return items\n}',
+              options: [
+                'Nothing, this is the correct way to return a list',
+                'It returns the live array, so any caller can mutate or clear the private state',
+                '`export function` is not valid syntax',
+                'The array must be declared with `const` to be exported',
+              ],
+              answer: 1,
+              explanation: 'Returning the array itself hands out the one binding the module was trying to keep private. Any caller could then run `all().length = 0` and wipe the state. Return a copy instead, with `items.slice()`.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -747,78 +878,6 @@ console.log(log.join(' '))`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s46',
-      title: 'Function closures check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s46-q1',
-          type: 'multiple-choice',
-          prompt: 'In one sentence, what is a closure?',
-          options: [
-            'A function bundled with its own copy of every global variable',
-            'A function that keeps a live reference to the variables in the scope where it was written',
-            'A function that cannot be called more than once',
-            'The memory freed when a function returns',
-          ],
-          answer: 1,
-          explanation:
-            'It is a live reference, not a copy. That distinction is why a closure sees the current value of a variable rather than the value at the moment it was created, and why two closures from the same outer call can hold completely different values.',
-        },
-        {
-          id: 'quiz-js-s46-q2',
-          type: 'code-output',
-          prompt: 'What does this log?',
-          code: `function outer() {
-  let n = 0
-  return () => ++n
-}
-const a = outer()
-const b = outer()
-a(); a(); b();
-console.log(a(), b())`,
-          options: ['`3 2`', '`2 2`', '`3 1`', '`1 1`'],
-          answer: 2,
-          explanation:
-            'Each call to `outer` creates a fresh `n`. `a` has been incremented twice and the `a()` in the log makes three, while `b` was incremented once and its `b()` makes two.',
-        },
-        {
-          id: 'quiz-js-s46-q3',
-          type: 'true-false',
-          prompt: 'A closure takes a snapshot of the values of the variables it uses when it is created.',
-          answer: false,
-          explanation:
-            'It holds a reference to the variable, not a copy of its value. If the variable changes afterwards, the closure reads the new value.',
-        },
-        {
-          id: 'quiz-js-s46-q4',
-          type: 'blank',
-          prompt: 'Which keyword gives each loop iteration its own binding, so closures created in the loop do not all share one counter?',
-          answers: ['let'],
-          explanation:
-            '`let` in a loop head is re-bound on every iteration, so each callback closes over a different variable. `var` is function-scoped, so all of them share one binding and every callback reports the final value.',
-        },
-        {
-          id: 'quiz-js-s46-q5',
-          type: 'identify-error',
-          prompt: 'What is wrong with this module?',
-          code: `let items = []
-export function all() {
-  return items
-}`,
-          options: [
-            'Nothing, this is the correct way to return a list',
-            'It returns the live array, so any caller can mutate or clear the private state',
-            '`export function` is not valid syntax',
-            'The array must be declared with `const` to be exported',
-          ],
-          answer: 1,
-          explanation:
-            'Returning the array itself hands out the one binding the module was trying to keep private. Any caller could then run `all().length = 0` and wipe the state. Return a copy instead, with `items.slice()`.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s47',
@@ -836,6 +895,70 @@ export function all() {
           'Avoid the two mistakes that break inheritance most often',
         ],
         xp: 55,
+        quiz: {
+          id: 'quiz-js-l58',
+          title: 'Extending classes quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l58-q1',
+              type: 'multiple-choice',
+              prompt: 'Why must `super()` be called before any use of `this` in a subclass constructor?',
+              options: [
+                'It is a style convention with no runtime effect',
+                'Until it runs there is no parent object for `this` to refer to',
+                'Because `this` is not allowed in constructors at all',
+                'To make the class static',
+              ],
+              answer: 1,
+              explanation: 'The parent constructor is what creates the object. `super` runs it and hands you the result as `this`, so assigning to `this` before that is assigning to nothing, and you get a ReferenceError.',
+            },
+            {
+              id: 'quiz-js-l58-q2',
+              type: 'code-output',
+              prompt: 'What does this log?',
+              code: 'class A { greet() { return \'A\' } }\nclass B extends A { greet() { return \'B\' + super.greet() } }\nconsole.log(new B().greet())',
+              options: [
+                '`A`',
+                '`B`',
+                '`BA`',
+                'It throws',
+              ],
+              answer: 2,
+              explanation: '`super.greet()` runs the parent method and returns "A". The subclass prepends its own "B", so the result is "BA". Overriding without `super` would replace the parent behaviour instead of extending it.',
+            },
+            {
+              id: 'quiz-js-l58-q3',
+              type: 'true-false',
+              prompt: 'A subclass of `Array` keeps its subclass type when you call `map` or `filter` on it.',
+              answer: false,
+              explanation: 'By default those methods return whatever constructor `this.constructor` names, and a subclass that wants the normal behaviour usually sets `static get [Symbol.species]`. Add that getter if the subclass must survive the operation.',
+            },
+            {
+              id: 'quiz-js-l58-q4',
+              type: 'blank',
+              prompt: 'Which keyword names the parent class in a class declaration?',
+              answers: [
+                'extends',
+              ],
+              explanation: '`class Child extends Parent` states the relationship. `super` is the separate keyword used inside the child to reach the parent.',
+            },
+            {
+              id: 'quiz-js-l58-q5',
+              type: 'identify-error',
+              prompt: 'What goes wrong here?',
+              code: 'class Base {\n  constructor(name) { this.name = name }\n}\nclass Child extends Base {\n  constructor(name) {\n    this.tagged = true\n    super(name)\n  }\n}',
+              options: [
+                'Nothing, the order is fine',
+                '`this.tagged = true` runs before any parent constructor, so `this` does not exist yet',
+                '`tagged` is a reserved word',
+                'A child class cannot have its own constructor',
+              ],
+              answer: 1,
+              explanation: 'The parent constructor must run first. Move `super(name)` to the top of the child constructor, then set your own fields.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1055,78 +1178,6 @@ console.log(output)`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s47',
-      title: 'Class syntax check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s47-q1',
-          type: 'multiple-choice',
-          prompt: 'Why must `super()` be called before any use of `this` in a subclass constructor?',
-          options: [
-            'It is a style convention with no runtime effect',
-            'Until it runs there is no parent object for `this` to refer to',
-            'Because `this` is not allowed in constructors at all',
-            'To make the class static',
-          ],
-          answer: 1,
-          explanation:
-            'The parent constructor is what creates the object. `super` runs it and hands you the result as `this`, so assigning to `this` before that is assigning to nothing, and you get a ReferenceError.',
-        },
-        {
-          id: 'quiz-js-s47-q2',
-          type: 'code-output',
-          prompt: 'What does this log?',
-          code: `class A { greet() { return 'A' } }
-class B extends A { greet() { return 'B' + super.greet() } }
-console.log(new B().greet())`,
-          options: ['`A`', '`B`', '`BA`', 'It throws'],
-          answer: 2,
-          explanation:
-            '`super.greet()` runs the parent method and returns "A". The subclass prepends its own "B", so the result is "BA". Overriding without `super` would replace the parent behaviour instead of extending it.',
-        },
-        {
-          id: 'quiz-js-s47-q3',
-          type: 'true-false',
-          prompt: 'A subclass of `Array` keeps its subclass type when you call `map` or `filter` on it.',
-          answer: false,
-          explanation:
-            'By default those methods return whatever constructor `this.constructor` names, and a subclass that wants the normal behaviour usually sets `static get [Symbol.species]`. Add that getter if the subclass must survive the operation.',
-        },
-        {
-          id: 'quiz-js-s47-q4',
-          type: 'blank',
-          prompt: 'Which keyword names the parent class in a class declaration?',
-          answers: ['extends'],
-          explanation:
-            '`class Child extends Parent` states the relationship. `super` is the separate keyword used inside the child to reach the parent.',
-        },
-        {
-          id: 'quiz-js-s47-q5',
-          type: 'identify-error',
-          prompt: 'What goes wrong here?',
-          code: `class Base {
-  constructor(name) { this.name = name }
-}
-class Child extends Base {
-  constructor(name) {
-    this.tagged = true
-    super(name)
-  }
-}`,
-          options: [
-            'Nothing, the order is fine',
-            '`this.tagged = true` runs before any parent constructor, so `this` does not exist yet',
-            '`tagged` is a reserved word',
-            'A child class cannot have its own constructor',
-          ],
-          answer: 1,
-          explanation:
-            'The parent constructor must run first. Move `super(name)` to the top of the child constructor, then set your own fields.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s48',
@@ -1144,6 +1195,70 @@ class Child extends Base {
           'Keep a constant next to the class that owns it',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-js-l59',
+          title: 'Static methods quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l59-q1',
+              type: 'multiple-choice',
+              prompt: 'What is `this` inside a static method?',
+              options: [
+                'The instance the method was called on',
+                'The class itself',
+                '`undefined` always',
+                'The global object',
+              ],
+              answer: 1,
+              explanation: 'Statics live on the constructor, not the prototype, so `this` is the class. That is why a static can read `this.name` for a class name but can never see an instance field.',
+            },
+            {
+              id: 'quiz-js-l59-q2',
+              type: 'code-output',
+              prompt: 'What does this log?',
+              code: 'class Counter {\n  constructor() { this.n = 0 }\n  static make() { return new Counter() }\n  bump() { this.n += 1; return this.n }\n}\nconsole.log(Counter.make().bump())',
+              options: [
+                '`1`',
+                '`0`',
+                '`undefined`',
+                'It throws',
+              ],
+              answer: 0,
+              explanation: '`Counter.make` is a static factory returning a new instance, and `bump` is a prototype method that runs on that instance, giving 1.',
+            },
+            {
+              id: 'quiz-js-l59-q3',
+              type: 'true-false',
+              prompt: 'A static method can read a property that was set on the instance.',
+              answer: false,
+              explanation: 'There is no instance in a static method. If the helper needs instance data, it belongs on the prototype instead, which is the usual reason a static helper appears to ignore its arguments.',
+            },
+            {
+              id: 'quiz-js-l59-q4',
+              type: 'blank',
+              prompt: 'Which keyword declares a method on the class rather than on its instances?',
+              answers: [
+                'static',
+              ],
+              explanation: '`static of(...)` hangs the method off the constructor, so it is called as `ClassName.of(...)` and can be used before any instance exists.',
+            },
+            {
+              id: 'quiz-js-l59-q5',
+              type: 'identify-error',
+              prompt: 'What is wrong with this factory?',
+              code: 'class Config {\n  constructor(overrides) {\n    Object.assign(this, overrides)\n  }\n  static defaults() {\n    return { theme: \'dark\' }\n  }\n}\nconst c = new Config()\nc.theme = Config.defaults().theme',
+              options: [
+                'Nothing, this is correct',
+                'Nothing is wrong with the factory; the problem is `Object.assign` in a constructor',
+                '`static defaults` cannot return an object literal',
+                'A constructor cannot call `Object.assign`',
+              ],
+              answer: 2,
+              explanation: 'Static methods can return ordinary values, including object literals, and `Object.assign` in a constructor is idiomatic. If the intent was a static that builds a configured instance, it should return `new Config(...)` rather than leaving callers to assemble the object themselves.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1351,81 +1466,5 @@ console.log(length)`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s48',
-      title: 'Static methods check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s48-q1',
-          type: 'multiple-choice',
-          prompt: 'What is `this` inside a static method?',
-          options: [
-            'The instance the method was called on',
-            'The class itself',
-            '`undefined` always',
-            'The global object',
-          ],
-          answer: 1,
-          explanation:
-            'Statics live on the constructor, not the prototype, so `this` is the class. That is why a static can read `this.name` for a class name but can never see an instance field.',
-        },
-        {
-          id: 'quiz-js-s48-q2',
-          type: 'code-output',
-          prompt: 'What does this log?',
-          code: `class Counter {
-  constructor() { this.n = 0 }
-  static make() { return new Counter() }
-  bump() { this.n += 1; return this.n }
-}
-console.log(Counter.make().bump())`,
-          options: ['`1`', '`0`', '`undefined`', 'It throws'],
-          answer: 0,
-          explanation:
-            '`Counter.make` is a static factory returning a new instance, and `bump` is a prototype method that runs on that instance, giving 1.',
-        },
-        {
-          id: 'quiz-js-s48-q3',
-          type: 'true-false',
-          prompt: 'A static method can read a property that was set on the instance.',
-          answer: false,
-          explanation:
-            'There is no instance in a static method. If the helper needs instance data, it belongs on the prototype instead, which is the usual reason a static helper appears to ignore its arguments.',
-        },
-        {
-          id: 'quiz-js-s48-q4',
-          type: 'blank',
-          prompt: 'Which keyword declares a method on the class rather than on its instances?',
-          answers: ['static'],
-          explanation:
-            '`static of(...)` hangs the method off the constructor, so it is called as `ClassName.of(...)` and can be used before any instance exists.',
-        },
-        {
-          id: 'quiz-js-s48-q5',
-          type: 'identify-error',
-          prompt: 'What is wrong with this factory?',
-          code: `class Config {
-  constructor(overrides) {
-    Object.assign(this, overrides)
-  }
-  static defaults() {
-    return { theme: 'dark' }
-  }
-}
-const c = new Config()
-c.theme = Config.defaults().theme`,
-          options: [
-            'Nothing, this is correct',
-            'Nothing is wrong with the factory; the problem is `Object.assign` in a constructor',
-            '`static defaults` cannot return an object literal',
-            'A constructor cannot call `Object.assign`',
-          ],
-          answer: 2,
-          explanation:
-            'Static methods can return ordinary values, including object literals, and `Object.assign` in a constructor is idiomatic. If the intent was a static that builds a configured instance, it should return `new Config(...)` rather than leaving callers to assemble the object themselves.',
-        },
-      ],
-    },
   },
 ]

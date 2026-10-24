@@ -13,7 +13,7 @@ const WARM_ROUTES = [
   '/courses',
   '/courses/html-fundamentals',
   '/learn/html-fundamentals/html-l1',
-  '/learn/html-fundamentals/quiz/quiz-html-s1',
+  '/learn/html-fundamentals/quiz/quiz-html-l1',
   '/courses/frontend-projects',
   '/learn/frontend-projects/fp-l7',
   '/projects',
@@ -27,6 +27,7 @@ const WARM_ROUTES = [
   '/learn/typescript/ts-l17',
   '/learn/git-github/git-l8',
   '/learn/dom-browser-apis/dom-l1',
+  '/learn/dom-browser-apis/quiz/quiz-dom-l1',
 ]
 
 export default async function globalSetup() {

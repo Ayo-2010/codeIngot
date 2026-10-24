@@ -17,6 +17,70 @@ export const htmlStructureSections: Section[] = [
           'Say what happened to div and span in HTML5',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-html-l40',
+          title: 'HTML Block and Inline quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l40-q1',
+              type: 'multiple-choice',
+              prompt: 'What is the default display of a p element?',
+              options: [
+                'inline',
+                'block',
+                'inline-block',
+                'flex',
+              ],
+              answer: 1,
+              explanation: 'A paragraph is block level: full width, and it forces a break before and after.',
+            },
+            {
+              id: 'quiz-html-l40-q2',
+              type: 'multiple-choice',
+              prompt: 'Why does width have no effect on a plain span?',
+              options: [
+                'Spans cannot be styled',
+                'An inline box is split across lines, so there is no single box for width to apply to',
+                'Spans are always zero-width',
+                'The width property only works on block elements in the HTML spec',
+              ],
+              answer: 1,
+              explanation: 'Inline boxes are fragmented per line. Replaced inline elements such as images are the exception, because they form one atomic box.',
+            },
+            {
+              id: 'quiz-html-l40-q3',
+              type: 'true-false',
+              prompt: 'display: inline-block lets an element sit inline and still accept a width.',
+              answer: true,
+              explanation: 'It is inline in its parent flow and establishes a block formatting context internally.',
+            },
+            {
+              id: 'quiz-html-l40-q4',
+              type: 'blank',
+              prompt: 'Which value makes an element a block that lays out its children in a row?',
+              answers: [
+                'flex',
+                'display: flex',
+                'inline-flex',
+              ],
+              explanation: 'display: flex is a block-level flex container; inline-flex is its inline equivalent.',
+            },
+            {
+              id: 'quiz-html-l40-q5',
+              type: 'multiple-choice',
+              prompt: 'What did HTML5 change about div and span?',
+              options: [
+                'They were removed',
+                'They were given generic roles, so they no longer carry meaning',
+                'They became inline by default',
+                'They were renamed',
+              ],
+              answer: 1,
+              explanation: 'They lost their semantic associations. The block and inline defaults remain, as CSS behaviour rather than definition.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -156,64 +220,6 @@ export const htmlStructureSections: Section[] = [
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s29',
-      title: 'HTML Block and Inline quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s29-q1',
-          type: 'multiple-choice',
-          prompt: 'What is the default display of a p element?',
-          options: ['inline', 'block', 'inline-block', 'flex'],
-          answer: 1,
-          explanation:
-            'A paragraph is block level: full width, and it forces a break before and after.',
-        },
-        {
-          id: 'quiz-html-s29-q2',
-          type: 'multiple-choice',
-          prompt: 'Why does width have no effect on a plain span?',
-          options: [
-            'Spans cannot be styled',
-            'An inline box is split across lines, so there is no single box for width to apply to',
-            'Spans are always zero-width',
-            'The width property only works on block elements in the HTML spec',
-          ],
-          answer: 1,
-          explanation:
-            'Inline boxes are fragmented per line. Replaced inline elements such as images are the exception, because they form one atomic box.',
-        },
-        {
-          id: 'quiz-html-s29-q3',
-          type: 'true-false',
-          prompt: 'display: inline-block lets an element sit inline and still accept a width.',
-          answer: true,
-          explanation: 'It is inline in its parent flow and establishes a block formatting context internally.',
-        },
-        {
-          id: 'quiz-html-s29-q4',
-          type: 'blank',
-          prompt: 'Which value makes an element a block that lays out its children in a row?',
-          answers: ['flex', 'display: flex', 'inline-flex'],
-          explanation: 'display: flex is a block-level flex container; inline-flex is its inline equivalent.',
-        },
-        {
-          id: 'quiz-html-s29-q5',
-          type: 'multiple-choice',
-          prompt: 'What did HTML5 change about div and span?',
-          options: [
-            'They were removed',
-            'They were given generic roles, so they no longer carry meaning',
-            'They became inline by default',
-            'They were renamed',
-          ],
-          answer: 1,
-          explanation:
-            'They lost their semantic associations. The block and inline defaults remain, as CSS behaviour rather than definition.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s30',
@@ -231,6 +237,71 @@ export const htmlStructureSections: Section[] = [
           'Explain specificity between a class and a tag selector',
         ],
         xp: 35,
+        quiz: {
+          id: 'quiz-html-l41',
+          title: 'HTML Classes quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l41-q1',
+              type: 'multiple-choice',
+              prompt: 'How do you write a class in HTML?',
+              options: [
+                'class="card"',
+                'class=card',
+                'className="card"',
+                '.card="card"',
+              ],
+              answer: 0,
+              explanation: 'The attribute is class, the value is quoted, and the dot only appears in the CSS selector.',
+            },
+            {
+              id: 'quiz-html-l41-q2',
+              type: 'true-false',
+              prompt: 'An element can carry more than one class at a time.',
+              answer: true,
+              explanation: 'Several class names go in one attribute, separated by spaces.',
+            },
+            {
+              id: 'quiz-html-l41-q3',
+              type: 'multiple-choice',
+              prompt: 'Which selector beats a tag selector?',
+              options: [
+                'p',
+                '.lead',
+                'p.lead is equal to .lead',
+                '*',
+              ],
+              answer: 1,
+              explanation: 'Specificity counts ids, then classes and attributes and pseudo-classes, then tags. A class outranks a tag.',
+            },
+            {
+              id: 'quiz-html-l41-q4',
+              type: 'blank',
+              prompt: 'Which two characters cannot be the first character of a class name?',
+              answers: [
+                'a digit',
+                'digits',
+                '0-9',
+                'a number',
+              ],
+              explanation: 'A class name cannot start with a digit, and a hyphen cannot be followed by a digit either.',
+            },
+            {
+              id: 'quiz-html-l41-q5',
+              type: 'multiple-choice',
+              prompt: 'Which class name is most likely to survive a restyle?',
+              options: [
+                '.blue-box',
+                '.b1',
+                '.card__title',
+                '.left-column',
+              ],
+              answer: 2,
+              explanation: 'A name describing purpose and structure stays correct when the colour or the layout changes.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -357,54 +428,6 @@ export const htmlStructureSections: Section[] = [
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s30',
-      title: 'HTML Classes quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s30-q1',
-          type: 'multiple-choice',
-          prompt: 'How do you write a class in HTML?',
-          options: ['class="card"', 'class=card', 'className="card"', '.card="card"'],
-          answer: 0,
-          explanation: 'The attribute is class, the value is quoted, and the dot only appears in the CSS selector.',
-        },
-        {
-          id: 'quiz-html-s30-q2',
-          type: 'true-false',
-          prompt: 'An element can carry more than one class at a time.',
-          answer: true,
-          explanation: 'Several class names go in one attribute, separated by spaces.',
-        },
-        {
-          id: 'quiz-html-s30-q3',
-          type: 'multiple-choice',
-          prompt: 'Which selector beats a tag selector?',
-          options: ['p', '.lead', 'p.lead is equal to .lead', '*'],
-          answer: 1,
-          explanation:
-            'Specificity counts ids, then classes and attributes and pseudo-classes, then tags. A class outranks a tag.',
-        },
-        {
-          id: 'quiz-html-s30-q4',
-          type: 'blank',
-          prompt: 'Which two characters cannot be the first character of a class name?',
-          answers: ['a digit', 'digits', '0-9', 'a number'],
-          explanation:
-            'A class name cannot start with a digit, and a hyphen cannot be followed by a digit either.',
-        },
-        {
-          id: 'quiz-html-s30-q5',
-          type: 'multiple-choice',
-          prompt: 'Which class name is most likely to survive a restyle?',
-          options: ['.blue-box', '.b1', '.card__title', '.left-column'],
-          answer: 2,
-          explanation:
-            'A name describing purpose and structure stays correct when the colour or the layout changes.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s31',
@@ -422,6 +445,70 @@ export const htmlStructureSections: Section[] = [
           'Describe how an id beats any number of classes in specificity',
         ],
         xp: 35,
+        quiz: {
+          id: 'quiz-html-l42',
+          title: 'HTML Id quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l42-q1',
+              type: 'multiple-choice',
+              prompt: 'What does the for attribute on a label do?',
+              options: [
+                'Sets the label text',
+                'Associates the label with the control whose id matches',
+                'Makes the field required',
+                'Forces the label to wrap the field',
+              ],
+              answer: 1,
+              explanation: 'Matching for against a control id is what makes the label name it.',
+            },
+            {
+              id: 'quiz-html-l42-q2',
+              type: 'true-false',
+              prompt: 'Two elements on a page may share an id if they look identical.',
+              answer: false,
+              explanation: 'Ids must be unique. Everything that uses one assumes there is a single target.',
+            },
+            {
+              id: 'quiz-html-l42-q3',
+              type: 'multiple-choice',
+              prompt: 'Which selector wins against twelve class rules?',
+              options: [
+                '#main',
+                'body',
+                '*',
+                '.layout',
+              ],
+              answer: 0,
+              explanation: 'An id outranks any number of class, attribute and pseudo-class selectors.',
+            },
+            {
+              id: 'quiz-html-l42-q4',
+              type: 'blank',
+              prompt: 'Which attribute links a label to its input?',
+              answers: [
+                'for',
+                'htmlFor',
+                'for=',
+              ],
+              explanation: 'The label carries for, and its value matches the control id.',
+            },
+            {
+              id: 'quiz-html-l42-q5',
+              type: 'multiple-choice',
+              prompt: 'Which is a good reason to use an id?',
+              options: [
+                'As a script handle for grabbing an element',
+                'As a fragment target and a label association',
+                'As the only way to style an element',
+                'To give the element a higher z-index',
+              ],
+              answer: 1,
+              explanation: 'Fragment targets and label associations are what ids are for. Script handles are better as data attributes.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -564,63 +651,6 @@ input { padding: 0.4rem; border: 1px solid #cbd5e1; border-radius: 4px; }
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s31',
-      title: 'HTML Id quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s31-q1',
-          type: 'multiple-choice',
-          prompt: 'What does the for attribute on a label do?',
-          options: [
-            'Sets the label text',
-            'Associates the label with the control whose id matches',
-            'Makes the field required',
-            'Forces the label to wrap the field',
-          ],
-          answer: 1,
-          explanation: 'Matching for against a control id is what makes the label name it.',
-        },
-        {
-          id: 'quiz-html-s31-q2',
-          type: 'true-false',
-          prompt: 'Two elements on a page may share an id if they look identical.',
-          answer: false,
-          explanation:
-            'Ids must be unique. Everything that uses one assumes there is a single target.',
-        },
-        {
-          id: 'quiz-html-s31-q3',
-          type: 'multiple-choice',
-          prompt: 'Which selector wins against twelve class rules?',
-          options: ['#main', 'body', '*', '.layout'],
-          answer: 0,
-          explanation: 'An id outranks any number of class, attribute and pseudo-class selectors.',
-        },
-        {
-          id: 'quiz-html-s31-q4',
-          type: 'blank',
-          prompt: 'Which attribute links a label to its input?',
-          answers: ['for', 'htmlFor', 'for='],
-          explanation: 'The label carries for, and its value matches the control id.',
-        },
-        {
-          id: 'quiz-html-s31-q5',
-          type: 'multiple-choice',
-          prompt: 'Which is a good reason to use an id?',
-          options: [
-            'As a script handle for grabbing an element',
-            'As a fragment target and a label association',
-            'As the only way to style an element',
-            'To give the element a higher z-index',
-          ],
-          answer: 1,
-          explanation:
-            'Fragment targets and label associations are what ids are for. Script handles are better as data attributes.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s32',
@@ -638,6 +668,69 @@ input { padding: 0.4rem; border: 1px solid #cbd5e1; border-radius: 4px; }
           'Explain the risk of framing a page you do not control',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-html-l43',
+          title: 'HTML Iframes quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l43-q1',
+              type: 'multiple-choice',
+              prompt: 'What does sandbox with no value do?',
+              options: [
+                'Allows everything',
+                'Grants no permissions at all to the framed document',
+                'Disables the iframe entirely',
+                'Is the same as omitting the attribute',
+              ],
+              answer: 1,
+              explanation: 'A bare sandbox is the most restrictive form. Permissions are added one token at a time.',
+            },
+            {
+              id: 'quiz-html-l43-q2',
+              type: 'true-false',
+              prompt: 'Combining allow-scripts and allow-same-origin is a security risk.',
+              answer: true,
+              explanation: 'The framed page can then remove its own sandbox attribute and reload unrestricted.',
+            },
+            {
+              id: 'quiz-html-l43-q3',
+              type: 'multiple-choice',
+              prompt: 'Why does an iframe need a title attribute?',
+              options: [
+                'To show a tooltip on hover',
+                'Because it is the accessible name, and without it the frame is announced as just "frame"',
+                'To set the frame height',
+                'It is required for lazy loading to work',
+              ],
+              answer: 1,
+              explanation: 'The title is how a screen reader user knows what the embedded document is.',
+            },
+            {
+              id: 'quiz-html-l43-q4',
+              type: 'blank',
+              prompt: 'Which attribute carries a whole document inline instead of a file path?',
+              answers: [
+                'srcdoc',
+                'srcdoc=',
+              ],
+              explanation: 'srcdoc takes a complete document as the attribute value.',
+            },
+            {
+              id: 'quiz-html-l43-q5',
+              type: 'multiple-choice',
+              prompt: 'A site refuses to be framed. What is it sending?',
+              options: [
+                'A sandbox attribute',
+                'X-Frame-Options or a frame-ancestors CSP directive',
+                'A crossorigin attribute',
+                'A rel="external" link',
+              ],
+              answer: 1,
+              explanation: 'Those are the standard clickjacking defences, and they are the reason an iframe is not a general-purpose embed.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -770,68 +863,5 @@ input { padding: 0.4rem; border: 1px solid #cbd5e1; border-radius: 4px; }
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s32',
-      title: 'HTML Iframes quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s32-q1',
-          type: 'multiple-choice',
-          prompt: 'What does sandbox with no value do?',
-          options: [
-            'Allows everything',
-            'Grants no permissions at all to the framed document',
-            'Disables the iframe entirely',
-            'Is the same as omitting the attribute',
-          ],
-          answer: 1,
-          explanation:
-            'A bare sandbox is the most restrictive form. Permissions are added one token at a time.',
-        },
-        {
-          id: 'quiz-html-s32-q2',
-          type: 'true-false',
-          prompt: 'Combining allow-scripts and allow-same-origin is a security risk.',
-          answer: true,
-          explanation:
-            'The framed page can then remove its own sandbox attribute and reload unrestricted.',
-        },
-        {
-          id: 'quiz-html-s32-q3',
-          type: 'multiple-choice',
-          prompt: 'Why does an iframe need a title attribute?',
-          options: [
-            'To show a tooltip on hover',
-            'Because it is the accessible name, and without it the frame is announced as just "frame"',
-            'To set the frame height',
-            'It is required for lazy loading to work',
-          ],
-          answer: 1,
-          explanation: 'The title is how a screen reader user knows what the embedded document is.',
-        },
-        {
-          id: 'quiz-html-s32-q4',
-          type: 'blank',
-          prompt: 'Which attribute carries a whole document inline instead of a file path?',
-          answers: ['srcdoc', 'srcdoc='],
-          explanation: 'srcdoc takes a complete document as the attribute value.',
-        },
-        {
-          id: 'quiz-html-s32-q5',
-          type: 'multiple-choice',
-          prompt: 'A site refuses to be framed. What is it sending?',
-          options: [
-            'A sandbox attribute',
-            'X-Frame-Options or a frame-ancestors CSP directive',
-            'A crossorigin attribute',
-            'A rel="external" link',
-          ],
-          answer: 1,
-          explanation:
-            'Those are the standard clickjacking defences, and they are the reason an iframe is not a general-purpose embed.',
-        },
-      ],
-    },
   },
 ]

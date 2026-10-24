@@ -60,15 +60,13 @@ function toMeta(course: Course): CourseMeta {
         objectives: lesson.objectives,
         xp: lesson.xp,
         exerciseCount: lesson.content.filter((block) => block.type === 'exercise').length,
+        quiz: {
+          id: lesson.quiz.id,
+          title: lesson.quiz.title,
+          passingScore: lesson.quiz.passingScore,
+          questionCount: lesson.quiz.questions.length,
+        },
       })),
-      quiz: section.quiz
-        ? {
-            id: section.quiz.id,
-            title: section.quiz.title,
-            passingScore: section.quiz.passingScore,
-            questionCount: section.quiz.questions.length,
-          }
-        : undefined,
       chapter: section.chapter,
     })),
   }

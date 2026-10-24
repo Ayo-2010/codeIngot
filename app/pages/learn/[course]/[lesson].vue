@@ -54,6 +54,13 @@
           >
             ← Previous
           </button>
+          <NuxtLink
+            :to="`/learn/${course.slug}/quiz/${lesson.quiz.id}`"
+            class="rounded-lg border border-brand/40 px-2.5 py-1.5 text-xs text-brand transition hover:bg-brand/10"
+            :aria-label="`Take the quiz for ${lesson.title}`"
+          >
+            ★ Quiz
+          </NuxtLink>
           <button
             v-if="next"
             type="button"
@@ -182,7 +189,7 @@ usePageSeo({
   description: computed(
     () =>
       lesson.value?.description ??
-      'A short guided lesson with a live example, an exercise and a section quiz.',
+      'A short guided lesson with a live example, an exercise and its own quiz.',
   ),
   type: 'article',
 })
@@ -281,21 +288,9 @@ const { data: lessonContent } = await useAsyncData(
   },
 )
 
-const next = computed(() => {
-  if (!lesson.value) return undefined
-  const current = lesson.value
-  // The last lesson of a section hands over to the section's quiz,
-  // which travels with the course metadata.
-  const quiz = current.section.quiz
-  if (quiz) {
-    const sectionLessons = current.section.lessons
-    const lastLessonInSection = sectionLessons[sectionLessons.length - 1]
-    if (lastLessonInSection && lastLessonInSection.id === current.id) {
-      return { href: `/learn/${current.courseSlug}/quiz/${quiz.id}` }
-    }
-  }
-  return nextLesson(current.id)
-})
+const next = computed(() =>
+  lesson.value ? nextLesson(lesson.value.id) : undefined,
+)
 const previous = computed(() => (lesson.value ? previousLesson(lesson.value.id) : undefined))
 const isDone = computed(() => (lesson.value ? isLessonComplete(lesson.value.id) : false))
 

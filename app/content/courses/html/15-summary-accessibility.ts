@@ -17,6 +17,70 @@ export const htmlClosingSections: Section[] = [
           'Check a page for the failures that matter before shipping it',
         ],
         xp: 45,
+        quiz: {
+          id: 'quiz-html-l76',
+          title: 'HTML Accessibility quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l76-q1',
+              type: 'multiple-choice',
+              prompt: 'Why is a real button better than a div with role="button"?',
+              options: [
+                'It looks better',
+                'It comes with focus, keyboard activation, disabled state and the correct announcement',
+                'role="button" is invalid',
+                'It is smaller',
+              ],
+              answer: 1,
+              explanation: 'The role adds the announcement. Everything else — focus, Enter and Space, disabled — is part of the element.',
+            },
+            {
+              id: 'quiz-html-l76-q2',
+              type: 'true-false',
+              prompt: 'It is fine to write outline: none as long as the element still shows a cursor change.',
+              answer: false,
+              explanation: 'A cursor change is invisible to a keyboard user. The focus indicator has to be visible or replaced with something equally visible.',
+            },
+            {
+              id: 'quiz-html-l76-q3',
+              type: 'multiple-choice',
+              prompt: 'Which is the correct way to mark a required field?',
+              options: [
+                'An asterisk next to the label',
+                'The required attribute, plus saying so in text',
+                'A red border',
+                'Nothing, users will find out',
+              ],
+              answer: 1,
+              explanation: 'An asterisk and a colour are both visual conventions that carry no information for a screen reader or in high contrast mode.',
+            },
+            {
+              id: 'quiz-html-l76-q4',
+              type: 'blank',
+              prompt: 'What is the minimum contrast ratio for body text?',
+              answers: [
+                '4.5:1',
+                '4.5',
+                '4.5:1 against its background',
+              ],
+              explanation: 'Large text at 24px or 18.66px bold may use 3:1.',
+            },
+            {
+              id: 'quiz-html-l76-q5',
+              type: 'multiple-choice',
+              prompt: 'What does a skip link do?',
+              options: [
+                'Skips an image',
+                'Lets a keyboard user jump past repeated navigation to the main content',
+                'Skips the page footer',
+                'Disables navigation',
+              ],
+              answer: 1,
+              explanation: 'It is the first focusable element on the page, and it targets the main landmark so repeated navigation is bypassed.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -256,70 +320,6 @@ button, .bad {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s65',
-      title: 'HTML Accessibility quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s65-q1',
-          type: 'multiple-choice',
-          prompt: 'Why is a real button better than a div with role="button"?',
-          options: [
-            'It looks better',
-            'It comes with focus, keyboard activation, disabled state and the correct announcement',
-            'role="button" is invalid',
-            'It is smaller',
-          ],
-          answer: 1,
-          explanation:
-            'The role adds the announcement. Everything else — focus, Enter and Space, disabled — is part of the element.',
-        },
-        {
-          id: 'quiz-html-s65-q2',
-          type: 'true-false',
-          prompt: 'It is fine to write outline: none as long as the element still shows a cursor change.',
-          answer: false,
-          explanation:
-            'A cursor change is invisible to a keyboard user. The focus indicator has to be visible or replaced with something equally visible.',
-        },
-        {
-          id: 'quiz-html-s65-q3',
-          type: 'multiple-choice',
-          prompt: 'Which is the correct way to mark a required field?',
-          options: [
-            'An asterisk next to the label',
-            'The required attribute, plus saying so in text',
-            'A red border',
-            'Nothing, users will find out',
-          ],
-          answer: 1,
-          explanation:
-            'An asterisk and a colour are both visual conventions that carry no information for a screen reader or in high contrast mode.',
-        },
-        {
-          id: 'quiz-html-s65-q4',
-          type: 'blank',
-          prompt: 'What is the minimum contrast ratio for body text?',
-          answers: ['4.5:1', '4.5', '4.5:1 against its background'],
-          explanation: 'Large text at 24px or 18.66px bold may use 3:1.',
-        },
-        {
-          id: 'quiz-html-s65-q5',
-          type: 'multiple-choice',
-          prompt: 'What does a skip link do?',
-          options: [
-            'Skips an image',
-            'Lets a keyboard user jump past repeated navigation to the main content',
-            'Skips the page footer',
-            'Disables navigation',
-          ],
-          answer: 1,
-          explanation:
-            'It is the first focusable element on the page, and it targets the main landmark so repeated navigation is bypassed.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s66',
@@ -337,6 +337,70 @@ button, .bad {
           'Know where to go next from here',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-html-l77',
+          title: 'HTML Summary quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l77-q1',
+              type: 'multiple-choice',
+              prompt: 'What is the central idea of choosing semantic HTML?',
+              options: [
+                'Semantic elements render faster',
+                'The element name describes what the content is, which solves accessibility, styling and indexing problems at once',
+                'It produces less markup',
+                'It is required by the validator',
+              ],
+              answer: 1,
+              explanation: 'One decision pays for itself three times over: assistive technology, CSS hooks, and search engines.',
+            },
+            {
+              id: 'quiz-html-l77-q2',
+              type: 'true-false',
+              prompt: 'A page should have exactly one h1.',
+              answer: true,
+              explanation: 'One h1 names the page. Everything below it is a heading level describing depth, not size.',
+            },
+            {
+              id: 'quiz-html-l77-q3',
+              type: 'multiple-choice',
+              prompt: 'How many main elements may a document contain?',
+              options: [
+                'One',
+                'One per page section',
+                'As many as you like',
+                'None',
+              ],
+              answer: 0,
+              explanation: 'Exactly one, and it holds the primary content.',
+            },
+            {
+              id: 'quiz-html-l77-q4',
+              type: 'blank',
+              prompt: 'Which attribute marks an image as deliberately decorative?',
+              answers: [
+                'alt=""',
+                'alt',
+                'alt=""',
+              ],
+              explanation: 'An empty alt tells the screen reader to skip it. Omitting alt is a missing description, not a decision.',
+            },
+            {
+              id: 'quiz-html-l77-q5',
+              type: 'multiple-choice',
+              prompt: 'Which of these is the next step after this course?',
+              options: [
+                'Learn a framework and stop writing HTML',
+                'CSS, then JavaScript, and keep the semantics underneath',
+                'Skip to backend development',
+                'Stop writing markup entirely',
+              ],
+              answer: 1,
+              explanation: 'A framework still emits the same elements. The semantics here are what everything else is built on.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -540,63 +604,5 @@ button, .bad {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s66',
-      title: 'HTML Summary quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s66-q1',
-          type: 'multiple-choice',
-          prompt: 'What is the central idea of choosing semantic HTML?',
-          options: [
-            'Semantic elements render faster',
-            'The element name describes what the content is, which solves accessibility, styling and indexing problems at once',
-            'It produces less markup',
-            'It is required by the validator',
-          ],
-          answer: 1,
-          explanation:
-            'One decision pays for itself three times over: assistive technology, CSS hooks, and search engines.',
-        },
-        {
-          id: 'quiz-html-s66-q2',
-          type: 'true-false',
-          prompt: 'A page should have exactly one h1.',
-          answer: true,
-          explanation:
-            'One h1 names the page. Everything below it is a heading level describing depth, not size.',
-        },
-        {
-          id: 'quiz-html-s66-q3',
-          type: 'multiple-choice',
-          prompt: 'How many main elements may a document contain?',
-          options: ['One', 'One per page section', 'As many as you like', 'None'],
-          answer: 0,
-          explanation: 'Exactly one, and it holds the primary content.',
-        },
-        {
-          id: 'quiz-html-s66-q4',
-          type: 'blank',
-          prompt: 'Which attribute marks an image as deliberately decorative?',
-          answers: ['alt=""', 'alt', 'alt=""'],
-          explanation: 'An empty alt tells the screen reader to skip it. Omitting alt is a missing description, not a decision.',
-        },
-        {
-          id: 'quiz-html-s66-q5',
-          type: 'multiple-choice',
-          prompt: 'Which of these is the next step after this course?',
-          options: [
-            'Learn a framework and stop writing HTML',
-            'CSS, then JavaScript, and keep the semantics underneath',
-            'Skip to backend development',
-            'Stop writing markup entirely',
-          ],
-          answer: 1,
-          explanation:
-            'A framework still emits the same elements. The semantics here are what everything else is built on.',
-        },
-      ],
-    },
   },
 ]

@@ -76,9 +76,7 @@ export default defineEventHandler((event) => {
     for (const section of course.sections) {
       for (const lesson of section.lessons) {
         paths.add(`/learn/${course.slug}/${lesson.id}`)
-      }
-      if (section.quiz) {
-        paths.add(`/learn/${course.slug}/quiz/${section.quiz.id}`)
+        paths.add(`/learn/${course.slug}/quiz/${lesson.quiz.id}`)
       }
     }
   }

@@ -140,16 +140,12 @@
                       </span>
                     </NuxtLink>
 
-                    <!--
-                      A one-lesson section owns a single quiz, so its quiz rides
-                      on the lesson row instead of adding 60 extra quiz cards.
-                    -->
+                    <!-- Every lesson row carries its own quiz at its side. -->
                     <NuxtLink
-                      v-if="section.quiz && section.lessons.length === 1"
-                      :to="`/learn/${course.slug}/quiz/${section.quiz.id}`"
+                      :to="`/learn/${course.slug}/quiz/${lesson.quiz.id}`"
                       class="flex shrink-0 items-center gap-1.5 rounded-xl border border-ink-600 bg-ink-900 px-3 text-xs transition hover:border-brand/40 hover:text-brand"
-                      :class="quizDone(section.quiz) ? 'text-ok' : 'text-dim'"
-                      :aria-label="`Take the ${section.quiz.title} quiz`"
+                      :class="quizDone(lesson.quiz) ? 'text-ok' : 'text-dim'"
+                      :aria-label="`Take the quiz for ${lesson.title}`"
                     >
                       <span aria-hidden="true">★</span>
                       <span class="hidden sm:inline">Quiz</span>
@@ -157,23 +153,6 @@
                   </div>
                 </li>
               </ol>
-
-              <NuxtLink
-                v-if="section.quiz && section.lessons.length > 1"
-                :to="`/learn/${course.slug}/quiz/${section.quiz.id}`"
-                class="mt-3 flex items-center gap-3 rounded-xl border border-ink-600 bg-ink-850 px-4 py-3 transition hover:border-brand/40"
-              >
-                <span class="text-brand" aria-hidden="true">★</span>
-                <div class="min-w-0 flex-1">
-                  <p class="text-sm text-mist-50">{{ section.quiz.title }}</p>
-                  <p class="text-xs text-dim">
-                    {{ section.quiz.questionCount }} questions · pass at {{ section.quiz.passingScore }}%
-                  </p>
-                </div>
-                <span class="font-mono text-xs" :class="quizDone(section.quiz) ? 'text-ok' : 'text-dim'">
-                  {{ quizScore(section.quiz) !== null ? `${quizScore(section.quiz)}%` : 'not taken' }}
-                </span>
-              </NuxtLink>
             </div>
           </div>
         </section>
@@ -241,7 +220,7 @@ usePageSeo({
   description: computed(
     () =>
       course.value?.description ??
-      'A guided frontend course with lessons, exercises and a section quiz.',
+      'A guided frontend course with lessons, exercises and a quiz for every lesson.',
   ),
   jsonLd: computed(() => {
     const value = course.value
@@ -345,10 +324,6 @@ const glance = computed(() => {
   }
   return entries
 })
-
-function quizScore(quiz: QuizSummary): number | null {
-  return progress.value.quizScores[quiz.id] ?? null
-}
 
 function quizDone(quiz: QuizSummary) {
   return quizPassed(quiz)

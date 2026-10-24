@@ -173,14 +173,17 @@ describe('course content invariants', () => {
     expect(new Set(lessonIds).size).toBe(lessonIds.length)
   })
 
-  it('gives every section a quiz with unique ids', () => {
+  it('gives every lesson a quiz with unique ids', () => {
     const quizIds = new Set<string>()
     for (const course of courses) {
       for (const section of course.sections) {
-        expect(section.quiz, `${course.slug}/${section.id}`).toBeDefined()
-        expect(quizIds.has(section.quiz!.id), section.quiz!.id).toBe(false)
-        quizIds.add(section.quiz!.id)
-        expect(section.quiz!.questions.length).toBeGreaterThan(0)
+        for (const lesson of section.lessons) {
+          const label = `${course.slug}/${section.id}/${lesson.id}`
+          expect(lesson.quiz, label).toBeDefined()
+          expect(quizIds.has(lesson.quiz.id), lesson.quiz.id).toBe(false)
+          quizIds.add(lesson.quiz.id)
+          expect(lesson.quiz.questions.length, label).toBe(5)
+        }
       }
     }
   })
@@ -200,20 +203,21 @@ describe('course content invariants', () => {
     expect([...sectionLoaderIds].sort()).toEqual(expected)
   })
 
-  it('ships quiz counts without question bodies in the eager metadata', () => {
+  it('ships lesson quiz counts without question bodies in the eager metadata', () => {
     for (const course of courses) {
       const meta = courseMeta.find((item) => item.slug === course.slug)!
       for (const section of meta.sections) {
-        const full = course.sections.find((item) => item.id === section.id)?.quiz
-        if (!full) {
-          expect(section.quiz, section.id).toBeUndefined()
-          continue
+        const full = course.sections.find((item) => item.id === section.id)!
+        for (const lesson of section.lessons) {
+          const source = full.lessons.find((item) => item.id === lesson.id)!
+          expect(lesson.quiz, `${course.slug}/${section.id}/${lesson.id}`).toEqual({
+            id: source.quiz.id,
+            title: source.quiz.title,
+            passingScore: source.quiz.passingScore,
+            questionCount: source.quiz.questions.length,
+          })
+          expect(lesson.quiz).not.toHaveProperty('questions')
         }
-        expect(section.quiz, section.id).toBeDefined()
-        expect(section.quiz!.id).toBe(full.id)
-        expect(section.quiz!.passingScore).toBe(full.passingScore)
-        expect(section.quiz!.questionCount).toBe(full.questions.length)
-        expect(section.quiz).not.toHaveProperty('questions')
       }
     }
   })
@@ -225,7 +229,6 @@ interface CourseShape {
     title: string
     chapter?: string
     lessons: Array<{ id: string }>
-    quiz?: { id: string }
   }>
 }
 
@@ -235,7 +238,6 @@ function summarise(course: CourseShape) {
     title: section.title,
     chapter: section.chapter,
     lessons: section.lessons.map((lesson) => lesson.id),
-    quiz: section.quiz?.id,
   }))
 }
 
@@ -247,7 +249,6 @@ function courseToMeta(course: Course): CourseShape {
       title: section.title,
       chapter: section.chapter,
       lessons: section.lessons.map((lesson) => ({ id: lesson.id })),
-      quiz: section.quiz,
     })),
   }
 }

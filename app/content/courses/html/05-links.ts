@@ -17,6 +17,69 @@ export const htmlLinkSections: Section[] = [
           'Explain what target and rel do, and when each is required',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-html-l28',
+          title: 'HTML Links quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l28-q1',
+              type: 'multiple-choice',
+              prompt: 'What does the href="/about/team.html" path resolve against?',
+              options: [
+                'The folder holding the current page',
+                'The root of the current origin',
+                'The domain of the previous page visited',
+                'Nothing — root-relative paths need a base tag',
+              ],
+              answer: 1,
+              explanation: 'A leading slash anchors the path at the root of the origin, so it resolves the same way from any depth.',
+            },
+            {
+              id: 'quiz-html-l28-q2',
+              type: 'true-false',
+              prompt: 'A link with target="_blank" should carry rel="noopener".',
+              answer: true,
+              explanation: 'Without it the opened page gets a handle on your window through window.opener, which is a real security risk.',
+            },
+            {
+              id: 'quiz-html-l28-q3',
+              type: 'multiple-choice',
+              prompt: 'Why is "Click here" a bad link text?',
+              options: [
+                'It is too long for most screens',
+                'It says nothing about the destination when read out of context',
+                'Search engines penalise the word here',
+                'It cannot be translated',
+              ],
+              answer: 1,
+              explanation: 'Screen readers announce the link text alone. The text has to describe the destination on its own.',
+            },
+            {
+              id: 'quiz-html-l28-q4',
+              type: 'blank',
+              prompt: 'Which attribute turns a link into a file download?',
+              answers: [
+                'download',
+              ],
+              explanation: 'The download attribute asks the browser to save the file instead of navigating to it.',
+            },
+            {
+              id: 'quiz-html-l28-q5',
+              type: 'identify-error',
+              prompt: 'Which link is written correctly?',
+              code: '<a href="https://example.com" target="_blank">Example</a>\n<a href="https://example.com" target="_blank" rel="noopener">Example</a>',
+              options: [
+                'The first one, because it is shorter',
+                'The second one, because it protects the opening page',
+                'Both are identical',
+                'Neither, because target is not valid on links',
+              ],
+              answer: 1,
+              explanation: 'The second adds rel="noopener", which stops the new page reaching back through window.opener.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -144,72 +207,6 @@ a { color: #1d4ed8; }`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s17',
-      title: 'HTML Links quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s17-q1',
-          type: 'multiple-choice',
-          prompt: 'What does the href="/about/team.html" path resolve against?',
-          options: [
-            'The folder holding the current page',
-            'The root of the current origin',
-            'The domain of the previous page visited',
-            'Nothing — root-relative paths need a base tag',
-          ],
-          answer: 1,
-          explanation:
-            'A leading slash anchors the path at the root of the origin, so it resolves the same way from any depth.',
-        },
-        {
-          id: 'quiz-html-s17-q2',
-          type: 'true-false',
-          prompt: 'A link with target="_blank" should carry rel="noopener".',
-          answer: true,
-          explanation:
-            'Without it the opened page gets a handle on your window through window.opener, which is a real security risk.',
-        },
-        {
-          id: 'quiz-html-s17-q3',
-          type: 'multiple-choice',
-          prompt: 'Why is "Click here" a bad link text?',
-          options: [
-            'It is too long for most screens',
-            'It says nothing about the destination when read out of context',
-            'Search engines penalise the word here',
-            'It cannot be translated',
-          ],
-          answer: 1,
-          explanation:
-            'Screen readers announce the link text alone. The text has to describe the destination on its own.',
-        },
-        {
-          id: 'quiz-html-s17-q4',
-          type: 'blank',
-          prompt: 'Which attribute turns a link into a file download?',
-          answers: ['download'],
-          explanation: 'The download attribute asks the browser to save the file instead of navigating to it.',
-        },
-        {
-          id: 'quiz-html-s17-q5',
-          type: 'identify-error',
-          prompt: 'Which link is written correctly?',
-          code: `<a href="https://example.com" target="_blank">Example</a>
-<a href="https://example.com" target="_blank" rel="noopener">Example</a>`,
-          options: [
-            'The first one, because it is shorter',
-            'The second one, because it protects the opening page',
-            'Both are identical',
-            'Neither, because target is not valid on links',
-          ],
-          answer: 1,
-          explanation:
-            'The second adds rel="noopener", which stops the new page reaching back through window.opener.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s18',
@@ -227,6 +224,71 @@ a { color: #1d4ed8; }`,
           'Explain the privacy reason :visited cannot be styled freely',
         ],
         xp: 35,
+        quiz: {
+          id: 'quiz-html-l29',
+          title: 'HTML Link Colors quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l29-q1',
+              type: 'multiple-choice',
+              prompt: 'Why can :visited not be used to change a link font size?',
+              options: [
+                'Because font-size is not a colour property',
+                'Because reading the result back would leak which links the user has visited',
+                'Because browsers do not support the selector',
+                'Because font-size does not inherit',
+              ],
+              answer: 1,
+              explanation: 'Visiting history is private. If a page could set a size and read it back, it could probe the user history one bit at a time.',
+            },
+            {
+              id: 'quiz-html-l29-q2',
+              type: 'true-false',
+              prompt: 'Relying on colour alone to mark a link is an accessibility problem.',
+              answer: true,
+              explanation: 'Colour vision deficiency and low-contrast screens both break the distinction. The underline is what carries the meaning.',
+            },
+            {
+              id: 'quiz-html-l29-q3',
+              type: 'multiple-choice',
+              prompt: 'Which selector matches a link the user has already followed?',
+              options: [
+                ':link',
+                ':visited',
+                ':hover',
+                ':target',
+              ],
+              answer: 1,
+              explanation: ':visited matches a followed link in the current browser profile.',
+            },
+            {
+              id: 'quiz-html-l29-q4',
+              type: 'blank',
+              prompt: 'Which pseudo-class applies while a keyboard user has focus on an element?',
+              answers: [
+                ':focus-visible',
+                'focus-visible',
+                ':focus',
+                'focus',
+              ],
+              explanation: ':focus-visible shows the ring only for keyboard interaction, which is what you almost always want.',
+            },
+            {
+              id: 'quiz-html-l29-q5',
+              type: 'multiple-choice',
+              prompt: 'Which of these may be styled inside a :visited rule?',
+              options: [
+                'background-image and font-size',
+                'display and position',
+                'Colour, and the other permitted properties',
+                'Nothing at all is permitted',
+              ],
+              answer: 2,
+              explanation: 'Browsers allow a narrow set of properties in :visited — colour among them — and ignore the rest to prevent history leaks.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -366,65 +428,6 @@ a:active {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s18',
-      title: 'HTML Link Colors quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s18-q1',
-          type: 'multiple-choice',
-          prompt: 'Why can :visited not be used to change a link font size?',
-          options: [
-            'Because font-size is not a colour property',
-            'Because reading the result back would leak which links the user has visited',
-            'Because browsers do not support the selector',
-            'Because font-size does not inherit',
-          ],
-          answer: 1,
-          explanation:
-            'Visiting history is private. If a page could set a size and read it back, it could probe the user history one bit at a time.',
-        },
-        {
-          id: 'quiz-html-s18-q2',
-          type: 'true-false',
-          prompt: 'Relying on colour alone to mark a link is an accessibility problem.',
-          answer: true,
-          explanation:
-            'Colour vision deficiency and low-contrast screens both break the distinction. The underline is what carries the meaning.',
-        },
-        {
-          id: 'quiz-html-s18-q3',
-          type: 'multiple-choice',
-          prompt: 'Which selector matches a link the user has already followed?',
-          options: [':link', ':visited', ':hover', ':target'],
-          answer: 1,
-          explanation: ':visited matches a followed link in the current browser profile.',
-        },
-        {
-          id: 'quiz-html-s18-q4',
-          type: 'blank',
-          prompt: 'Which pseudo-class applies while a keyboard user has focus on an element?',
-          answers: [':focus-visible', 'focus-visible', ':focus', 'focus'],
-          explanation:
-            ':focus-visible shows the ring only for keyboard interaction, which is what you almost always want.',
-        },
-        {
-          id: 'quiz-html-s18-q5',
-          type: 'multiple-choice',
-          prompt: 'Which of these may be styled inside a :visited rule?',
-          options: [
-            'background-image and font-size',
-            'display and position',
-            'Colour, and the other permitted properties',
-            'Nothing at all is permitted',
-          ],
-          answer: 2,
-          explanation:
-            'Browsers allow a narrow set of properties in :visited — colour among them — and ignore the rest to prevent history leaks.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s19',
@@ -442,6 +445,70 @@ a:active {
           'Describe the difference between a bookmark target and a named anchor',
         ],
         xp: 35,
+        quiz: {
+          id: 'quiz-html-l30',
+          title: 'HTML Bookmarks quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l30-q1',
+              type: 'multiple-choice',
+              prompt: 'What creates a bookmark target in modern HTML?',
+              options: [
+                'The name attribute on an anchor',
+                'The id attribute on any element',
+                'The target attribute on a link',
+                'The fragment attribute on the body',
+              ],
+              answer: 1,
+              explanation: 'Any element with an id can be a fragment target. The old name attribute on anchors is obsolete.',
+            },
+            {
+              id: 'quiz-html-l30-q2',
+              type: 'true-false',
+              prompt: 'Two elements on a page can share the same id.',
+              answer: false,
+              explanation: 'The id is the fragment identifier. Duplicates make the target ambiguous and break label and header associations.',
+            },
+            {
+              id: 'quiz-html-l30-q3',
+              type: 'multiple-choice',
+              prompt: 'What problem does scroll-margin-top solve?',
+              options: [
+                'A fragment target scrolled underneath a fixed header and made invisible',
+                'Links appearing before the page styles load',
+                'Headings jumping too slowly',
+                'The browser back button not working',
+              ],
+              answer: 0,
+              explanation: 'It reserves the space the fixed header occupies, so the target lands below it rather than under it.',
+            },
+            {
+              id: 'quiz-html-l30-q4',
+              type: 'blank',
+              prompt: 'What character starts a fragment identifier in a URL?',
+              answers: [
+                '#',
+                'hash',
+                'number sign',
+              ],
+              explanation: 'A fragment is written as a hash followed by the element id.',
+            },
+            {
+              id: 'quiz-html-l30-q5',
+              type: 'multiple-choice',
+              prompt: 'What happens when a fragment link points at an id that does not exist?',
+              options: [
+                'The browser shows an error page',
+                'Nothing visible happens; the page stays where it is',
+                'The page scrolls to the top',
+                'The link is removed from the document',
+              ],
+              answer: 1,
+              explanation: 'A missing target fails silently, which is why checking that every fragment resolves is a worthwhile test.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -577,69 +644,5 @@ h2, h3, [id] {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s19',
-      title: 'HTML Bookmarks quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s19-q1',
-          type: 'multiple-choice',
-          prompt: 'What creates a bookmark target in modern HTML?',
-          options: [
-            'The name attribute on an anchor',
-            'The id attribute on any element',
-            'The target attribute on a link',
-            'The fragment attribute on the body',
-          ],
-          answer: 1,
-          explanation:
-            'Any element with an id can be a fragment target. The old name attribute on anchors is obsolete.',
-        },
-        {
-          id: 'quiz-html-s19-q2',
-          type: 'true-false',
-          prompt: 'Two elements on a page can share the same id.',
-          answer: false,
-          explanation:
-            'The id is the fragment identifier. Duplicates make the target ambiguous and break label and header associations.',
-        },
-        {
-          id: 'quiz-html-s19-q3',
-          type: 'multiple-choice',
-          prompt: 'What problem does scroll-margin-top solve?',
-          options: [
-            'A fragment target scrolled underneath a fixed header and made invisible',
-            'Links appearing before the page styles load',
-            'Headings jumping too slowly',
-            'The browser back button not working',
-          ],
-          answer: 0,
-          explanation:
-            'It reserves the space the fixed header occupies, so the target lands below it rather than under it.',
-        },
-        {
-          id: 'quiz-html-s19-q4',
-          type: 'blank',
-          prompt: 'What character starts a fragment identifier in a URL?',
-          answers: ['#', 'hash', 'number sign'],
-          explanation: 'A fragment is written as a hash followed by the element id.',
-        },
-        {
-          id: 'quiz-html-s19-q5',
-          type: 'multiple-choice',
-          prompt: 'What happens when a fragment link points at an id that does not exist?',
-          options: [
-            'The browser shows an error page',
-            'Nothing visible happens; the page stays where it is',
-            'The page scrolls to the top',
-            'The link is removed from the document',
-          ],
-          answer: 1,
-          explanation:
-            'A missing target fails silently, which is why checking that every fragment resolves is a worthwhile test.',
-        },
-      ],
-    },
   },
 ]

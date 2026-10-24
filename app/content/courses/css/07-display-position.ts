@@ -20,6 +20,71 @@ export const cssDisplayPositionSections: Section[] = [
           'Explain how a flex or grid parent overrides the layout role of its children',
           'Remove an element from the layout and from the accessibility tree at the same time',
         ],
+        quiz: {
+          id: 'quiz-css-l54',
+          title: 'CSS Display quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l54-q1',
+              type: 'multiple-choice',
+              prompt: 'You set `width: 300px` and `padding: 20px` on a `<span>` and neither has any effect. What is the most likely cause?',
+              options: [
+                'The span is missing a `position` value',
+                'The span is `display: inline`, so it has no block box for width or vertical padding to apply to',
+                '`width` only works on elements inside a flex container',
+                'The padding is being overridden by a `box-sizing` rule',
+              ],
+              answer: 1,
+              explanation: 'An inline box has no separate block box, so `width` and `height` cannot apply, and top/bottom padding renders but does not affect layout. `display: inline-block` gives the span a real box and makes every box model property work.',
+            },
+            {
+              id: 'quiz-css-l54-q2',
+              type: 'true-false',
+              prompt: 'A `display: none` element is still announced by screen readers, because it stays in the HTML.',
+              answer: false,
+              explanation: '`display: none` removes the element from the accessibility tree as well as the layout. It cannot be focused either. It stays in the DOM for scripts and CSS to find, but nothing a user can perceive reaches it.',
+            },
+            {
+              id: 'quiz-css-l54-q3',
+              type: 'blank',
+              prompt: 'Which `display` value makes a parent lay its direct children out in a row, and blockifies those children in the process?',
+              answers: [
+                'flex',
+                'display: flex',
+              ],
+              explanation: '`display: flex` establishes a flex formatting context. Its direct children become flex items, which are laid out as block boxes, so `float` on them is ignored and their margins stop collapsing with anything.',
+            },
+            {
+              id: 'quiz-css-l54-q4',
+              type: 'identify-error',
+              prompt: 'Why does this row develop an unexplained few-pixel gap between the two boxes?',
+              code: '.row {\n  display: block;\n}\n.card {\n  display: inline-block;\n  width: 200px;\n}\n\n<div class="row">\n  <div class="card">One</div>\n  <div class="card">Two</div>\n</div>',
+              options: [
+                'Because `display: block` on the parent forces each child onto its own line',
+                'Because the newline and indentation between the two `div` elements count as a whitespace text node, which renders as a space in an inline formatting context',
+                'Because `width: 200px` on an inline-block is invalid and is being discarded',
+                'Because the parent has no `font-size` and inherits a fallback that adds spacing',
+              ],
+              answer: 1,
+              explanation: 'Inside a block container, inline-level children flow as one inline run, and any whitespace text node between them collapses to a single space that is rendered. That is the gap. `display: flex` on the parent with `gap` removes the problem entirely, because flex items are not part of an inline run and whitespace between them is ignored.',
+            },
+            {
+              id: 'quiz-css-l54-q5',
+              type: 'code-output',
+              prompt: 'What happens to the vertical spacing between the two items below?',
+              code: '.list {\n  display: flex;\n  flex-direction: column;\n}\n.item {\n  margin-bottom: 20px;\n}',
+              options: [
+                'The two margins collapse and the gap is 20px',
+                'The gap is 20px, because flex items never collapse their margins',
+                'The gap is 40px, because both margins are added',
+                'The items overlap, because margins do not apply to flex items',
+              ],
+              answer: 1,
+              explanation: 'Margins between flex items do not collapse. Each item keeps its own `margin-bottom`, so the space between the first and second item is 20px, exactly as written. In a normal block flow the same two margins would collapse to the larger of the two.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -276,73 +341,6 @@ export const cssDisplayPositionSections: Section[] = [
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s21',
-      title: 'CSS Display quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s21-q1',
-          type: 'multiple-choice',
-          prompt: 'You set `width: 300px` and `padding: 20px` on a `<span>` and neither has any effect. What is the most likely cause?',
-          options: [
-            'The span is missing a `position` value',
-            'The span is `display: inline`, so it has no block box for width or vertical padding to apply to',
-            '`width` only works on elements inside a flex container',
-            'The padding is being overridden by a `box-sizing` rule',
-          ],
-          answer: 1,
-          explanation:
-            'An inline box has no separate block box, so `width` and `height` cannot apply, and top/bottom padding renders but does not affect layout. `display: inline-block` gives the span a real box and makes every box model property work.',
-        },
-        {
-          id: 'quiz-css-s21-q2',
-          type: 'true-false',
-          prompt: 'A `display: none` element is still announced by screen readers, because it stays in the HTML.',
-          answer: false,
-          explanation:
-            '`display: none` removes the element from the accessibility tree as well as the layout. It cannot be focused either. It stays in the DOM for scripts and CSS to find, but nothing a user can perceive reaches it.',
-        },
-        {
-          id: 'quiz-css-s21-q3',
-          type: 'blank',
-          prompt: 'Which `display` value makes a parent lay its direct children out in a row, and blockifies those children in the process?',
-          answers: ['flex', 'display: flex'],
-          explanation:
-            '`display: flex` establishes a flex formatting context. Its direct children become flex items, which are laid out as block boxes, so `float` on them is ignored and their margins stop collapsing with anything.',
-        },
-        {
-          id: 'quiz-css-s21-q4',
-          type: 'identify-error',
-          prompt: 'Why does this row develop an unexplained few-pixel gap between the two boxes?',
-          code: '.row {\n  display: block;\n}\n.card {\n  display: inline-block;\n  width: 200px;\n}\n\n<div class="row">\n  <div class="card">One</div>\n  <div class="card">Two</div>\n</div>',
-          options: [
-            'Because `display: block` on the parent forces each child onto its own line',
-            'Because the newline and indentation between the two `div` elements count as a whitespace text node, which renders as a space in an inline formatting context',
-            'Because `width: 200px` on an inline-block is invalid and is being discarded',
-            'Because the parent has no `font-size` and inherits a fallback that adds spacing',
-          ],
-          answer: 1,
-          explanation:
-            'Inside a block container, inline-level children flow as one inline run, and any whitespace text node between them collapses to a single space that is rendered. That is the gap. `display: flex` on the parent with `gap` removes the problem entirely, because flex items are not part of an inline run and whitespace between them is ignored.',
-        },
-        {
-          id: 'quiz-css-s21-q5',
-          type: 'code-output',
-          prompt: 'What happens to the vertical spacing between the two items below?',
-          code: '.list {\n  display: flex;\n  flex-direction: column;\n}\n.item {\n  margin-bottom: 20px;\n}',
-          options: [
-            'The two margins collapse and the gap is 20px',
-            'The gap is 20px, because flex items never collapse their margins',
-            'The gap is 40px, because both margins are added',
-            'The items overlap, because margins do not apply to flex items',
-          ],
-          answer: 1,
-          explanation:
-            'Margins between flex items do not collapse. Each item keeps its own `margin-bottom`, so the space between the first and second item is 20px, exactly as written. In a normal block flow the same two margins would collapse to the larger of the two.',
-        },
-      ],
-    },
   },
   {
     id: 'css-s22',
@@ -363,6 +361,70 @@ export const cssDisplayPositionSections: Section[] = [
           'Use min-width as the opposite floor and predict what wins when they conflict',
           'Use min-content, max-content and fit-content to size to the content',
         ],
+        quiz: {
+          id: 'quiz-css-l55',
+          title: 'CSS Max-width quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l55-q1',
+              type: 'multiple-choice',
+              prompt: 'What is the practical difference between `width: 300px` and `max-width: 300px` on a block element?',
+              options: [
+                'There is none; both produce 300px when the parent is wider',
+                '`width` fixes the box at 300px and can overflow a narrower parent, while `max-width` only forbids going above 300px and still shrinks to fit',
+                '`max-width` is ignored by browsers that support `box-sizing: border-box`',
+                '`width` includes padding, `max-width` does not',
+              ],
+              answer: 1,
+              explanation: '`width` asks for an exact size. `max-width` only caps the size, so the element uses the smaller of the width and the cap and then still shrinks if the parent is narrower. That is why a `max-width` can never be the cause of an overflow.',
+            },
+            {
+              id: 'quiz-css-l55-q2',
+              type: 'true-false',
+              prompt: 'An element with `min-width: 400px` and `max-width: 200px` renders at 200px, because the cap is applied last.',
+              answer: false,
+              explanation: 'The `min-width` floor is enforced on the result, so when the two conflict the floor wins and the element renders at 400px. The limits are arithmetic bounds on the used width, not a priority list where the cap always wins.',
+            },
+            {
+              id: 'quiz-css-l55-q3',
+              type: 'blank',
+              prompt: 'Which intrinsic sizing keyword resolves to the width the content would take if nothing wrapped at all?',
+              answers: [
+                'max-content',
+                'max-content()',
+              ],
+              explanation: '`max-content` is the full unwrapped length of the content. `min-content` is the width of the longest unbreakable word, and `fit-content()` sits between them, capped by whatever length you pass it.',
+            },
+            {
+              id: 'quiz-css-l55-q4',
+              type: 'identify-error',
+              prompt: 'This "responsive" panel overflows its parent on a narrow screen. What is the mistake?',
+              code: '.panel {\n  width: 100%;\n  padding: 1.5rem;\n}\n',
+              options: [
+                '`width: 100%` should be `max-width: 100%`',
+                'The default `box-sizing: content-box` means the 1.5rem padding is added on top of the 100% width',
+                '`width` cannot be used on a block element',
+                '`padding` must come before `width` in the declaration block',
+              ],
+              answer: 1,
+              explanation: 'With `box-sizing: content-box`, `width: 100%` sizes the content box, so 1.5rem of padding on each side is added outside that and the panel ends up 3rem wider than its parent. Either use `box-sizing: border-box` or swap `width: 100%` for `max-width: 100%`.',
+            },
+            {
+              id: 'quiz-css-l55-q5',
+              type: 'multiple-choice',
+              prompt: 'A container has `max-width: 300px` and `min-width: 400px`. How wide does it actually render?',
+              options: [
+                '300px, because max-width is the outer limit',
+                '400px, because the min-width floor overrides the cap',
+                '300px on narrow screens and 400px on wide ones',
+                'The declaration is invalid and the element falls back to auto width',
+              ],
+              answer: 1,
+              explanation: 'The two limits are not a negotiation. The used width is fitted into the range they define, and when the minimum sits above the maximum the minimum wins, so the element renders at 400px. The combination is legal - it just does not do anything except guarantee 400px.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -670,72 +732,6 @@ img {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s22',
-      title: 'CSS Max-width quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s22-q1',
-          type: 'multiple-choice',
-          prompt: 'What is the practical difference between `width: 300px` and `max-width: 300px` on a block element?',
-          options: [
-            'There is none; both produce 300px when the parent is wider',
-            '`width` fixes the box at 300px and can overflow a narrower parent, while `max-width` only forbids going above 300px and still shrinks to fit',
-            '`max-width` is ignored by browsers that support `box-sizing: border-box`',
-            '`width` includes padding, `max-width` does not',
-          ],
-          answer: 1,
-          explanation:
-            '`width` asks for an exact size. `max-width` only caps the size, so the element uses the smaller of the width and the cap and then still shrinks if the parent is narrower. That is why a `max-width` can never be the cause of an overflow.',
-        },
-        {
-          id: 'quiz-css-s22-q2',
-          type: 'true-false',
-          prompt: 'An element with `min-width: 400px` and `max-width: 200px` renders at 200px, because the cap is applied last.',
-          answer: false,
-          explanation:
-            'The `min-width` floor is enforced on the result, so when the two conflict the floor wins and the element renders at 400px. The limits are arithmetic bounds on the used width, not a priority list where the cap always wins.',
-        },
-        {
-          id: 'quiz-css-s22-q3',
-          type: 'blank',
-          prompt: 'Which intrinsic sizing keyword resolves to the width the content would take if nothing wrapped at all?',
-          answers: ['max-content', 'max-content()'],
-          explanation:
-            '`max-content` is the full unwrapped length of the content. `min-content` is the width of the longest unbreakable word, and `fit-content()` sits between them, capped by whatever length you pass it.',
-        },
-        {
-          id: 'quiz-css-s22-q4',
-          type: 'identify-error',
-          prompt: 'This "responsive" panel overflows its parent on a narrow screen. What is the mistake?',
-          code: '.panel {\n  width: 100%;\n  padding: 1.5rem;\n}\n',
-          options: [
-            '`width: 100%` should be `max-width: 100%`',
-            'The default `box-sizing: content-box` means the 1.5rem padding is added on top of the 100% width',
-            '`width` cannot be used on a block element',
-            '`padding` must come before `width` in the declaration block',
-          ],
-          answer: 1,
-          explanation:
-            'With `box-sizing: content-box`, `width: 100%` sizes the content box, so 1.5rem of padding on each side is added outside that and the panel ends up 3rem wider than its parent. Either use `box-sizing: border-box` or swap `width: 100%` for `max-width: 100%`.',
-        },
-        {
-          id: 'quiz-css-s22-q5',
-          type: 'multiple-choice',
-          prompt: 'A container has `max-width: 300px` and `min-width: 400px`. How wide does it actually render?',
-          options: [
-            '300px, because max-width is the outer limit',
-            '400px, because the min-width floor overrides the cap',
-            '300px on narrow screens and 400px on wide ones',
-            'The declaration is invalid and the element falls back to auto width',
-          ],
-          answer: 1,
-          explanation:
-            'The two limits are not a negotiation. The used width is fitted into the range they define, and when the minimum sits above the maximum the minimum wins, so the element renders at 400px. The combination is legal - it just does not do anything except guarantee 400px.',
-        },
-      ],
-    },
   },
   {
     id: 'css-s23',
@@ -756,6 +752,70 @@ img {
           'Identify the containing block of an absolute element and use it to fix an unexpected parent',
           'Make a sticky header work by supplying a scroll container and an offset',
         ],
+        quiz: {
+          id: 'quiz-css-l56',
+          title: 'CSS Position quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l56-q1',
+              type: 'multiple-choice',
+              prompt: 'What is the difference in layout effect between `position: relative` and `position: absolute` on the same element?',
+              options: [
+                'None; both move the element by the same amount',
+                'Relative stays in the flow and keeps its space, absolute leaves the flow and its space is reclaimed',
+                'Relative can only be moved horizontally, absolute can be moved on both axes',
+                'Absolute removes the element from the document, relative keeps it in the DOM only',
+              ],
+              answer: 1,
+              explanation: 'A relative element reserves its original slot and is only displaced visually, so siblings do not move. An absolute element is out of flow, so nothing reserves its space and following siblings close up behind it. Both stay in the DOM - that is not what separates them.',
+            },
+            {
+              id: 'quiz-css-l56-q2',
+              type: 'true-false',
+              prompt: 'An absolutely positioned element with no positioned ancestor is positioned against the viewport.',
+              answer: false,
+              explanation: 'With no positioned ancestor it falls back to the initial containing block, which is the viewport-sized block at the top of the document, not the visible viewport. That is why such an element scrolls away with the page, while a `fixed` element does not.',
+            },
+            {
+              id: 'quiz-css-l56-q3',
+              type: 'blank',
+              prompt: 'Which `position` value is positioned against the nearest scrolling ancestor and is bounded by its own parent?',
+              answers: [
+                'sticky',
+                'position: sticky',
+              ],
+              explanation: '`sticky` stays in the flow until its offset would be crossed, then pins inside its scroll container. Because it is bounded by its parent, it can never escape its own section, which is the main reason to prefer it over `fixed` for in-page headers.',
+            },
+            {
+              id: 'quiz-css-l56-q4',
+              type: 'identify-error',
+              prompt: 'This header was meant to stay pinned at the top of the window while the page scrolls. Why does it not work?',
+              code: '.card {\n  transition: transform 200ms;\n}\n.fixed-header {\n  position: fixed;\n  top: 0;\n}\n\n<div class="card">\n  <div class="fixed-header">Menu</div>\n  <p>Page content</p>\n</div>',
+              options: [
+                '`top: 0` is not a valid offset for a fixed element',
+                '`position: fixed` cannot be combined with a parent that has padding',
+                'The `transform` on the ancestor makes it the containing block for the fixed element, so it scrolls with the page',
+                'Fixed elements need `z-index` to stay visible',
+              ],
+              answer: 2,
+              explanation: 'A non-`none` `transform` on an ancestor establishes a containing block for `position: fixed` descendants. The header is then positioned and scrolled relative to that card instead of the viewport. `filter`, `perspective`, `backdrop-filter` and `will-change: transform` have the same effect.',
+            },
+            {
+              id: 'quiz-css-l56-q5',
+              type: 'multiple-choice',
+              prompt: 'Your `position: sticky; top: 0` table header does not stick. What should you check first?',
+              options: [
+                'Whether the sticky element has a `z-index`',
+                'Whether an ancestor between it and the page has `overflow` set to anything other than visible, which makes that ancestor the scroll container',
+                'Whether the sticky element is `display: inline`',
+                'Whether the page has a `<meta name="viewport">` tag',
+              ],
+              answer: 1,
+              explanation: 'Sticky is positioned against its nearest scrolling ancestor, and any overflow other than `visible` creates one, even if it never actually scrolls. If such a wrapper sits between the header and the document scroller, the header pins to that wrapper instead and appears not to work.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1043,72 +1103,6 @@ img {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s23',
-      title: 'CSS Position quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s23-q1',
-          type: 'multiple-choice',
-          prompt: 'What is the difference in layout effect between `position: relative` and `position: absolute` on the same element?',
-          options: [
-            'None; both move the element by the same amount',
-            'Relative stays in the flow and keeps its space, absolute leaves the flow and its space is reclaimed',
-            'Relative can only be moved horizontally, absolute can be moved on both axes',
-            'Absolute removes the element from the document, relative keeps it in the DOM only',
-          ],
-          answer: 1,
-          explanation:
-            'A relative element reserves its original slot and is only displaced visually, so siblings do not move. An absolute element is out of flow, so nothing reserves its space and following siblings close up behind it. Both stay in the DOM - that is not what separates them.',
-        },
-        {
-          id: 'quiz-css-s23-q2',
-          type: 'true-false',
-          prompt: 'An absolutely positioned element with no positioned ancestor is positioned against the viewport.',
-          answer: false,
-          explanation:
-            'With no positioned ancestor it falls back to the initial containing block, which is the viewport-sized block at the top of the document, not the visible viewport. That is why such an element scrolls away with the page, while a `fixed` element does not.',
-        },
-        {
-          id: 'quiz-css-s23-q3',
-          type: 'blank',
-          prompt: 'Which `position` value is positioned against the nearest scrolling ancestor and is bounded by its own parent?',
-          answers: ['sticky', 'position: sticky'],
-          explanation:
-            '`sticky` stays in the flow until its offset would be crossed, then pins inside its scroll container. Because it is bounded by its parent, it can never escape its own section, which is the main reason to prefer it over `fixed` for in-page headers.',
-        },
-        {
-          id: 'quiz-css-s23-q4',
-          type: 'identify-error',
-          prompt: 'This header was meant to stay pinned at the top of the window while the page scrolls. Why does it not work?',
-          code: '.card {\n  transition: transform 200ms;\n}\n.fixed-header {\n  position: fixed;\n  top: 0;\n}\n\n<div class="card">\n  <div class="fixed-header">Menu</div>\n  <p>Page content</p>\n</div>',
-          options: [
-            '`top: 0` is not a valid offset for a fixed element',
-            '`position: fixed` cannot be combined with a parent that has padding',
-            'The `transform` on the ancestor makes it the containing block for the fixed element, so it scrolls with the page',
-            'Fixed elements need `z-index` to stay visible',
-          ],
-          answer: 2,
-          explanation:
-            'A non-`none` `transform` on an ancestor establishes a containing block for `position: fixed` descendants. The header is then positioned and scrolled relative to that card instead of the viewport. `filter`, `perspective`, `backdrop-filter` and `will-change: transform` have the same effect.',
-        },
-        {
-          id: 'quiz-css-s23-q5',
-          type: 'multiple-choice',
-          prompt: 'Your `position: sticky; top: 0` table header does not stick. What should you check first?',
-          options: [
-            'Whether the sticky element has a `z-index`',
-            'Whether an ancestor between it and the page has `overflow` set to anything other than visible, which makes that ancestor the scroll container',
-            'Whether the sticky element is `display: inline`',
-            'Whether the page has a `<meta name="viewport">` tag',
-          ],
-          answer: 1,
-          explanation:
-            'Sticky is positioned against its nearest scrolling ancestor, and any overflow other than `visible` creates one, even if it never actually scrolls. If such a wrapper sits between the header and the document scroller, the header pins to that wrapper instead and appears not to work.',
-        },
-      ],
-    },
   },
   {
     id: 'css-s24',
@@ -1129,6 +1123,70 @@ img {
           'Truncate a single line with an ellipsis using the full three-declaration recipe',
           'Explain why overflow: hidden is a problem for keyboard users and find the alternatives',
         ],
+        quiz: {
+          id: 'quiz-css-l57',
+          title: 'CSS Overflow quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l57-q1',
+              type: 'multiple-choice',
+              prompt: 'What is the practical difference between `overflow: auto` and `overflow: scroll`?',
+              options: [
+                'None; both clip the content identically',
+                'Both create a scroll container, but `scroll` always reserves the scrollbar track while `auto` only shows it when there is something to scroll to',
+                '`auto` also clips the overflowing content, `scroll` lets it spill',
+                '`scroll` only works on the vertical axis, `auto` on both',
+              ],
+              answer: 1,
+              explanation: 'Both make the box a scroll container. The difference is purely the scrollbar track: `auto` shows it on demand, `scroll` reserves it permanently. Use `scroll` when the content grows and shrinks and you do not want the layout to jump.',
+            },
+            {
+              id: 'quiz-css-l57-q2',
+              type: 'true-false',
+              prompt: 'Content that is clipped by `overflow: hidden` can still be reached by tabbing to it and letting the browser scroll it into view.',
+              answer: false,
+              explanation: 'A clipping container is not scrollable, so there is nowhere for the browser to scroll to. Anything clipped is unreachable: not focusable, not scrollable into view, not selectable, and not in the accessibility tree. That is the accessibility cost of `hidden`, and it is why truncating text needs a `title` or an expand control.',
+            },
+            {
+              id: 'quiz-css-l57-q3',
+              type: 'blank',
+              prompt: 'Which property adds the three-dot truncation to text that is clipped on a single line?',
+              answers: [
+                'text-overflow',
+                'text-overflow: ellipsis',
+              ],
+              explanation: '`text-overflow: ellipsis` draws the ellipsis, but it only works alongside a constrained width, `white-space: nowrap` and `overflow: hidden`. On its own it does nothing, which is the most common reason it appears not to work.',
+            },
+            {
+              id: 'quiz-css-l57-q4',
+              type: 'identify-error',
+              prompt: 'The developer expected a horizontal scrollbar. Why is there not one?',
+              code: '.wrap {\n  width: 300px;\n  overflow-x: hidden;\n  overflow-y: visible;\n}',
+              options: [
+                '`overflow-y: visible` is not a valid value',
+                '`overflow-x` must be declared before `overflow-y` in the block',
+                'Because once one axis is a scroll container, the `visible` axis is computed to `auto`, but `hidden` on x still clips instead of scrolling',
+                'Because `width` must be set with `max-width` for scrolling to work',
+              ],
+              answer: 2,
+              explanation: 'The two axes are not fully independent: when one is set to a value other than `visible`, the other is computed to `auto` if it was left at `visible`, so the box remains a usable scroll container. Here `overflow-x: hidden` is the load-bearing value and it clips rather than scrolls, so no scrollbar appears. Use `overflow-x: auto` to get one.',
+            },
+            {
+              id: 'quiz-css-l57-q5',
+              type: 'multiple-choice',
+              prompt: 'A long unbroken URL is forcing your whole page to scroll sideways. What is the least invasive fix?',
+              options: [
+                'Add `overflow: hidden` to the container, so the URL is clipped',
+                'Add `overflow-wrap: break-word` (or `word-break: break-word`) so the URL can wrap',
+                'Reduce the page font size until the URL fits',
+                'Add `overflow: scroll` to `body` so the sideways scroll is at least intentional',
+              ],
+              answer: 1,
+              explanation: 'The URL is one unbreakable token, so it has a minimum width larger than its column. Letting it wrap at arbitrary points fixes the cause. `overflow: hidden` would hide part of the URL, which is a data loss problem, not a layout fix.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1403,71 +1461,5 @@ img {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s24',
-      title: 'CSS Overflow quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s24-q1',
-          type: 'multiple-choice',
-          prompt: 'What is the practical difference between `overflow: auto` and `overflow: scroll`?',
-          options: [
-            'None; both clip the content identically',
-            'Both create a scroll container, but `scroll` always reserves the scrollbar track while `auto` only shows it when there is something to scroll to',
-            '`auto` also clips the overflowing content, `scroll` lets it spill',
-            '`scroll` only works on the vertical axis, `auto` on both',
-          ],
-          answer: 1,
-          explanation:
-            'Both make the box a scroll container. The difference is purely the scrollbar track: `auto` shows it on demand, `scroll` reserves it permanently. Use `scroll` when the content grows and shrinks and you do not want the layout to jump.',
-        },
-        {
-          id: 'quiz-css-s24-q2',
-          type: 'true-false',
-          prompt: 'Content that is clipped by `overflow: hidden` can still be reached by tabbing to it and letting the browser scroll it into view.',
-          answer: false,
-          explanation:
-            'A clipping container is not scrollable, so there is nowhere for the browser to scroll to. Anything clipped is unreachable: not focusable, not scrollable into view, not selectable, and not in the accessibility tree. That is the accessibility cost of `hidden`, and it is why truncating text needs a `title` or an expand control.',
-        },
-        {
-          id: 'quiz-css-s24-q3',
-          type: 'blank',
-          prompt: 'Which property adds the three-dot truncation to text that is clipped on a single line?',
-          answers: ['text-overflow', 'text-overflow: ellipsis'],
-          explanation:
-            '`text-overflow: ellipsis` draws the ellipsis, but it only works alongside a constrained width, `white-space: nowrap` and `overflow: hidden`. On its own it does nothing, which is the most common reason it appears not to work.',
-        },
-        {
-          id: 'quiz-css-s24-q4',
-          type: 'identify-error',
-          prompt: 'The developer expected a horizontal scrollbar. Why is there not one?',
-          code: '.wrap {\n  width: 300px;\n  overflow-x: hidden;\n  overflow-y: visible;\n}',
-          options: [
-            '`overflow-y: visible` is not a valid value',
-            '`overflow-x` must be declared before `overflow-y` in the block',
-            'Because once one axis is a scroll container, the `visible` axis is computed to `auto`, but `hidden` on x still clips instead of scrolling',
-            'Because `width` must be set with `max-width` for scrolling to work',
-          ],
-          answer: 2,
-          explanation:
-            'The two axes are not fully independent: when one is set to a value other than `visible`, the other is computed to `auto` if it was left at `visible`, so the box remains a usable scroll container. Here `overflow-x: hidden` is the load-bearing value and it clips rather than scrolls, so no scrollbar appears. Use `overflow-x: auto` to get one.',
-        },
-        {
-          id: 'quiz-css-s24-q5',
-          type: 'multiple-choice',
-          prompt: 'A long unbroken URL is forcing your whole page to scroll sideways. What is the least invasive fix?',
-          options: [
-            'Add `overflow: hidden` to the container, so the URL is clipped',
-            'Add `overflow-wrap: break-word` (or `word-break: break-word`) so the URL can wrap',
-            'Reduce the page font size until the URL fits',
-            'Add `overflow: scroll` to `body` so the sideways scroll is at least intentional',
-          ],
-          answer: 1,
-          explanation:
-            'The URL is one unbreakable token, so it has a minimum width larger than its column. Letting it wrap at arbitrary points fixes the cause. `overflow: hidden` would hide part of the URL, which is a data loss problem, not a layout fix.',
-        },
-      ],
-    },
   },
 ]

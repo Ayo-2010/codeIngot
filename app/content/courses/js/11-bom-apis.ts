@@ -20,6 +20,70 @@ export const jsBomApisSections: Section[] = [
           'Explain why a real page load is still the wrong answer for a small view change',
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-js-l78',
+          title: 'History quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l78-q1',
+              type: 'multiple-choice',
+              prompt: 'What does history.length actually count?',
+              options: [
+                'Every entry the current tab has pushed, across all same-origin pages in that tab',
+                'The number of entries on the current page only',
+                'The number of times the current page has been reloaded',
+                'The number of URLs in your bookmarks for this site',
+              ],
+              answer: 0,
+              explanation: 'The session history belongs to the tab, not the page. A single-page app that pushes an entry on every filter change is exactly why the number gets large, and it is why Back can take twenty clicks to leave a site.',
+            },
+            {
+              id: 'quiz-js-l78-q2',
+              type: 'true-false',
+              prompt: 'Calling history.pushState loads the new URL and fires a page load.',
+              answer: false,
+              explanation: 'pushState only adds an entry and rewrites the address bar. No request is made, no document is parsed, and neither load nor hashchange fires. Nothing renders until you listen for popstate and draw it yourself.',
+            },
+            {
+              id: 'quiz-js-l78-q3',
+              type: 'blank',
+              prompt: 'Which event fires when the user presses Back after you have used pushState?',
+              answers: [
+                'popstate',
+              ],
+              explanation: 'popstate fires for Back and Forward across same-document entries, and its event.state is the object you passed to the entry now being shown.',
+            },
+            {
+              id: 'quiz-js-l78-q4',
+              type: 'code-output',
+              prompt: 'What does this log?',
+              code: 'history.pushState({ page: 2 }, \'\', \'?page=2\')\nconsole.log(history.state.page)',
+              options: [
+                '2',
+                'null',
+                'undefined',
+                '?page=2',
+              ],
+              answer: 0,
+              explanation: 'The first argument is stored on the entry and handed back by history.state. The third argument is only what the address bar shows — a string, not data.',
+            },
+            {
+              id: 'quiz-js-l78-q5',
+              type: 'identify-error',
+              prompt: 'A developer calls pushState and listens for nothing. What happens when the user presses Back?',
+              code: 'history.pushState({ page: 2 }, \'\', \'/page-2\')\n// no popstate listener anywhere',
+              options: [
+                'The address bar returns to the previous URL but the page still shows the old content, because nothing re-rendered it',
+                'The browser restores the previous page from its cache',
+                'The entry is removed automatically, as if pushState had never been called',
+                'A SecurityError is reported in the console',
+              ],
+              answer: 0,
+              explanation: 'The entry is still there and the URL still changes. Only your own listener can move the content, which is the whole reason popstate exists.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -289,70 +353,6 @@ render()`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s66',
-      title: 'History check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s66-q1',
-          type: 'multiple-choice',
-          prompt: 'What does history.length actually count?',
-          options: [
-            'Every entry the current tab has pushed, across all same-origin pages in that tab',
-            'The number of entries on the current page only',
-            'The number of times the current page has been reloaded',
-            'The number of URLs in your bookmarks for this site',
-          ],
-          answer: 0,
-          explanation:
-            'The session history belongs to the tab, not the page. A single-page app that pushes an entry on every filter change is exactly why the number gets large, and it is why Back can take twenty clicks to leave a site.',
-        },
-        {
-          id: 'quiz-js-s66-q2',
-          type: 'true-false',
-          prompt: 'Calling history.pushState loads the new URL and fires a page load.',
-          answer: false,
-          explanation:
-            'pushState only adds an entry and rewrites the address bar. No request is made, no document is parsed, and neither load nor hashchange fires. Nothing renders until you listen for popstate and draw it yourself.',
-        },
-        {
-          id: 'quiz-js-s66-q3',
-          type: 'blank',
-          prompt: 'Which event fires when the user presses Back after you have used pushState?',
-          answers: ['popstate'],
-          explanation:
-            'popstate fires for Back and Forward across same-document entries, and its event.state is the object you passed to the entry now being shown.',
-        },
-        {
-          id: 'quiz-js-s66-q4',
-          type: 'code-output',
-          prompt: 'What does this log?',
-          code: `history.pushState({ page: 2 }, '', '?page=2')
-console.log(history.state.page)`,
-          options: ['2', 'null', 'undefined', '?page=2'],
-          answer: 0,
-          explanation:
-            'The first argument is stored on the entry and handed back by history.state. The third argument is only what the address bar shows — a string, not data.',
-        },
-        {
-          id: 'quiz-js-s66-q5',
-          type: 'identify-error',
-          prompt: 'A developer calls pushState and listens for nothing. What happens when the user presses Back?',
-          code: `history.pushState({ page: 2 }, '', '/page-2')
-// no popstate listener anywhere`,
-          options: [
-            'The address bar returns to the previous URL but the page still shows the old content, because nothing re-rendered it',
-            'The browser restores the previous page from its cache',
-            'The entry is removed automatically, as if pushState had never been called',
-            'A SecurityError is reported in the console',
-          ],
-          answer: 0,
-          explanation:
-            'The entry is still there and the URL still changes. Only your own listener can move the content, which is the whole reason popstate exists.',
-        },
-      ],
-    },
   },
 
   {
@@ -373,6 +373,71 @@ console.log(history.state.page)`,
           'Explain why userAgent is a weak feature test and what to use instead',
         ],
         xp: 45,
+        quiz: {
+          id: 'quiz-js-l79',
+          title: 'Navigator quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l79-q1',
+              type: 'multiple-choice',
+              prompt: 'What is navigator.userAgent?',
+              options: [
+                'A string describing the browser and platform',
+                'A unique identifier that stays constant for one visitor',
+                'The width of the browser window in pixels',
+                'A promise that resolves once the page has loaded',
+              ],
+              answer: 0,
+              explanation: 'It is a descriptive string about the browser build and platform. It is not an identity: it describes the software, not the person, which is exactly why it has been reduced and frozen by browsers.',
+            },
+            {
+              id: 'quiz-js-l79-q2',
+              type: 'true-false',
+              prompt: 'navigator.onLine can be trusted to tell you whether a server is actually reachable.',
+              answer: false,
+              explanation: 'It reports whether the machine has a network interface. A captive portal, a dead router or a stale DNS cache all leave it reporting true, so it is fine for a hint and useless as a health check.',
+            },
+            {
+              id: 'quiz-js-l79-q3',
+              type: 'blank',
+              prompt: 'Which navigator property reports how many logical CPU cores the browser may use?',
+              answers: [
+                'hardwareconcurrency',
+                'navigator.hardwareconcurrency',
+              ],
+              explanation: 'hardwareConcurrency is a practical hint for how much work to hand to a web worker, and it is capped by the browser rather than being a raw count of the silicon.',
+            },
+            {
+              id: 'quiz-js-l79-q4',
+              type: 'code-output',
+              prompt: 'What does this log?',
+              code: 'console.log(typeof navigator.onLine)',
+              options: [
+                'boolean',
+                'string',
+                'number',
+                'undefined',
+              ],
+              answer: 0,
+              explanation: 'It is a live boolean, and the online and offline events are how you find out when it changes. Reading it once at the start of your script is not enough on its own.',
+            },
+            {
+              id: 'quiz-js-l79-q5',
+              type: 'identify-error',
+              prompt: 'What is the real problem with branching the layout on the user agent string?',
+              code: 'if (navigator.userAgent.indexOf(\'Mobile\') > -1) {\n  showDesktopLayout()\n}',
+              options: [
+                'The string can be frozen, spoofed or reduced, so it is an unreliable test of the thing you actually care about',
+                'indexOf does not exist on strings',
+                'userAgent is undefined in every browser',
+                'It fails only when the page is served over http',
+              ],
+              answer: 0,
+              explanation: 'The string format is not a contract. Test the feature instead: matchMedia("(pointer: coarse)") for a touch device, or the presence of the API or CSS you are about to use.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -579,70 +644,6 @@ add('Online', navigator.onLine ? 'yes' : 'no')`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s67',
-      title: 'Navigator check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s67-q1',
-          type: 'multiple-choice',
-          prompt: 'What is navigator.userAgent?',
-          options: [
-            'A string describing the browser and platform',
-            'A unique identifier that stays constant for one visitor',
-            'The width of the browser window in pixels',
-            'A promise that resolves once the page has loaded',
-          ],
-          answer: 0,
-          explanation:
-            'It is a descriptive string about the browser build and platform. It is not an identity: it describes the software, not the person, which is exactly why it has been reduced and frozen by browsers.',
-        },
-        {
-          id: 'quiz-js-s67-q2',
-          type: 'true-false',
-          prompt: 'navigator.onLine can be trusted to tell you whether a server is actually reachable.',
-          answer: false,
-          explanation:
-            'It reports whether the machine has a network interface. A captive portal, a dead router or a stale DNS cache all leave it reporting true, so it is fine for a hint and useless as a health check.',
-        },
-        {
-          id: 'quiz-js-s67-q3',
-          type: 'blank',
-          prompt: 'Which navigator property reports how many logical CPU cores the browser may use?',
-          answers: ['hardwareconcurrency', 'navigator.hardwareconcurrency'],
-          explanation:
-            'hardwareConcurrency is a practical hint for how much work to hand to a web worker, and it is capped by the browser rather than being a raw count of the silicon.',
-        },
-        {
-          id: 'quiz-js-s67-q4',
-          type: 'code-output',
-          prompt: 'What does this log?',
-          code: `console.log(typeof navigator.onLine)`,
-          options: ['boolean', 'string', 'number', 'undefined'],
-          answer: 0,
-          explanation:
-            'It is a live boolean, and the online and offline events are how you find out when it changes. Reading it once at the start of your script is not enough on its own.',
-        },
-        {
-          id: 'quiz-js-s67-q5',
-          type: 'identify-error',
-          prompt: 'What is the real problem with branching the layout on the user agent string?',
-          code: `if (navigator.userAgent.indexOf('Mobile') > -1) {
-  showDesktopLayout()
-}`,
-          options: [
-            'The string can be frozen, spoofed or reduced, so it is an unreliable test of the thing you actually care about',
-            'indexOf does not exist on strings',
-            'userAgent is undefined in every browser',
-            'It fails only when the page is served over http',
-          ],
-          answer: 0,
-          explanation:
-            'The string format is not a contract. Test the feature instead: matchMedia("(pointer: coarse)") for a touch device, or the presence of the API or CSS you are about to use.',
-        },
-      ],
-    },
   },
 
   {
@@ -664,6 +665,70 @@ add('Online', navigator.onLine ? 'yes' : 'no')`,
           'Report the window and screen measurements that decide a popup size',
         ],
         xp: 45,
+        quiz: {
+          id: 'quiz-js-l80',
+          title: 'Popups quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l80-q1',
+              type: 'multiple-choice',
+              prompt: 'What does window.open return when a popup blocker stops the window?',
+              options: [
+                'null',
+                'undefined',
+                'an empty window object',
+                'the URL it was about to load',
+              ],
+              answer: 0,
+              explanation: 'It returns null, so every use of the result needs a guard. Calling a method on the result without checking is the crash you will meet otherwise.',
+            },
+            {
+              id: 'quiz-js-l80-q2',
+              type: 'true-false',
+              prompt: 'A window.open call inside a page load event handler works reliably in every current browser.',
+              answer: false,
+              explanation: 'Blockers key on user activation, so a load-time call has none and is blocked. Some blockers then treat the whole origin as suspicious and block the popup you actually wanted.',
+            },
+            {
+              id: 'quiz-js-l80-q3',
+              type: 'blank',
+              prompt: 'Which features string value stops the opened page getting a window.opener reference back to your page?',
+              answers: [
+                'noopener',
+              ],
+              explanation: 'noopener is the direct answer. noreferrer also implies it in current browsers, and it additionally drops the Referer header, which is its own reason to use it.',
+            },
+            {
+              id: 'quiz-js-l80-q4',
+              type: 'code-output',
+              prompt: 'With a popup blocker active, what reaches the console?',
+              code: 'var win = window.open(\'about:blank\', \'_blank\', \'width=400\')\nif (win) {\n  win.close()\n} else {\n  console.log(\'blocked\')\n}',
+              options: [
+                'blocked',
+                'nothing is logged',
+                'an error is reported',
+                '400',
+              ],
+              answer: 0,
+              explanation: 'The blocked call gives null, so the else branch is the one that runs. The point of the check is that the user is told, rather than the app carrying on as if a window existed.',
+            },
+            {
+              id: 'quiz-js-l80-q5',
+              type: 'identify-error',
+              prompt: 'What is the risk in this line?',
+              code: 'window.open(\'https://example.com/report\', \'_blank\')',
+              options: [
+                'The page that opens gets window.opener and can navigate or redirect the page that opened it',
+                'The URL is malformed because it is not encoded',
+                'It always opens a full window instead of a tab',
+                'It cannot open an https page from an http page',
+              ],
+              answer: 0,
+              explanation: 'That is tabnabbing. The fix is a third argument of "noopener", and the same rel="noopener" on any link in your own markup that uses target="_blank".',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -881,68 +946,6 @@ button.addEventListener('click', function () {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s68',
-      title: 'Popups check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s68-q1',
-          type: 'multiple-choice',
-          prompt: 'What does window.open return when a popup blocker stops the window?',
-          options: ['null', 'undefined', 'an empty window object', 'the URL it was about to load'],
-          answer: 0,
-          explanation:
-            'It returns null, so every use of the result needs a guard. Calling a method on the result without checking is the crash you will meet otherwise.',
-        },
-        {
-          id: 'quiz-js-s68-q2',
-          type: 'true-false',
-          prompt: 'A window.open call inside a page load event handler works reliably in every current browser.',
-          answer: false,
-          explanation:
-            'Blockers key on user activation, so a load-time call has none and is blocked. Some blockers then treat the whole origin as suspicious and block the popup you actually wanted.',
-        },
-        {
-          id: 'quiz-js-s68-q3',
-          type: 'blank',
-          prompt: 'Which features string value stops the opened page getting a window.opener reference back to your page?',
-          answers: ['noopener'],
-          explanation:
-            'noopener is the direct answer. noreferrer also implies it in current browsers, and it additionally drops the Referer header, which is its own reason to use it.',
-        },
-        {
-          id: 'quiz-js-s68-q4',
-          type: 'code-output',
-          prompt: 'With a popup blocker active, what reaches the console?',
-          code: `var win = window.open('about:blank', '_blank', 'width=400')
-if (win) {
-  win.close()
-} else {
-  console.log('blocked')
-}`,
-          options: ['blocked', 'nothing is logged', 'an error is reported', '400'],
-          answer: 0,
-          explanation:
-            'The blocked call gives null, so the else branch is the one that runs. The point of the check is that the user is told, rather than the app carrying on as if a window existed.',
-        },
-        {
-          id: 'quiz-js-s68-q5',
-          type: 'identify-error',
-          prompt: 'What is the risk in this line?',
-          code: `window.open('https://example.com/report', '_blank')`,
-          options: [
-            'The page that opens gets window.opener and can navigate or redirect the page that opened it',
-            'The URL is malformed because it is not encoded',
-            'It always opens a full window instead of a tab',
-            'It cannot open an https page from an http page',
-          ],
-          answer: 0,
-          explanation:
-            'That is tabnabbing. The fix is a third argument of "noopener", and the same rel="noopener" on any link in your own markup that uses target="_blank".',
-        },
-      ],
-    },
   },
 
   {
@@ -964,6 +967,70 @@ if (win) {
           'Cancel an animation with cancelAnimationFrame instead of leaving it running',
         ],
         xp: 55,
+        quiz: {
+          id: 'quiz-js-l81',
+          title: 'Timing and animation frames quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l81-q1',
+              type: 'multiple-choice',
+              prompt: 'Which function should redraw an animation so it stays in step with the display?',
+              options: [
+                'requestAnimationFrame',
+                'setTimeout at 16ms',
+                'setInterval at 16ms',
+                'Date.now in a while loop',
+              ],
+              answer: 0,
+              explanation: 'The frame callback is scheduled for the display itself, and it stops costing anything when the tab is hidden. A timer runs on its own clock whether or not anything was painted.',
+            },
+            {
+              id: 'quiz-js-l81-q2',
+              type: 'true-false',
+              prompt: 'setTimeout(fn, 0) runs fn straight away, before the rest of the current code.',
+              answer: false,
+              explanation: 'It queues a task, so the rest of the current script finishes first, and the browser clamps the delay to something like 4ms. Zero means "as soon as possible", not "now".',
+            },
+            {
+              id: 'quiz-js-l81-q3',
+              type: 'blank',
+              prompt: 'Which method cancels a requestAnimationFrame callback that has not run yet?',
+              answers: [
+                'cancelanimationframe',
+              ],
+              explanation: 'It takes the id returned by the call you want to cancel, which is the frame callback equivalent of clearTimeout.',
+            },
+            {
+              id: 'quiz-js-l81-q4',
+              type: 'code-output',
+              prompt: 'What does this log?',
+              code: 'var n = 0\nfunction tick() {\n  n = n + 1\n  if (n < 3) requestAnimationFrame(tick)\n}\nrequestAnimationFrame(tick)\nconsole.log(n)',
+              options: [
+                '0',
+                '1',
+                '3',
+                'undefined',
+              ],
+              answer: 0,
+              explanation: 'The callback is scheduled for a later frame, so the synchronous log statement runs first with nothing done yet. That is the same queuing behaviour as a timer, and the same reason a frame loop is written the way it is.',
+            },
+            {
+              id: 'quiz-js-l81-q5',
+              type: 'identify-error',
+              prompt: 'What is the problem with this loop?',
+              code: 'setInterval(function () {\n  position = position + 10\n}, 0)',
+              options: [
+                'A delay of 0 floods the main thread with timer tasks instead of waiting for the display',
+                'setInterval cannot be given a delay of 0',
+                'position has to be declared with let before it can be added to',
+                'The callback must be an arrow function',
+              ],
+              answer: 0,
+              explanation: 'The browser clamps nested timers to roughly 4ms and throttles them further, so you get a busy loop that is not in step with any frame and keeps running in a hidden tab. Use requestAnimationFrame for motion.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1230,76 +1297,6 @@ document.querySelector('#stop').addEventListener('click', function () {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s69',
-      title: 'Timing check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s69-q1',
-          type: 'multiple-choice',
-          prompt: 'Which function should redraw an animation so it stays in step with the display?',
-          options: [
-            'requestAnimationFrame',
-            'setTimeout at 16ms',
-            'setInterval at 16ms',
-            'Date.now in a while loop',
-          ],
-          answer: 0,
-          explanation:
-            'The frame callback is scheduled for the display itself, and it stops costing anything when the tab is hidden. A timer runs on its own clock whether or not anything was painted.',
-        },
-        {
-          id: 'quiz-js-s69-q2',
-          type: 'true-false',
-          prompt: 'setTimeout(fn, 0) runs fn straight away, before the rest of the current code.',
-          answer: false,
-          explanation:
-            'It queues a task, so the rest of the current script finishes first, and the browser clamps the delay to something like 4ms. Zero means "as soon as possible", not "now".',
-        },
-        {
-          id: 'quiz-js-s69-q3',
-          type: 'blank',
-          prompt: 'Which method cancels a requestAnimationFrame callback that has not run yet?',
-          answers: ['cancelanimationframe'],
-          explanation:
-            'It takes the id returned by the call you want to cancel, which is the frame callback equivalent of clearTimeout.',
-        },
-        {
-          id: 'quiz-js-s69-q4',
-          type: 'code-output',
-          prompt: 'What does this log?',
-          code: `var n = 0
-function tick() {
-  n = n + 1
-  if (n < 3) requestAnimationFrame(tick)
-}
-requestAnimationFrame(tick)
-console.log(n)`,
-          options: ['0', '1', '3', 'undefined'],
-          answer: 0,
-          explanation:
-            'The callback is scheduled for a later frame, so the synchronous log statement runs first with nothing done yet. That is the same queuing behaviour as a timer, and the same reason a frame loop is written the way it is.',
-        },
-        {
-          id: 'quiz-js-s69-q5',
-          type: 'identify-error',
-          prompt: 'What is the problem with this loop?',
-          code: `setInterval(function () {
-  position = position + 10
-}, 0)`,
-          options: [
-            'A delay of 0 floods the main thread with timer tasks instead of waiting for the display',
-            'setInterval cannot be given a delay of 0',
-            'position has to be declared with let before it can be added to',
-            'The callback must be an arrow function',
-          ],
-          answer: 0,
-          explanation:
-            'The browser clamps nested timers to roughly 4ms and throttles them further, so you get a busy loop that is not in step with any frame and keeps running in a hidden tab. Use requestAnimationFrame for motion.',
-        },
-      ],
-    },
   },
 
   {
@@ -1321,6 +1318,70 @@ console.log(n)`,
           'Explain why anything sensitive belongs behind httpOnly instead',
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-js-l82',
+          title: 'Cookies quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l82-q1',
+              type: 'multiple-choice',
+              prompt: 'What does document.cookie give you?',
+              options: [
+                'One string holding every cookie this page is allowed to read',
+                'An object with one property per cookie',
+                'Only the cookies that the current page set',
+                'An array with one entry per cookie',
+              ],
+              answer: 0,
+              explanation: 'It is a single name=value string joined by semicolons, and it is filtered by the HttpOnly attribute and by the path and domain rules. That is why every piece of cookie code starts by parsing it.',
+            },
+            {
+              id: 'quiz-js-l82-q2',
+              type: 'true-false',
+              prompt: 'A cookie set with the httpOnly attribute can be read from JavaScript with document.cookie.',
+              answer: false,
+              explanation: 'httpOnly exists precisely to hide a value from page scripts. It is still sent on matching requests, which is what makes it right for a session identifier.',
+            },
+            {
+              id: 'quiz-js-l82-q3',
+              type: 'blank',
+              prompt: 'Which cookie attribute keeps a cookie from being sent on cross-site requests?',
+              answers: [
+                'samesite',
+              ],
+              explanation: 'SameSite=Lax or Strict withholds the cookie from requests initiated by another site, which is the main defence against cross-site request forgery and against third-party tracking.',
+            },
+            {
+              id: 'quiz-js-l82-q4',
+              type: 'code-output',
+              prompt: 'Roughly how long does this cookie last?',
+              code: 'document.cookie = \'theme=dark; path=/; max-age=60\'',
+              options: [
+                '60 seconds',
+                '60 minutes',
+                '60 days',
+                'Until the tab is closed',
+              ],
+              answer: 0,
+              explanation: 'max-age is counted in seconds, not minutes, and the expires attribute is the alternative spelling with a date. Get this wrong and a "remember me" cookie lasts a minute.',
+            },
+            {
+              id: 'quiz-js-l82-q5',
+              type: 'identify-error',
+              prompt: 'What is the problem with this line?',
+              code: 'document.cookie = \'sessionToken=\' + token + \'; path=/\'',
+              options: [
+                'Any script on the page can read the token, and it is resent with every request to the site',
+                'Cookie values cannot be built from a variable',
+                'The name is too long for a cookie',
+                'path=/ means the cookie is only sent to the root path',
+              ],
+              answer: 0,
+              explanation: 'A cookie set this way is readable by every script on the page and is attached to every matching request. A session identifier belongs in a server-set httpOnly cookie instead.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1532,68 +1593,6 @@ return jar && typeof jar === 'object' && Object.keys(jar).length === 0
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s70',
-      title: 'Cookies check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s70-q1',
-          type: 'multiple-choice',
-          prompt: 'What does document.cookie give you?',
-          options: [
-            'One string holding every cookie this page is allowed to read',
-            'An object with one property per cookie',
-            'Only the cookies that the current page set',
-            'An array with one entry per cookie',
-          ],
-          answer: 0,
-          explanation:
-            'It is a single name=value string joined by semicolons, and it is filtered by the HttpOnly attribute and by the path and domain rules. That is why every piece of cookie code starts by parsing it.',
-        },
-        {
-          id: 'quiz-js-s70-q2',
-          type: 'true-false',
-          prompt: 'A cookie set with the httpOnly attribute can be read from JavaScript with document.cookie.',
-          answer: false,
-          explanation:
-            'httpOnly exists precisely to hide a value from page scripts. It is still sent on matching requests, which is what makes it right for a session identifier.',
-        },
-        {
-          id: 'quiz-js-s70-q3',
-          type: 'blank',
-          prompt: 'Which cookie attribute keeps a cookie from being sent on cross-site requests?',
-          answers: ['samesite'],
-          explanation:
-            'SameSite=Lax or Strict withholds the cookie from requests initiated by another site, which is the main defence against cross-site request forgery and against third-party tracking.',
-        },
-        {
-          id: 'quiz-js-s70-q4',
-          type: 'code-output',
-          prompt: 'Roughly how long does this cookie last?',
-          code: `document.cookie = 'theme=dark; path=/; max-age=60'`,
-          options: ['60 seconds', '60 minutes', '60 days', 'Until the tab is closed'],
-          answer: 0,
-          explanation:
-            'max-age is counted in seconds, not minutes, and the expires attribute is the alternative spelling with a date. Get this wrong and a "remember me" cookie lasts a minute.',
-        },
-        {
-          id: 'quiz-js-s70-q5',
-          type: 'identify-error',
-          prompt: 'What is the problem with this line?',
-          code: `document.cookie = 'sessionToken=' + token + '; path=/'`,
-          options: [
-            'Any script on the page can read the token, and it is resent with every request to the site',
-            'Cookie values cannot be built from a variable',
-            'The name is too long for a cookie',
-            'path=/ means the cookie is only sent to the root path',
-          ],
-          answer: 0,
-          explanation:
-            'A cookie set this way is readable by every script on the page and is attached to every matching request. A session identifier belongs in a server-set httpOnly cookie instead.',
-        },
-      ],
-    },
   },
 
   {
@@ -1616,6 +1615,70 @@ return jar && typeof jar === 'object' && Object.keys(jar).length === 0
           'Add your own rule with setCustomValidity and clear it afterwards',
         ],
         xp: 65,
+        quiz: {
+          id: 'quiz-js-l83',
+          title: 'Web APIs, the History API and form validation quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l83-q1',
+              type: 'multiple-choice',
+              prompt: 'What does form.checkValidity() do?',
+              options: [
+                'Runs every control’s constraint rules and returns true or false, without showing any message',
+                'Shows the browser’s own validation popup and returns the result',
+                'Submits the form if everything passes',
+                'Turns the invalid fields red',
+              ],
+              answer: 0,
+              explanation: 'checkValidity is the quiet version: it asks the question and answers it. reportValidity is the one that talks to the user, and the popup it shows is not yours to style.',
+            },
+            {
+              id: 'quiz-js-l83-q2',
+              type: 'true-false',
+              prompt: 'Calling event.preventDefault() inside a submit handler stops the browser from submitting the form.',
+              answer: true,
+              explanation: 'It is the first line of any submit handler that talks to a server. Skip it and the browser does a full page submit, the page unloads, and any fetch you started goes with it.',
+            },
+            {
+              id: 'quiz-js-l83-q3',
+              type: 'blank',
+              prompt: 'Which object exposes the specific reason an input is invalid, such as valueMissing or typeMismatch?',
+              answers: [
+                'validity',
+              ],
+              explanation: 'input.validity is a set of booleans naming the failed rule, which is what lets you point at one specific field. input.validationMessage is the sentence that goes with it.',
+            },
+            {
+              id: 'quiz-js-l83-q4',
+              type: 'code-output',
+              prompt: 'What does this log?',
+              code: 'var input = document.querySelector(\'#age\')\ninput.setCustomValidity(\'\')\ninput.setCustomValidity(\'You must be 18 or over\')\nconsole.log(input.validity.valid)',
+              options: [
+                'false',
+                'true',
+                'undefined',
+                'It depends on the current value',
+              ],
+              answer: 0,
+              explanation: 'A custom message sets the customError flag, which makes the field invalid regardless of the other rules. The empty-string call before it is what lets the built-in rules work again later.',
+            },
+            {
+              id: 'quiz-js-l83-q5',
+              type: 'identify-error',
+              prompt: 'What is missing here?',
+              code: 'form.addEventListener(\'submit\', function (e) {\n  fetch(\'/save\', { method: \'POST\', body: new FormData(form) })\n})',
+              options: [
+                'e.preventDefault(), so the browser also does its own submit and the data is sent twice',
+                'A content-type header on the request',
+                'An action attribute on the form',
+                'FormData cannot be sent with fetch',
+              ],
+              answer: 0,
+              explanation: 'Without preventDefault the browser performs its own navigation, and the page unloads before the fetch can be read. FormData sets its own multipart content type, so that header is the browser’s job.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1914,73 +1977,6 @@ form.addEventListener('submit', function (event) {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s71',
-      title: 'Web APIs check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s71-q1',
-          type: 'multiple-choice',
-          prompt: 'What does form.checkValidity() do?',
-          options: [
-            'Runs every control’s constraint rules and returns true or false, without showing any message',
-            'Shows the browser’s own validation popup and returns the result',
-            'Submits the form if everything passes',
-            'Turns the invalid fields red',
-          ],
-          answer: 0,
-          explanation:
-            'checkValidity is the quiet version: it asks the question and answers it. reportValidity is the one that talks to the user, and the popup it shows is not yours to style.',
-        },
-        {
-          id: 'quiz-js-s71-q2',
-          type: 'true-false',
-          prompt: 'Calling event.preventDefault() inside a submit handler stops the browser from submitting the form.',
-          answer: true,
-          explanation:
-            'It is the first line of any submit handler that talks to a server. Skip it and the browser does a full page submit, the page unloads, and any fetch you started goes with it.',
-        },
-        {
-          id: 'quiz-js-s71-q3',
-          type: 'blank',
-          prompt: 'Which object exposes the specific reason an input is invalid, such as valueMissing or typeMismatch?',
-          answers: ['validity'],
-          explanation:
-            'input.validity is a set of booleans naming the failed rule, which is what lets you point at one specific field. input.validationMessage is the sentence that goes with it.',
-        },
-        {
-          id: 'quiz-js-s71-q4',
-          type: 'code-output',
-          prompt: 'What does this log?',
-          code: `var input = document.querySelector('#age')
-input.setCustomValidity('')
-input.setCustomValidity('You must be 18 or over')
-console.log(input.validity.valid)`,
-          options: ['false', 'true', 'undefined', 'It depends on the current value'],
-          answer: 0,
-          explanation:
-            'A custom message sets the customError flag, which makes the field invalid regardless of the other rules. The empty-string call before it is what lets the built-in rules work again later.',
-        },
-        {
-          id: 'quiz-js-s71-q5',
-          type: 'identify-error',
-          prompt: 'What is missing here?',
-          code: `form.addEventListener('submit', function (e) {
-  fetch('/save', { method: 'POST', body: new FormData(form) })
-})`,
-          options: [
-            'e.preventDefault(), so the browser also does its own submit and the data is sent twice',
-            'A content-type header on the request',
-            'An action attribute on the form',
-            'FormData cannot be sent with fetch',
-          ],
-          answer: 0,
-          explanation:
-            'Without preventDefault the browser performs its own navigation, and the page unloads before the fetch can be read. FormData sets its own multipart content type, so that header is the browser’s job.',
-        },
-      ],
-    },
   },
 
   {
@@ -2002,6 +1998,70 @@ console.log(input.validity.valid)`,
           'Namespace your keys and catch the quota error instead of losing the data',
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-js-l84',
+          title: 'localStorage and sessionStorage quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l84-q1',
+              type: 'multiple-choice',
+              prompt: 'Which of these survives closing the tab?',
+              options: [
+                'localStorage',
+                'sessionStorage',
+                'Both of them',
+                'Neither of them',
+              ],
+              answer: 0,
+              explanation: 'localStorage is kept until something deletes it or the user clears site data. sessionStorage belongs to the tab and is discarded with it, which is exactly why it suits a wizard and not a saved draft.',
+            },
+            {
+              id: 'quiz-js-l84-q2',
+              type: 'true-false',
+              prompt: 'Values in localStorage are stored as strings, so saving an object needs JSON.stringify.',
+              answer: true,
+              explanation: 'Storing an object coerces it to "[object Object]" and you get it back as that string. JSON.stringify on the way in and JSON.parse on the way out are the only way to keep the structure.',
+            },
+            {
+              id: 'quiz-js-l84-q3',
+              type: 'blank',
+              prompt: 'Which method removes a single named key from localStorage?',
+              answers: [
+                'removeitem',
+              ],
+              explanation: 'removeItem takes one key. clear() is the blunt version that empties storage for the whole origin, including keys another feature put there.',
+            },
+            {
+              id: 'quiz-js-l84-q4',
+              type: 'code-output',
+              prompt: 'What does this log?',
+              code: 'localStorage.setItem(\'count\', 4)\nconsole.log(localStorage.getItem(\'count\') + 1)',
+              options: [
+                '"41"',
+                '5',
+                '"5"',
+                'null',
+              ],
+              answer: 0,
+              explanation: 'getItem hands back the string "4", and the + operator joins two strings rather than adding two numbers. Convert with Number() on the way out and String() on the way in.',
+            },
+            {
+              id: 'quiz-js-l84-q5',
+              type: 'identify-error',
+              prompt: 'What is wrong with this?',
+              code: 'for (var i = 0; i < 1000000; i++) {\n  localStorage.setItem(\'log-\' + i, \'x\')\n}',
+              options: [
+                'Every write is synchronous, and the 5 MB quota will be hit long before a million keys',
+                'localStorage cannot be written from inside a loop',
+                'setItem returns a promise that has to be awaited',
+                'A key cannot contain a hyphen',
+              ],
+              answer: 0,
+              explanation: 'Storage is not a database: writes block the main thread, the origin has roughly 5 MB, and the excess raises a QuotaExceededError. Keep one key with a bounded value rather than a key per row.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -2256,65 +2316,5 @@ function clearNote(key) {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s72',
-      title: 'Web storage check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s72-q1',
-          type: 'multiple-choice',
-          prompt: 'Which of these survives closing the tab?',
-          options: ['localStorage', 'sessionStorage', 'Both of them', 'Neither of them'],
-          answer: 0,
-          explanation:
-            'localStorage is kept until something deletes it or the user clears site data. sessionStorage belongs to the tab and is discarded with it, which is exactly why it suits a wizard and not a saved draft.',
-        },
-        {
-          id: 'quiz-js-s72-q2',
-          type: 'true-false',
-          prompt: 'Values in localStorage are stored as strings, so saving an object needs JSON.stringify.',
-          answer: true,
-          explanation:
-            'Storing an object coerces it to "[object Object]" and you get it back as that string. JSON.stringify on the way in and JSON.parse on the way out are the only way to keep the structure.',
-        },
-        {
-          id: 'quiz-js-s72-q3',
-          type: 'blank',
-          prompt: 'Which method removes a single named key from localStorage?',
-          answers: ['removeitem'],
-          explanation:
-            'removeItem takes one key. clear() is the blunt version that empties storage for the whole origin, including keys another feature put there.',
-        },
-        {
-          id: 'quiz-js-s72-q4',
-          type: 'code-output',
-          prompt: 'What does this log?',
-          code: `localStorage.setItem('count', 4)
-console.log(localStorage.getItem('count') + 1)`,
-          options: ['"41"', '5', '"5"', 'null'],
-          answer: 0,
-          explanation:
-            'getItem hands back the string "4", and the + operator joins two strings rather than adding two numbers. Convert with Number() on the way out and String() on the way in.',
-        },
-        {
-          id: 'quiz-js-s72-q5',
-          type: 'identify-error',
-          prompt: 'What is wrong with this?',
-          code: `for (var i = 0; i < 1000000; i++) {
-  localStorage.setItem('log-' + i, 'x')
-}`,
-          options: [
-            'Every write is synchronous, and the 5 MB quota will be hit long before a million keys',
-            'localStorage cannot be written from inside a loop',
-            'setItem returns a promise that has to be awaited',
-            'A key cannot contain a hyphen',
-          ],
-          answer: 0,
-          explanation:
-            'Storage is not a database: writes block the main thread, the origin has roughly 5 MB, and the excess raises a QuotaExceededError. Keep one key with a bounded value rather than a key per row.',
-        },
-      ],
-    },
   },
 ]

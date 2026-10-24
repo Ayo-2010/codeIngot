@@ -17,6 +17,70 @@ export const htmlImageSections: Section[] = [
           'Say what width and height do for layout stability',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-html-l31',
+          title: 'HTML Images quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l31-q1',
+              type: 'multiple-choice',
+              prompt: 'What does the alt attribute contain?',
+              options: [
+                'A caption displayed under the image',
+                'A replacement for the image, read in its place when it cannot be seen',
+                'A tooltip shown on hover',
+                'The file name for SEO',
+              ],
+              answer: 1,
+              explanation: 'Alt is a replacement, not a caption. Long descriptions belong in a figcaption next to the image.',
+            },
+            {
+              id: 'quiz-html-l31-q2',
+              type: 'multiple-choice',
+              prompt: 'How do you mark an image as decorative?',
+              options: [
+                'Omit the alt attribute',
+                'Set alt to the word decorative',
+                'Set alt to an empty string',
+                'Set the role attribute to presentation',
+              ],
+              answer: 2,
+              explanation: 'alt="" tells the screen reader to skip the image. An omitted attribute is treated as a missing description, not as a decision.',
+            },
+            {
+              id: 'quiz-html-l31-q3',
+              type: 'true-false',
+              prompt: 'Declaring width and height on an image prevents layout shift while it loads.',
+              answer: true,
+              explanation: 'The browser reserves the space up front instead of discovering it after the download.',
+            },
+            {
+              id: 'quiz-html-l31-q4',
+              type: 'blank',
+              prompt: 'Which attribute makes the browser download the image only when it is near the viewport?',
+              answers: [
+                'loading',
+                'loading="lazy"',
+                'lazy',
+              ],
+              explanation: 'loading="lazy" defers off-screen images until they approach the viewport.',
+            },
+            {
+              id: 'quiz-html-l31-q5',
+              type: 'multiple-choice',
+              prompt: 'Why should alt text avoid starting with "image of"?',
+              options: [
+                'Because it makes the attribute too long',
+                'Because the screen reader already announced the element type',
+                'Because search engines reject it',
+                'Because it breaks the alt in older browsers',
+              ],
+              answer: 1,
+              explanation: 'The reader has already said "image". Repeating that in the alt text just adds noise before the useful part.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -151,70 +215,6 @@ export const htmlImageSections: Section[] = [
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s20',
-      title: 'HTML Images quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s20-q1',
-          type: 'multiple-choice',
-          prompt: 'What does the alt attribute contain?',
-          options: [
-            'A caption displayed under the image',
-            'A replacement for the image, read in its place when it cannot be seen',
-            'A tooltip shown on hover',
-            'The file name for SEO',
-          ],
-          answer: 1,
-          explanation:
-            'Alt is a replacement, not a caption. Long descriptions belong in a figcaption next to the image.',
-        },
-        {
-          id: 'quiz-html-s20-q2',
-          type: 'multiple-choice',
-          prompt: 'How do you mark an image as decorative?',
-          options: [
-            'Omit the alt attribute',
-            'Set alt to the word decorative',
-            'Set alt to an empty string',
-            'Set the role attribute to presentation',
-          ],
-          answer: 2,
-          explanation:
-            'alt="" tells the screen reader to skip the image. An omitted attribute is treated as a missing description, not as a decision.',
-        },
-        {
-          id: 'quiz-html-s20-q3',
-          type: 'true-false',
-          prompt: 'Declaring width and height on an image prevents layout shift while it loads.',
-          answer: true,
-          explanation:
-            'The browser reserves the space up front instead of discovering it after the download.',
-        },
-        {
-          id: 'quiz-html-s20-q4',
-          type: 'blank',
-          prompt: 'Which attribute makes the browser download the image only when it is near the viewport?',
-          answers: ['loading', 'loading="lazy"', 'lazy'],
-          explanation: 'loading="lazy" defers off-screen images until they approach the viewport.',
-        },
-        {
-          id: 'quiz-html-s20-q5',
-          type: 'multiple-choice',
-          prompt: 'Why should alt text avoid starting with "image of"?',
-          options: [
-            'Because it makes the attribute too long',
-            'Because the screen reader already announced the element type',
-            'Because search engines reject it',
-            'Because it breaks the alt in older browsers',
-          ],
-          answer: 1,
-          explanation:
-            'The reader has already said "image". Repeating that in the alt text just adds noise before the useful part.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s21',
@@ -232,6 +232,70 @@ export const htmlImageSections: Section[] = [
           'Explain why a set of real links is almost always better',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-html-l32',
+          title: 'HTML Image Map quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l32-q1',
+              type: 'multiple-choice',
+              prompt: 'How does an image know which map to use?',
+              options: [
+                'The map element has an id and the image uses usemap',
+                'The image has a map attribute',
+                'The map element has a src attribute',
+                'They must be adjacent siblings',
+              ],
+              answer: 0,
+              explanation: 'The image carries usemap="#name" and the map element carries name="name". They do not have to be adjacent.',
+            },
+            {
+              id: 'quiz-html-l32-q2',
+              type: 'multiple-choice',
+              prompt: 'How many numbers does a circle area need?',
+              options: [
+                'Two',
+                'Three',
+                'Four',
+                'As many as it has points',
+              ],
+              answer: 1,
+              explanation: 'A circle takes centre x, centre y and radius — three numbers.',
+            },
+            {
+              id: 'quiz-html-l32-q3',
+              type: 'true-false',
+              prompt: 'A screen reader user can tell which part of an image each area covers.',
+              answer: false,
+              explanation: 'They hear the image once and then a list of separate links with no indication of where each sits.',
+            },
+            {
+              id: 'quiz-html-l32-q4',
+              type: 'blank',
+              prompt: 'Which shape value covers everything not claimed by another area?',
+              answers: [
+                'default',
+                'shape="default"',
+                'default shape',
+              ],
+              explanation: 'The default shape takes no coords and acts as the fallback for the rest of the image.',
+            },
+            {
+              id: 'quiz-html-l32-q5',
+              type: 'multiple-choice',
+              prompt: 'What is the usual recommendation for a set of links arranged on a page?',
+              options: [
+                'Use an image map so the layout matches the design',
+                'Use real links, laid out with CSS',
+                'Use absolute positioning on the anchors',
+                'Use an area element per link without a map',
+              ],
+              answer: 1,
+              explanation: 'Real links are focusable, styleable, responsive and announced with useful text. CSS can place them anywhere.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -379,64 +443,6 @@ img { display: block; border-radius: 8px; }`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s21',
-      title: 'HTML Image Map quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s21-q1',
-          type: 'multiple-choice',
-          prompt: 'How does an image know which map to use?',
-          options: [
-            'The map element has an id and the image uses usemap',
-            'The image has a map attribute',
-            'The map element has a src attribute',
-            'They must be adjacent siblings',
-          ],
-          answer: 0,
-          explanation:
-            'The image carries usemap="#name" and the map element carries name="name". They do not have to be adjacent.',
-        },
-        {
-          id: 'quiz-html-s21-q2',
-          type: 'multiple-choice',
-          prompt: 'How many numbers does a circle area need?',
-          options: ['Two', 'Three', 'Four', 'As many as it has points'],
-          answer: 1,
-          explanation: 'A circle takes centre x, centre y and radius — three numbers.',
-        },
-        {
-          id: 'quiz-html-s21-q3',
-          type: 'true-false',
-          prompt: 'A screen reader user can tell which part of an image each area covers.',
-          answer: false,
-          explanation:
-            'They hear the image once and then a list of separate links with no indication of where each sits.',
-        },
-        {
-          id: 'quiz-html-s21-q4',
-          type: 'blank',
-          prompt: 'Which shape value covers everything not claimed by another area?',
-          answers: ['default', 'shape="default"', 'default shape'],
-          explanation: 'The default shape takes no coords and acts as the fallback for the rest of the image.',
-        },
-        {
-          id: 'quiz-html-s21-q5',
-          type: 'multiple-choice',
-          prompt: 'What is the usual recommendation for a set of links arranged on a page?',
-          options: [
-            'Use an image map so the layout matches the design',
-            'Use real links, laid out with CSS',
-            'Use absolute positioning on the anchors',
-            'Use an area element per link without a map',
-          ],
-          answer: 1,
-          explanation:
-            'Real links are focusable, styleable, responsive and announced with useful text. CSS can place them anywhere.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s22',
@@ -454,6 +460,69 @@ img { display: block; border-radius: 8px; }`,
           'Explain why a background image is the wrong choice for meaningful content',
         ],
         xp: 35,
+        quiz: {
+          id: 'quiz-html-l33',
+          title: 'HTML Background Images quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l33-q1',
+              type: 'multiple-choice',
+              prompt: 'What is the status of the HTML background attribute?',
+              options: [
+                'Current and preferred',
+                'Obsolete — the CSS background properties replaced it',
+                'Valid only on the body element',
+                'Valid only for images',
+              ],
+              answer: 1,
+              explanation: 'It still parses and renders, but it is obsolete. Everything it did is available in CSS, and more.',
+            },
+            {
+              id: 'quiz-html-l33-q2',
+              type: 'true-false',
+              prompt: 'A background image is described to screen reader users automatically.',
+              answer: false,
+              explanation: 'A background is not an element, so it has no alt text and cannot be announced. Meaningful images must be img elements.',
+            },
+            {
+              id: 'quiz-html-l33-q3',
+              type: 'multiple-choice',
+              prompt: 'What does background-size: cover do?',
+              options: [
+                'Scales the image to fit inside the box, leaving gaps',
+                'Scales the image to fill the box, cropping if needed and keeping the ratio',
+                'Repeats the image until the box is filled',
+                'Sets the image to its natural size',
+              ],
+              answer: 1,
+              explanation: 'cover fills the box and crops the overflow; contain fits the whole image inside and leaves gaps.',
+            },
+            {
+              id: 'quiz-html-l33-q4',
+              type: 'blank',
+              prompt: 'Which background property controls whether an image repeats?',
+              answers: [
+                'background-repeat',
+                'repeat',
+              ],
+              explanation: 'background-repeat takes repeat, no-repeat, repeat-x or repeat-y.',
+            },
+            {
+              id: 'quiz-html-l33-q5',
+              type: 'multiple-choice',
+              prompt: 'Why set a background colour as well as a background image?',
+              options: [
+                'Because images do not load in some browsers',
+                'So the content stays readable if the image fails to load or is not printed',
+                'Because CSS requires it',
+                'To make the image load faster',
+              ],
+              answer: 1,
+              explanation: 'Background images are not printed by default and can fail. The colour is the fallback the text is actually readable against.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -594,70 +663,6 @@ body {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s22',
-      title: 'HTML Background Images quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s22-q1',
-          type: 'multiple-choice',
-          prompt: 'What is the status of the HTML background attribute?',
-          options: [
-            'Current and preferred',
-            'Obsolete — the CSS background properties replaced it',
-            'Valid only on the body element',
-            'Valid only for images',
-          ],
-          answer: 1,
-          explanation:
-            'It still parses and renders, but it is obsolete. Everything it did is available in CSS, and more.',
-        },
-        {
-          id: 'quiz-html-s22-q2',
-          type: 'true-false',
-          prompt: 'A background image is described to screen reader users automatically.',
-          answer: false,
-          explanation:
-            'A background is not an element, so it has no alt text and cannot be announced. Meaningful images must be img elements.',
-        },
-        {
-          id: 'quiz-html-s22-q3',
-          type: 'multiple-choice',
-          prompt: 'What does background-size: cover do?',
-          options: [
-            'Scales the image to fit inside the box, leaving gaps',
-            'Scales the image to fill the box, cropping if needed and keeping the ratio',
-            'Repeats the image until the box is filled',
-            'Sets the image to its natural size',
-          ],
-          answer: 1,
-          explanation:
-            'cover fills the box and crops the overflow; contain fits the whole image inside and leaves gaps.',
-        },
-        {
-          id: 'quiz-html-s22-q4',
-          type: 'blank',
-          prompt: 'Which background property controls whether an image repeats?',
-          answers: ['background-repeat', 'repeat'],
-          explanation: 'background-repeat takes repeat, no-repeat, repeat-x or repeat-y.',
-        },
-        {
-          id: 'quiz-html-s22-q5',
-          type: 'multiple-choice',
-          prompt: 'Why set a background colour as well as a background image?',
-          options: [
-            'Because images do not load in some browsers',
-            'So the content stays readable if the image fails to load or is not printed',
-            'Because CSS requires it',
-            'To make the image load faster',
-          ],
-          answer: 1,
-          explanation:
-            'Background images are not printed by default and can fail. The colour is the fallback the text is actually readable against.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s23',
@@ -675,6 +680,68 @@ body {
           'Explain when a plain img with srcset is enough',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-html-l34',
+          title: 'The Picture Element quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l34-q1',
+              type: 'multiple-choice',
+              prompt: 'How many img elements must a picture contain?',
+              options: [
+                'None',
+                'Exactly one, as the fallback',
+                'One per source',
+                'As many as needed',
+              ],
+              answer: 1,
+              explanation: 'The img is the fallback for browsers that do not support picture, and it carries the alt text for the whole set.',
+            },
+            {
+              id: 'quiz-html-l34-q2',
+              type: 'multiple-choice',
+              prompt: 'Which of these is art direction rather than resolution switching?',
+              options: [
+                'Serving a 400w image on a small screen and a 1600w image on a large one',
+                'Serving a portrait crop on a phone and a landscape crop on a desktop',
+                'Serving an AVIF where supported and a JPEG otherwise',
+                'Adding a width descriptor to srcset',
+              ],
+              answer: 1,
+              explanation: 'Art direction changes the image itself. The others change only the encoding or the resolution of the same picture.',
+            },
+            {
+              id: 'quiz-html-l34-q3',
+              type: 'true-false',
+              prompt: 'A picture element needs a sizes attribute on its img for resolution switching.',
+              answer: false,
+              explanation: 'For resolution switching, a plain img with srcset and sizes is simpler and is the recommended approach.',
+            },
+            {
+              id: 'quiz-html-l34-q4',
+              type: 'blank',
+              prompt: 'Which attribute on a source element carries a MIME type condition?',
+              answers: [
+                'type',
+              ],
+              explanation: 'The first source whose type the browser can display is used.',
+            },
+            {
+              id: 'quiz-html-l34-q5',
+              type: 'multiple-choice',
+              prompt: 'What problem appears when different sources show meaningfully different content?',
+              options: [
+                'The image fails to load',
+                'The single alt text on the img can only describe one of them accurately',
+                'The browser downloads every source',
+                'The width descriptor becomes invalid',
+              ],
+              answer: 1,
+              explanation: 'One img, one alt. If the variants differ in content, the description needs a caption or the markup is misleading one group of users.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -812,64 +879,5 @@ picture img { width: 100%; height: auto; border-radius: 8px; display: block; }`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s23',
-      title: 'The Picture Element quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s23-q1',
-          type: 'multiple-choice',
-          prompt: 'How many img elements must a picture contain?',
-          options: ['None', 'Exactly one, as the fallback', 'One per source', 'As many as needed'],
-          answer: 1,
-          explanation:
-            'The img is the fallback for browsers that do not support picture, and it carries the alt text for the whole set.',
-        },
-        {
-          id: 'quiz-html-s23-q2',
-          type: 'multiple-choice',
-          prompt: 'Which of these is art direction rather than resolution switching?',
-          options: [
-            'Serving a 400w image on a small screen and a 1600w image on a large one',
-            'Serving a portrait crop on a phone and a landscape crop on a desktop',
-            'Serving an AVIF where supported and a JPEG otherwise',
-            'Adding a width descriptor to srcset',
-          ],
-          answer: 1,
-          explanation:
-            'Art direction changes the image itself. The others change only the encoding or the resolution of the same picture.',
-        },
-        {
-          id: 'quiz-html-s23-q3',
-          type: 'true-false',
-          prompt: 'A picture element needs a sizes attribute on its img for resolution switching.',
-          answer: false,
-          explanation:
-            'For resolution switching, a plain img with srcset and sizes is simpler and is the recommended approach.',
-        },
-        {
-          id: 'quiz-html-s23-q4',
-          type: 'blank',
-          prompt: 'Which attribute on a source element carries a MIME type condition?',
-          answers: ['type'],
-          explanation: 'The first source whose type the browser can display is used.',
-        },
-        {
-          id: 'quiz-html-s23-q5',
-          type: 'multiple-choice',
-          prompt: 'What problem appears when different sources show meaningfully different content?',
-          options: [
-            'The image fails to load',
-            'The single alt text on the img can only describe one of them accurately',
-            'The browser downloads every source',
-            'The width descriptor becomes invalid',
-          ],
-          answer: 1,
-          explanation:
-            'One img, one alt. If the variants differ in content, the description needs a caption or the markup is misleading one group of users.',
-        },
-      ],
-    },
   },
 ]

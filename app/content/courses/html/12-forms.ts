@@ -17,6 +17,70 @@ export const htmlFormSections: Section[] = [
           'Say what enctype multipart/form-data is for',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-html-l58',
+          title: 'HTML Forms quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l58-q1',
+              type: 'multiple-choice',
+              prompt: 'What happens to a form control with no name attribute?',
+              options: [
+                'It is submitted with an empty value',
+                'It is not submitted at all',
+                'The browser generates a name for it',
+                'It causes a validation error',
+              ],
+              answer: 1,
+              explanation: 'The name is the key the server receives, so an unnamed control sends nothing.',
+            },
+            {
+              id: 'quiz-html-l58-q2',
+              type: 'true-false',
+              prompt: 'Using method="get" for a password field is safe because GET requests are validated.',
+              answer: false,
+              explanation: 'GET puts the data in the URL, which ends up in the address bar, the history and the server log.',
+            },
+            {
+              id: 'quiz-html-l58-q3',
+              type: 'multiple-choice',
+              prompt: 'Which enctype is required for a file upload?',
+              options: [
+                'application/x-www-form-urlencoded',
+                'multipart/form-data',
+                'text/plain',
+                'application/json',
+              ],
+              answer: 1,
+              explanation: 'enctype="multipart/form-data" is what lets the request carry file content at all.',
+            },
+            {
+              id: 'quiz-html-l58-q4',
+              type: 'blank',
+              prompt: 'What is the default type of a button inside a form?',
+              answers: [
+                'submit',
+                'submit',
+                'type="submit"',
+              ],
+              explanation: 'Which is why a Cancel button needs type="button" written on it explicitly.',
+            },
+            {
+              id: 'quiz-html-l58-q5',
+              type: 'multiple-choice',
+              prompt: 'What does a disabled control do on submission?',
+              options: [
+                'It is submitted with its value',
+                'It is submitted as an empty value',
+                'It is not submitted',
+                'It causes the form to be rejected',
+              ],
+              answer: 2,
+              explanation: 'Disabled controls are excluded from the submitted data, which is the opposite of readonly.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -179,70 +243,6 @@ button { padding: 0.4rem 0.75rem; border-radius: 6px; border: 1px solid #cbd5e1;
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s47',
-      title: 'HTML Forms quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s47-q1',
-          type: 'multiple-choice',
-          prompt: 'What happens to a form control with no name attribute?',
-          options: [
-            'It is submitted with an empty value',
-            'It is not submitted at all',
-            'The browser generates a name for it',
-            'It causes a validation error',
-          ],
-          answer: 1,
-          explanation: 'The name is the key the server receives, so an unnamed control sends nothing.',
-        },
-        {
-          id: 'quiz-html-s47-q2',
-          type: 'true-false',
-          prompt: 'Using method="get" for a password field is safe because GET requests are validated.',
-          answer: false,
-          explanation:
-            'GET puts the data in the URL, which ends up in the address bar, the history and the server log.',
-        },
-        {
-          id: 'quiz-html-s47-q3',
-          type: 'multiple-choice',
-          prompt: 'Which enctype is required for a file upload?',
-          options: [
-            'application/x-www-form-urlencoded',
-            'multipart/form-data',
-            'text/plain',
-            'application/json',
-          ],
-          answer: 1,
-          explanation:
-            'enctype="multipart/form-data" is what lets the request carry file content at all.',
-        },
-        {
-          id: 'quiz-html-s47-q4',
-          type: 'blank',
-          prompt: 'What is the default type of a button inside a form?',
-          answers: ['submit', 'submit', 'type="submit"'],
-          explanation:
-            'Which is why a Cancel button needs type="button" written on it explicitly.',
-        },
-        {
-          id: 'quiz-html-s47-q5',
-          type: 'multiple-choice',
-          prompt: 'What does a disabled control do on submission?',
-          options: [
-            'It is submitted with its value',
-            'It is submitted as an empty value',
-            'It is not submitted',
-            'It causes the form to be rejected',
-          ],
-          answer: 2,
-          explanation:
-            'Disabled controls are excluded from the submitted data, which is the opposite of readonly.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s48',
@@ -260,6 +260,69 @@ button { padding: 0.4rem 0.75rem; border-radius: 6px; border: 1px solid #cbd5e1;
           'Describe how form submission works without JavaScript',
         ],
         xp: 35,
+        quiz: {
+          id: 'quiz-html-l59',
+          title: 'HTML Form Attributes quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l59-q1',
+              type: 'multiple-choice',
+              prompt: 'What does novalidate do on a form?',
+              options: [
+                'It disables the form',
+                'It skips the native constraint validation, so you can render errors yourself',
+                'It prevents the form from being submitted',
+                'It hides the submit button',
+              ],
+              answer: 1,
+              explanation: 'Use it when you present errors next to the fields, with your own messages and your own styling.',
+            },
+            {
+              id: 'quiz-html-l59-q2',
+              type: 'true-false',
+              prompt: 'accept-charset is worth setting to something other than utf-8 on a modern site.',
+              answer: false,
+              explanation: 'Every current browser supports UTF-8 and only UTF-8, so any other value is decoration.',
+            },
+            {
+              id: 'quiz-html-l59-q3',
+              type: 'multiple-choice',
+              prompt: 'Why is a form that works without JavaScript worth having?',
+              options: [
+                'It loads faster',
+                'It still works when a script fails, is blocked, or is not run at all',
+                'Browsers require it',
+                'It makes the markup shorter',
+              ],
+              answer: 1,
+              explanation: 'The form is the contract and the script is an enhancement. Progressive enhancement is the difference.',
+            },
+            {
+              id: 'quiz-html-l59-q4',
+              type: 'blank',
+              prompt: 'Which form attribute declares the encoding a submission may use?',
+              answers: [
+                'accept-charset',
+                'acceptCharset',
+              ],
+              explanation: 'accept-charset is the only form attribute that is hyphenated rather than camel-cased.',
+            },
+            {
+              id: 'quiz-html-l59-q5',
+              type: 'multiple-choice',
+              prompt: 'What is the default value of the method attribute?',
+              options: [
+                'post',
+                'get',
+                'dialog',
+                'send',
+              ],
+              answer: 1,
+              explanation: 'It defaults to get, which is why an explicit method is worth writing.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -409,64 +472,6 @@ button { padding: 0.4rem 0.75rem; border-radius: 6px; border: 1px solid #cbd5e1;
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s48',
-      title: 'HTML Form Attributes quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s48-q1',
-          type: 'multiple-choice',
-          prompt: 'What does novalidate do on a form?',
-          options: [
-            'It disables the form',
-            'It skips the native constraint validation, so you can render errors yourself',
-            'It prevents the form from being submitted',
-            'It hides the submit button',
-          ],
-          answer: 1,
-          explanation:
-            'Use it when you present errors next to the fields, with your own messages and your own styling.',
-        },
-        {
-          id: 'quiz-html-s48-q2',
-          type: 'true-false',
-          prompt: 'accept-charset is worth setting to something other than utf-8 on a modern site.',
-          answer: false,
-          explanation:
-            'Every current browser supports UTF-8 and only UTF-8, so any other value is decoration.',
-        },
-        {
-          id: 'quiz-html-s48-q3',
-          type: 'multiple-choice',
-          prompt: 'Why is a form that works without JavaScript worth having?',
-          options: [
-            'It loads faster',
-            'It still works when a script fails, is blocked, or is not run at all',
-            'Browsers require it',
-            'It makes the markup shorter',
-          ],
-          answer: 1,
-          explanation:
-            'The form is the contract and the script is an enhancement. Progressive enhancement is the difference.',
-        },
-        {
-          id: 'quiz-html-s48-q4',
-          type: 'blank',
-          prompt: 'Which form attribute declares the encoding a submission may use?',
-          answers: ['accept-charset', 'acceptCharset'],
-          explanation: 'accept-charset is the only form attribute that is hyphenated rather than camel-cased.',
-        },
-        {
-          id: 'quiz-html-s48-q5',
-          type: 'multiple-choice',
-          prompt: 'What is the default value of the method attribute?',
-          options: ['post', 'get', 'dialog', 'send'],
-          answer: 1,
-          explanation: 'It defaults to get, which is why an explicit method is worth writing.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s49',
@@ -484,6 +489,69 @@ button { padding: 0.4rem 0.75rem; border-radius: 6px; border: 1px solid #cbd5e1;
           'Choose between input and textarea for multi-line text',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-html-l60',
+          title: 'HTML Form Elements quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l60-q1',
+              type: 'multiple-choice',
+              prompt: 'What does the fieldset element do?',
+              options: [
+                'Adds a border around a form',
+                'Groups related controls and names the group with a legend',
+                'Validates the controls it contains',
+                'Submits the form',
+              ],
+              answer: 1,
+              explanation: 'The grouping is announced before each control, so a screen reader user knows what each field belongs to.',
+            },
+            {
+              id: 'quiz-html-l60-q2',
+              type: 'true-false',
+              prompt: 'The default value of a textarea is set with a value attribute.',
+              answer: false,
+              explanation: 'A textarea takes its default value as its child content, which is why stray whitespace inside the tags becomes part of the value.',
+            },
+            {
+              id: 'quiz-html-l60-q3',
+              type: 'multiple-choice',
+              prompt: 'When is a select a better choice than a text input?',
+              options: [
+                'When the set of valid values is known and is not very large',
+                'When the user needs to type free text',
+                'When the field must be searchable',
+                'Never — a text input is always simpler',
+              ],
+              answer: 0,
+              explanation: 'A closed set of a handful of options is exactly what a select is for. Beyond about seven, a searchable input with a datalist is better.',
+            },
+            {
+              id: 'quiz-html-l60-q4',
+              type: 'blank',
+              prompt: 'Which element provides suggestions for an input without requiring a choice?',
+              answers: [
+                'datalist',
+                '<datalist>',
+              ],
+              explanation: 'The input references it with a list attribute containing the datalist id.',
+            },
+            {
+              id: 'quiz-html-l60-q5',
+              type: 'multiple-choice',
+              prompt: 'What is the output element for?',
+              options: [
+                'Sending data to the server',
+                'Reporting a computed result, associated with its inputs via for',
+                'Displaying an error message',
+                'Grouping controls',
+              ],
+              answer: 1,
+              explanation: 'output is for a result the page computed, not for anything the user typed.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -637,69 +705,6 @@ button { padding: 0.35rem 0.7rem; border-radius: 6px; border: 1px solid #cbd5e1;
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s49',
-      title: 'HTML Form Elements quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s49-q1',
-          type: 'multiple-choice',
-          prompt: 'What does the fieldset element do?',
-          options: [
-            'Adds a border around a form',
-            'Groups related controls and names the group with a legend',
-            'Validates the controls it contains',
-            'Submits the form',
-          ],
-          answer: 1,
-          explanation:
-            'The grouping is announced before each control, so a screen reader user knows what each field belongs to.',
-        },
-        {
-          id: 'quiz-html-s49-q2',
-          type: 'true-false',
-          prompt: 'The default value of a textarea is set with a value attribute.',
-          answer: false,
-          explanation:
-            'A textarea takes its default value as its child content, which is why stray whitespace inside the tags becomes part of the value.',
-        },
-        {
-          id: 'quiz-html-s49-q3',
-          type: 'multiple-choice',
-          prompt: 'When is a select a better choice than a text input?',
-          options: [
-            'When the set of valid values is known and is not very large',
-            'When the user needs to type free text',
-            'When the field must be searchable',
-            'Never — a text input is always simpler',
-          ],
-          answer: 0,
-          explanation:
-            'A closed set of a handful of options is exactly what a select is for. Beyond about seven, a searchable input with a datalist is better.',
-        },
-        {
-          id: 'quiz-html-s49-q4',
-          type: 'blank',
-          prompt: 'Which element provides suggestions for an input without requiring a choice?',
-          answers: ['datalist', '<datalist>'],
-          explanation: 'The input references it with a list attribute containing the datalist id.',
-        },
-        {
-          id: 'quiz-html-s49-q5',
-          type: 'multiple-choice',
-          prompt: 'What is the output element for?',
-          options: [
-            'Sending data to the server',
-            'Reporting a computed result, associated with its inputs via for',
-            'Displaying an error message',
-            'Grouping controls',
-          ],
-          answer: 1,
-          explanation: 'output is for a result the page computed, not for anything the user typed.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s50',
@@ -717,6 +722,69 @@ button { padding: 0.35rem 0.7rem; border-radius: 6px; border: 1px solid #cbd5e1;
           'Say why type="text" is a legitimate choice as often as it is',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-html-l61',
+          title: 'HTML Input Types quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l61-q1',
+              type: 'multiple-choice',
+              prompt: 'What value does a color input always submit?',
+              options: [
+                'A colour name',
+                'A hex value such as #1d4ed8',
+                'An rgb() value',
+                'Whatever text the user typed',
+              ],
+              answer: 1,
+              explanation: 'The color type normalises to a lower-case six-digit hex value.',
+            },
+            {
+              id: 'quiz-html-l61-q2',
+              type: 'true-false',
+              prompt: 'type="number" is a good choice for a quantity field where users may type commas.',
+              answer: false,
+              explanation: 'A number input discards anything it cannot parse, so "1,200" becomes an empty field with no explanation.',
+            },
+            {
+              id: 'quiz-html-l61-q3',
+              type: 'multiple-choice',
+              prompt: 'What does the inputmode attribute control?',
+              options: [
+                'Validation',
+                'Which keyboard appears on a touch device',
+                'The value format',
+                'The autocomplete behaviour',
+              ],
+              answer: 1,
+              explanation: 'inputmode is the keyboard hint; type is the validation and semantics. They solve different problems.',
+            },
+            {
+              id: 'quiz-html-l61-q4',
+              type: 'blank',
+              prompt: 'Which input type is submitted but never displayed?',
+              answers: [
+                'hidden',
+                'type="hidden"',
+              ],
+              explanation: 'A hidden input is part of the submitted data and invisible on the page.',
+            },
+            {
+              id: 'quiz-html-l61-q5',
+              type: 'multiple-choice',
+              prompt: 'Which input type gives you a slider?',
+              options: [
+                'number',
+                'range',
+                'search',
+                'progress',
+              ],
+              answer: 1,
+              explanation: 'range is the slider, bounded by min and max and stepped by step.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -867,63 +935,6 @@ input { padding: 0.3rem; border: 1px solid #cbd5e1; border-radius: 4px; font: in
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s50',
-      title: 'HTML Input Types quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s50-q1',
-          type: 'multiple-choice',
-          prompt: 'What value does a color input always submit?',
-          options: [
-            'A colour name',
-            'A hex value such as #1d4ed8',
-            'An rgb() value',
-            'Whatever text the user typed',
-          ],
-          answer: 1,
-          explanation: 'The color type normalises to a lower-case six-digit hex value.',
-        },
-        {
-          id: 'quiz-html-s50-q2',
-          type: 'true-false',
-          prompt: 'type="number" is a good choice for a quantity field where users may type commas.',
-          answer: false,
-          explanation:
-            'A number input discards anything it cannot parse, so "1,200" becomes an empty field with no explanation.',
-        },
-        {
-          id: 'quiz-html-s50-q3',
-          type: 'multiple-choice',
-          prompt: 'What does the inputmode attribute control?',
-          options: [
-            'Validation',
-            'Which keyboard appears on a touch device',
-            'The value format',
-            'The autocomplete behaviour',
-          ],
-          answer: 1,
-          explanation:
-            'inputmode is the keyboard hint; type is the validation and semantics. They solve different problems.',
-        },
-        {
-          id: 'quiz-html-s50-q4',
-          type: 'blank',
-          prompt: 'Which input type is submitted but never displayed?',
-          answers: ['hidden', 'type="hidden"'],
-          explanation: 'A hidden input is part of the submitted data and invisible on the page.',
-        },
-        {
-          id: 'quiz-html-s50-q5',
-          type: 'multiple-choice',
-          prompt: 'Which input type gives you a slider?',
-          options: ['number', 'range', 'search', 'progress'],
-          answer: 1,
-          explanation: 'range is the slider, bounded by min and max and stepped by step.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s51',
@@ -941,6 +952,69 @@ input { padding: 0.3rem; border: 1px solid #cbd5e1; border-radius: 4px; font: in
           'Write autocomplete tokens that help a password manager',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-html-l62',
+          title: 'HTML Input Attributes quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l62-q1',
+              type: 'multiple-choice',
+              prompt: 'What is the difference between readonly and disabled?',
+              options: [
+                'They are identical',
+                'readonly submits and stays focusable; disabled is not submitted and is skipped by the keyboard',
+                'disabled submits, readonly does not',
+                'readonly is for text inputs, disabled is for selects',
+              ],
+              answer: 1,
+              explanation: 'A readonly field is part of the data and reachable by keyboard. A disabled field is not in the submission at all.',
+            },
+            {
+              id: 'quiz-html-l62-q2',
+              type: 'true-false',
+              prompt: 'A placeholder attribute is a substitute for a label.',
+              answer: false,
+              explanation: 'It disappears as soon as the user types, and screen reader support is inconsistent. Keep a real label.',
+            },
+            {
+              id: 'quiz-html-l62-q3',
+              type: 'multiple-choice',
+              prompt: 'Which autocomplete token belongs on a sign-in password field?',
+              options: [
+                'new-password',
+                'current-password',
+                'password',
+                'off',
+              ],
+              answer: 1,
+              explanation: 'current-password tells the manager this is an existing password, so it fills rather than offers to generate one.',
+            },
+            {
+              id: 'quiz-html-l62-q4',
+              type: 'blank',
+              prompt: 'Which attribute constrains a value against a regular expression?',
+              answers: [
+                'pattern',
+                'pattern=',
+              ],
+              explanation: 'The pattern is anchored at both ends automatically, so ^ and $ are not needed.',
+            },
+            {
+              id: 'quiz-html-l62-q5',
+              type: 'multiple-choice',
+              prompt: 'Why must constraints be enforced on the server as well?',
+              options: [
+                'The browser is not always present',
+                'maxlength and pattern are trivially bypassed by a script, a paste or the developer tools',
+                'It makes the code shorter',
+                'Servers are faster',
+              ],
+              answer: 1,
+              explanation: 'Client-side validation is a convenience for the user. The server is the only place a constraint is actually enforced.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1098,71 +1172,6 @@ button { padding: 0.35rem 0.7rem; border-radius: 6px; border: 1px solid #cbd5e1;
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s51',
-      title: 'HTML Input Attributes quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s51-q1',
-          type: 'multiple-choice',
-          prompt: 'What is the difference between readonly and disabled?',
-          options: [
-            'They are identical',
-            'readonly submits and stays focusable; disabled is not submitted and is skipped by the keyboard',
-            'disabled submits, readonly does not',
-            'readonly is for text inputs, disabled is for selects',
-          ],
-          answer: 1,
-          explanation:
-            'A readonly field is part of the data and reachable by keyboard. A disabled field is not in the submission at all.',
-        },
-        {
-          id: 'quiz-html-s51-q2',
-          type: 'true-false',
-          prompt: 'A placeholder attribute is a substitute for a label.',
-          answer: false,
-          explanation:
-            'It disappears as soon as the user types, and screen reader support is inconsistent. Keep a real label.',
-        },
-        {
-          id: 'quiz-html-s51-q3',
-          type: 'multiple-choice',
-          prompt: 'Which autocomplete token belongs on a sign-in password field?',
-          options: [
-            'new-password',
-            'current-password',
-            'password',
-            'off',
-          ],
-          answer: 1,
-          explanation:
-            'current-password tells the manager this is an existing password, so it fills rather than offers to generate one.',
-        },
-        {
-          id: 'quiz-html-s51-q4',
-          type: 'blank',
-          prompt: 'Which attribute constrains a value against a regular expression?',
-          answers: ['pattern', 'pattern='],
-          explanation:
-            'The pattern is anchored at both ends automatically, so ^ and $ are not needed.',
-        },
-        {
-          id: 'quiz-html-s51-q5',
-          type: 'multiple-choice',
-          prompt: 'Why must constraints be enforced on the server as well?',
-          options: [
-            'The browser is not always present',
-            'maxlength and pattern are trivially bypassed by a script, a paste or the developer tools',
-            'It makes the code shorter',
-            'Servers are faster',
-          ],
-          answer: 1,
-          explanation:
-            'Client-side validation is a convenience for the user. The server is the only place a constraint is actually enforced.',
-        },
-      ],
-    },
   },
   {
     id: 'html-s52',
@@ -1180,6 +1189,69 @@ button { padding: 0.35rem 0.7rem; border-radius: 6px; border: 1px solid #cbd5e1;
           'Say when a second submit button is the right design',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-html-l63',
+          title: 'HTML Input Form Attributes quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-html-l63-q1',
+              type: 'multiple-choice',
+              prompt: 'What does the form attribute on an input do?',
+              options: [
+                'Sets the encoding of the submission',
+                'Associates the control with a form by its id, even from outside the form element',
+                'Marks the control as required',
+                'Gives the control a name',
+              ],
+              answer: 1,
+              explanation: 'It takes the form id with no hash, and the association works in both directions.',
+            },
+            {
+              id: 'quiz-html-l63-q2',
+              type: 'multiple-choice',
+              prompt: 'How do you make one button submit a form to a different URL?',
+              options: [
+                'Set the action attribute on the button',
+                'Set formaction on the button',
+                'Use a second form',
+                'Use target="_blank"',
+              ],
+              answer: 1,
+              explanation: 'formaction overrides the form action for that button only, which is how one form gets two destinations.',
+            },
+            {
+              id: 'quiz-html-l63-q3',
+              type: 'true-false',
+              prompt: 'The form attribute can associate a label with a control that is outside the form.',
+              answer: true,
+              explanation: 'label, output, fieldset, legend and object all accept it, which is what makes remote association work.',
+            },
+            {
+              id: 'quiz-html-l63-q4',
+              type: 'blank',
+              prompt: 'Which attribute skips constraint validation for a single button?',
+              answers: [
+                'formnovalidate',
+                'formnovalidate',
+              ],
+              explanation: 'The form-level equivalent is novalidate, and it applies to the whole form.',
+            },
+            {
+              id: 'quiz-html-l63-q5',
+              type: 'multiple-choice',
+              prompt: 'Which is the best reason to have two submit buttons?',
+              options: [
+                'To have two forms on one page',
+                'Because the actions differ, so one set of fields can go to two destinations',
+                'To make the form look better',
+                'To disable validation on one path',
+              ],
+              answer: 1,
+              explanation: 'Preview versus publish, or save versus save-and-close, are genuinely different actions and belong in one form.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1344,69 +1416,5 @@ button { padding: 0.35rem 0.7rem; border-radius: 6px; border: 1px solid #cbd5e1;
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-html-s52',
-      title: 'HTML Input Form Attributes quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-html-s52-q1',
-          type: 'multiple-choice',
-          prompt: 'What does the form attribute on an input do?',
-          options: [
-            'Sets the encoding of the submission',
-            'Associates the control with a form by its id, even from outside the form element',
-            'Marks the control as required',
-            'Gives the control a name',
-          ],
-          answer: 1,
-          explanation:
-            'It takes the form id with no hash, and the association works in both directions.',
-        },
-        {
-          id: 'quiz-html-s52-q2',
-          type: 'multiple-choice',
-          prompt: 'How do you make one button submit a form to a different URL?',
-          options: [
-            'Set the action attribute on the button',
-            'Set formaction on the button',
-            'Use a second form',
-            'Use target="_blank"',
-          ],
-          answer: 1,
-          explanation:
-            'formaction overrides the form action for that button only, which is how one form gets two destinations.',
-        },
-        {
-          id: 'quiz-html-s52-q3',
-          type: 'true-false',
-          prompt: 'The form attribute can associate a label with a control that is outside the form.',
-          answer: true,
-          explanation:
-            'label, output, fieldset, legend and object all accept it, which is what makes remote association work.',
-        },
-        {
-          id: 'quiz-html-s52-q4',
-          type: 'blank',
-          prompt: 'Which attribute skips constraint validation for a single button?',
-          answers: ['formnovalidate', 'formnovalidate'],
-          explanation: 'The form-level equivalent is novalidate, and it applies to the whole form.',
-        },
-        {
-          id: 'quiz-html-s52-q5',
-          type: 'multiple-choice',
-          prompt: 'Which is the best reason to have two submit buttons?',
-          options: [
-            'To have two forms on one page',
-            'Because the actions differ, so one set of fields can go to two destinations',
-            'To make the form look better',
-            'To disable validation on one path',
-          ],
-          answer: 1,
-          explanation:
-            'Preview versus publish, or save versus save-and-close, are genuinely different actions and belong in one form.',
-        },
-      ],
-    },
   },
 ]

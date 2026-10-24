@@ -18,6 +18,71 @@ export const cssTableDisplaySections: Section[] = [
           'Predict how wide an internal border will be in each mode',
           'Use border-spacing to control the gap in separate mode',
         ],
+        quiz: {
+          id: 'quiz-css-l49',
+          title: 'Table Borders quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l49-q1',
+              type: 'blank',
+              prompt: 'Which single property on the table decides whether adjacent borders merge into one line or stay separate?',
+              answers: [
+                'border-collapse',
+                'border-collapse: collapse',
+              ],
+              explanation: '`border-collapse: collapse` (the default) merges shared edges into one border. `separate` keeps each cell\'s border to itself, so shared edges appear twice as wide, and `border-spacing` then applies.',
+            },
+            {
+              id: 'quiz-css-l49-q2',
+              type: 'multiple-choice',
+              prompt: 'What is the initial value of `border-collapse`, which a table uses when you never set it?',
+              options: [
+                '`collapse`',
+                '`separate`',
+                '`none`',
+                '`inherit`',
+              ],
+              answer: 0,
+              explanation: 'The initial value is `collapse`, so adjacent cell borders merge by default. You have to opt in to `separate` to get a gap between cells.',
+            },
+            {
+              id: 'quiz-css-l49-q3',
+              type: 'multiple-choice',
+              prompt: 'A table uses `border-collapse: separate` and every cell has `border: 1px solid`. How wide is the line between two adjacent cells?',
+              options: [
+                '1px, because the two borders merge in separate mode',
+                '0px, because separate mode removes internal borders',
+                '2px, because each cell draws its own full border on that edge',
+                '3px, because each cell adds a half border on each side',
+              ],
+              answer: 2,
+              explanation: 'In separate mode neither cell shares its border, so the two one-pixel borders sit side by side and read as a two-pixel line.',
+            },
+            {
+              id: 'quiz-css-l49-q4',
+              type: 'multiple-choice',
+              prompt: 'Where should a table border go so it renders consistently in collapsed mode?',
+              options: [
+                'On the `tr` element, so one rule covers the row',
+                'On the `thead` and `tbody` elements',
+                'On the `td` and `th` cells',
+                'On a `::before` pseudo-element of the table',
+              ],
+              answer: 2,
+              explanation: 'A row has no box of its own, so borders on `tr` render inconsistently between engines. Put the border on the cells and draw only the edges you want.',
+            },
+            {
+              id: 'quiz-css-l49-q5',
+              type: 'blank',
+              prompt: 'Which property sets the gap between cells while `border-collapse: separate` is in effect?',
+              answers: [
+                'border-spacing',
+              ],
+              explanation: '`border-spacing` controls the space between cells in separate mode; cell `padding` is separate and applies in both modes.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -213,6 +278,72 @@ td {
           'Explain how table-layout: fixed allocates column widths',
           'Choose fixed layout for tables whose content length is unpredictable',
         ],
+        quiz: {
+          id: 'quiz-css-l50',
+          title: 'Table Size quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l50-q1',
+              type: 'true-false',
+              prompt: 'Setting `border-spacing` on a table with `border-collapse: collapse` changes the gap between its cells.',
+              answer: false,
+              explanation: '`border-spacing` only applies in `separate` mode. In `collapse` mode the gap between cells is produced by the cells\' own padding and by the shared borders.',
+            },
+            {
+              id: 'quiz-css-l50-q2',
+              type: 'multiple-choice',
+              prompt: 'Under `table-layout: auto`, how does the browser choose column widths?',
+              options: [
+                'It reads the widths from the first row and shares the rest equally',
+                'It divides the table width equally between every column',
+                'It measures every cell and allocates width in proportion to what the content wants',
+                'It copies the widths declared on the widest body row',
+              ],
+              answer: 2,
+              explanation: 'Auto layout is content-driven: the browser measures every cell, so one long value can blow a column open and the widths change as the data changes.',
+            },
+            {
+              id: 'quiz-css-l50-q3',
+              type: 'multiple-choice',
+              prompt: 'Under `table-layout: fixed`, where does the browser read a column width from?',
+              options: [
+                'The first row cell for that column',
+                'The widest cell anywhere in the column',
+                'The `min-width` declared on the table',
+                'The last body cell in that column',
+              ],
+              answer: 0,
+              explanation: 'Fixed layout only reads widths from the first row; a width on a cell forty rows down is ignored completely, so put the widths on your `th` elements.',
+            },
+            {
+              id: 'quiz-css-l50-q4',
+              type: 'multiple-choice',
+              prompt: 'A fixed-layout table has no explicit cell widths. How is its width shared?',
+              options: [
+                'Proportionally to how much content each column holds',
+                'Only the columns that contain text get width',
+                'By the order the columns appear in the markup',
+                'Equally between the columns',
+              ],
+              answer: 3,
+              explanation: 'With no explicit widths, fixed layout gives every column an equal share of the table width and makes the content fit that share by wrapping or overflowing.',
+            },
+            {
+              id: 'quiz-css-l50-q5',
+              type: 'multiple-choice',
+              prompt: 'Why is `table-layout: fixed` cheaper to render on a long table?',
+              options: [
+                'It skips painting borders and backgrounds',
+                'It only inspects the first row instead of measuring every cell',
+                'It stores the rendered table in localStorage',
+                'It removes cell padding',
+              ],
+              answer: 1,
+              explanation: 'Auto layout must measure every cell before it can draw anything, while fixed layout only looks at the first row, so the cost stops growing with the row count.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -412,6 +543,78 @@ td:nth-child(4) {
           'Move a caption to the bottom with caption-side',
           'Give cells internal spacing with padding rather than margins',
         ],
+        quiz: {
+          id: 'quiz-css-l51',
+          title: 'Table Alignment quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l51-q1',
+              type: 'multiple-choice',
+              prompt: 'Why does a shared border between two adjacent cells look twice as wide under `border-collapse: separate`?',
+              options: [
+                'Because `separate` adds `border-spacing` to the border itself',
+                'Because each cell keeps its own border and neither one is shared',
+                'Because the browser doubles every border in separate mode',
+                'Because `border-width` is interpreted as a total across both cells',
+              ],
+              answer: 1,
+              explanation: 'In `separate` mode each cell draws its own border to its own edge, so the two borders sit side by side. In `collapse` mode they merge into one shared border drawn half by each cell, which is why a `1px` border looks like `1px`.',
+            },
+            {
+              id: 'quiz-css-l51-q2',
+              type: 'multiple-choice',
+              prompt: 'Which property moves content to the vertical middle of a tall table cell?',
+              options: [
+                '`text-align: middle`',
+                '`align-content: middle`',
+                '`vertical-align: middle`',
+                '`line-height: middle`',
+              ],
+              answer: 2,
+              explanation: '`vertical-align` handles the vertical axis inside a table cell; `text-align` only moves content horizontally, and `middle` is not one of its values.',
+            },
+            {
+              id: 'quiz-css-l51-q3',
+              type: 'multiple-choice',
+              prompt: 'Which declaration moves a `<caption>` below the table?',
+              options: [
+                '`caption-side: bottom`',
+                '`caption-align: bottom`',
+                '`vertical-align: bottom`',
+                '`text-align: bottom`',
+              ],
+              answer: 0,
+              explanation: '`caption-side` is the dedicated property for the caption position and accepts `top` or `bottom`. No other alignment property moves it.',
+            },
+            {
+              id: 'quiz-css-l51-q4',
+              type: 'multiple-choice',
+              prompt: 'Why does the lesson recommend padding rather than margin inside table cells?',
+              options: [
+                'Padding is inherited and margin is not',
+                'Padding can be animated and margin cannot',
+                'Margin cannot be declared on a `td` at all',
+                'Margins on cells behave inconsistently across engines and can collapse rows, while padding is reliable',
+              ],
+              answer: 3,
+              explanation: 'A cell is a table cell first, so margins are handled inconsistently and may disturb the row. Padding grows the space inside the cell in every engine.',
+            },
+            {
+              id: 'quiz-css-l51-q5',
+              type: 'multiple-choice',
+              prompt: 'Why right-align a column of prices?',
+              options: [
+                'It makes the header row bold',
+                'The digits line up so values can be compared down the column',
+                'It stops the column from wrapping',
+                '`text-align: right` is the only value cells accept',
+              ],
+              answer: 1,
+              explanation: 'Right alignment puts the last digit of each number on the same vertical line, which is what makes a numeric column scannable.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -603,6 +806,78 @@ td:last-child {
           'Style a header row that reads as distinct from the body',
           'Diagnose a zebra stripe that is invisible because cells have their own background',
         ],
+        quiz: {
+          id: 'quiz-css-l52',
+          title: 'Table Style quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l52-q1',
+              type: 'multiple-choice',
+              prompt: 'Your zebra striping rule `tr:nth-child(even) { background: #eee; }` produces nothing. What is the most likely cause?',
+              options: [
+                '`:nth-child` only works on elements that are direct children of `body`',
+                'The `tr` elements have no background because a `td` rule sets its own background',
+                '`background` is not allowed on table rows in any browser',
+                'The selector needs `tbody` as a prefix to match',
+              ],
+              answer: 1,
+              explanation: 'A cell with its own background paints on top of its row, hiding the stripe entirely. Stripe the cells instead (`tr:nth-child(even) td`), or clear the cell background to `transparent`.',
+            },
+            {
+              id: 'quiz-css-l52-q2',
+              type: 'multiple-choice',
+              prompt: 'Which selector stripes every second row of the table body only?',
+              options: [
+                '`thead tr:nth-child(even)`',
+                '`tbody tr:nth-child(even)`',
+                '`td:nth-child(odd)`',
+                '`tbody li:nth-child(even)`',
+              ],
+              answer: 1,
+              explanation: 'Scoping the selector to `tbody` counts rows inside the body, so the stripe starts on the second body row and no header row is involved.',
+            },
+            {
+              id: 'quiz-css-l52-q3',
+              type: 'multiple-choice',
+              prompt: 'What does `.data tbody tr:hover` do?',
+              options: [
+                'It changes the colour of the hovered cell only',
+                'It applies the style permanently after a click',
+                'It targets the first row of the body',
+                'It applies the style while the pointer is anywhere over that row',
+              ],
+              answer: 3,
+              explanation: 'The pointer is genuinely over the `tr` box for the whole width of the row, so the highlight follows the row rather than a single cell.',
+            },
+            {
+              id: 'quiz-css-l52-q4',
+              type: 'multiple-choice',
+              prompt: 'How do you keep a header row visible while a long table body scrolls?',
+              options: [
+                '`position: sticky; top: 0` on the `th` elements',
+                '`position: fixed` on the `th` elements',
+                '`overflow: hidden` on the `th` elements',
+                '`table-layout: fixed` on the table',
+              ],
+              answer: 0,
+              explanation: 'A sticky `th` stays pinned to the top of its scroll container, which is the same `position: sticky` behaviour used outside tables.',
+            },
+            {
+              id: 'quiz-css-l52-q5',
+              type: 'multiple-choice',
+              prompt: 'Why prefer `:nth-child(even)` over adding `class="even"` to alternate rows by hand?',
+              options: [
+                'Classes are not allowed inside `tbody`',
+                '`:nth-child` works without JavaScript and a class would not',
+                'The selector cannot go stale when rows are inserted, while hand-written classes desynchronise',
+                'Classes cannot be given a background colour',
+              ],
+              answer: 2,
+              explanation: 'A selector is recalculated from the current DOM, so inserting a row keeps the stripe correct. Hand-written classes have to be maintained forever and break on the first insert.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -803,6 +1078,78 @@ td:last-child {
           'Describe the card pattern and the media query that switches to it',
           'Explain why overflow on an ancestor breaks position: sticky',
         ],
+        quiz: {
+          id: 'quiz-css-l53',
+          title: 'Table Responsive quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-css-l53-q1',
+              type: 'multiple-choice',
+              prompt: 'A wide table breaks the layout on a phone. Which fix is the safest general answer?',
+              options: [
+                'Add `width: 100%` to the table so it always fits',
+                'Set `font-size: 8px` on the table so more columns fit',
+                'Wrap it in a container with `max-width: 100%` and `overflow-x: auto`, and give the table a `min-width`',
+                'Add `display: block` to every `td` unconditionally at all widths',
+              ],
+              answer: 2,
+              explanation: 'A `width: 100%` table has no minimum, so its columns collapse into unreadable slivers rather than staying legible. Scrolling a capped wrapper and giving the table a `min-width` floor keeps the data readable and keeps the page itself from scrolling sideways.',
+            },
+            {
+              id: 'quiz-css-l53-q2',
+              type: 'multiple-choice',
+              prompt: 'Which declaration on the wrapper is the load-bearing one for horizontal scrolling?',
+              options: [
+                '`overflow-x: auto`',
+                '`overflow-x: hidden`',
+                '`overflow-x: scroll`',
+                '`white-space: nowrap`',
+              ],
+              answer: 0,
+              explanation: '`auto` adds a scrollbar only when the content actually overflows. `hidden` clips the data with no way to reach it, and `scroll` forces a permanent scrollbar.',
+            },
+            {
+              id: 'quiz-css-l53-q3',
+              type: 'multiple-choice',
+              prompt: 'Why give the table `min-width` rather than `width: 100%` inside the scroll wrapper?',
+              options: [
+                '`min-width` makes the table transparent to the wrapper',
+                '`width: 100%` is invalid on a table element',
+                '`min-width` keeps a readable floor so columns cannot collapse, and the wrapper scrolls instead',
+                '`min-width` disables the scrollbar entirely',
+              ],
+              answer: 2,
+              explanation: 'A percentage width lets the columns compress to slivers, while a pixel `min-width` holds their size and pushes the overflow onto the wrapper.',
+            },
+            {
+              id: 'quiz-css-l53-q4',
+              type: 'multiple-choice',
+              prompt: 'In the card pattern, what replaces the hidden column header on a narrow screen?',
+              options: [
+                'A second `th` placed inside every row',
+                'An `aria-label` on the table element',
+                'A caption repeated under every row',
+                'A `::before` on each cell that reads its `data-label`',
+              ],
+              answer: 3,
+              explanation: 'Below the breakpoint the `thead` is hidden and each `td::before` generates its column name from the cell\'s `data-label`, so the value still has a label.',
+            },
+            {
+              id: 'quiz-css-l53-q5',
+              type: 'multiple-choice',
+              prompt: 'Why does wrapping a table in a scroll container break a sticky header placed outside it?',
+              options: [
+                'Sticky only works on `td` elements',
+                'An ancestor with `overflow` other than `visible` becomes the scroll container for the sticky element',
+                'The wrapper forces `position: static` on all children',
+                'Sticky requires `table-layout: auto`',
+              ],
+              answer: 1,
+              explanation: 'Sticky positioning is relative to the nearest scroll container, so the wrapper captures the header. Put the sticky `thead` inside the same wrapper as the rows.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1043,70 +1390,5 @@ td:last-child {
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-css-s20',
-      title: 'CSS Tables quiz',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-css-s20-q1',
-          type: 'multiple-choice',
-          prompt: 'Why does a shared border between two adjacent cells look twice as wide under `border-collapse: separate`?',
-          options: [
-            'Because `separate` adds `border-spacing` to the border itself',
-            'Because each cell keeps its own border and neither one is shared',
-            'Because the browser doubles every border in separate mode',
-            'Because `border-width` is interpreted as a total across both cells',
-          ],
-          answer: 1,
-          explanation:
-            'In `separate` mode each cell draws its own border to its own edge, so the two borders sit side by side. In `collapse` mode they merge into one shared border drawn half by each cell, which is why a `1px` border looks like `1px`.',
-        },
-        {
-          id: 'quiz-css-s20-q2',
-          type: 'true-false',
-          prompt: 'Setting `border-spacing` on a table with `border-collapse: collapse` changes the gap between its cells.',
-          answer: false,
-          explanation:
-            '`border-spacing` only applies in `separate` mode. In `collapse` mode the gap between cells is produced by the cells\' own padding and by the shared borders.',
-        },
-        {
-          id: 'quiz-css-s20-q3',
-          type: 'multiple-choice',
-          prompt: 'Your zebra striping rule `tr:nth-child(even) { background: #eee; }` produces nothing. What is the most likely cause?',
-          options: [
-            '`:nth-child` only works on elements that are direct children of `body`',
-            'The `tr` elements have no background because a `td` rule sets its own background',
-            '`background` is not allowed on table rows in any browser',
-            'The selector needs `tbody` as a prefix to match',
-          ],
-          answer: 1,
-          explanation:
-            'A cell with its own background paints on top of its row, hiding the stripe entirely. Stripe the cells instead (`tr:nth-child(even) td`), or clear the cell background to `transparent`.',
-        },
-        {
-          id: 'quiz-css-s20-q4',
-          type: 'blank',
-          prompt: 'Which single property on the table decides whether adjacent borders merge into one line or stay separate?',
-          answers: ['border-collapse', 'border-collapse: collapse'],
-          explanation:
-            '`border-collapse: collapse` (the default) merges shared edges into one border. `separate` keeps each cell\'s border to itself, so shared edges appear twice as wide, and `border-spacing` then applies.',
-        },
-        {
-          id: 'quiz-css-s20-q5',
-          type: 'multiple-choice',
-          prompt: 'A wide table breaks the layout on a phone. Which fix is the safest general answer?',
-          options: [
-            'Add `width: 100%` to the table so it always fits',
-            'Set `font-size: 8px` on the table so more columns fit',
-            'Wrap it in a container with `max-width: 100%` and `overflow-x: auto`, and give the table a `min-width`',
-            'Add `display: block` to every `td` unconditionally at all widths',
-          ],
-          answer: 2,
-          explanation:
-            'A `width: 100%` table has no minimum, so its columns collapse into unreadable slivers rather than staying legible. Scrolling a capped wrapper and giving the table a `min-width` floor keeps the data readable and keeps the page itself from scrolling sideways.',
-        },
-      ],
-    },
   },
 ]

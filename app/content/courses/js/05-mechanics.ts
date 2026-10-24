@@ -19,6 +19,73 @@ export const jsMechanicsSections: Section[] = [
           'Use a closure to keep state private to a function',
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-js-l36',
+          title: 'Scope and closures quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l36-q1',
+              type: 'multiple-choice',
+              prompt: 'Which declaration decides the value of `label` on the line that logs it?',
+              code: 'function report() {\n  const label = \'report\'\n  if (true) {\n    const label = \'section\'\n    console.log(label)\n  }\n}',
+              options: [
+                'The `label` in the `if` block, because it is declared nearest the line',
+                'The `label` in the function body, because an inner block cannot shadow an outer one',
+                'Whichever was assigned last, regardless of nesting',
+                'Neither — `if` bodies do not create their own scope',
+              ],
+              answer: 0,
+              explanation: 'Scope lookup walks outwards from the line and stops at the first declaration it finds. The block-scoped `label` sits nearest the `console.log`, so it wins — the outer one is shadowed for the rest of the block. That is also why the block one has to be a different name if you meant the outer value.',
+            },
+            {
+              id: 'quiz-js-l36-q2',
+              type: 'true-false',
+              prompt: 'A closure gives a returned function a way to change a variable that the code calling it can also see and change.',
+              answer: false,
+              explanation: 'It is the other way round. The remembered variables stay inside the factory: `makeCounter()` seals `count` away, and the returned function is the only thing with a reference to it. That privacy is the reason to reach for a closure rather than a global variable, which any code on the page can overwrite.',
+            },
+            {
+              id: 'quiz-js-l36-q3',
+              type: 'blank',
+              prompt: 'The span from the top of a block down to the `let` or `const` declaration is called the temporal ____ ____.',
+              answers: [
+                'dead zone',
+                'deadzone',
+                'temporal dead zone',
+              ],
+              explanation: 'The name is the temporal dead zone. The declaration is noted when the scope is read but has no value yet, so touching the name in that span throws a ReferenceError. Moving the declaration above its first use always fixes it.',
+            },
+            {
+              id: 'quiz-js-l36-q4',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'const value = \'top\'\n\nfunction show() {\n  console.log(value)\n  {\n    const value = \'inside\'\n    console.log(value)\n  }\n  console.log(value)\n}\n\nshow()',
+              options: [
+                'top, inside, top',
+                'inside, inside, top',
+                'top, top, top',
+                'inside, top, inside',
+              ],
+              answer: 0,
+              explanation: 'The first `console.log` is before the block opens, so the only `value` in scope is the top one. Inside the braces the nearer declaration shadows it. After the braces close, the inner declaration is gone and the outer one is visible again — a block shadow is temporary.',
+            },
+            {
+              id: 'quiz-js-l36-q5',
+              type: 'identify-error',
+              prompt: 'What is wrong with this code?',
+              code: 'function makeCounter() {\n  count = 0\n  return function () {\n    count += 1\n    return count\n  }\n}\n\nconst a = makeCounter()\nconst b = makeCounter()',
+              options: [
+                'Nothing is wrong, two calls to makeCounter give two counters',
+                'count is never declared, so both counters share one implicit global and interfere with each other',
+                'count is block scoped, so it cannot be used inside the returned function',
+                'makeCounter must be called with the new keyword',
+              ],
+              answer: 1,
+              explanation: 'The assignment has no `let`, `const` or `var` in front of it, so it creates a global. Both returned functions close over that same global, so calling `a()` also moves `b()` — the exact opposite of the sealed counter the factory is there to provide. Declare `let count = 0` inside `makeCounter`.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -259,96 +326,6 @@ console.log(next())`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s28',
-      title: 'Scope check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s28-q1',
-          type: 'multiple-choice',
-          prompt: 'Which declaration decides the value of `label` on the line that logs it?',
-          code: `function report() {
-  const label = 'report'
-  if (true) {
-    const label = 'section'
-    console.log(label)
-  }
-}`,
-          options: [
-            'The `label` in the `if` block, because it is declared nearest the line',
-            'The `label` in the function body, because an inner block cannot shadow an outer one',
-            'Whichever was assigned last, regardless of nesting',
-            'Neither — `if` bodies do not create their own scope',
-          ],
-          answer: 0,
-          explanation:
-            'Scope lookup walks outwards from the line and stops at the first declaration it finds. The block-scoped `label` sits nearest the `console.log`, so it wins — the outer one is shadowed for the rest of the block. That is also why the block one has to be a different name if you meant the outer value.',
-        },
-        {
-          id: 'quiz-js-s28-q2',
-          type: 'true-false',
-          prompt: 'A closure gives a returned function a way to change a variable that the code calling it can also see and change.',
-          answer: false,
-          explanation:
-            'It is the other way round. The remembered variables stay inside the factory: `makeCounter()` seals `count` away, and the returned function is the only thing with a reference to it. That privacy is the reason to reach for a closure rather than a global variable, which any code on the page can overwrite.',
-        },
-        {
-          id: 'quiz-js-s28-q3',
-          type: 'blank',
-          prompt:
-            'The span from the top of a block down to the `let` or `const` declaration is called the temporal ____ ____.',
-          answers: ['dead zone', 'deadzone', 'temporal dead zone'],
-          explanation:
-            'The name is the temporal dead zone. The declaration is noted when the scope is read but has no value yet, so touching the name in that span throws a ReferenceError. Moving the declaration above its first use always fixes it.',
-        },
-        {
-          id: 'quiz-js-s28-q4',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `const value = 'top'
-
-function show() {
-  console.log(value)
-  {
-    const value = 'inside'
-    console.log(value)
-  }
-  console.log(value)
-}
-
-show()`,
-          options: ['top, inside, top', 'inside, inside, top', 'top, top, top', 'inside, top, inside'],
-          answer: 0,
-          explanation:
-            'The first `console.log` is before the block opens, so the only `value` in scope is the top one. Inside the braces the nearer declaration shadows it. After the braces close, the inner declaration is gone and the outer one is visible again — a block shadow is temporary.',
-        },
-        {
-          id: 'quiz-js-s28-q5',
-          type: 'identify-error',
-          prompt: 'What is wrong with this code?',
-          code: `function makeCounter() {
-  count = 0
-  return function () {
-    count += 1
-    return count
-  }
-}
-
-const a = makeCounter()
-const b = makeCounter()`,
-          options: [
-            'Nothing is wrong, two calls to makeCounter give two counters',
-            'count is never declared, so both counters share one implicit global and interfere with each other',
-            'count is block scoped, so it cannot be used inside the returned function',
-            'makeCounter must be called with the new keyword',
-          ],
-          answer: 1,
-          explanation:
-            'The assignment has no `let`, `const` or `var` in front of it, so it creates a global. Both returned functions close over that same global, so calling `a()` also moves `b()` — the exact opposite of the sealed counter the factory is there to provide. Declare `let count = 0` inside `makeCounter`.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s29',
@@ -368,6 +345,72 @@ const b = makeCounter()`,
           'Find the temporal dead zone in a piece of code',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-js-l37',
+          title: 'Hoisting quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l37-q1',
+              type: 'multiple-choice',
+              prompt: 'What does this print?',
+              code: 'console.log(typeof fn)\nconsole.log(typeof later)\nfunction fn() {}',
+              options: [
+                '"undefined"',
+                '"function"',
+                '"object"',
+                'It throws',
+              ],
+              answer: 2,
+              explanation: 'Function declarations are hoisted whole, so `fn` already holds a function value by the time the first `console.log` runs. `later` has not been reached, and a `typeof` on an undeclared name is one of the few operations that is safe to do — it returns "undefined" instead of throwing.',
+            },
+            {
+              id: 'quiz-js-l37-q2',
+              type: 'true-false',
+              prompt: 'Reading a `const` declared further down the current block gives you `undefined` rather than an error.',
+              answer: false,
+              explanation: 'It throws a ReferenceError. `var` gives you `undefined`; `let` and `const` are reserved during the pre-pass and reading one before its declaration line is a hard stop. That is the deliberate design choice — a wrong value you carry on with is harder to find than a line that refuses to run.',
+            },
+            {
+              id: 'quiz-js-l37-q3',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'console.log(a)\nvar a = 1\nconsole.log(a)',
+              options: [
+                '1 then 1',
+                'undefined then 1',
+                '1 then undefined',
+                'It throws',
+              ],
+              answer: 1,
+              explanation: '`var a = 1` is split by the pre-pass into a declaration, which is hoisted as an empty slot, and an assignment, which stays where it is. So the first log reads the empty slot and prints `undefined`, and the second reads the value once the assignment has run. This is the silent version of the bug that `let` turns into an error.',
+            },
+            {
+              id: 'quiz-js-l37-q4',
+              type: 'blank',
+              prompt: 'A class declaration is not hoisted, so using one above its own declaration line behaves like a ____ ____ of a let, and throws.',
+              answers: [
+                'reference error',
+                'referenceerror',
+              ],
+              explanation: 'Classes get the same treatment as `let` and `const`: the name is reserved in the pre-pass but has no value until the declaration runs. Put classes above the code that uses them, or import them from a module, which is evaluated first.',
+            },
+            {
+              id: 'quiz-js-l37-q5',
+              type: 'identify-error',
+              prompt: 'What is wrong with this code?',
+              code: 'const config = getConfig()\nconsole.log(config)\n\nfunction getConfig() {\n  const settings = { theme: \'dark\' }\n  return settings\n}',
+              options: [
+                'Nothing is wrong, function declarations are hoisted',
+                'getConfig must be called with the new keyword',
+                'settings is not visible outside the function that declares it',
+                'const cannot be used at the top level of a script',
+              ],
+              answer: 0,
+              explanation: 'This is hoisting doing its job. `getConfig` is a function declaration, so it is fully defined before the first statement runs, and calling it above the definition is safe. The same code with `const getConfig = () => ...` would throw, which is the difference worth remembering when you convert declarations into arrows.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -563,75 +606,6 @@ announce('done')`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s29',
-      title: 'Hoisting check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s29-q1',
-          type: 'multiple-choice',
-          prompt: 'What does this print?',
-          code: `console.log(typeof fn)
-console.log(typeof later)
-function fn() {}`,
-          options: ['"undefined"', '"function"', '"object"', 'It throws'],
-          answer: 2,
-          explanation:
-            'Function declarations are hoisted whole, so `fn` already holds a function value by the time the first `console.log` runs. `later` has not been reached, and a `typeof` on an undeclared name is one of the few operations that is safe to do — it returns "undefined" instead of throwing.',
-        },
-        {
-          id: 'quiz-js-s29-q2',
-          type: 'true-false',
-          prompt: 'Reading a `const` declared further down the current block gives you `undefined` rather than an error.',
-          answer: false,
-          explanation:
-            'It throws a ReferenceError. `var` gives you `undefined`; `let` and `const` are reserved during the pre-pass and reading one before its declaration line is a hard stop. That is the deliberate design choice — a wrong value you carry on with is harder to find than a line that refuses to run.',
-        },
-        {
-          id: 'quiz-js-s29-q3',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `console.log(a)
-var a = 1
-console.log(a)`,
-          options: ['1 then 1', 'undefined then 1', '1 then undefined', 'It throws'],
-          answer: 1,
-          explanation:
-            '`var a = 1` is split by the pre-pass into a declaration, which is hoisted as an empty slot, and an assignment, which stays where it is. So the first log reads the empty slot and prints `undefined`, and the second reads the value once the assignment has run. This is the silent version of the bug that `let` turns into an error.',
-        },
-        {
-          id: 'quiz-js-s29-q4',
-          type: 'blank',
-          prompt:
-            'A class declaration is not hoisted, so using one above its own declaration line behaves like a ____ ____ of a let, and throws.',
-          answers: ['reference error', 'referenceerror'],
-          explanation:
-            'Classes get the same treatment as `let` and `const`: the name is reserved in the pre-pass but has no value until the declaration runs. Put classes above the code that uses them, or import them from a module, which is evaluated first.',
-        },
-        {
-          id: 'quiz-js-s29-q5',
-          type: 'identify-error',
-          prompt: 'What is wrong with this code?',
-          code: `const config = getConfig()
-console.log(config)
-
-function getConfig() {
-  const settings = { theme: 'dark' }
-  return settings
-}`,
-          options: [
-            'Nothing is wrong, function declarations are hoisted',
-            'getConfig must be called with the new keyword',
-            'settings is not visible outside the function that declares it',
-            'const cannot be used at the top level of a script',
-          ],
-          answer: 0,
-          explanation:
-            'This is hoisting doing its job. `getConfig` is a function declaration, so it is fully defined before the first statement runs, and calling it above the definition is safe. The same code with `const getConfig = () => ...` would throw, which is the difference worth remembering when you convert declarations into arrows.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s30',
@@ -651,6 +625,71 @@ function getConfig() {
           'Explain why modules and class bodies are always strict',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-js-l38',
+          title: 'Strict mode quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l38-q1',
+              type: 'multiple-choice',
+              prompt: 'What happens in strict mode when you run `total = 10` with no declaration anywhere?',
+              options: [
+                'A global called total is created',
+                'It is a ReferenceError, because total was never declared',
+                'It is silently ignored',
+                'total becomes 0',
+              ],
+              answer: 1,
+              explanation: 'Strict mode removed the implicit global. This is the rule worth the most in practice: a typo in a name now fails on the line you typed it instead of creating a global that quietly corrupts a different part of the page hours later.',
+            },
+            {
+              id: 'quiz-js-l38-q2',
+              type: 'true-false',
+              prompt: 'A file loaded with `<script type="module">` runs in strict mode whether or not you write the directive.',
+              answer: true,
+              explanation: 'Modules are always strict, as is every class body, and so is eval called with the flag. The directive only matters for classic scripts and ordinary function bodies — which is why old code that relied on `this` being the global object breaks when it is moved into a module.',
+            },
+            {
+              id: 'quiz-js-l38-q3',
+              type: 'identify-error',
+              prompt: 'This code used to work and stopped after the directive was added. Why?',
+              code: 'function renderAll() {\n  var items = getItems()\n  items.forEach(function (item) {\n    this.draw(item)\n  })\n}\n\nrenderAll()',
+              options: [
+                'forEach cannot be used in strict mode',
+                'this inside the forEach callback is undefined, not the object that called renderAll',
+                'getItems is not defined in strict mode',
+                'Strict mode forbids var',
+              ],
+              answer: 1,
+              explanation: 'The callback is called with no object to use as `this`, so it is `undefined`. In loose mode it would silently have been the global object, which is how this bug survived in the first place. The fix is to pass the object in — `items.forEach(renderAll.draw, renderAll)` or an arrow function that closes over it.',
+            },
+            {
+              id: 'quiz-js-l38-q4',
+              type: 'code-output',
+              prompt: 'What does this print in strict mode?',
+              code: '\'use strict\'\nfunction check() {\n  return this\n}\nconsole.log(check() === undefined)',
+              options: [
+                'true',
+                'false',
+                'undefined',
+                'It throws a TypeError',
+              ],
+              answer: 0,
+              explanation: 'A plain function call supplies no receiver, so strict mode sets `this` to `undefined` and the comparison is true. In loose mode `this` would have been the global object and it would have printed false. Reading a property off the undefined `this` is what produces the TypeError.',
+            },
+            {
+              id: 'quiz-js-l38-q5',
+              type: 'blank',
+              prompt: 'The directive that turns strict mode on must be the ____ ____ statement in the file or function body.',
+              answers: [
+                'first statement',
+                'first statement in',
+              ],
+              explanation: 'It has to come first, or JavaScript treats it as an ordinary string expression and nothing happens — which is the quietest strict mode failure there is, because nothing looks wrong. A comment above it is fine; a line of code above it is not.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -840,80 +879,6 @@ console.log(safeNumber('42'))`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s30',
-      title: 'Strict mode check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s30-q1',
-          type: 'multiple-choice',
-          prompt: 'What happens in strict mode when you run `total = 10` with no declaration anywhere?',
-          options: [
-            'A global called total is created',
-            'It is a ReferenceError, because total was never declared',
-            'It is silently ignored',
-            'total becomes 0',
-          ],
-          answer: 1,
-          explanation:
-            'Strict mode removed the implicit global. This is the rule worth the most in practice: a typo in a name now fails on the line you typed it instead of creating a global that quietly corrupts a different part of the page hours later.',
-        },
-        {
-          id: 'quiz-js-s30-q2',
-          type: 'true-false',
-          prompt: 'A file loaded with `<script type="module">` runs in strict mode whether or not you write the directive.',
-          answer: true,
-          explanation:
-            'Modules are always strict, as is every class body, and so is eval called with the flag. The directive only matters for classic scripts and ordinary function bodies — which is why old code that relied on `this` being the global object breaks when it is moved into a module.',
-        },
-        {
-          id: 'quiz-js-s30-q3',
-          type: 'identify-error',
-          prompt: 'This code used to work and stopped after the directive was added. Why?',
-          code: `function renderAll() {
-  var items = getItems()
-  items.forEach(function (item) {
-    this.draw(item)
-  })
-}
-
-renderAll()`,
-          options: [
-            'forEach cannot be used in strict mode',
-            'this inside the forEach callback is undefined, not the object that called renderAll',
-            'getItems is not defined in strict mode',
-            'Strict mode forbids var',
-          ],
-          answer: 1,
-          explanation:
-            'The callback is called with no object to use as `this`, so it is `undefined`. In loose mode it would silently have been the global object, which is how this bug survived in the first place. The fix is to pass the object in — `items.forEach(renderAll.draw, renderAll)` or an arrow function that closes over it.',
-        },
-        {
-          id: 'quiz-js-s30-q4',
-          type: 'code-output',
-          prompt: 'What does this print in strict mode?',
-          code: `'use strict'
-function check() {
-  return this
-}
-console.log(check() === undefined)`,
-          options: ['true', 'false', 'undefined', 'It throws a TypeError'],
-          answer: 0,
-          explanation:
-            'A plain function call supplies no receiver, so strict mode sets `this` to `undefined` and the comparison is true. In loose mode `this` would have been the global object and it would have printed false. Reading a property off the undefined `this` is what produces the TypeError.',
-        },
-        {
-          id: 'quiz-js-s30-q5',
-          type: 'blank',
-          prompt:
-            'The directive that turns strict mode on must be the ____ ____ statement in the file or function body.',
-          answers: ['first statement', 'first statement in'],
-          explanation:
-            'It has to come first, or JavaScript treats it as an ordinary string expression and nothing happens — which is the quietest strict mode failure there is, because nothing looks wrong. A comment above it is fine; a line of code above it is not.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s31',
@@ -933,6 +898,72 @@ console.log(check() === undefined)`,
           'Fix a lost `this` with an arrow function or an explicit receiver',
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-js-l39',
+          title: 'The this keyword quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l39-q1',
+              type: 'multiple-choice',
+              prompt: 'What is `this` inside `describe` when this runs?',
+              code: 'const ticket = { label: \'refund\', describe() { return this.label } }\nconst fn = ticket.describe\nfn()',
+              options: [
+                'ticket',
+                'window',
+                'undefined',
+                'globalThis, in both loose and strict mode',
+              ],
+              answer: 2,
+              explanation: 'The assignment `const fn = ticket.describe` stores the function, not the object, and `fn()` is a bare call with nothing to the left of the dot. There is no receiver, so strict mode supplies `undefined` — which is why reading `this.label` throws. Call it as `ticket.describe()` or bind it.',
+            },
+            {
+              id: 'quiz-js-l39-q2',
+              type: 'true-false',
+              prompt: 'An arrow function defined inside a method can see the method’s `this`, and always keeps it.',
+              answer: true,
+              explanation: 'An arrow has no `this` of its own, so the name resolves to the enclosing method’s binding. That is why arrows are the standard fix for a lost `this` in a callback — and why they are the wrong choice for an object method, where you want `this` to follow the object it was called on.',
+            },
+            {
+              id: 'quiz-js-l39-q3',
+              type: 'code-output',
+              prompt: 'What does this print in strict mode?',
+              code: 'function speak() {\n  return typeof this\n}\nconst obj = { speak }\nobj.speak()\nconst bare = obj.speak\nbare()',
+              options: [
+                '"object" then "undefined"',
+                '"object" then "object"',
+                '"undefined" twice',
+                '"object" then "function"',
+              ],
+              answer: 0,
+              explanation: '`obj.speak()` has a receiver, so `this` is the object. `bare()` has none, so strict mode sets `this` to `undefined` and `typeof` reports it as "undefined". The same call in loose mode would have reported "object" because `this` would have been the global object.',
+            },
+            {
+              id: 'quiz-js-l39-q4',
+              type: 'identify-error',
+              prompt: 'What is wrong with this code?',
+              code: 'const grid = {\n  cells: [\'a\', \'b\'],\n  render(item) { return item.toUpperCase() },\n  draw() {\n    this.cells.forEach(this.render)\n  }\n}',
+              options: [
+                'forEach cannot take a method reference',
+                'render is called without a receiver, so this is undefined inside it',
+                'render must be a function, not a shorthand method',
+                'cells needs to be a Set rather than an array',
+              ],
+              answer: 1,
+              explanation: 'Passing the method reference hands over the function alone, so forEach calls it with no object and `this` is undefined. Inside render there is no `this` read, so the mistake shows up later the moment you add one. Fix it with `this.cells.forEach(cell => this.render(cell))`.',
+            },
+            {
+              id: 'quiz-js-l39-q5',
+              type: 'blank',
+              prompt: 'A function that returns `this` and is called with an object handed to it directly — `fn.call(obj)` — is using ____ binding.',
+              answers: [
+                'explicit',
+                'explicit binding',
+              ],
+              explanation: 'Explicit binding is `call`, `apply` and `bind`. It is the escape hatch for the case where the call site cannot be changed, which is exactly what happens when a method is passed somewhere as a callback: `list.forEach(obj.render.bind(obj))`.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1151,79 +1182,6 @@ console.log(ada.summary())`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s31',
-      title: 'The this keyword check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s31-q1',
-          type: 'multiple-choice',
-          prompt: 'What is `this` inside `describe` when this runs?',
-          code: `const ticket = { label: 'refund', describe() { return this.label } }
-const fn = ticket.describe
-fn()`,
-          options: ['ticket', 'window', 'undefined', 'globalThis, in both loose and strict mode'],
-          answer: 2,
-          explanation:
-            'The assignment `const fn = ticket.describe` stores the function, not the object, and `fn()` is a bare call with nothing to the left of the dot. There is no receiver, so strict mode supplies `undefined` — which is why reading `this.label` throws. Call it as `ticket.describe()` or bind it.',
-        },
-        {
-          id: 'quiz-js-s31-q2',
-          type: 'true-false',
-          prompt: 'An arrow function defined inside a method can see the method’s `this`, and always keeps it.',
-          answer: true,
-          explanation:
-            'An arrow has no `this` of its own, so the name resolves to the enclosing method’s binding. That is why arrows are the standard fix for a lost `this` in a callback — and why they are the wrong choice for an object method, where you want `this` to follow the object it was called on.',
-        },
-        {
-          id: 'quiz-js-s31-q3',
-          type: 'code-output',
-          prompt: 'What does this print in strict mode?',
-          code: `function speak() {
-  return typeof this
-}
-const obj = { speak }
-obj.speak()
-const bare = obj.speak
-bare()`,
-          options: ['"object" then "undefined"', '"object" then "object"', '"undefined" twice', '"object" then "function"'],
-          answer: 0,
-          explanation:
-            '`obj.speak()` has a receiver, so `this` is the object. `bare()` has none, so strict mode sets `this` to `undefined` and `typeof` reports it as "undefined". The same call in loose mode would have reported "object" because `this` would have been the global object.',
-        },
-        {
-          id: 'quiz-js-s31-q4',
-          type: 'identify-error',
-          prompt: 'What is wrong with this code?',
-          code: `const grid = {
-  cells: ['a', 'b'],
-  render(item) { return item.toUpperCase() },
-  draw() {
-    this.cells.forEach(this.render)
-  }
-}`,
-          options: [
-            'forEach cannot take a method reference',
-            'render is called without a receiver, so this is undefined inside it',
-            'render must be a function, not a shorthand method',
-            'cells needs to be a Set rather than an array',
-          ],
-          answer: 1,
-          explanation:
-            'Passing the method reference hands over the function alone, so forEach calls it with no object and `this` is undefined. Inside render there is no `this` read, so the mistake shows up later the moment you add one. Fix it with `this.cells.forEach(cell => this.render(cell))`.',
-        },
-        {
-          id: 'quiz-js-s31-q5',
-          type: 'blank',
-          prompt:
-            'A function that returns `this` and is called with an object handed to it directly — `fn.call(obj)` — is using ____ binding.',
-          answers: ['explicit', 'explicit binding'],
-          explanation:
-            'Explicit binding is `call`, `apply` and `bind`. It is the escape hatch for the case where the call site cannot be changed, which is exactly what happens when a method is passed somewhere as a callback: `list.forEach(obj.render.bind(obj))`.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s32',
@@ -1243,6 +1201,72 @@ bare()`,
           'Choose between an arrow and a function for an object method',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-js-l40',
+          title: 'Arrow functions quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l40-q1',
+              type: 'multiple-choice',
+              prompt: 'Which of these returns an object?',
+              code: 'const a = () => { id: 1 }\nconst b = () => ({ id: 1 })',
+              options: [
+                'Only b',
+                'Only a',
+                'Both a and b',
+                'Neither a nor b',
+              ],
+              answer: 0,
+              explanation: 'In `a`, the braces are read as a function body, so `{ id: 1 }` is a labelled statement and the arrow returns nothing. Wrapping the object in parentheses forces it to be read as an expression instead. This trips up everyone once.',
+            },
+            {
+              id: 'quiz-js-l40-q2',
+              type: 'true-false',
+              prompt: 'An arrow function can be called with `new`.',
+              answer: false,
+              explanation: 'Arrows have no constructor behaviour, so `new (() => {})` is a TypeError. They also have no `arguments`, which is why a rest parameter is the way to take a variable number of arguments in one.',
+            },
+            {
+              id: 'quiz-js-l40-q3',
+              type: 'identify-error',
+              prompt: 'What is wrong with this code?',
+              code: 'const app = {\n  title: \'Inbox\',\n  render() {\n    return [1, 2].map(n => this.title + n)\n  }\n}',
+              options: [
+                'this is not available inside an arrow function, so this.title is undefined',
+                'map cannot be used with an arrow',
+                'The arrow needs parentheses around n',
+                'Nothing is wrong, arrows inherit this from the object',
+              ],
+              answer: 3,
+              explanation: 'This is correct code, and it is the reason to reach for an arrow. The arrow has no `this` of its own, so the name resolves to the `render` method’s `this`, which is the app object — even though the callback itself is called with no receiver.',
+            },
+            {
+              id: 'quiz-js-l40-q4',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'function outer() {\n  const name = \'outer\'\n  const inner = () => name\n  return inner()\n}\nconsole.log(outer())',
+              options: [
+                'outer',
+                'undefined',
+                'The function itself',
+                'It throws',
+              ],
+              answer: 0,
+              explanation: 'The arrow resolves `name` from the scope it was written in, which is `outer`, and that scope is still alive while the call runs. This is the closure half of an arrow: no arguments, no `new`, but a live view of the enclosing scope.',
+            },
+            {
+              id: 'quiz-js-l40-q5',
+              type: 'blank',
+              prompt: 'An arrow function cannot be used as a constructor because it has no ____.',
+              answers: [
+                'prototype',
+                'own prototype',
+              ],
+              explanation: 'Classes give instances a prototype chain and arrows give them nothing. This is one of several reasons an arrow is the wrong shape for an object method — it also has no `this` of its own, so it would keep referring to the object it was defined beside.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1426,76 +1450,6 @@ console.log(makeGreeter('Ada').greet())`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s32',
-      title: 'Arrow functions check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s32-q1',
-          type: 'multiple-choice',
-          prompt: 'Which of these returns an object?',
-          code: `const a = () => { id: 1 }
-const b = () => ({ id: 1 })`,
-          options: ['Only b', 'Only a', 'Both a and b', 'Neither a nor b'],
-          answer: 0,
-          explanation:
-            'In `a`, the braces are read as a function body, so `{ id: 1 }` is a labelled statement and the arrow returns nothing. Wrapping the object in parentheses forces it to be read as an expression instead. This trips up everyone once.',
-        },
-        {
-          id: 'quiz-js-s32-q2',
-          type: 'true-false',
-          prompt: 'An arrow function can be called with `new`.',
-          answer: false,
-          explanation:
-            'Arrows have no constructor behaviour, so `new (() => {})` is a TypeError. They also have no `arguments`, which is why a rest parameter is the way to take a variable number of arguments in one.',
-        },
-        {
-          id: 'quiz-js-s32-q3',
-          type: 'identify-error',
-          prompt: 'What is wrong with this code?',
-          code: `const app = {
-  title: 'Inbox',
-  render() {
-    return [1, 2].map(n => this.title + n)
-  }
-}`,
-          options: [
-            'this is not available inside an arrow function, so this.title is undefined',
-            'map cannot be used with an arrow',
-            'The arrow needs parentheses around n',
-            'Nothing is wrong, arrows inherit this from the object',
-          ],
-          answer: 3,
-          explanation:
-            'This is correct code, and it is the reason to reach for an arrow. The arrow has no `this` of its own, so the name resolves to the `render` method’s `this`, which is the app object — even though the callback itself is called with no receiver.',
-        },
-        {
-          id: 'quiz-js-s32-q4',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `function outer() {
-  const name = 'outer'
-  const inner = () => name
-  return inner()
-}
-console.log(outer())`,
-          options: ['outer', 'undefined', 'The function itself', 'It throws'],
-          answer: 0,
-          explanation:
-            'The arrow resolves `name` from the scope it was written in, which is `outer`, and that scope is still alive while the call runs. This is the closure half of an arrow: no arguments, no `new`, but a live view of the enclosing scope.',
-        },
-        {
-          id: 'quiz-js-s32-q5',
-          type: 'blank',
-          prompt:
-            'An arrow function cannot be used as a constructor because it has no ____.',
-          answers: ['prototype', 'own prototype'],
-          explanation:
-            'Classes give instances a prototype chain and arrows give them nothing. This is one of several reasons an arrow is the wrong shape for an object method — it also has no `this` of its own, so it would keep referring to the object it was defined beside.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s33',
@@ -1514,6 +1468,72 @@ console.log(outer())`,
           'Use static members and # private fields, and say when a class earns its place',
         ],
         xp: 55,
+        quiz: {
+          id: 'quiz-js-l41',
+          title: 'Classes, constructors and inheritance quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l41-q1',
+              type: 'multiple-choice',
+              prompt: 'Which of these is a reason a class is worth the extra machinery?',
+              options: [
+                'Classes run faster than objects',
+                'It states what every instance will have and takes its arguments in one place',
+                'Classes can be JSON.stringified in full',
+                'A class creates only one instance',
+              ],
+              answer: 1,
+              explanation: 'The value is in the contract: fields are declared once, the constructor takes the arguments in one place instead of trusting each caller, and private state stays private. Performance is not on the list — a class and an object literal of the same shape are the same thing at runtime.',
+            },
+            {
+              id: 'quiz-js-l41-q2',
+              type: 'true-false',
+              prompt: 'A class declaration is hoisted, so a constructor can be called from code above it.',
+              answer: false,
+              explanation: 'Classes get the same treatment as `let` and `const`: noted in the pre-pass, no value until the declaration runs. Using one above its own line throws, which is deliberate — you should not be reaching for a type you have not defined yet.',
+            },
+            {
+              id: 'quiz-js-l41-q3',
+              type: 'identify-error',
+              prompt: 'What is wrong with this code?',
+              code: 'class TimedTask extends Task {\n  constructor(title, minutes) {\n    this.title = title\n    this.minutes = minutes\n  }\n}',
+              options: [
+                'extends needs the keyword class on the parent too',
+                'super() has to run before this is touched',
+                'minutes should be a field, not an argument',
+                'Nothing is wrong',
+              ],
+              answer: 1,
+              explanation: 'In a derived constructor there is no parent state to read until the parent constructor has run, so touching `this` first is a hard error. Call `super(title)` as the first line, then set your own fields.',
+            },
+            {
+              id: 'quiz-js-l41-q4',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'class Point {\n  x = 0\n  constructor(x) { this.x = x }\n}\nconst p = new Point(0)\np.x += 5\nconsole.log(p.x)',
+              options: [
+                '0',
+                '5',
+                'undefined',
+                'It throws',
+              ],
+              answer: 1,
+              explanation: 'Class fields are set up before the constructor body runs, so the field initialiser sets `x` to 0 and the constructor argument then overwrites it with 0 as well. The later `+= 5` makes it 5. The order matters if you rely on a field default and also pass a value for it.',
+            },
+            {
+              id: 'quiz-js-l41-q5',
+              type: 'blank',
+              prompt: 'A static method on a class is called on the ____ itself, not on an instance.',
+              answers: [
+                'class',
+                'the class',
+                'constructor',
+              ],
+              explanation: '`static empty()` lives on the class, so you call `Cart.empty()` and never `cart.empty()`. It is the right home for a factory or a helper that does not need instance state — and the wrong home for anything that reads `this`.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -1753,80 +1773,6 @@ console.log(user.greet())`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s33',
-      title: 'Classes check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s33-q1',
-          type: 'multiple-choice',
-          prompt: 'Which of these is a reason a class is worth the extra machinery?',
-          options: [
-            'Classes run faster than objects',
-            'It states what every instance will have and takes its arguments in one place',
-            'Classes can be JSON.stringified in full',
-            'A class creates only one instance',
-          ],
-          answer: 1,
-          explanation:
-            'The value is in the contract: fields are declared once, the constructor takes the arguments in one place instead of trusting each caller, and private state stays private. Performance is not on the list — a class and an object literal of the same shape are the same thing at runtime.',
-        },
-        {
-          id: 'quiz-js-s33-q2',
-          type: 'true-false',
-          prompt: 'A class declaration is hoisted, so a constructor can be called from code above it.',
-          answer: false,
-          explanation:
-            'Classes get the same treatment as `let` and `const`: noted in the pre-pass, no value until the declaration runs. Using one above its own line throws, which is deliberate — you should not be reaching for a type you have not defined yet.',
-        },
-        {
-          id: 'quiz-js-s33-q3',
-          type: 'identify-error',
-          prompt: 'What is wrong with this code?',
-          code: `class TimedTask extends Task {
-  constructor(title, minutes) {
-    this.title = title
-    this.minutes = minutes
-  }
-}`,
-          options: [
-            'extends needs the keyword class on the parent too',
-            'super() has to run before this is touched',
-            'minutes should be a field, not an argument',
-            'Nothing is wrong',
-          ],
-          answer: 1,
-          explanation:
-            'In a derived constructor there is no parent state to read until the parent constructor has run, so touching `this` first is a hard error. Call `super(title)` as the first line, then set your own fields.',
-        },
-        {
-          id: 'quiz-js-s33-q4',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `class Point {
-  x = 0
-  constructor(x) { this.x = x }
-}
-const p = new Point(0)
-p.x += 5
-console.log(p.x)`,
-          options: ['0', '5', 'undefined', 'It throws'],
-          answer: 1,
-          explanation:
-            'Class fields are set up before the constructor body runs, so the field initialiser sets `x` to 0 and the constructor argument then overwrites it with 0 as well. The later `+= 5` makes it 5. The order matters if you rely on a field default and also pass a value for it.',
-        },
-        {
-          id: 'quiz-js-s33-q5',
-          type: 'blank',
-          prompt:
-            'A static method on a class is called on the ____ itself, not on an instance.',
-          answers: ['class', 'the class', 'constructor'],
-          explanation:
-            '`static empty()` lives on the class, so you call `Cart.empty()` and never `cart.empty()`. It is the right home for a factory or a helper that does not need instance state — and the wrong home for anything that reads `this`.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s34',
@@ -1845,6 +1791,72 @@ console.log(p.x)`,
           'Say what JSON cannot represent, and why parsed data must be checked',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-js-l42',
+          title: 'JSON basics quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l42-q1',
+              type: 'multiple-choice',
+              prompt: 'What does `JSON.stringify({ greet() {}, when: new Date(0), skip: undefined })` return?',
+              options: [
+                '{ "greet": "function", "when": "1970-01-01T00:00:00.000Z" }',
+                '{ "when": "1970-01-01T00:00:00.000Z" }',
+                '{ "when": 0 }',
+                '{}',
+              ],
+              answer: 1,
+              explanation: 'Functions and `undefined` values are dropped entirely, and a Date is written as its ISO string because JSON has no date type. So the greet key disappears, `skip` disappears, and `when` survives as text — which is why a date that round-trips through JSON comes back a string.',
+            },
+            {
+              id: 'quiz-js-l42-q2',
+              type: 'true-false',
+              prompt: 'Once a JSON string has been parsed, the result is as trustworthy as an object you wrote yourself.',
+              answer: false,
+              explanation: 'Parsing only turns text into values. The data usually came from somewhere you do not control, so check the shape before you read into it: is `employees` an array, does each entry have the fields you are about to use. One missing key is how a blank page happens.',
+            },
+            {
+              id: 'quiz-js-l42-q3',
+              type: 'identify-error',
+              prompt: 'What is wrong with this code?',
+              code: 'const payload = { user: user, tags: tags, meta }\nconst saved = JSON.parse(JSON.stringify(payload))\nsaved.user.name = \'Ada\'\nconsole.log(user.name)',
+              options: [
+                'JSON.stringify cannot take an object with a nested one inside',
+                'A parsed copy is a full deep clone, so editing saved.user also edits user',
+                'JSON.parse returns a string, not an object',
+                'meta needs quotes around its key',
+              ],
+              answer: 1,
+              explanation: 'The round trip is deep, so `saved.user` really is a different object — which means editing `saved` leaves `user` alone. The trap is the opposite belief: reaching for JSON round trips to clone, which works but throws away Dates, turns them into strings, and drops every function on the way.',
+            },
+            {
+              id: 'quiz-js-l42-q4',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'const data = JSON.parse(\'{"count":3}\')\nconsole.log(typeof data.count, data.count + 1)',
+              options: [
+                'number 4',
+                'string 31',
+                'object NaN',
+                'It throws',
+              ],
+              answer: 0,
+              explanation: 'JSON has number literals, so `count` is a real number once parsed and the addition gives 4. Quote the key in the JSON text if you want a string — `{"count":"3"}` would give you "31", which is the classic case where the type came from the wrong place.',
+            },
+            {
+              id: 'quiz-js-l42-q5',
+              type: 'blank',
+              prompt: 'The two-space indentation you see when you log an object comes from the third argument to ____.',
+              answers: [
+                'json.stringify',
+                'stringify',
+                'json.stringify()',
+              ],
+              explanation: '`JSON.stringify(value, replacer, indent)` takes the indent as its third argument. The second one is the replacer: an array of keys to keep, or a function called for each key — which is how you build a payload without leaking a password hash or an internal id.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -2021,73 +2033,6 @@ console.log(data.employees[0].firstName + ' ' + data.employees[0].lastName)`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s34',
-      title: 'JSON check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s34-q1',
-          type: 'multiple-choice',
-          prompt: 'What does `JSON.stringify({ greet() {}, when: new Date(0), skip: undefined })` return?',
-          options: [
-            '{ "greet": "function", "when": "1970-01-01T00:00:00.000Z" }',
-            '{ "when": "1970-01-01T00:00:00.000Z" }',
-            '{ "when": 0 }',
-            '{}',
-          ],
-          answer: 1,
-          explanation:
-            'Functions and `undefined` values are dropped entirely, and a Date is written as its ISO string because JSON has no date type. So the greet key disappears, `skip` disappears, and `when` survives as text — which is why a date that round-trips through JSON comes back a string.',
-        },
-        {
-          id: 'quiz-js-s34-q2',
-          type: 'true-false',
-          prompt: 'Once a JSON string has been parsed, the result is as trustworthy as an object you wrote yourself.',
-          answer: false,
-          explanation:
-            'Parsing only turns text into values. The data usually came from somewhere you do not control, so check the shape before you read into it: is `employees` an array, does each entry have the fields you are about to use. One missing key is how a blank page happens.',
-        },
-        {
-          id: 'quiz-js-s34-q3',
-          type: 'identify-error',
-          prompt: 'What is wrong with this code?',
-          code: `const payload = { user: user, tags: tags, meta }
-const saved = JSON.parse(JSON.stringify(payload))
-saved.user.name = 'Ada'
-console.log(user.name)`,
-          options: [
-            'JSON.stringify cannot take an object with a nested one inside',
-            'A parsed copy is a full deep clone, so editing saved.user also edits user',
-            'JSON.parse returns a string, not an object',
-            'meta needs quotes around its key',
-          ],
-          answer: 1,
-          explanation:
-            'The round trip is deep, so `saved.user` really is a different object — which means editing `saved` leaves `user` alone. The trap is the opposite belief: reaching for JSON round trips to clone, which works but throws away Dates, turns them into strings, and drops every function on the way.',
-        },
-        {
-          id: 'quiz-js-s34-q4',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `const data = JSON.parse('{"count":3}')
-console.log(typeof data.count, data.count + 1)`,
-          options: ['number 4', 'string 31', 'object NaN', 'It throws'],
-          answer: 0,
-          explanation:
-            'JSON has number literals, so `count` is a real number once parsed and the addition gives 4. Quote the key in the JSON text if you want a string — `{"count":"3"}` would give you "31", which is the classic case where the type came from the wrong place.',
-        },
-        {
-          id: 'quiz-js-s34-q5',
-          type: 'blank',
-          prompt:
-            'The two-space indentation you see when you log an object comes from the third argument to ____.',
-          answers: ['json.stringify', 'stringify', 'json.stringify()'],
-          explanation:
-            '`JSON.stringify(value, replacer, indent)` takes the indent as its third argument. The second one is the replacer: an array of keys to keep, or a function called for each key — which is how you build a payload without leaking a password hash or an internal id.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s35',
@@ -2109,6 +2054,72 @@ console.log(typeof data.count, data.count + 1)`,
           'Name values so a log line reads as a sentence',
         ],
         xp: 50,
+        quiz: {
+          id: 'quiz-js-l43',
+          title: 'Debugging and readable code quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l43-q1',
+              type: 'multiple-choice',
+              prompt: 'Which console call is the one to reach for when you want to read a list of objects?',
+              code: 'const orders = [{ id: 1, total: 24 }, { id: 2, total: 61 }]',
+              options: [
+                'console.log(orders), because the objects print out in full',
+                'console.table(orders), because it lines them up one row per item',
+                'console.error(orders), because errors are always more detailed',
+                'console.count(orders)',
+              ],
+              answer: 1,
+              explanation: '`console.log` on an array of objects collapses them onto one line, which is where a lot of debugging gives up. `console.table` gives one row per item and one column per key, `console.dir(x, { depth: null })` expands every level instead of cutting it off, and `console.count` only tells you how many times a line ran.',
+            },
+            {
+              id: 'quiz-js-l43-q2',
+              type: 'true-false',
+              prompt: 'A `debugger` statement left in shipped source will pause the page for every visitor.',
+              answer: false,
+              explanation: 'The statement only does anything when devtools are open and attached, so it costs a visitor nothing. Delete it before you ship anyway — not for their sake but for yours, because the next person to search for `debugger` has to check every hit is not live.',
+            },
+            {
+              id: 'quiz-js-l43-q3',
+              type: 'identify-error',
+              prompt: 'Clicking the button fires the handler twice. What is the likely cause?',
+              code: 'function render(list) {\n  list.forEach((item) => {\n    const li = document.createElement(\'li\')\n    li.textContent = item\n    document.querySelector(\'#out\').appendChild(li)\n    li.addEventListener(\'click\', onPick)\n  })\n}\n\nbutton.addEventListener(\'click\', () => render(items))',
+              options: [
+                'addEventListener cannot be called inside a loop',
+                'A listener is attached every time render runs, and they stack up',
+                'onPick is not a function',
+                'items is empty',
+              ],
+              answer: 1,
+              explanation: 'Each run builds fresh elements, and each fresh element gets its own listener — that part is fine. The bug is that the same *parent* listener is registered on every render, so the parent accumulates handlers and everything runs once per render. `console.count("render")` shows it in one line. Attach the parent listener once, outside the function that rebuilds the DOM.',
+            },
+            {
+              id: 'quiz-js-l43-q4',
+              type: 'blank',
+              prompt: 'A watch expression in devtools can hold any ____ , re-evaluated as you step, without editing your code.',
+              answers: [
+                'expression',
+                'javascript expression',
+              ],
+              explanation: 'That is the advantage over a log line: you can try `cart.length`, `order.total * 1.2` or `items.filter(isOpen).length` without touching the source and without a reload for each attempt.',
+            },
+            {
+              id: 'quiz-js-l43-q5',
+              type: 'code-output',
+              prompt: 'Why does this comparison behave differently from `count === 0`?',
+              code: 'const row = { count: \'0\' }\nconsole.log(row.count == 0, row.count === 0)',
+              options: [
+                'They print false false',
+                'They print true true',
+                'They print true false',
+                'They print false true',
+              ],
+              answer: 2,
+              explanation: '`==` converts the string to a number first, so `\'0\'` and `0` are equal. `===` compares type first and says no. This is why a value read from an input or a URL — both strings — will pass a `== 0` check and fail a `=== 0` one, and why the loose comparison is the mistake worth naming.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -2332,85 +2343,6 @@ console.log(binarySearch(numbers, 100))`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s35',
-      title: 'Debugging check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s35-q1',
-          type: 'multiple-choice',
-          prompt: 'Which console call is the one to reach for when you want to read a list of objects?',
-          code: `const orders = [{ id: 1, total: 24 }, { id: 2, total: 61 }]`,
-          options: [
-            'console.log(orders), because the objects print out in full',
-            'console.table(orders), because it lines them up one row per item',
-            'console.error(orders), because errors are always more detailed',
-            'console.count(orders)',
-          ],
-          answer: 1,
-          explanation:
-            '`console.log` on an array of objects collapses them onto one line, which is where a lot of debugging gives up. `console.table` gives one row per item and one column per key, `console.dir(x, { depth: null })` expands every level instead of cutting it off, and `console.count` only tells you how many times a line ran.',
-        },
-        {
-          id: 'quiz-js-s35-q2',
-          type: 'true-false',
-          prompt: 'A `debugger` statement left in shipped source will pause the page for every visitor.',
-          answer: false,
-          explanation:
-            'The statement only does anything when devtools are open and attached, so it costs a visitor nothing. Delete it before you ship anyway — not for their sake but for yours, because the next person to search for `debugger` has to check every hit is not live.',
-        },
-        {
-          id: 'quiz-js-s35-q3',
-          type: 'identify-error',
-          prompt: 'Clicking the button fires the handler twice. What is the likely cause?',
-          code: `function render(list) {
-  list.forEach((item) => {
-    const li = document.createElement('li')
-    li.textContent = item
-    document.querySelector('#out').appendChild(li)
-    li.addEventListener('click', onPick)
-  })
-}
-
-button.addEventListener('click', () => render(items))`,
-          options: [
-            'addEventListener cannot be called inside a loop',
-            'A listener is attached every time render runs, and they stack up',
-            'onPick is not a function',
-            'items is empty',
-          ],
-          answer: 1,
-          explanation:
-            'Each run builds fresh elements, and each fresh element gets its own listener — that part is fine. The bug is that the same *parent* listener is registered on every render, so the parent accumulates handlers and everything runs once per render. `console.count("render")` shows it in one line. Attach the parent listener once, outside the function that rebuilds the DOM.',
-        },
-        {
-          id: 'quiz-js-s35-q4',
-          type: 'blank',
-          prompt:
-            'A watch expression in devtools can hold any ____ , re-evaluated as you step, without editing your code.',
-          answers: ['expression', 'javascript expression'],
-          explanation:
-            'That is the advantage over a log line: you can try `cart.length`, `order.total * 1.2` or `items.filter(isOpen).length` without touching the source and without a reload for each attempt.',
-        },
-        {
-          id: 'quiz-js-s35-q5',
-          type: 'code-output',
-          prompt: 'Why does this comparison behave differently from `count === 0`?',
-          code: `const row = { count: '0' }
-console.log(row.count == 0, row.count === 0)`,
-          options: [
-            'They print false false',
-            'They print true true',
-            'They print true false',
-            'They print false true',
-          ],
-          answer: 2,
-          explanation:
-            '`==` converts the string to a number first, so `\'0\'` and `0` are equal. `===` compares type first and says no. This is why a value read from an input or a URL — both strings — will pass a `== 0` check and fail a `=== 0` one, and why the loose comparison is the mistake worth naming.',
-        },
-      ],
-    },
   },
   {
     id: 'js-s36',
@@ -2430,6 +2362,77 @@ console.log(row.count == 0, row.count === 0)`,
           'Give a function the smallest useful surface and return early',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-js-l44',
+          title: 'Writing code others can read quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l44-q1',
+              type: 'multiple-choice',
+              prompt: 'Which name makes the bug impossible rather than merely unlikely?',
+              options: [
+                't',
+                'temp',
+                'timeoutMs',
+                'data2',
+              ],
+              answer: 2,
+              explanation: 'A name that carries the unit removes the whole class of mistake where a milliseconds value is passed where seconds were expected. The single-letter and numbered versions are not shorter to type — they are shorter to write and much longer to read.',
+            },
+            {
+              id: 'quiz-js-l44-q2',
+              type: 'identify-error',
+              prompt: 'Why is the reported total wrong?',
+              code: 'function totalOf(list) {\n  list.sort((a, b) => a.price - b.price)\n  return list.reduce((sum, item) => sum + item.price, 0)\n}\n\nconst shown = [...products]\nconst reported = totalOf(shown)',
+              options: [
+                'sort cannot be called on a spread array',
+                'sort changes the array in place, so the copy the page is showing gets reordered too',
+                'reduce needs a starting value of 0 as a string',
+                'The arrow function inside sort has the wrong this',
+              ],
+              answer: 1,
+              explanation: '`sort` sorts in place. `shown` was copied specifically so the display would be untouched, and sorting inside the function undoes that — the page silently reorders itself and the user has no idea why. Copy again inside the function: `[...list].sort(...)`.',
+            },
+            {
+              id: 'quiz-js-l44-q3',
+              type: 'blank',
+              prompt: 'Reading a layout property such as offsetHeight right after writing a style forces the browser to ____ immediately.',
+              answers: [
+                'recalculate',
+                'recalculate layout',
+                'lay out',
+              ],
+              explanation: 'That is layout thrashing: write, read, write, read, and the browser recalculates the layout between every pair. Read every measurement you need first, then make every change, and it happens once.',
+            },
+            {
+              id: 'quiz-js-l44-q4',
+              type: 'multiple-choice',
+              prompt: 'Which is the best name for a boolean that says a form may be submitted?',
+              options: [
+                '`flag`',
+                '`state`',
+                '`canSubmit`',
+                '`submitData`',
+              ],
+              answer: 2,
+              explanation: 'A boolean name should read as the question it answers, so `canSubmit` makes `if (canSubmit)` a sentence. `flag` and `state` describe nothing, and `submitData` sounds like data rather than a yes-or-no fact.',
+            },
+            {
+              id: 'quiz-js-l44-q5',
+              type: 'multiple-choice',
+              prompt: 'What is the advantage of the early-return version of `canWithdraw` over three nested `if`s?',
+              options: [
+                'It runs fewer checks in every case',
+                'Each guard exits immediately, so the remaining checks stay at one indentation level',
+                'It removes the need to return a boolean',
+                'It makes the function asynchronous',
+              ],
+              answer: 1,
+              explanation: 'Early returns turn each failed precondition into a flat, readable guard. The reader never has to track three levels of nesting, and the final `return true` only runs when every guard has passed.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -2647,6 +2650,74 @@ console.log(summariseOrders(orders))`,
           'Fix a function without changing what the caller expects',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-js-l45',
+          title: 'Common mistakes quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l45-q1',
+              type: 'true-false',
+              prompt: 'A `for...of` loop can be off by one index in the way a counted `for` loop can.',
+              answer: false,
+              explanation: 'There is no index to get wrong: the loop walks the values themselves, so there is no `length` bound to get wrong and nothing to read past the end. Off-by-one comes from hand-managing an index, and `for...of` is the way to stop managing one.',
+            },
+            {
+              id: 'quiz-js-l45-q2',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'console.log(0 == \'0\', 0 === \'0\')',
+              options: [
+                'true true',
+                'true false',
+                'false false',
+                'false true',
+              ],
+              answer: 1,
+              explanation: 'Loose `==` coerces the string to a number before comparing, so it reports true. Strict `===` requires the same type as well as the same value, so a number and a string are never equal.',
+            },
+            {
+              id: 'quiz-js-l45-q3',
+              type: 'multiple-choice',
+              prompt: 'What does `{ id: 1 } === { id: 1 }` evaluate to, and why?',
+              options: [
+                'true, because the contents are identical',
+                'false, because `===` compares object references, not contents',
+                'true, because both objects have one property',
+                'It throws, because objects cannot be compared',
+              ],
+              answer: 1,
+              explanation: 'Each object literal creates a separate object, and `===` asks whether two names point at the same one. Compare a field such as `a.id === b.id`, or serialise both when you need the whole shape.',
+            },
+            {
+              id: 'quiz-js-l45-q4',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'console.log(0.1 + 0.2 === 0.3)',
+              options: [
+                'true',
+                'false',
+                'NaN',
+                'It throws',
+              ],
+              answer: 1,
+              explanation: 'Binary floating point cannot represent 0.1 or 0.2 exactly, so their sum is a tiny fraction away from 0.3. Round both sides before comparing, or keep money as whole cents.',
+            },
+            {
+              id: 'quiz-js-l45-q5',
+              type: 'multiple-choice',
+              prompt: 'You need to stop a loop as soon as a condition matches. Why is `forEach` the wrong tool?',
+              options: [
+                '`forEach` cannot read the array\'s length',
+                '`forEach` always visits every item and offers no way to stop early',
+                '`forEach` only works on arrays of numbers',
+                '`forEach` changes the array while it runs',
+              ],
+              answer: 1,
+              explanation: '`forEach` runs the callback for every item, so a guard cannot skip the rest; `return` inside the callback only ends that one call. A `for...of` loop with `break` can leave immediately.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -2828,6 +2899,73 @@ console.log(averageCartValue([{ total: 10 }, { total: 20 }]))`,
           'Measure before and after, with a tool that gives you numbers',
         ],
         xp: 40,
+        quiz: {
+          id: 'quiz-js-l46',
+          title: 'Performance habits quiz',
+          passingScore: 60,
+          questions: [
+            {
+              id: 'quiz-js-l46-q1',
+              type: 'code-output',
+              prompt: 'What does this print?',
+              code: 'const rows = [{ total: 10 }, { total: 20 }]\nlet total = 0\nfor (let i = 0; i <= rows.length; i++) {\n  total += rows[i].total\n}\nconsole.log(total)',
+              options: [
+                '30',
+                'NaN',
+                'undefined',
+                'It throws',
+              ],
+              answer: 1,
+              explanation: 'The loop runs one time too many, so the last pass reads `rows[2]`, which is `undefined`, and adding undefined gives NaN — which prints as NaN rather than throwing, so the loop looks like it worked. Use `i < rows.length`, or better `for (const row of rows)`.',
+            },
+            {
+              id: 'quiz-js-l46-q2',
+              type: 'multiple-choice',
+              prompt: 'Why move `document.querySelector(\'#list\')` above a loop instead of calling it on every pass?',
+              options: [
+                'The selector becomes invalid inside a loop',
+                'Each call walks the document again, so the work is repeated on every iteration',
+                'A query made inside a loop returns a different element type',
+                'The loop cannot see variables declared inside it',
+              ],
+              answer: 1,
+              explanation: 'A DOM query is a search through the document, and its cost is paid every time it runs. Store the node once in a variable and the loop only reads a property.',
+            },
+            {
+              id: 'quiz-js-l46-q3',
+              type: 'multiple-choice',
+              prompt: 'An expensive search runs on every `input` event and the typing feels laggy. Which fix matches the lesson?',
+              options: [
+                'Run the search twice and compare the results',
+                'Wait until the user pauses typing, using a timer that is reset on each keystroke',
+                'Move the search into a `for...of` loop',
+                'Read `offsetHeight` before each keystroke',
+              ],
+              answer: 1,
+              explanation: 'The work still has to happen, but not on every keystroke. Debouncing with a reset timer lets the user finish typing, keeps the page responsive and produces the same final result.',
+            },
+            {
+              id: 'quiz-js-l46-q4',
+              type: 'multiple-choice',
+              prompt: 'How should you decide whether a performance change actually helped?',
+              options: [
+                'Measure the slow path before and after with `performance.now()` or the devtools Performance panel',
+                'Assume that fewer lines of code is faster',
+                'Ask whether the code looks more advanced',
+                'Optimise until the code contains no loops',
+              ],
+              answer: 0,
+              explanation: 'Performance work is only meaningful against a measurement. Timing the same operation before and after, or reading the devtools profile, tells you whether the change mattered instead of guessing.',
+            },
+            {
+              id: 'quiz-js-l46-q5',
+              type: 'true-false',
+              prompt: 'Caching a DOM lookup that runs five times is a meaningful performance optimisation worth the extra variable.',
+              answer: false,
+              explanation: 'Five lookups cost almost nothing, so the change adds code without a measurable gain. The habit matters when the lookup is inside a hot loop or a long list; elsewhere clarity should win.',
+            },
+          ],
+        },
         content: [
           {
             type: 'text',
@@ -3006,74 +3144,5 @@ console.log(makeLookup(employees)(7))`,
         ],
       },
     ],
-    quiz: {
-      id: 'quiz-js-s36',
-      title: 'Style guide check',
-      passingScore: 60,
-      questions: [
-        {
-          id: 'quiz-js-s36-q1',
-          type: 'multiple-choice',
-          prompt: 'Which name makes the bug impossible rather than merely unlikely?',
-          options: ['t', 'temp', 'timeoutMs', 'data2'],
-          answer: 2,
-          explanation:
-            'A name that carries the unit removes the whole class of mistake where a milliseconds value is passed where seconds were expected. The single-letter and numbered versions are not shorter to type — they are shorter to write and much longer to read.',
-        },
-        {
-          id: 'quiz-js-s36-q2',
-          type: 'true-false',
-          prompt: 'A `for...of` loop can be off by one index in the way a counted `for` loop can.',
-          answer: false,
-          explanation:
-            'There is no index to get wrong: the loop walks the values themselves, so there is no `length` bound to get wrong and nothing to read past the end. Off-by-one comes from hand-managing an index, and `for...of` is the way to stop managing one.',
-        },
-        {
-          id: 'quiz-js-s36-q3',
-          type: 'identify-error',
-          prompt: 'Why is the reported total wrong?',
-          code: `function totalOf(list) {
-  list.sort((a, b) => a.price - b.price)
-  return list.reduce((sum, item) => sum + item.price, 0)
-}
-
-const shown = [...products]
-const reported = totalOf(shown)`,
-          options: [
-            'sort cannot be called on a spread array',
-            'sort changes the array in place, so the copy the page is showing gets reordered too',
-            'reduce needs a starting value of 0 as a string',
-            'The arrow function inside sort has the wrong this',
-          ],
-          answer: 1,
-          explanation:
-            '`sort` sorts in place. `shown` was copied specifically so the display would be untouched, and sorting inside the function undoes that — the page silently reorders itself and the user has no idea why. Copy again inside the function: `[...list].sort(...)`.',
-        },
-        {
-          id: 'quiz-js-s36-q4',
-          type: 'blank',
-          prompt:
-            'Reading a layout property such as offsetHeight right after writing a style forces the browser to ____ immediately.',
-          answers: ['recalculate', 'recalculate layout', 'lay out'],
-          explanation:
-            'That is layout thrashing: write, read, write, read, and the browser recalculates the layout between every pair. Read every measurement you need first, then make every change, and it happens once.',
-        },
-        {
-          id: 'quiz-js-s36-q5',
-          type: 'code-output',
-          prompt: 'What does this print?',
-          code: `const rows = [{ total: 10 }, { total: 20 }]
-let total = 0
-for (let i = 0; i <= rows.length; i++) {
-  total += rows[i].total
-}
-console.log(total)`,
-          options: ['30', 'NaN', 'undefined', 'It throws'],
-          answer: 1,
-          explanation:
-            'The loop runs one time too many, so the last pass reads `rows[2]`, which is `undefined`, and adding undefined gives NaN — which prints as NaN rather than throwing, so the loop looks like it worked. Use `i < rows.length`, or better `for (const row of rows)`.',
-        },
-      ],
-    },
   },
 ]
