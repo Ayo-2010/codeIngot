@@ -30,6 +30,15 @@ const budgets = [
 ]
 const entryBudgetGzipKB = 60
 
+/**
+ * Stylesheets block render from the head, and a split component stylesheet is
+ * only discovered after the entry CSS is parsed - a second serial round trip
+ * before first paint. The build merges all styles into one file; these checks
+ * keep it that way and cap its size.
+ */
+const stylesheetCountBudget = 1
+const stylesheetBudgetGzipKB = 20
+
 function freePort() {
   return new Promise((resolvePort, reject) => {
     const probe = createServer()
@@ -114,6 +123,33 @@ try {
           `${budget.route} entry is ${entry} KB gzip, over the ${entryBudgetGzipKB} KB budget`,
         )
       }
+    }
+
+    const stylesheetHrefs = [
+      ...new Set(
+        [...html.matchAll(/<link[^>]+rel="stylesheet"[^>]+href="([^"]+\.css)"/g)].map(
+          (match) => match[1],
+        ),
+      ),
+    ]
+    let stylesheetGzip = 0
+    for (const sheet of stylesheetHrefs) {
+      const file = join(publicRoot, sheet)
+      if (!existsSync(file)) continue
+      stylesheetGzip += gzipSync(readFileSync(file)).length
+    }
+    const stylesheetKB = Math.ceil(stylesheetGzip / 1024)
+    console.log(
+      `     ${budget.label.padEnd(8)} stylesheet ${stylesheetHrefs.length} file(s), ${stylesheetKB} KB gzip`,
+    )
+    if (stylesheetHrefs.length > stylesheetCountBudget) {
+      failures.push(
+        `${budget.route} loads ${stylesheetHrefs.length} stylesheets before first paint; split CSS chunks chain the entry stylesheet and delay LCP`,
+      )
+    } else if (stylesheetKB > stylesheetBudgetGzipKB) {
+      failures.push(
+        `${budget.route} stylesheet is ${stylesheetKB} KB gzip, over the ${stylesheetBudgetGzipKB} KB budget`,
+      )
     }
   }
 } finally {

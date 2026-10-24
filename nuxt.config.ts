@@ -30,6 +30,18 @@ export default defineNuxtConfig({
   },
   vite: {
     plugins: [tailwindcss()],
+    build: {
+      /**
+       * One stylesheet for the whole app. Split stylesheet chunks are
+       * discovered only after the entry CSS has been parsed, so a small
+       * component stylesheet (AppHeader's 0.8 KiB) arrived as a second
+       * render-blocking round trip and chained the critical path behind two
+       * downloads. The merged stylesheet is roughly 12 KiB gzipped, which
+       * removes that chain - and the LCP element render delay it caused - at
+       * the cost of shipping a little CSS each page loaded anyway.
+       */
+      cssCodeSplit: false,
+    },
     /**
      * Sucrase is imported lazily, the first time a JSX/TS demo runs. Left to
      * Vite's discovery, that first import is what makes the dev server discover
