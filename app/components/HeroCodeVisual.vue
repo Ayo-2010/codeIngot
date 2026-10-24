@@ -23,10 +23,15 @@
 
         <div class="bg-[var(--color-code-bg)] p-4 sm:p-5">
           <p class="font-mono text-[11px] uppercase tracking-wider text-[var(--color-code-header-text)]">console</p>
-          <ul class="mt-2 space-y-1 font-mono text-[12.5px]">
-            <li v-for="(line, index) in output" :key="index" class="flex gap-2">
+          <ul data-testid="hero-console" class="mt-2 space-y-1 font-mono text-[12.5px]">
+            <li
+              v-for="(line, index) in output"
+              :key="index"
+              class="flex gap-2"
+              :class="{ invisible: line.pending }"
+            >
               <span class="select-none text-[var(--color-code-header-text)]">{{ String(index + 1).padStart(2, '0') }}</span>
-              <span :class="line.startsWith(':') ? 'text-ok' : 'text-[var(--color-code-text)]'">{{ line }}</span>
+              <span :class="line.text.startsWith(':') ? 'text-ok' : 'text-[var(--color-code-text)]'">{{ line.text }}</span>
             </li>
           </ul>
           <div class="mt-4 rounded-lg border border-[var(--color-code-border)] bg-[var(--color-code-header-bg)] p-3">
@@ -56,23 +61,31 @@ function greet(role) {
 console.log(greet(future));`
 
 const tokens = highlight(source, 'javascript')
-const lines = ['"developer"', 'greet("developer")']
-const results = [': ✓ Code executed successfully', '✓ 3 tests passed']
-const output = ref<string[]>([lines[0]!])
-
 const statusText = ref('typing…')
+
+// The console reveal is a text swap, not a growing list. All four rows exist
+// from the first paint with reserved space, so the staged reveal never
+// invalidates layout around the preview panel and never shows the shift.
+const plannedLines = ['"developer"', 'greet("developer")', ': ✓ Code executed successfully', '✓ 3 tests passed']
+const revealedCount = ref(2)
+const output = computed(() =>
+  plannedLines.map((text, index) => ({
+    text,
+    pending: index >= revealedCount.value,
+  })),
+)
 
 onMounted(() => {
   const timers: ReturnType<typeof setTimeout>[] = []
   timers.push(
     setTimeout(() => {
-      output.value = [...lines, results[0]!]
+      revealedCount.value = 3
       statusText.value = 'running'
     }, 1100),
   )
   timers.push(
     setTimeout(() => {
-      output.value = [...lines, results[0]!, results[1]!]
+      revealedCount.value = 4
       statusText.value = 'all tests passed'
     }, 2400),
   )

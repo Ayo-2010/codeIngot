@@ -116,6 +116,21 @@ test('the home page does not download auth or reference modules', async ({ page 
   expect(eager).toEqual([])
 })
 
+test('the hero console reveals output without moving anything', async ({ page }) => {
+  await gotoHydrated(page, '/')
+
+  // All four console rows exist from the SSR paint, with the pending two held
+  // out of sight, so the live reveal changes text rather than layout.
+  const consoleList = page.locator('[data-testid="hero-console"]')
+  const rows = consoleList.locator('> li')
+  await expect(rows).toHaveCount(4)
+
+  const reserved = await consoleList.boundingBox()
+  await expect(rows.last()).toBeVisible()
+  const settled = await consoleList.boundingBox()
+  expect(settled?.height).toBe(reserved?.height)
+})
+
 test('the sidebar links to the current lesson and reveals it', async ({ page }) => {
   await gotoHydrated(page, '/learn/javascript-fundamentals/js-l65')
 
